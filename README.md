@@ -1,6 +1,8 @@
 # start-here
 An introduction and guide to the tudat environment.
 
+![Alt text](tudat-team.png?raw=true "tudat-environment")
+
 # Repositories
 
 - **[[tudat]](https://github.com/tudat-team/tudat) A C++ platform to perform astrodynamics and space research.**
