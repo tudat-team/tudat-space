@@ -1,5 +1,5 @@
 # start-here
-An introduction and guide to the tudat environment.
+An introduction and guide to the new tudat environment.
 
 <p align="center">
   <img src="tudat-team.png" width="300" height="300">
