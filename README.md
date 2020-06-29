@@ -1,7 +1,10 @@
 # start-here
 An introduction and guide to the tudat environment.
 
-![Alt text](tudat-team.png?raw=true "tudat-environment")
+<p align="center">
+  <img src="tudat-team.png" width="300" height="300">
+</p>
+
 
 # Repositories
 
