@@ -3,6 +3,9 @@ An introduction and guide to the tudat environment.
 
 <p align="center">
   <img src="tudat-team.png" width="300" height="300">
+  <em>
+  <br>Big thanks to my friend <a href="https://neiltfat.wixsite.com/neiltf">Neil Tiou-Fat</a> from my childhood, for throwing this concept together
+    </em>
 </p>
 
 # Foreword
