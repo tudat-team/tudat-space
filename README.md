@@ -19,7 +19,7 @@ To the ongoing developers of tudat and its ecosystem: I apologise sincerely. The
 
 - **[[tudat-resources]](https://github.com/tudat-team/tudat-resources) A curated resource manager to facilitate astrodynamics and space research.** 
 
-> There is a continuous demand to incorporate readily available and accessible resources for tudat, as well as allow for unique analyses that may be rare. For this purpose, all spice kernels, space weather data, gravity models (everything that can be classified as data outside of a header file) have been separated from tudat. The end goal is to eventually have the package retrieve resources on the fly, as requested, from the original source. (e.g. the spice kernels path will mirror the original [source](https://naif.jpl.nasa.gov/pub/naif/generic_kernels/), downloading only when requested, or from user configuration)
+> There is a continuous demand to incorporate readily available and accessible resources for tudat, as well as allow for unique analyses that may be rare. For this purpose, all spice kernels, space weather data, gravity models (everything that can be classified as data outside of a header file) have been separated from tudat. The end goal is to eventually have the package retrieve resources on the fly, as requested, from the original source. (e.g. the spice kernels path will mirror the original [source](https://naif.jpl.nasa.gov/pub/naif/generic_kernels/), downloading artefacts only when requested, or in advance with user configuration)
 
 - **[[sofa-cmake]](https://github.com/tudat-team/sofa-cmake)** [dependency] 
 > Required for the tudat spice_interface library.
