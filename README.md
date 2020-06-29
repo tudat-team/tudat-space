@@ -15,7 +15,7 @@ To the ongoing developers of tudat and its ecosystem: I apologise sincerely. The
 # Repositories
 
 - **[[tudat]](https://github.com/tudat-team/tudat) A C++ platform to perform astrodynamics and space research.**
-> If the tudat-environment were Io, the most geolocially active object in the solar system, then tudat would be its iron constiuent core. It comprises of a powerful set of C++ libraries aimed towards facilliating astrodynamics and space research. 
+> If the tudat-environment were Io, the most geolocially active object in the solar system, then tudat would be its iron constiuent of its core. It comprises of a powerful set of C++ libraries aimed towards facilliating astrodynamics and space research. 
 
 - **[[tudat-resources]](https://github.com/tudat-team/tudat-resources) A curated resource manager to facilitate astrodynamics and space research.** 
 
