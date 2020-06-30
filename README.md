@@ -4,13 +4,20 @@ An introduction and guide to the new tudat environment.
 <p align="center">
   <img src="tudat-team.png" width="300" height="300">
   <em>
-  <br>Big thanks to a childhood friend, <a href="https://www.instagram.com/neiltf/?hl=en">Neil Tiou-Fat</a>, for throwing this concept together
-    </em>
+    <br>Big thanks to a childhood friend, <a href="https://www.instagram.com/neiltf/?hl=en">Neil Tiou-Fat</a>, for throwing this concept together
+  </em>
 </p>
 
 # Foreword
 
 To the ongoing developers of tudat and its ecosystem: I apologise sincerely. The codebases have gone through a complete refractoring, but I will motviate and go through each and every one of them. I also give you my word that I will be here be here to ensure a smooth transition to the accepted changes of the codebase (I will refractor specific changes if it is so desired by the majority). There are changes to the development workflow and user workflow which concern both performance and conventions. Also, for the first time in my memory of the environment, we have versioning!
+
+# Table of Contents
+1. [Repositories](#repositories)
+2. [Changes](#changes)
+2. [Users](#users)
+3. [Developers](#developers)
+4. [Goals](#goals)
 
 # Repositories
 
@@ -34,3 +41,32 @@ To the ongoing developers of tudat and its ecosystem: I apologise sincerely. The
 
 - **[[tudat-bundle]](https://github.com/tudat-team/tudat-bundle) A developers repository for the tudat environment.**
 > If you're used to the original way of working with tudat, this will be familiar. This repository bundles together all dependencies that are maintained by the tudat-team, with the addition of pybind11. Boost and Eigen have well maintained packages on conda-forge which reduces compile time (w.r.t. Boost), so their dependencies are met through specifying the `CMAKE_PREFIX_PATH=$CONDA_PREFIX`, for your chosen conda environment.
+
+# Changes
+
+# Users
+
+## Documentation
+
+## Feature requests
+
+## Submit an issue
+
+# Developers
+
+## Packaging ([conda](https://docs.conda.io/en/latest/))
+
+### Building ([conda-build](https://docs.conda.io/projects/conda-build/en/latest/))
+
+### Deployment ([conda-smithy](https://github.com/conda-forge/conda-smithy))
+
+### Peer-review ([conda-forge](https://conda-forge.org/))
+
+## Versioning ([rever](https://regro.github.io/rever-docs/index.html))
+
+# Goals
+
+- Ease of Accessibility:
+- Educational Environment:
+- Research and Development:
+- Machine Learning Integration:
