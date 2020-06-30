@@ -33,4 +33,4 @@ To the ongoing developers of tudat and its ecosystem: I apologise sincerely. The
 
 
 - **[[tudat-bundle]](https://github.com/tudat-team/tudat-bundle) A developers repository for the tudat environment.**
-> If you're used to the original way of working with tudat, this will be familiar. This repository bundles together all dependencies that are maintained by the tudat-team, with the addition of pybind11. Boost and Eigen have well maintained packages on conda-forge which reduces compile time (w.r.t. Boost), so their dependencies are met through specifying the CMAKE_PREFIX_PATH=$CONDA_PREFIX, for your chosen conda environment.
+> If you're used to the original way of working with tudat, this will be familiar. This repository bundles together all dependencies that are maintained by the tudat-team, with the addition of pybind11. Boost and Eigen have well maintained packages on conda-forge which reduces compile time (w.r.t. Boost), so their dependencies are met through specifying the `CMAKE_PREFIX_PATH=$CONDA_PREFIX`, for your chosen conda environment.
