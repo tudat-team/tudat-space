@@ -1,12 +1,7 @@
 # start-here
 An introduction and guide to the new tudat environment.
 
-<p align="center">
-  <img src="tudat-team.png" width="300" height="300">
-  <em>
-    <br>Big thanks to a childhood friend, <a href="https://www.instagram.com/neiltf/?hl=en">Neil Tiou-Fat</a>, for throwing this concept together
-  </em>
-</p>
+![alt text](cover.png "Logo Title Text 1")
 
 # Foreword
 
