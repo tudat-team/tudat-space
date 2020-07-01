@@ -1,6 +1,3 @@
-# start-here
-An introduction and guide to the new tudat environment.
-
 ![alt text](cover.png "Logo Title Text 1")
 
 # Foreword
