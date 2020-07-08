@@ -81,6 +81,24 @@ cmake files in order to interface with `tudat`. From wikipedia's
 > telescopes.
 
 # Changes
+In an effort to modernised the repositories and provide capability to host prebuilt libraries on contemporary package
+managers, many changes have been made. Some minor corrections, some styling and most related to the build process. 
+(See [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html))
+
+## Conda support
+- Conda package manager support for all repositories has been added (See [Anaconda Cloud](https://anaconda.org/tudat-team)). 
+
+## Styling
+- Directory naming has been changed throughout the tudat source code.
+- The `tudat::electro_magnetism` namespace has been changed to `tudat::electromagnetism`. 
+
+
+## CMake
+- CMakeList.cmake files have been changed throughout the entirety of the tudat source code to provide relocatability
+in addition the an install step.
+- `yolo` cmake archive added which provided consistent functions to add tudat libraries, tests and executables. 
+(See [Github](https://github.com/tudat-team/tudat/tree/master/cmake_modules/yolo))
+
 
 # Users
 
@@ -101,15 +119,106 @@ From the [`conda`](https://docs.conda.io/en/latest/) website, `conda` is a:
 
 > Package, dependency and environment management for any language—Python, R, Ruby, Lua, Scala, Java, JavaScript, C/ C++, FORTRAN, and more.
 
-Minconda is solely the repository management system without packages, whereas Anaconda is the repository management 
-system packaged with some built in packages. If you want the bare minimum (bare in mind you will be installing a lot of
-what comes with the base distribution in Anaconda), then install Miniconda ([download links]), otherwise you can install
-the Graphical, or command line installer of Anaconda ([download links](https://www.anaconda.com/products/individual)).
+Minconda is solely the conda repository management system without packages, whereas Anaconda is the repository management 
+system packaged with some built in packages. If you want the bare minimum (bare in mind you will be installing some of
+what comes with the base distribution in Anaconda), then install Miniconda 
+([Miniconda download](https://docs.conda.io/en/latest/miniconda.html)), otherwise you can install
+the Graphical, or command line installer of Anaconda ([Anaconda download](https://www.anaconda.com/products/individual)).
 
 ### Building ([conda-build](https://docs.conda.io/projects/conda-build/en/latest/))
-From the [`conda-build`](https://docs.conda.io/projects/conda-build/en/latest/) documentation:
+When designing the specifics of a build process for a repository across platforms, to be install by the `conda` package 
+manager, `conda-build` is concerned. From the [`conda-build`](https://docs.conda.io/projects/conda-build/en/latest/) 
+documentation:
 
 > Conda-build contains commands and tools to use conda to build your own packages. It also provides helpful tools to constrain or pin versions in recipes. Building a conda package requires installing conda-build and creating a conda recipe. You then use the conda build command to build the conda package from the conda recipe.
+
+At the heart of `conda-build` are `conda-recipes`. Within the `tudat-team` repositories, these can be found in the source
+code as `.conda`. The `.conda` recipes are used for development purposes, whereas releases on conda are invoked by making
+a PR to the master branches of any of the `feedstock` repositories (see below). For more information on `conda-build` 
+see their [docs](https://docs.conda.io/projects/conda-build/en/latest/index.html). 
+
+Please see [`conda-build` recipes](https://docs.conda.io/projects/conda-build/en/latest/concepts/recipe.html) in
+conjunction with the following examples.
+
+**Example 1**: [cspice-cmake](https://github.com/tudat-team/cspice-cmake) repository recipe. 
+
+````$xslt
+.conda
+├── bld.bat
+├── build.sh
+├── conda_build_config.yaml
+└── meta.yaml
+````
+
+The `build.sh` contains the build process for Linux and macOS. Worth noticing is the definition of `CMAKE_PREFIX_PATH`.
+This tells `CMake` to install the build into `conda-build`'s `$PREFIX` path. The `$PREFIX` path is an important concept
+and is equivalent to the `$CONDA_PREFIX` environment variable following installation of Anaconda or Miniconda. 
+
+````$xslt
+#!/usr/bin/env bash
+
+mkdir build
+
+cd build
+
+cmake \
+    -DCMAKE_CXX_STANDARD=17 \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX="$PREFIX" \
+    -DCMAKE_PREFIX_PATH="$PREFIX" \
+    -DCSPICE_BUILD_STATIC_LIBRARY=1 \
+    ..
+
+make -j2
+
+ctest
+
+make install
+````
+
+The `$PREFIX` path definition fixes the following install tree structure in the compressed package on Anaconda Cloud. 
+(see the [cspice-cmake package](https://anaconda.org/tudat-team/cspice-cmake/files)).
+
+## Result
+````$xslt
+.
+├── data
+│   └── cspice
+│       ├── cook_01.tc
+|       ...
+|
+├── include
+│   └── cspice
+│       ├── f2c.h
+|       ...
+|
+├── info
+│   ├── about.json
+│   ├── files
+│   ├── git
+│   ├── hash_input.json
+│   ├── has_prefix
+│   ├── index.json
+│   ├── paths.json
+│   └── recipe
+│       ├── bld.bat
+│       ├── build.sh
+│       ├── conda_build_config.yaml
+│       ├── meta.yaml
+│       └── meta.yaml.template
+└── lib
+    ├── cmake
+    │   └── cspice
+    │       ├── cspice-config.cmake
+    │       ├── cspice-config-version.cmake
+    │       ├── cspice_export.cmake
+    │       └── cspice_export-release.cmake
+    └── libcspice.a
+
+````
+
+
+
 
 ### Deployment ([conda-smithy](https://github.com/conda-forge/conda-smithy))
 From the [`conda-smithy`](https://github.com/conda-forge/conda-smithy) repository:
