@@ -8,7 +8,30 @@ toolkit to facilitate careers and passions in astrodynamics and space.
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: First Steps
+   :hidden:
+
+   _src_first_steps/legacy
+   _src_first_steps/
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Getting Started
+   :hidden:
+
+.. toctree::
+   :maxdepth: 2
+   :caption: About Tudat Space
+   :hidden:
+
+   _src_about/contributing
+   _src_about/developers
+   _src_about/roadmap
+
+
+
+
+
 
 Indices and tables
 ==================
