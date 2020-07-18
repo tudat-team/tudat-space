@@ -115,6 +115,7 @@ html_sidebars = {
         'searchbox.html',
     ]
 }
+html_logo = "_static/cover.png"
 
 # -- Options for HTMLHelp output ------------------------------------------
 
