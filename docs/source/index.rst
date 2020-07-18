@@ -4,7 +4,7 @@ Tudat Space: Documentation
 Tudat Space is a platform and community for astrodynamics and space
 research. We are built around the idea of providing educators,
 researchers, students and enthusiasts accessibility to a powerful
-toolkit to facilitate careers and passions in astrodynamics and space.
+toolkit to fuel careers and passions in astrodynamics and space.
 
 .. toctree::
    :maxdepth: 2
@@ -12,12 +12,7 @@ toolkit to facilitate careers and passions in astrodynamics and space.
    :hidden:
 
    _src_first_steps/legacy
-   _src_first_steps/
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Getting Started
-   :hidden:
+   _src_first_steps/new
 
 .. toctree::
    :maxdepth: 2
@@ -27,11 +22,6 @@ toolkit to facilitate careers and passions in astrodynamics and space.
    _src_about/contributing
    _src_about/developers
    _src_about/roadmap
-
-
-
-
-
 
 Indices and tables
 ==================
