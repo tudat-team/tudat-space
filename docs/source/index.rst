@@ -1,10 +1,10 @@
 Tudat Space: Documentation
 ======================================
 
-Tudat Space is a platform and community for astrodynamics and space
-research. We are built around the idea of providing educators,
-researchers, students and enthusiasts accessibility to a powerful
-toolkit to fuel careers and passions in astrodynamics and space.
+Tudat Space is a platform and community for astrodynamics and space research.
+We are propelled by the idea of providing educators, researchers, students, and
+enthusiasts with accessibility to a powerful toolkit to fuel careers and
+passions in astrodynamics and space.
 
 .. toctree::
    :maxdepth: 2
@@ -22,6 +22,17 @@ toolkit to fuel careers and passions in astrodynamics and space.
    _src_about/contributing
    _src_about/developers
    _src_about/roadmap
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Developers Guide
+   :hidden:
+
+   _src_developer/started
+   _src_developer/clion
+   _src_developer/conda-build
+   _src_developer/conda-smithy
+   _src_developer/github
 
 Indices and tables
 ==================
