@@ -11,6 +11,8 @@ passions in astrodynamics and space.
    :caption: First Steps
    :hidden:
 
+   _src_first_steps/python
+   _src_first_steps/conda
    _src_first_steps/legacy
    _src_first_steps/new
 
@@ -30,8 +32,7 @@ passions in astrodynamics and space.
 
    _src_developer/started
    _src_developer/clion
-   _src_developer/conda-build
-   _src_developer/conda-smithy
+   _src_developer/conda
    _src_developer/github
 
 Indices and tables
