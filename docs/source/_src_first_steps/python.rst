@@ -2,7 +2,7 @@
 Getting Started with Python
 ***************************
 
-.. image:: _static/conda_logo.svg
+.. image:: _static/Python_logo_and_wordmark.svg
 
 This page outlines resources to gain an understanding in the ``Python`` programming language.
 
