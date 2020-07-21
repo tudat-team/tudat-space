@@ -31,9 +31,23 @@ passions in astrodynamics and space.
    :hidden:
 
    _src_developer/started
-   _src_developer/clion
-   _src_developer/conda
    _src_developer/github
+   _src_developer/advanced-conda
+   _src_developer/clion
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Tudat Development Guide (temporarily here)
+   :hidden:
+
+   _src_tudat/cmake
+
+.. toctree::
+   :maxdepth: 2
+   :caption: TudatPy Development Guide (temporarily here)
+   :hidden:
+
+   _src_tudatpy/pybind11
 
 Indices and tables
 ==================

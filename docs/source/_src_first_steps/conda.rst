@@ -15,8 +15,8 @@ This page outlines the fundamentals in using the `conda` package manager.
     Conda has its own cheat sheet available for download
     :download:`pdf <_static/conda-cheatsheet.pdf>`
 
-Choosing a Conda
-################
+Choosing a Conda Flavour
+########################
 
 When using the conda package manager, you have two options to choose from:
 
@@ -62,3 +62,5 @@ Managing Packages
 
 Conda Configuration File
 ########################
+
+A conda configuration file can be found
