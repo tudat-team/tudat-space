@@ -56,8 +56,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'tudat.space'
-copyright = '2020, ggarrett13'
-author = 'ggarrett13'
+copyright = '2020, Tudat Space'
+author = 'Tudat Space'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
