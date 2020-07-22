@@ -6,7 +6,7 @@ Getting Started with Conda
 
 .. image:: _static/conda_logo.svg
 
-This page outlines the fundamentals in using the `conda` package manager.
+This page outlines the fundamentals in using the ``conda`` package manager.
 
   Package, dependency and environment management for any language—Python, R,
   Ruby, Lua, Scala, Java, JavaScript, C/ C++, FORTRAN, and more.
