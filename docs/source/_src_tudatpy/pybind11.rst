@@ -13,7 +13,7 @@ implementation and design of the current architecture.
 
 The entirety of exposed C++ functionality in ``tudatpy`` is contained within
 the ``tudatpy/kernel`` source directory. For reference during this guide, the
-current architecture of this directory is as follows:
+architecture of this directory is as follows:
 
 .. code-block:: base
     :linenos:
@@ -21,10 +21,9 @@ current architecture of this directory is as follows:
 Module Definition
 #################
 
-The following folded code shows the entirety of the core elements in the top
-level ``kernel`` definition in ``tudatpy``. It would serve the reader to have
-a quick glance while making any mental notes before we walk through it
-line by line.
+The following folded code shows the core elements of the
+level ``kernel`` module definition in ``tudatpy``. It would serve the reader to
+have glance through before we walk through the elements in detail.
 
 .. code-block:: cpp
     :caption: ``tudatpy/kernel/kernel.cpp``
@@ -73,7 +72,7 @@ line by line.
 .. note::
 
     Starting with the end in mind, compiling the previous will result in a
-    shared library named ``kernel.so`` to be compiled.
+    shared library named ``kernel.so``.
 
 .. note::
 
