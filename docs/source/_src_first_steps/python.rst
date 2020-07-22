@@ -4,30 +4,33 @@ Getting Started with Python
 
 .. image:: _static/Python_logo_and_wordmark.svg
 
-This page outlines resources to gain an understanding in the ``Python`` programming language.
+This page highlights resources to gain an understanding of the ``Python`` programming language.
 
 Learn Python
 ============
 
+.. table:: Table title
+    :widths: 50,50
+   
 +------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------+
-| Title & link                                                                                               | Description                                                         |
+| Title                                                                                                      | Description                                                         |
 +============================================================================================================+=====================================================================+
-| `Getting started with Python for science <http://scipy-lectures.org/intro/language/python_language.html>`_ | - Scipy lecture notes — Getting started with Python for science     |
-|                                                                                                            | - Quick primer tutorial for scientific python by & for scientists   |
+| `Getting started with Python for science <http://scipy-lectures.org/intro/language/python_language.html>`_ | - Quick primer tutorial for scientific Python by & for scientists   |
+|                                                                                                            | - from: Scipy lecture notes                                         |
 +------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------+
-| `Think Python <http://www.greenteapress.com/thinkpython/>`_                                                | - Start with this if you consider yourself a beginning programmer   |
+| `The Python tutorial <https://docs.python.org/3/tutorial/index.html>`_                                     | - A more thorough tutorial                                          |
++------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------+
+| `Think Python <http://www.greenteapress.com/thinkpython/>`_                                                | - A free, pdf book (also for the beginning programmer)              |
+|                                                                                                            |                                                                     |
 +------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------+
 
 Further reading
 ===============
 
 +------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------+
-| Title & link                                                                                               | Description                                                         |
+| Title                                                                                                      | Description                                                         |
 +============================================================================================================+=====================================================================+
-| `Title <http://lmgtfy.com>`_                                                                               | - Let me Google that for you                                        |
-|                                                                                                            | - again                                                             |
-+------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------+
-| `Title <http://lmgtfy.com>`_                                                                               | -  Let me Google that for you                                       |
-|                                                                                                            | - again                                                             |
+| `python.org <https://www.python.org>`_                                                                     | - 'home base', with extensive resources                             |
+|                                                                                                            | -  from: Python Software Foundation                                 |
 +------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------+
 =======
