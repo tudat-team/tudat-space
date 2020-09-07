@@ -10,66 +10,50 @@ Create model settings
 
 .. container:: content-tabs
 
-    .. tab-container:: python
-        :title: Python
+    .. tab-container:: beginner
+        :title: Beginner
 
+        - Ephemeris
+        - Gravity field
+        - Gravity field time-variations
+        - Atmosphere
+        - Shape
+        - Rotation
+        - Aerodynamic coefficient
+        - Radiation pressure
+        - Mass
+        - Vehicle system
 
+    .. tab-container:: advanced
+        :title: Advanced
 
-        .. rubric:: Definition
+        .. toggle-header::
+           :header: Ephemeris
 
-        .. code-block:: python
+        .. toggle-header::
+           :header: Gravity field
 
-            my_api.signin()
+        .. toggle-header::
+           :header: Gravity field time-variations
 
-        .. rubric:: Example request
+        .. toggle-header::
+           :header: Atmosphere
 
-        .. code-block:: python
+        .. toggle-header::
+           :header: Shape
 
-            import my_api
-            my_api.signin('username', 'password')
+        .. toggle-header::
+           :header: Rotation
 
+        .. toggle-header::
+           :header: Aerodynamic coefficient
 
-- Ephemeris
-- Gravity field
-- Gravity field time-variations
-- Atmosphere
-- Shape
-- Rotation
-- Aerodynamic coefficient
-- Radiation pressure
-- Mass
-- Vehicle system
+        .. toggle-header::
+           :header: Radiation pressure
 
+        .. toggle-header::
+           :header: Mass
 
-.. toggle-header::
-   :header: Ephemeris
-
-    .. include:: environment_setup/model_settings/ephemeris.rst
-
-.. toggle-header::
-   :header: Gravity field
-
-.. toggle-header::
-   :header: Gravity field time-variations
-
-.. toggle-header::
-   :header: Atmosphere
-
-.. toggle-header::
-   :header: Shape
-
-.. toggle-header::
-   :header: Rotation
-
-.. toggle-header::
-   :header: Aerodynamic coefficient
-
-.. toggle-header::
-   :header: Radiation pressure
-
-.. toggle-header::
-   :header: Mass
-
-.. toggle-header::
-   :header: Vehicle system
+        .. toggle-header::
+           :header: Vehicle system
 
