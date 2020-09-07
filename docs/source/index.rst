@@ -11,10 +11,19 @@ passions in astrodynamics and space.
    :caption: First Steps
    :hidden:
 
-   _src_first_steps/python
    _src_first_steps/conda
-   _src_first_steps/legacy
-   _src_first_steps/new
+   _src_first_steps/python
+   _src_first_steps/simulations
+
+.. toctree::
+   :maxdepth: 2
+   :caption: API
+   :hidden:
+
+   _src_api/simulation
+   _src_api/astrodynamics
+   _src_api/mathematics
+   _src_api/interface
 
 .. toctree::
    :maxdepth: 2
@@ -55,3 +64,4 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+

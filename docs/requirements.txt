@@ -1,1 +1,5 @@
 sphinx_rtd_theme
+sphinx-tabs
+sphinx-copybutton
+rtcat_sphinx_theme
+sphinxcontrib-contentui

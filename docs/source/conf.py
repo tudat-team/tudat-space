@@ -40,7 +40,13 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.viewcode',
               'sphinx.ext.autosectionlabel',
               # theme
-              'sphinx_rtd_theme']
+              'sphinx_rtd_theme',
+              'sphinx_tabs.tabs',
+              'sphinx_copybutton',
+              'sphinxcontrib.contentui'
+              ]
+
+sphinx_tabs_valid_builders = ['linkcheck']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -93,6 +99,11 @@ todo_include_todos = True
 #
 import sphinx_rtd_theme
 html_theme = 'sphinx_rtd_theme'
+
+# import rtcat_sphinx_theme
+
+# html_theme = 'rtcat_sphinx_theme'
+# html_theme_path = [rtcat_sphinx_theme.get_html_theme_path()]
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
