@@ -16,43 +16,108 @@ three fundamental procedural steps:
 Environment Setup
 =================
 
+This guide separates the definition of environment models into two steps:
+(1) ``create bodies``, which are bodies generally derived from default models, (2)
+``create vehicle``, which is generally the definition of a simple custom body which
+seldom involves complex model definition; and (3) ``create interfaces``, which
+defines the models that determine the interaction between the vehicle and the
+environment.
+
+.. note::
+    The sole definition of an 'interface' will not result in the associated
+    acceleration to be accounted for during propagation. The `interface` provides
+    the environment model which the acceleration model will later use during
+    propagation.
+
 Create bodies
 #############
 
-The definition of bodies present within the simulation largely involves the
-th
+.. container:: content-tabs
 
-.. tabs::
+    .. tab-container:: default
+        :title: Default
 
-   .. tab:: Default
+        The definition of bodies present within the simulation can be carried out by
+        creating a string list of bodies that are a subset of the following available
+        default bodies. For transparency, all default models are explained in each
+        bodies respective expand option.
 
-      .. tabs::
+        - Common:
+            - **Shape**: SphericalBodyShapeSettings(**spice::bodvrd_c**)
+            - **Ephemeris**: DirectSpiceEphemerisSettings
+                - frame origin: Solar System Barycentric (SSB)
+                - frame orientation: Ecliptic J2000 (ECLIPJ2000)
+                - stellar aberration correction: False
+                - converge light time aberration: False
+            - **Gravity field**:
+                If no gravity field is specified below, a point
+                mass gravity field model will be generated with data from ``SPICE``.
 
-         .. tab:: C++
+        - Sun
+        - Mercury
+            - **Gravity model**:
+            - **Rotation model**:
+        - Venus
+            - **Gravity model**:
+            - **Rotation model**:
+        - Earth
+            - **Atmosphere model**: TabulatedAtmosphere(**USSA1976Until100kmPer100mUntil1000kmPer1000m.dat**)
+            - **Gravity field model**: SphericalHarmonicsGravityField(**egm96**)
+            - **Rotation model**:
+        - Moon
+            - **Gravity model**: SphericalHarmonicsGravityField(**lpe200**)
+            - **Rotation model**:
+        - Mars
+            - **Gravity model**: SphericalHarmonicsGravityField(**jgmro120d**)
+            - **Rotation model**:
+        - Jupiter
+            - **Ephemeris**:
+            - **Gravity model**:
+        - Io
+        - Europa
+        - Ganymede
+        - Callisto
+        - Saturn
+            - **Ephemeris**:
+            - **Gravity model**:
+            - **Rotation model**:
+        - Uranus
+            - **Ephemeris**:
+            - **Gravity model**:
+            - **Rotation model**:
+        - Neptune
+            - **Ephemeris**:
+            - **Gravity model**:
+            - **Rotation model**:
 
-          .. toggle-header::
-             :header: Required **Show/Hide**
+        .. tabs::
 
-             .. literalinclude:: ../_src_snippets/simulation/environment_setup/req_create_bodies.cpp
-                :language: c++
+             .. tab:: Python
 
-          .. literalinclude:: ../_src_snippets/simulation/environment_setup/create_bodies_1.cpp
-             :language: c++
+              .. toggle-header::
+                 :header: Required **Show/Hide**
 
-         .. tab:: Python
+                 .. literalinclude:: ../_src_snippets/simulation/environment_setup/req_create_bodies.py
+                    :language: python
 
-          .. toggle-header::
-             :header: Required **Show/Hide**
+              .. literalinclude:: ../_src_snippets/simulation/environment_setup/create_bodies_1.py
+                 :language: python
 
-             .. literalinclude:: ../_src_snippets/simulation/environment_setup/req_create_bodies.py
-                :language: python
+             .. tab:: C++
 
-          .. literalinclude:: ../_src_snippets/simulation/environment_setup/create_bodies_1.py
-             :language: python
+              .. toggle-header::
+                 :header: Required **Show/Hide**
 
-   .. tab:: Custom
+                 .. literalinclude:: ../_src_snippets/simulation/environment_setup/req_create_bodies.cpp
+                    :language: c++
 
-      .. warning:: This is only recommended for advanced users.
+              .. literalinclude:: ../_src_snippets/simulation/environment_setup/create_bodies_1.cpp
+                 :language: c++
+
+    .. tab-container:: custom
+        :title: Custom
+
+        .. warning:: This is only recommended for advanced users (undocumented).
 
 
 Create vehicle

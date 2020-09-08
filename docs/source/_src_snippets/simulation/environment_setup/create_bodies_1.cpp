@@ -1,3 +1,6 @@
+// load spice kernels
+spice_interface::load_standard_spice_kernels()
+
 // define bodies in simulation
 std::vector<std::string> bodiesToCreate = {"Sun", "Earth", "Moon"};
 
@@ -7,4 +10,3 @@ std::map<std::string, std::shared_ptr<BodySettings>> bodySettings =
 
 // create body system object
 NamedBodyMap bodyMap = createBodies(bodySettings);
-

@@ -1,3 +1,6 @@
+# load spice kernels
+spice_interface.load_standard_kernels()
+
 # define bodies in simulation
 bodies_to_create = ["Sun", "Earth", "Moon"]
 
@@ -6,4 +9,3 @@ body_settings = environment_setup.get_default_body_settings(bodies_to_create)
 
 # create body system
 body_system = environment_setup.create_bodies(body_settings)
-
