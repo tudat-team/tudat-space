@@ -24,6 +24,8 @@ spice_kernel_paths = map(
 # load standard spice kernels
 spice.furnsh(spice_kernel_paths)
 
+
+
 # --------------------------------------------------
 #  get gravitational parameter of Earth using spice:
 # --------------------------------------------------
