@@ -6,3 +6,7 @@ dependencies:
   - sphinx_rtd_theme
   - sphinx-tabs
   - sphinx-copybutton
+  - pip
+  - pip:
+    - rtcat_sphinx_theme
+    - sphinxcontrib-contentui

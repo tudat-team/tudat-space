@@ -1,2 +1,0 @@
-rtcat_sphinx_theme
-sphinxcontrib-contentui
