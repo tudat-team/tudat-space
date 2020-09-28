@@ -17,7 +17,7 @@ locally on your system using ``sphinx``.
 
 .. code:: bash
 
-    conda create --name tudat-docs python=3.7 & conda activate tudat-docs
+    conda create -y --name tudat-docs python=3.7 & conda activate tudat-docs
 
 2. Install all dependencies for building the documentation. The ``-y`` flag instructs the ``conda-install`` command to install packages without asking for confirmation.
 
