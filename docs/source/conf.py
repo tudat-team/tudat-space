@@ -41,7 +41,7 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.autosectionlabel',
               # theme
               'sphinx_rtd_theme',
-              'sphinx_tabs.tabs',
+              # 'sphinx_tabs.tabs',
               'sphinx_copybutton',
               'sphinxcontrib.contentui'
               ]
