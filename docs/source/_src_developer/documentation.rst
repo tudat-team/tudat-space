@@ -11,7 +11,7 @@ locally on your system using ``sphinx``.
 .. note::
 
     This procedure requires that Anaconda or Miniconda is installed. For
-    information regarding the use of the conda environment, please see :ref:`Getting Started with Conda`.
+    information regarding the use of the conda ecosystem, please see :ref:`Getting Started with Conda`.
 
 1. Create an environment that will be satisfy all dependencies required for building documentation, then activate it.
 
