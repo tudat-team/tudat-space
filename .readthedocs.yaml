@@ -1,0 +1,9 @@
+version: 2
+
+conda:
+  environment: docs/environment.yml
+
+sphinx:
+  builder: html
+  configuration: conf.py
+  fail_on_warning: false
