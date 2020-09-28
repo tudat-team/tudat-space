@@ -16,13 +16,19 @@ support for an existing request.
     This procedure requires that Anaconda or Miniconda is installed. For
     information regarding the use of the conda ecosystem, please see :ref:`Getting Started with Conda`.
 
-1. Add the ``tudat-team`` channel to your conda channel list.
+1. Ensure that ``conda`` is updated.
+
+.. code:: bash
+
+    conda update conda
+
+2. Add the ``tudat-team`` channel to your conda channel list.
 
 .. code:: bash
 
     conda config --append channels tudat-team
 
-2. Install the desired package for developing in Python (``tudatpy``) or C++ (``tudat``). The installation of ``tudatpy``
+3. Install the desired package for developing in Python (``tudatpy``) or C++ (``tudat``). The installation of ``tudatpy``
 will automatically include ``tudat`` as a dependency.
 
 .. code:: bash
@@ -32,6 +38,19 @@ will automatically include ``tudat`` as a dependency.
 .. code:: bash
 
     conda install tudat
+
+.. warning::
+
+    **[macOS users]** There is currently an issue with the package metadata defined for the ``tudatpy-feedstock``.
+    You will require definition of the channels as follows to install successfully:
+
+    .. code:: bash
+
+        conda install tudatpy -c tudat-team -c conda-forge -c defaults
+
+    If this was not required, or did not work, please inform us `on tudatpy-feedstock (#2)`_
+
+.. _`on tudatpy-feedstock (#2)`: https://github.com/tudat-team/tudatpy-feedstock/issues/2
 
 .. note::
 
@@ -67,12 +86,18 @@ Setting up JupyterLab in a Conda Environment
 
 .. code-block:: bash
 
-    jupyter-lab   # or ``jupyter lab``
+    jupyter-lab
+
+OR
+
+.. code-block:: bash
+
+    jupyter lab
 
 Setting up PyCharm to use Python from a Conda Environment
 ---------------------------------------------------------
 
-1. Navigate to ``File>Settings>Project>Python Interpreter``
+1. Navigate to ``File`` > ``Settings`` > ``Project`` > ``Python Interpreter``
 
 2. Drop down the menu for Python selection.
 
