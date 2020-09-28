@@ -13,6 +13,7 @@ passions in astrodynamics and space.
 
    _src_first_steps/conda
    _src_first_steps/python
+   _src_first_steps/tudat_py
    _src_first_steps/simulations
 
 .. toctree::
@@ -40,6 +41,7 @@ passions in astrodynamics and space.
    :hidden:
 
    _src_developer/started
+   _src_developer/documentation
    _src_developer/github
    _src_developer/advanced-conda
    _src_developer/clion
