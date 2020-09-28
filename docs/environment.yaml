@@ -5,4 +5,4 @@ dependencies:
   - sphinx
   - sphinx_rtd_theme
   - sphinx-tabs
-  - sphinx-copybutto
+  - sphinx-copybutton
