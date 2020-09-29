@@ -22,42 +22,62 @@ support for an existing request.
 
     conda update conda
 
-2. Add the ``tudat-team`` channel to your conda channel list.
+2. Download and create an environment from this ``environment.yaml`` (:download:`pdf <_static/environment.yaml>`).
+Ensure that the current working directory is set to the one containing the ``environment.yaml`` file.
 
 .. code:: bash
 
-    conda config --append channels tudat-team
-
-3. Install the desired package for developing in Python (``tudatpy``) or C++ (``tudat``). The installation of ``tudatpy``
-will automatically include ``tudat`` as a dependency.
-
-.. code:: bash
-
-    conda install tudatpy
-
-.. code:: bash
-
-    conda install tudat
-
-.. warning::
-
-    **[macOS users]** There is currently an issue with the package metadata defined for the ``tudatpy-feedstock``.
-    You will require definition of the channels as follows to install successfully:
-
-    .. code:: bash
-
-        conda install tudatpy -c tudat-team -c conda-forge -c defaults
-
-    If this was not required, or did not work, please inform us `on tudatpy-feedstock (#2)`_
-
-.. _`on tudatpy-feedstock (#2)`: https://github.com/tudat-team/tudatpy-feedstock/issues/2
+    conda env create -f environment.yaml
 
 .. note::
 
-    If there are any issues regarding the installation process on the side of ``conda``, please submit an issue
-    on the respective package's feedstock (suffixed with ``feedstock``).
-    If there are issues running tutorials in the form of import errors, failing tests, or symbol errors, please
-    submit an issue on the package repository itself. This can be done at https://github.com/tudat-team.
+    **New to the command-line?** The following commands may be useful to you:
+
+    +-------------------------------------------------------+-----------------------+-----------------------+-----------------------+
+    | **Command effect**                                    | **Linux**             | **macOS**             | **Windows**           |
+    +-------------------------------------------------------+-----------------------+-----------------------+-----------------------+
+    | Enter a directory using a path (relative or absolute) | ``cd <abs/rel path>`` | ``cd <abs/rel path>`` | ``cd <abs/rel path>`` |
+    +-------------------------------------------------------+-----------------------+-----------------------+-----------------------+
+    | Step back to the previous directory                   | ``cd ..``             | ``cd ..``             | ``cd ..``             |
+    +-------------------------------------------------------+-----------------------+-----------------------+-----------------------+
+    | List the contents of the current working directory    | ``ls``                | ``ls``                | ``dir``               |
+    +-------------------------------------------------------+-----------------------+-----------------------+-----------------------+
+
+.. warning::
+
+    **Are you a macOS user**? There is currently a known issue while installing tudatpy via conda.
+    If you have issues installing via the ``environment.yml`` in the form of conflicts when installing, please inform us `on tudatpy-feedstock (#2)`_.
+
+    If this is the case, then you will need to follow this procedure:
+
+    1. Create a new environment.
+
+    .. code:: bash
+
+        conda create --name tudat-space python=3.7
+
+    2. Activate the environment.
+
+    .. code:: bash
+
+        conda activate tudat-space
+
+    3. Install tudatpy & matplotlib with manual definition of channels.
+
+    .. code:: bash
+
+        conda install tudatpy matplotlib -c tudat-team -c conda-forge -c defaults
+
+    Furthermore, if this fix did not work, please inform us `on tudatpy-feedstock (#2)`_.
+
+.. _`on tudatpy-feedstock (#2)`: https://github.com/tudat-team/tudatpy-feedstock/issues/2
+.. _`tudatpy-feedstock`: https://github.com/tudat-team/tudatpy-feedstock
+.. _`tudatpy`: https://github.com/tudat-team/tudatpy
+
+.. note::
+
+    If there are any other issues with the installation process, please submit an issue
+    on the `tudatpy-feedstock`_. If there are issues running tutorials please submit an issue on the `tudatpy`_ repository.
 
 Choosing a Development Environment
 ##################################
