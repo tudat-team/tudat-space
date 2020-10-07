@@ -2,21 +2,30 @@
 Simulation
 **********
 
-Propagation Setup
+Propagator Set-Up
 ===================
 
 
 =========================
-Acceleration Model Set-up
+Acceleration Model Set-Up
 =========================
+
 .. toctree::
     :maxdepth: 2
-
-    propagation_setup/acceleration_models/settings
+    
     propagation_setup/acceleration_models/available
     
 
-Environment Setup
+
+Integrator Set-Up
+=================
+.. toctree::
+    :maxdepth: 2
+    
+    integrator_setup/settings
+
+
+Environment Set-Up
 =================
 
 .. toctree::

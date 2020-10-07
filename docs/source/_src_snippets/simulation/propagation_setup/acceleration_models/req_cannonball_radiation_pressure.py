@@ -13,7 +13,7 @@ fixed_step_size = 100.0
 spice_interface.load_standard_kernels()
 
 # Create body objects
-bodies_to_create = ["Earth"]
+bodies_to_create = ["Sun"]
 
 body_settings = environment_setup.get_default_body_settings(bodies_to_create,
             simulation_start_epoch,
@@ -37,4 +37,4 @@ environment_setup.set_global_frame_body_ephemerides(bodies, global_frame_origin,
 bodies_to_propagate = ["Apollo"]
 
 # Define central bodies.
-central_bodies = ["Earth"]
+central_bodies = ["Sun"]
