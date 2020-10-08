@@ -1,0 +1,1 @@
+body_settings[ "Earth" ].environment_setup.custom_wind_model_settings( wind_function )

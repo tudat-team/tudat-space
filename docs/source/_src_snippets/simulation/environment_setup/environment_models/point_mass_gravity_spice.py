@@ -1,0 +1,1 @@
+body_settings[ "Earth" ].gravity_field_settings( central_spice );

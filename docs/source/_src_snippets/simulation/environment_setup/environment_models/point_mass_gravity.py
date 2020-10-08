@@ -1,3 +1,3 @@
 gravitational_parameter = ...
 
-bodySettings[ "Earth" ].gravity_field_settings( gravitational_parameter );
+body_settings[ "Earth" ].gravity_field_settings( gravitational_parameter );

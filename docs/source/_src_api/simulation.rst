@@ -2,8 +2,23 @@
 Simulation
 **********
 
+
+
+Environment Set-Up
+==================
+
+.. toctree::
+    :maxdepth: 3
+
+    environment_setup/create_models/default
+    environment_setup/create_models/system
+    environment_setup/create_models/custom
+    environment_setup/create_models/tabulated_atmosphere
+
+
+
 Propagator Set-Up
-===================
+=================
 
 
 =========================
@@ -23,14 +38,3 @@ Integrator Set-Up
     :maxdepth: 2
     
     integrator_setup/settings
-
-
-Environment Set-Up
-=================
-
-.. toctree::
-    :maxdepth: 3
-
-    environment_setup/create_models/default
-    environment_setup/create_models/system
-    environment_setup/create_models/custom

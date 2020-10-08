@@ -1,0 +1,1 @@
+bodySettings[ "Earth" ]->ephemerisSettings-> resetMakeMultiArcEphemeris( true );

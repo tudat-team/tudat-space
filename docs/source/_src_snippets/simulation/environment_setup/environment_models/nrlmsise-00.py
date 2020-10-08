@@ -1,0 +1,1 @@
+body_settings[ "Earth" ].environment_setup.atmosphere_settings( nrlmsise00 )

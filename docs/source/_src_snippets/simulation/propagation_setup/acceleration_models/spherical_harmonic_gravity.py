@@ -1,4 +1,3 @@
-
 maximum_degree = 12
 maximum_order = 12
 

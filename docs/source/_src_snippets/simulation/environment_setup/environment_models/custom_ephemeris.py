@@ -1,0 +1,1 @@
+custom_ephemeris_settings = environment_setup.custom_ephemeris_settings( custom_boost_function, frame_origin, frame_orientation )
