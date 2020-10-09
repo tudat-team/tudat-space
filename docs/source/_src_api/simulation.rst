@@ -10,10 +10,11 @@ Environment Set-Up
 .. toctree::
     :maxdepth: 3
 
-    environment_setup/create_models/default
-    environment_setup/create_models/system
+    environment_setup/create_models/available
     environment_setup/create_models/custom
+    environment_setup/create_models/system
     environment_setup/create_models/tabulated_atmosphere
+    nvironment_setup/create_models/aerodynamic_coefficients
 
 
 

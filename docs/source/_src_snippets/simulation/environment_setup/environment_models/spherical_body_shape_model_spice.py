@@ -1,0 +1,1 @@
+body_settings[ "Earth" ].environment_setup.body_shape_settings( spherical_spice )

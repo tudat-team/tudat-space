@@ -1,0 +1,1 @@
+bodySettings[ "Earth" ]->shapeModelSettings = std::make_shared< BodyShapeSettings >( spherical_spice );
