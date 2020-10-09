@@ -14,7 +14,7 @@ Environment Set-Up
     environment_setup/create_models/custom
     environment_setup/create_models/system
     environment_setup/create_models/tabulated_atmosphere
-    nvironment_setup/create_models/aerodynamic_coefficients
+    environment_setup/create_models/aerodynamic_coefficients
 
 
 
