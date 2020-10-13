@@ -104,17 +104,158 @@ With these settings, the body "Vehicle" will be propagated w.r.t. body "Earth", 
 
 Additional options that can be used for the propagation:
 
-* Specifying an additional formulation for teh translational state (see TODO)
-* Specifying alternative termination conditions (see TODO)
-* Speciyingg variables that are to be saved during the propagation (see TODO)
-* Requesting terminal output during the propagation (see TODO) 
+* Specifying alternative termination conditions (see TODO), this input replaces the ``simulation_end_epoch`` above
+* Specifying an alternative formulation for the translational state (see TODO). Default: Cowell formulation (Cartesian position and velocity) is used
+* Specifying variables that are to be saved during the propagation (see TODO). Default: None
+* Requesting terminal output during the propagation (see TODO) . Default: None
 
+These additional options can be provided as follows (TODO code):
+
+    .. tabs::
+
+         .. tab:: Python
+
+          .. toggle-header:: 
+             :header: Required **Show/Hide**
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/full_translational_setup.py
+             :language: python
+
+         .. tab:: C++
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_setup.cpp
+             :language: cpp
+
+Where the three final, and optional, input arguments can be used with both when ``termination_settings`` and ``simulation_end_epoch`` input. 
 
 Rotational dynamics
 ###################
 
+Settings and optionsto define the propagation of rotational dynamics are largely similar to those of translational dynamics. Differences are:
+
+* A set of torque models has to be supplied, as opposed to acceleration models. See (TODO) for the list of options for torques in Tudat
+* No 'central body' is specified. The rotational state that is propagated is always that from the global inertial orientation, to the body-fixed orientation of the propagated body
+* The propagated state formulation is, by default, a vector of size 7 (for a single body), with:
+	- Entries 1-4: The quaternion defining the rotation from inertial to body-fixed frame
+	- Entries 5-7: The body's angular velocity vector, expressed in its body-fixed frame
+* Alternative formulations for propagated state vector can be selected from (TODO)
+
+Defining settings for the rotational dynamics is done by:
+
+    .. tabs::
+
+         .. tab:: Python
+
+          .. toggle-header:: 
+             :header: Required **Show/Hide**
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/full_rotational_setup.py
+             :language: python
+
+         .. tab:: C++
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_setup.cpp
+             :language: cpp
+
+
+where the final three inputs are all optional, and the ``simulation_end_epoch`` input may be replaced by the more general ``termination_settings`` (see TODO), as was the case for translational dynamics
+
 Mass dynamics
 #############
+
+Propagating the mass of a body is typically (but not exclusively) coupled with the use of a thrust model. For a full description of mass-rate models and thrust models, see (TODO and TODO). Defining mass propagation settings is done similarly to the translational and rotational dynamics:
+
+    .. tabs::
+
+         .. tab:: Python
+
+          .. toggle-header:: 
+             :header: Required **Show/Hide**
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/full_mass_setup.py
+             :language: python
+
+         .. tab:: C++
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_setup.cpp
+             :language: cpp
+
+where the final two inputs are optional, and the ``simulation_end_epoch`` input may be replaced by the more general ``termination_settings`` (see TODO).
+
+Multi-type dynamics
+###################
+
+Tudat permits the propagation of any combination of types of dynamics, for any number of bodies
+One example is the simulation of coupled translational-rotational dynamics of one or more bodies, or the combined translational and mass dynamics of a body (e.g. spacecraft under thrust). N
+
+To define multi-type propagaor settings, you must first define the propagaor settings for each type of dynamics separately, after which you combine these using the TODO function, as follows: 
+
+    .. tabs::
+
+         .. tab:: Python
+
+          .. toggle-header:: 
+             :header: Required **Show/Hide**
+
+             .. literalinclude:: /_src_snippets/simulation/environment_setup/full_translational_setup.py
+             .. literalinclude:: /_src_snippets/simulation/environment_setup/full_rotational_setup.py
+             .. literalinclude:: /_src_snippets/simulation/environment_setup/full_mass_setup.py
+                :language: python
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/full_multitype_setup.py
+             :language: python
+
+         .. tab:: C++
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_setup.cpp
+             :language: cpp
+
+This example shows the use of the translational, rotational and mass dynamics of a single body ``Vehicle``. However, the framework is not limited to propagating the differnet types of dynamics for only one body. You may for instance propagate the translational state and mass of a spacecraft concurrently with the rotational state of the Earth. Also, you may propagate any number of any type of dynamics of any body, e.g. translational dynamics of 6 bodies, rotational dynamics of 4 bodies and mass of 2 bodies, where these three sets of bodies may but need not fully or partially overlap)
+   
+   .. Warning:: When using multi-type propagator settings, the output variables, termination settings, and print interval defined through the ``propagation_setup.propagator.multi_type`` function are used. Settings of the same kind are also stored in the constituent single-type propagator settings, but these are fully ignored when using multi-type settings 
+
+
+Multi-body dynamics
+###################
+
+The propagation framework in Tudat is implemented such that any number of bodies may be propagated numerically. Taking the translational dynamics as an example, propagating multiple bodies is achieved simply by extending the list of propagated bodies and central bodies:
+
+    .. tabs::
+
+         .. tab:: Python
+
+          .. toggle-header:: 
+             :header: Required **Show/Hide**
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/basic_multi_translational_setup.py
+             :language: python
+
+         .. tab:: C++
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_setup.cpp
+             :language: cp
+
+Where the ``acceleration_models`` should contain a set of acceleration models acting upon each propagated body (if one or more of the bodies is omitted from the ``acceleration_models``, no accelerations are assumed to act on this body, without warning or error).
+
+The use of a 'hierarchical' system is also supported by Tudat. For instance, one can propagate the Earth and Mars w.r.t. the Sun, the Sun w.r.t. the barycenter, the Moon w.r.t the Earth:
+
+    .. tabs::
+
+         .. tab:: Python
+
+          .. toggle-header:: 
+             :header: Required **Show/Hide**
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/basic_multi_hierarchy_translational_setup.py
+             :language: python
+
+         .. tab:: C++
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_setup.cpp
+             :language: cp
+
+In either case, any and all physical interactions are automatically formulated as required for the specific dynamical system under consideration. Specifically, the use of direct and third-body gravitational accelerations, and the definition of the correct effective gravitational parameter, are automatically handled. See TODO for details on this process
+
 
 =========================
 Acceleration Model Set-Up
