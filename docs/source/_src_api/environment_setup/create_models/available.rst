@@ -2,8 +2,10 @@
 Available Environment Models
 ============================
 
-Ephemeris Model
-###############
+.. _environment_ephemeris_model:
+
+Ephemeris Models
+################
 
 .. class:: Approximate Planet Positions
 
@@ -242,9 +244,10 @@ Ephemeris Model
           .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/custom_ephemeris.cpp
              :language: cpp
 
+.. _environment_gravity_field_model:
 
-Gravity Field Model
-###################
+Gravity Field Models
+####################
 
 .. class:: Point Mass Gravity
 
@@ -303,6 +306,7 @@ Gravity Field Model
           .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/point_mass_gravity_spice.cpp
              :language: cpp
 
+.. _environment_spherical_harmonics_gravity:
 
 .. class:: Spherical Harmonics Gravity
 
@@ -350,8 +354,10 @@ Time-variations of the Gravity Field
 
   Variations in spherical harmonic coefficients tabulated as a function of time.
 
-Atmosphere Model
-################
+.. _environment_atmosphere_model:
+
+Atmosphere Models
+#################
 
 .. class:: Exponential Atmosphere
 
@@ -422,7 +428,7 @@ Atmosphere Model
 
 .. class:: Tabulated Atmosphere
   
-  Due to the extensive customization available for the tabulated atmosphere, you can find the settings for this class in a separate page: :ref:`_tabulated-atmosphere-settings`.
+  Due to the extensive customization available for the tabulated atmosphere, you can find the settings for this class in a separate page: :ref:`tabulated-atmosphere-settings`.
 
 .. class:: Custom Constant Temperature Atmosphere
 
@@ -518,8 +524,8 @@ Atmosphere Model
 
   where :literal:`windFunction` is a function with inputs; altitude, longitude, latitude and time.
 
-Body Shape Model
-################
+Body Shape Models
+#################
 
 .. class:: Spherical Body Shape
 
@@ -605,8 +611,10 @@ Body Shape Model
             .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/oblate_spherical_body_shape_model.cpp
                :language: cpp 
 
-Rotational Model
-################
+.. _environment_rotational_model:
+
+Rotational Models
+#################
 
 .. class:: Simple Rotation Model
 
@@ -730,8 +738,10 @@ where the rotation from the original frame to the target frame at initial time i
   
   Rotation model with a constant value for the rotation. Currently the settings interface is not yet implemented.
 
-Aerodynamic Coefficient Interface
-#################################
+.. _environment_aerodynamic_coefficient_interface:
+
+Aerodynamic Coefficient Interfaces
+##################################
 
 .. class:: Constant Aerodynamic Coefficient
 
@@ -763,14 +773,16 @@ Aerodynamic Coefficient Interface
 
 .. class:: Tabulated Aerodynamic Coefficient
 
-  Settings for tabulated aerodynamic coefficients as a function of given independent variables. These tables can be defined either manually or loaded from a file, as discussed in more detail on the :ref:`_aerodynamic_coefficients` page. Coefficients can be defined as a function of angle of sideslip, angle of attack, Mach number or altitude. If you simulation requires any other dependencies for the coefficients, please open an issue on Github requesting feature.
+  Settings for tabulated aerodynamic coefficients as a function of given independent variables. These tables can be defined either manually or loaded from a file, as discussed in more detail on the :ref:`aerodynamic_coefficients` page. Coefficients can be defined as a function of angle of sideslip, angle of attack, Mach number or altitude. If you simulation requires any other dependencies for the coefficients, please open an issue on Github requesting feature.
 
 .. class:: Local Inclination Methods
   
   Settings for aerodynamic coefficients computed internally using a shape model of the vehicle, valid for hypersonic Mach numbers. Currently, this type of aerodynamic coefficients can only be set manually in the :literal:`Body` object directly.
 
-Radiation Pressure Interface
-############################
+.. _environment_radiation_pressure_interface:
+
+Radiation Pressure Interfaces
+#############################
 
 .. class:: Cannonball Radiation Pressure
 

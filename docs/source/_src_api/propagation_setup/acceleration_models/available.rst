@@ -32,8 +32,8 @@ Available Acceleration Models
          
     Requires the following environment models to be defined:
 
-    - Gravity field for body exerting acceleration.
-    - Current state of bodies undergoing and exerting acceleration, either from an Ephemeris model or from the numerical propagation.
+    - Gravity field for body exerting acceleration, see :ref:`environment_gravity_field_model` for non-default models.
+    - Current state of bodies undergoing and exerting acceleration, either from an Ephemeris model or from the numerical propagation, see :ref:`environment_ephemeris_model`.
 
 .. class:: Spherical Harmonic Gravity
 
@@ -65,9 +65,9 @@ Available Acceleration Models
 
   where the gravity field will be expanded up to degree and order 12 in the acceleration model. Requires the following environment models to be defined:
 
-  - Spherical harmonic gravity field for body exerting acceleration.
-  - Rotation model from the inertial frame to the body-fixed frame.
-  - Current state of bodies undergoing and exerting acceleration, either from an ephemeris model or from the numerical propagation.
+  - Spherical harmonic gravity field for body exerting acceleration, see :ref:`environment_spherical_harmonics_gravity` for non-default models.
+  - Rotation model from the inertial frame to the body-fixed frame, see :ref:`environment_rotational_model`.
+  - Current state of bodies undergoing and exerting acceleration, either from an ephemeris model or from the numerical propagation, see :ref:`environment_ephemeris_model`.
 
   .. note::
       The spherical harmonic acceleration up to degree N and order M includes the point-mass gravity acceleration (which is the degree and order 0 term).
@@ -108,8 +108,8 @@ Available Acceleration Models
 
   Requires the following environment models to be defined:
 
-  - Atmosphere model for body exerting acceleration.
-  - Aerodynamic coefficient interface for body undergoing acceleration.
+  - Atmosphere model for body exerting acceleration, see :ref:`environment_atmosphere_model`.
+  - Aerodynamic coefficient interface for body undergoing acceleration, see :ref:`environment_aerodynamic_coefficient_interface`.
   - Mass model for body undergoing acceleration.
   - Current state of body undergoing acceleration and body with atmosphere.
 
@@ -148,8 +148,8 @@ Available Acceleration Models
 
   Requires the following environment models to be defined:
 
-  - Radiation pressure model for body undergoing acceleration (from source equal to body exerting acceleration).
-  - Current state of body undergoing and body emitting radiation
+  - Cannonball radiation pressure model for body undergoing acceleration (from source equal to body exerting acceleration), see :ref:`environment_radiation_pressure_interface`.
+  - Current state of body undergoing and body emitting radiation.
 
 .. class:: Relativistic Acceleration Correction
 
@@ -244,8 +244,8 @@ Available Acceleration Models
 
   Requires the following environment models to be defined:
 
-  - Panelled radiation pressure model for body undergoing acceleration (from source equal to body exerting acceleration).
-  - Current state of body undergoing and body emitting radiation
+  - Panelled radiation pressure model for body undergoing acceleration (from source equal to body exerting acceleration), see :ref:`environment_radiation_pressure_interface`.
+  - Current state of body undergoing and body emitting radiation.
 
 .. class:: Solar sailing Acceleration
 
@@ -277,8 +277,8 @@ Available Acceleration Models
 
   Requires the following environment models to be defined:
 
-  - Solar sailing radiation pressure model for body undergoing acceleration (from source equal to body exerting acceleration).
-  - Current state of body undergoing and body emitting radiation
+  - Solar sailing radiation pressure model for body undergoing acceleration (from source equal to body exerting acceleration), :ref:`environment_radiation_pressure_interface`.
+  - Current state of body undergoing and body emitting radiation.
 
 
 .. class:: Thrust Acceleration
@@ -288,7 +288,7 @@ Available Acceleration Models
   - Mass of body undergoing acceleration.
   - Settings for both the direction and magnitude of the thrust force. These models may in turn have additional environmental dependencies.
 
-  Setting up a thrust acceleration is discussed in more detail on the page Thrust Guidance.
+  Setting up a thrust acceleration is discussed in more detail on the page (TODO) Thrust Guidance.
 
 .. class:: Quasi Impulsive Shot Acceleration
 
@@ -386,9 +386,9 @@ Available Acceleration Models
 
   where the gravity fields of Io and Jupiter will be expanded up to degree and order 12 and 4, respectively, in the acceleration model. Requires the following environment models to be defined:
 
-  - Spherical harmonic gravity field for body exerting acceleration and body undergoing acceleration.
-  - Rotation model from the inertial frame to the body-fixed frame and body undergoing acceleration.
-  - Current state of bodies undergoing and exerting acceleration, either from an Ephemeris model or from the numerical propagation.
+  - Spherical harmonic gravity field for body exerting acceleration and body undergoing acceleration, see :ref:`environment_gravity_field_model` for non-default models.
+  - Rotation model from the inertial frame to the body-fixed frame and body undergoing acceleration, see :ref:`environment_rotational_model`.
+  - Current state of bodies undergoing and exerting acceleration, either from an Ephemeris model or from the numerical propagation, see :ref:`environment_ephemeris_model`.
 
   For the case where a third-body mutual spherical harmonic acceleration (e.g. Ganymede on Io when propagating w.r.t. Jupiter), additional parameters have to be provided that denote the expansion degree/order of the central body, so:
 
