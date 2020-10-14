@@ -63,7 +63,11 @@ Available Acceleration Models
         .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/spherical_harmonic_gravity.cpp
            :language: cpp
 
-  where the gravity field will be expanded up to degree and order 12 in the acceleration model.
+  where the gravity field will be expanded up to degree and order 12 in the acceleration model. Requires the following environment models to be defined:
+
+  - Spherical harmonic gravity field for body exerting acceleration.
+  - Rotation model from the inertial frame to the body-fixed frame.
+  - Current state of bodies undergoing and exerting acceleration, either from an ephemeris model or from the numerical propagation.
 
   .. note::
       The spherical harmonic acceleration up to degree N and order M includes the point-mass gravity acceleration (which is the degree and order 0 term).
