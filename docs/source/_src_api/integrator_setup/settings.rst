@@ -1,6 +1,7 @@
+.. _simulation_integrator_settings:
 
 Integrator Settings
-#############################
+###################
 
 Runge-Kutta 4
 -------------

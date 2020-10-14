@@ -1,3 +1,4 @@
+.. _available_dependent_variables:
 
 Available Dependent Variables
 #############################

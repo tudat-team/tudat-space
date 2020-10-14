@@ -1,3 +1,5 @@
+.. _available_environment_models:
+
 ============================
 Available Environment Models
 ============================
