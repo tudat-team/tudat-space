@@ -1,2 +1,1 @@
-body_settings[ "Jupiter" ].environment_settings.approximate_planet_position_settings( 
-							ephemerides.ApproximatePlanetPositionsBase.jupiter, False)
+body_settings.get_body( "Jupiter" ).ephemeris_settings = environment_setup.ephemeris.approximate_planet_position( )

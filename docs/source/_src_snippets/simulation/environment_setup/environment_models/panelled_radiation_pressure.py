@@ -9,5 +9,7 @@ occulting_bodies = [ "Earth" ]
 panel_surface_normals = [ [0.0, 0.0, 1.0], [0.0, 0.0, -1.0],
 						[1.0, 0.0, 0.0], [-1.0, 0.0, 0.0] ] 
 
-body_settings[ "Vehicle" ].environment_setup.panelled_radiation_pressure_settings( source_body, emissivities,
-	areas, diffusion_coefficients, surfaceNormalsInBodyFixedFrameFunctions, occulting_bodies )
+radiation_pressure_settings = environment_setup.radiation_pressure.panelled( source_body, emissivities,
+	areas, diffusion_coefficients, surfaceNormalsInBodyFixedFrameFunctions, occulting_bodies)
+
+environment_setup.add_radiation_pressure_interface( bodies, "Vehicle", radiation_pressure_settings )

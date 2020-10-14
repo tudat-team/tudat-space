@@ -1,1 +1,1 @@
-body_settings[ "Earth" ].environment_setup.reset_make_multi_arc_ephemeris( True )
+body_settings.get_body( "Earth" ).ephemeris_settings = environment_setup.ephemeris.multi_arc( )

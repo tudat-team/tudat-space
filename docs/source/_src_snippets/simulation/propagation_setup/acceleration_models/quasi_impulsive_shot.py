@@ -8,6 +8,6 @@ maneuver_rise_time = 15.0
 
 
 acceleration_settings_on_vehicle = dict(
-            Apollo = [ propagation_setup.Acceleration.quasi_impulsive_shot_acceleration( thrust_mid_times, delta_v_values,
+            Apollo = [ propagation_setup.acceleration.quasi_impulsive_shot( thrust_mid_times, delta_v_values,
             																total_maneuver_time, maneuver_rise_time) ] 
         )

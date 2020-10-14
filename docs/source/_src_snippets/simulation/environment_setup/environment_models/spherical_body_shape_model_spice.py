@@ -1,1 +1,1 @@
-body_settings[ "Earth" ].environment_setup.body_shape_settings( spherical_spice )
+body_settings.get_body( "Earth" ).shape_settings = environment_setup.shape.spherical_spice( )

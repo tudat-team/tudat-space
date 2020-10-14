@@ -16,6 +16,8 @@ specular_reflection_coefficient = 1.0
 occulting_bodies = [ "Earth" ]
 central_body = "Earth"
 
-body_settings[ "Vehicle"].environment_setup.solar_sail_radiation_interface_settings( source_body, area, cone_angle, clock_angle,
+radiation_pressure_settings = environment_setup.radiation_pressure.solar_sail( source_body, area, cone_angle, clock_angle,
 	front_emissivity_coefficient, back_emissivity_coefficient, front_lambertian_coefficient, back_lambertian_coefficient,
 	reflectivity_coefficient, specular_reflection_coefficient, occulting_bodies, central_body)
+
+environment_setup.add_radiation_pressure_interface( bodies, "Vehicle", radiation_pressure_settings )
