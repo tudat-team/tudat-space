@@ -168,7 +168,7 @@ Available Acceleration Models
   Requires the following environment models to be defined:
 
   - Atmosphere model for body exerting acceleration.
-  - Aerodynamic coefficient interface for body undergoing acceleration (set by AerodynamicCoefficientSettings).
+  - Aerodynamic coefficient interface for body undergoing acceleration.
   - Mass model for body undergoing acceleration.
   - Current state of body undergoing acceleration and body with atmosphere.
 

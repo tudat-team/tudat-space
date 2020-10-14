@@ -5,7 +5,7 @@ Available Environment Models
 Ephemeris Model
 ###############
 
-.. class:: Approximate Planet Positions Settings
+.. class:: Approximate Planet Positions
 
   Highly simplified model of ephemerides of major Solar system bodies (model described here). Both a three-dimensional, and circular coplanar approximation may be used.
 
@@ -35,7 +35,7 @@ Ephemeris Model
 
   where the first constructor argument is taken from the enum in approximatePlanetPositionsBase.h, and the second argument (false) denotes that the circular coplanar approximation is not made.
 
-.. class:: Direct Spice Ephemeris Settings
+.. class:: Direct Spice Ephemeris
 
   Ephemeris retrieved directly using Spice.
 
@@ -66,7 +66,7 @@ Ephemeris Model
   creating a barycentric (SSB) ephemeris with axes along J2000, with data directly from spice.
 
 
-.. class:: Interpolated Spice Ephemeris Settings
+.. class:: Interpolated Spice Ephemeris
 
   Using this option the state of the body is retrieved at regular intervals, and used to create an interpolator, before setting up environment. This has the advantage of only requiring calls to Spice outside of the propagation inner loop, reducing computation time. However, it has the downside of begin applicable only during a limited time interval.
 
@@ -96,7 +96,7 @@ Ephemeris Model
 
   creating a barycentric (SSB) ephemeris with axes along J2000, with data retrieved from Spice at 3600 s intervals between t=0 and t=1.0E8, using a 6th order Lagrange interpolator. Settings for the interpolator (discussed here, can be added as a sixth argument if you wish to use a different interpolation method)
 
-.. class:: Tabulated Ephemeris Settings
+.. class:: Tabulated Ephemeris
 
   Ephemeris created directly by interpolating user-specified states as a function of time.
 
@@ -127,7 +127,7 @@ Ephemeris Model
   creating an ephemeris interpolated (with 6th order Lagrange interpolation) from the data in bodyStateHistory, which contains the Cartesian state (w.r.t. SSB; axes along J2000) for a given number of times (map keys, valid time range between first and last time in this map).
 
 
-.. class:: Kepler Ephemeris Settings
+.. class:: Kepler Ephemeris
   
   Ephemeris modelled as being a perfect Kepler orbit.
 
@@ -158,7 +158,7 @@ Ephemeris Model
   creating a Kepler orbit as ephemeris using the given kepler elements and associated initial time and gravitational parameter. See Frame/State Transformations for more details on orbital elements in Tudat.
 
 
-.. class:: Constant Ephemeris Settings
+.. class:: Constant Ephemeris
 
   Ephemeris modelled as being independent of time.
 
@@ -186,7 +186,7 @@ Ephemeris Model
           .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/constant_ephemeris.cpp
              :language: cpp
 
-.. class:: Multi-Arc Ephemeris Settings
+.. class:: Multi-Arc Ephemeris
 
   An ephemeris model (for translational state) that allows the body’s state to be defined by distinct ephemeris models over different arcs. Class is implemented to support multi-arc propagation/estimation. 
 
@@ -214,7 +214,7 @@ Ephemeris Model
           .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/multi_arc_ephemeris.cpp
              :language: cpp
 
-.. class:: Custom Ephemeris Settings
+.. class:: Custom Ephemeris
 
   Allows user to provide arbitrary function as ephemeris model.
 
@@ -246,7 +246,7 @@ Ephemeris Model
 Gravity Field Model
 ###################
 
-.. class:: Point Mass Gravity Settings
+.. class:: Point Mass Gravity
 
     Point-mass gravity field model, with user-defined gravitational parameter.
 
@@ -274,7 +274,7 @@ Gravity Field Model
           .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/point_mass_gravity.cpp
              :language: cpp
 
-.. class:: Point Mass Gravity from Spice Settings
+.. class:: Point Mass Gravity from Spice
 
 
   Point-mass gravity field model, with gravitational parameter from Spice.
@@ -304,7 +304,7 @@ Gravity Field Model
              :language: cpp
 
 
-.. class:: Spherical Harmonics Gravity Settings
+.. class:: Spherical Harmonics Gravity
 
 
   Gravity field model as a spherical harmonic expansion.
@@ -342,18 +342,18 @@ Gravity Field Model
 Time-variations of the Gravity Field
 ####################################
 
-.. class:: Basic Solid Body Gravity Field Variation Settings
+.. class:: Basic Solid Body Gravity Field Variation
 
   Tidal variation of the gravity field using first-order tidal theory.
 
-.. class:: Tabulated Gravity Field Variation Settings
+.. class:: Tabulated Gravity Field Variation
 
   Variations in spherical harmonic coefficients tabulated as a function of time.
 
 Atmosphere Model
 ################
 
-.. class:: Exponential Atmosphere Settings
+.. class:: Exponential Atmosphere
 
   Simple atmosphere model independent of time, latitude and longitude based on an exponentially decaying density profile with a constant temperature. 
 
@@ -420,11 +420,11 @@ Atmosphere Model
   - **Earth**: Lecture notes, Rocket Motion by Prof. Ir. B.A.C. Ambrosius, November 2009
   - **Mars**: Spohn, T., Breuer, D., and Johnson, T., Eds., Encyclopedia of the Solar System, 3rd ed. Elsevier, 2014
 
-.. class:: Tabulated Atmosphere Settings
+.. class:: Tabulated Atmosphere
   
   Due to the extensive customization available for the tabulated atmosphere, you can find the settings for this class in a separate page: :ref:`_tabulated-atmosphere-settings`.
 
-.. class:: Custom Constant Temperature Atmosphere Settings
+.. class:: Custom Constant Temperature Atmosphere
 
   You can define your own constant temperature atmosphere, which computes the atmospheric properties based on an input function. For instance, one can link a function to the settings as such:
 
@@ -488,7 +488,7 @@ Atmosphere Model
                :language: cpp
 
 
-.. class:: Custom Wind Model Settings
+.. class:: Custom Wind Model
 
   Custom wind model which can be used to retrieve a wind vector. This wind vector is in the body-fixed, body-centered reference frame.
 
@@ -521,7 +521,7 @@ Atmosphere Model
 Body Shape Model
 ################
 
-.. class:: Spherical Body Shape Settings
+.. class:: Spherical Body Shape
 
   Model defining a body shape as a perfect sphere, with the sphere radius provided by the user.
 
@@ -549,7 +549,7 @@ Body Shape Model
             .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/spherical_body_shape_model.cpp
                :language: cpp
 
-.. class:: Spherical Body Shape from Spice Settings
+.. class:: Spherical Body Shape from Spice
 
   Model defining a body shape as a perfect sphere, with the sphere radius retrieved from Spice. 
 
@@ -577,7 +577,7 @@ Body Shape Model
             .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/spherical_body_shape_model_spice.cpp
                :language: cpp 
 
-.. class:: Oblate Spherical Body Shape Settings
+.. class:: Oblate Spherical Body Shape
   
   Model defining a body shape as a flattened sphere, with the equatorial radius and flattening provided by the user.
 
@@ -608,7 +608,7 @@ Body Shape Model
 Rotational Model
 ################
 
-.. class:: Simple Rotation Model Settings
+.. class:: Simple Rotation Model
 
   Rotation model with constant orientation of the rotation axis, and constant rotation rate about local z-axis.
 
@@ -668,7 +668,7 @@ where the rotation from the original frame to the target frame at initial time i
                :language: cpp
 
 
-.. class:: Gcrs to Itrs Rotation Model Settings
+.. class:: Gcrs to Itrs Rotation Model
 
   High-accuracy rotation model of the Earth, according to the IERS 2010 Conventions. This class has various options to deviate from the default settings, here we only show the main options (typical applications will use default):
 
@@ -733,7 +733,7 @@ where the rotation from the original frame to the target frame at initial time i
 Aerodynamic Coefficient Interface
 #################################
 
-.. class:: Constant Aerodynamic Coefficient Settings
+.. class:: Constant Aerodynamic Coefficient
 
   Settings for constant (not a function of any independent variables) aerodynamic coefficients. For example for constant drag coefficient of 1.5 and lift coefficient of 0.3.
 
@@ -761,7 +761,7 @@ Aerodynamic Coefficient Interface
             .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/constant_aerodynamic_coefficients.cpp
                :language: cpp
 
-.. class:: Tabulated Aerodynamic Coefficient Settings
+.. class:: Tabulated Aerodynamic Coefficient
 
   Settings for tabulated aerodynamic coefficients as a function of given independent variables. These tables can be defined either manually or loaded from a file, as discussed in more detail on the :ref:`_aerodynamic_coefficients` page. Coefficients can be defined as a function of angle of sideslip, angle of attack, Mach number or altitude. If you simulation requires any other dependencies for the coefficients, please open an issue on Github requesting feature.
 
@@ -772,7 +772,7 @@ Aerodynamic Coefficient Interface
 Radiation Pressure Interface
 ############################
 
-.. class:: Cannonball Radiation Pressure Settings
+.. class:: Cannonball Radiation Pressure
 
   Properties for a cannonball radiation pressure model, i.e. effective force colinear with vector from source to target. For example creating cannonball radiation pressure settings for radiation due to the Sun, acting on the “Spacecraft” body, where the occultations due to the Earth are taken into account.
 
@@ -803,7 +803,7 @@ Radiation Pressure Interface
   .. note::
       Occultations by multiple bodies are not yet supported. Please contact the Tudat suppport team if you wish to use multiple occultations.
 
-.. class:: Panelled Radiation Pressure Settings
+.. class:: Panelled Radiation Pressure
 
   Properties for a panelled radiation pressure model, i.e. solar radiation pressure force derived from a so-called boxes-and-wings model.
 
@@ -841,7 +841,7 @@ Radiation Pressure Interface
   - Vector with the names of the occulting bodies.
 
 
-.. class:: Solar Sail Radiation Interface Settings
+.. class:: Solar Sail Radiation Interface
 
   Properties for a solar sail radiation pressure model, i.e. solar radiation pressure force derived from a solar sail characteristics and orientation.
 

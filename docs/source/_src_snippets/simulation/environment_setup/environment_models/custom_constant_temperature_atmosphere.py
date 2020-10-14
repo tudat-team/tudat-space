@@ -2,7 +2,7 @@
 def custom_density_function( altitude, longitude, latitude, time ):
 
    # Return a linear combination of the input values
-   return 0.5 * altitude + 0.25 * longitude + 0.15 * latitude + 0.1 * time;
+   return 0.5 * altitude + 0.25 * longitude + 0.15 * latitude + 0.1 * time
 
 
 def main( ):
