@@ -22,8 +22,8 @@ Available Dependent Variables
 - Single Acceleration Norm :python:`propagation_setup.dependent_variable.single_acceleration_norm( point_mass_gravity, "Spacecraft", "Earth" )`
 - Spherical Harmonic Terms Acceleration :python:`propagation_setup.dependent_variable.spherical_harmonics_terms_acceleration( "Spacecraft", "Earth", (2,2) )` TODO: component indices
 - Spherical Harmonic Terms Acceleration Norm :python:`propagation_setup.dependent_variable.spherical_harmonics_terms_acceleration_norm( "Spacecraft", "Earth", (2,2) )` TODO: component indices
-- Total Acceleration :python:`propagation_setup.dependent_variable.total_acceleration( "Earth" )`
-- Total Acceleration Norm :python:`propagation_setup.dependent_variable.total_acceleration_norm( "Earth" )`
+- Total Acceleration :python:`propagation_setup.dependent_variable.total_acceleration( "Spacecraft" )`
+- Total Acceleration Norm :python:`propagation_setup.dependent_variable.total_acceleration_norm( "Spacecraft" )`
 
 - Aerodynamic Force Coefficients :python:`propagation_setup.dependent_variable.aerodynamic_force_coefficients( "Spacecraft" )`
 - Aerodynamic Moment Coefficients :python:`propagation_setup.dependent_variable.aerodynamic_moment_coefficients( "Spacecraft" )`
