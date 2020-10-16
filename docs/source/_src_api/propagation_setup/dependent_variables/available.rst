@@ -139,7 +139,8 @@ After the dynamics simulator has been called, the dependent variable history can
 
 	.. code-block:: python
 
-		propagation_setup.dependent_variable.spherical_harmonic_terms_acceleration_norm( "Spacecraft", "Earth", [(2,2)] )
+		spherical_harmonic_terms = [ (2,0), (2,1), (2,2) ]
+		propagation_setup.dependent_variable.spherical_harmonic_terms_acceleration_norm( "Spacecraft", "Earth", spherical_harmonic_terms )
 
 	The entries in the ``spherical_harmonic_terms`` define the (degree, order) pairs of which the norm of the contribution to the spherical harmonic acceleration is to be retrieved.
 
