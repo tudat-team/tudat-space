@@ -3,37 +3,198 @@
 Available Dependent Variables
 #############################
 
-.. role:: python(code)
-   :language: python
+All variables are saved in SI units. Dependent variables can be added to the propagation settings by first defining a list of desired dependent variables.
 
 
-- Mach Number :python:`propagation_setup.dependent_variable.mach_number( "Spacecraft", "Earth" )`
-- Altitude :python:`propagation_setup.dependent_variable.altitude( "Spacecraft", "Earth" )`
-- Airspeed :python:`propagation_setup.dependent_variable.airspeed( "Spacecraft", "Earth" )`
-- Density :python:`propagation_setup.dependent_variable.density( "Spacecraft", "Earth" )`
+.. code-block:: python
+      
+    dependent_variables_to_save = [
+        propagation_setup.dependent_variable.total_acceleration( "Delfi-C3" ),
+        propagation_setup.dependent_variable.keplerian_state( "Delfi-C3", "Earth" ),
+        propagation_setup.dependent_variable.latitude( "Delfi-C3", "Earth" ),
+        propagation_setup.dependent_variable.longitude( "Delfi-C3", "Earth" )
+    ]
 
-- Relative Speed :python:`propagation_setup.dependent_variable.relative_speed( "Spacecraft", "Earth" )`
-- Relative Position :python:`propagation_setup.dependent_variable.relative_position( "Spacecraft", "Earth" )`
-- Relative Distance :python:`propagation_setup.dependent_variable.relative_distance( "Spacecraft", "Earth" )`
-- Relative Velocity :python:`propagation_setup.dependent_variable.relative_velocity( "Spacecraft", "Earth" )`
-- Keplerian State :python:`propagation_setup.dependent_variable.keplerian_state( "Spacecraft", "Earth" )`
+Then, add this list to the propagating settings.
 
-- Single Acceleration :python:`propagation_setup.dependent_variable.single_acceleration( point_mass_gravity, "Spacecraft", "Earth" )`
-- Single Acceleration Norm :python:`propagation_setup.dependent_variable.single_acceleration_norm( point_mass_gravity, "Spacecraft", "Earth" )`
-- Spherical Harmonic Terms Acceleration :python:`propagation_setup.dependent_variable.spherical_harmonics_terms_acceleration( "Spacecraft", "Earth", (2,2) )` TODO: component indices
-- Spherical Harmonic Terms Acceleration Norm :python:`propagation_setup.dependent_variable.spherical_harmonics_terms_acceleration_norm( "Spacecraft", "Earth", (2,2) )` TODO: component indices
-- Total Acceleration :python:`propagation_setup.dependent_variable.total_acceleration( "Spacecraft" )`
-- Total Acceleration Norm :python:`propagation_setup.dependent_variable.total_acceleration_norm( "Spacecraft" )`
+.. code-block:: python
 
-- Aerodynamic Force Coefficients :python:`propagation_setup.dependent_variable.aerodynamic_force_coefficients( "Spacecraft" )`
-- Aerodynamic Moment Coefficients :python:`propagation_setup.dependent_variable.aerodynamic_moment_coefficients( "Spacecraft" )`
+    propagator_settings = propagation_setup.propagator.translational(
+	    central_bodies,
+	    acceleration_models,
+	    bodies_to_propagate,
+	    initial_state,
+	    simulation_end_epoch,
+	    output_variables = dependent_variables_to_save
+    )
 
-- Latitude :python:`propagation_setup.dependent_variable.latitude( "Spacecraft", "Earth" )`
-- Longitude :python:`propagation_setup.dependent_variable.longitude( "Spacecraft", "Earth" )`
-- Heading Angle :python:`propagation_setup.dependent_variable.heading_angle( "Spacecraft", "Earth" )`
-- Flight Path Angle :python:`propagation_setup.dependent_variable.flight_path_angle( "Spacecraft", "Earth" )`
+After the dynamics simulator has been called, the dependent variable history can be retrieved as:
 
-- Radiation Pressure :python:`propagation_setup.dependent_variable.radiation_pressure( "Spacecraft", "Earth" )`
+.. code-block:: python
+
+	dependent_variables = dynamics_simulator.dependent_variable_history
+
+.. note::
+
+	Dependent variables can be saved for each (celestial) body, as long as it has been defined in the environment.
+
+- **Mach Number**
+
+	Mach number in atmosphere. Requires an aerodynamic acceleration to be acting on the vehicle.
+
+	.. code-block:: python
+
+		 propagation_setup.dependent_variable.mach_number( "Spacecraft", "Earth" )
+
+- **Altitude** 
+
+	Altitude above body exerting aerodynamic acceleration. Requires an aerodynamic acceleration to be acting on the vehicle.
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.altitude( "Spacecraft", "Earth" )
+
+- **Airspeed**
+	
+	Airspeed in atmosphere of body exerting aerodynamic acceleration. Requires an aerodynamic acceleration to be acting on the vehicle.
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.airspeed( "Spacecraft", "Earth" )
+
+- **Density**
+
+	Local density in atmosphere of body exerting aerodynamic acceleration (at position of body undergoing acceleration). Requires an aerodynamic acceleration to be acting on the vehicle. 
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.density( "Spacecraft", "Earth" )
+
+- **Relative Position**
+
+	Vector position of a body with respect to a second body (between centers of mass).
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.relative_position( "Spacecraft", "Earth" )
+
+- **Relative Distance**
+
+	Scalar distance of a body with respect to a second body (between centers of mass). 
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.relative_distance( "Spacecraft", "Earth" )
+
+- **Relative Velocity**
+
+	Vector velocity of a body with respect to a second body (between centers of mass).
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.relative_velocity( "Spacecraft", "Earth" )
+
+- **Relative Speed**
+
+	Scalar velocity of a body with respect to a second body (between centers of mass).
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.relative_speed( "Spacecraft", "Earth" )
+
+- **Keplerian State**
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.keplerian_state( "Spacecraft", "Earth" )
+
+
+	Returns six columns:
+	1: Semi-major Axis. 2: Eccentricity. 3: Inclination. 4: Argument of Periapsis. 5. Right Ascension of the Ascending Node. 6: True Anomaly.
+
+- **Single Acceleration**
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.single_acceleration( 
+			propagation_setup.acceleration.point_mass_gravity_type, "Spacecraft", "Earth" )
+
+- **Single Acceleration Norm**
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.single_acceleration_norm( 
+			propagation_setup.acceleration.point_mass_gravity_type, "Spacecraft", "Earth" )
+
+- **Spherical Harmonic Terms Acceleration**
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.spherical_harmonics_terms_acceleration( "Spacecraft", "Earth", (2,2) )
+
+	Returns the the full list of accelerations for *each* spherical harmonics term.
+
+- **Spherical Harmonic Terms Acceleration Norm**
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.spherical_harmonics_terms_acceleration_norm( "Spacecraft", "Earth", (2,2) )
+
+	Returns the the full list of acceleration norms for *each* spherical harmonics term.
+
+- **Total Acceleration**
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.total_acceleration( "Spacecraft" )
+
+- **Total Acceleration Norm**
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.total_acceleration_norm( "Spacecraft" )
+
+- **Aerodynamic Force Coefficients**
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.aerodynamic_force_coefficients( "Spacecraft" )
+
+- **Aerodynamic Moment Coefficients**
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.aerodynamic_moment_coefficients( "Spacecraft" )
+
+- **Latitude**
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.latitude( "Spacecraft", "Earth" )
+
+- **Longitude**
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.longitude( "Spacecraft", "Earth" )
+
+- **Heading Angle**
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.heading_angle( "Spacecraft", "Earth" )
+
+- **Flight Path Angle**
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.flight_path_angle( "Spacecraft", "Earth" )
+
+- **Radiation Pressure**
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.radiation_pressure( "Spacecraft", "Earth" )
 
 
       

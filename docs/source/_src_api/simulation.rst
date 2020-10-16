@@ -30,6 +30,7 @@ A typical procedure for carrying out this process is given on page TODO(getting 
                 :language: python
 
           .. literalinclude:: /_src_snippets/simulation/environment_setup/create_bodies_1.py
+
           .. literalinclude:: /_src_snippets/simulation/environment_setup/create_vehicle.py
              :language: python
 
@@ -302,6 +303,13 @@ Output Variables
 
 By default, propagating the dynamics of a body provides only the numerically integrated state history of your model as output. Tudat has the option to provide any number of additional outputs from your simulation, by defining the ``output_variables`` input to the propagator settings. For instance:
 
+.. code-block:: python
+
+  output_variables = [
+        propagation_setup.dependent_variable.altitude( "Vehicle", "Earth" ),
+        propagation_setup.dependent_variable.single_acceleration( 
+          propagation_setup.acceleration.aerodynamic_type, "Vehicle", "Earth" )
+    ]
 
 To save the altitude of ' Vehicle' w.r.t. Earth and the aerodynamic acceleration exerted by the Earth on this vehicle. A comprehensive list of available outputs is given below 
 
