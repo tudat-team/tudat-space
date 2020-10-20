@@ -1,0 +1,1 @@
+body_settings.get_body( "Jupiter" ).ephemeris_settings = environment_setup.ephemeris.approximate_planet_position( )

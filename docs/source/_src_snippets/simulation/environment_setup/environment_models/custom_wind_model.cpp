@@ -1,0 +1,1 @@
+bodySettings[ "Earth" ]->atmosphereSettings = std::make_shared< CustomWindModelSettings >(  windFunction )

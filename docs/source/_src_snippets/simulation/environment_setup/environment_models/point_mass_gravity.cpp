@@ -1,0 +1,3 @@
+double gravitationalParameter = ...
+
+bodySettings[ "Earth" ]->gravityFieldSettings = std::make_shared< CentralGravityFieldSettings >( gravitationalParameter );

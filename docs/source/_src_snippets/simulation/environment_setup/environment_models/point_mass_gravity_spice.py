@@ -1,0 +1,1 @@
+body_settings.get_body( "Earth" ).gravity_field_settings = environment_setup.gravity_field.central_spice( )
