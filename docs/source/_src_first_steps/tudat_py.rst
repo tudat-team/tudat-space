@@ -5,6 +5,31 @@ Getting Started with Tudat(Py)
 Installation
 ############
 
+Please see the `Installation`_ guide provided by the Anaconda documentation.
+
+.. _`Installation`: https://docs.anaconda.com/anaconda/install/
+
+Managing Conda
+##############
+
+Command-line & GUI use
+----------------------
+
+On Unix system (Linux and Mac), conda should be integrated with the terminal. On Windows, you can find
+a program called ``Anaconda Navigator`` and ``Anaconda Prompt`` in the Windows search. The ``Anaconda Prompt`` is
+equivalent to the terminal use of ``conda`` on Unix. Some Unix commands are made available in this prompt, although
+most usage is equivalent to the Windows shell. On Unix you can start ``Anaconda Navigator`` with the following command:
+
+.. code-block::
+
+    anaconda-navigator    # base environment should be active
+
+Verify Conda is Installed via ``Terminal/Anaconda Prompt``.
+
+.. code-block::
+
+    conda --version
+
 
 Choosing a Development Environment
 ##################################
