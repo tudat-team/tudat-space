@@ -1,4 +1,4 @@
-**********
+3**********
 Simulation
 **********
 
@@ -52,7 +52,7 @@ Details on the above procedure, and various additional/alternative options avail
 Details on all available environment models, and how to define them in your simulation, is given below:
 
 .. toctree::
-    :maxdepth: 5
+    :maxdepth: 3
 
     environment_setup/create_models/available
     environment_setup/create_models/custom
