@@ -11,8 +11,6 @@ passions in astrodynamics and space.
    :caption: First Steps
    :hidden:
 
-   _src_first_steps/conda
-   _src_first_steps/python
    _src_first_steps/tudat_py
    _src_first_steps/simulations
 
@@ -25,6 +23,14 @@ passions in astrodynamics and space.
    _src_api/astrodynamics
    _src_api/mathematics
    _src_api/interface
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Use of Tools
+   :hidden:
+
+   _src_first_steps/conda
+   _src_first_steps/python
 
 .. toctree::
    :maxdepth: 2
