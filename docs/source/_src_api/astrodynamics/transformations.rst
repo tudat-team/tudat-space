@@ -31,7 +31,7 @@ Transformation between these elements is done by passing through quaternions fir
 
 	The Kepler elements are the standard orbital elements used in classical celestial mechanics, with the element indices shown above. Converting to/from Cartesian state requires an additional piece of information in addition to the state itself: the gravitational parameter of the body w.r.t. the Keplerian elements are defined. The physical meaning of each of the elements is
 
-	.. list-table:: Kepler Elements Indices
+	.. list-table:: Kepler Elements Indices.
 	     :widths: 50 50
 	     :header-rows: 1
 
@@ -139,7 +139,7 @@ Transformation between these elements is done by passing through quaternions fir
 
 	The spherical elements are typically used to denote the conditions in atmospheric flight. In most applications, they will be used to denote the state in a body-fixed frame. The details of the physical meaning of the elements is discussed here. The element indices in Tudat are the following:
 
-	.. list-table:: Spherical-orbital Elements Indices
+	.. list-table:: Spherical-orbital Elements Indices.
 		 :widths: 50 50
 		 :header-rows: 1
 
@@ -178,7 +178,7 @@ Transformation between these elements is done by passing through quaternions fir
 	
 	The modified equinoctial elements are typically used for orbits with eccentricities near 0 or 1 and/or inclinations near 0 or :math:`\pi`. The element indices in Tudat are the following:
 
-	.. list-table:: Modified Equinoctial Elements Indices
+	.. list-table:: Modified Equinoctial Elements Indices.
 		 :widths: 50 50
 		 :header-rows: 1
 
@@ -220,3 +220,218 @@ Transformation between these elements is done by passing through quaternions fir
 
 		cartesian_state = conversion.modified_equinoctial_to_cartesian( modified_equinoctial_state, central_body_gravitational_parameter, flip_singularity_to_zero_inclination )
 		
+
+
+.. class:: Unified State Model Elements
+
+	Three different versions of the Unified State Model are present in Tudat. They differ based on the coordinates chosen to represent the rotation from local orbital to inertial frame, which can be expressed in quaternions (USM7), modified Rodrigues parameters (USM6) or exponential map (USMEM). The element indices are the following:
+
+	.. list-table:: Unified State Model indices with quaternions (USM7), modified Rodrigues parameters (USM6) or exponential map (USMEM).
+		 :widths: 25 25 25 25
+		 :header-rows: 1
+
+		 * - Column Indices
+		   - USM7
+		   - USM6
+		   - USMEM
+		 * - 0
+		   - C Hodograph
+		   - C Hodograph
+		   - C Hodograph
+		 * - 1
+		   - Rf1 Hodograph
+		   - Rf1 Hodograph
+		   - Rf1 Hodograph
+		 * - 2
+		   - Rf2 Hodograph
+		   - Rf2 Hodograph
+		   - Rf2 Hodograph
+		 * - 3
+		   - :math:`\eta`
+		   - :math:`\sigma` 1
+		   - e1
+		 * - 4
+		   - :math:`\epsilon` 1
+		   - :math:`\sigma` 2
+		   - e2
+		 * - 5
+		   - :math:`\epsilon` 2
+		   - :math:`\sigma` 3
+		   - e3
+		 * - 6
+		   - :math:`\epsilon` 3
+		   - Shadow flag
+		   - Shadow flag
+
+	Regardless of the rotational coordinates chosen, the Unified State Model elements consists of 7 elements. For each Unified State Model representation, conversion to and from Keplerian and Cartesian coordinates is implemented. As an example, the conversion from Keplerian elements for the USM7 elements is shown here:
+
+	.. code-block:: python
+
+		keplerian_elements = ...
+		central_body = ...
+		central_body_gravitational_parameter = bodies.get_body( central_body ).gravitational_parameter
+
+		unified_state_model_elements = conversion.keplerian_to_unified_state_model( keplerian_elements, central_body_gravitational_parameter )
+
+	Similarly, the inverse operation is done as:
+
+	.. code-block:: python
+
+		unified_state_model_elements = ...
+		central_body = ...
+		central_body_gravitational_parameter = bodies.get_body( central_body ).gravitational_parameter
+
+		keplerian_elements = conversion.unified_state_model_to_keplerian( keplerian_elements, central_body_gravitational_parameter )
+
+.. class:: Quaternions
+
+	As mentioned at the beginning of this chapter, quaternions are the default attitude representation in Tudat. Depending on the location in the Tudat framework, you will find a quaternion element expressed as either of the two types below:
+
+	**TODO-Dominic**
+
+.. class:: Modified Rodrigues Parameters
+
+	One of the other two supported attitude representations is the modified Rodrigues parameters (MRPs). The indeces for MRPs are defined as follows:
+
+		.. list-table:: Modified Rodrigues Parameters Indices.
+		 :widths: 50 50
+		 :header-rows: 1
+
+		 * - Column Indices
+		   - Modified Rodrigues Parameter
+		 * - 0
+		   - :math:`\sigma` 1
+		 * - 1
+		   - :math:`\sigma` 2
+		 * - 2
+		   - :math:`\sigma` 3
+		 * - 3
+		   - Shadow flag
+
+
+	Transformation to and from quaternions is achieved with the functions ``conversion.modified_rodrigues_parameters_to_quaternions`` and ``conversion.quaterns_to_modified_rodrigues_parameter_elements``, respectively, where the only input is the attitude element (in vector format).
+
+	.. note::
+
+		The last index is the flag that triggers the shadow modifed Rodrigues parameters (SMRPs). Its use is introduced to avoid the singularity at :math:`\pm 2 \pi` radians. If its value is 0, then the elements are MRPs, whereas if it is 1, then they are SMRPs. The use of SMRPs results in slightly different equations of motion and transformations. The switch between MRPs and SMRPs occurs whenever the magnitude of the rotation represented by the MRP vector is larger than :math:`\pi`.
+
+
+.. class:: Exponential Map
+
+	The final attitude representations is the exponential map (EM). The indeces for EM are defined as follows:
+
+		.. list-table:: Exponential Map Indices.
+		 :widths: 50 50
+		 :header-rows: 1
+
+		 * - Column Indices
+		   - Exponential Map
+		 * - 0
+		   - e1
+		 * - 1
+		   - e2
+		 * - 2
+		   - e3
+		 * - 3
+		   - Shadow flag
+
+	and transformation to and from quaternions is achieved with the aid of the functions ``conversion.exponential_map_to_quaternions`` and ``conversions.quaternions_to_exponential_map``, respectively. Also for these equations the only input is the attitude element (in vector format).
+
+
+	.. note:: 
+
+		Similarly to MRPs, the exponential map elements also make use of the shadow flag. In this case, this flag signals whether the shadow exponential map (SEM) is in use. This flag is also introduces to avoid the singularity at :math:`\pm 2 \pi` radians, but interestingly, there is no difference between the equations of motion and transformations in terms of EM or SEM. In fact, they are only introduced to make sure that when converting from EM to quaternions, the resulting quaternion sign history is continuous. The switch between EM and SEM occurs whenever the magnitude of the rotation represented by the EM vector is larger than :math:`\pi`.
+
+
+Frame Transformations
+######################
+
+Every state, regardless of its representation is expressed with a particular origin and orientation. This is most easy to understand for Cartesian elements, where the origin represents the (0,0,0) position, and the orientation defines the direction of the x-, y- and z-axes. Below, we discuss how to perform these operations in Tudat.
+
+Transformations in ``tudatpy`` requires this import statement:
+
+.. code-block:: python
+	
+	from tudatpy.kernel.astro import transformation
+
+
+.. warning::
+	
+	Do not use the ``get_current_state`` or ``get_current_rotation`` function in the body objects! These functions are used during numerical propagation, and calling them outside of the numerical propagation will generally not lead to meaningful results.
+
+.. class:: Frame Translations
+
+	To change the origin of a Cartesian, one can simply add a Cartesian state that represents the difference between the original and the new origin. For instance, when transforming a vector (state of a vehicle) from Earth-centered to Moon-centered (keeping the orientation constant):
+
+	.. code-block:: python
+
+		vehicle_cartesian_state_in_earth_centered_frame = ...
+		moon_cartesian_state_in_earth_centered_frame = ...
+
+		vehicle_cartesian_state_in_moon_centered_frame = vehicle_cartesian_state_in_earth_centered_frame + moon_cartesian_state_in_earth_centered_frame
+
+	The challenge here, of course, is determining the ``moon_cartesian_state_in_earth_centered_frame`` vector. We provide a few ways in which to achieve this. When performing a numerical simulation using a set of body objects, you can use the following (assuming that ``bodiesz`` contains both an ``"Earth"`` and ``"Moon"`` entry):
+
+	.. code-block:: python
+
+		bodies = ...
+		current_time = ...
+
+		moon_cartesian_state_in_earth_centered_frame = bodies.at( "Moon" ).get_state_in_base_frame_from_ephemeris( current_time ) - bodies.at( "Earth" ).get_state_in_base_frame_from_ephemeris( current_time )
+
+	You can also bypass the body map altogether, and use ``spice`` to obtain the relative state. Note, however, that this will use whichever ``spice`` kernels you have loaded, and may not be consistent with the states you are using the bodies in your simulation.
+
+	.. code-block:: python
+
+		current_time = ...
+		frame_orientation = "J2000"
+
+		moon_cartesian_state_in_earth_centered_frame = spice_interface.get_body_cartesian_state_at_epoch(
+				target_body_name="Moon"
+			observer_body_name="Earth",
+			reference_frame_name=frame_orientation,
+			aberration_corrections="NONE",
+			ephemeris_time=current_time
+		)
+
+	where the ``"NONE"`` arguments indicates that no light-time corrections are used, and the frame orientation denotes the orientation of the frame in which the relative state is returned.
+
+.. class:: Frame Rotations
+
+	Rotating the frame in which a Cartesian state is expressed requires two pieces of information:
+
+	1. The rotation matrix from one frame to the other
+	2. The first time derivative of the rotation matrix from one frame to the other
+
+	Manually, the state may then be transformed as:
+
+	.. code-block:: python
+
+		rotation_to_frame = ... # 3D Matrix
+		time_derivative_of_rotation_to_frame  = ... # 3D Matrix
+		original_state = ... # 6D Vector
+
+		rotated_state = np.zeros(6, dtype=float);
+		rotated_state[ :3 ] = rotation_to_frame * original_state[ :3 ];
+		rotated_state[ 3: ] = rotation_to_frame * original_state[ 3: ] + time_derivative_of_rotation_to_frame * original_state[ :3 ];
+
+	In many cases, however, your frame rotation will be from the inertial frame to a body-fixed frame. All information required for this is stored in the rotational ephemeris objects. This object contains a base (inertial) and target (body-fixed) frame and defines the rotation between the two. Assuming that you are using a body map to store your environment, you can transform the state from an inertial to a body-fixed frame as follows, for the example of transforming a vehicle’s Cartesian state from an inertial to the body-fixed frame of the Earth:
+
+	.. code-block:: python
+
+		bodies = ...
+		current_time = ...
+		inertial_state = ...
+
+		body_fixed_state = transformation.state_to_target_frame( inertial_state, current_time, bodies.at( "Earth" ).get_rotational_ephemeris( ) )
+
+	The inverse is done as follows:
+
+	.. code-block:: python
+
+		bodies = ...
+		current_time = ...
+		body_fixed_state = ...
+
+		inertial_state = transformation.state_to_global_frame( body_fixed_state, current_time, bodies.at( "Earth" ).get_rotational_ephemeris( ) )
+
