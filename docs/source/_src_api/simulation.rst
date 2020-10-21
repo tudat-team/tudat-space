@@ -1,4 +1,4 @@
-3**********
+***********
 Simulation
 **********
 
@@ -76,6 +76,9 @@ Tudat currently supports the propagation of three types of dynamics: translation
     propagation_setup/dynamics_types/rotational
     propagation_setup/dynamics_types/mass
     propagation_setup/dynamics_types/multi_type
+
+On the following page, we give a brief description of how propagate the dynamics of multiple bodies concurrently:
+
     propagation_setup/dynamics_types/multi_body
 
 
@@ -83,7 +86,7 @@ Tudat currently supports the propagation of three types of dynamics: translation
 Acceleration Model Set-Up
 =========================
 
-In Tudat, an acceleration acting on a body is defined by
+To propagate translational dynamics, you must provide a set of acceleration models. In Tudat, an acceleration acting on a body is defined by
 
 *  The body undergoing acceleration
 *  The body exerting the acceleration

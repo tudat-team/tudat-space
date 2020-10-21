@@ -2,9 +2,6 @@
 Two body dynamics
 =================
 
-Clohessy-Wiltshire
-##################
-
 Capture and Escape ΔV
 #####################
 

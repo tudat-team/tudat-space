@@ -1,0 +1,7 @@
+name: tudat-space
+channels:
+  - conda-forge
+  - tudat-team
+dependencies:
+  - tudatpy
+  - matplotlib

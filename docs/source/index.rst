@@ -16,6 +16,14 @@ passions in astrodynamics and space.
 
 .. toctree::
    :maxdepth: 2
+   :caption: Intermediate Steps
+   :hidden:
+
+   _src_intermediate/post_processing
+   _src_intermediate/visualisation
+
+.. toctree::
+   :maxdepth: 2
    :caption: API
    :hidden:
 
