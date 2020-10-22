@@ -1,3 +1,5 @@
+.. _propagating_a_spacecraft_with_perturbations:
+
 Propagating a Spacecraft with Perturbations
 ===========================================
 

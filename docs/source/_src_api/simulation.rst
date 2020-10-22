@@ -17,7 +17,7 @@ The typical procedure to create the environment is the following:
 * Create any additional bodies which have no defaults
 * Assign properties to these additional bodies
 
-A typical procedure for carrying out this process is given on page TODO(getting started), to create a default Sun, Earth and Moon, and a body named "Vehicle" with a mass of 5000 kg, and constant aerodynamic coefficients (reference area of 50 m^2, drag coefficient of 1.2)
+A typical procedure for carrying out this process is given in the following example, to create a default Sun, Earth and Moon, and a body named "Vehicle" with a mass of 5000 kg, and constant aerodynamic coefficients (reference area of 50 m^2, drag coefficient of 1.2)
 
     .. tabs::
 

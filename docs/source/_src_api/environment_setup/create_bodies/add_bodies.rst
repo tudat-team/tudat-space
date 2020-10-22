@@ -47,4 +47,4 @@ which creates a new body, with no properties. Properties can then be added to th
           .. literalinclude:: /_src_snippets/simulation/environment_setup/req_setup.cpp
              :language: cpp
 
-In this example, the settings for the aerodynamic coefficients and radiation pressure are defined as the most simple models avaialble (constant drag-only aerodynamic coefficients, and cannonball radiation pressure). A comprehensive list of settings for both types of models can be found here (TODO).
+In this example, the settings for the aerodynamic coefficients and radiation pressure are defined as the most simple models available (constant drag-only aerodynamic coefficients, and cannonball radiation pressure). A comprehensive list of settings for both types of models can be found here :ref:`available_environment_models`.
