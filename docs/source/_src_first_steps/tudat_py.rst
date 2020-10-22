@@ -147,11 +147,7 @@ After installing PyCharm, use the following procedure to use your conda installa
 
 .. note::
 
-    On Unix, Anaconda and Miniconda are by default installed under ``~/Anaconda3/`` and ``~/Miniconda3`` respectively. This
-    is also the ``$CONDA_PREFIX`` env variable in the terminal on Unix or ``%CONDA_PREFIX`` on Windows in the Anaconda
-    prompt. The base environment Python interpreter is located as ``$CONDA_PREFIX/python`` (dev note: this must be verified on Unix)
-    and ``%CONDA_PREFIX%/python.exe`` on Windows. The Python Interpreter of any contained environment can be found under a directory
-    with their name as ``$CONDA_PREFIX/envs/<name>``.
+    The location of the python interpreter in your active conda environment is the output of ``which python`` in the command line.
 
 
 
