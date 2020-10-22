@@ -367,7 +367,7 @@ Let's make some plots to visualize our simulation results. In order to make plot
 
   .. code-block:: python
 
-      total_acceleration_norm = np.sqrt( dependent_variable_list[:,0] ** 2 + dependent_variable_list[:,1] ** 2 + dependent_variable_list[:,1] ** 2 )
+      total_acceleration_norm = np.sqrt( dependent_variable_list[:,0] ** 2 + dependent_variable_list[:,1] ** 2 + dependent_variable_list[:,2] ** 2 )
 
 
   The first step is to make a figure to make your plot in.
