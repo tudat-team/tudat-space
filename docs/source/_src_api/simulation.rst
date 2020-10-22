@@ -60,6 +60,14 @@ Details on all available environment models, and how to define them in your simu
     environment_setup/create_models/tabulated_atmosphere
     environment_setup/create_models/aerodynamic_coefficients
 
+Specifics on the environment during propagations can be found here:
+
+.. toctree::
+    :maxdepth:3
+
+    environment_setup/environment_during_propagation
+    environment_setup/valid_time_range
+
 .. _simulation_propagator_setup:
 
 Propagator Set-Up
