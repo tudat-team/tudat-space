@@ -79,8 +79,18 @@ Tudat currently supports the propagation of three types of dynamics: translation
 
 On the following page, we give a brief description of how propagate the dynamics of multiple bodies concurrently:
 
+.. toctree::
+    :maxdepth: 3
+
     propagation_setup/dynamics_types/multi_body
 
+
+The following page provides you with the difference between *conventional* and *propagated* coordinates in the propagator settings:
+
+.. toctree::
+    :maxdepth:3
+
+    propagation_setup/settings/conventional_vs_propagated_coordinates
 
 =========================
 Acceleration Model Set-Up
