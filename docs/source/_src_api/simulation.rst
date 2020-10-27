@@ -7,7 +7,7 @@ Simulation
 Environment Set-Up
 ==================
 
-In Tudat, the physical environment is defined by a system of bodies, each encapsulated in a Body object. Such an object may represent a celestial body, or a manmade vehicle, and Tudat makes *no* a priori distinction between the two. The distinction is made by the user when creating the bodies The combination of all Body objects is stored a SystemOfBodies object. 
+In Tudat, the physical environment is defined by a system of bodies, each encapsulated in a Body object. Such an object may represent a celestial body, or a manmade vehicle, and Tudat makes *no* a priori distinction between the two. The distinction is made by the user when creating the bodies The combination of all Body objects is stored in a SystemOfBodies object. 
 
 The typical procedure to create the environment is the following:
 
@@ -175,6 +175,20 @@ The typical propagation is terminated when a specific final time is reached. Tud
 Integrator Set-Up
 =================
 
+With the environment and the formulation of the dynamical equations in place, Tudat still needs one piece of information to be able to solve the equations: the numerical integrator settings. These specify *how* the equations are solved and include the type of integrator, initial time (?), fixed step size (or minimum/maximum step size in the case of a variable step size integrator), and tolerances.
+
+As of October 2020, Tudat and TudatPy support the following integrator types:
+
+* Euler (fixed step size)
+* Runge-Kutta 4 (fixed step size)
+* Runge-Kutta with customizable coefficient set (variable step size)
+* Bulirsch-Stoer (variable step size)
+* Adams-Bashforth-Moulton (variable step size)
+
+Since the choice of integrator strongly depends on the nature of the dynamical problem and the requirements of the user, there is no 'best' integrator that works in all cases. For reasons of brevity, details about the different types will **not** be given here; the reader is therefore referred to existing literature on the topic of numerical integrators.
+
+
+Details on creating the integrator settings and code examples are outlined on the following page:
 
 .. toctree::
     :maxdepth: 2
