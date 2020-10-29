@@ -1,6 +1,6 @@
 initial_time = 86400 # seconds since J2000
 initial_time_step = 10 # seconds
-extrapolation_sequence = ...
+extrapolation_sequence = propagation_setup.ExtrapolationMethodStepSequences.bulirsch_stoer_sequence
 maximum_number_of_steps = 10 # -
 minimum_step_size = 0.1 # seconds
 maximum_step_size = 100 # seconds
