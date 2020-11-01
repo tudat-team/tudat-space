@@ -2,12 +2,12 @@
 Simulation
 **********
 
+In this section, the different stages of a typical simulation setup are described. The user is guided along the creation of the environment, the dynamical model, output variables, termination settings, the integrator, and the actual simulation itself. Code examples will illustrate the usage of the application programming interface (API), both in Python and C++. (C++ is WIP)
 
-
-Environment Set-Up
+Environment Setup
 ==================
 
-In Tudat, the physical environment is defined by a system of bodies, each encapsulated in a Body object. Such an object may represent a celestial body, or a manmade vehicle, and Tudat makes *no* a priori distinction between the two. The distinction is made by the user when creating the bodies The combination of all Body objects is stored a SystemOfBodies object. 
+In Tudat, the physical environment is defined by a system of bodies, each encapsulated in a Body object. Such an object may represent a celestial body, or a manmade vehicle, and Tudat makes *no* a priori distinction between the two. The distinction is made by the user when creating the bodies The combination of all Body objects is stored in a SystemOfBodies object. 
 
 The typical procedure to create the environment is the following:
 
@@ -70,7 +70,7 @@ Specifics on the environment during propagations can be found here:
 
 .. _simulation_propagator_setup:
 
-Propagator Set-Up
+Propagator Setup
 =================
 
 In Tudat, the term 'propagator' is used to denote the formulation of the differential equations that are to be numerically solved. This includes the type of dynamics (translational, rotational, mass), but also the formulation for a given type of dynamics (e.g. Encke, Cowell, Kepler elements for translational dynamics).
@@ -101,7 +101,7 @@ The following page provides you with the difference between *conventional* and *
     propagation_setup/settings/conventional_vs_propagated_coordinates
 
 =========================
-Acceleration Model Set-Up
+Acceleration Model Setup
 =========================
 
 To propagate translational dynamics, you must provide a set of acceleration models. In Tudat, an acceleration acting on a body is defined by
@@ -172,11 +172,78 @@ The typical propagation is terminated when a specific final time is reached. Tud
     propagation_setup/termination/available
 
 
-Integrator Set-Up
+Integrator Setup
 =================
 
+With the environment and the formulation of the dynamical equations in place, Tudat still needs one piece of information to be able to solve the equations: the numerical integrator settings. These specify *how* the equations are solved and include the type of integrator, initial time (?), fixed step size (or minimum/maximum step size in the case of a variable step size integrator), and tolerances.
+
+As of October 2020, Tudat and TudatPy support the following integrator types:
+
+* Euler (fixed step size)
+* Runge-Kutta 4 (fixed step size)
+* Runge-Kutta with customizable coefficient set (variable step size)
+* Bulirsch-Stoer (variable step size)
+* Adams-Bashforth-Moulton (variable step size)
+
+Since the choice of integrator strongly depends on the nature of the dynamical problem and the requirements of the user, there is no 'best' integrator that works in all cases. For reasons of brevity, details about the different types will **not** be given here; the reader is therefore referred to existing literature on the topic of numerical integrators.
+
+
+Details on creating the integrator settings and code examples are outlined on the following page:
 
 .. toctree::
     :maxdepth: 2
     
     integrator_setup/settings
+    
+Running the Simulation
+======================
+
+With all the necessary simulation settings in place, it is time to run the simulation. In Tudat(Py), this is done by means of a DynamicsSimulator object, which handles the setup and execution of the simulation. It also contains functions to retrieve the propagated state history and dependent variables for further analysis and plotting.
+
+In its simplest form, the ``DynamicsSimulator`` is used as shown in this example:
+
+.. tabs::
+
+     .. tab:: Python
+
+          .. toggle-header:: 
+             :header: Required **Show/Hide**
+
+          .. code-block:: python
+          
+      		# Create simulation object and propagate dynamics.
+      		dynamics_simulator = propagation_setup.SingleArcDynamicsSimulator(
+        		bodies, integrator_settings, propagator_settings, True)
+        		
+    		states = dynamics_simulator.state_history
+
+     .. tab:: C++
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_setup.cpp
+             :language: cpp
+             
+First, a ``SingleArcDynamicsSimulator`` is created using the system of bodies, integrator settings, and propagator settings objects. Tudat will then automatically read and setup the simulation accordingly. The ``True`` at the end of the line indicates that the equations of motion should be integrated immediately after creating the object, such that the state history can be retrieved afterwards.
+
+The latter is done in the next line. The simulator will return a dictionary (Python) or map (C++) containing the state of the vehicle at each epoch, which can be exported or used for subsequent analysis.
+
+If the user chose to also export dependent variables, they can be extracted from the dynamics simulator as follows:
+
+.. tabs::
+
+     .. tab:: Python
+
+          .. toggle-header:: 
+             :header: Required **Show/Hide**
+
+          .. code-block:: python
+          
+          	# Retrieve dependent variables
+      		dependent_variable_history = dynamics_simulator.get_dependent_variable_history()
+
+     .. tab:: C++
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_setup.cpp
+             :language: cpp
+             
+             
+This concludes the section on simulation of this API guide. For more detailed information, refer to the pages listed in this section or refer to the next few sections for information and examples on e.g. interpolators, coordinate and time conversions, and interfaces to Spice, JSON, and Sofa.
