@@ -1,5 +1,5 @@
 ==========================
-Default environment models
+Default Environment Models
 ==========================
 
 To facilitate the creation of the celestial bodies in your simulation, Tudat provides the option of loading default models for a broad range of bodies. Largely, these settings are derived from Spice kernels, and loading additional Spice kernels will allow you to generate default settings for additional bodies. Details on loading additional Spice kernels, and on the kernels currently loaded into Tudat by default, are given here (TODO)

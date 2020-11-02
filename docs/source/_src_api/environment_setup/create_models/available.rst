@@ -1,8 +1,8 @@
 .. _available_environment_models:
 
-============================
-Available Environment Models
-============================
+==============================
+List of all Environment Models
+==============================
 
 .. _environment_ephemeris_model:
 

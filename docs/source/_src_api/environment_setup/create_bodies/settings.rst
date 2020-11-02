@@ -1,5 +1,5 @@
 =========================
-Creating celestial bodies
+Creating Celestial Bodies
 =========================
 
 

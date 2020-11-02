@@ -47,18 +47,17 @@ Details on the above procedure, and various additional/alternative options avail
 
     environment_setup/create_bodies/settings
     environment_setup/create_bodies/add_bodies
-    environment_setup/create_bodies/default_settings
+    
 
 Details on all available environment models, and how to define them in your simulation, is given below:
 
 .. toctree::
-    :maxdepth: 3
+    :maxdepth: 1
 
+    environment_setup/create_bodies/default_settings
     environment_setup/create_models/available
     environment_setup/create_models/custom
     environment_setup/create_models/system
-    environment_setup/create_models/tabulated_atmosphere
-    environment_setup/create_models/aerodynamic_coefficients
 
 Specifics on the environment during propagations can be found here:
 
