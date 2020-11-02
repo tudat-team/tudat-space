@@ -17,30 +17,7 @@ The typical procedure to create the environment is the following:
 * Create any additional bodies which have no defaults
 * Assign properties to these additional bodies
 
-A typical procedure for carrying out this process is given in the following example, to create a default Sun, Earth and Moon, and a body named "Vehicle" with a mass of 5000 kg, and constant aerodynamic coefficients (reference area of 50 m^2, drag coefficient of 1.2)
-
-    .. tabs::
-
-         .. tab:: Python
-
-          .. toggle-header:: 
-             :header: Required **Show/Hide**
-
-             .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.py
-                :language: python
-
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/create_bodies_1.py
-
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/create_vehicle.py
-             :language: python
-
-         .. tab:: C++
-
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_setup.cpp
-             :language: cpp
-
-
-Details on the above procedure, and various additional/alternative options available to you for creating bodies, are given in the following pages:
+All the options available to you for creating bodies are given in the following pages:
 
 .. toctree::
     :maxdepth: 3
@@ -92,7 +69,7 @@ On the following page, we give a brief description of how propagate the dynamics
     propagation_setup/dynamics_types/multi_body
 
 
-The following page provides you with the difference between *conventional* and *propagated* coordinates in the propagator settings:
+The following page provides you with the difference between *conventional* and *propagated* coordinates in the propagator settings. It is important to keep in mind that this page covers some details which happen 'under the hood'.
 
 .. toctree::
     :maxdepth: 1
@@ -103,31 +80,12 @@ The following page provides you with the difference between *conventional* and *
 Acceleration Model Setup
 =========================
 
-To propagate translational dynamics, you must provide a set of acceleration models. In Tudat, an acceleration acting on a body is defined by
+To propagate translational dynamics, you must provide a set of acceleration models. The acceleration model setup is provided here:
 
-*  The body undergoing acceleration
-*  The body exerting the acceleration
-*  The type and settings of the acceleration
+.. toctree::
+    :maxdepth: 2
 
-A user defines these settings for each acceleration in their simulation. These settings are then used to create the acceleration models:
-
-
-    .. tabs::
-
-         .. tab:: Python
-
-          .. toggle-header:: 
-             :header: Required **Show/Hide**
-
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/acceleration_example.py
-             :language: python
-
-         .. tab:: C++
-
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_setup.cpp
-             :language: cpp
-
-where a spherical harmonic (degree and order 5) gravitational acceleration, and aerodynamic acceleration, of the Earth are defined, as well as a point-mass gravity of Sun and Moon. The variable ``accelerations_settings_vehicle`` denotes the list of bodies exerting accelerations, and the types of accelerations, and the variable ``acceleration_settings`` associates this list with the body undergoing the acceleration. The function ``create_acceleration_models`` creates the list of models that compute the accelerations during the propagation.
+    propagation_setup/acceleration_models/setup
 
 Below, a comprehensive list of all available acceleration models in Tudat, and the manner in which to define them, is given
 
@@ -142,17 +100,7 @@ Below, a comprehensive list of all available acceleration models in Tudat, and t
 Output Variables
 =========================
 
-By default, propagating the dynamics of a body provides only the numerically integrated state history of your model as output. Tudat has the option to provide any number of additional outputs from your simulation, by defining the ``output_variables`` input to the propagator settings. For instance:
-
-.. code-block:: python
-
-  output_variables = [
-        propagation_setup.dependent_variable.altitude( "Vehicle", "Earth" ),
-        propagation_setup.dependent_variable.single_acceleration( 
-          propagation_setup.acceleration.aerodynamic_type, "Vehicle", "Earth" )
-    ]
-
-To save the altitude of ' Vehicle' w.r.t. Earth and the aerodynamic acceleration exerted by the Earth on this vehicle. A comprehensive list of available outputs is given below 
+By default, propagating the dynamics of a body provides only the numerically integrated state history of your model as output. Tudat has the option to provide any number of additional outputs from your simulation, by defining the ``output_variables`` input to the propagator settings. A comprehensive list of available outputs is given below 
 
 .. toctree::
     :maxdepth: 2
