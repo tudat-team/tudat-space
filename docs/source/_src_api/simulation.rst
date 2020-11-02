@@ -77,7 +77,7 @@ In Tudat, the term 'propagator' is used to denote the formulation of the differe
 Tudat currently supports the propagation of three types of dynamics: translational, rotational and mass. Any combination of any number of types of dynamics, for any number of bodies, may be defined.
 
 .. toctree::
-    :maxdepth: 5
+    :maxdepth: 3
 
     propagation_setup/dynamics_types/translational
     propagation_setup/dynamics_types/rotational
@@ -95,7 +95,7 @@ On the following page, we give a brief description of how propagate the dynamics
 The following page provides you with the difference between *conventional* and *propagated* coordinates in the propagator settings:
 
 .. toctree::
-    :maxdepth:3
+    :maxdepth: 1
 
     propagation_setup/settings/conventional_vs_propagated_coordinates
 
