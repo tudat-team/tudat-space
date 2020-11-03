@@ -37,8 +37,8 @@ passions in astrodynamics and space.
    :caption: Use of Tools
    :hidden:
 
-   _src_first_steps/conda
-   _src_first_steps/python
+   _src_use_of_tools/conda
+   _src_use_of_tools/python
 
 .. toctree::
    :maxdepth: 2
