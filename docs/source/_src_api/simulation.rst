@@ -122,25 +122,16 @@ The typical propagation is terminated when a specific final time is reached. Tud
 Integrator Setup
 =================
 
-With the environment and the formulation of the dynamical equations in place, Tudat still needs one piece of information to be able to solve the equations: the numerical integrator settings. These specify *how* the equations are solved and include the type of integrator, initial time (?), fixed step size (or minimum/maximum step size in the case of a variable step size integrator), and tolerances.
-
-As of October 2020, Tudat and TudatPy support the following integrator types:
-
-* Euler (fixed step size)
-* Runge-Kutta 4 (fixed step size)
-* Runge-Kutta with customizable coefficient set (variable step size)
-* Bulirsch-Stoer (variable step size)
-* Adams-Bashforth-Moulton (variable step size)
-
-Since the choice of integrator strongly depends on the nature of the dynamical problem and the requirements of the user, there is no 'best' integrator that works in all cases. For reasons of brevity, details about the different types will **not** be given here; the reader is therefore referred to existing literature on the topic of numerical integrators.
+The environment and formulation of dynamical equations are now in place. In order to solve these equations you still need to define the numerical integrator settings. These settings specify *how* the equations are solved. In Tudat(Py) you can choose between different types of integrators.
 
 
-Details on creating the integrator settings and code examples are outlined on the following page:
+Since the choice of integrator strongly depends on the nature of the dynamical problem and the requirements of the user, there is no 'best' integrator that works in all cases. Details about the different types will **not** be given here; you are referred to existing literature on the topic of numerical integrators. We only show you how to create the integrator settings, given on the following page:
 
 .. toctree::
-    :maxdepth: 2
-    
-    integrator_setup/settings
+  :maxdepth: 1
+
+  integrator_setup/settings
+
     
 Running the Simulation
 ======================

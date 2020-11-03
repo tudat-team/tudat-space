@@ -5,6 +5,8 @@ Integrator Settings
 
 This page lists the available integrators within Tudat(Py) and provides code examples which illustrate their configuration. This section does however **not** include detailed descriptions of the integrators' mechanics and applications. More information and application examples are taught in the TU Delft Numerical Astrodynamics (AE4868) and Propagation & Optimization (AE4866) courses, or can be found in existing literature on the topic.
 
+.. _simulation_integrator_type_euler:
+
 Euler
 -----
 
@@ -33,6 +35,7 @@ Its configuration is straightforward: it only needs an initial time and a fixed 
 
    .. tab:: C++
        
+.. _simulation_integrator_type_rk4:       
 
 Runge-Kutta 4
 -------------
@@ -62,6 +65,7 @@ Since it is a fixed time step method, configuration is straightforward and follo
 
    .. tab:: C++
 
+.. _simulation_integrator_type_rkf_and_rkdp:
        
 Runge-Kutta-Fehlberg and Runge-Kutta Dormand-Prince
 ---------------------------------------------------
@@ -98,6 +102,7 @@ These are available in the enum ``propagation_setup.CoefficientSets`` and must b
 
    .. tab:: C++
        
+.. _simulation_integrator_type_bs:
 
 Bulirsch-Stoer
 --------------
@@ -129,6 +134,8 @@ These are available in the ``propagation_setup.ExtrapolationMethodStepSequences`
         :language: python
 
    .. tab:: C++
+
+.. _simulation_integrator_type_abm:
 
 Adams-Bashforth-Moulton
 -----------------------
