@@ -1,3 +1,5 @@
+.. _default_environment_models:
+
 ==========================
 Default Environment Models
 ==========================

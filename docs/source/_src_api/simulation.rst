@@ -46,7 +46,7 @@ Specifics on the environment during propagations can be found here:
 
 .. _simulation_propagator_setup:
 
-Propagator Setup
+Propagation Setup
 =================
 
 In Tudat, the term 'propagator' is used to denote the formulation of the differential equations that are to be numerically solved. This includes the type of dynamics (translational, rotational, mass), but also the formulation for a given type of dynamics (e.g. Encke, Cowell, Kepler elements for translational dynamics).

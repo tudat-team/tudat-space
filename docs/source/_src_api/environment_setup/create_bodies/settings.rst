@@ -3,7 +3,7 @@ Creating Celestial Bodies
 =========================
 
 
-Creating a set of celstial bodies is done by creating a list of settings for all bodies, after which these settings are parsed to create a set of Body objects, which are stored in a SystemOfBodies object. In creating this system of bodies, all interdependencies between them are automatically processed. The typical first step, when defining celestial bodies, is to retrieve their 'default' settings as follows:
+Creating a set of celestial bodies is done by creating a list of settings for all bodies, after which these settings are parsed to create a set of ``body`` objects. In creating this system of bodies, all interdependencies between them are automatically processed. The typical first step, when defining celestial bodies, is to retrieve their 'default' settings as follows:
 
     .. tabs::
 
@@ -23,9 +23,9 @@ Creating a set of celstial bodies is done by creating a list of settings for all
           .. literalinclude:: /_src_snippets/simulation/environment_setup/req_setup.cpp
              :language: cpp
 
-where the global frame origin and orientation define the reference frame in which state vectors stored within the Body object are represented. In general, it is recommended to choose this as the most 'intuitive' frame origin for your propagation (e.g. SSB or Sun for solar system scale propagations, Earth for an Earth orbiter, Mars for a Martian mission, etc.). This frame definition is *distinct* from the center of propagation that you can define in your propagation setup TODO
+where the global frame origin and orientation define the reference frame in which state vectors stored within the Body object are represented. In general, it is recommended to choose this as the most 'intuitive' frame origin for your propagation (e.g. SSB or Sun for solar system scale propagations, Earth for an Earth orbiter, Mars for a Martian mission, etc.). This frame definition is *distinct* from the center of propagation that you can define in your :ref:`simulation_propagator_setup`.
 
-Generating default settings prevents a user from having to manually define a varity of 'typical' models for solar-system bodies. The full list of default body settings, and an alternative set of default settings, which is typically more computationally efficient (at the expense of higher memory usage and some practical limitations) is discussed here TODO. 
+Generating default settings prevents a user from having to manually define a varity of 'typical' models for solar-system bodies. The full list of default body settings, and an alternative set of default settings, which is typically more computationally efficient (at the expense of higher memory usage and some practical limitations) is discussed here: :ref:`default_environment_models`. 
 
 Default settings may be overridden as follows:
 
@@ -48,7 +48,7 @@ Default settings may be overridden as follows:
           .. literalinclude:: /_src_snippets/simulation/environment_setup/req_setup.cpp
              :language: cpp
 
-Where the above example overrides the default setting for the Sun's gravity field, and sets a point-mass gravity field with a gravitationa parameter of 1.32712440042E20 m^3/s^2. A comprehensive list of *all* environment models, and how their settings can be defined and overridden as above, is given in the list TODO
+Where the above example overrides the default setting for the Sun's gravity field, and sets a point-mass gravity field with a gravitationa parameter of 1.32712440042E20 m^3/s^2. A comprehensive list of *all* environment models, and how their settings can be defined and overridden as above, is given in this :ref:`available_environment_models`.
 
 Once all settings for the bodies are defined as desired, the bodies are created and linked as follows:
 
