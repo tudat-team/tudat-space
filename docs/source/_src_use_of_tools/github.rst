@@ -3,6 +3,8 @@ Communicating Tudat code with Git
 
 Now that you’ve installed Tudat, you can run all of the example applications and unit tests at your leisure. On this page, we will describe how to create other Tudat applications, specifically tuned to your research/education project. There are two broad options for creating applications: pulling an existing application from Github (or elsewhere), or creating an application from scratch. Below, both are discussed.
 
+Git is included in the default packages of Anaconda (>python 3.7). Mac and Linux users can use the default terminal for Git commands. Windows users should use the Anaconda prompt for Git commands.
+
 .. note:: 
 
   It is not the goal of this page to give a full-fledged introduction to repository management, git or Github. Much more details can be found online, for instance in the `Resources to learn Git <https://try.github.io/>`_ or `Github Help <https://help.github.com/>`_. An extensive online book on git is given `here <https://git-scm.com/book/en/v2>`_ This page is meant to serve as a starting point for using git with Tudat and using examples that are very close to a typical user's first Tudat experience.
