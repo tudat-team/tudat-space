@@ -39,6 +39,7 @@ passions in astrodynamics and space.
 
    _src_use_of_tools/conda
    _src_use_of_tools/python
+   _src_use_of_tools/github
 
 .. toctree::
    :maxdepth: 2
