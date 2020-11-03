@@ -5,6 +5,15 @@ Integrator Settings
 
 This page lists the available integrators within Tudat(Py) and provides code examples which illustrate their configuration. This section does however **not** include detailed descriptions of the integrators' mechanics and applications. More information and application examples are taught in the TU Delft Numerical Astrodynamics (AE4868) and Propagation & Optimization (AE4866) courses, or can be found in existing literature on the topic.
 
+
+The available integrators are:
+
+* :ref:`simulation_integrator_type_euler`
+* :ref:`simulation_integrator_type_rk4`
+* :ref:`simulation_integrator_type_rkf_and_rkdp`
+* :ref:`simulation_integrator_type_bs`
+* :ref:`simulation_integrator_type_abm`
+
 .. _simulation_integrator_type_euler:
 
 Euler
