@@ -1,5 +1,5 @@
-Communicating Tudat code with Git
-=================================
+Getting started with Git
+========================
 
 Now that you’ve installed Tudat, you can run all of the example applications and unit tests at your leisure. On this page, we will describe how to create other Tudat applications, specifically tuned to your research/education project. There are two broad options for creating applications: pulling an existing application from Github (or elsewhere), or creating an application from scratch. Below, both are discussed.
 
