@@ -2,7 +2,7 @@
 Creating Artificial Bodies
 ==========================
 
-After creating a set of bodies (see TODO), any number of additional custom bodies may be added to the simulation. Typically, such an approach is used for artificial bodies
+After creating a set of bodies (see :ref:`creating_celestial_bodies`), any number of additional custom bodies may be added to the simulation. Typically, such an approach is used for artificial bodies
 
     .. tabs::
 

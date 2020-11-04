@@ -75,7 +75,7 @@ Available Acceleration Models
 .. class:: Third Body Gravity
 
   .. note::
-      When creating an object of the AccelerationSettings type (or its derived class), you must not provide any of the third body acceleration types (third_body_central_gravity, third_body_spherical_harmonic_gravity, third_body_mutual_spherical_harmonic_gravity) as input. If you wish to use a third-body gravity acceleration (typically from a point mass), simply provide central_gravity as input. Depending on the settings for your central bodies, the code will automatically create the corresponding acceleration object (central or third-body).
+      When creating an object of the ``acceleration_settings`` type, you must not provide any of the third body acceleration types (``third_body_central_gravity``, ``third_body_spherical_harmonic_gravity``, ``third_body_mutual_spherical_harmonic_gravity``) as input. If you wish to use a third-body gravity acceleration (typically from a point mass), simply provide ``central_gravity`` as input. Depending on the settings for your central bodies, the code will automatically create the corresponding acceleration object (central or third-body).
 
 .. class:: Aerodynamic Acceleration
 

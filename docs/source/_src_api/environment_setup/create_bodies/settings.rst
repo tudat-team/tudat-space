@@ -1,3 +1,5 @@
+.. _creating_celestial_bodies:
+
 =========================
 Creating Celestial Bodies
 =========================

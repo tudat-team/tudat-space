@@ -39,29 +39,8 @@ Since the conventional coordinates are used to update the environment and accele
 
 .. note::
 
-	The fact that using a different set of propagated coordinates may lead to a longer computation time is not always true. As a matter of fact, the default translational propagator (i.e., cowell) is considerably slower and less accurate than other propagators, in certain situations. Check out Comparison of Propagator Types (TODO) to get an idea of the difference in performance among the various translational propagators offered by Tudat.
+	The fact that using a different set of propagated coordinates may lead to a longer computation time is not always true. As a matter of fact, the default translational propagator (i.e., cowell) is considerably slower and less accurate than other propagators, in certain situations. Check out Comparison of Propagator Types to get an idea of the difference in performance among the various translational propagators offered by Tudat.
 
 Another fact to consider, is that sometimes there may be a difference between the size of the conventional and propagates states. For instance, a Cartesian state is expressed with 6 elements, but the USM7 state with 7. This may lead to some confusion when extracting the results, so keep this in mind. In the next section, you can find the size of each propagated type used in Tudat.
 
-
-Propagated Coordinates in Tudat
--------------------------------
-
-For the following state types, one can choose between the listed propagated coordinates. You can also find a similar list in Propagator Settings: Basics (TODO), where each propagator available is listed.
-
-.. class:: Translational Motion
-
-	- Cartesian coordinates (with ``cowell`` and ``encke`` propagators); state size: 6
-	- Keplerian elements (with ``gauss_keplerian propagator``); state size: 6
-	- Modified equinoctial elements (with ``gauss_modified_equinoctial`` propagator); state size: 6
-	- Unified state model with quaternions, or USM7 (with ``unified_state_model_quaternions`` propagator); state size: 7
-	- Unified state model with modified Rodrigues parameters, or USM6 (with ``unified_state_model_modified_rodrigues_parameters`` propagator); state size: 7
-	- Unified state model with exponential map, or USMEM (with ``unified_state_model_exponential_map`` propagator); state size: 7
-
-.. class:: Rotational Motion
-
-	- Quaternions (with ``quaternions`` propagator); state size: 7
-	- Modified Rodrigues parameters, or MRPs (with ``modified_rodrigues_parameters`` propagator); state size: 7
-	- Exponential map (with ``exponential_map`` propagator); state size: 7
-
-Any other state type that has not been mentioned, is only described by one coordinate type, and thus their conventional and propagated coordinates always match.
+For a full list of propagater types in Tudat, see :ref:`translational_dynamics` and :ref:`rotational_dynamics`.

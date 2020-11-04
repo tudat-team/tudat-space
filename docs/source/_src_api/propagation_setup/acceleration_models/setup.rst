@@ -1,3 +1,5 @@
+.. _acceleration_model_setup:
+
 ========================
 Acceleration Model Setup
 ========================

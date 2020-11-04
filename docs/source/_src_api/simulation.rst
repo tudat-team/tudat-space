@@ -97,8 +97,22 @@ Below, a comprehensive list of all available acceleration models in Tudat, and t
     
     propagation_setup/acceleration_models/available
 
+.. _torque_models:
 
-    
+==================
+Torque Model Setup
+==================
+
+.. toctree::
+    :maxdepth: 2
+
+    propagation_setup/torque_models/setup
+    propagation_setup/torque_models/available
+
+
+
+.. _simulation_output_variables:
+
 =========================
 Output Variables
 =========================
