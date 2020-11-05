@@ -119,12 +119,16 @@ After the dynamics simulator has been called, the dependent variable history can
 		propagation_setup.dependent_variable.single_acceleration( 
 			propagation_setup.acceleration.point_mass_gravity_type, "Spacecraft", "Earth" )
 
+	Here is a list with the :ref:`acceleration_types`.
+
 - **Single Acceleration Norm**
 
 	.. code-block:: python
 
 		propagation_setup.dependent_variable.single_acceleration_norm( 
 			propagation_setup.acceleration.point_mass_gravity_type, "Spacecraft", "Earth" )
+
+	Here is a list with the :ref:`acceleration_types`.
 
 - **Spherical Harmonic Terms Acceleration**
 

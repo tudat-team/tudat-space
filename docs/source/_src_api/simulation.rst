@@ -86,14 +86,14 @@ Acceleration Model Setup
 To propagate translational dynamics, you must provide a set of acceleration models. The acceleration model setup is provided here:
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
     propagation_setup/acceleration_models/setup
 
 Below, a comprehensive list of all available acceleration models in Tudat, and the manner in which to define them, is given
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
     
     propagation_setup/acceleration_models/available
 

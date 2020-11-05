@@ -418,6 +418,23 @@ Available Acceleration Models
 
   where Jupiter now takes the role of central body, instead of body exerting the acceleration.
 
+.. _acceleration_types:
 
+Acceleration Types
+------------------
 
+In certain pieces of code, such as when requesting the saving of a single acceleration, you will need to supply an identified for the type of acceleration. Below is a list of all supported types.
 
+- ``point_mass_gravity_type``
+- ``aerodynamic_type``
+- ``cannon_ball_radiation_pressure_type``
+- ``spherical_harmonic_gravity_type``
+- ``mutual_spherical_harmonic_gravity_type``
+- ``thrust_acceleration_type``
+- ``relativistic_correction_acceleration_type``
+- ``empirical_acceleration_type``
+- ``direct_tidal_dissipation_in_central_body_acceleration_type``
+- ``direct_tidal_dissipation_in_orbiting_body_acceleration_type``
+- ``panelled_radiation_pressure_acceleration_type``
+- ``momentum_wheel_desaturation_acceleration_type``
+- ``solar_sail_acceleration_type``
