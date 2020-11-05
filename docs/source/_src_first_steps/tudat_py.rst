@@ -129,6 +129,19 @@ OR
 
     jupyter lab
 
+Getting started with Jupyter Notebooks
+---------------------------------------
+
+Your default browser will now open a localhost page in your current directory, as given in the following figure:
+
+.. figure:: _static/jupyterlab_launch.png
+
+Search and open your notebook. Once opened, you should see, for example, the following screen (Numerical Astrodynamics Assignment 1)
+
+.. figure:: _static/jupyterlab_notebook.png
+
+The notebook consists of blocks. There are three types of blocks, two of which are important for us: Markdown and Code. Markdown blocks contain mostly text, while Code blocks contain and run python code.
+
 Setting up PyCharm to use a Conda Environment
 ---------------------------------------------
 
@@ -149,27 +162,4 @@ After installing PyCharm, use the following procedure to use your conda installa
 .. note::
 
     The location of the python interpreter in your active conda environment is the output of ``which python`` in the command line.
-
-Getting started with Jupyter Notebooks
----------------------------------------
-
-1. Activate your desired conda environment:
-
-.. code-block:: bash
-
-    conda activate tudat-space
-
-2. Open Jupyter Notebook:
-
-.. code-block:: bash
-
-    jupyter notebook
-
-Your default browser will now open a localhost page in your current directory. 
-
-3. Search and open your notebook. Once opened, you should see, for example, the following screen (Numerical Astrodynamics Assignment 1)
-
-.. figure:: _static/jupyter_notebook.png
-
-4. The notebook consists of blocks. There are three types of blocks, two of which are important for us: Markdown and Code. Markdown blocks contain mostly text, while Code blocks contain and run python code.
 
