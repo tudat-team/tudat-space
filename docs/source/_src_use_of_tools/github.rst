@@ -49,17 +49,28 @@ Below, we discuss how to retrieve an application from an existing Github reposit
 
 **Step 2: Clone the application to your system**
 
-   Now, the next step is to create a version of the code on your computer, which is linked to your own Github page. Using the terminal (or the ``tudat_shell.bat`` program when using Windows), navigate to the directory where you want to have your assignment code. Then, use the following command in the terminal::
+   Now, the next step is to create a version of the code on your computer, which is linked to your own Github page. Using the terminal (or the ``anaconda prompt`` program when using Windows), navigate to the directory where you want to have your assignment code. Then, use the following command in the terminal::
 
       git clone https://github.com/YourName/NumericalAstrodynamicsAssignments_2020.git
 
    where ``YourName`` should be replaced with your Github account name (so that it corresponds to the URL to where you've forked the repository).
 
+   If you get an error stating that ``git`` is not recognized, run the following command: ::
+
+      conda install git
+
+   And then rerun the clone command
+
 
 Pulling and pushing Tudat code
 -------------------------------
 
-Now, we are ready to discuss two distinct but related aspects of developing your code: retrieving modifications from the original repository, called pulling (here: ``https://github.com/tudat/NumericalAstrodynamicsAssignments_2020.git``) and uploading your modifications to your own repository, called pushing (here: ``https://github.com/YourName/NumericalAstrodynamicsAssignments_2020.git``).
+Now, we are ready to discuss two distinct but related aspects of developing your code:
+
+* Retrieving modifications from the original repository, called pulling (here: ``https://github.com/tudat/NumericalAstrodynamicsAssignments_2020.git``) 
+* Uploading your modifications to your own repository, called pushing (here: ``https://github.com/YourName/NumericalAstrodynamicsAssignments_2020.git``).
+
+In your terminal, first navigate into the directory containing your git repository ``...../NumericalAstrodynamicsAssignments_2020/``)
 
 **Step 1: Setting up your remotes**
 
