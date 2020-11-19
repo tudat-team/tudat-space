@@ -1,3 +1,4 @@
+.. _available_acceleration_models:
 
 Available Acceleration Models
 #############################
@@ -72,10 +73,11 @@ Available Acceleration Models
   .. note::
       The spherical harmonic acceleration up to degree N and order M includes the point-mass gravity acceleration (which is the degree and order 0 term).
 
+.. _third_body_gravity:
+
 .. class:: Third Body Gravity
 
-  .. note::
-      When creating an object of the ``acceleration_settings`` type, you must not provide any of the third body acceleration types (``third_body_central_gravity``, ``third_body_spherical_harmonic_gravity``, ``third_body_mutual_spherical_harmonic_gravity``) as input. If you wish to use a third-body gravity acceleration (typically from a point mass), simply provide ``central_gravity`` as input. Depending on the settings for your central bodies, the code will automatically create the corresponding acceleration object (central or third-body).
+      When creating an object of the ``acceleration_settings`` type, you must **not** provide any of the third body acceleration types (``third_body_central_gravity``, ``third_body_spherical_harmonic_gravity``, ``third_body_mutual_spherical_harmonic_gravity``) as input. If you wish to use a third-body gravity acceleration (typically from a point mass), simply provide ``central_gravity`` as input. Depending on the settings for your central bodies, the code will automatically create the corresponding acceleration object.
 
 .. class:: Aerodynamic Acceleration
 
@@ -427,7 +429,7 @@ In certain pieces of code, such as when requesting the saving of a single accele
 
 - ``point_mass_gravity_type``
 - ``aerodynamic_type``
-- ``cannon_ball_radiation_pressure_type``
+- ``cannonball_radiation_pressure_type``
 - ``spherical_harmonic_gravity_type``
 - ``mutual_spherical_harmonic_gravity_type``
 - ``thrust_acceleration_type``

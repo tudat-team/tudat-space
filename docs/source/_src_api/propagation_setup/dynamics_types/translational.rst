@@ -38,7 +38,7 @@ Additional options that can be used for the propagation:
 * Specifying variables that are to be saved during the propagation (see :ref:`simulation_propagator_setup`). Default: None
 * Requesting terminal output during the propagation (see :ref:`simulation_output_variables`) . Default: None
 
-These additional options can be provided as follows (TODO code):
+These additional options can be provided as follows:
 
     .. tabs::
 

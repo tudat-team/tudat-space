@@ -22,21 +22,21 @@ Each body object and its constituent members is updated to the current state and
 
 - **Spherical harmonic gravity field coefficients**
 
-	These coefficients may be time variable. The cosine and sine coefficients can be retrieved from a body object through its gravity field model. A piece of example code on retrieving these coefficients is given below for the case of Earth: (TODO-Dominic)
+        These coefficients may be time variable. The cosine and sine coefficients can be retrieved from a body object through its gravity field model. A piece of example code on retrieving these coefficients is given below for the case of Earth:
 
 	.. code-block:: python
 
 		bodies = ....
 
 		try:
-			spherical_harmonics_gravity_field = bodies.at( "Earth " ).spherical_harmonics_gravity_field
-			cosine_coefficients = spherical_harmonics_gravity_field.get_cosine_coefficients( )
-			sine_coefficients = spherical_harmonics_gravity_field.get_sine_coefficients( )
+                        earth_gravity_field = bodies.at( "Earth " ).gravity_field_model
+                        cosine_coefficients = earth_gravity_field.get_cosine_coefficients( )
+                        sine_coefficients = earth_gravity_field.get_sine_coefficients( )
 
 		except:
 			print( "Error when retrieving spherical harmonic coefficients: Earth does not have a spherical harmonics gravity field" )
 
-	Note the ``try/except`` blocks in the code. These checks are very helpful in ascertaining the reason for a crashing program.
+        Note the ``try/except`` blocks in the code, the ``except`` block will be entered in case the gravity field model type of the Earth is not spherical harmonic
 
 - **The current flight conditions**
 
@@ -45,4 +45,4 @@ Each body object and its constituent members is updated to the current state and
 
 .. note::
 
-	As a user, you will typically not access these variables directly. Important examples of cases where users can explicitly access them, are custom aerodynamic or thrust guidance.
+        As a user, you will typically not access these variables directly. Important examples of cases where users can explicitly access them, are custom aerodynamic or thrust guidance.
