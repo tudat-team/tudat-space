@@ -153,14 +153,20 @@ After the dynamics simulator has been called, the dependent variable history can
 	.. code-block:: python
 
 		propagation_setup.dependent_variable.total_acceleration( "Spacecraft" )
+		
+	Returns the total acceleration (in vector form) acting upon the specified body.
 
 - **Total Acceleration Norm**
 
 	.. code-block:: python
 
 		propagation_setup.dependent_variable.total_acceleration_norm( "Spacecraft" )
+		
+	Returns the norm of the total acceleration acting upon the specified body, i.e. its scalar value.
 
 - **Aerodynamic Force Coefficients**
+
+	Aerodynamic force coefficients for the specified body.
 
 	.. code-block:: python
 
@@ -168,11 +174,15 @@ After the dynamics simulator has been called, the dependent variable history can
 
 - **Aerodynamic Moment Coefficients**
 
+	Aerodynamic moment coefficients for the specified body.
+
 	.. code-block:: python
 
 		propagation_setup.dependent_variable.aerodynamic_moment_coefficients( "Spacecraft" )
 
 - **Latitude**
+
+	Latitude of the first body w.r.t. the second body.
 
 	.. code-block:: python
 
@@ -180,11 +190,15 @@ After the dynamics simulator has been called, the dependent variable history can
 
 - **Longitude**
 
+	Longitude of the first body w.r.t. the second body.
+
 	.. code-block:: python
 
 		propagation_setup.dependent_variable.longitude( "Spacecraft", "Earth" )
 
 - **Heading Angle**
+
+	Heading of the first body w.r.t. the second body.
 
 	.. code-block:: python
 
@@ -192,15 +206,43 @@ After the dynamics simulator has been called, the dependent variable history can
 
 - **Flight Path Angle**
 
+	Flight path angle of the first body w.r.t. the second body.
+
 	.. code-block:: python
 
 		propagation_setup.dependent_variable.flight_path_angle( "Spacecraft", "Earth" )
+		
+- **Angle of Attack**
 
-- **Radiation Pressure**
+	Angle of attack of the first body w.r.t. the second body.
 
 	.. code-block:: python
 
-		propagation_setup.dependent_variable.radiation_pressure( "Spacecraft", "Earth" )
+		propagation_setup.dependent_variable.angle_of_attack( "Spacecraft", "Earth" )
+	
+- **Sideslip Angle**
+
+	Sideslip angle of the first body w.r.t. the second body.
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.sideslip_angle( "Spacecraft", "Earth" )
+		
+- **Bank Angle**
+
+	Bank angle of the first body w.r.t. the second body.
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.bank_angle( "Spacecraft", "Earth" )
+
+- **Radiation Pressure**
+
+	Returns the value of the radiation pressure that the first body experiences due to the second body.
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.radiation_pressure( "Spacecraft", "Sun" )
 
 
       
