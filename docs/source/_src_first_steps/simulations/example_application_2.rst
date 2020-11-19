@@ -303,8 +303,10 @@ You can retrieve the states and dependent variables at time step in your simulat
 
     dependent_variables = dynamics_simulator.dependent_variable_history
 
+.. _visualize_results:
+
 Visualize results
------------------
+#################
 
 Let's make some plots to visualize our simulation results. In order to make plots in python, import pyplot from matplotlib.
 
