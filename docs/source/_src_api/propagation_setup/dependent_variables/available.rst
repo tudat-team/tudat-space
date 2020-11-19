@@ -111,6 +111,14 @@ After the dynamics simulator has been called, the dependent variable history can
 
 	Returns six columns:
 	1: Semi-major Axis. 2: Eccentricity. 3: Inclination. 4: Argument of Periapsis. 5. Right Ascension of the Ascending Node. 6: True Anomaly.
+	
+- **Modified Equinoctial State**
+	
+	.. code-block:: python
+	
+		propagation_setup.dependent_variable.modified_equinoctial_state( "Spacecraft", "Earth" )
+		
+	Returns six columns: 1: p. 2: f. 3: g. 4: h. 5. k. 6: L. CHECK!
 
 - **Single Acceleration**
 
@@ -187,6 +195,14 @@ After the dynamics simulator has been called, the dependent variable history can
 	.. code-block:: python
 
 		propagation_setup.dependent_variable.latitude( "Spacecraft", "Earth" )
+		
+- **Geodetic Latitude**
+
+	Geodetic latitude of the first body w.r.t. the second body.
+	
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.geodetic_latitude( "Spacecraft", "Earth" )
 
 - **Longitude**
 
@@ -235,6 +251,14 @@ After the dynamics simulator has been called, the dependent variable history can
 	.. code-block:: python
 
 		propagation_setup.dependent_variable.bank_angle( "Spacecraft", "Earth" )
+		
+- **Control Surface Deflection**
+
+	Deflection of specified control surface on associated body. The name of the control surface is the second argument and needs to match the names given in the control surface setup.
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.control_surface_deflection( "Spacecraft", "left_aileron" )	
 
 - **Radiation Pressure**
 
@@ -244,7 +268,67 @@ After the dynamics simulator has been called, the dependent variable history can
 
 		propagation_setup.dependent_variable.radiation_pressure( "Spacecraft", "Sun" )
 
+- **Local Temperature**
 
+	Local temperature within the atmosphere of the **second** body at the position of the **first** body.
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.local_temperature( "Spacecraft", "Earth" )
       
+- **Local Dynamic Pressure**
 
+	Local dynamic pressure within the atmosphere of the **second** body at the position of the **first** body.
 
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.local_dynamic_pressure( "Spacecraft", "Earth" )
+		
+- **Local Aerodynamic Heat Rate**
+
+	Local aerodynamic heat rate within the atmosphere of the **second** body at the position of the **first** body.
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.local_aerodynamic_heat_rate( "Spacecraft", "Earth" )
+		
+- **Total Aerodynamic G Load**
+
+	Total aerodynamic G load acting on the **first** body within the atmosphere of the **second** body.
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.total_aerodynamic_g_load( "Spacecraft", "Earth" )
+		
+- **Stagnation Point Heat Flux**
+
+	Calculates the heat flux in the vehicle's (**first** body) stagnation point due to the atmosphere of the **second** body.
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.local_temperature( "Spacecraft", "Earth" )
+		
+- **Total Mass Rate**
+
+	Returns the *total* rate of change of the body's mass, e.g. due to thrust.
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.total_mass_rate( "Spacecraft" )		
+
+- **Total Torque**
+
+	Returns the *total* torque acting on a body due to all torque model moments in vector form.
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.total_torque( "Spacecraft" )
+		
+- **Total Torque Norm**
+
+	Returns the *norm* of the total torque acting on a body due to all torque model moments, i.e. its scalar value.
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.total_torque_norm( "Spacecraft" )
+		
