@@ -16,8 +16,7 @@ The available integrators are:
 
 .. _simulation_integrator_type_euler:
 
-Euler
------
+.. class:: Euler
 
 The Euler method is the simplest integrator that is available in Tudat. It is known to be inaccurate for complex dynamics and is therefore **discouraged for use in research**. It can however still be used for comparison studies or very simple propagations.
 
@@ -46,8 +45,7 @@ Its configuration is straightforward: it only needs an initial time and a fixed 
        
 .. _simulation_integrator_type_rk4:       
 
-Runge-Kutta 4
--------------
+.. class:: Runge-Kutta 4
 
 The Runge-Kutta 4 integrator is the only other integrator in Tudat that uses a fixed step size. It is a multistage method, meaning that it uses multiple stages in between time steps to better predict the state at the next time step; in this case, there are four stages.
 
@@ -76,8 +74,7 @@ Since it is a fixed time step method, configuration is straightforward and follo
 
 .. _simulation_integrator_type_rkf_and_rkdp:
        
-Runge-Kutta-Fehlberg and Runge-Kutta Dormand-Prince
----------------------------------------------------
+.. class:: Runge-Kutta-Fehlberg and Runge-Kutta Dormand-Prince
 
 Being an extension to the RK4 method described above, Runge-Kutta-Fehlberg performs two integrations: a 'normal' one and a more high-fidelity one using one more stage. This means that the method now has a means of estimating the integration error and thus correcting the time step.
 
@@ -113,8 +110,7 @@ These are available in the enum ``propagation_setup.CoefficientSets`` and must b
        
 .. _simulation_integrator_type_bs:
 
-Bulirsch-Stoer
---------------
+.. class:: Bulirsch-Stoer
 
 The following different sequences are available for the Bulirsch-Stoer method in Tudat:
 
@@ -146,8 +142,7 @@ These are available in the ``propagation_setup.ExtrapolationMethodStepSequences`
 
 .. _simulation_integrator_type_abm:
 
-Adams-Bashforth-Moulton
------------------------
+.. class:: Adams-Bashforth-Moulton
 
 The last integrator in the list is a multi-step, predictor-corrector method. It uses multiple time steps in its approximation of the next step and is implicit, meaning that it needs a predictor-corrector setup to solve for the unknown time step. Its *order* is the number of steps used to predict the next value, so an order of two means that steps n-1 and n are used to predict n+1.
 
