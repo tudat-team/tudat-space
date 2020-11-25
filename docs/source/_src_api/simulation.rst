@@ -206,3 +206,37 @@ If the user chose to also export dependent variables, they can be extracted from
              
              
 This concludes the section on simulation of this API guide. For more detailed information, refer to the pages listed in this section or refer to the next few sections for information and examples on e.g. interpolators, coordinate and time conversions, and interfaces to Spice, JSON, and Sofa.
+
+
+Sensitivity Analysis
+====================
+
+Up to this point, we have been concerned with propagating states of bodies only. Tudat is also capable of propagating the so-called variational equations associated with the dynamics to produce the state transition matrix :math:`\Phi(t,t_{0})` and sensitivity matrix :math:`S(t)`, which we define here as:
+
+.. math::
+      
+      \Phi(t,t_{0}) &= \frac{\partial \mathbf{x}(t)}{\partial\mathbf{x}(t_{0})}\\
+      S &= \frac{\partial \mathbf{x}(t)}{\partial \mathbf{p  }}\\
+
+where :math:`\mathbf{x}` is the propagated state, :math:`\mathbf{p}` the vector of a parameter vector (e.g. gravity field parameters, rotation model parameters, etc.), and :math:`t_{0}` denotes the initial time.
+These two matrices are based on linearization of the complex dynamics and can be used to quickly determine the influence of a change in initial state (:math:`\mathbf{x}(t_{0})`) and/or parameters (:math:`\mathbf{p}`) on the state :math:`\mathbf{x}(t)` at time :math:`t`.
+
+.. warning:: Note that linearization comes with a caveat. These matrices only produce accurate results within a 'reasonable' time frame around :math:`t_{0}` and with a 'small' change in parameters/initial state. The words between quotation marks indicate that the user should always determine whether the linearization is valid for the case at hand; no rules can be given as the answer strongly depends on the kind of dynamics and problem parameters.
+
+.. note:: In some literature, the sensitivity matrix is not defined separately, but the state transition matrix :math:`\Phi(t,t_{0})` is defined as :math:`\frac{\partial[\mathbf{x}(t);\text{ }\mathbf{p}]}{\partial[\mathbf{x}(t_{0};\text{ }\mathbf{p}])}`
+
+The propagation of these equations is done similarly as for the dynamics, and is executed by a (derived class of) :class:`VariationalEquationsSolver`.
+
+At the moment, the following :class:`VariationalEquationsSolver` options are available or under development in Tudat:
+
+- Single-arc;
+- Multi-arc;
+- Hybrid (under development).
+
+These are implemented in derived classes and are discussed below. Note that these objects of these classes propagate both the variational equations and dynamics (either concurrently or sequentially). 
+
+.. toctree::
+  :maxdepth: 1
+
+  sensitivity_analysis/variational_equations_solvers
+  sensitivity_analysis/estimatable_parameters
