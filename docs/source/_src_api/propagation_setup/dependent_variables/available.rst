@@ -118,7 +118,16 @@ After the dynamics simulator has been called, the dependent variable history can
 	
 		propagation_setup.dependent_variable.modified_equinoctial_state( "Spacecraft", "Earth" )
 		
-	Returns six columns: 1: p. 2: f. 3: g. 4: h. 5. k. 6: L. CHECK!
+	Returns six columns, where the elements are in the following order: 
+	
+	1. :math:`p` (Semilatus rectum)
+	2. :math:`f = e \cdot \cos\left(\omega + I\Omega\right)`
+	3. :math:`g = e \cdot \sin\left(\omega + I\Omega\right)`
+	4. :math:`h = \arctan\left(\frac{i}{2}\right) \cdot \cos \Omega`
+	5. :math:`k = \arctan\left(\frac{i}{2}\right) \cdot \sin \Omega`
+	6. :math:`L = \omega + I\Omega + \theta` (True longitude)
+	
+	For more information on modified equinoctial elements, see for instance `this paper <https://arc.aiaa.org/doi/pdf/10.2514/1.32237>`_.
 
 - **Single Acceleration**
 
