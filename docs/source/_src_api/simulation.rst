@@ -211,6 +211,9 @@ This concludes the section on simulation of this API guide. For more detailed in
 Sensitivity Analysis
 ====================
 
+ .. figure:: flowchart_var_eq.png
+    :width: 800
+
 Up to this point, we have been concerned with propagating states of bodies only. Tudat is also capable of propagating the so-called variational equations associated with the dynamics to produce the state transition matrix :math:`\Phi(t,t_{0})` and sensitivity matrix :math:`S(t)`, which we define here as:
 
 .. math::
