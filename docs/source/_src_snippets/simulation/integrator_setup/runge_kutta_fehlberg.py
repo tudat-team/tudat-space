@@ -6,7 +6,7 @@ maximum_step_size = 100 # seconds
 relative_error_tolerance = 1.0e-9 # -
 absolute_error_tolerance = 1.0e-9 # -
 
-integrator_settings = propagation_setup.integrator.runge_kutta_variable_step_size(
+integrator_settings = propagation_setup.integrator.runge_kutta_variable_step_size_scalar_tolerances(
 	initial_time,
 	initial_time_step,
 	coefficient_set,
