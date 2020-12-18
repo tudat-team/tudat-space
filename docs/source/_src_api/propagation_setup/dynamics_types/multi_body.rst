@@ -1,3 +1,5 @@
+.. _multi_body_propagation:
+
 ===================
 Multi-body Dynamics
 ===================
@@ -39,3 +41,5 @@ The use of a 'hierarchical' system is also supported by Tudat. For instance, one
              :language: cp
 
 In either case, any and all physical interactions are automatically formulated as required for the specific dynamical system under consideration. Specifically, the use of direct and third-body gravitational accelerations, and the definition of the correct effective gravitational parameter, are automatically handled when creating the acceleration models (see :ref:`available_acceleration_models`)
+
+When propagating multiple bodies simultaneously, acceleration models for each need to be defined (for the case of translational dynamics). See :ref:`acceleration_model_setup` on details how to define this.
