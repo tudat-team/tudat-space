@@ -1,1 +1,1 @@
-body_settings.get_body( "Earth" ).atmosphere_settings = environment_setup.atmosphere.nrlmsise00()
+body_settings.get( "Earth" ).atmosphere_settings = environment_setup.atmosphere.nrlmsise00()
