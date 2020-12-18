@@ -2,11 +2,11 @@
 Conventional vs. Propagated Coordinates
 =======================================
 
-In the description of some of the objects in this part of the wiki about the simulation set-up, you may have noticed the use of two names to describe the states of an object. These two names are conventional and propagated, and they describe two slightly different concepts. In this part of the Wiki, you will get to know in what they differ and how that may affect your application.
+In the description of some of the objects in this part of the wiki about the simulation setup, you may have noticed the use of two names to describe the states of an object. These two names are conventional and propagated, and they describe two slightly different concepts. In this part of the wiki, you will get to know in what ways they differ and how that may affect your application.
 
 .. class:: Conventional Coordinates
 
-	These coordinates are mainly used to describe the state of the object(s) you are propagating outsite of integration. This means that you will find *conventional* coordinates in these scenarios:
+	These coordinates are mainly used to describe the state of the object(s) you are propagating outside of integration. This means that you will find *conventional* coordinates in these scenarios:
 
 	- To describe the initial conditions of an object
 	- To update the acceleration model of an object
@@ -22,7 +22,7 @@ In the description of some of the objects in this part of the wiki about the sim
 
 .. class:: Propagated Coordinates
 
-	The *propagated coordinates*, on the other hand, are mainly used to describe the state of an object inside of the integration environment. Thus, you can expect to see these elements here:
+	The *propagated coordinates*, on the other hand, are mainly used to describe the state of an object inside the integration environment. Thus, you can expect to see these elements here:
 
 	- To describe the equations of motion
 	- To describe the state and state derivative during integration
@@ -35,7 +35,7 @@ In the remaining part of this page, you will find a description of where you nee
 Important To Keep In Mind
 -------------------------
 
-Since the conventional coordinates are used to update the environment and accelerations of the bodies, but the propagated coordinates are the ones used in propagation, you can see that whenever the conventional and propagated coordinates differ, there is a need to convert between the two at every time step (or even multiple times, if the time step is divided in multiple steps for integration). Thus, this leads to a set of extra stages to be perfomed during propagation, which may in turn lead to a longer computation time. This convertion is also necessary when outputting the conventional state at the end of propagation.
+Since the conventional coordinates are used to update the environment and accelerations of the bodies, but the propagated coordinates are the ones used in propagation, you can see that whenever the conventional and propagated coordinates differ, there is a need to convert between the two at every time step (or even multiple times, if the time step is divided in multiple steps for integration). Thus, this leads to a set of extra stages to be perfomed during propagation, which may in turn lead to a longer computation time. This conversion is also necessary when outputting the conventional state at the end of propagation.
 
 .. note::
 

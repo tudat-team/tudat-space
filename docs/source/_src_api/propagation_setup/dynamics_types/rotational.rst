@@ -4,15 +4,16 @@
 Rotational Dynamics
 ===================
 
-Settings and optionsto define the propagation of rotational dynamics are largely similar to those of translational dynamics. Differences are:
+Settings to define the propagation of rotational dynamics are largely similar to those of translational dynamics. Differences are:
 
-* A set of torque models has to be supplied, as opposed to acceleration models. See :ref:`available_torque_models` for the list of options for torques in Tudat
-* No 'central body' is specified. The rotational state that is propagated is always that from the global inertial orientation, to the body-fixed orientation of the propagated body
+* A set of torque models has to be supplied, as opposed to acceleration models. See :ref:`available_torque_models` for the list of options for torques in Tudat.
+* No 'central body' is specified. The rotational state that is propagated is always that from the global inertial orientation, to the body-fixed orientation of the propagated body.
 * The propagated state formulation is, by default, a vector of size 7 (for a single body), with:
 
-   * Entries 1-4: The quaternion defining the rotation from inertial to body-fixed frame
-   * Entries 5-7: The body's angular velocity vector, expressed in its body-fixed frame
-* Alternative formulations for propagated state vector can be selected from the list at the end of this page.
+   * Entries 1-4: The quaternion defining the rotation from inertial to body-fixed frame;
+   * Entries 5-7: The body's angular velocity vector, expressed in its body-fixed frame.
+Quaternions are used in lieu of e.g. Euler angles because they get rid of ambiguities and gimbal locks.
+* Alternative formulations for the propagated state vector can be selected from the list at the end of this page.
 
 Defining settings for the rotational dynamics is done by:
 

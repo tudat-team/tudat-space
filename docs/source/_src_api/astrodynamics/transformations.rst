@@ -67,13 +67,14 @@ Transformation between these elements is done by passing through quaternions fir
 
 	Similarly, the inverse operation is done as:
 
-	.. code-bock:: python
+	.. code-block:: python
 
 		keplerian_state = ...
 		central_body = ...
 		central_body_gravitational_parameter = bodies.get_body( central_body ).gravitational_parameter
 
 		cartesian_state = conversion.keplerian_to_cartesian( keplerian_state, central_body_gravitational_parameter )
+
 
 
 	In the definition of the state elements, you will notice that element 5 is the *true* anomaly, not the *eccentric* or *mean* anomaly. Tudat also contains functions to convert to these alternative anomalies. Converting between true and eccentric anomaly is done as follows:
