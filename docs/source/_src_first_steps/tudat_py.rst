@@ -60,10 +60,10 @@ Congratulations! You have now installed Tudat and TudatPy, and are ready to get 
 
 .. warning::
 
-    **Are you a macOS user**? There is currently a known issue while installing tudatpy via conda.
+    **Are you a macOS user**? You may encounter an issue while installing tudatpy via conda.
     If you have issues installing via the ``environment.yaml`` in the form of conflicts when installing, please inform us `on tudatpy-feedstock (#2)`_.
 
-    If this is the case, then you will need to follow this procedure:
+    If this is the case, then you can attempt to install tudatpy with this alternative procedure:
 
     1. Create a new environment.
 
@@ -77,13 +77,13 @@ Congratulations! You have now installed Tudat and TudatPy, and are ready to get 
 
         conda activate tudat-space
 
-    3. Install tudatpy & matplotlib with manual definition of channels.
+    3. Install tudatpy & matplotlib with a manual definition of channels.
 
     .. code:: bash
 
         conda install tudatpy matplotlib -c tudat-team -c conda-forge -c defaults
 
-    Furthermore, if this fix did not work, please inform us `on tudatpy-feedstock (#2)`_.
+    If this alternative fix did not work, please inform us `on tudatpy-feedstock (#2)`_.
 
 .. _`on tudatpy-feedstock (#2)`: https://github.com/tudat-team/tudatpy-feedstock/issues/2
 .. _`tudatpy-feedstock`: https://github.com/tudat-team/tudatpy-feedstock
@@ -91,8 +91,9 @@ Congratulations! You have now installed Tudat and TudatPy, and are ready to get 
 
 .. note::
 
-    If there are any other issues with the installation process, please submit an issue
-    on the `tudatpy-feedstock`_. If there are issues running tutorials please submit an issue on the `tudatpy`_ repository.
+    - If there are any other issues with the installation process, please submit an issue
+    on the `tudatpy-feedstock`_. 
+    - If there are issues running tutorials please submit an issue on the `tudatpy`_ repository.
 
 Setting Up a Development Environment
 ####################################
@@ -161,5 +162,5 @@ After installing PyCharm, use the following procedure to use your conda installa
 
 .. note::
 
-    The location of the python interpreter in your active conda environment is the output of ``which python`` in the command line.
+    The location of the python interpreter in your active conda environment is the output of the ``which python`` command.
 
