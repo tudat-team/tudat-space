@@ -1,4 +1,6 @@
     integrator_settings = propagation_setup.integrator.runge_kutta_4(
-        simulation_start_epoch,
-        fixed_step_size
+        initial_time,
+        fixed_step_size,
+        save_frequency = 1,
+        assess_termination_on_minor_steps = false
     )

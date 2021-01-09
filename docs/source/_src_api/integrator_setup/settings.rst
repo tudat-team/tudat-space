@@ -3,24 +3,14 @@
 Integrator Settings
 ###################
 
-This page lists the available integrators within Tudat(Py) and provides code examples which illustrate their configuration. This section does however **not** include detailed descriptions of the integrators' mechanics and applications. More information and application examples are taught in the TU Delft Numerical Astrodynamics (AE4868) and Propagation & Optimization (AE4866) courses, or can be found in existing literature on the topic.
+This page lists the available integrators within Tudat(Py) and provides code examples which illustrate their configuration. This section does however **not** include detailed descriptions of the integrators' mechanics and applications. More information and application examples are taught in the TU Delft Numerical Astrodynamics (AE4868) and Propagation & Optimization (AE4866) courses, or can be found in existing literature on the topic. Below, the various integrators in Tudat are discussed.
 
-
-The available integrators are:
-
-* :ref:`simulation_integrator_type_euler`
-* :ref:`simulation_integrator_type_rk4`
-* :ref:`simulation_integrator_type_rkf_and_rkdp`
-* :ref:`simulation_integrator_type_bs`
-* :ref:`simulation_integrator_type_abm`
 
 .. _simulation_integrator_type_euler:
 
 .. class:: Euler
 
 The Euler method is the simplest integrator that is available in Tudat. It is known to be inaccurate for complex dynamics and is therefore **discouraged for use in research**. It can however still be used for comparison studies or very simple propagations.
-
-Its configuration is straightforward: it only needs an initial time and a fixed time step to operate.
 
 .. tabs::
 
@@ -42,14 +32,30 @@ Its configuration is straightforward: it only needs an initial time and a fixed 
         :language: python
 
    .. tab:: C++
-       
+
+
+   - :literal:`initial_time`
+
+      Floating point value that defines the simulation's start epoch. 
+
+   - :literal:`fixed_step_size`
+
+      Floating point valuethat defines the fixed step-size to be used either by the :literal:`euler` or the :literal:`rungeKutta4` numerical integrator. 
+   
+   - :literal:`save_frequency`
+
+      Cadence at which to save the numerical integrated states. For instance, you may want to save one every 15 time steps, to give an output that is less demanding in terms of storage (in this case 15 would be the :literal:`save_frequency`). The default value is 1.
+
+   - :literal:`assess_termination_on_minor_steps`
+
+      Determines whether the propagation termination conditions should be evaluated during each function evaluation (or 'minor step') of the integrator (``true``) or only at the end of each integration step (``false``). The default value is ``false``, and the termination conditions are only checked on each full step of the intergator.
+
+
 .. _simulation_integrator_type_rk4:       
 
 .. class:: Runge-Kutta 4
 
-The Runge-Kutta 4 integrator is the only other integrator in Tudat that uses a fixed step size. It is a multistage method, meaning that it uses multiple stages in between time steps to better predict the state at the next time step; in this case, there are four stages.
-
-Since it is a fixed time step method, configuration is straightforward and follows the same template as the Euler integrator: it only needs an initial time and step size.
+The Runge-Kutta 4 integrator is a fixed step size integrator. It is a multistage method, meaning that it uses multiple stages (function evaluations) to perform a single time step. In the case of RK4, there are four stages.
 
 .. tabs::
 
@@ -72,20 +78,38 @@ Since it is a fixed time step method, configuration is straightforward and follo
 
    .. tab:: C++
 
+   - :literal:`initial_time`
+
+      Floating point value that defines the simulation's start epoch. 
+
+   - :literal:`fixed_step_size`
+
+      Floating point valuethat defines the fixed step-size to be used either by the :literal:`euler` or the :literal:`rungeKutta4` numerical integrator. 
+   
+   - :literal:`save_frequency`
+
+      Cadence at which to save the numerical integrated states. For instance, you may want to save one every 15 time steps, to give an output that is less demanding in terms of storage (in this case 15 would be the :literal:`save_frequency`). The default value is 1.
+
+   - :literal:`assess_termination_on_minor_steps`
+
+      Determines whether the propagation termination conditions should be evaluated during each function evaluation (or 'minor step') of the integrator (``true``) or only at the end of each integration step (``false``). The default value is ``false``, and the termination conditions are only checked on each full step of the intergator.
+
 .. _simulation_integrator_type_rkf_and_rkdp:
        
 .. class:: Runge-Kutta-Fehlberg and Runge-Kutta Dormand-Prince
 
-Being an extension to the RK4 method described above, Runge-Kutta-Fehlberg performs two integrations: a 'normal' one and a more high-fidelity one using one more stage. This means that the method now has a means of estimating the integration error and thus correcting the time step.
+These variable-step multi-stage integrators allow for step size control using embedded Runge-Kitta methods, with the step size adaptation based on user-defined tolerances.  
 
-The user can choose from the following coefficient sets for RKF, where the numbers indicate the number of stages in each time step:
+One of a number of different sets of coefficient sets for the embedded Runge-Kutta methods may be selected
 
-* RKF4(5);
-* RKF5(6);
-* RKF7(8);
-* RKDP8(7).
+* RKF4(5), defined by ``propagation_setup.integrator.RKCoefficientSets.rkf_45`` (in Python)
+* RKF5(6), defined by ``propagation_setup.integrator.RKCoefficientSets.rkf_56`` (in Python)
+* RKF7(8), defined by ``propagation_setup.integrator.RKCoefficientSets.rkf_78`` (in Python)
+* RKDP8(7), defined by ``propagation_setup.integrator.RKCoefficientSets.rkdp_87`` (in Python)
 
-These are available in the enum ``propagation_setup.CoefficientSets`` and must be supplied to the Python function that initializes the integrator, as follows:
+These coefficient sets may be defined as follows:
+
+The integrator settings for the variable step-size multi-stage integrator may be defined as follows:
 
 .. tabs::
 
@@ -107,6 +131,55 @@ These are available in the enum ``propagation_setup.CoefficientSets`` and must b
         :language: python
 
    .. tab:: C++
+
+   - :literal:`initial_time`
+
+      Floating point value that defines the simulation's initial time. 
+   
+   - :literal:`initial_time_step`
+
+      Floating point value that defines the initial step-size to be used by the numerical integrator. 
+
+   - :literal:`coefficient_set`
+
+      Setting that defines the coefficient set to be used by numerical integrator. The list of available coefficient sets is given above.
+
+   - :literal:`minimum_step_size`
+
+      Floating point value that defines the minimum step-size that the numerical integrator can take. 
+
+   - :literal:`maximum_step_size`
+
+      Floating point value that defines the maximum step-size that the numerical integrator can take.
+
+   - :literal:`relative_error_tolerance`
+
+      Floating point value that defines the relative error tolerance for step size control of the numerical integrator.
+
+   - :literal:`absolute_error_tolerance`
+
+      Floating point value that defines the absolute error tolerance for step size control of the numerical integrator.
+
+   - :literal:`save_frequency`
+
+      Cadence at which to save the numerical integrated states. For instance, you may want to save one every 15 time steps, to give an output that is less demanding in terms of storage (in this case 15 would be the :literal:`save_frequency`). The default value is 1.
+
+   - :literal:`assess_termination_on_minor_steps`
+
+      Determines whether the propagation termination conditions should be evaluated during each function evaluation (or 'minor step') of the integrator (``True``) or only at the end of each integration step (``False``). The default value is ``False``, and the termination conditions are only checked on each full step of the intergator.
+
+   - :literal:`safety_factor`
+
+      Safety factor for step size control. The default value is 0.8.
+
+   - :literal:`maximum_factor_increase`
+
+      Maximum increase factor in time step in subsequent iterations. The default value is 4.0.
+
+   - :literal:`minimum_factor_increase`
+
+      Minimum decrease factor in time step in subsequent iterations. The default value is 0.1.
+
        
 .. _simulation_integrator_type_bs:
 
