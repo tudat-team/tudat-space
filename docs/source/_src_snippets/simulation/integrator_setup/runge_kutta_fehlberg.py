@@ -19,4 +19,3 @@ integrator_settings = propagation_setup.integrator.runge_kutta_variable_step_siz
         safety_factor = 0.8,
         maximum_factor_increase = 4.0,
         minimum_factor_increase = 0.1 );
-)
