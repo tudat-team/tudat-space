@@ -143,24 +143,54 @@ Search and open your notebook. Once opened, you should see, for example, the fol
 
 The notebook consists of blocks. There are three types of blocks, two of which are important for us: Markdown and Code. Markdown blocks contain mostly text, while Code blocks contain and run python code.
 
-Setting up PyCharm to use a Conda Environment
----------------------------------------------
+Setting up PyCharm
+------------------
 
-After installing PyCharm, use the following procedure to use your conda installation of Tudat:
+PyCharm is a famous Integrated Development Environment (IDE) to work with Python, widely used by developers and
+professionals. It is available for download `here`_. The open-source, basic version ("Community") is free to download and sufficient
+to write and run Python code; however, if you have a TU Delft account, you can download and activate the professional
+version as well.
 
-1. Navigate to ``File`` > ``Settings`` > ``Project`` > ``Python Interpreter``
+.. _`here`: https://www.jetbrains.com/pycharm/download
 
-2. Drop down the menu for Python selection.
+To start working with PyCharm, you can create a new project. It is possible to set the conda environment to be used
+directly from PyCharm. You can follow this procedure to create a new project and use your conda installation of Tudat:
 
-3. Click ``Show all``.
+1. Go to ``File`` > ``New project...``
 
-4. Click ``+`` to add an intepreter not listed.
+2. From the tab ``PurePython``, select the location of your project (i.e. provide the path to the directory of interest,
+named ``yourProjectFolderPath`` in the figure below).
 
-5. Select ``Conda Environment`` on the left bar.
+.. figure:: _static/pycharm_new_project.png
 
-6. Select ``Existing Environment`` and tell Pycharm where the environment ``python(.exe)`` is.
+3. Select ``Existing interpreter`` and click on the three dots to the right to provide the path to the interpreter.
+
+4. Select ``Conda Environment`` on the left bar.
+
+5. Select ``Existing Environment`` and tell Pycharm where the environment ``python(.exe)`` is.
+
+.. figure:: _static/pycharm_set_environment.png
+
+The project interpreter can be viewed and/or modified at any time, even after the project is created, by
+navigating to ``File`` > ``Settings`` > ``Project`` > ``Python Interpreter``.
+
+.. figure:: _static/pycharm_interpreter.png
 
 .. note::
 
     The location of the python interpreter in your active conda environment is the output of the ``which python`` command.
+
+If you are working with multiple source files (e.g. your code is split into multiple modules), the best practice is to
+let PyCharm know about this, so it will retrieve all the dependencies present in your modules. Otherwise, the IDE will
+parse the source code and complain about potential errors, especially while importing other modules: even if the code
+runs fine, PyCharm does not know where to look for them. This can be done as follows:
+
+1. Navigate to ``File`` > ``Settings`` > ``Project`` > ``Project Structure``.
+
+2. Select the directory containing your source code and mark it as ``Sources`` (blue folder).
+
+.. note::
+
+    The students of AE4866 Propagation and Optimization in Astrodynamics are encouraged to follow all the steps
+    presented above.
 
