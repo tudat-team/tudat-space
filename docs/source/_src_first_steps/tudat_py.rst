@@ -172,7 +172,9 @@ named ``yourProjectFolderPath`` in the figure below).
 .. figure:: _static/pycharm_set_environment.png
 
 The project interpreter can be viewed and/or modified at any time, even after the project is created, by
-navigating to ``File`` > ``Settings`` > ``Project`` > ``Python Interpreter``.
+navigating to ``File`` > ``Settings`` > ``Project`` > ``Python Interpreter`` (Windows/Linux) or ``PyCharm`` >
+``Preferences`` > ``Project`` > ``Python Interpreter`` (MacOS). The figure below shows the interpreter panel on
+Windows.
 
 .. figure:: _static/pycharm_interpreter.png
 
