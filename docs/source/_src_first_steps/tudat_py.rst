@@ -158,8 +158,7 @@ directly from PyCharm. You can follow this procedure to create a new project and
 
 1. Go to ``File`` > ``New project...``
 
-2. From the tab ``PurePython``, select the location of your project (i.e. provide the path to the directory of interest,
-named ``yourProjectFolderPath`` in the figure below).
+2. From the tab ``PurePython``, select the location of your project (i.e. provide the path to the directory of interest, named ``yourProjectFolderPath`` in the figure below).
 
 .. figure:: _static/pycharm_new_project.png
 
@@ -172,7 +171,9 @@ named ``yourProjectFolderPath`` in the figure below).
 .. figure:: _static/pycharm_set_environment.png
 
 The project interpreter can be viewed and/or modified at any time, even after the project is created, by
-navigating to ``File`` > ``Settings`` > ``Project`` > ``Python Interpreter``.
+navigating to ``File`` > ``Settings`` > ``Project`` > ``Python Interpreter`` (Windows/Linux) or ``PyCharm`` >
+``Preferences`` > ``Project`` > ``Python Interpreter`` (MacOS). The figure below shows the interpreter panel on
+Windows.
 
 .. figure:: _static/pycharm_interpreter.png
 
