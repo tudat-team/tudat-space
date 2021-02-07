@@ -168,6 +168,10 @@ directly from PyCharm. You can follow this procedure to create a new project and
 
 5. Select ``Existing Environment`` and tell Pycharm where the environment ``python(.exe)`` is.
 
+.. note::
+
+    The location of the python interpreter in your active conda environment is the output of the ``which python`` command.
+
 .. figure:: _static/pycharm_set_environment.png
 
 The project interpreter can be viewed and/or modified at any time, even after the project is created, by
@@ -177,9 +181,15 @@ Windows.
 
 .. figure:: _static/pycharm_interpreter.png
 
-.. note::
+After a project is created, it can happen that the *run* button is disabled. This issue can be caused by two reasons:
 
-    The location of the python interpreter in your active conda environment is the output of the ``which python`` command.
+*   PyCharm is parsing and indexing the source files. This can take a few minutes, depending on the size of the project;
+    the processes run in the background by PyCharm can be viewed and monitored from the bar at the bottom of the screen.
+
+*   A *run configuration* is missing. This can be added manually by clicking on ``Add configuration`` next to the *run*
+    button in the bar at the top of the editor (not explained here), but it is also possible to let PyCharm set up a
+    predefined run configuration by right-clicking on a script and select ``Run`` from the context menu. This is the
+    recommended procedure, if the user does not have specific requirements on the run configuration.
 
 If you are working with multiple source files (e.g. your code is split into multiple modules), the best practice is to
 let PyCharm know about this, so it will retrieve all the dependencies present in your modules. Otherwise, the IDE will
