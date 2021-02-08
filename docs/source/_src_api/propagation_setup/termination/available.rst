@@ -15,8 +15,7 @@ The termination settings are a key parameter in the propagation of a body’s or
         bodies_to_propagate,
         initial_state,
         termination_settings,
-        output_variables = dependent_variables_to_save
-	)
+        output_variables = dependent_variables_to_save)
 
 
 
@@ -24,14 +23,17 @@ Currently, the following termination settings are offered in Tudat:
 
 - Termination once a certain **time** has passed.
 
-	As the name suggests, these settings will cause the propagation to terminate after a certain time has passed. Please note that the simulator will finish the final time-step, which may cause the termination time to be slightly overpassed. You can set the termination settings as follows:
+	As the name suggests, these settings will cause the propagation to terminate after a certain simulated time has passed. You can set the termination settings as follows:
 
 	.. code-block:: python
 
-		termination_time = ...
-		terminate_exactly_on_final_condition = ... # Boolean
+		termination_time = 86400.0
+		termination_settings = propagation_setup.propagator.time_termination( termination_time )
 
-		termination_settings = propagation_setup.propagator.time_termination( termination_time, terminate_exactly_on_final_condition )
+        where the propagation will terminate once :math:`t=86400`. Note that the termination time is set as the absolute time (in seconds since J2000), not the time since the start of the propagation. Depending on the sign of the time step of the numerical integrator, the termination time will be treated as an upper bound (for positive time step) or lower bound (for negative time step).
+
+        
+        Please note that the simulator will normally finish the final time-step, which may cause the termination time to be slightly exceeded. This behaviour can be suppressed by providing the optional input argument ``terminate_exactly_on_final_condition=True``, in which case the final propagation step will be *exactly* on the specified time (note that to reach this final time exactly, state derivative function evaluations beyond the final time may be required by the propagator). 
 
 - Termination once a certain **CPU time** is reached.
 
@@ -39,72 +41,67 @@ Currently, the following termination settings are offered in Tudat:
 
 	.. code-block:: python
 
-		cpu_termination_time = ...
-
+		cpu_termination_time = 120.0
 		termination_settings = propagation_setup.propagator.cpu_time_termination( cpu_termination_time )
+
+	which will terminate the propagation once your computer has run it for 120 seconds.
 
 - Termination once a **dependent variable** meets a certain criterion.
 
-	The termination variable can be any :ref:`available_dependent_variables`, and is implemented here for vehicle altitude.
+	The termination variable can be any :ref:`available_dependent_variables`. Below, an example is shown for termination on a given vehicle altitude.
 
 	.. code-block:: python
 
 		termination_variable = propagation_setup.dependent_variable.altitude( "Spacecraft", "Earth" )
-
-	The exact termination condition is defined in the ``termination_settings``. The propagation is terminated once the lower limit of 25 km in altitude is reached:
-
-	.. code-block:: python
-
 		termination_settings = propagation_setup.propagator.dependent_variable_termination( 
 			dependent_variable_settings = termination_variable,
 			limit_value = 25.0E3,
-			use_as_lower_limit = True,
-			terminate_exactly_on_final_condition = False
-		)
+			use_as_lower_limit = True)
 
+	The exact termination condition is defined in the ``termination_settings``. The propagation is terminated once the *lower* limit of 25 km in altitude is reached (as the ``use_as_lower_limit`` is set to ``True``). To use the above settings to terminate when an *upper* limit of 25 km is reached, set this boolean to ``False``. 
+
+        Please note that the simulator will normally finish the final time-step, which may cause the termination condition to be slightly exceeded. This behaviour can be suppressed by providing the optional input argument ``terminate_exactly_on_final_condition=True``, in which case the final propagation step will be *almost exactly* on the specified condition (note that to reach this final condition, state derivative function evaluations beyond the final time may be required by the propagator). Reaching the final condition exactly is an iterative process, and very minor deviations from the specified final condition
 
 - Termination once a **user-defined function** returns true.
 
-	You can set a custom function that based on some internal calculations will return whether to stop propagation. Your custom function should take the current time as input, and output a Boolean:
+	You can set a custom function that based on some internal calculations, which will return whether to stop propagation. Your custom function should take the current time as input, and output a Boolean:
 
 	.. code-block:: python
 
-		def custom_termination_function( current_time ):
+		custom_termination_function = ...
+		termination_settings = propagation_setup.propagator.custom_termination( 
+			custom_termination_function)
 
-			if current_time ...:
-				return True
-			else:
-				return False
-
-	The propagation settings are then set as follows:
-
-	.. code-block:: python
-
-		current_time = ...
-
-		termination_settings = propagation_setup.propagator.custom_termination( custom_termination_function( current_time ) )
-
+        The ``custom_termination_function`` should be a function pointer taking a float as input (representing time), and returning a boolean as output. The propagation will continue to run, so long as this function returns `False`. 
 
 - Termination once **multiple criteria** are met.
 
 	It may be possible that the user desires to terminate a propagation according several criteria, where such criteria may or may not be fulfilled simulataneously. The constructor for this derived class is:
 
+
 	.. code-block:: python
 
-		termination_settings_list = ... #TODO Dominic
-		fulfill_single_condition = True
+		termination_time = 86400.0
+		time_termination_settings = propagation_setup.propagator.time_termination( termination_time )
 
-		termination_settings = propagation_setup.propagator.hybrid_termination( termination_settings_list, fulfill_single_condition )
+		termination_variable = propagation_setup.dependent_variable.altitude( "Spacecraft", "Earth" )
+		altitude_termination_settings = propagation_setup.propagator.dependent_variable_termination( 
+			dependent_variable_settings = termination_variable,
+			limit_value = 25.0E3,
+			use_as_lower_limit = True)
 
-	The ``fulfill_single_condition`` variable determines whether the propagation terminates once a single condition is met (true) or whether all conditions must be met (false).
+		cpu_termination_time = 120.0
+		cpu_termination_settings = propagation_setup.propagator.cpu_time_termination( cpu_termination_time )
+
+    		termination_settings_list = [time_termination_settings, altitude_termination_settings, cpu_termination_settings ]
+		termination_settings = propagation_setup.propagator.hybrid_termination( termination_settings_list, fulfill_single_condition = True )
+
+	By using this setup, the propagation will terminate once *one of the three* constituent termination settings (simulated time, cpu time, altitude) has reached the imposed limit value. The ``fulfill_single_condition`` variable determines whether the propagation terminates once a *single* condition is met (if True, as above) or once *all* conditions must be met (False).
 
 	.. tip::
 
-		It is possible to terminate both on time and dependent variable(s).
+		When using a dependent variable as termination condition, it is adviced to also include a (cpu) time termination condition, to ensure that your simulation will terminate.
 
-.. note:: 
-
-	For both CPU Time and Custom termination, the termination cannot be set to occur exactly on the final condition.
 
 
 

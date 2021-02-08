@@ -14,7 +14,35 @@ Ephemeris Models
 
 .. class:: Approximate Planet Positions
 
-  Highly simplified model of ephemerides of major Solar system bodies (model described here). Both a three-dimensional, and circular coplanar approximation may be used.
+   Highly simplified model of ephemerides of major Solar system bodies, with Keplerian elements modelled as linear functions of time, and several sinusoidal variations (full model described `here <https://ssd.jpl.nasa.gov/txt/aprx_pos_planets.pdf>`_). Both a three-dimensional, and circular coplanar approximation may be used.
+
+    .. tabs::
+
+         .. tab:: Python
+
+          .. toggle-header:: 
+             :header: Required **Show/Hide**
+
+             .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/req_environment_models.py
+                :language: python
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/approximate_planet_positions_ephemeris_alt.py
+             :language: python
+
+          .. toggle-header:: 
+           :header: Required after **Show/Hide**
+
+           .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/req_environment_models_after.py
+              :language: python
+
+         .. tab:: C++
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/approximate_planet_positions_ephemeris.cpp
+             :language: cpp
+
+   Note that this option is only available when assigning a property to one of the solar system planets (for the case of the Earth the approximate ephemeris of the Earth-Moon barycenter is provided). 
+
+   An alternative interface is available:
 
     .. tabs::
 
@@ -40,11 +68,11 @@ Ephemeris Models
           .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/approximate_planet_positions_ephemeris.cpp
              :language: cpp
 
-  where the first constructor argument is taken from the enum in approximatePlanetPositionsBase.h, and the second argument (false) denotes that the circular coplanar approximation is not made.
+   which allows one to add the ephemeris model of a planet, to any custom body. In the above example, the body ``CustomBody`` is endowed with the approximate ephemeris model of ``Jupiter``. 
 
 .. class:: Direct Spice Ephemeris
 
-  Ephemeris retrieved directly using Spice.
+   Ephemeris retrieved directly from the Spice toolbox (requires an appropriate Spice kernel to be loaded).
 
     .. tabs::
 
@@ -70,12 +98,39 @@ Ephemeris Models
           .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/direct_spice_ephemeris.cpp
              :language: cpp
 
-  creating a barycentric (SSB) ephemeris with axes along J2000, with data directly from spice.
+   This creates a barycentric (origin: SSB) ephemeris with axes along J2000, with data directly from spice.
 
+   An alternative interface is available:
+
+    .. tabs::
+
+         .. tab:: Python
+
+          .. toggle-header:: 
+             :header: Required **Show/Hide**
+
+             .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/req_environment_models.py
+                :language: python
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/direct_spice_ephemeris_alt.py
+             :language: python
+
+          .. toggle-header:: 
+           :header: Required after **Show/Hide**
+
+           .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/req_environment_models_after.py
+              :language: python
+
+         .. tab:: C++
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/direct_spice_ephemeris_alt.cpp
+             :language: cpp
+
+   which allows one to add the ephemeris model of any body to any custom body. In the above example, the body ``CustomBody`` is endowed with the approximate ephemeris model of ``Jupiter``. 
 
 .. class:: Interpolated Spice Ephemeris
 
-  Using this option the state of the body is retrieved at regular intervals, and used to create an interpolator, before setting up environment. This has the advantage of only requiring calls to Spice outside of the propagation inner loop, reducing computation time. However, it has the downside of begin applicable only during a limited time interval.
+   Using this option the state of the body is retrieved from Spice at regular intervals *during* the environment propagation (as opposed to during the propagation). These data are then used to create an interpolator, which is put into the environment, and called during the propagation. This has the advantage of only requiring calls to Spice outside of the propagation inner loop, reducing computation time in many cases (a single call to the interpolator is significantly faster that a single call to Spice). However, it has the downside of begin applicable only during a limited time interval, and requiring the tabulated data to be stored in RAM.
 
     .. tabs::
 
@@ -101,37 +156,7 @@ Ephemeris Models
           .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/interpolated_spice_ephemeris.cpp
              :language: cpp
 
-  creating a barycentric (SSB) ephemeris with axes along J2000, with data retrieved from Spice at 3600 s intervals between t=0 and t=1.0E8, using a 6th order Lagrange interpolator. Settings for the interpolator (discussed here, can be added as a sixth argument if you wish to use a different interpolation method)
-
-.. class:: Tabulated Ephemeris
-
-  Ephemeris created directly by interpolating user-specified states as a function of time.
-
-    .. tabs::
-
-         .. tab:: Python
-
-          .. toggle-header:: 
-             :header: Required **Show/Hide**
-
-             .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/req_environment_models.py
-                :language: python
-
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/tabulated_ephemeris.py
-             :language: python
-
-          .. toggle-header:: 
-           :header: Required after **Show/Hide**
-
-           .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/req_environment_models_after.py
-              :language: python
-
-         .. tab:: C++
-
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/tabulated_ephemeris.cpp
-             :language: cpp
-
-  creating an ephemeris interpolated (with 6th order Lagrange interpolation) from the data in bodyStateHistory, which contains the Cartesian state (w.r.t. SSB; axes along J2000) for a given number of times (map keys, valid time range between first and last time in this map).
+  creating a barycentric (SSB) ephemeris with axes along J2000, with data retrieved from Spice at 3600 s intervals between t=0 and t=1.0E8. By default, a 6th order Lagrange interpolator is used (NOTE: the Lagrange interpolator is not reliable at the edges of the interpolation interval, as discussed :ref:`here<lagrange_interpolator_edges>`) Settings for an alternative interpolator can be use (see :ref:`interpolators<interpolator_settings>`) by specifying the optional input argument. Additionally, as is the case for the :class:`.Direct Spice Ephemeris`, an optional input argument ``body_name_to_use`` to use an ephemeris model from Spice for body A and assign it to body B.
 
 
 .. class:: Kepler Ephemeris
@@ -162,8 +187,37 @@ Ephemeris Models
           .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/kepler_ephemeris.cpp
              :language: cpp
 
-  creating a Kepler orbit as ephemeris using the given kepler elements and associated initial time and gravitational parameter. See Frame/State Transformations for more details on orbital elements in Tudat.
+  This creates a Kepler orbit as ephemeris using the given kepler elements (``initial_state_in_keplerian_elements`` numpy array, size 6, required order: :math:`a,e,i,\omega,\Omega,\theta`, with the final element the true anomaly). These are taken as the elements at the time ``initial_state_epoch`` and propagated to any other time using the provided ``central_body_gravitational_parameter``. See :ref:`Frame/State Transformations` for more details on orbital elements in Tudat.
 
+.. class:: Kepler Ephemeris from Spice
+
+  This ephemeris model is essentially a wrapper for the Kepler Ephemeris, with the added functionality that the initial Keplerian state is extracted from Spice, as opposed to provided manually
+    
+    .. tabs::
+
+         .. tab:: Python
+
+          .. toggle-header:: 
+             :header: Required **Show/Hide**
+
+             .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/req_environment_models.py
+                :language: python
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/kepler_ephemeris_spice.py
+             :language: python
+
+          .. toggle-header:: 
+           :header: Required after **Show/Hide**
+
+           .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/req_environment_models_after.py
+              :language: python
+
+         .. tab:: C++
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/kepler_ephemeris_spice.cpp
+             :language: cpp
+
+  The initial Keplerian state is extracted from Spice as the state of ``body_name`` w.r.t. ``frame_origin``.
 
 .. class:: Constant Ephemeris
 
@@ -192,10 +246,11 @@ Ephemeris Models
 
           .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/constant_ephemeris.cpp
              :language: cpp
+   with ``constant_cartesian_state`` being the constant Cartesian state of the body (as a numpy array, size 6)
 
-.. class:: Multi-Arc Ephemeris
+.. class:: Tabulated Ephemeris
 
-  An ephemeris model (for translational state) that allows the body’s state to be defined by distinct ephemeris models over different arcs. Class is implemented to support multi-arc propagation/estimation. 
+  Ephemeris created directly by interpolating user-specified states as a function of time.
 
     .. tabs::
 
@@ -207,7 +262,7 @@ Ephemeris Models
              .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/req_environment_models.py
                 :language: python
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/multi_arc_ephemeris.py
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/tabulated_ephemeris.py
              :language: python
 
           .. toggle-header:: 
@@ -218,8 +273,11 @@ Ephemeris Models
 
          .. tab:: C++
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/multi_arc_ephemeris.cpp
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/tabulated_ephemeris.cpp
              :language: cpp
+
+  creating an ephemeris interpolated (with 6th order Lagrange interpolation) from the data in the ``body_state_history`` dictionary (keys: floats representing time - numpy arrays, size 6, representing Cartesian states).
+
 
 .. class:: Custom Ephemeris
 
@@ -249,7 +307,43 @@ Ephemeris Models
           .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/custom_ephemeris.cpp
              :language: cpp
 
+   where the ``custom_state_function`` must be a function pointer taking a float (time) as input, and returning a nunmpy array, size 6 (Cartesian state)
+
+.. class:: Scaled Ephemeris
+
+  This options is not an ephemeris by itself, but instead allows users to take an existing ephemeris, and apply a scaling factor to the resulting Cartesian states (for instance for an uncertainty analysis)
+
+    .. tabs::
+
+         .. tab:: Python
+
+          .. toggle-header:: 
+             :header: Required **Show/Hide**
+
+             .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/req_environment_models.py
+                :language: python
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/scaled_ephemeris.py
+             :language: python
+
+          .. toggle-header:: 
+           :header: Required after **Show/Hide**
+
+           .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/req_environment_models_after.py
+              :language: python
+
+         .. tab:: C++
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/scaled_ephemeris.cpp
+             :language: cpp
 .. _environment_gravity_field_model:
+
+In the above case, the original Jupiter ephemeris setting is taken, and each state element (x,y,z position and velocity) from the original ephemeris is multiplied by a factor 1.001 before being used in the simulation. Two additional interfaces exist:
+
+* Taking a ``scaling_vector`` as input (numpy array, size 6) instead of ``scaling_constant``. With this interface, a different scaling constant can be applied for each entry of the Cartesian state.
+* Taking a ``scaling_vector_function`` as input (function pointer taking a float as input, returning numpy array, size 6) instead of ``scaling_constant``. With this interface, a time-varying (float input to function pointer represents time) scaling constant can be applied for each entry of the Cartesian state.
+
+Finally, an optional boolean input argument ``is_scaling_absolute`` (default false) can be provided to the ``environment_setup.ephemeris.scaled`` functions. Setting this boolean to true will *add*  the scaling value to the state, instead of the default behaviour of *multiplying*  the state by the scaling value.
 
 Gravity Field Models
 ####################
@@ -342,18 +436,127 @@ Gravity Field Models
           .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/spherical_harmonics_gravity.cpp
              :language: cpp
 
-  The associatedReferenceFrame reference frame must presently be the same frame as the target frame of the body’s rotation model (see below). It represents the frame to which the spherical harmonic field is fixed.
+  The ``associated_reference_frame`` must presently be the same frame ID as the target frame of the body’s rotation model (see below). It represents the frame in which the spherical harmonic field is defined. The ``normalized_cosine_coefficients`` and ``normalized_sine_coefficients`` are numpy two-dimensional arrays containing the spherical harmonic coefficients. As such, note that entry (0,0) of cosine coefficients should be equal to 1.
 
   .. warning::
-      Spherical harmonic coefficients used for this environment model must ALWAYS be fully normalized.
+      Spherical harmonic coefficients used for this environment model must ALWAYS be fully normalized. To normalize unnormalized spherical harmonic coefficients, see :ref:`spherical_harmonics_normalization`
 
+.. class:: Spherical Harmonics Gravity - Triaxial body
+
+
+  Gravity field model as a spherical harmonic expansion, with coefficients automatically generated for a homogeneous triaxial ellipsoid.
+
+    .. tabs::
+
+         .. tab:: Python
+
+          .. toggle-header:: 
+             :header: Required **Show/Hide**
+
+             .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/req_environment_models.py
+                :language: python
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/spherical_harmonic_triaxial_body.py
+             :language: python
+
+          .. toggle-header:: 
+           :header: Required after **Show/Hide**
+
+           .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/req_environment_models_after.py
+              :language: python
+
+         .. tab:: C++
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/spherical_harmonic_triaxial_body.cpp
+             :language: cpp
+
+  The ``axis_A``, ``axis_B`` and ``axis_C`` inputs represent the dimensions of principal axis of the ellipsoid (with A>B>C), and the ``density`` represents the mass density of the body (assumed homogeneous). The maximum degree and order of the spherical harmonic coefficients that are calculated have to be provided (a true homogeneous ellipsoid has non-zero coefficients up to infinite degree), as does the reference frame in which teh coefficients are to be defined (see :class:`Spherical Harmonics Gravity`).
 
 Time-variations of the Gravity Field
 ####################################
 
 .. class:: Basic Solid Body Gravity Field Variation
 
-  Tidal variation of the gravity field using first-order tidal theory.
+  Variations of the gravity field due to solid body tides, using the model provide (for instance) by `Eq. 6.6 of this document <https://www.iers.org/SharedDocs/Publikationen/EN/IERS/Publications/tn/TechnNote36/tn36_079.pdf?__blob=publicationFile&v=1>`_). Several options, using various levels of simplification, can be used:
+
+    .. tabs::
+
+         .. tab:: Python
+
+          .. toggle-header:: 
+             :header: Required **Show/Hide**
+
+             .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/req_environment_models.py
+                :language: python
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/gravity_field_tides_simple.py
+             :language: python
+
+          .. toggle-header:: 
+           :header: Required after **Show/Hide**
+
+           .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/req_environment_models_after.py
+              :language: python
+
+         .. tab:: C++
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/gravity_field_tides_simple.cpp
+             :language: cpp
+ 
+  This interface defines a single Love number for a full degree. Specifically, the above case computes tides raised by the Moon, for the case where :math:`k_{2}=k_{20}=k_{21}=k_{22}=0.3`. The ``love_number`` variable may be provided as a float or complex type.
+
+    .. tabs::
+
+         .. tab:: Python
+
+          .. toggle-header:: 
+             :header: Required **Show/Hide**
+
+             .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/req_environment_models.py
+                :language: python
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/gravity_field_tides_multiple_degrees.py
+             :language: python
+
+          .. toggle-header:: 
+           :header: Required after **Show/Hide**
+
+           .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/req_environment_models_after.py
+              :language: python
+
+         .. tab:: C++
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/gravity_field_tides_multiple_degrees.cpp
+             :language: cpp
+ 
+  This interface defines a separate Love number for multiple full degrees. Specifically, the above case computes tides raised by the Moon, for the case where :math:`k_{2}=k_{20}=k_{21}=k_{22}=0.3` and :math:`k_{3}=k_{30}=k_{31}=k_{32}=k_{33}=0.1`. The values of :math:`k_{2}` and :math:`k_{3}`  may be provided as a float or complex type.
+
+    .. tabs::
+
+         .. tab:: Python
+
+          .. toggle-header:: 
+             :header: Required **Show/Hide**
+
+             .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/req_environment_models.py
+                :language: python
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/gravity_field_tides_multiple_orders.py
+             :language: python
+
+          .. toggle-header:: 
+           :header: Required after **Show/Hide**
+
+           .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/req_environment_models_after.py
+              :language: python
+
+         .. tab:: C++
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/gravity_field_tides_multiple_orders.cpp
+             :language: cpp
+ 
+  This interface defines a separate Love number at each order for a single degree. the above case computes tides raised by the Moon :math:`k_{20}=0.31`, :math:`k_{21}=0.305` and :math:`k_{22}=0.308`. The entries of ``love_numbers`` may be provided as a float or complex type.
+
 
 .. class:: Tabulated Gravity Field Variation
 

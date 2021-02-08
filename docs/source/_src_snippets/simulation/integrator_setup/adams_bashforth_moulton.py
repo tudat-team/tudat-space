@@ -7,7 +7,7 @@ absolute_error_tolerance = 1.0e-9 # -
 minimum_order = 6
 maximum_order = 11
 
-integrator_settings = propagation_setup.integrator.runge_kutta_variable_step_size(
+integrator_settings = propagation_setup.integrator.adams_bashforth_moulton(
 	initial_time,
 	initial_time_step,
 	minimum_step_size,

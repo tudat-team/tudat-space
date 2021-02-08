@@ -209,7 +209,7 @@ This concludes the section on simulation of this API guide. For more detailed in
 
 
 Linear Sensitivity Analysis
-====================
+============================
 
  .. figure:: flowchart_var_eq.png
     :width: 800
@@ -239,7 +239,7 @@ At the moment, the following :class:`VariationalEquationsSolver` options are ava
 These are implemented in derived classes and are discussed below. Note that these objects of these classes propagate both the variational equations and dynamics (either concurrently or sequentially). 
 
 Parameter Architecture
-######################
+#######################
 
 The parameter estimation framework of Tudat allows an ever increasing variety of parameters to be estimated, these parameters may be:
 
