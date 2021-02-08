@@ -1,3 +1,5 @@
+.. _creating_artificial_bodies:
+
 ==========================
 Creating Artificial Bodies
 ==========================
