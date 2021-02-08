@@ -203,5 +203,5 @@ runs fine, PyCharm does not know where to look for them. This can be done as fol
 .. note::
 
     The students of AE4866 Propagation and Optimization in Astrodynamics are encouraged to follow all the steps
-    presented above.
+    presented above .
 
