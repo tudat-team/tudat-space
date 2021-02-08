@@ -7,7 +7,7 @@ This page will guide you through the installation of Tudat(Py). The installation
 package manager, such as ``Anaconda``. Additional installation procedures are not currently
 supported by the team, although there are plans to add additional support in the future. If the current situation does not satisfy your
 application then please make a feature request at the respective package at https://github.com/tudat-team or show
-support for an existing request .
+support for an existing request.
 
 
 
