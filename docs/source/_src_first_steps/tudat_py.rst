@@ -147,11 +147,13 @@ Setting up PyCharm
 ------------------
 
 PyCharm is a famous Integrated Development Environment (IDE) to work with Python, widely used by developers and
-professionals. It is available for download `here`_. The open-source, basic version ("Community") is free to download and sufficient
-to write and run Python code; however, if you have a TU Delft account, you can download and activate the professional
-version as well.
+professionals. It is available for download `here`_. The open-source, basic version ("Community") is free to download
+and sufficient to write and run Python code; however, if you have a TU Delft account (or another educational email),
+you can download and activate the professional version as well. To activate your educational license, please visit this
+`webpage`_.
 
 .. _`here`: https://www.jetbrains.com/pycharm/download
+.. _`webpage`: https://www.jetbrains.com/shop/eform/students
 
 To start working with PyCharm, you can create a new project. It is possible to set the conda environment to be used
 directly from PyCharm. You can follow this procedure to create a new project and use your conda installation of Tudat:
