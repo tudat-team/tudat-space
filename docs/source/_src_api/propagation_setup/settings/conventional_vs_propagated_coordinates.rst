@@ -1,3 +1,5 @@
+.. _convention_propagated_coordinates:
+
 =======================================
 Conventional vs. Propagated Coordinates
 =======================================
@@ -26,11 +28,11 @@ In the description of some of the objects in this part of the wiki about the sim
 
 	- To describe the equations of motion
 	- To describe the state and state derivative during integration
-	- As an output to the ``state_history`` function of the ``dynamics_simulator`` object
+	- As an output to the ``unprocessed_state_history`` function of the ``dynamics_simulator`` object
 
-As a user, you will generally only interact with the conventional coordinates, but you will have the choice over which propagated coordinate to use for propagation/integration. Note that setting a type of coordinates for propagation does not necessarily also constrain which propagator is used. For instance, Cowell and Encke propagation, both use Cartesian coordinates as the propagated states. The same is also true vice-versa: Gauss’ version of Lagrange’s planetary equations can be used with both Keplerian and modified equinoctial elements.
+As a user, you will generally only interact with the conventional coordinates, but you will have the choice over which propagated coordinate to use for propagation/integration. 
 
-In the remaining part of this page, you will find a description of where you need to keep a closer look at the difference between these two types of coordinates and which coordinates are available in Tudat.
+
 
 Important To Keep In Mind
 -------------------------
