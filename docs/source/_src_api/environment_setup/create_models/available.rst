@@ -276,7 +276,7 @@ Ephemeris Models
           .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/tabulated_ephemeris.cpp
              :language: cpp
 
-  creating an ephemeris interpolated (with 6th order Lagrange interpolation) from the data in the ``body_state_history`` dictionary (keys: floats representing time - numpy arrays, size 6, representing Cartesian states).
+  creating an ephemeris interpolated (with 6th order Lagrange interpolation) from the data in the ``body_state_history`` dictionary (keys: floats representing time - values: numpy arrays, size 6, representing Cartesian states).
 
 
 .. class:: Custom Ephemeris
@@ -475,6 +475,8 @@ Gravity Field Models
 Time-variations of the Gravity Field
 ####################################
 
+Unlike most other environment models, gravity field variations are provided as a *list* for a single body: multiple gravity field variation settings may be defined. Their summation is then applied to the spherical harmonic gravity field.
+
 .. class:: Basic Solid Body Gravity Field Variation
 
   Variations of the gravity field due to solid body tides, using the model provide (for instance) by `Eq. 6.6 of this document <https://www.iers.org/SharedDocs/Publikationen/EN/IERS/Publications/tn/TechnNote36/tn36_079.pdf?__blob=publicationFile&v=1>`_). Several options, using various levels of simplification, can be used:
@@ -562,6 +564,32 @@ Time-variations of the Gravity Field
 
   Variations in spherical harmonic coefficients tabulated as a function of time.
 
+    .. tabs::
+
+         .. tab:: Python
+
+          .. toggle-header:: 
+             :header: Required **Show/Hide**
+
+             .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/req_environment_models.py
+                :language: python
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/tabulate_gravity_variations.py
+             :language: python
+
+          .. toggle-header:: 
+           :header: Required after **Show/Hide**
+
+           .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/req_environment_models_after.py
+              :language: python
+
+         .. tab:: C++
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/tabulate_gravity_variations.cpp
+             :language: cpp
+
+  where the ``cosine_variations_table``  and ``sine_variations_table`` variables contain the tabulated data for the variations of the spherical harmonic coefficients. Both are dictionaries (keys: floats representing time - values: numpy arrays, size :math:`N\times M`, representing variation in gravity field coefficients at given time). Each value in these two dictionaries must be the same size array. The ``minimum_degree`` and ``minimum_degree`` inputs define how the data in the table is processed: they denote the degree and order of the variation that the (0,0) entry in each value in the dictionaries represent. For instance, for array sizes :math:`N=2` and :math:`M=3`, the above would provide variations in gravity field at degree 2 and 3 (up to order 3)
+
 .. _environment_atmosphere_model:
 
 Atmosphere Models
@@ -569,7 +597,7 @@ Atmosphere Models
 
 .. class:: Exponential Atmosphere
 
-  Simple atmosphere model independent of time, latitude and longitude based on an exponentially decaying density profile with a constant temperature. 
+  Simple atmosphere model independent of time, latitude and longitude based on an exponentially decaying density profile with a constant temperature and composition. 
 
   For example for an exponential atmosphere with a scale height of 7200 m, a constant temperature of 290 K, a density at 0 m altitude of 1.225 kg/m^3 and a specific gas constant of 287.06 J/(kg K):
 
@@ -596,43 +624,36 @@ Atmosphere Models
 
             .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/exponential_atmosphere.cpp
                :language: cpp
+  
+  The value of pressure is computed by assuming hydrostatic equilibrium, whereas temperature, gas constant and the ratio of specific heats are assumed to be constant.
 
+  For cases where only the atmospheric density is relevant, you can use:
 
-  If you want to model the exponential atmosphere for Earth or Mars, you can also simply input ``aerodynamics::earth`` or ``aerodynamics::mars`` to load the default settings, which are defined in the table below.
+    .. tabs::
 
-  .. list-table:: Default settings for the exponential atmospheres of Earth and Mars.
-     :widths: 25 25 25 25
-     :header-rows: 1
+         .. tab:: Python
 
-     * - Property
-       - Earth
-       - Mars
-       - Units
-     * - Scale Height
-       - 7.2
-       - 1.11
-       - km
-     * - Density at Zero Altitude
-       - 1.225
-       - 0.02
-       - kg/m^3
-     * - Constant Temperature
-       - 246.0
-       - 215.0
-       - K
-     * - Specific Gas Constant
-       - 287.0
-       - 197.0
-       - J/kg/K
-     * - Ratio of Specific Heats
-       - 1.4
-       - 1.3
-       - --
+          .. toggle-header:: 
+             :header: Required **Show/Hide**
 
-  References for the values above are:
+             .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/req_environment_models_simple.py
+                :language: python
 
-  - **Earth**: Lecture notes, Rocket Motion by Prof. Ir. B.A.C. Ambrosius, November 2009
-  - **Mars**: Spohn, T., Breuer, D., and Johnson, T., Eds., Encyclopedia of the Solar System, 3rd ed. Elsevier, 2014
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/exponential_atmosphere.py
+             :language: python
+
+          .. toggle-header:: 
+           :header: Required after **Show/Hide**
+
+           .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/req_environment_models_after.py
+              :language: python
+
+         .. tab:: C++
+
+            .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/exponential_atmosphere_simple.cpp
+               :language: cpp
+
+  When using this interface, all other properties are set to NaN, and it is not possible to extract any other property besides the density from the atmosphere model.
 
 .. class:: Tabulated Atmosphere
   
@@ -640,7 +661,7 @@ Atmosphere Models
 
 .. class:: Custom Constant Temperature Atmosphere
 
-  You can define your own constant temperature atmosphere, which computes the atmospheric properties based on an input function. For instance, one can link a function to the settings as such:
+  You can define your own custom atmosphere model, with constant temperature and composition (gas constant and ratio of specific heats), but a density which varies according to some user-defined model.
 
     .. tabs::
 
@@ -667,11 +688,51 @@ Atmosphere Models
                :language: cpp
 
 
-  As shown in the example above, the user-defined function, is required to have those inputs, and in that specific order. The value of pressure is computed by assuming hydrostatic equilibrium, whereas temperature, gas constant and the ratio of specific heats are assumed to be constant.
+  There are two options for providing the ``density_function``:
+  
+  * A function taking a single float (altitude) as input, with a single float (density) as output. 
+  * A function taking four floats (altitude, latitude, longitude, time, *in that order*) as input, with a single float (density) as output. 
 
-.. tip::
+  The value of pressure is computed by assuming hydrostatic equilibrium, whereas temperature, gas constant and the ratio of specific heats are assumed to be constant.
 
-  Note that in C++, by using :literal:`std::bind`, you can have more inputs than the ones in :literal:`customDensityFunction`. However, keep in mind that :literal:`std::bind` only allows up to 9 inputs.
+.. class:: Scaled Atmosphere Model
+
+  This option is not an atmosphere model by itself, but instead allows users to take an existing atmosphere model, and apply a scaling factor to the resulting density value (for instance for an uncertainty analysis)
+
+    .. tabs::
+
+         .. tab:: Python
+
+          .. toggle-header:: 
+             :header: Required **Show/Hide**
+
+             .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/req_environment_models.py
+                :language: python
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/scaled_atmosphere.py
+             :language: python
+
+          .. toggle-header:: 
+           :header: Required after **Show/Hide**
+
+           .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/req_environment_models_after.py
+              :language: python
+
+         .. tab:: C++
+
+            .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/scaled_atmosphere.cpp
+               :language: cpp
+
+  In the above case, the original Earth atmosphere setting is taken, and the density from the original model is multiplied by a factor 1.5 before being used in the simulation. An additional interfaces exist:
+
+* Taking a ``scaling_function`` as input: a function pointer taking a float as input, representing the current time, returning a float which is the current scaling factor, instead of ``scaling_constant``. With this interface, a time-varying scaling constant can be applie to the density.
+
+  Finally, an optional boolean input argument ``is_scaling_absolute`` (default false) can be provided to the ``environment_setup.atmosphere.scaled`` functions. Setting this boolean to true will *add*  the scaling value to the state, instead of the default behaviour of *multiplying*  the state by the scaling value.
+
+
+  .. warning::
+
+      At present, the scaled atmosphere model only supports scaling of the density value. For cases where the density is used to compute other atmospheric quantities (such as pressure using hydrostatic equilibrium), this calculation is performed using the *unscaled* density!
 
 .. class:: NRLMSISE-00
 
@@ -826,7 +887,7 @@ Rotational Models
 
 .. class:: Simple Rotation Model
 
-  Rotation model with constant orientation of the rotation axis, and constant rotation rate about local z-axis.
+  Rotation model with constant orientation of the rotation axis (body-fixed z-axis), and constant rotation rate about this axis.
 
     .. tabs::
 
@@ -852,7 +913,44 @@ Rotational Models
             .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/simple_rotation_model.cpp
                :language: cpp
 
-where the rotation from the original frame to the target frame at initial time is given by the initial orientation quaternion. This is mapped to other times using the rotation rate.
+  The rotation from original (inertial) to target (body-fixed) frame at some reference time ``initial_time`` is defined by the ``initial_orientation`` rotation matrix (numpy 3x3 array). The rotation about the body-fixed z-axis is defined by the ``rotation_rate`` float variable (in rad/s)
+
+
+
+.. class:: Simple Rotation Model from Spice
+
+  This rotation model is essentially a wrapper for the Simple Rotation Model, with the added functionality that the initial orientation and rotation rate are extracted from Spice, as opposed to provided manually
+
+    .. tabs::
+
+         .. tab:: Python
+
+          .. toggle-header:: 
+             :header: Required **Show/Hide**
+
+             .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/req_environment_models.py
+                :language: python
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/simple_spice_rotation_model.py
+             :language: python
+
+          .. toggle-header:: 
+           :header: Required after **Show/Hide**
+
+           .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/req_environment_models_after.py
+              :language: python
+
+         .. tab:: C++
+
+            .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/simple_spice_rotation_model.cpp
+               :language: cpp
+
+  The initial orientation and rotation rate are extracted from Spice at the time defined by ``initial_time``. The distinction between the two target frame inputs is the following:
+
+  * ``target_frame`` The name of the frame that Tudat assigns to the body-fixed frame
+  * ``target_frame_spice`` The name of the frame in Spice for which the initial orientation and rotation rate are extracted
+
+  Note that this is the *only* time at which Spice is used: to define the initial values of the simple rotation model. For the full Spice rotation model, see below:
 
 
 .. class:: Spice Rotation Model
@@ -884,9 +982,75 @@ where the rotation from the original frame to the target frame at initial time i
                :language: cpp
 
 
+.. class:: Synchronous Rotation Model
+
+  This rotation model defines the rotation of a body from its relative orbit w.r.t. some central body. Specifically:
+
+  * The body-fixed x-axis is *always* pointing towards the central body
+  * The body-fixed z-axis is *always* perpendicular to the orbital plane (along the direction of :math:`\mathbf{x}\times\mathbf{v}`)
+  * The body-fixed y-axis completes the right-handed reference frame
+
+  This model can be useful for, for instance, approximate rotation of tidally locked natural satellites, or nadir-pointinf spacraft.
+
+    .. tabs::
+
+         .. tab:: Python
+
+          .. toggle-header:: 
+             :header: Required **Show/Hide**
+
+             .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/req_environment_models.py
+                :language: python
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/synchronous_rotation_model.py
+             :language: python
+
+          .. toggle-header:: 
+           :header: Required after **Show/Hide**
+
+           .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/req_environment_models_after.py
+              :language: python
+
+         .. tab:: C++
+
+            .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/synchronous_rotation_model.cpp
+               :language: cpp
+
+  The above code snippet defines the frame ``Phobos_Fixed`` to be fully synchronous w.r.t. Mars (and ``ECLIPJ2000`` as the base frame).
+
+.. class:: Constant Rotation Model
+
+  Highly simplified model, in which the rotation from inertial to body-fixed coordinates is a constant rotation matrix.
+
+    .. tabs::
+
+         .. tab:: Python
+
+          .. toggle-header:: 
+             :header: Required **Show/Hide**
+
+             .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/req_environment_models.py
+                :language: python
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/constant_rotation_model.py
+             :language: python
+
+          .. toggle-header:: 
+           :header: Required after **Show/Hide**
+
+           .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/req_environment_models_after.py
+              :language: python
+
+         .. tab:: C++
+
+            .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/constant_rotation_model.cpp
+               :language: cpp
+  
+  The rotation from original (inertial) to target (body-fixed) frame is defined by the ``constant_orientation`` rotation matrix (numpy 3x3 array).
+
 .. class:: Gcrs to Itrs Rotation Model
 
-  High-accuracy rotation model of the Earth, according to the IERS 2010 Conventions. This class has various options to deviate from the default settings, here we only show the main options (typical applications will use default):
+  High-accuracy rotation model of the Earth, defined according to the IERS 2010 Conventions. This class has various options to deviate from the default settings, here we only show the main options (typical applications will use default):
 
     .. tabs::
 
@@ -912,39 +1076,9 @@ where the rotation from the original frame to the target frame at initial time i
             .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/gcrs_to_itrs_rotation_model.cpp
                :language: cpp
 
-  Note that for this model the original frame must be J2000, ECLIPJ2000 or GCRS. The precession-nutation theory may be :literal:`iau_2000a`, :literal:`iau_2000b` or :literal:`iau_2006`, as implemented in the SOFA toolbox. Alternative options to modify (not shown above) include the EOP correction file, input time scale, short period UT1 and polar motion variations. Please see the Dosygen documentation for details.
+  Note that for this model the original frame must be J2000 or GCRS (in the case of the former, teh frame bias between GCRS and J2000 is automatically corrected for). The target frame (*e.g.* body-fixed frame) name is ITRS. 
 
-.. class:: Tabulated Rotation Model
-
-  Rotation model obtained from an interpolator, with dependent variable a Eigen::VectorXd of size 7: the four entries (w,x,y,z) of the quaternion from the target frame to the base frame, and body’s angular velocity vector, expressed in its body-fixed frame. The tabulated rotational ephemeris can be implemented as follows:
-
-    .. tabs::
-
-         .. tab:: Python
-
-          .. toggle-header:: 
-             :header: Required **Show/Hide**
-
-             .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/req_environment_models.py
-                :language: python
-
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/tabulated_rotation_model.py
-             :language: python
-
-          .. toggle-header:: 
-           :header: Required after **Show/Hide**
-
-           .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/req_environment_models_after.py
-              :language: python
-
-         .. tab:: C++
-
-            .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/tabulated_rotation_model.cpp
-               :language: cpp
-
-.. class:: Constant Rotation Model
-  
-  Rotation model with a constant value for the rotation. Currently the settings interface is not yet implemented.
+  The precession-nutation theory may be :literal:`iau_2000a`, :literal:`iau_2000b` or :literal:`iau_2006`, as implemented in the SOFA toolbox. Alternative options to modify the input (not shown above) include the EOP correction file, input time scale, short period UT1 and polar motion variations. 
 
 .. _environment_aerodynamic_coefficient_interface:
 

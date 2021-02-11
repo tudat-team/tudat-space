@@ -3,7 +3,7 @@
 Integrator Settings
 ###################
 
-This page lists the available integrators within Tudat(Py) and provides code examples which illustrate their configuration. This section does however **not** include detailed descriptions of the integrators' mechanics and applications. More information and application examples are taught in the TU Delft Numerical Astrodynamics (AE4868) and Propagation & Optimization (AE4866) courses, or can be found in existing literature on the topic. Below, the various integrators in Tudat are discussed.
+This page lists the available integrators within Tudat(Py) and provides code examples which illustrate their configuration. 
 
 
 .. _simulation_integrator_type_euler:
