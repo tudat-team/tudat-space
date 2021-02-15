@@ -336,7 +336,6 @@ Ephemeris Models
 
           .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/scaled_ephemeris.cpp
              :language: cpp
-.. _environment_gravity_field_model:
 
 In the above case, the original Jupiter ephemeris setting is taken, and each state element (x,y,z position and velocity) from the original ephemeris is multiplied by a factor 1.001 before being used in the simulation. Two additional interfaces exist:
 
@@ -344,6 +343,8 @@ In the above case, the original Jupiter ephemeris setting is taken, and each sta
 * Taking a ``scaling_vector_function`` as input (function pointer taking a float as input, returning numpy array, size 6) instead of ``scaling_constant``. With this interface, a time-varying (float input to function pointer represents time) scaling constant can be applied for each entry of the Cartesian state.
 
 Finally, an optional boolean input argument ``is_scaling_absolute`` (default false) can be provided to the ``environment_setup.ephemeris.scaled`` functions. Setting this boolean to true will *add*  the scaling value to the state, instead of the default behaviour of *multiplying*  the state by the scaling value.
+
+.. _environment_gravity_field_model:
 
 Gravity Field Models
 ####################

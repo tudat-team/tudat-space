@@ -1,30 +1,20 @@
 .. _available_acceleration_models:
 
-Available Acceleration Models
-#############################
+==============================
+List of all Acceleration Models
+==============================
 
-.. class:: Point Mass Gravity
+Point-mass Gravity
+##################
 
-    Settings for a point mass gravity acceleration. For example of acceleration exerted on “Apollo” by “Earth”:
+    Settings for a point mass gravity acceleration. For example of acceleration exerted by Earth:
 
     .. tabs::
 
          .. tab:: Python
 
-          .. toggle-header:: 
-             :header: Required **Show/Hide**
-
-             .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/req_acceleration_models.py
-                :language: python
-
           .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/point_mass_gravity.py
              :language: python
-
-          .. toggle-header:: 
-           :header: Required after **Show/Hide**
-
-           .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/req_acceleration_models_after.py
-              :language: python
 
          .. tab:: C++
 
@@ -33,58 +23,122 @@ Available Acceleration Models
          
     Requires the following environment models to be defined:
 
-    - Gravity field for body exerting acceleration, see :ref:`environment_gravity_field_model` for non-default models.
-    - Current state of bodies undergoing and exerting acceleration, either from an Ephemeris model or from the numerical propagation, see :ref:`environment_ephemeris_model`.
+  - Gravity field for body exerting acceleration, see :ref:`environment_gravity_field_model` for non-default models.
+  - Current state of body exerting acceleration, either from a pre-defined ephemeris model (see :ref:`environment_ephemeris_model`) or from the numerical propagation of the translational dynamics of the body exerting the acceleration (Earth in the above example).
 
-.. class:: Spherical Harmonic Gravity
+Spherical Harmonic Gravity
+##########################
 
-  Settings for a spherical harmonic gravity acceleration. For example of acceleration exerted on “Apollo” by “Earth”:
+  Settings for a spherical harmonic gravity acceleration. For example of acceleration exerted by Earth:
 
-  .. tabs::
+    .. tabs::
 
        .. tab:: Python
 
-        .. toggle-header:: 
-           :header: Required before **Show/Hide**
-
-           .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/req_acceleration_models.py
-              :language: python
-
         .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/spherical_harmonic_gravity.py
            :language: python
-
-        .. toggle-header:: 
-           :header: Required after **Show/Hide**
-
-           .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/req_acceleration_models_after.py
-              :language: python
 
        .. tab:: C++
 
         .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/spherical_harmonic_gravity.cpp
            :language: cpp
 
-  where the gravity field will be expanded up to degree and order 12 in the acceleration model. Requires the following environment models to be defined:
+  where the gravity field will be expanded up to degree and order 12 in the acceleration model. Or, the acceleration up to degree and order 4 where only zonal coefficients are used (since the maximum order is 0 )
 
-  - Spherical harmonic gravity field for body exerting acceleration, see :ref:`environment_spherical_harmonics_gravity` for non-default models.
-  - Rotation model from the inertial frame to the body-fixed frame, see :ref:`environment_rotational_model`.
-  - Current state of bodies undergoing and exerting acceleration, either from an ephemeris model or from the numerical propagation, see :ref:`environment_ephemeris_model`.
+    .. tabs::
+
+       .. tab:: Python
+
+        .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/spherical_harmonic_gravity_zonal.py
+           :language: python
+
+       .. tab:: C++
+
+        .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/spherical_harmonic_gravity_zonal.cpp
+           :language: cpp
+
+  Requires the following environment models to be defined:
+
+  - Spherical harmonic gravity field for body exerting acceleration. See :ref:`environment_spherical_harmonics_gravity` for options on how to define one (if the default gravity field model of the exerting body is not spherical harmonic)
+  - Rotation model from the inertial frame to the body-fixed frame, either from a pre-defined rotation model (:ref:`environment_rotational_model`) or from the numerical propagation of the rotational dynamics of the body exerting the acceleration (Earth in the above example).
+  - Current state of body exerting acceleration, either from a pre-defined ephemeris model (see :ref:`environment_ephemeris_model`) or from the numerical propagation of the translational dynamics of the body exerting the acceleration (Earth in the above example).
 
   .. note::
       The spherical harmonic acceleration up to degree N and order M includes the point-mass gravity acceleration (which is the degree and order 0 term).
 
 .. _third_body_gravity:
 
-.. class:: Third Body Gravity
+Third Body Gravity & Central Gravity
+####################################
 
-      When creating an object of the ``acceleration_settings`` type, you must **not** provide any of the third body acceleration types (``third_body_central_gravity``, ``third_body_spherical_harmonic_gravity``, ``third_body_mutual_spherical_harmonic_gravity``) as input. If you wish to use a third-body gravity acceleration (typically from a point mass), simply provide ``central_gravity`` as input. Depending on the settings for your central bodies, the code will automatically create the corresponding acceleration object.
+  Settings for a third-body and central gravitational acceleration are defined identically to direct gravitational accelerations. During the creation and processing of the acceleration models, Tudat distinguishes three different cases, for the body :math:`A` exerting the acceleration, the body :math:`B` undergoing the acceleration, and the body :math:`C` as the center of propagation.
 
-.. class:: Aerodynamic Acceleration
+  * **Third-body perturbation** The central body is non-inertial (e.g. is not the SSB), and the acceleration *is not* exerted by central body. The acceleration is then computed from:
 
+    .. math::
+
+     \mathbf{a}=\nabla U_{B}(\mathbf{r}_{A})-\nabla U_{B}(\mathbf{r}_{C})
+
+    This is the typical *third body* perturbation, for instance for the case where :math:`A` is a spacecraft orbiting the Moon, :math:`B` is the Earth and :math:`C` is the Moon
+    
+
+  * **Central gravitational acceleration** The central body is non-inertial (e.g. is not the SSB), and the acceleration *is* exerted by the central body. If the body undergoing the acceleration itself possesses a gravity field, the gravitational back-reaction is accounted for when setting up the gravitational acceleration.
+
+    .. math::
+
+     \mathbf{a}=\nabla U_{B}(\mathbf{r}_{A})-\nabla U_{A}(\mathbf{r}_{B})
+
+    The backreaction (accounted for by the second term) becomes relevant when computing the mutual dynamics of two natural bodies. For instance, when propagating the Moon w.r.t. the Earth, and adding the point-mass gravitational acceleration of the Earth on the Moon, the following acceleration will be used:  
+
+    .. math::
+
+     \mathbf{a}=-\frac{\mu_{A}+\mu_{B}}{||\mathbf{r}||^{2}}\hat{\mathbf{r}}
+
+    with :math:`\mathbf{r}` the position of the Moon w.r.t. the Earth. The backreaction is taken into account by using the sum of the gravitational parameters (as opposed to only the gravitational parameter of the Earth).
+    
+
+  * **Direct gravitational acceleration** The central body is inertial (e.g. is the SSB). In this case, the direct acceleration is used:
+
+    .. math::
+
+     \mathbf{a}=\nabla U_{B}(\mathbf{r}_{A})
+
+  We stress that the above works equally well for **point-mass**, **spherical-harmonic** and **mutual-spherical-harmonic** accelerations. When propagating the dynamics of a spacecraft w.r.t. the Moon, the following will add the third-body point-mass acceleration of the Earth:
+
+    .. tabs::
+
+         .. tab:: Python
+
+          .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/point_mass_gravity.py
+             :language: python
+
+         .. tab:: C++
+
+          .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/point_mass_gravity.cpp
+             :language: cpp
+
+  while the following will add the third-body spherical-harmonic acceleration of the Earth (zonal coefficients up to degree 4)
+
+    .. tabs::
+
+       .. tab:: Python
+
+        .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/spherical_harmonic_gravity_zonal.py
+           :language: python
+
+       .. tab:: C++
+
+        .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/spherical_harmonic_gravity_zonal.cpp
+           :language: cpp
+
+  Note that above two code blocks are identical to those given as exaple for the :ref:`point_mass_acceleration` and the :ref:`spherical_harmonic_acceleration`. It is through the definition *of the central body* that a direct, central or third-body acceleration is created.
+
+Aerodynamic Acceleration
+########################
 
   Settings for an aerodynamic acceleration. For example of acceleration exerted on "Apollo" by "Earth" (e.g. atmosphere model belonging to Earth):
 
-  .. tabs::
+    .. tabs::
 
        .. tab:: Python
 
@@ -117,9 +171,10 @@ Available Acceleration Models
 
 
   .. warning::
-      Defining settings for a vehicle’s orientation, which may influence your aerodynamic force, is done after creating the acceleration models, as discussed here.
+      Defining settings for a vehicle’s orientation, which may influence your aerodynamic force, is done after creating the acceleration models, as discussed :ref:`body_orientation_guidance`.
 
-.. class:: Cannonball Radiation Pressure
+Cannonball Radiation Pressure
+#############################
 
   Settings for a cannonball radiation pressure acceleration. For example of acceleration exerted on "Apollo" by "Sun":
 
@@ -153,70 +208,109 @@ Available Acceleration Models
   - Cannonball radiation pressure model for body undergoing acceleration (from source equal to body exerting acceleration), see :ref:`environment_radiation_pressure_interface`.
   - Current state of body undergoing and body emitting radiation.
 
-.. class:: Relativistic Acceleration Correction
+Relativistic Acceleration Correction
+####################################
 
-  A first-order (in 1/c^2) correction to the acceleration due to the influence of relativity. It implements the model of Chapter 10, Section 3 of the IERS 2010 Conventions. For example that includes all three contributions (Schwarzschild, Lense-Thirring and de Sitter):
+  A first-order (in 1/c^2) correction to the acceleration due to the influence of relativity. It implements the model of Chapter 10, Section 3 of the IERS 2010 Conventions, consisting of three distinct effects: the Schwarzschild, Lense-Thirring and de Sitter accelerations. In Tudat, these three effects are all handled through a single acceleration model, where each of the three terms can be toggled on or of.
 
   .. tabs::
 
      .. tab:: Python
 
-      .. toggle-header:: 
-         :header: Required **Show/Hide**
-
       .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/relativistic.py
-         :language: python
-
-      .. toggle-header:: 
-         :header: Required after **Show/Hide**
-
-         .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/req_acceleration_models_after.py
-            :language: python
+         :language: python   
 
      .. tab:: C++
 
       .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/relativistic.cpp
          :language: cpp
 
-  Here, the ‘primary body’ for a planetary orbiter should always be set as the Sun (only relevant for de Sitter correction). The angular momentum vector of the orbited body is only relevant for Lense-Thirring correction.
-
-.. class:: Empirical Accelerations
+  Here, the ``de_sitter_central_body`` for a planetary orbiter should typically be set as the Sun, and only needs to be provided if ``use_de_sitter`` is set to True. Similarly, the angular momentum vector of the orbited body (provided by the ``lense_thirring_angular_momentum``) is only relevant for Lense-Thirring correction, and need not be provided if ``use_lense_thirring`` is set to false. It should be provided in a frame with the global frame orientation. By default, all three effects are set to false, and one of the following three can be used to include only a single effect.
 
 
-  A constant/once-per-orbit acceleration, expressed in the RSW frame, for which the magnitude is determined empirically (typically during an orbit determination process). The acceleration components are defined according to Montenbruck and Gill (2000), with a total of 9 components: a constant, sine and cosine term (with true anomaly as argument) for each of the three independent directions of the RSW frame. The settings object (for a vehicle called “Orbiter” around Mars) is created as:
+  Schwarzschild only:
+  
+  .. tabs::
+
+     .. tab:: Python
+
+      .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/relativistic_1.py
+         :language: python   
+
+     .. tab:: C++
+
+      .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/relativistic_1.cpp
+         :language: cpp
+         
+  De Sitter only:        
+  
+  .. tabs::
+
+     .. tab:: Python
+
+      .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/relativistic_2.py
+         :language: python   
+
+     .. tab:: C++
+
+      .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/relativistic_2.cpp
+         :language: cpp
+
+
+  Lense-Thirring only:                 
+  
+  .. tabs::
+
+     .. tab:: Python
+
+      .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/relativistic_3.py
+         :language: python   
+
+     .. tab:: C++
+
+      .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/relativistic_3.cpp
+         :language: cpp
+
+
+Empirical Accelerations
+#######################
+
+  A constant/once-per-orbit acceleration, expressed in the RSW frame, for which the magnitude is determined empirically (typically during an orbit determination process). The acceleration components are defined according to Montenbruck and Gill (2000), with a total of 9 components: a constant, sine and cosine term (with true anomaly as argument) for each of the three independent directions of the RSW frame. The settings object is created as:
 
   .. tabs::
 
        .. tab:: Python
 
-        .. toggle-header:: 
-           :header: Required **Show/Hide**
-
-           .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/req_acceleration_models.py
-              :language: python
-
         .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/empirical.py
            :language: python
 
-        .. toggle-header:: 
-           :header: Required after **Show/Hide**
-
-           .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/req_acceleration_models_after.py
-              :language: python
-
+       
        .. tab:: C++
 
         .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/empirical.cpp
            :language: cpp
 
-  Where the three input variables represent:
+  where in Tudat, the body 'exerting' the acceleration is considered to be the central body, w.r.t. which the true anomaly is calculated. The empirical acceleration is the calculated from:
+  
+      .. math::
 
-  - Vector containing the constant terms of the accelerations in the R, S and W directions.
-  - Vector containing the sine terms of the accelerations in the R, S and W directions.
-  - Vector containing the cosine terms of the accelerations in the R, S and W directions.
+       \mathbf{a}=R^{I/RSW}\left(\mathbf{a}_{\text{const.}}+\mathbf{a}_{\sin}\sin\theta+\mathbf{a}_{\cos}\cos\theta \right)
+
+  Here, :math:`R^{I/RSW}` is the rotation matrix from the RSW frame (of the body undergoing the acceleration w.r.t. the nody exerting the acceleration), :math:`theta` is the true anomaly, and the three constituent acceleration vectors are the inputs provided in the above code block.
 
 
-.. class:: Panelled Radiation Pressure
+Thrust Acceleration
+###################
+  
+  Used to define the resulting accerelations of a thrust force, requiring:
+
+  - Mass of body undergoing acceleration.
+  - Settings for both the direction and magnitude of the thrust force. These models may in turn have additional environmental dependencies.
+
+  Setting up a thrust acceleration is discussed in more detail on the page (TODO) Thrust Guidance.
+  
+Panelled Radiation Pressure
+###########################
   
   Settings for a panelled radiation pressure acceleration. For example of acceleration exerted on “Apollo” by “Sun”:
 
@@ -249,7 +343,8 @@ Available Acceleration Models
   - Panelled radiation pressure model for body undergoing acceleration (from source equal to body exerting acceleration), see :ref:`environment_radiation_pressure_interface`.
   - Current state of body undergoing and body emitting radiation.
 
-.. class:: Solar sailing Acceleration
+Solar sailing Acceleration
+##########################
 
   Settings for a solar sail acceleration. For example of acceleration exerted on “Apollo” by “Sun”:
 
@@ -283,16 +378,8 @@ Available Acceleration Models
   - Current state of body undergoing and body emitting radiation.
 
 
-.. class:: Thrust Acceleration
-  
-  Used to define the resulting accerelations of a thrust force, requiring:
-
-  - Mass of body undergoing acceleration.
-  - Settings for both the direction and magnitude of the thrust force. These models may in turn have additional environmental dependencies.
-
-  Setting up a thrust acceleration is discussed in more detail on the page (TODO) Thrust Guidance.
-
-.. class:: Quasi Impulsive Shot Acceleration
+Quasi Impulsive Shot Acceleration
+#################################
 
   Settings used to define the resulting acceleration of a quasi-impulsive shot, requiring:
 
@@ -328,37 +415,10 @@ Available Acceleration Models
   - Total duration of the quasi-impulsive shots (same value for each of them).
   - Rise time, i.e. time required to reach the peak acceleration (same value for each impulsive shot).
 
-.. class:: Tidal effect on natural satellites
-
-  The direct of tidal effects in a satellite system, applied directly as an acceleration (as opposed to a modification of spherical harmonic coefficients). The model is based on Lainey et al. (2007,2012). It can compute either the acceleration due to tides, and in particular tidal dissipation, on a planetary satellites. The accelertion can compute either the effect of tide raised on the satellite by the planet, or on the planet by the satellite. The satellite is assumed to be tidally locked to the planet.
-
-  .. tabs::
-
-     .. tab:: Python
-
-      .. toggle-header:: 
-         :header: Required **Show/Hide**
-
-      .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/direct_tidal_dissipation.py
-         :language: python
-
-      .. toggle-header:: 
-         :header: Required after **Show/Hide**
-
-     .. tab:: C++
-
-      .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/direct_tidal_dissipation.cpp
-         :language: cpp
-
-  Where the three input variables represent:
-
-  - Value of the k2 Love number (real value) that is used.
-  - Value of the tidal time lag (in seconds) that is used.
-  - Boolean denoting whether the term independent of the time lag is to be computed (default true)
-  - Boolean denoting whether the tide raised on the planet is to be modelled (if true), or the tide raised on the satellite (if false). Default is true.
 
 
-.. class:: Mutual Spherical Harmonic Gravity Acceleration
+Mutual Spherical Harmonic Gravity Acceleration
+##############################################
 
   Settings for a mutual spherical harmonic gravity acceleration. This model is typically only used for detailed propagation of planetary systems. For example of acceleration exerted on “Io” by “Jupiter”:
 
@@ -419,6 +479,37 @@ Available Acceleration Models
            :language: cpp
 
   where Jupiter now takes the role of central body, instead of body exerting the acceleration.
+
+Tidal effect on natural satellites
+##################################
+
+  The direct of tidal effects in a satellite system, applied directly as an acceleration (as opposed to a modification of spherical harmonic coefficients). The model is based on Lainey et al. (2007,2012). It can compute either the acceleration due to tides, and in particular tidal dissipation, on a planetary satellites. The accelertion can compute either the effect of tide raised on the satellite by the planet, or on the planet by the satellite. The satellite is assumed to be tidally locked to the planet.
+
+  .. tabs::
+
+     .. tab:: Python
+
+      .. toggle-header:: 
+         :header: Required **Show/Hide**
+
+      .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/direct_tidal_dissipation.py
+         :language: python
+
+      .. toggle-header:: 
+         :header: Required after **Show/Hide**
+
+     .. tab:: C++
+
+      .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/direct_tidal_dissipation.cpp
+         :language: cpp
+
+  Where the three input variables represent:
+
+  - Value of the k2 Love number (real value) that is used.
+  - Value of the tidal time lag (in seconds) that is used.
+  - Boolean denoting whether the term independent of the time lag is to be computed (default true)
+  - Boolean denoting whether the tide raised on the planet is to be modelled (if true), or the tide raised on the satellite (if false). Default is true.
+
 
 .. _acceleration_types:
 
