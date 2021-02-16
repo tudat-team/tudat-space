@@ -213,6 +213,8 @@ These are available in the ``propagation_setup.ExtrapolationMethodStepSequences`
 
    .. tab:: C++
 
+In addition, the `save_frequency`, `assess_termination_on_minor_steps`, `safety_factor`,   `maximum_factor_increase` and `minimum_factor_increase` inputs may optionally be provided, as fpr the :ref:`simulation_integrator_type_rkf_and_rkdp`, with the difference that the defaults for the last two optional inputs are 10.0 and 0.1, respectively.
+
 .. _simulation_integrator_type_abm:
 
 .. class:: Adams-Bashforth-Moulton
@@ -242,3 +244,5 @@ Bounds on the used order must be given to the Python function initializing the i
 
    .. tab:: C++
 
+
+In addition, the `save_frequency` and `assess_termination_on_minor_steps` inputs may optionally be provided, as fpr the :ref:`simulation_integrator_type_rkf_and_rkdp`.
