@@ -309,14 +309,7 @@ After the dynamics simulator has been called, the dependent variable history can
 
 		propagation_setup.dependent_variable.total_aerodynamic_g_load( "Spacecraft", "Earth" )
 		
-- **Stagnation Point Heat Flux**
 
-	Calculates the heat flux in the vehicle's (**first** body) stagnation point due to the atmosphere of the **second** body.
-
-	.. code-block:: python
-
-		propagation_setup.dependent_variable.local_temperature( "Spacecraft", "Earth" )
-		
 - **Total Mass Rate**
 
 	Returns the *total* rate of change of the body's mass, e.g. due to thrust.
@@ -340,4 +333,69 @@ After the dynamics simulator has been called, the dependent variable history can
 	.. code-block:: python
 
 		propagation_setup.dependent_variable.total_torque_norm( "Spacecraft" )
+
+- **Body mass**
+
+	Returns the current mass of a body.
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.body_mass( "Spacecraft")
+				
+- **Body-fixed Cartesian position**
+
+	Returns the current Cartesian position of a body, expressed in the body-fixed frame of a central body.
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.central_body_fixed_cartesian_position( "Spacecraft", "Earth" )
 		
+
+- **Body-fixed Spherical position**
+
+	Returns the current spherical position of a body, expressed in the body-fixed frame of a central body.
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.central_body_fixed_spherical_position( "Spacecraft", "Earth" )
+		
+- **Airspeed-based velocity**
+
+	Returns the current airspeed-based velocity w.r.t. a central body, expressed in a frame fixed to the central body
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.body_fixed_airspeed_velocity( "Spacecraft", "Earth" )
+		
+- **Groundspeed-based velocity**
+
+	Returns the current groundspeed-based velocity w.r.t. a central body, expressed in a frame fixed to the central body
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.body_fixed_groundspeed_velocity( "Spacecraft", "Earth" )
+		
+- **Periapsis altitude**
+
+	Returns the current periapsis altitude of an orbit, extracted from its current Keplerian state w.r.t. a central body.
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.periapsis_altitude( "Spacecraft", "Earth" )
+
+- **Rotation to body-fixed frame - 313 Euler angles**
+
+	Returns the rotation from inertial to body-fixed coordinates, as 313 Euler angles
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.inertial_to_body_fixed_313_euler_angles( "Spacecraft" )
+		
+- **Rotation from Local-Vertical-Local-Horizontal frame**
+
+	Returns the rotation matrix from the Local-Vertical-Local-Horizontal (LVLH) frame w.r.t. a central body to the inertial frame
+
+	.. code-block:: python
+
+		propagation_setup.dependent_variable.lvlh_to_inertial_rotation_matrix( "Spacecraft", "Earth" )
+				

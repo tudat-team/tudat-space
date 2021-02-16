@@ -225,59 +225,28 @@ Up to this point, we have been concerned with propagating states of bodies only.
 where :math:`\mathbf{x}` is the propagated state, :math:`\mathbf{p}` the vector of a parameter vector (e.g. gravity field parameters, rotation model parameters, etc.), and :math:`t_{0}` denotes the initial time.
 These two matrices are based on linearization of the complex dynamics and can be used to quickly determine the influence of a change in initial state (:math:`\mathbf{x}(t_{0})`) and/or parameters (:math:`\mathbf{p}`) on the state :math:`\mathbf{x}(t)` at time :math:`t`.
 
-.. warning:: Note that linearization comes with a caveat. These matrices only produce accurate results within a 'reasonable' time frame around :math:`t_{0}` and with a 'small' change in parameters/initial state. The words between quotation marks indicate that the user should always determine whether the linearization is valid for the case at hand; no rules can be given as the answer strongly depends on the kind of dynamics and problem parameters.
 
 .. note:: In some literature, the sensitivity matrix is not defined separately, but the state transition matrix :math:`\Phi(t,t_{0})` is defined as :math:`\frac{\partial[\mathbf{x}(t);\text{ }\mathbf{p}]}{\partial[\mathbf{x}(t_{0};\text{ }\mathbf{p}])}`
 
-The propagation of these equations is done similarly as for the dynamics, and is executed by a (derived class of) :class:`VariationalEquationsSolver`.
+===============
+Parameter Setup
+===============
 
-At the moment, the following :class:`VariationalEquationsSolver` options are available or under development in Tudat:
+The propagation of the variational equations is done similarly to that of the dynamics. In addition to the settings described above, settings for the parameters that are considered are to be defined. In terms of the equations above, it needs to be specified for which parameters :math:`\mathbf{x}_{0}` and :math:`\mathbf{p}` the solution for the state transition and sensitivity matrices is to be computed.
 
-- Single-arc (TudatPy + Tudat);
-- Multi-arc (Tudat only);
-- Hybrid (under development).
+The manner in which these parameters are to be defined, and a comprehensive list of all available paramaters, is described
 
-These are implemented in derived classes and are discussed below. Note that these objects of these classes propagate both the variational equations and dynamics (either concurrently or sequentially). 
+.. toctree::
+    :maxdepth: 3
 
-Parameter Architecture
-#######################
-
-The parameter estimation framework of Tudat allows an ever increasing variety of parameters to be estimated, these parameters may be:
-
-* Properties of a body, such as a gravitational parameter :math:`\mu`
-* Properties of a ground station, such as its body-fixed position :math:`\mathbf{x}_{GS}^{(B)}`
-* Global properties of the simulation, such a Parameterize Post_Newtonian (PPN) parameters :math:`\gamma` and :math:`\beta`
-* Acceleration model properties, such as empirical acceleration magnitudes
-* Observation model properties, such as absolute and relative observation biases
-
-In Tudat, these parameters influence the simulation in a variety of manners, and during propagation and/or observation simulation, information of this parameter is transferred in manner different ways. To provide a unified framework for estimating any type of parameter, the :class:`EstimatableParameter` class has been set up. 
-
-.. class:: EstimatableParameter
-
-   This class has interfaces to retrieve and reset parameters, providing a single interface for modifying/obtaining any of the parameters that Tudat supports. For each estimated parameter, there is a dedicated derived class of :class:`EstimatableParameter`. 
-
-.. class:: EstimatableParameterSet
-
-   The full list of estimated parameters is stored in an object of type :class:`EstimatableParameterSet`. This class is templated by the state scalar type of the estimated initial state parameters. 
-
-.. note::
-   For the remainder of this page, we will implicitly assume that the template argument of an :class:`EstimatableParameterSet` object is double, unless explicitly mentioned otherwise.
-
-As is the case for acceleration models, integration models, environment models, *etc.*, the parameter objects are created by calling factory functions in the ``estimation_setup.parameter.*`` namespace. Most parameters need one or more arguments which contain settings for setting up the desired parameter. See :ref:`parameterSettingCreation` for more details on the available parameters in TudatPy.
-Most factory functions return a *single* parameter, such that the list can be constructed using the ``[parameter1, parameter_2]`` syntax in Python. There are, however, a few that return a list of parameters, such as those that create initial state parameters. Adding them to the list using the comma operator would result in a multi-dimensional list, which will raise an error when creating the variational equations simulator object. To prevent this, use the following syntax:
-
-.. code-block:: python
-
-	parameter_settings = [
-			      estimation_setup.parameter.gravitational_parameter("Earth"),
-			      estimation_setup.parameter.constant_drag_coefficient("Delfi-C3"),
-			      estimation_setup.parameter.radiation_pressure_coefficient("Delfi-C3")
-			     ]
-			     + estimation_setup.parameter.initial_states(propagator_settings, bodies)
-	
-         
-In the snippet above, parameters are created to estimate the gravitational parameter of the Earth, the constant drag and the radiation pressure coefficient of Delfi-C3, and the initial states of the propagated bodies.
-
+    sensitivity_analysis/parameter_settings
+    sensitivity_analysis/available_parameters
+    
+=====================================
+Propagating the Variational Equations
+=====================================
+    
+    
 Now that the parameter settings have been created, the variational equations solver can be set up as well. This solver acts as a replacement of the normal dynamics simulator:
 
 .. code-block:: python
@@ -328,8 +297,3 @@ While resetting the full parameter vector is done as:
 When resetting the parameter vector, the change in the values in :math:`\mathbf{q}` immediately take effect. For the initial state parameters to take effect, however, the dynamics must be re-propagated. This occurs automatically when estimating parameters. It can also be performed manually by calling the :literal:`resetParameterEstimate` member function of the :class:`VariationalEquationsSolver` class. 
 
 
-.. toctree::
-  :maxdepth: 1
-
-  sensitivity_analysis/variational_equations_solvers
-  sensitivity_analysis/estimatable_parameters
