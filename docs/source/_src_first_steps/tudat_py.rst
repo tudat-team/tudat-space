@@ -19,10 +19,28 @@ Install Anaconda on your system, see the `Installation`_ guide provided by the A
 
 .. _`Installation`: https://docs.anaconda.com/anaconda/install/
 
-Installing Tudat(Py) 
+.. note::
+
+    **macOS users are advised to use `homebrew`_ **: this is an excellent packet manager, with the added advantage of making it exceedingly easy to install Anaconda:
+
+    .. code:: bash
+
+        brew install anaconda
+
+    ... or `Miniconda`_, a ligher alternative to Anaconda:
+
+    .. code:: bash
+
+        brew install miniconda
+
+.. _`homebrew`: https://brew.sh
+.. _`Miniconda`: https://docs.conda.io/en/latest/miniconda.html
+
+
+Installing Tudat(Py)
 ####################
 
-To install Tudat(Py), we recommend the use of a terminal (command line) interface. On Unix system (Linux and Mac), ``conda`` should be integrated with the terminal, and you can open your terminal directly. On Windows, you can find a program called ``Anaconda Prompt`` in the Windows search. The ``Anaconda Prompt`` is equivalent to the terminal use of ``conda`` on Unix. Some Unix commands are made available in this prompt, although most usage is equivalent to the Windows shell (see below for some useful terminal commands). 
+To install Tudat(Py), we recommend the use of a terminal (command line) interface. On Unix system (Linux and Mac), ``conda`` should be integrated with the terminal, and you can open your terminal directly. On Windows, you can find a program called ``Anaconda Prompt`` in the Windows search. The ``Anaconda Prompt`` is equivalent to the terminal use of ``conda`` on Unix. Some Unix commands are made available in this prompt, although most usage is equivalent to the Windows shell (see below for some useful terminal commands).
 
 Open a terminal. Then, first verify that Conda is Installed via using the following command:
 
@@ -36,13 +54,19 @@ Then, ensure that ``conda`` is updated.
 
     conda update conda
 
-Download this ``environment.yaml`` (:download:`yaml <_static/environment.yaml>`). In your terminal navigate to the directory containing this file, and use the following command (see below for tips on using the command line):
+Download this ``environment.yaml`` (:download:`yaml <_static/environment.yaml>`), or use wget to this for you (downloading it to the current directory):
+
+.. code:: bash
+
+    wget https://tudat-space.readthedocs.io/en/latest/_downloads/2ff196b0ef4830f53d754f6a3972d2e8/environment.yaml
+
+In your terminal navigate to the directory containing this file, and use the following command (see below for tips on using the command line):
 
 .. code:: bash
 
     conda env create -f environment.yaml
 
-Congratulations! You have now installed Tudat and TudatPy, and are ready to get started running your simulations and analyses! 
+Congratulations! You have now installed Tudat and TudatPy, and are ready to get started running your simulations and analyses!
 
 .. note::
 
@@ -69,7 +93,13 @@ Congratulations! You have now installed Tudat and TudatPy, and are ready to get 
 
     .. code:: bash
 
-        conda create --name tudat-space python=3.7
+        conda create --name tudat-space
+
+    In case you need to specify the python version, you can do this with:
+
+    .. code:: bash
+
+        conda create --name tudat-space python=3.9
 
     2. Activate the environment.
 
@@ -83,6 +113,14 @@ Congratulations! You have now installed Tudat and TudatPy, and are ready to get 
 
         conda install tudatpy matplotlib -c tudat-team -c conda-forge -c defaults
 
+    If conda complains there is no tudat-team channel, just add it:
+
+    .. code:: bash
+
+        conda config --add channels tudat-team
+
+    then re-run the command in item 3.
+
     If this alternative fix did not work, please inform us `on tudatpy-feedstock (#2)`_.
 
 .. _`on tudatpy-feedstock (#2)`: https://github.com/tudat-team/tudatpy-feedstock/issues/2
@@ -92,7 +130,7 @@ Congratulations! You have now installed Tudat and TudatPy, and are ready to get 
 .. note::
 
     - If there are any other issues with the installation process, please submit an issue
-    on the `tudatpy-feedstock`_. 
+    on the `tudatpy-feedstock`_.
     - If there are issues running tutorials please submit an issue on the `tudatpy`_ repository.
 
 Setting Up a Development Environment
