@@ -95,11 +95,13 @@ Congratulations! You have now installed Tudat and TudatPy, and are ready to get 
 
         conda create --name tudat-space
 
-    In case you need to specify the python version, you can do this with:
+    In case you need to specify the python version to be used with TudatPy (which is irrespective and independent of the python version you may have installed in your system), you can do this with:
 
     .. code:: bash
 
-        conda create --name tudat-space python=3.9
+        conda create --name tudat-space python=3.8
+
+    Be aware that the tudat-space environment has a certain number of pre-defined python versions that it can work with; you can check which ones in the `conda_build_config.yaml`_ file.
 
     2. Activate the environment.
 
@@ -123,9 +125,12 @@ Congratulations! You have now installed Tudat and TudatPy, and are ready to get 
 
     If this alternative fix did not work, please inform us `on tudatpy-feedstock (#2)`_.
 
+    You can also try the macOS install (:download:`install-osx.sh <_static/install-osx.sh>`) and uninstall (:download:`uninstall-osx.sh <_static/uninstall-osx.sh>`) scripts.
+
 .. _`on tudatpy-feedstock (#2)`: https://github.com/tudat-team/tudatpy-feedstock/issues/2
 .. _`tudatpy-feedstock`: https://github.com/tudat-team/tudatpy-feedstock
 .. _`tudatpy`: https://github.com/tudat-team/tudatpy
+.. _`conda_build_config.yaml`: https://github.com/tudat-team/tudatpy-feedstock/blob/master/recipe/conda_build_config.yaml
 
 .. note::
 
@@ -216,7 +221,7 @@ directly from PyCharm. You can follow this procedure to create a new project and
 
 The project interpreter can be viewed and/or modified at any time, even after the project is created, by
 navigating to ``File`` > ``Settings`` > ``Project`` > ``Python Interpreter`` (Windows/Linux) or ``PyCharm`` >
-``Preferences`` > ``Project`` > ``Python Interpreter`` (MacOS). The figure below shows the interpreter panel on
+``Preferences`` > ``Project`` > ``Python Interpreter`` (macOS). The figure below shows the interpreter panel on
 Windows.
 
 .. figure:: _static/pycharm_interpreter.png
