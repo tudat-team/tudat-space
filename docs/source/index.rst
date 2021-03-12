@@ -53,6 +53,7 @@ Tudat has also been used extensively in research projects, a few of them are lis
 
    _src_intermediate/post_processing
    _src_intermediate/visualisation
+   _src_intermediate/pygmo
 
 .. toctree::
    :maxdepth: 2

@@ -130,7 +130,7 @@ Ephemeris Models
 
 .. class:: Interpolated Spice Ephemeris
 
-   Using this option the state of the body is retrieved from Spice at regular intervals *during* the environment propagation (as opposed to during the propagation). These data are then used to create an interpolator, which is put into the environment, and called during the propagation. This has the advantage of only requiring calls to Spice outside of the propagation inner loop, reducing computation time in many cases (a single call to the interpolator is significantly faster that a single call to Spice). However, it has the downside of begin applicable only during a limited time interval, and requiring the tabulated data to be stored in RAM.
+   Using this option the state of the body is retrieved from Spice at regular intervals *during* the environment propagation (as opposed to during the propagation). These data are then used to create an interpolator, which is put into the environment, and called during the propagation. This has the advantage of only requiring calls to Spice outside of the propagation inner loop, reducing computation time in many cases (a single call to the interpolator is significantly faster that a single call to Spice). However, it has the downside of being applicable only during a limited time interval, and requiring the tabulated data to be stored in RAM.
 
     .. tabs::
 
