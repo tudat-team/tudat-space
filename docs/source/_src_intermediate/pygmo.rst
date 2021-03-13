@@ -1,5 +1,5 @@
 *********************************
-Optimizating a problem with PyGMO
+Optimization with PyGMO
 *********************************
 
 The following sections will provide some information on how to
