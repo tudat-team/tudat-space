@@ -7,6 +7,7 @@ for i in range(number_of_evolutions):
 print('Fitness (= function) value: ', pop.champion_f)
 # Print its decision variable vector
 print('Decision variable vector: ', pop.champion_x)
+
 ### OUTPUT ###
 # Fitness (= function) value:  [1.29214202e-11]
 # Decision variable vector:  [2.99999936 2.00000024]
