@@ -139,7 +139,7 @@ a seed can be passed as an optional input argument to ensure reproducibility.
 ------------------------
 
 To actually solve the problem, it is necessary to *evolve* the population.
-This can be done by calling the ``evolve`` method of the ``pygmo.algorithm`` object. We do so 100 times
+This can be done by calling the ``evolve()`` method of the ``pygmo.algorithm`` object. We do so 100 times
 in a recursive manner. With this particular seed, the Differential Evolution
 algorithm finds the first solution: it works!
 
