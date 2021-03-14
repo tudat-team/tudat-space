@@ -83,6 +83,7 @@ The original code, which is broken down into parts for the sake of clarity, is a
 First, we create a Python class to describe the problem. This class will be fed later
 to PyGMO, therefore it must be compatible. To be PyGMO-compatible, a UDP class must
 have two methods:
+
 - ``fitness(np.array)``: it takes a vector of size :math:`n` as input and returns a list with :math:`p` values
   as output. :math:`n` and :math:`p` are respectively the dimension of the problem (in our case, :math:`n = 2`)
   and the number of objectives (in our case, :math:`p = 1` because it is a single-objective optimization).
