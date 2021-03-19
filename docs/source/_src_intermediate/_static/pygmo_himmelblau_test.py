@@ -20,6 +20,11 @@ PyGMO is the Python counterpart of PAGMO: https://esa.github.io/pagmo2/index.htm
 # Import statements
 import math
 import pygmo
+import matplotlib
+from matplotlib import pyplot as plt
+from matplotlib import ticker as mtick
+import numpy as np
+from numpy import random
 
 """
 Here, a Pygmo-compatible problem class is defined. This is usually known in Pygmo terminology as
@@ -40,6 +45,9 @@ See also: https://esa.github.io/pygmo2/tutorials/coding_udp_simple.html
 ##########################################################
 # CREATE USER-DEFINED PROBLEM (UDP) ######################
 ##########################################################
+
+def himmelblau_function(x: list) -> float:
+    return math.pow(x[0] * x[0] + x[1] - 11.0, 2.0) + math.pow(x[0] + x[1] * x[1] - 7.0, 2.0)
 
 class HimmelblauOptimization:
     """
@@ -123,7 +131,7 @@ class HimmelblauOptimization:
             List of size p with the values for each objective (for this single-objective optimization problem, p=1).
         """
         # Compute Himmelblau function value
-        function_value = math.pow(x[0] * x[0] + x[1] - 11.0, 2.0) + math.pow(x[0] + x[1] * x[1] - 7.0, 2.0)
+        function_value = himmelblau_function(x)
         # Return list
         return [function_value]
 
@@ -198,16 +206,170 @@ def main():
 
     # Set number of evolutions
     number_of_evolutions = 100
+    # Initialize empty containers
+    individuals_list = []
+    fitness_list = []
     # Evolve population multiple times
     for i in range(number_of_evolutions):
         pop = algo.evolve(pop)
+        individuals_list.append(pop.get_x()[pop.best_idx()])
+        fitness_list.append(pop.get_f()[pop.best_idx()])
+
     # At the end of the evolution(s), we extract the best individual
     print('\n########### PRINTING CHAMPION INDIVIDUALS ###########\n')
     # Print its fitness value
     print('Fitness (= function) value: ', pop.champion_f)
     # Print its decision variable vector
     print('Decision variable vector: ', pop.champion_x)
+    # Print the number of function evaluations (calls to the fitness function)
+    print('Number of function evaluations: ', pop.problem.get_fevals())
+    # Print the difference wrt to the minimum location
+    print('Difference wrt the minimum: ', pop.champion_x - np.array([3,2]))
+
+    ##########################################################
+    # VISUALIZE OPTIMIZATION #################################
+    ##########################################################
+
+    # Set font size for plots
+    font = {'size': 18}
+    matplotlib.rc('font', **font)
+    # Extract best individuals for each generation
+    best_x = [ind[0] for ind in individuals_list]
+    best_y = [ind[1] for ind in individuals_list]
+    # Extract problem bounds
+    (x_min, y_min), (x_max, y_max) = udp.get_bounds()
+
+    # Plot fitness over generations
+    fig, ax = plt.subplots(figsize=(16, 4))
+    ax.plot(np.arange(0, number_of_evolutions), fitness_list, label='Function value')
+    # Plot champion
+    champion_n = np.argmin(np.array(fitness_list))
+    ax.scatter(champion_n, np.min(fitness_list), marker='x', color='r', label='All-time champion')
+    # Prettify
+    ax.set_xlim((0, number_of_evolutions))
+    ax.grid('major')
+    ax.set_title('Best individual of each generation', fontweight='bold')
+    ax.set_xlabel('Number of generation')
+    ax.set_ylabel(r'Himmelblau function value $f(x,y)$')
+    ax.legend(loc='upper right')
+    plt.savefig('fitness_himmelblau.png', bbox_inches='tight')
+
+    # Plot Himmelblau function
+    grid_points = 100
+    x_vector = np.linspace(x_min, x_max, grid_points)
+    y_vector = np.linspace(y_min, y_max, grid_points)
+    x_grid, y_grid = np.meshgrid(x_vector, y_vector)
+    z_grid = np.zeros((grid_points, grid_points))
+    for i in range(x_grid.shape[1]):
+        for j in range(x_grid.shape[0]):
+            z_grid[i, j] = himmelblau_function([x_grid[i, j], y_grid[i, j]])
+    # Create figure
+    fig, ax = plt.subplots(figsize=(16, 10))
+    cs = ax.contour(x_grid, y_grid, z_grid, 50)
+    # Plot best individuals of each generation
+    ax.scatter(best_x, best_y, marker='x', color='r')
+    # Prettify
+    ax.set_xlim((x_min, x_max))
+    ax.set_ylim((y_min, y_max))
+    ax.set_title('Himmelblau function', fontweight='bold')
+    ax.set_xlabel('X-coordinate')
+    ax.set_ylabel('Y-coordinate')
+    cbar = fig.colorbar(cs)
+    cbar.ax.set_ylabel(r'Himmelblau function value $f(x,y)$')
+    plt.savefig('contour_himmelblau.png', bbox_inches='tight')
+
+    # Visualize only one minimum
+    eps = 1E-3
+    x_min, x_max = (3 - eps, 3 + eps)
+    y_min, y_max = (2 - eps, 2 + eps)
+    grid_points = 100
+    x_vector = np.linspace(x_min, x_max, grid_points)
+    y_vector = np.linspace(y_min, y_max, grid_points)
+    x_grid, y_grid = np.meshgrid(x_vector, y_vector)
+    z_grid = np.zeros((grid_points, grid_points))
+    for i in range(x_grid.shape[1]):
+        for j in range(x_grid.shape[0]):
+            z_grid[i, j] = himmelblau_function([x_grid[i, j], y_grid[i, j]])
+    fig, ax = plt.subplots(figsize=(16, 10))
+    cs = ax.contour(x_grid, y_grid, z_grid, 50)
+    # Plot best individuals of each generation
+    ax.scatter(best_x, best_y, marker='x', color='r', label='Best individual of each generation')
+    ax.scatter(pop.champion_x[0], pop.champion_x[1], marker='x', color='k', label='Champion')
+    # Prettify
+    ax.xaxis.set_major_formatter(mtick.FormatStrFormatter('%1.5f'))
+    ax.yaxis.set_major_formatter(mtick.FormatStrFormatter('%1.5f'))
+    plt.xticks(rotation=45)
+    ax.set_xlim((x_min, x_max))
+    ax.set_ylim((y_min, y_max))
+    ax.set_title('Vicinity of (3,2)', fontweight='bold')
+    ax.set_xlabel('X-coordinate')
+    ax.set_ylabel('Y-coordinate')
+    cbar = fig.colorbar(cs)
+    cbar.ax.set_ylabel(r'Himmelblau function value $f(x,y)$')
+    ax.legend(loc='lower right')
+    ax.grid('major')
+    plt.savefig('one_minimum_himmelblau.png', bbox_inches='tight')
+
+
+    ##########################################################
+    # GRID SEARCH ############################################
+    ##########################################################
+
+    # Set number of points
+    number_of_nodes = 1000
+    # Extract problem bounds
+    (x_min, y_min), (x_max, y_max) = udp.get_bounds()
+    x_vector = np.linspace(x_min, x_max, number_of_nodes)
+    y_vector = np.linspace(y_min, y_max, number_of_nodes)
+    x_grid, y_grid = np.meshgrid(x_vector, y_vector)
+    z_grid = np.zeros((number_of_nodes, number_of_nodes))
+    for i in range(x_grid.shape[1]):
+        for j in range(x_grid.shape[0]):
+            z_grid[i, j] = himmelblau_function([x_grid[i, j], y_grid[i, j]])
+    best_f = np.min(z_grid)
+    best_ind = np.argmin(z_grid)
+    best_x = (x_grid.flatten()[best_ind], y_grid.flatten()[best_ind])
+    print('\n########### RESULTS OF GRID SEARCH (' + str(number_of_nodes) + ' nodes per variable) ########### ')
+    print('Best fitness with grid search (' + str(number_of_nodes) + ' points):', best_f)
+    print('Decision variable vector: ', best_x)
+    print('Number of function evaluations: ', number_of_nodes**2)
+    print('Difference wrt the minimum: ', best_x - np.array([3, 2]))
+    del number_of_nodes
+
+    ##########################################################
+    # MONTE-CARLO SEARCH #####################################
+    ##########################################################
+
+    # Fix seed (for reproducibility)
+    random.seed(current_seed)
+    # Size of random number vector
+    number_of_points = 1000
+    x_vector = random.random(number_of_points)
+    x_vector *= (x_max - x_min)
+    x_vector += x_min
+    y_vector = random.random(number_of_points)
+    y_vector *= (y_max - y_min)
+    y_vector += y_min
+    x_grid, y_grid = np.meshgrid(x_vector, y_vector)
+    z_grid = np.zeros((number_of_points, number_of_points))
+    for i in range(x_grid.shape[1]):
+        for j in range(x_grid.shape[0]):
+            z_grid[i, j] = himmelblau_function([x_grid[i, j], y_grid[i, j]])
+    best_f = np.min(z_grid)
+    best_ind = np.argmin(z_grid)
+    best_x = (x_grid.flatten()[best_ind], y_grid.flatten()[best_ind])
+    print('\n########### RESULTS OF MONTE-CARLO SEARCH (' + str(number_of_points) + ' points per variable) ' +
+                                                                                    '########### ')
+    print('Best fitness with grid search (' + str(number_of_points) + ' points):', best_f)
+    print('Decision variable vector: ', best_x)
+    print('Number of function evaluations: ', number_of_points**2)
+    print('Difference wrt the minimum: ', best_x - np.array([3, 2]))
+    del number_of_points
+
+    # Show plot
+    plt.show()
 
 
 if __name__ == "__main__":
     main()
+
