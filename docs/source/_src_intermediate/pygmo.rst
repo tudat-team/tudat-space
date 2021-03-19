@@ -130,7 +130,7 @@ As a final preliminary step, a population of individuals must be initialized wit
 decision vector which can change (evolution), the resulting fitness vector, and an unique ID to allow their tracking.
 The population is initialized starting from a specific problem to ensure that all individuals are
 compatible with the UDP. The default population size is 0; in this example, we use 1000 individuals.
-Similarly to what was done for the algorithm, since the populationinitialization is random,
+Similarly to what was done for the algorithm, since the population initialization is random,
 a seed can be passed as an optional input argument to ensure reproducibility.
 
 .. literalinclude:: ./_static/pygmo_population.py
@@ -141,11 +141,56 @@ a seed can be passed as an optional input argument to ensure reproducibility.
 
 To actually solve the problem, it is necessary to *evolve* the population.
 This can be done by calling the ``evolve()`` method of the ``pygmo.algorithm`` object. We do so 100 times
-in a recursive manner. With this particular seed, the Differential Evolution
-algorithm finds the first solution: it works!
+in a recursive manner. At each evolution stage, it is possible to retrieve the full population through the ``get_x()``
+method and, analogously, the related fitness values with ``get_f()``. If we are only interested in the best individual
+of each evolution stage, we can find its index through the ``pop.best_idx()`` method. On the contrary, the ``champion_x``
+(and the related ``champion_f``) attributes retrieves the decision variable vector and its fitness value. Note that the
+*champion* is the best individual across all evolutionary stages (not necessarily the best individual found at the last
+evolution).
 
 .. literalinclude:: ./_static/pygmo_evolution.py
              :language: python
 
+6. Visualization of the results
+-------------------------------
 
-.. [Biscani2020] Biscani et al., (2020). A parallel global multiobjective framework for optimization: pagmo. Journal of Open Source Software, 5(53), 2338, https://doi.org/10.21105/joss.02338.
+In the following figure, a contour plot of the Himmelblau's function is reported, where the red X represent the best
+individuals of each generation. As it can be seen, the algorithm manages to locate all four identical minima.
+
+.. figure:: _static/contour_himmelblau.png
+
+In the plot below, instead, we can see how the fitness of the best individual improves while the population is evolved.
+It can be seen, as anticipated before, that the champion is found a few generations before the last one.
+
+.. figure:: _static/fitness_himmelblau.png
+
+The figure below illustrates indicatively the performance of the algorithm in the vicinity of one of the four minima.
+
+.. figure:: _static/one_minimum_himmelblau.png
+
+7. Performance of the algorithm
+-------------------------------
+
+Since this is supposed to be an introductory example, a performance analysis of the algorithm is not presented here.
+However, it is interesting to provide a quick comparison between the optimization conducted with PyGMO's DE algorithm
+two other simple analytical methods, namely a grid search and a Monte-Carlo search (both of them were run with 1000
+points per variable). In the table below, referred to the minimum located at (3,2), the results are summarized in terms
+of accuracy and computational expenses.
+As it can be noticed, the DE algorithm reaches a fitness level several orders of magnitude below the other two methods,
+despite using only 10% of the computational resources.
+
+.. tabularcolumns:: |l|c|c|c|
++-----------------------------------------------+------------------------------+-----------------------------------------------------+----------------------------+
+| **Optimization method**                       | **Fitness value**            | **Decision variable difference wrt (3,2)**          | **Function evaluations**   |
++-----------------------------------------------+------------------------------+-----------------------------------------------------+----------------------------+
+| PyGMO's DE (100 gens, 1000 individuals)       | :math:`1.292 \cdot 10^{-11}` | :math:`(-6.365 \cdot 10^{-7}, +2.382 \cdot 10^{-7})`| :math:`1.01 \cdot 10^{5}`  |
++-----------------------------------------------+------------------------------+-----------------------------------------------------+----------------------------+
+| Grid search (1000 points per variable)        | :math:`4.215 \cdot 10^{-4}`  | :math:`(-2.002 \cdot 10^{-3}, -3.003 \cdot 10^{-3})`| :math:`1.00 \cdot 10^{6}`  |
++-----------------------------------------------+------------------------------+-----------------------------------------------------+----------------------------+
+| Monte-Carlo search (1000 points per variable) | :math:`7.095 \cdot 10^{-4}`  | :math:`(+4.595 \cdot 10^{-3}, -9.645 \cdot 10^{-4})`| :math:`1.00 \cdot 10^{6}`  |
++-----------------------------------------------+------------------------------+-----------------------------------------------------+----------------------------+
+
+
+
+.. [Biscani2020] Biscani et al., (2020). A parallel global multiobjective framework for optimization: pagmo.
+   Journal of Open Source Software, 5(53), 2338, https://doi.org/10.21105/joss.02338.
