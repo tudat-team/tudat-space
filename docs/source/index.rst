@@ -53,17 +53,24 @@ Tudat has also been used extensively in research projects, a few of them are lis
 
    _src_intermediate/post_processing
    _src_intermediate/visualisation
-   _src_intermediate/pygmo
 
 .. toctree::
    :maxdepth: 2
-   :caption: API
+   :caption: User Guide
    :hidden:
 
    _src_api/simulation
    _src_api/astrodynamics
    _src_api/mathematics
    _src_api/interface
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Examples
+   :hidden:
+
+   _src_intermediate/pygmo_basics
+   _src_intermediate/pygmo_orbit_optimization
 
 .. toctree::
    :maxdepth: 2
