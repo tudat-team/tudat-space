@@ -1,3 +1,5 @@
+.. _`pygmo_basics`:
+
 *********************************
 Optimization with PyGMO
 *********************************
@@ -90,7 +92,11 @@ have two methods:
 
 - ``get_bounds()``: it takes no input and returns a tuple of two :math:`n`-dimensional lists, defining respectively the
   lower and upper boundaries of each variable. The dimension of the problem (i.e. the value of :math:`n`) is
-  automatically inferred by the return type of the this function;
+  automatically inferred by the return type of the this function.
+
+More information about the definition of an UDP class is available
+`here <https://esa.github.io/pygmo2/tutorials/coding_udp_simple.html>`_.
+
 
 .. literalinclude:: ./_static/himmelblau_udp.py
              :language: python
@@ -102,7 +108,8 @@ Once the UDP class is created, we must create a PyGMO problem object by passing
 an instantiation of our class to ``pygmo.problem``. Note that an instantiation of the UDP class
 must be passed as input to pygmo.problem() and NOT the class itself. It is also possible to use a PyGMO UDP, i.e.
 a problem that is already defined in PyGMO, but it will not be shown in this tutorial. In this example,
-we will use only one generation.
+we will use only one generation. More information about the PyGMO problem class is available
+`here <https://esa.github.io/pygmo2/tutorials/using_problem.html>`_.
 
 .. literalinclude:: ./_static/pygmo_problem.py
              :language: python
@@ -114,7 +121,10 @@ Now we must choose a specific optimization algorithm to be passed to ``pygmo.alg
 the Differential Evolution algorithm (DE). Many different algorithms are available
 through PyGMO, including heuristic methods and local optimizers. It is also possible to create a User-Defined Algorithm
 (UDA), but in this tutorial we will use an algorithm readily available in PyGMO. Since the algorithm internally uses a
-random number generator, a seed can be passed as an optional input argument to ensure reproducibility.
+random number generator, a seed can be passed as an optional input argument to ensure reproducibility. More information
+about the available algorithms and the PyGMO algorithm class is available respectively
+`here <https://esa.github.io/pygmo2/overview.html#list-of-algorithms>`_ and
+`here <https://esa.github.io/pygmo2/tutorials/using_algorithm.html>`_.
 
 .. note::
     During the actual optimization process, fixing the seed is probably what you do **not** want to do.
@@ -131,7 +141,9 @@ decision vector which can change (evolution), the resulting fitness vector, and 
 The population is initialized starting from a specific problem to ensure that all individuals are
 compatible with the UDP. The default population size is 0; in this example, we use 1000 individuals.
 Similarly to what was done for the algorithm, since the population initialization is random,
-a seed can be passed as an optional input argument to ensure reproducibility.
+a seed can be passed as an optional input argument to ensure reproducibility. More information
+about the PyGMO population class is available
+`here <https://esa.github.io/pygmo2/tutorials/using_population.html>`_.
 
 .. literalinclude:: ./_static/pygmo_population.py
              :language: python
@@ -146,7 +158,8 @@ method and, analogously, the related fitness values with ``get_f()``. If we are 
 of each evolution stage, we can find its index through the ``pop.best_idx()`` method. On the contrary, the ``champion_x``
 (and the related ``champion_f``) attributes retrieves the decision variable vector and its fitness value. Note that the
 *champion* is the best individual across all evolutionary stages (not necessarily the best individual found at the last
-evolution).
+evolution). More information about evolving a PyGMO population is available
+`here <https://esa.github.io/pygmo2/tutorials/evolving_a_population.html>`_.
 
 .. literalinclude:: ./_static/pygmo_evolution.py
              :language: python
@@ -189,90 +202,6 @@ despite using only 10% of the computational resources.
 +-----------------------------------------------+------------------------------+-----------------------------------------------------+----------------------------+
 | Monte-Carlo search (1000 points per variable) | :math:`7.095 \cdot 10^{-4}`  | :math:`(+4.595 \cdot 10^{-3}, -9.645 \cdot 10^{-4})`| :math:`1.00 \cdot 10^{6}`  |
 +-----------------------------------------------+------------------------------+-----------------------------------------------------+----------------------------+
-
-A more advanced example
-##########################
-
-In this example it will be shown how to use PyGMO functionalities in the context of an astrodynamics problem.
-We will treat here the problem of the design of a mission around an asteroid, named `Itokawa`_.
-
-.. _`Itokawa`: https://en.wikipedia.org/wiki/25143_Itokawa
-
-Problem formulation
--------------------
-
-Let's suppose that the mission objectives include the characterization of the asteroid's surface, which generates a
-conflict between coverage and resolution. Therefore, the problem falls in the category of multi-objective optimization
-and we will expect to generate a Pareto front of optimal solutions. The two **objectives** and their mathematical
-formulation are:
-
-1. the spacecraft must be able to observe most of the asteroid's surface (or maximize the mean value of the absolute
-   longitude with respect to Itokawa over the full propagation;
-2. the spacecraft must be close to the asteroid (or minimize the mean value of the distance from the asteroid's center
-   of mass over the full propagation).
-
-Our goal is to define an initial orbit that allows us to reach those objectives.
-Therefore, the **design variables** selected are the initial values of:
-
-1. the semi-major axis;
-2. the eccentricity;
-3. the inclination;
-4. the longitude of the node.
-
-At the same time, we must make sure that the spacecraft does not crash on nor escape Itokawa. These are not included in
-the simulation as actual constraints; on the contrary, boundary values are placed on the distance :math:`d` from Itokawa's COM
-(:math:`R_I + 150m < d < R_I + 5000m`, where :math:`R_I` is Itokawa's mean radius). If those are
-violated, the propagation ends prematurely and, in that case, the value of the fitness is greatly exaggerated so that
-the optimizer is inclined to discard those solutions.
-
-Simulation settings
--------------------
-
-Here, the main simulation settings are summarized:
-
-- *nominal mission duration:* 5 days
-- *dynamical model:* Itokawa's Spherical Harmonic gravity up to degree 4 and degree 4, point mass gravity of the Sun,
-  Jupiter, Saturn, the Earth, Mars and solar radiation pressure
-- *integrator settings:* variable step-size Runge-Kutta-Fehlberg 7(8) with relative and absolute tolerances set to
-  :math:`10^{-8}`
-- *propagator settings:* Cowell propagator
-
-Optimization settings
----------------------
-
-For this example, we use a Non-dominating Sorting Genetic Algorithm, or NSGA-II, available in the PyGMO library
-(documentation available `here`_). We use a population of 48 individuals and we evolve the population 50 times.
-
-.. _`here`: https://esa.github.io/pygmo2/algorithms.html#pygmo.nsga2
-
-
-User-Defined Problem class
---------------------------
-
-Below, we report the code for the problem class, which shows some necessary steps that have to be taken in order to
-successfully integrate PyGMO with tudatpy (or vice-versa, depending on the point of view).
-In addition to the ``fitness()`` and ``get_bounds()`` methods, there is also a ``get_nobj()``, which returns the number of
-objectives and it is mandatory to have for multi-objective optimization problems. Furthermore, while the ``get_bounds()``
-method does not present many differences with respect to the simpler Himmelblau example, the fitness method is slighyly
-more complicated. Indeed, the orbit parameters are passed as the only input. These are used to create a new initial
-orbit. The actual call to the dynamics simulator is also performed *inside* the ``fitness`` method, together with the
-computation of the objectives, whose values are eventually returned. On the other hand, the
-``get_last_run_dynamics_simulator()`` is used to retrieve the state and dependent variable history from outside the
-optimization loop.
-
-.. note::
-    As you may have noticed, the input arguments to the class constructor ``__init__()`` are not stored directly as
-    attributes, but they are saved through lambda functions. This is done to ensure compatibility with PyGMO, since
-    tudatpy objects are not yet designed to be "picklable". `Pickle`_ is a Python package that provides serialization
-    and deserialization capabilities; it is internally used by PyGMO to deal with the User-Defined Problem class. It is
-    important to use lambda functions to ensure that the UDP is picklable.
-
-    .. _`Pickle`: https://docs.python.org/3/library/pickle.html#what-can-be-pickled-and-unpickled
-
-.. literalinclude:: ./_static/itokawa_udp.py
-             :language: python
-
-
 
 .. [Biscani2020] Biscani et al., (2020). A parallel global multiobjective framework for optimization: pagmo.
    Journal of Open Source Software, 5(53), 2338, https://doi.org/10.21105/joss.02338.
