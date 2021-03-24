@@ -1,4 +1,4 @@
-name: environment
+name: tudat-space-docs
 channels:
   - conda-forge
 dependencies:
@@ -7,8 +7,12 @@ dependencies:
   - sphinx_rtd_theme
   - sphinx-tabs
   - sphinx-copybutton
+  - xorg-libxrender
+  - xorg-libxpm
+  - python-graphviz
   - pip
   - pip:
     - rtcat_sphinx_theme
     - sphinxcontrib-contentui
-
+    - sphinxemoji
+    - btd.sphinx.graphviz

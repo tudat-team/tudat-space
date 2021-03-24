@@ -43,7 +43,9 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx_rtd_theme',
               'sphinx_tabs.tabs',
               'sphinx_copybutton',
-              'sphinxcontrib.contentui'
+              'sphinx.ext.graphviz', # for vector graphs
+              'sphinxcontrib.contentui',
+              'sphinxemoji.sphinxemoji'
               ]
 
 sphinx_tabs_valid_builders = ['linkcheck']
