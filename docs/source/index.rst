@@ -56,7 +56,7 @@ Tudat has also been used extensively in research projects, a few of them are lis
 
 .. toctree::
    :maxdepth: 2
-   :caption: User Guide
+   :caption: API
    :hidden:
 
    _src_api/simulation
@@ -69,8 +69,7 @@ Tudat has also been used extensively in research projects, a few of them are lis
    :caption: Examples
    :hidden:
 
-   _src_examples/pygmo_basics
-   _src_examples/pygmo_orbit_optimization
+   _src_examples/examples
 
 .. toctree::
    :maxdepth: 2
