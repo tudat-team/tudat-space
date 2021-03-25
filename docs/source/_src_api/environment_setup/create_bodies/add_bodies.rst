@@ -23,7 +23,7 @@ After creating a set of bodies (see :ref:`creating_celestial_bodies`), any numbe
 
          .. tab:: C++
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_setup.cpp
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
              :language: cpp
 
 which creates a new body, with no properties. Properties can then be added to this body one-by-one. For an artificial body, typical properties are a mass, aerodynamic coefficients, and radiation pressure properties. 
@@ -46,7 +46,7 @@ which creates a new body, with no properties. Properties can then be added to th
 
          .. tab:: C++
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_setup.cpp
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
              :language: cpp
 
 In this example, the settings for the aerodynamic coefficients and radiation pressure are defined as the most simple models available (constant drag-only aerodynamic coefficients, and cannonball radiation pressure). A comprehensive list of settings for both types of models can be found here :ref:`available_environment_models`.

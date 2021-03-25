@@ -24,7 +24,7 @@ To define multi-type propagator settings, you must first define the propagaor se
 
          .. tab:: C++
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_setup.cpp
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
              :language: cpp
 
 This example shows the use of the translational, rotational and mass dynamics of a single body ``Vehicle``. However, the framework is not limited to propagating the differnet types of dynamics for only one body. You may for instance propagate the translational state and mass of a spacecraft concurrently with the rotational state of the Earth. Also, you may propagate any number of any type of dynamics of any body, e.g. translational dynamics of 6 bodies, rotational dynamics of 4 bodies and mass of 2 bodies, where these three sets of bodies may but need not fully or partially overlap)

@@ -179,7 +179,7 @@ In its simplest form, the ``DynamicsSimulator`` is used as shown in this example
 
      .. tab:: C++
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_setup.cpp
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
              :language: cpp
              
 First, a ``SingleArcDynamicsSimulator`` is created using the system of bodies, integrator settings, and propagator settings objects. Tudat will then automatically read and setup the simulation accordingly. The ``True`` at the end of the line indicates that the equations of motion should be integrated immediately after creating the object, such that the state history can be retrieved afterwards. The latter is done in the next line when extracting the ``states``. The simulator will return a dictionary (Python) or map (C++) containing the state of the vehicle at each epoch, which can be exported or used for subsequent analysis. 
@@ -202,7 +202,7 @@ If the user chose to also export dependent variables, they can be extracted from
 
      .. tab:: C++
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_setup.cpp
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
              :language: cpp
              
              

@@ -25,7 +25,7 @@ A user defines these settings for each acceleration in their simulation. These s
 
          .. tab:: C++
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_setup.cpp
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
              :language: cpp
 
 where a spherical harmonic (degree and order 5) gravitational acceleration, and aerodynamic acceleration, of the Earth are defined, as well as a point-mass gravity of Sun and Moon. The variable ``accelerations_settings_vehicle`` denotes the list of bodies exerting accelerations, and the types of accelerations, and the variable ``acceleration_settings`` associates this list with the body undergoing the acceleration. The function ``create_acceleration_models`` creates the list of models that compute the accelerations during the propagation.
@@ -44,7 +44,7 @@ When propagating multiple bodies (see :ref:`multi_body_propagation`), the same l
 
          .. tab:: C++
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_setup.cpp
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
              :language: cpp
 
 Or separate acceleration settings may be defined for separate bodies, and then combined into a ``acceleration_settings`` variable. Below, an example for such a case is given when propagating the Earth and Moon: 
@@ -61,7 +61,7 @@ Or separate acceleration settings may be defined for separate bodies, and then c
 
          .. tab:: C++
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_setup.cpp
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
              :language: cpp
 
 

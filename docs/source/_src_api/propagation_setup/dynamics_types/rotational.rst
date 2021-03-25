@@ -29,7 +29,7 @@ Defining settings for the rotational dynamics is done by:
 
          .. tab:: C++
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_setup.cpp
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
              :language: cpp
 
 

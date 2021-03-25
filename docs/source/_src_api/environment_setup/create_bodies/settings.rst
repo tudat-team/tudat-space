@@ -22,7 +22,7 @@ Creating a set of celestial bodies is done by creating a list of settings for al
 
          .. tab:: C++
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_setup.cpp
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
              :language: cpp
 
 where the ``global_frame_origin`` and ``global_frame_orientation`` define the reference frame in which state vectors stored in the environment `during` propagation are represented. In general, it is recommended to choose this as the most 'intuitive' frame origin for your propagation (e.g. SSB or Sun for solar system scale propagations, Earth for an Earth orbiter, Mars for a Martian mission, etc.). This frame definition is *distinct* from the center of propagation that you can define in your :ref:`simulation_propagator_setup`. 
@@ -51,7 +51,7 @@ Default settings may be overridden as follows:
 
          .. tab:: C++
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_setup.cpp
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
              :language: cpp
 
 Where the above example overrides the default setting for the Sun's gravity field, and sets a point-mass gravity field with a gravitational parameter of 1.32712440042E20 m^3/s^2. A comprehensive list of *all* environment models, and how their settings can be defined and overridden as above, is given in this :ref:`available_environment_models`.
@@ -75,7 +75,7 @@ Once all settings for the bodies are defined as desired, the bodies are created 
 
          .. tab:: C++
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_setup.cpp
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
              :language: cpp
 
 This ``bodies`` in the above simulation are the heart of many Tudat simulations: they contain all properties of your celestial and manmade bodies, and are used to retieve properties of your accelerations, state derivative models, output variables, etc. 

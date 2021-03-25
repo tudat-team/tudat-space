@@ -245,7 +245,8 @@ Ephemeris Models
          .. tab:: C++
 
           .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/constant_ephemeris.cpp
-             :language: cpp
+              :language: cpp
+   
    with ``constant_cartesian_state`` being the constant Cartesian state of the body (as a numpy array, size 6)
 
 .. class:: Tabulated Ephemeris
