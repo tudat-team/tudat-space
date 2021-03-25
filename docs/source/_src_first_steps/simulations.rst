@@ -7,4 +7,4 @@ Getting Started with Simulations
     :maxdepth: 1
     
     simulations/example_application_2
-    simulations/example_application_10
+    simulations/new_example_app_10
