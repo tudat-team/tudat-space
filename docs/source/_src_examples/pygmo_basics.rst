@@ -105,7 +105,7 @@ More information about the definition of an UDP class is available
 ------------------------------
 
 Once the UDP class is created, we must create a PyGMO problem object by passing
-an instantiation of our class to ``pygmo.problem``. Note that an instantiation of the UDP class
+an instance of our class to ``pygmo.problem``. Note that an instance of the UDP class
 must be passed as input to pygmo.problem() and NOT the class itself. It is also possible to use a PyGMO UDP, i.e.
 a problem that is already defined in PyGMO, but it will not be shown in this tutorial. In this example,
 we will use only one generation. More information about the PyGMO problem class is available
