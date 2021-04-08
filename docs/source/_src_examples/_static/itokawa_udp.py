@@ -8,6 +8,13 @@ from tudatpy.kernel.astro import conversion
 class AsteroidOrbitProblem:
     """
     This class creates a PyGMO-compatible User Defined Problem (UDP).
+
+    Attributes
+    ----------
+
+
+    Methods
+    -------
     """
 
     def __init__(self,
@@ -20,9 +27,19 @@ class AsteroidOrbitProblem:
                  design_variable_upper_boundaries: Tuple[float]):
         """
         Constructor for the AsteroidOrbitProblem class.
+
+        Parameters
+        ----------
+        bodies : tudatpy.kernel.simulation.environment_setup.SystemOfBodies:
+            System of bodies.
+        integrator_settings :
+            Integrator settings object.
+        propagator_settings :
+            Propagator settings object.
         """
         # Sets input arguments as lambda function attributes
         # NOTE: this is done so that the class is "pickable", i.e., can be serialized by pygmo
+        # TODO Dominic: add here, if needed
         self.bodies_function = lambda: bodies
         self.integrator_settings_function = lambda: integrator_settings
         self.propagator_settings_function = lambda: propagator_settings
@@ -37,7 +54,17 @@ class AsteroidOrbitProblem:
 
     def get_bounds(self) -> Tuple[List[float], List[float]]:
         """
-        Defines the search space.
+        Returns the search space.
+
+        Parameters
+        ----------
+        none
+
+        Returns
+        -------
+        Tuple[List[float], List[float]]
+            Two lists of size n (for this problem, n=4), containing respectively the lower and upper
+            boundaries of each variable.
         """
         return (list(self.design_variable_lower_boundaries), list(self.design_variable_upper_boundaries))
 
@@ -51,6 +78,16 @@ class AsteroidOrbitProblem:
                 orbit_parameters: List[float]) -> List[float]:
         """
         Computes the fitness value for the problem.
+
+        Parameters
+        ----------
+        orbit_parameters : List[float]
+            Vector of decision variables of size n (for this problem, n = 4).
+
+        Returns
+        -------
+        List[float]
+            List of size p with the values for each objective (for this multi-objective optimization problem, p=2).
         """
         # Retrieves system of bodies
         current_bodies = self.bodies_function()
@@ -91,10 +128,12 @@ class AsteroidOrbitProblem:
         mean_latitude = np.mean(np.absolute(latitudes))
         # Computes fitness as mean latitude
         current_fitness = 1.0 / mean_latitude
+
         # Exaggerate fitness value if the spacecraft has broken out of the selected distance range
         current_penalty = 0.0
-        if max(dynamics_simulator.dependent_variable_history.keys()) < self.mission_final_time:
+        if (max(dynamics_simulator.dependent_variable_history.keys()) < self.mission_final_time):
             current_penalty += 1.0E4
+
         return [current_fitness + current_penalty, np.mean(distance) + current_penalty * 1.0E3]
 
     def get_last_run_dynamics_simulator(self):
@@ -102,3 +141,5 @@ class AsteroidOrbitProblem:
         Returns the dynamics simulator lambda function.
         """
         return self.dynamics_simulator_function()
+
+

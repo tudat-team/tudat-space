@@ -6,5 +6,5 @@ Getting Started with Simulations
 .. toctree::
     :maxdepth: 1
     
-    simulations/example_application_2
-    simulations/example_application_10
+    simulations/delfi_simple_example_page
+    simulations/var_equation_example_page
