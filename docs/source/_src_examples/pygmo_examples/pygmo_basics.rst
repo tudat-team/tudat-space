@@ -1,8 +1,8 @@
 .. _`pygmo_basics`:
 
-=======================
-Optimization with PyGMO
-=======================
+***********************
+Introduction to PyGMO
+***********************
 
 The following paragraphs will give some information on how to
 optimize an astrodynamics problem written with tudatpy through the
