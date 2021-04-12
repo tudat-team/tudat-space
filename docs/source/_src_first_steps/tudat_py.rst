@@ -21,7 +21,7 @@ Install Anaconda on your system, see the `Installation`_ guide provided by the A
 
 .. note::
 
-    **macOS users are advised to use `homebrew`_ **: this is an excellent packet manager, with the added advantage of making it exceedingly easy to install Anaconda:
+    **macOS users are advised to use `homebrew`_**: this is an excellent packet manager, with the added advantage of making it exceedingly easy to install Anaconda:
 
     .. code:: bash
 
