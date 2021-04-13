@@ -1,6 +1,6 @@
-**********
-Simulation
-**********
+******************
+State Propagation
+******************
 
 In this section, the different stages of a typical simulation setup are described. The user is guided along the creation of the environment, the dynamical model, output variables, termination settings, the integrator, and the actual simulation itself. Code examples will illustrate the usage of the application programming interface (API), both in Python and C++. (C++ is WIP)
 
@@ -83,6 +83,7 @@ The following page provides you with the difference between *conventional* and *
 
     propagation_setup/settings/conventional_vs_propagated_coordinates
 
+
 ==============================
 State Derivative Model Setup
 ==============================
@@ -111,8 +112,12 @@ Below, a comprehensive list of all available acceleration models in Tudat, and t
 Torque Model Setup
 -------------------
 
+To propagate rotational dynamics, you must provide a set of torque models.
+Torque models are handled in a similar manner to the translational acceleration models:
+
+
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
     propagation_setup/torque_models/setup
     propagation_setup/torque_models/available
@@ -144,6 +149,40 @@ The typical propagation is terminated when a specific final time is reached. Tud
     propagation_setup/termination/available
 
 
+
+Parameter Setup
+=================
+
+Tudat(Py) is also capable of propagating the so-called variational equations associated with the dynamics to produce the state transition matrix :math:`\Phi(t,t_{0})` and sensitivity matrix :math:`S(t)`, which we define here as:
+
+.. math::
+
+      \Phi(t,t_{0}) &= \frac{\partial \mathbf{x}(t)}{\partial\mathbf{x}(t_{0})}\\
+      S &= \frac{\partial \mathbf{x}(t)}{\partial \mathbf{p  }}\\
+
+where :math:`\mathbf{x}` is the propagated state, :math:`\mathbf{p}` the vector of a parameter vector (e.g. gravity field parameters, rotation model parameters, etc.), and :math:`t_{0}` denotes the initial time.
+These two matrices are based on linearization of the complex dynamics and can be used to quickly determine the influence of a change in initial state (:math:`\mathbf{x}(t_{0})`) and/or parameters (:math:`\mathbf{p}`) on the state :math:`\mathbf{x}(t)` at time :math:`t`.
+
+
+.. note:: In some literature, the sensitivity matrix is not defined separately, but the state transition matrix :math:`\Phi(t,t_{0})` is defined as :math:`\frac{\partial[\mathbf{x}(t);\text{ }\mathbf{p}]}{\partial[\mathbf{x}(t_{0};\text{ }\mathbf{p}])}`
+
+
+
+If the user wishes to do propagate the variational equations alongside the system sate, settings for the parameters that are to be considered in the variational equations have to be defined.
+In terms of the equations above, it needs to be specified for which parameters :math:`\mathbf{x}_{0}` and :math:`\mathbf{p}` the solution for the state transition and sensitivity matrices is to be computed.
+In Tudat(Py) these parameters are referred to as parameters or sometimes "estimated" parameters, because of their primary application in state estimation problems.
+%! I have this in here as a safety for now
+
+A description of how these parameters are to be defined and a comprehensive list of all available parameters are linked below:
+
+.. toctree::
+    :maxdepth: 3
+
+    sensitivity_analysis/parameter_settings
+    sensitivity_analysis/available_parameters
+
+
+
 Integrator Setup
 =================
 
@@ -161,9 +200,18 @@ Since the choice of integrator strongly depends on the nature of the dynamical p
 Running the Simulation
 ======================
 
-With all the necessary simulation settings in place, it is time to run the simulation. In Tudat(Py), this is done by means of a DynamicsSimulator object, which handles the setup and execution of the simulation. It also contains functions to retrieve the propagated state history and dependent variables for further analysis and plotting.
+With all the necessary simulation settings in place, it is time to run the simulation.
+In Tudat(Py), this is done by means of a simulator object, which handles the setup and execution of the simulation.
+It also contains functions to retrieve the propagated state history and dependent variables for further analysis and plotting.
 
-In its simplest form, the ``DynamicsSimulator`` is used as shown in this example:
+There are various types of simulators, each of which offers different functionalities to the user.
+
+=================================
+Propagating System State Only
+=================================
+
+Simulations in which only the system state is propagated are handled by simulator objects from the ``DynamicsSimulator`` class.
+For propagation of the system state along a single arc, the ``SingleArcDynamicsSimulator`` derivative of the ``DynamicsSimulator`` base class should be used:
 
 .. tabs::
 
@@ -176,7 +224,7 @@ In its simplest form, the ``DynamicsSimulator`` is used as shown in this example
           
       		# Create simulation object and propagate dynamics.
       		dynamics_simulator = propagation_setup.SingleArcDynamicsSimulator(
-        		bodies, integrator_settings, propagator_settings, True)
+        		bodies, integrator_settings, propagator_settings)
         		
     		states = dynamics_simulator.state_history
     		unprocessed_states = dynamics_simulator.unprocessed_state_history
@@ -186,11 +234,17 @@ In its simplest form, the ``DynamicsSimulator`` is used as shown in this example
           .. literalinclude:: /_src_snippets/simulation/environment_setup/req_setup.cpp
              :language: cpp
              
-First, a ``SingleArcDynamicsSimulator`` is created using the system of bodies, integrator settings, and propagator settings objects. Tudat will then automatically read and setup the simulation accordingly. The ``True`` at the end of the line indicates that the equations of motion should be integrated immediately after creating the object, such that the state history can be retrieved afterwards. The latter is done in the next line when extracting the ``states``. The simulator will return a dictionary (Python) or map (C++) containing the state of the vehicle at each epoch, which can be exported or used for subsequent analysis. 
+First, a ``SingleArcDynamicsSimulator`` is created using the system of bodies, integrator settings, and propagator settings objects.
+Tudat will then automatically read and setup the simulation accordingly.
+The state history is retrieved in the next line by accessing the ``state_history`` attribute of the ``DynamicsSimulator``.
+The ``state_history`` attribute is of type dictionary (Python) or map (C++) and contains the state of the propagated body at each epoch, which can be exported or used for subsequent analysis.
 
-It's important to realize that, *regardless* of the formulation of the equations of motion (Cowell, Gauss-Kepler, etc.), the ``state_history`` attribute will always provide the results of the propagation, converted to Cartesian elements (for the case of translational dynamics). In the case where a different formulation than the Cowell formulation is used, the states that were actually used during the numerical integration can be accessed through the ``unprocessed_state_history``. For instance, whe using the ``gauss_keplerian`` propagator, it is the equations of motion in Keplerian elements which are solved numerically. The ``unprocessed_state_history`` will provide you with the history of the Keplerian elements (as directly solved for by the integrator), while the  ``state_history`` provides the Cartesian elements, obtained from the conversion of the propagated Keplerian elements(see :ref:`convention_propagated_coordinates` for more details).
+It's important to realize that, *regardless* of the formulation of the equations of motion (Cowell, Gauss-Kepler, etc.), the ``state_history`` attribute will always provide the results of the propagation, converted to Cartesian elements (for the case of translational dynamics).
+In the case where a different formulation than the Cowell formulation is used, the states that were actually used during the numerical integration can be accessed through the ``unprocessed_state_history``. For instance, whe using the ``gauss_keplerian`` propagator, it is the equations of motion in Keplerian elements which are solved numerically.
+The ``unprocessed_state_history`` will provide you with the history of the Keplerian elements (as directly solved for by the integrator), while the  ``state_history`` provides the Cartesian elements, obtained from the conversion of the propagated Keplerian elements(see :ref:`convention_propagated_coordinates` for more details).
 
-If the user chose to also export dependent variables, they can be extracted from the dynamics simulator as follows:
+If the user chose to export dependent variables, they can be extracted from the dynamics simulator as follows.
+Just like the ``state_history``, the ``dependent_variable_history`` attribute is of kind dictionary (Python) or map (C++):
 
 .. tabs::
 
@@ -202,56 +256,27 @@ If the user chose to also export dependent variables, they can be extracted from
           .. code-block:: python
           
           	# Retrieve dependent variables
-      		dependent_variable_history = dynamics_simulator.get_dependent_variable_history()
+      		dependent_variable_history = dynamics_simulator.dependent_variable_history
 
      .. tab:: C++
 
           .. literalinclude:: /_src_snippets/simulation/environment_setup/req_setup.cpp
              :language: cpp
-             
-             
-This concludes the section on simulation of this API guide. For more detailed information, refer to the pages listed in this section or refer to the next few sections for information and examples on e.g. interpolators, coordinate and time conversions, and interfaces to Spice, JSON, and Sofa.
 
 
-Linear Sensitivity Analysis
-============================
-
- .. figure:: flowchart_var_eq.png
-    :width: 800
-
-Up to this point, we have been concerned with propagating states of bodies only. Tudat is also capable of propagating the so-called variational equations associated with the dynamics to produce the state transition matrix :math:`\Phi(t,t_{0})` and sensitivity matrix :math:`S(t)`, which we define here as:
-
-.. math::
-      
-      \Phi(t,t_{0}) &= \frac{\partial \mathbf{x}(t)}{\partial\mathbf{x}(t_{0})}\\
-      S &= \frac{\partial \mathbf{x}(t)}{\partial \mathbf{p  }}\\
-
-where :math:`\mathbf{x}` is the propagated state, :math:`\mathbf{p}` the vector of a parameter vector (e.g. gravity field parameters, rotation model parameters, etc.), and :math:`t_{0}` denotes the initial time.
-These two matrices are based on linearization of the complex dynamics and can be used to quickly determine the influence of a change in initial state (:math:`\mathbf{x}(t_{0})`) and/or parameters (:math:`\mathbf{p}`) on the state :math:`\mathbf{x}(t)` at time :math:`t`.
-
-
-.. note:: In some literature, the sensitivity matrix is not defined separately, but the state transition matrix :math:`\Phi(t,t_{0})` is defined as :math:`\frac{\partial[\mathbf{x}(t);\text{ }\mathbf{p}]}{\partial[\mathbf{x}(t_{0};\text{ }\mathbf{p}])}`
-
-===============
-Parameter Setup
-===============
-
-The propagation of the variational equations is done similarly to that of the dynamics. In addition to the settings described above, settings for the parameters that are considered are to be defined. In terms of the equations above, it needs to be specified for which parameters :math:`\mathbf{x}_{0}` and :math:`\mathbf{p}` the solution for the state transition and sensitivity matrices is to be computed.
-
-The manner in which these parameters are to be defined, and a comprehensive list of all available paramaters, is described
-
-.. toctree::
-    :maxdepth: 3
-
-    sensitivity_analysis/parameter_settings
-    sensitivity_analysis/available_parameters
+For a complete example of a perturbed single-arc propagation, please see the tutorial :ref:`propagating_a_spacecraft_with_perturbations`.
     
-=====================================
-Propagating the Variational Equations
-=====================================
-    
-    
-Now that the parameter settings have been created, the variational equations solver can be set up as well. This solver acts as a replacement of the normal dynamics simulator:
+=========================================================
+Propagating System State & Variational Equations
+=========================================================
+
+For propagation of the variational equations alongside the system state, a different sort of simulator object - a ``VariationalEquationsSolver`` - has to be used.
+``VariationalEquationsSolver`` objects contain a ``DynamicsSimulator`` object, which means that they can do anything that a ``DynamicsSimulator`` can plus the added functionality of propagating variational equations.
+
+
+To propagate the variational equations alongside the single-arc system state, the ``SingleArcVariationalEquationsSolver`` derivative of the ``VariationalEquationsSolver`` base class should be used.
+With the basic simulation setup (system of bodies, integrator settings, propagator settings) and the parameter settings for the variational equations, a variational equations solver can be set up.
+The setup works similarly to the normal dynamics simulator (%! integrate_on_creation arg):
 
 .. code-block:: python
 	
@@ -268,36 +293,7 @@ The state history, state transition matrices, and sensitivity matrices can then 
 	state_transition_matrices = variational_equations_solver.state_transition_matrix_history
 	sensitivity_matrices = variational_equations_solver.sensitivity_matrix_history
 	
-For a complete example of propagating the variational equations, please see the tutorial :ref:`propagating_variational_equations`.
+For a complete example of propagation and usage of the variational equations, please see the tutorial :ref:`propagating_variational_equations`.
 
-The :class:`EstimatableParameterSet` object contains three objects that have :class:`EstimatableParameter` as base class (one for each parameter). We distinguish two types of :class:`EstimatableParameter` objects:
-
-* Those that represent initial conditions for dynamics (denoted as :math:`\mathbf{x}_{0}` below)
-* Those that represent fixed parameters for environment, acceleration or observation models (denoted as :math:`\mathbf{q}` below)
-
-Resetting the full parameter vector :math:`\mathbf{p}(=[\mathbf{x}_{0};\mathbf{q}])` is done as follows (for :literal:`double` state scalar type):
-         
-   .. code-block:: cpp
-
-       // Create parameter set  
-       std::shared_ptr< EstimatableParameterSet< double > > parametersToEstimate = ...
-       
-       Eigen::VectorXd parameterVector =
-            parametersToEstimate->getFullParameterValues< double >( );
-
-While resetting the full parameter vector is done as:
-
-   .. code-block:: cpp
-
-       // Create parameter set  
-       std::shared_ptr< EstimatableParameterSet< double > > parametersToEstimate = ...
-       
-       // Define vector of new values of estimated parameters
-       Eigen::VectorXd newParameterVector = ...
-       
-       // Reset parameter values
-       parametersToEstimate->resetParameterValues< double >( );
-
-When resetting the parameter vector, the change in the values in :math:`\mathbf{q}` immediately take effect. For the initial state parameters to take effect, however, the dynamics must be re-propagated. This occurs automatically when estimating parameters. It can also be performed manually by calling the :literal:`resetParameterEstimate` member function of the :class:`VariationalEquationsSolver` class. 
 
 

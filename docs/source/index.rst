@@ -59,7 +59,8 @@ Tudat has also been used extensively in research projects, a few of them are lis
    :caption: User Guide
    :hidden:
 
-   _src_api/simulation
+   _src_api/state_propagation
+   _src_api/state_estimation
    _src_api/astrodynamics
    _src_api/mathematics
    _src_api/interface

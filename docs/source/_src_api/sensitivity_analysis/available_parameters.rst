@@ -1,11 +1,11 @@
 
 .. _parameterSettingCreation:
 
-==============================
-Available Estimated Parameters
-==============================
+===================================
+Available ("Estimated") Parameters
+===================================
 
-The framework discussed in the previous section explains how the :literal:`parameter_settings` list is populated. The goal of this section is to list the available parameters that can be estimated, what syntax they use, and explain to which environment models they are linked.
+The framework discussed in the previous section explains how the :literal:`parameter_settings` list is populated. The goal of this section is to list the available parameters that can be used in the variational equations (and which are therefore available for estimation in a state estimation problem), what syntax they use, and explain to which environment models they are linked.
 
 .. class:: Single Parameters
 
@@ -73,7 +73,7 @@ The framework discussed in the previous section explains how the :literal:`param
 .. class:: Initial State Parameters
 
 .. warning::
-	These functions return **lists** of estimated parameters, which means that they can not be simply added in a list creation statement like ``[parameter_1, parameter_2, ...]``. Instead, this list needs to be concatenated to a list of 'simple' parameters, e.g. by using the ``+`` operator: ``parameter_settings + estimation_setup.parameter.initial_states(...)``.
+	These functions return **lists** of parameters, which means that they can not be simply added in a list creation statement like ``[parameter_1, parameter_2, ...]``. Instead, this list needs to be concatenated to a list of 'simple' parameters, e.g. by using the ``+`` operator: ``parameter_settings + estimation_setup.parameter.initial_states(...)``.
 	
 The factory function for initial states uses the propagator settings to determine which type is needed, e.g. if a translational propagator is defined, the function will automatically create the parameters for initial translational state.
 	
@@ -96,7 +96,7 @@ The factory function for initial states uses the propagator settings to determin
 
 - :literal:`spherical_harmonics_c_coefficients`
 
-	Estimates the **cosine** coefficients in the spherical harmonics gravity model for a body. There are two ways to specify which coefficients are to be estimated: using min/max settings for degree and order, or using block indices. The latter constitutes a list of tuples, where the first value is the degree and the second the order of the coefficient to be estimated. The length of this list can be arbitrary, as long as the pairs are unique.
+	Considers the **cosine** coefficients in the spherical harmonics gravity model for a body. There are two ways to specify which coefficients are to be used: giving min/max settings for degree and order, or giving block indices. The latter constitutes a list of tuples, where the first value is the degree and the second the order of the coefficient to be used. The length of this list can be arbitrary, as long as the pairs are unique.
 
 	.. code-block:: python
 
@@ -113,7 +113,7 @@ The factory function for initial states uses the propagator settings to determin
 - :literal:`spherical_harmonics_s_coefficients`
 
 	
-	Estimates the **sine** coefficients in the spherical harmonics gravity model for a body. There are two ways to specify which coefficients are to be estimated: using min/max settings for degree and order, or using block indices:
+	Considers the **sine** coefficients in the spherical harmonics gravity model for a body. There are two ways to specify which coefficients are to be used: giving min/max settings for degree and order, or giving block indices:
 
 	.. code-block:: python
 
