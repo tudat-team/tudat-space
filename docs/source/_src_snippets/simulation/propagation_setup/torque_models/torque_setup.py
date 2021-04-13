@@ -19,7 +19,7 @@ torque_settings_vehicle = dict(
 )
 
 # Create global accelerations settings dictionary.
-torque_settings = {"Delfi-C3": torque_settings_vehicle}
+torque_settings = {"Vehicle": torque_settings_vehicle}
 
 # Create acceleration models.
 torque_models = propagation_setup.create_torque_models(

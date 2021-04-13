@@ -168,10 +168,9 @@ These two matrices are based on linearization of the complex dynamics and can be
 
 
 
-If the user wishes to do propagate the variational equations alongside the system sate, settings for the parameters that are to be considered in the variational equations have to be defined.
+If the user wishes to do propagate the variational equations alongside the system sate, settings for the parameters that are to be used in the variational equations have to be defined.
 In terms of the equations above, it needs to be specified for which parameters :math:`\mathbf{x}_{0}` and :math:`\mathbf{p}` the solution for the state transition and sensitivity matrices is to be computed.
 In Tudat(Py) these parameters are referred to as parameters or sometimes "estimated" parameters, because of their primary application in state estimation problems.
-%! I have this in here as a safety for now
 
 A description of how these parameters are to be defined and a comprehensive list of all available parameters are linked below:
 
@@ -276,14 +275,14 @@ For propagation of the variational equations alongside the system state, a diffe
 
 To propagate the variational equations alongside the single-arc system state, the ``SingleArcVariationalEquationsSolver`` derivative of the ``VariationalEquationsSolver`` base class should be used.
 With the basic simulation setup (system of bodies, integrator settings, propagator settings) and the parameter settings for the variational equations, a variational equations solver can be set up.
-The setup works similarly to the normal dynamics simulator (%! integrate_on_creation arg):
+The setup works similarly to the normal dynamics simulator:
 
 .. code-block:: python
 	
 	variational_equations_solver = estimation_setup.SingleArcVariationalEquationsSolver(
 		bodies, integrator_settings, propagator_settings,
-		estimation_setup.create_parameters_to_estimate(parameter_settings, bodies),
-		integrate_on_creation=1 )
+		estimation_setup.create_parameters_to_estimate(parameter_settings, bodies)
+		)
 		
 The state history, state transition matrices, and sensitivity matrices can then be extracted:
 

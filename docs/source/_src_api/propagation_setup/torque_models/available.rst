@@ -4,118 +4,131 @@
 List of all Available Torque Models
 ====================================
 
-%! add python code snippets, introduce final example snippets correctly in text
-%! I have taken out the repeated requirements (they were in introductory text block as well as bullet pointed in the end - now only bullet-pointed).
-%! References to objects (e.g. set by BodyShapeSettings) may only apply to C++, how do we handle this?
-
 
 Aerodynamic Torque
 ######################
 
-    Torque exerted by a body with an atmosphere model and shape model on another body.
-    The settings are created as follows, for an aerodynamic torque exerted by "Earth" on body "Apollo":
+Torque exerted by a body with an atmosphere model and shape model on another body.
+The settings are created as follows, for an aerodynamic torque exerted by "Earth" on the propagated body "Vehicle":
 
-    .. tabs::
+.. tabs::
 
-         .. tab:: Python
+     .. tab:: Python
 
-          .. toggle-header::
-             :header: Required **Show/Hide**
+      .. toggle-header::
+         :header: Required **Show/Hide**
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/acceleration_example.py
-             :language: python
+      .. literalinclude:: /_src_snippets/simulation/propagation_setup/torque_models/aerodynamic_torque_example.py
+         :language: python
 
-         .. tab:: C++
+     .. tab:: C++
 
-          .. code-block:: cpp
+      .. code-block:: cpp
 
-                SelectedTorqueMap selectedTorqueModelMap;
-                selectedTorqueModelMap[ "Apollo" ][ "Earth" ].push_back( std::make_shared< TorqueSettings >( aerodynamic_torque ) );
+            SelectedTorqueMap selectedTorqueModelMap;
+            selectedTorqueModelMap[ "Vehicle" ][ "Earth" ].push_back( std::make_shared< TorqueSettings >( aerodynamic_torque ) );
 
 
-    Requires the following environment models to be defined:
+Requires the following environment models to be defined:
 
-    * Atmosphere model for body exerting torque (set by AtmosphereSettings).
+* Atmospheric model for body exerting torque (see :ref:`environment_atmosphere_model`)
 
-    * Shape model for body exerting torque (set by BodyShapeSettings).
+* Shape model for body exerting torque (see :ref:`environment_shape_model`).
 
-    * Aerodynamic coefficient interface for body undergoing torque (set by AerodynamicCoefficientSettings). NOTE: In the case that the aerodynamic coefficients are defined as a function of the vehicle orientation (e.g. angle of attack and sideslip angle), these angles can be manually or automatically defined.
+* Aerodynamic coefficient interface for body undergoing torque (see :ref:`environment_aerodynamic_coefficient_interface`).
 
-    * Current state of body undergoing torque and body with atmosphere.
+.. note::
+
+    In the case that the aerodynamic coefficients are defined as a function of the vehicle orientation (e.g. angle of attack and sideslip angle), these angles can be manually or automatically defined.
+
+* Current state of bodies undergoing and exerting torque, either from an Ephemeris model (see :ref:`environment_ephemeris_model`) or from the numerical propagation.
 
 
 Second Degree Gravitational Torque
 ###################################
 
-    Torque exerted by a point mass on a body with a degree two spherical harmonics mass distribution.
-    The settings are created as follows, for a torque exerted by AAA on body BBB:
+Torque exerted by a point mass on a body with a defined inertia tensor.
+The settings are created as follows, for a torque exerted by body "Earth" on propagated body "Vehicle":
 
-    .. tabs::
+.. tabs::
 
-         .. tab:: Python
+     .. tab:: Python
 
-          .. toggle-header::
-             :header: Required **Show/Hide**
+      .. toggle-header::
+         :header: Required **Show/Hide**
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/acceleration_example.py
-             :language: python
+      .. literalinclude:: /_src_snippets/simulation/propagation_setup/torque_models/seconddegree_torque_example.py
+         :language: python
 
-         .. tab:: C++
+     .. tab:: C++
 
-          .. code-block:: cpp
+      .. code-block:: cpp
 
-                SelectedTorqueMap selectedTorqueModelMap;
-                selectedTorqueModelMap[ "Apollo" ][ "Earth" ].push_back( std::make_shared< TorqueSettings >( second_order_gravitational_torque ) );
+            SelectedTorqueMap selectedTorqueModelMap;
+            selectedTorqueModelMap[ "Vehicle" ][ "Earth" ].push_back( std::make_shared< TorqueSettings >( second_order_gravitational_torque ) );
+
+
+Requires the following environment models to be defined:
+
+* Gravity field (at least point-mass) for body exerting torque (see :ref:`environment_gravity_field_model`).
+
+* Inertia tensor of body undergoing torque (see :ref:`environment_inertia_tensor`).
+
+* Current state of bodies undergoing and exerting torque, either from an Ephemeris model (see :ref:`environment_ephemeris_model`) or from the numerical propagation.
 
 
 
-    Requires the following environment models to be defined:
+.. tip::
 
-    * Gravity field (at least point-mass) for body exerting torque (set by GravityFieldSettings).
-
-    * Inertia tensor (%!) of body undergoing torque.
-
-    * Current state of bodies undergoing and exerting torque, either from an Ephemeris model (set by EphemerisSettings) or from the numerical propagation.
+    This implementation of the gravitational torque model uses the inertia tensor if the body undergoing the torque to infer its degree two spherical harmonics gravity field.
+    It is therefore convenient for modelling the gravitational torque acting on a custom body, such as a vehicle, because its custom spherical harmonics model does not have to be created manually.
 
 
 
 Spherical Harmonics Gravitational Torque
 ##########################################
 
-    Torque exerted by a point mass on a body with an arbitrary degree/order spherical harmonics mass distribution.
+Torque exerted by a point mass on a body with an arbitrary degree/order spherical harmonics mass distribution.
+As an example, for a spherical harmonic torque, expanded to degree and order 8, exerted by body "Earth" on propagated body "Moon":
 
-    As an example, for a spherical harmonic torque, expanded to degree and order 8, exerted by AAA on body BBB:
+.. tabs::
 
-    .. tabs::
+     .. tab:: Python
 
-         .. tab:: Python
+      .. toggle-header::
+         :header: Required **Show/Hide**
 
-          .. toggle-header::
-             :header: Required **Show/Hide**
+      .. literalinclude:: /_src_snippets/simulation/propagation_setup/torque_models/sphericalharmonics_torque_example.py
+         :language: python
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/acceleration_example.py
-             :language: python
+     .. tab:: C++
 
-         .. tab:: C++
+      .. code-block:: cpp
 
-          .. code-block:: cpp
-
-                SelectedTorqueMap selectedTorqueModelMap;
-                int maximumDegree = 8;
-                int maximumOrder = 8;
-                selectedTorqueModelMap[ "Apollo" ][ "Earth" ].push_back( std::make_shared< SphericalHarmonicTorqueSettings >( maximumDegree, maximumOrder ) );
+            SelectedTorqueMap selectedTorqueModelMap;
+            int maximumDegree = 8;
+            int maximumOrder = 8;
+            selectedTorqueModelMap[ "Moon" ][ "Earth" ].push_back( std::make_shared< SphericalHarmonicTorqueSettings >( maximumDegree, maximumOrder ) );
 
 
-    Requires the following environment models to be defined:
+Requires the following environment models to be defined:
 
-    * Gravity field (at least point-mass) for body exerting torque (set by GravityFieldSettings).
+* Gravity field (at least point-mass) for body exerting torque (see :ref:`environment_gravity_field_model`).
 
-    * Spherical harmonic gravity field for body undergoing torque (set by SphericalHarmonicsGravityFieldSettings)..
+* Spherical harmonic gravity field for body undergoing torque (see :ref:`environment_gravity_field_model`).
 
-    * Current state of bodies undergoing and exerting torque, either from an Ephemeris model (set by EphemerisSettings) or from the numerical propagation.
+* Current state of bodies undergoing and exerting torque, either from an Ephemeris model (see :ref:`environment_ephemeris_model`) or from the numerical propagation.
+
+
+
+.. tip::
+
+    In contrast to the second degree gravitational torque, the spherical harmonics gravity torque implementation requires the spherical harmonics gravity field model of the torque-undergoing body.
+    It is therefore more suited for modelling the gravity torques acting on "standard" celestial bodies, for which spherical harmonics mass distributions are readily available.
+
 
 
 Custom Torque
 #################
 
-    %! info.
+This section is WIP and will be updated soon.
