@@ -51,7 +51,7 @@ Next, use conda to install the PyGMO package *to this environment*:
 
 .. warning::
 
-    Please ensure to install PyGMO in your given tudatpy environment. Do not add the PyGMO package to your (base) install.
+    Please ensure to install PyGMO in your given tudatpy environment. Do not add the PyGMO package to your base environment.
 
 
 Lastly, you should verify that the package is now available in your tudatpy environment.
