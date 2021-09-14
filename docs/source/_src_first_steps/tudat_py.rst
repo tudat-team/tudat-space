@@ -1,4 +1,6 @@
 
+.. _getting_started_tudatpy:
+
 ******************************
 Getting Started with Tudat(Py)
 ******************************
@@ -27,7 +29,7 @@ Install Anaconda on your system, see the `Installation`_ guide provided by the A
 
         brew install anaconda
 
-    ... or `Miniconda`_, a ligher alternative to Anaconda:
+    ... or `Miniconda`_, a lighter alternative to Anaconda:
 
     .. code:: bash
 

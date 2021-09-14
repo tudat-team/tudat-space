@@ -1,15 +1,31 @@
 **************************
-Exposing C++ with Pybind11
+tudat-bundle
 **************************
 
-This guide on exposing ``C++`` using ``pybind11`` is centered around the
-architecture of the ``tudatpy/kernel`` source directory. This is done in
-order to provide developers with a practical guide that introduces the
-implementation and design of the current architecture.
+This guide shows how ``C++``-based tudat code can be exposed to python and how it can be made available in a local ``tudatpy`` module.
+This topic is relevant for developers who want to expose updated tudat code to a new tudatpy module and for users who like to extend tudatpy functionality via modification of the ``C++``-based tudat code.
 
-.. note::
-    This also allows developers to see motivations for the current design,
-    should convention change, or deprecation of classes/functions occur.
+The interface between tudat and tudatpy is managed via ``pybind11`` in the ``tudat-bundle`` environment.
+%! Check version number
+
+
+Setting up tudat-bundle
+########################
+
+%! Getting tudat bundle
+%! Setting up Cmake
+
+
+Introduction to tudat-bundle
+#############################
+
+The tudat-bundle consists of three subdirectories:
+
+- ``tudat``, containing the tudat ``C++`` source code
+- ``tudatpy``, containing the ``tudatpy/kernel`` directory in which the ``pybind`` exposure is facilitated
+- ``cmake-build-XXX``, the build directory containing the compiled ``C++`` tudat code (cmake-build-XXX/tudat), as well as the compiled tudatpy kernels at cmake-build-XXX/tudatpy/tudatpy/kernel.so
+
+
 
 The entirety of exposed C++ functionality in ``tudatpy`` is contained within
 the ``tudatpy/kernel`` source directory. For reference during this guide, the
@@ -18,61 +34,23 @@ architecture of this directory is as follows:
 .. code-block:: base
     :linenos:
 
+%! insert architecture
+
+
 Module Definition
 #################
 
-The following folded code shows the core elements of the
-level ``kernel`` module definition in ``tudatpy``. It would serve the reader to
-have glance through before we walk through the elements in detail.
+The following folded code shows the core elements of the module definition on level ``kernel`` in ``tudatpy``.
+It would serve the reader to have glance through before we walk through the elements in detail.
 
-.. code-block:: cpp
-    :caption: ``tudatpy/kernel/kernel.cpp``
-    :linenos:
 
-    // expose tudat versioning
-    #include <tudat/config.hpp>
-
-    // include all exposition headers
-    #include "expose_simulation.h"
-    // other submodule headers...
-
-    // standard pybind11 usage
-    #include <pybind11/pybind11.h>
-    namespace py = pybind11;
-
-    PYBIND11_MODULE(kernel, m) {
-
-        // Disable automatic function signatures in the docs.
-        // NOTE: the 'options' object needs to stay alive
-        // throughout the whole definition of the module.
-        py::options options;
-        options.disable_function_signatures();
-        options.enable_user_defined_docstrings();
-
-        // export the tudat version.
-        m.attr("_tudat_version_major") = TUDAT_VERSION_MAJOR;
-        m.attr("_tudat_version_minor") = TUDAT_VERSION_MINOR;
-        m.attr("_tudat_version_patch") = TUDAT_VERSION_PATCH;
-
-        // simulation module definition
-        auto simulation = m.def_submodule("simulation");
-        tudatpy::expose_simulation(simulation);
-
-        // other submodule definitions...
-
-        // versioning of kernel module
-        #ifdef VERSION_INFO
-          m.attr("__version__") = VERSION_INFO;
-        #else
-          m.attr("__version__") = "dev";
-        #endif
-
-    }
+.. literalinclude:: /_src_tudatpy/snippets/kernel.cpp
+        :caption: ``tudatpy/kernel/kernel.cpp``
+        :language: cpp
 
 .. note::
 
-    Starting with the end in mind, compiling the previous will result in a
-    shared library named ``kernel.so``.
+    Starting with the end in mind, compiling the previous will create a shared library named ``kernel.so``, making available all submodules included in ``kernel.cpp``.
 
 .. note::
 

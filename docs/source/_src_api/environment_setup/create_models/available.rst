@@ -794,6 +794,9 @@ Atmosphere Models
 
   where :literal:`windFunction` is a function with inputs; altitude, longitude, latitude and time.
 
+
+.. _environment_shape_model:
+
 Body Shape Models
 #################
 
@@ -1080,6 +1083,15 @@ Rotational Models
   Note that for this model the original frame must be J2000 or GCRS (in the case of the former, teh frame bias between GCRS and J2000 is automatically corrected for). The target frame (*e.g.* body-fixed frame) name is ITRS. 
 
   The precession-nutation theory may be :literal:`iau_2000a`, :literal:`iau_2000b` or :literal:`iau_2006`, as implemented in the SOFA toolbox. Alternative options to modify the input (not shown above) include the EOP correction file, input time scale, short period UT1 and polar motion variations. 
+
+
+.. _environment_inertia_tensor:
+
+Inertia Tensors
+################
+
+This section is WIP and will be updated soon.
+
 
 .. _environment_aerodynamic_coefficient_interface:
 
