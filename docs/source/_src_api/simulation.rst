@@ -42,7 +42,7 @@ Details on all available environment models, and how to define them in your simu
 Specifics on the environment during propagations can be found here:
 
 .. toctree::
-    :maxdepth:3
+    :maxdepth: 3
 
     environment_setup/environment_during_propagation
     environment_setup/valid_time_range
@@ -83,9 +83,13 @@ The following page provides you with the difference between *conventional* and *
 
     propagation_setup/settings/conventional_vs_propagated_coordinates
 
-=========================
+==============================
+State Derivative Model Setup
+==============================
+
+
 Acceleration Model Setup
-=========================
+-------------------------
 
 To propagate translational dynamics, you must provide a set of acceleration models. The acceleration model setup is provided here:
 
@@ -103,9 +107,9 @@ Below, a comprehensive list of all available acceleration models in Tudat, and t
 
 .. _torque_models:
 
-==================
+
 Torque Model Setup
-==================
+-------------------
 
 .. toctree::
     :maxdepth: 2

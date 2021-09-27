@@ -1,8 +1,8 @@
 .. _`pygmo_basics`:
 
-*********************************
-Optimization with PyGMO
-*********************************
+***********************
+Introduction to PyGMO
+***********************
 
 The following paragraphs will give some information on how to
 optimize an astrodynamics problem written with tudatpy through the
@@ -19,7 +19,7 @@ About PyGMO
 The "basic" idea
 ----------------
 
-PyGMO is a Python scientific library derived by `PaGMO`_ (Parallel Global Multiobjective Optimization),
+PyGMO is a Python scientific library derived from `PaGMO`_ (Parallel Global Multiobjective Optimization),
 an open-source software developed at the European Space Agency by F. Biscani and D. Izzo [Biscani2020]_.
 The flexible and complete framework of PaGMO (and of its equivalent PyGMO) can be applied to
 "single-objective, multiple-objective, continuous, integer, box-constrained, non linear constrained, stochastic,
@@ -28,6 +28,42 @@ Both programs are based on the concept of the *island model*, which in short is 
 run the optimization process in parallel (hence its name) by using multithreading techniques.
 
 .. _`PaGMO`: https://esa.github.io/pagmo2/index.html
+
+
+Installing PyGMO
+----------------
+PyGMO is not part of the standard tudatpy distribution, but it can easily be added to any tudatpy environment.
+Here we will assume that you already have a standard tudatpy environment (called ``tudat-space``) installed.
+If that is not the case, please follow the "Installing Tudat(Py)" instructions in :ref:`getting_started_tudatpy`.
+
+In order to make PyGMO available inside the ``tudat-space`` environment, the following steps need to be taken.
+First, activate the ``tudat-space`` environment:
+
+.. code:: bash
+
+    $ conda activate tudat-space
+
+Next, use conda to install the PyGMO package *to this environment*:
+
+.. code:: bash
+
+    (tudat-space) $ conda install pygmo
+
+.. warning::
+
+    Please ensure to install PyGMO in your given tudatpy environment. Do not add the PyGMO package to your base environment.
+
+
+Lastly, you should verify that the package is now available in your tudatpy environment.
+You can do so via your IDE or by using the following command in your terminal:
+
+.. code:: bash
+
+    (tudat-space) $ conda list | grep pygmo
+
+which should return the name, version, build and channel of the pygmo installation in the given environment.
+
+
 
 First steps
 -----------
@@ -105,7 +141,7 @@ More information about the definition of an UDP class is available
 ------------------------------
 
 Once the UDP class is created, we must create a PyGMO problem object by passing
-an instantiation of our class to ``pygmo.problem``. Note that an instantiation of the UDP class
+an instance of our class to ``pygmo.problem``. Note that an instance of the UDP class
 must be passed as input to pygmo.problem() and NOT the class itself. It is also possible to use a PyGMO UDP, i.e.
 a problem that is already defined in PyGMO, but it will not be shown in this tutorial. In this example,
 we will use only one generation. More information about the PyGMO problem class is available

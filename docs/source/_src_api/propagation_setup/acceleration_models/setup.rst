@@ -20,7 +20,7 @@ A user defines these settings for each acceleration in their simulation. These s
           .. toggle-header:: 
              :header: Required **Show/Hide**
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/acceleration_example.py
+          .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/acceleration_setup.py
              :language: python
 
          .. tab:: C++
@@ -39,7 +39,7 @@ When propagating multiple bodies (see :ref:`multi_body_propagation`), the same l
           .. toggle-header:: 
              :header: Required **Show/Hide**
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/acceleration_example_multi_vehicle.py
+          .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/acceleration_setup_multi_vehicle.py
              :language: python
 
          .. tab:: C++
@@ -56,7 +56,7 @@ Or separate acceleration settings may be defined for separate bodies, and then c
           .. toggle-header:: 
              :header: Required **Show/Hide**
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/acceleration_example_multi.py
+          .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/acceleration_setup_multi.py
              :language: python
 
          .. tab:: C++

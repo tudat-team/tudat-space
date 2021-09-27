@@ -20,7 +20,7 @@ The first lines of code in your script should always be the (``tudatpy``) import
     from tudatpy.kernel.astro import conversion
 
 
-Important first steps to take are to (1) load the spice kernels, and (2) to set the start- and end epochs of your simulation. In ``tudat``, J2000 is t = 0, with all times given in seconds. The simulation end epoch is set to be one Julian day, which equals 86400 s.
+Important first steps to take are to load the spice kernels and to set the start- and end epochs of your simulation. In ``tudat``, J2000 is t = 0, with all times given in seconds. The simulation end epoch is set to be one Julian day, which equals 86400 s.
 
 .. code-block:: python
 
@@ -42,14 +42,15 @@ Create bodies
 Bodies can be created by making a list of strings with the bodies you want to include in your simulation. The default body settings (such as atmosphere, body shape, rotation model) are taken from spice. These settings can be adjusted to your preference, see :ref:`available_environment_models` for more detail. Finally, the system of bodies is created using your settings and stored into the variable ``bodies``. 
 
 .. code-block:: python
-  
+
     bodies_to_create = ["Sun", "Earth", "Moon", "Mars", "Venus"]
+
+    global_frame_orientation = "J2000" # centred around the Sun by default
 
     body_settings = environment_setup.get_default_body_settings(
         bodies_to_create,
-        simulation_start_epoch,
-        simulation_end_epoch,
-        "Earth","J2000")
+        base_frame_orientation=global_frame_orientation
+    )
 
     bodies = environment_setup.create_system_of_bodies(body_settings)
 
@@ -57,13 +58,13 @@ Bodies can be created by making a list of strings with the bodies you want to in
 Create vehicle
 --------------
 
-Now it's time to create your vehicle. In the following code, a vehicle named *Delfi-C3* is made, with a body mass of 400 kg.
+Now it's time to create your vehicle. In the following code, a vehicle named *Delfi-C3* is made, with a body mass of 2.2 kg.
 
 .. code-block:: python
-  
+
     bodies.create_empty_body( "Delfi-C3" )
 
-    bodies.get_body( "Delfi-C3").set_constant_mass( 400.0 )
+    bodies.get_body( "Delfi-C3").set_constant_mass( 2.2 )
 
 Create interfaces
 -----------------
@@ -77,38 +78,38 @@ parameters defining the nature of the interaction. Below the aerodynamics coeffi
 
   .. code-block:: python
     
-      reference_area = 4.0
-      drag_coefficient = 1.2
+    reference_area = 0.05
+    drag_coefficient = 1.2
+    aero_coefficient_settings = environment_setup.aerodynamic_coefficients.constant(
+        reference_area,[drag_coefficient,0,0]
+    )
 
-      aero_coefficient_settings = environment_setup.aerodynamic_coefficients.constant(
-          reference_area,[drag_coefficient,0,0],
-          are_coefficients_in_aerodynamic_frame=True,
-          are_coefficients_in_negative_axis_direction=True
-      )
-
-      environment_setup.add_aerodynamic_coefficient_interface(
-                  bodies, "Delfi-C3", aero_coefficient_settings )
+    environment_setup.add_aerodynamic_coefficient_interface(
+                  bodies, "Delfi-C3", aero_coefficient_settings
+    )
 
 
 - **Radiation Pressure**
 
   .. code-block:: python
 
-      reference_area_radiation = 4.0
-      radiation_pressure_coefficient = 1.2
-      occulting_bodies = ["Earth"]
-      radiation_pressure_settings = environment_setup.radiation_pressure.cannonball(
-          "Sun", reference_area_radiation, radiation_pressure_coefficient, occulting_bodies
-      )
+    reference_area_radiation = 0.05
+    radiation_pressure_coefficient = 1.2
+    occulting_bodies = ["Earth"]
+    radiation_pressure_settings = environment_setup.radiation_pressure.cannonball(
+        "Sun", reference_area_radiation, radiation_pressure_coefficient, occulting_bodies
+    )
 
-      environment_setup.add_radiation_pressure_interface(
-                  bodies, "Delfi-C3", radiation_pressure_settings )
+    environment_setup.add_radiation_pressure_interface(
+                bodies, "Delfi-C3", radiation_pressure_settings
+    )
 
 
 Propagation Setup
 #################
 
-Now that the environment is created, the propagation setup is defined. First, the bodies to be propagated and the central bodies will be defined, as given below.
+Now that the environment is created, the propagation setup is defined. First, the bodies to be propagated and the central bodies will be defined.
+Central bodies are the bodies with respect to which the state of the respective propagated bodies is defined.
 
 .. code-block:: python
 
@@ -148,32 +149,34 @@ This is the place to define the accelerations acting on your vehicle, and create
           [
               propagation_setup.acceleration.point_mass_gravity()
           ]
-          )
+      )
+
 
 
   .. note::
     
-    A more compact way of adding a point mass gravity of all bodies *except* a small selection, such as Earth in this case, can be done using the ``.difference()`` function in python. The same accelerations can be added in a more elegant manner, as given below:
+    A more compact way of adding a point mass gravity of all bodies *except* a small selection, such as Sun and Earth in this case, can be done using the ``.difference()`` function in python. The same accelerations can be added in a more elegant manner, as given below:
 
     .. code-block:: python
 
         accelerations_settings_delfi_c3 = dict(
-          Sun=
-          [
-              propagation_setup.acceleration.cannonball_radiation_pressure(),
-          ],
-          Earth=
-          [
-              propagation_setup.acceleration.spherical_harmonic_gravity(5, 5),
-              propagation_setup.acceleration.aerodynamic()
-          ]
-          )
-        
-        for other in set(bodies_to_create).difference( { "Earth" } ):
-          accelerations_settings_delfi_c3[other] = 
-          [
-              propagation_setup.acceleration.point_mass_gravity()
-          ]
+            Sun=
+            [
+                propagation_setup.acceleration.cannonball_radiation_pressure(),
+                propagation_setup.acceleration.point_mass_gravity()
+            ],
+            Earth=
+            [
+                propagation_setup.acceleration.spherical_harmonic_gravity(5, 5),
+                propagation_setup.acceleration.aerodynamic()
+            ]
+        )
+
+        # Define point mass accelerations acting on Delfi-C3 by all other bodies.
+        for other in set(bodies_to_create).difference({"Sun", "Earth"}):
+            accelerations_settings_delfi_c3[other] = [
+                propagation_setup.acceleration.point_mass_gravity()
+            ]
 
 
 - **Create acceleration models**
@@ -182,13 +185,14 @@ This is the place to define the accelerations acting on your vehicle, and create
 
   .. code-block:: python
         
-      acceleration_settings = {"Delfi-C3": accelerations_settings_delfi_c3}
+    acceleration_settings = {"Delfi-C3": accelerations_settings_delfi_c3}
 
-      acceleration_models = propagation_setup.create_acceleration_models(
-          bodies,
-          acceleration_settings,
-          bodies_to_propagate,
-          central_bodies)
+    acceleration_models = propagation_setup.create_acceleration_models(
+        bodies,
+        acceleration_settings,
+        bodies_to_propagate,
+        central_bodies
+    )
 
 
 Define Initial System State
@@ -197,7 +201,8 @@ Define Initial System State
 At the beginning of your script, you have defined a simulation start epoch, but you also need to define the initial state of your vehicle. For this case, we define a point along a Kepler orbit around Earth to be the initial state of *Delfi-C3*, and subsequently transform it to a Cartesian state using the ``conversion.keplerian_to_cartesian()`` function. Obviously, we need the gravitational parameter of our central body, Earth, which we can retrieve from the ``bodies`` variable.
 
 .. code-block:: python
-      
+
+
     earth_gravitational_parameter = bodies.get_body( "Earth" ).gravitational_parameter
 
     initial_state = conversion.keplerian_to_cartesian(
@@ -224,7 +229,7 @@ Apart from the state history, you can specify certain dependent variables to be 
         propagation_setup.dependent_variable.latitude( "Delfi-C3", "Earth" ),
         propagation_setup.dependent_variable.longitude( "Delfi-C3", "Earth" ),
         propagation_setup.dependent_variable.single_acceleration_norm( 
-            propagation_setup.acceleration.point_mass_gravity_type, "Delfi-C3", "Sun" 
+            propagation_setup.acceleration.point_mass_gravity_type, "Delfi-C3", "Sun"
         ),
         propagation_setup.dependent_variable.single_acceleration_norm( 
             propagation_setup.acceleration.point_mass_gravity_type, "Delfi-C3", "Moon" 
@@ -244,7 +249,8 @@ Apart from the state history, you can specify certain dependent variables to be 
         propagation_setup.dependent_variable.single_acceleration_norm( 
             propagation_setup.acceleration.cannonball_radiation_pressure_type, "Delfi-C3", "Sun" 
         )
-        ]
+    ]
+
 
 
 
@@ -290,7 +296,8 @@ Create dynamics simulator
 .. code-block:: python
       
     dynamics_simulator = propagation_setup.SingleArcDynamicsSimulator(
-        bodies, integrator_settings, propagator_settings)
+        bodies, integrator_settings, propagator_settings
+    )
 
 Retrieve result
 ---------------
@@ -308,23 +315,25 @@ You can retrieve the states and dependent variables at time step in your simulat
 Visualize results
 #################
 
-Let's make some plots to visualize our simulation results. In order to make plots in python, import pyplot from matplotlib.
+Let's make some plots to visualize our simulation results. In order to make plots in python, import pyplot from matplotlib and adjust some settings for our purposes.
 
 .. code-block:: python
       
     from matplotlib import pyplot as plt
+    font_size = 20
+    plt.rcParams.update({'font.size': font_size})
 
 
 - **Pre-processing**
 
-  The first step we have to take is to extract relevant variables from our dependent_variables dictionary. The times are stored in the keys, and can be extracted using the ``.keys( )`` function. The actual dependent variables are in the values of the dictionary, and we use ``.values( )`` to extract these, and subsequently stack them vertically using ``np.vstack( )`` in order to select the desired columns.
+  The first step we have to take is to extract relevant variables from our dependent_variables dictionary. The times are stored in the keys, and can be extracted using the ``.keys( )`` function. We also convert the time axis to be in the units of hours instead of seconds, which is optional. For this, we make use of *list comprehensions* in python. The actual dependent variables are in the values of the dictionary, and we use ``.values( )`` to extract these, and subsequently stack them vertically using ``np.vstack( )`` in order to select the desired columns.
 
   .. code-block:: python
         
       time = dependent_variables.keys( )
+      time_hours = [t / 3600 for t in time]
 
       dependent_variable_list = np.vstack( list( dependent_variables.values( ) ) )
-
 
 
   .. note::
@@ -347,22 +356,6 @@ Let's make some plots to visualize our simulation results. In order to make plot
        - Longitude
      * - 11-17
        - Acceleration Norms
-
-  We also convert the time axis to be in the units of hours instead of seconds, which is optional. For this, we make use of *list comprehensions* in python:
-
-  .. code-block:: python
-
-      time_hours = [ t / 3600 for t in time]
-
-  .. note::
-
-    Using
-
-    .. code-block:: python
-
-      time_hours = time / 3600
-
-    will **not** work in python, it will result in an ``TypeError``.
 
 
 - **Total Acceleration**
