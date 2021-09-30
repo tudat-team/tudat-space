@@ -1,0 +1,2 @@
+body_settings.get( "Earth" ).atmosphere_settings = environment_setup.atmosphere.exponential(
+        density_scale_height, density_at_zero_altitude)

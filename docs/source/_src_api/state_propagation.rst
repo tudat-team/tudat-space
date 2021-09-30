@@ -47,6 +47,13 @@ Specifics on the environment during propagations can be found here:
     environment_setup/environment_during_propagation
     environment_setup/valid_time_range
 
+In various applications, the environment models implemented in Tudat will not be specific, and you will want to define your own custom models. The manner in which to do this is similar for each environment model, and is discussed in more detail below:
+
+.. toctree::
+    :maxdepth: 1
+
+    environment_setup/custom_settings
+
 .. _simulation_propagator_setup:
 
 Propagation Setup
