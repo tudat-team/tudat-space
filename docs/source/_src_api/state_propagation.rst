@@ -42,8 +42,9 @@ Details on all available environment models, and how to define them in your simu
 Specifics on the environment during propagations can be found here:
 
 .. toctree::
-    :maxdepth:3
+    :maxdepth:1
 
+    environment_setup/use_of_reference_frames
     environment_setup/environment_during_propagation
     environment_setup/valid_time_range
 

@@ -63,7 +63,6 @@ Tudat has also been used extensively in research projects, a few of them are lis
    _src_api/state_estimation
    _src_api/astrodynamics
    _src_api/mathematics
-   _src_api/interface
 
 .. toctree::
    :maxdepth: 2
