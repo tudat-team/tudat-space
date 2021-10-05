@@ -45,7 +45,6 @@ When defining the environment, it is important to understand a number of aspects
     :maxdepth: 1
 
     environment_setup/use_of_reference_frames
-    environment_setup/valid_time_range
 
 In various applications, the environment models that are already implemented in Tudat will not suffice for a given application, and you will want to define your own custom models. The manner in which to do this is similar for each environment model, and is discussed in more detail below:
 

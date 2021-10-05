@@ -10,11 +10,11 @@ Largely, these settings are derived from so-called Spice kernels. `Spice <https:
 
 The cspice toolkit (version of spice written in the C language) is included in the conda environment when installing tudat, and Tudat contains a number of functions to directly interact with spice (see TODO for all available functions in our spice interface). Spice relies on a set of user-supplier input files, or 'kernels' to perform its calculations. A number of these kernels are installed automatically with Tudat, specifically, Tudat comes with the following Spice kernels:
 
-* TODO
+* TODO (add list of time interval at which these are valid)
 
 Using the data from these Spice kernels into Tudat, the following default models are used by Tudat when calling the TODO function
 
-* **Ephemeris** Directly from Spice (any body available through Spice kernels). For our default settings, this includes solar system planets and Martian, Jovian and Saturnian satellites. Users can append this list with additional ephemeris files, for instance for small bodies or other satellite systems, through the use of the TODO function
+* **Ephemeris** Directly from Spice (any body available through Spice kernels). For our default settings, this includes solar system planets and Martian, Jovian and Saturnian satellites. Users can append this list with additional ephemeris files, for instance for small bodies or other satellite systems, through the use of the TODO function. 
 * **Rotation model** Directly from Spice (any body available through Spice kernels). For body Foo, Tudat uses the frame IAU_Foo defined in Spice as the body-fixed frame. These rotation models are implementations of results published by the IAU Working Group on Cartographic Coordinates and Rotational Elements
 * **Shape model** Directly loaded from Spice (any body available through Spice kernels). Tudat uses the average radius from Spice to define a spherical shape model for all bodies
 

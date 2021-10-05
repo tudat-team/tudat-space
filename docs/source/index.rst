@@ -6,14 +6,20 @@ We are propelled by the idea of providing educators, researchers, students, and
 enthusiasts with accessibility to a powerful toolkit to fuel careers and
 passions in astrodynamics and space.
 
-The TU Delft Astrodynamics Toolbox (Tudat) is a powerful set of C++ libraries that support astrodynamics and space research. One of the key strengths within Tudat is its ability to combine such libraries in a powerful simulator framework. Such framework can be used for a wide variety of purposes, ranging from the study of reentry dynamic to interplanetary missions. 
+The TU Delft Astrodynamics Toolbox (Tudat) is a powerful set of libraries that support astrodynamics and space research. One of the key strengths within Tudat is its ability to combine such libraries in a powerful simulator framework. Such framework can be used for a wide variety of purposes, ranging from the study of reentry dynamic to interplanetary missions. The functionality of Tudat is implemented in C++, but a Python interface, called Tudatpy, is now available, through which the core simulation functionality can be accessed. Tudat and Tudatpy are disseminated as conda packages, to get started on them, have a look at our 
+:ref:`installation guide<getting_started_tudatpy>`.
 
-A detailed list containing the features and applications of Tudat is given here:
+On this website, you will find a user guide for Tudat, which walks you through the manner in which to set up a simulation, and start designing transfer orbits, propagating trajectories, analyzing uncertainties or estimating gravity fields! A detailed function-by-function description of our software can be found on our  `API website <https://tudatpy.readthedocs.io/en/latest/>`_. 
+
+
+Tudat's core functionality is in everything related to numerical progation of dynamics, including functionality such as:
 
 - Choices of various, fixed and variable step-size, integrators, including: Runge-Kutta 4, Runge-Kutta variable step-size (various orders), Bulirsch-Stoer, and Adams-Bashfort-Moulton. 
-- Propagation of the translational state, rotational state, mass, or any user defined state derivative function. With various options for the terminal conditions and dependent variables that are derived from the state.
-- Propagation of not only the state, but also the variational equations associated with the dynamics, over a single arc, multiple arcs, or a combination.
-- Options to include environments of solar-system bodies in the simulation, e.g. gravity fields, atmosphere, orbits and rotations of various planets, and a radiation environment (for the calculation of radiation pressure).
+- Propagation of the **diverse state types**: translational state, rotational state, mass, or any user defined state derivative function. 
+- Flexible options for the **termination conditions** of a propagation 
+- Options to **save environment and system properties** during the propagation
+- Propagation of not only the state, but also the **variational equations **associated with the dynamics, over a single arc, multiple arcs, or a combination.
+- Numerous **built-in and customizable solar-system body models**, e.g. gravity fields, atmosphere, orbits and rotations of various planets.
 - Options to include acceleration models, e.g. point mass gravity, spherical harmonics gravity, aerodynamics, radiation pressure, and thrust.
 - Building of a custom made, or pre-defined, aerodynamic guidance model and/or thrust guidance model. 
 - Defining a vehicle to be used in the simulation, for which the mass, aerodynamic coefficients, reference area, orientation, and various other parameters can be defined by the user. 
@@ -40,7 +46,7 @@ Tudat has also been used extensively in research projects, a few of them are lis
 
 .. toctree::
    :maxdepth: 2
-   :caption: First Steps
+   :caption: Getting started
    :hidden:
 
    _src_first_steps/tudat_py
@@ -48,15 +54,7 @@ Tudat has also been used extensively in research projects, a few of them are lis
 
 .. toctree::
    :maxdepth: 2
-   :caption: Intermediate Steps
-   :hidden:
-
-   _src_intermediate/post_processing
-   _src_intermediate/visualisation
-
-.. toctree::
-   :maxdepth: 2
-   :caption: API
+   :caption: User guide
    :hidden:
 
    _src_api/state_propagation
@@ -66,12 +64,19 @@ Tudat has also been used extensively in research projects, a few of them are lis
 
 .. toctree::
    :maxdepth: 2
-   :caption: Examples
+   :caption: Example applications
    :hidden:
 
    _src_examples/simulation_examples/simulation_ex
    _src_examples/pygmo_examples/pygmo_ex
 
+.. toctree::
+   :maxdepth: 2
+   :caption: Processing results
+   :hidden:
+
+   _src_intermediate/post_processing
+   _src_intermediate/visualisation
 .. toctree::
    :maxdepth: 2
    :caption: Use of Tools

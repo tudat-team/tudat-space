@@ -23,6 +23,8 @@ A detailed list containing the features and applications of Tudat is given here:
 
 Tudat has also been used extensively in research projects, a few of them are listed below:
 
+- `Analytical framework for mutual approximations-Derivation and application to Jovian satellites<https://www.aanda.org/articles/aa/abs/2021/08/aa41261-21/aa41261-21.html>`_, Fayolle, M., Dirkx, D., Visser, P. N. A. M., & Lainey, V. (2021). . Astronomy & Astrophysics, 652, A93.
+s
 - `Propagation and estimation of the dynamical behaviour of gravitationally interacting rigid bodies <https://link.springer.com/article/10.1007/s10509-019-3521-4>`_, Dirkx, D., Mooij, E., & Root, B. Astrophysics and Space Science, 364(2), 2019, 37.
 - `Ariane 5 GTO debris mitigation using natural perturbations <https://www.sciencedirect.com/science/article/pii/S0273117718308792?dgcid=coauthor>`_, Pinardell Pons, A., and Noomen, R. Advances in Space Research (in press) 2019.
 - `Laser and radio tracking for planetary science missions—a comparison <https://link.springer.com/article/10.1007/s00190-018-1171-x>`_, Dirkx, D., Prochazka, I., Bauer, S., Visser, P., Noomen, R., Gurvits, L. I., & Vermeersen, B. Journal of Geodesy (in press), 2018
