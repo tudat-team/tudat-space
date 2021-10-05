@@ -2,6 +2,8 @@
 Mathematics
 ***********
 
+.. _interpolators:
+
 Interpolators
 =============
 
@@ -75,6 +77,8 @@ When the ``interpolate`` function of the interpolator is called, the interpolato
 
 * Hunting algorithm: here, the interpolator 'remembers' which value of :math:`t_{i}` was the nearest neighbour during the previous call to the interpolate function, and starts looking at/near this entry of the data set :math:`[t_{i}]` to find the nearest neighbour
 * Binary algorithm: the algorithm uses a binary search algorithm to find the nearest neighbour (see Press at al.)
+
+.. _lagrange_interpolator_issues:
 
 Special considerations: Lagrange interpolator
 ---------------------------------------------

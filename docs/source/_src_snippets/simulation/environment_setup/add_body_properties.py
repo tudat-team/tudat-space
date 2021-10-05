@@ -1,5 +1,5 @@
 # Set mass of vehicle
-bodies.get_body( "Vehicle").set_constant_mass(5000.0)
+bodies.get( "Vehicle").set_constant_mass(5000.0)
 
 # Create aerodynamic coefficient interface settings, and add to vehicle
 aero_coefficient_settings = environment_setup.aerodynamic_coefficients.constant(

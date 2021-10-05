@@ -25,7 +25,7 @@ Creating a set of celestial bodies is done by creating a list of settings for al
           .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
              :language: cpp
 
-where the ``global_frame_origin`` and ``global_frame_orientation`` define the reference frame in which state vectors stored in the environment `during` propagation are represented. In general, it is recommended to choose this as the most 'intuitive' frame origin for your propagation (e.g. SSB or Sun for solar system scale propagations, Earth for an Earth orbiter, Mars for a Martian mission, etc.). This frame definition is *distinct* from the center of propagation that you can define in your :ref:`propagator seteup<simulation_propagator_setup>`.  See the page on `reference frames<propagation_reference_frames>` for details on the distinction between them.
+where the ``global_frame_origin`` and ``global_frame_orientation`` define the reference frame in which state vectors stored in the environment `during` propagation are represented. In general, it is recommended to choose this as the most 'intuitive' frame origin for your propagation (e.g. SSB or Sun for solar system scale propagations, Earth for an Earth orbiter, Mars for a Martian mission, etc.). This frame definition is *distinct* from the center of propagation that you can define in your :ref:`propagator setup<simulation_propagator_setup>`.  See the page on :ref:`reference frames<propagation_reference_frames>` for details on the distinction between them.
 
 The following options are currently available:
 

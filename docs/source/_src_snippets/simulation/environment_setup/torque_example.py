@@ -13,7 +13,7 @@ torque_settings_vehicle = dict(
     ],
     Earth=
     [
-        propagation_setup.torque.spherical_harmonic_gravity(4, 4),
+        propagation_setup.torque.spherical_harmonic_gravitational(4, 4),
         propagation_setup.torque.aerodynamic()
     ])
 

@@ -67,6 +67,14 @@ The handling of rotational states in the environment and propagation framework f
 
 However, Tudat presently requires all **translational** state vectors to be defined w.r.t. the same inertial orientation (J2000 or ECLIPJ2000, selected by the user). As such, rotations in Tudat that are defined in one of the above three places will always be from this inertial frame to the body-fixed frame (of the body associated with it). 
 
+.. _quaternion_definition:
+
+Definition of rotational state
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The basic definition of a rotational states in Tudat uses quaternions, which is a typical non-singular choice of elements. However, the exact definition of the quaternion entries :math:`q_{0},q_{1},q_{2},q_{3}` is non-unique, with several conventions in use. Our quaternion definition is that used in the `Eigen library <https://eigen.tuxfamily.org/dox/classEigen_1_1Quaternion.html>`_. Instead of having to manually determine each of the quaternion entries for a given rotation, we provide a function which converts a rotation matrix to the corresponding quaternion ``rotation_matrix_to_quaternion_entries``, and the inverse ``quaterion_entries_to_rotation_matrix`` (TODO: add API links). Here, we stress that, in the context of these functions, we are not dealing with actual quaternions (in the sense of mathematical operators that can rotate a vector), but merely with 4x1 arrays which store the four quaternion elements, using the correct conventions.
+
+
 Predefined orientations
 =======================
 

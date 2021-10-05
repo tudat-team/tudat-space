@@ -45,7 +45,6 @@ When defining the environment, it is important to understand a number of aspects
     :maxdepth: 1
 
     environment_setup/use_of_reference_frames
-    environment_setup/valid_time_range
 
 In various applications, the environment models that are already implemented in Tudat will not suffice for a given application, and you will want to define your own custom models. The manner in which to do this is similar for each environment model, and is discussed in more detail below:
 
@@ -224,8 +223,8 @@ There are various types of simulators, each of which offers different functional
 Propagating System State Only
 =================================
 
-Simulations in which only the system state is propagated are handled by simulator objects from the ``DynamicsSimulator`` class.
-For propagation of the system state along a single arc, the ``SingleArcDynamicsSimulator`` derivative of the ``DynamicsSimulator`` base class should be used:
+Simulations in which only the system state is propagated are handled by simulator objects from the ``Simulator`` class.
+For propagation of the system state along a single arc, the ``SingleArcSimulator`` derivative of the ``Simulator`` base class should be used:
 
 .. tabs::
 
@@ -237,7 +236,7 @@ For propagation of the system state along a single arc, the ``SingleArcDynamicsS
           .. code-block:: python
           
       		# Create simulation object and propagate dynamics.
-      		dynamics_simulator = propagation_setup.SingleArcDynamicsSimulator(
+                dynamics_simulator = propagation_setup.SingleArcSimulator(
         		bodies, integrator_settings, propagator_settings)
         		
     		states = dynamics_simulator.state_history
@@ -248,9 +247,9 @@ For propagation of the system state along a single arc, the ``SingleArcDynamicsS
           .. literalinclude:: /_src_snippets/simulation/environment_setup/req_setup.cpp
              :language: cpp
              
-First, a ``SingleArcDynamicsSimulator`` is created using the system of bodies, integrator settings, and propagator settings objects.
+First, a ``SingleArcSimulator`` is created using the system of bodies, integrator settings, and propagator settings objects.
 Tudat will then automatically read and setup the simulation accordingly.
-The state history is retrieved in the next line by accessing the ``state_history`` attribute of the ``DynamicsSimulator``.
+The state history is retrieved in the next line by accessing the ``state_history`` attribute of the ``Simulator``.
 The ``state_history`` attribute is of type dictionary (Python) or map (C++) and contains the state of the propagated body at each epoch, which can be exported or used for subsequent analysis.
 
 It's important to realize that, *regardless* of the formulation of the equations of motion (Cowell, Gauss-Kepler, etc.), the ``state_history`` attribute will always provide the results of the propagation, converted to Cartesian elements (for the case of translational dynamics).
@@ -284,17 +283,17 @@ For a complete example of a perturbed single-arc propagation, please see the tut
 Propagating System State & Variational Equations
 =========================================================
 
-For propagation of the variational equations alongside the system state, a different sort of simulator object - a ``VariationalEquationsSolver`` - has to be used.
-``VariationalEquationsSolver`` objects contain a ``DynamicsSimulator`` object, which means that they can do anything that a ``DynamicsSimulator`` can plus the added functionality of propagating variational equations.
+For propagation of the variational equations alongside the system state, a different sort of simulator object - a ``VariationalSimulator`` - has to be used.
+``VariationalSimulator`` objects contain a ``Simulator`` object, which means that they can do anything that a ``Simulator`` can plus the added functionality of propagating variational equations.
 
 
-To propagate the variational equations alongside the single-arc system state, the ``SingleArcVariationalEquationsSolver`` derivative of the ``VariationalEquationsSolver`` base class should be used.
+To propagate the variational equations alongside the single-arc system state, the ``SingleArcVariationalSimulator`` derivative of the ``VariationalSimulator`` base class should be used.
 With the basic simulation setup (system of bodies, integrator settings, propagator settings) and the parameter settings for the variational equations, a variational equations solver can be set up.
 The setup works similarly to the normal dynamics simulator:
 
 .. code-block:: python
 	
-	variational_equations_solver = estimation_setup.SingleArcVariationalEquationsSolver(
+        variational_equations_solver = estimation_setup.SingleArcVariationalSimulator(
 		bodies, integrator_settings, propagator_settings,
 		estimation_setup.create_parameters_to_estimate(parameter_settings, bodies)
 		)

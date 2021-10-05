@@ -6,7 +6,7 @@ torque_settings_moon = dict(
     ],
     Earth=
     [
-        propagation_setup.torque.spherical_harmonic_gravity(4, 4)
+        propagation_setup.torque.spherical_harmonic_gravitational(4, 4)
     ]
 )
 
@@ -26,5 +26,5 @@ torque_settings_earth = dict(
 # assign the torque selections to respective bodies that act upon
 acceleration_settings = {
     "Moon": torque_settings_moon,
-	"Earth": torque_settings_earth
+    "Earth": torque_settings_earth
 }

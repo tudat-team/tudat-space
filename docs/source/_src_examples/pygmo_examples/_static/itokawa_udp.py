@@ -92,7 +92,7 @@ class AsteroidOrbitProblem:
         # Retrieves system of bodies
         current_bodies = self.bodies_function()
         # Retrieves Itokawa gravitational parameter
-        itokawa_gravitational_parameter = current_bodies.get_body("Itokawa").gravitational_parameter
+        itokawa_gravitational_parameter = current_bodies.get("Itokawa").gravitational_parameter
         # Reset the initial state from the decision variable vector
         new_initial_state = conversion.keplerian_to_cartesian(
             gravitational_parameter=itokawa_gravitational_parameter,
@@ -110,7 +110,7 @@ class AsteroidOrbitProblem:
         propagator_settings.reset_initial_states(new_initial_state)
 
         # Propagate orbit
-        dynamics_simulator = propagation_setup.SingleArcDynamicsSimulator(current_bodies,
+        dynamics_simulator = propagation_setup.SingleArcSimulator(current_bodies,
                                                                           integrator_settings,
                                                                           propagator_settings,
                                                                           print_dependent_variable_data=False)

@@ -59,12 +59,12 @@ The propagation w.r.t. these parameters will result in the history of a sensitiv
 Create dynamics simulator
 -------------
 
-The dynamics simulator in this use case is a ``SingleArcVariationalEquationsSolver`` object.
+The dynamics simulator in this use case is a ``SingleArcVariationalSimulator`` object.
 It propagates the variational equations specified by ``estimation_setup.create_parameters_to_estimate()`` alongside the dynamics of the orbiter as specified in ``propagator_settings``.
 
 .. code-block:: python
 
-    variational_equations_solver = estimation_setup.SingleArcVariationalEquationsSolver(
+    variational_equations_solver = estimation_setup.SingleArcVariationalSimulator(
         bodies, integrator_settings, propagator_settings, estimation_setup.create_parameters_to_estimate(
             parameter_settings, bodies
         ),

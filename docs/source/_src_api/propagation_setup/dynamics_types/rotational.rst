@@ -10,7 +10,7 @@ Settings to define the propagation of rotational dynamics are largely similar to
 * No 'central body' is specified. The rotational state that is propagated is always that from the global inertial orientation, to the body-fixed orientation of the propagated body.
 * The propagated state formulation is, by default, a vector of size 7 (for a single body), with:
 
-   * Entries 1-4: The quaternion defining the rotation from inertial to body-fixed frame;
+   * Entries 1-4: The quaternion defining the rotation from inertial to body-fixed frame, see :ref:`this page<quaternion_definition>` for a definition of quaternion entries in Tudat.
    * Entries 5-7: The body's angular velocity vector, expressed in its body-fixed frame.
 Quaternions are used in lieu of e.g. Euler angles because they get rid of ambiguities and gimbal locks.
 * Alternative formulations for the propagated state vector can be selected from the list at the end of this page.

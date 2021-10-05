@@ -123,7 +123,6 @@ Ephemeris Models
 
          .. tab:: C++
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/direct_spice_ephemeris_alt.cpp
              :language: cpp
 
    which allows one to add the ephemeris model of any body to any custom body. In the above example, the body ``CustomBody`` is endowed with the approximate ephemeris model of ``Jupiter``. 
@@ -153,10 +152,9 @@ Ephemeris Models
 
          .. tab:: C++
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/interpolated_spice_ephemeris.cpp
              :language: cpp
 
-  creating a barycentric (SSB) ephemeris with axes along J2000, with data retrieved from Spice at 3600 s intervals between t=0 and t=1.0E8. By default, a 6th order Lagrange interpolator is used (NOTE: the Lagrange interpolator is not reliable at the edges of the interpolation interval, as discussed :ref:`here<lagrange_interpolator_edges>`) Settings for an alternative interpolator can be use (see :ref:`interpolators<interpolator_settings>`) by specifying the optional input argument. Additionally, as is the case for the :class:`.Direct Spice Ephemeris`, an optional input argument ``body_name_to_use`` to use an ephemeris model from Spice for body A and assign it to body B.
+  creating a barycentric (SSB) ephemeris with axes along J2000, with data retrieved from Spice at 3600 s intervals between t=0 and t=1.0E8. By default, a 6th order Lagrange interpolator is used (NOTE: the Lagrange interpolator is not reliable at the edges of the interpolation interval, as discussed :ref:`here<lagrange_interpolator_issues>`) Settings for an alternative interpolator can be use (see :ref:`interpolators<interpolators>`) by specifying the optional input argument. Additionally, as is the case for the :class:`.Direct Spice Ephemeris`, an optional input argument ``body_name_to_use`` to use an ephemeris model from Spice for body A and assign it to body B.
 
 
 .. class:: Kepler Ephemeris
@@ -184,7 +182,6 @@ Ephemeris Models
 
          .. tab:: C++
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/kepler_ephemeris.cpp
              :language: cpp
 
   This creates a Kepler orbit as ephemeris using the given kepler elements (``initial_state_in_keplerian_elements`` numpy array, size 6, required order: :math:`a,e,i,\omega,\Omega,\theta`, with the final element the true anomaly). These are taken as the elements at the time ``initial_state_epoch`` and propagated to any other time using the provided ``central_body_gravitational_parameter``. See :ref:`Frame/State Transformations` for more details on orbital elements in Tudat.
@@ -214,7 +211,6 @@ Ephemeris Models
 
          .. tab:: C++
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/kepler_ephemeris_spice.cpp
              :language: cpp
 
   The initial Keplerian state is extracted from Spice as the state of ``body_name`` w.r.t. ``frame_origin``.
@@ -244,7 +240,6 @@ Ephemeris Models
 
          .. tab:: C++
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/constant_ephemeris.cpp
               :language: cpp
    
    with ``constant_cartesian_state`` being the constant Cartesian state of the body (as a numpy array, size 6)
@@ -335,7 +330,6 @@ Ephemeris Models
 
          .. tab:: C++
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/scaled_ephemeris.cpp
              :language: cpp
 
 In the above case, the original Jupiter ephemeris setting is taken, and each state element (x,y,z position and velocity) from the original ephemeris is multiplied by a factor 1.001 before being used in the simulation. Two additional interfaces exist:
@@ -407,8 +401,6 @@ Gravity Field Models
           .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/point_mass_gravity_spice.cpp
              :language: cpp
 
-.. _environment_spherical_harmonics_gravity:
-
 .. class:: Spherical Harmonics Gravity
 
 
@@ -469,7 +461,6 @@ Gravity Field Models
 
          .. tab:: C++
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/spherical_harmonic_triaxial_body.cpp
              :language: cpp
 
   The ``axis_A``, ``axis_B`` and ``axis_C`` inputs represent the dimensions of principal axis of the ellipsoid (with A>B>C), and the ``density`` represents the mass density of the body (assumed homogeneous). The maximum degree and order of the spherical harmonic coefficients that are calculated have to be provided (a true homogeneous ellipsoid has non-zero coefficients up to infinite degree), as does the reference frame in which teh coefficients are to be defined (see :class:`Spherical Harmonics Gravity`).
@@ -504,7 +495,6 @@ Unlike most other environment models, gravity field variations are provided as a
 
          .. tab:: C++
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/gravity_field_tides_simple.cpp
              :language: cpp
  
   This interface defines a single Love number for a full degree. Specifically, the above case computes tides raised by the Moon, for the case where :math:`k_{2}=k_{20}=k_{21}=k_{22}=0.3`. The ``love_number`` variable may be provided as a float or complex type.
@@ -530,7 +520,6 @@ Unlike most other environment models, gravity field variations are provided as a
 
          .. tab:: C++
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/gravity_field_tides_multiple_degrees.cpp
              :language: cpp
  
   This interface defines a separate Love number for multiple full degrees. Specifically, the above case computes tides raised by the Moon, for the case where :math:`k_{2}=k_{20}=k_{21}=k_{22}=0.3` and :math:`k_{3}=k_{30}=k_{31}=k_{32}=k_{33}=0.1`. The values of :math:`k_{2}` and :math:`k_{3}`  may be provided as a float or complex type.
@@ -556,7 +545,6 @@ Unlike most other environment models, gravity field variations are provided as a
 
          .. tab:: C++
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/gravity_field_tides_multiple_orders.cpp
              :language: cpp
  
   This interface defines a separate Love number at each order for a single degree. the above case computes tides raised by the Moon :math:`k_{20}=0.31`, :math:`k_{21}=0.305` and :math:`k_{22}=0.308`. The entries of ``love_numbers`` may be provided as a float or complex type.
@@ -587,7 +575,6 @@ Unlike most other environment models, gravity field variations are provided as a
 
          .. tab:: C++
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/tabulate_gravity_variations.cpp
              :language: cpp
 
   where the ``cosine_variations_table``  and ``sine_variations_table`` variables contain the tabulated data for the variations of the spherical harmonic coefficients. Both are dictionaries (keys: floats representing time - values: numpy arrays, size :math:`N\times M`, representing variation in gravity field coefficients at given time). Each value in these two dictionaries must be the same size array. The ``minimum_degree`` and ``minimum_degree`` inputs define how the data in the table is processed: they denote the degree and order of the variation that the (0,0) entry in each value in the dictionaries represent. For instance, for array sizes :math:`N=2` and :math:`M=3`, the above would provide variations in gravity field at degree 2 and 3 (up to order 3)
@@ -638,7 +625,7 @@ Atmosphere Models
           .. toggle-header:: 
              :header: Required **Show/Hide**
 
-             .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/req_environment_models_simple.py
+             .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/req_environment_models.py
                 :language: python
 
           .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/exponential_atmosphere.py
@@ -652,7 +639,6 @@ Atmosphere Models
 
          .. tab:: C++
 
-            .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/exponential_atmosphere_simple.cpp
                :language: cpp
 
   When using this interface, all other properties are set to NaN, and it is not possible to extract any other property besides the density from the atmosphere model.
@@ -722,7 +708,6 @@ Atmosphere Models
 
          .. tab:: C++
 
-            .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/scaled_atmosphere.cpp
                :language: cpp
 
   In the above case, the original Earth atmosphere setting is taken, and the density from the original model is multiplied by a factor 1.5 before being used in the simulation. An additional interfaces exist:
@@ -947,7 +932,6 @@ Rotational Models
 
          .. tab:: C++
 
-            .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/simple_spice_rotation_model.cpp
                :language: cpp
 
   The initial orientation and rotation rate are extracted from Spice at the time defined by ``initial_time``. The distinction between the two target frame inputs is the following:
@@ -1018,7 +1002,6 @@ Rotational Models
 
          .. tab:: C++
 
-            .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/synchronous_rotation_model.cpp
                :language: cpp
 
   The above code snippet defines the frame ``Phobos_Fixed`` to be fully synchronous w.r.t. Mars (and ``ECLIPJ2000`` as the base frame).
@@ -1048,7 +1031,6 @@ Rotational Models
 
          .. tab:: C++
 
-            .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/constant_rotation_model.cpp
                :language: cpp
   
   The rotation from original (inertial) to target (body-fixed) frame is defined by the ``constant_orientation`` rotation matrix (numpy 3x3 array).

@@ -4,6 +4,8 @@
 List of all Acceleration Models
 ===============================
 
+.. _point_mass_acceleration:
+
 Point-mass Gravity
 ##################
 
@@ -25,6 +27,8 @@ Requires the following environment models to be defined:
 
 - Gravity field for body exerting acceleration, see :ref:`environment_gravity_field_model` for non-default models.
 - Current state of body exerting acceleration, either from a pre-defined ephemeris model (see :ref:`environment_ephemeris_model`) or from the numerical propagation of the translational dynamics of the body exerting the acceleration (Earth in the above example).
+
+.. _spherical_harmonic_acceleration:
 
 Spherical Harmonic Gravity
 ##########################
@@ -54,12 +58,11 @@ where the gravity field will be expanded up to degree and order 12 in the accele
 
    .. tab:: C++
 
-    .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/spherical_harmonic_gravity_zonal.cpp
        :language: cpp
 
 Requires the following environment models to be defined:
 
-- Spherical harmonic gravity field for body exerting acceleration. See :ref:`environment_spherical_harmonics_gravity` for options on how to define one (if the default gravity field model of the exerting body is not spherical harmonic)
+- Spherical harmonic gravity field for body exerting acceleration. See :ref:`environment_gravity_field_model` for options on how to define one (if the default gravity field model of the exerting body is not spherical harmonic)
 - Rotation model from the inertial frame to the body-fixed frame, either from a pre-defined rotation model (:ref:`environment_rotational_model`) or from the numerical propagation of the rotational dynamics of the body exerting the acceleration (Earth in the above example).
 - Current state of body exerting acceleration, either from a pre-defined ephemeris model (see :ref:`environment_ephemeris_model`) or from the numerical propagation of the translational dynamics of the body exerting the acceleration (Earth in the above example).
 
@@ -131,7 +134,7 @@ while the following will add the third-body spherical-harmonic acceleration of t
     .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/spherical_harmonic_gravity_zonal.cpp
        :language: cpp
 
-Note that above two code blocks are identical to those given as exaple for the :ref:`point_mass_acceleration` and the :ref:`spherical_harmonic_acceleration`. It is through the definition *of the central body* that a direct, central or third-body acceleration is created.
+Note that above two code blocks are identical to those given as example for the :ref:`point_mass_acceleration` and the :ref:`spherical_harmonic_acceleration`. It is through the definition *of the central body* that a direct, central or third-body acceleration is created.
 
 Aerodynamic Acceleration
 ########################
@@ -239,7 +242,6 @@ Schwarzschild only:
 
  .. tab:: C++
 
-  .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/relativistic_1.cpp
      :language: cpp
 
 De Sitter only:
@@ -253,7 +255,6 @@ De Sitter only:
 
  .. tab:: C++
 
-  .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/relativistic_2.cpp
      :language: cpp
 
 
@@ -268,7 +269,6 @@ Lense-Thirring only:
 
  .. tab:: C++
 
-  .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/relativistic_3.cpp
      :language: cpp
 
 
@@ -341,40 +341,6 @@ Settings for a panelled radiation pressure acceleration. For example of accelera
 Requires the following environment models to be defined:
 
 - Panelled radiation pressure model for body undergoing acceleration (from source equal to body exerting acceleration), see :ref:`environment_radiation_pressure_interface`.
-- Current state of body undergoing and body emitting radiation.
-
-Solar sailing Acceleration
-##########################
-
-Settings for a solar sail acceleration. For example of acceleration exerted on “Apollo” by “Sun”:
-
-.. tabs::
-
-   .. tab:: Python
-
-    .. toggle-header::
-       :header: Required **Show/Hide**
-
-       .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/req_cannonball_radiation_pressure.py
-          :language: python
-
-    .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/solar_sailing.py
-       :language: python
-
-    .. toggle-header::
-       :header: Required after **Show/Hide**
-
-       .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/req_acceleration_models_after.py
-          :language: python
-
-   .. tab:: C++
-
-    .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/solar_sailing.cpp
-       :language: cpp
-
-Requires the following environment models to be defined:
-
-- Solar sailing radiation pressure model for body undergoing acceleration (from source equal to body exerting acceleration), :ref:`environment_radiation_pressure_interface`.
 - Current state of body undergoing and body emitting radiation.
 
 

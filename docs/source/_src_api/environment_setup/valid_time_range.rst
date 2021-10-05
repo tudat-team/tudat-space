@@ -1,3 +1,5 @@
+.. _valid_time_range:
+
 ==============================================
 Default bodies with a limited valid time range
 ==============================================

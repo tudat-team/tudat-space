@@ -63,7 +63,7 @@ Now it's time to create your vehicle. In the following code, a vehicle named *De
   
     bodies.create_empty_body( "Delfi-C3" )
 
-    bodies.get_body( "Delfi-C3").set_constant_mass( 400.0 )
+    bodies.get( "Delfi-C3").set_constant_mass( 400.0 )
 
 Create interfaces
 -----------------
@@ -198,7 +198,7 @@ At the beginning of your script, you have defined a simulation start epoch, but 
 
 .. code-block:: python
       
-    earth_gravitational_parameter = bodies.get_body( "Earth" ).gravitational_parameter
+    earth_gravitational_parameter = bodies.get( "Earth" ).gravitational_parameter
 
     initial_state = conversion.keplerian_to_cartesian(
         gravitational_parameter = earth_gravitational_parameter,
@@ -263,7 +263,7 @@ Create dynamics simulator
 
 .. code-block:: python
       
-    variational_equations_solver = estimation_setup.SingleArcVariationalEquationsSolver(
+    variational_equations_solver = estimation_setup.SingleArcVariationalSimulator(
     bodies, integrator_settings, propagator_settings, estimation_setup.create_parameters_to_estimate( parameter_settings, bodies ),
     integrate_on_creation=1 )
 

@@ -24,5 +24,5 @@ accelerations_settings_earth = dict(
 # Create global accelerations settings dictionary.
 acceleration_settings = {
     "Moon": accelerations_settings_moon,
-	"Earth": accelerations_settings_earth
+    "Earth": accelerations_settings_earth
 }

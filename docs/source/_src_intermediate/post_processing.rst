@@ -10,7 +10,7 @@ state and dependent variable histories. In Python, this is returned as a ``dict[
     # ...
 
     # Create simulation object and propagate dynamics.
-    dynamics_simulator = propagation_setup.SingleArcDynamicsSimulator(
+    dynamics_simulator = propagation_setup.SingleArcSimulator(
         bodies,
         integrator_settings,
         propagator_settings,

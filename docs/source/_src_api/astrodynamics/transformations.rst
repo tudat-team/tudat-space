@@ -61,7 +61,7 @@ Transformation between these elements is done by passing through quaternions fir
 
 		cartesian_state = ...
 		central_body = ...
-		central_body_gravitational_parameter = bodies.get_body( central_body ).gravitational_parameter
+		central_body_gravitational_parameter = bodies.get( central_body ).gravitational_parameter
 
 		keplerian_state = conversion.cartesian_to_keplerian( cartesian_state, central_body_gravitational_parameter )
 
@@ -71,7 +71,7 @@ Transformation between these elements is done by passing through quaternions fir
 
 		keplerian_state = ...
 		central_body = ...
-		central_body_gravitational_parameter = bodies.get_body( central_body ).gravitational_parameter
+		central_body_gravitational_parameter = bodies.get( central_body ).gravitational_parameter
 
 		cartesian_state = conversion.keplerian_to_cartesian( keplerian_state, central_body_gravitational_parameter )
 
@@ -204,7 +204,7 @@ Transformation between these elements is done by passing through quaternions fir
 
 		cartesian_state = ...
 		central_body = ...
-		central_body_gravitational_parameter = bodies.get_body( central_body ).gravitational_parameter
+		central_body_gravitational_parameter = bodies.get( central_body ).gravitational_parameter
 
 		modified_equinoctial_state = conversion.cartesian_to_modified_equinoctial( cartesian_state, central_body_gravitational_parameter, flip_singularity_to_zero_inclination )
 
@@ -217,7 +217,7 @@ Transformation between these elements is done by passing through quaternions fir
 
 		modified_equinoctial_state = ...
 		central_body = ...
-		central_body_gravitational_parameter = bodies.get_body( central_body ).gravitational_parameter
+		central_body_gravitational_parameter = bodies.get( central_body ).gravitational_parameter
 
 		cartesian_state = conversion.modified_equinoctial_to_cartesian( modified_equinoctial_state, central_body_gravitational_parameter, flip_singularity_to_zero_inclination )
 		
@@ -270,7 +270,7 @@ Transformation between these elements is done by passing through quaternions fir
 
 		keplerian_elements = ...
 		central_body = ...
-		central_body_gravitational_parameter = bodies.get_body( central_body ).gravitational_parameter
+		central_body_gravitational_parameter = bodies.get( central_body ).gravitational_parameter
 
 		unified_state_model_elements = conversion.keplerian_to_unified_state_model( keplerian_elements, central_body_gravitational_parameter )
 
@@ -280,7 +280,7 @@ Transformation between these elements is done by passing through quaternions fir
 
 		unified_state_model_elements = ...
 		central_body = ...
-		central_body_gravitational_parameter = bodies.get_body( central_body ).gravitational_parameter
+		central_body_gravitational_parameter = bodies.get( central_body ).gravitational_parameter
 
 		keplerian_elements = conversion.unified_state_model_to_keplerian( keplerian_elements, central_body_gravitational_parameter )
 
@@ -378,7 +378,7 @@ Transformations in ``tudatpy`` requires this import statement:
 		bodies = ...
 		current_time = ...
 
-		moon_cartesian_state_in_earth_centered_frame = bodies.at( "Moon" ).get_state_in_base_frame_from_ephemeris( current_time ) - bodies.at( "Earth" ).get_state_in_base_frame_from_ephemeris( current_time )
+                moon_cartesian_state_in_earth_centered_frame = bodies.at( "Moon" ).state_in_base_frame_from_ephemeris( current_time ) - bodies.at( "Earth" ).state_in_base_frame_from_ephemeris( current_time )
 
 	You can also bypass the body map altogether, and use ``spice`` to obtain the relative state. Note, however, that this will use whichever ``spice`` kernels you have loaded, and may not be consistent with the states you are using the bodies in your simulation.
 
@@ -424,7 +424,7 @@ Transformations in ``tudatpy`` requires this import statement:
 		current_time = ...
 		inertial_state = ...
 
-		body_fixed_state = transformation.state_to_target_frame( inertial_state, current_time, bodies.at( "Earth" ).get_rotational_ephemeris( ) )
+                body_fixed_state = transformation.state_to_target_frame( inertial_state, current_time, bodies.at( "Earth" ).rotational_ephemeris( ) )
 
 	The inverse is done as follows:
 
@@ -434,5 +434,5 @@ Transformations in ``tudatpy`` requires this import statement:
 		current_time = ...
 		body_fixed_state = ...
 
-		inertial_state = transformation.state_to_global_frame( body_fixed_state, current_time, bodies.at( "Earth" ).get_rotational_ephemeris( ) )
+                inertial_state = transformation.state_to_global_frame( body_fixed_state, current_time, bodies.at( "Earth" ).rotational_ephemeris( ) )
 
