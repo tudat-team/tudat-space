@@ -59,7 +59,10 @@ This example defines a termination condition using a dependent variable: the sim
 
 Where the three final, and optional, input arguments can be used with both when ``termination_settings`` and ``simulation_end_epoch`` are given. 
 
-.. class:: Translational Motion Propagators
+.. _translational_dynamics_propagators:
+
+Translational Dynamics Propagators
+==================================
 
 Tudat(Py) currently supports seven types of translational propagators, each having its own advantages and drawbacks. They are exposed in the ``propagation_setup.propagator`` module:
 
