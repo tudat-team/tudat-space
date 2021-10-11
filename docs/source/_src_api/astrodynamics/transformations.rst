@@ -25,7 +25,7 @@ Transformation between these elements is done by passing through quaternions fir
 
 .. code-block:: python
 	
-	from tudatpy.kernel.astro import conversion
+        from tudatpy.kernel.astro import element_conversion
 
 .. class:: Kepler Elements
 
@@ -353,7 +353,7 @@ Transformations in ``tudatpy`` requires this import statement:
 
 .. code-block:: python
 	
-	from tudatpy.kernel.astro import transformation
+        from tudatpy.kernel.astro import frame_conversion
 
 
 .. warning::
@@ -424,7 +424,7 @@ Transformations in ``tudatpy`` requires this import statement:
 		current_time = ...
 		inertial_state = ...
 
-                body_fixed_state = transformation.state_to_target_frame( inertial_state, current_time, bodies.at( "Earth" ).rotational_ephemeris( ) )
+                body_fixed_state = environment.transform_to_inertial_orientation( inertial_state, current_time, bodies.at( "Earth" ).rotational_ephemeris( ) )
 
 	The inverse is done as follows:
 
@@ -434,5 +434,5 @@ Transformations in ``tudatpy`` requires this import statement:
 		current_time = ...
 		body_fixed_state = ...
 
-                inertial_state = transformation.state_to_global_frame( body_fixed_state, current_time, bodies.at( "Earth" ).rotational_ephemeris( ) )
+                inertial_state = environment.transform_to_inertial_orientation( body_fixed_state, current_time, bodies.at( "Earth" ).rotational_ephemeris( ) )
 

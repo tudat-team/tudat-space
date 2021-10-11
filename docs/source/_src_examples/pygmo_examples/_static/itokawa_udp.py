@@ -1,8 +1,9 @@
 from typing import Tuple, List
 import numpy as np
 import tudatpy
-from tudatpy.kernel.simulation import propagation_setup
-from tudatpy.kernel.astro import conversion
+from tudatpy.kernel.numerical_simulation import propagation_setup
+from tudatpy.kernel.astro import frame_conversion
+from tudatpy.kernel.astro import element_conversion
 
 
 class AsteroidOrbitProblem:
@@ -18,7 +19,7 @@ class AsteroidOrbitProblem:
     """
 
     def __init__(self,
-                 bodies: tudatpy.kernel.simulation.environment_setup.SystemOfBodies,
+                 bodies: tudatpy.kernel.numerical_simulation.environment.SystemOfBodies,
                  integrator_settings,
                  propagator_settings,
                  mission_initial_time: float,
@@ -30,7 +31,7 @@ class AsteroidOrbitProblem:
 
         Parameters
         ----------
-        bodies : tudatpy.kernel.simulation.environment_setup.SystemOfBodies:
+        bodies : tudatpy.kernel.numerical_simulation.environment.SystemOfBodies:
             System of bodies.
         integrator_settings :
             Integrator settings object.

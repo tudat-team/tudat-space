@@ -6,7 +6,7 @@ import os
 # required internal imports
 from tudatpy.kernel import io
 from tudatpy.kernel.astro import two_body_dynamics
-from tudatpy.kernel.interface import spice_interface
+from tudatpy.kernel.interface import spice
 
 # future implementation
 spice_kernel_paths = spice_interface.get_standard_kernels([])

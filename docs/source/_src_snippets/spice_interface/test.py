@@ -1,4 +1,4 @@
-from tudatpy.kernel.interface import spice_interface
+from tudatpy.kernel.interface import spice
 
 # load tudat standard spice kernels
 spice_interface.load_standard_kernels()
