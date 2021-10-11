@@ -1,5 +1,5 @@
 # Set mass of vehicle
-bodies.get( "Vehicle").set_constant_mass(5000.0)
+bodies.get( "Vehicle").mass = 5000.0
 
 # Create aerodynamic coefficient interface settings, and add to vehicle
 aero_coefficient_settings = environment_setup.aerodynamic_coefficients.constant(
@@ -7,7 +7,7 @@ aero_coefficient_settings = environment_setup.aerodynamic_coefficients.constant(
     constant_force_coefficient = [drag_coefficient,0,0]
 )
 environment_setup.add_aerodynamic_coefficient_interface(
-            bodies, "Delfi-C3", aero_coefficient_settings );
+            bodies, "Vehicle", aero_coefficient_settings );
 
 # Create radiation pressure settings, and add to vehicle
 radiation_pressure_settings = environment_setup.radiation_pressure.cannonball(
@@ -17,4 +17,4 @@ radiation_pressure_settings = environment_setup.radiation_pressure.cannonball(
     occulting_bodies = ["Earth"]
 )
 environment_setup.add_radiation_pressure_interface(
-            bodies, "Delfi-C3", radiation_pressure_settings );
+            bodies, "Vehicle", radiation_pressure_settings );

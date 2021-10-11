@@ -14,10 +14,12 @@ The first lines of code in your script should always be the (``tudatpy``) import
 
     import numpy as np
     from tudatpy.kernel import constants
+    from tudatpy.kernel import numerical_simulation
+    from tudatpy.kernel.astro import element_conversion
     from tudatpy.kernel.interface import spice_interface
-    from tudatpy.kernel.simulation import environment_setup
-    from tudatpy.kernel.simulation import propagation_setup
-    from tudatpy.kernel.astro import conversion
+    from tudatpy.kernel.numerical_simulation import environment_setup
+    from tudatpy.kernel.numerical_simulation import propagation_setup
+    from tudatpy.kernel.numerical_simulation import propagation
 
 
 Important first steps to take are to load the spice kernels and to set the start- and end epochs of your simulation. In ``tudat``, J2000 is t = 0, with all times given in seconds. The simulation end epoch is set to be one Julian day, which equals 86400 s.
@@ -43,15 +45,11 @@ Bodies can be created by making a list of strings with the bodies you want to in
 
 .. code-block:: python
 
-    bodies_to_create = ["Sun", "Earth", "Moon", "Mars", "Venus"]
-
-    global_frame_orientation = "J2000" # centred around the Sun by default
-
+    global_frame_origin = "Earth"
+    global_frame_orientation = "J2000"
     body_settings = environment_setup.get_default_body_settings(
-        bodies_to_create,
-        base_frame_orientation=global_frame_orientation
-    )
-
+        bodies_to_create, global_frame_origin, global_frame_orientation )
+        
     bodies = environment_setup.create_system_of_bodies(body_settings)
 
 
@@ -64,7 +62,7 @@ Now it's time to create your vehicle. In the following code, a vehicle named *De
 
     bodies.create_empty_body( "Delfi-C3" )
 
-    bodies.get( "Delfi-C3").set_constant_mass( 2.2 )
+    bodies.get( "Delfi-C3").mass = 2.2
 
 Create interfaces
 -----------------
@@ -205,7 +203,7 @@ At the beginning of your script, you have defined a simulation start epoch, but 
 
     earth_gravitational_parameter = bodies.get( "Earth" ).gravitational_parameter
 
-    initial_state = conversion.keplerian_to_cartesian(
+    initial_state = conversion.keplerian_to_cartesian_elementwise(
         gravitational_parameter = earth_gravitational_parameter,
         semi_major_axis = 7500.0E3,
         eccentricity = 0.1,
@@ -260,13 +258,14 @@ Create propagator settings
 We have defined all the ingredients for the propagator settings. Let's create translational propagator settings for this case. For more detailes, also for other propagator dynamics, visit :ref:`simulation_propagator_setup`.
 
 .. code-block:: python
-      
+
+    termination_condition = propagation_setup.propagator.time_termination( simulation_end_epoch )
     propagator_settings = propagation_setup.propagator.translational(
         central_bodies,
         acceleration_models,
         bodies_to_propagate,
         initial_state,
-        simulation_end_epoch,
+        termination_condition,
         output_variables = dependent_variables_to_save
     )
 
@@ -364,8 +363,7 @@ Let's make some plots to visualize our simulation results. In order to make plot
 
   .. code-block:: python
 
-      total_acceleration_norm = np.sqrt( dependent_variable_list[:,0] ** 2 + dependent_variable_list[:,1] ** 2 + dependent_variable_list[:,2] ** 2 )
-
+      total_acceleration_norm = np.linalg.norm( dependent_variable_list[:, 0:3], axis = 1 )
 
   The first step is to make a figure to make your plot in.
 

@@ -13,15 +13,18 @@ Again, we are considering the Delfi-C3 Earth orbiter.
 The basic setup of the problem is therefore identical to that of the first minimal usecase of :ref:`propagating_a_spacecraft_with_perturbations`:
 
 *  Import Statements and Setup
+
     - import tudatpy kernels
     - setting up spice kernels
 
 *  Environment Setup
+
     - creating bodies
     - creating vehicles
     - creating interfaces
 
 *  Propagation Setup
+
     - creating acceleration models
     - defining initial system state
     - setting dependent variables to save
@@ -40,7 +43,7 @@ Simulator Usage
 
 
 Setting variational parameters
--------------
+------------------------------
 
 Now we will create a list of parameters for which the variational equations are to be propagated.
 First, the initial state(s) of the propagated object(s) are set as "parameters". This is done via the ``.initial_states( )`` method, which constructs the corresponding variational equations from the ``propagator_settings`` and ``bodies``.
@@ -57,19 +60,16 @@ The propagation w.r.t. these parameters will result in the history of a sensitiv
     parameter_settings.append( estimation_setup.parameter.constant_drag_coefficient( "Delfi-C3" ) )
 
 Create dynamics simulator
--------------
+-------------------------
 
 The dynamics simulator in this use case is a ``SingleArcVariationalSimulator`` object.
 It propagates the variational equations specified by ``estimation_setup.create_parameters_to_estimate()`` alongside the dynamics of the orbiter as specified in ``propagator_settings``.
 
 .. code-block:: python
 
-    variational_equations_solver = estimation_setup.SingleArcVariationalSimulator(
-        bodies, integrator_settings, propagator_settings, estimation_setup.create_parameters_to_estimate(
-            parameter_settings, bodies
-        ),
-        integrate_on_creation=1
-    )
+    variational_equations_solver = numerical_simulation.SingleArcVariationalSimulator(
+        bodies, integrator_settings, propagator_settings, estimation_setup.create_parameters_to_estimate( parameter_settings, bodies ),
+        integrate_on_creation=1 )
 
 .. note::
 
@@ -77,7 +77,7 @@ It propagates the variational equations specified by ``estimation_setup.create_p
 
 
 Retrieve results
--------------
+----------------
 
 You can retrieve the states, state transition matrices and sensitivity matrices at each time step in your simulation by using ``.state_history``, ``.state_transition_matrix_history`` and ``sensitivity_matrix_history``, respectively, on the variational equations solver object.
 
@@ -161,14 +161,17 @@ For each of the three variations, we want to plot the magnitude of the deviation
 .. code-block:: python
 
     # 1 // due to initial state variation
-    delta_r1 = np.sqrt(delta_initial_state[:, 0] ** 2 + delta_initial_state[:, 1] ** 2 + delta_initial_state[:, 2] ** 2)
-    delta_v1 = np.sqrt(delta_initial_state[:, 3] ** 2 + delta_initial_state[:, 4] ** 2 + delta_initial_state[:, 5] ** 2)
+    delta_r1 = np.linalg.norm( delta_initial_state[:, 0:3], axis = 1 )
+    delta_v1 = np.linalg.norm( delta_initial_state[:, 3:7], axis = 1 )
+
     # 2 // due to gravitational parameter variation
-    delta_r2 = np.sqrt(delta_earth_standard_param[:, 0] ** 2 + delta_earth_standard_param[:, 1] ** 2 + delta_earth_standard_param[:, 2] ** 2)
-    delta_v2 = np.sqrt(delta_earth_standard_param[:, 3] ** 2 + delta_earth_standard_param[:, 4] ** 2 + delta_earth_standard_param[:, 5] ** 2)
+    delta_r2 = np.linalg.norm( delta_earth_standard_param[:, 0:3], axis = 1 )
+    delta_v2 = np.linalg.norm( delta_earth_standard_param[:, 3:7], axis = 1 )
+
     # 3 // due to drag coefficient variation
-    delta_r3 = np.sqrt(delta_drag_coefficient[:, 0] ** 2 + delta_drag_coefficient[:, 1] ** 2 + delta_drag_coefficient[:, 2] ** 2)
-    delta_v3 = np.sqrt(delta_drag_coefficient[:, 3] ** 2 + delta_drag_coefficient[:, 4] ** 2 + delta_drag_coefficient[:, 5] ** 2)
+    delta_r3 = np.linalg.norm( delta_drag_coefficient[:, 0:3], axis = 1 )
+    delta_v3 = np.linalg.norm( delta_drag_coefficient[:, 3:7], axis = 1 )
+
 
 
 - **Create and save figures**
