@@ -11,6 +11,8 @@ supported by the team, although there are plans to add additional support in the
 application then please make a feature request at the respective package at https://github.com/tudat-team or show
 support for an existing request.
 
+If you want more details on how to use Anaconda, please refer to our detailed guide
+(:ref:`getting_started_with_conda`) and references therein.
 
 
 

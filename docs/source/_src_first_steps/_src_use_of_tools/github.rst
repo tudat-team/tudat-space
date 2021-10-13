@@ -23,7 +23,7 @@ Below, we discuss how to retrieve an application from an existing Github reposit
 
    The first step in the workflow of retrieving a public application is to "fork" it. Forking means that you will create a copy on your own Github page, which is identical to the original. The reason why we do this is that, typically, you will *not* have permission to modify the original repository, and have to save any modifications you make under your own account. To do so, first make sure you are logged into Github, and then go the repository page for the application you want to retrieve, and click the "fork" button at the top (see screenshot below).
 
-   .. figure:: figures/forkingExample.png
+   .. figure:: _static/forkingExample.png
 
    After doing so, you will have created your own local version of the ``NumericalAstrodynamicsAssignments_2020`` repository.
 
@@ -31,11 +31,11 @@ Below, we discuss how to retrieve an application from an existing Github reposit
 
    The first step in the workflow of retrieving a private application is create an empty new Repository, by going to ``https://github.com/YourName`` (fill in your own name), and clicking ``New`` under ``Repositories`` (see screenshot below):
 
-   .. figure:: figures/newRepository.png
+   .. figure:: _static/newRepository.png
 
    Type a name for your repository (make sure it is descriptive, so not ``NumAstroAssignment``, but, for instance, ``NumericalAstrodynamics2020_INSERT_NAME``), and set the repository to **private** (see screenshot below). 
 
-   .. figure:: figures/newRepositoryPrivate.png
+   .. figure:: _static/newRepositoryPrivate.png
 
    You may, but need not, write a repository description. Click ``Create repository``. 
 
@@ -126,7 +126,7 @@ In your terminal, first navigate into the directory containing your git reposito
    
    This should given an output similar to that given below:
 
-   .. figure:: figures/gitStatusExample.png
+   .. figure:: _static/gitStatusExample.png
       :width: 600
 
    In this example, we have modified two existing files, and created a new file. 
@@ -137,7 +137,7 @@ In your terminal, first navigate into the directory containing your git reposito
 
    For the example given above, this will result in (after running ``git status`` again):
 
-   .. figure:: figures/gitAddExample.png
+   .. figure:: _static/gitAddExample.png
       :width: 500
    
    If you only want to stage a single file, or folder, use::
