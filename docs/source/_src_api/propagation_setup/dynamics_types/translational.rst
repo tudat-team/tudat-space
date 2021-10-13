@@ -31,9 +31,8 @@ Such a propagation is defined as follows:
 
 With these settings, the body "Vehicle" will be propagated w.r.t. body "Earth", using given acceleration models (see :ref:`acceleration_model_setup`), a given initial state which defines the initial Cartesian state of the center of mass of "Vehicle" w.r.t. the center of mass of "Earth". The propagation will terminate once the ``simulation_end_epoch`` epoch is reached.
 
-Additional options that can be used for the propagation:
+Additional options that can be used for the propagation (see :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.translational`):
 
-* Specifying alternative termination conditions (see :ref:`available_termination_settings`), this input replaces the ``simulation_end_epoch`` above
 * Specifying an alternative formulation for the translational state (see list below). Default: Cowell formulation (Cartesian position and velocity) is used
 * Specifying variables that are to be saved during the propagation (see :ref:`simulation_propagator_setup`). Default: None
 * Requesting terminal output during the propagation (see :ref:`simulation_output_variables`) . Default: None
@@ -56,8 +55,6 @@ These additional options can be provided as follows:
              :language: cpp
              
 This example defines a termination condition using a dependent variable: the simulation should stop when the propagated vehicle reaches an altitude of 25.0 km. Next to that, the propagator is asked to save the total acceleration, Keplerian state, latitude, and longitude of the spacecraft as dependent variables.
-
-Where the three final, and optional, input arguments can be used with both when ``termination_settings`` and ``simulation_end_epoch`` are given. 
 
 .. _translational_dynamics_propagators:
 

@@ -19,4 +19,4 @@ Propagating the mass of a body is typically (but not exclusively) coupled with t
           .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
              :language: cpp
 
-where the final two inputs are optional, and the ``simulation_end_epoch`` input may be replaced by the more general ``termination_settings`` (see TODO).
+where the final two inputs are optional (see :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.mass`)

@@ -33,7 +33,7 @@ Defining settings for the rotational dynamics is done by:
              :language: cpp
 
 
-where the final three inputs are all optional, and the ``simulation_end_epoch`` input may be replaced by the more general ``termination_settings`` (see :ref:`available_termination_settings`), as was the case for translational dynamics
+where the final three inputs are all optional (see :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.rotational`)
 
 .. class:: Rotational Motion Propagators
 
