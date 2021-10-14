@@ -1,5 +1,5 @@
 **********************************
-Getting Started with Documentation
+Contribute to tudat-space
 **********************************
 
 Compiling Documentation Locally
@@ -83,6 +83,3 @@ following command from the command line:
 
     sphinx-build -b html docs/source docs/build
 
-
-Documenting Python objects with docstrings
-##########################################

@@ -1,5 +1,5 @@
 **************************
-Use of tools
+Use of external tools
 **************************
 
 Below, you can find introductory guides to some tools that can (git) or have to (Conda, Python) be used in combination
