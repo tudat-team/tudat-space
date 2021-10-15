@@ -1,7 +1,7 @@
 .. _`pygmo_basics`:
 
 ***********************
-Introduction to PyGMO
+Optimization with PyGMO
 ***********************
 
 The following paragraphs will give some information on how to

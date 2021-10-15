@@ -1,6 +1,6 @@
-**********************************
-A more advanced example with PyGMO
-**********************************
+********************************************************
+Optimization in astrodynamics with PyGMO
+********************************************************
 
 In this example it will be shown how to use PyGMO functionalities in the context of an astrodynamics problem.
 It is assumed that, before diving into this example, the reader is already acquainted with the basic concepts
