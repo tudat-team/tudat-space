@@ -1,6 +1,6 @@
-********************************************************
-Optimization in astrodynamics with PyGMO
-********************************************************
+******************************************************************
+Optimize orbit for asteroid surface characterization
+******************************************************************
 
 In this example it will be shown how to use PyGMO functionalities in the context of an astrodynamics problem.
 It is assumed that, before diving into this example, the reader is already acquainted with the basic concepts
