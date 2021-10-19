@@ -2,7 +2,7 @@
 .. _getting_started_tudatpy:
 
 ******************************
-First steps with Tudat(Py)
+Installation
 ******************************
 
 This page will guide you through the installation of Tudat(Py). The installation is supported exclusively through the use of the ``conda``

@@ -18,7 +18,7 @@ On this website, you will find a user guide for Tudat, which walks you through t
    :caption: Getting started
    :hidden:
 
-   _src_getting_started/tudat_py
+   _src_getting_started/installation
    _src_getting_started/setup_ide
    _src_getting_started/examples
 
@@ -38,6 +38,7 @@ On this website, you will find a user guide for Tudat, which walks you through t
    :hidden:
 
    _src_resources/post_processing
+   _src_resources/pygmo_basics
    _src_resources/use_of_tools
 
 .. toctree::

@@ -20,11 +20,11 @@ The example code is also available at this link: TODO add link.
 Examples with Pygmo
 ===================
 
-Below you can find some examples, explained in detail, about optimizing an astrodynamical problem simulated in
-TudatPy through `Pygmo <https://esa.github.io/pygmo2/index.html>`_.
+Below you can find general examples, explained in detail, about optimizing an astrodynamical problem simulated in
+TudatPy through `Pygmo <https://esa.github.io/pygmo2/index.html>`_. If you have never used PyGMO before, please
+consider reading our introductory guide: :ref:`Optimization with PyGMO`.
 
 .. toctree::
    :maxdepth: 1
 
-   _src_examples/pygmo_examples/pygmo_basics
    _src_examples/pygmo_examples/pygmo_orbit_optimization
