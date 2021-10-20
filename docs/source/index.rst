@@ -43,18 +43,11 @@ On this website, you will find a user guide for Tudat, which walks you through t
 
 .. toctree::
    :maxdepth: 2
-   :caption: About TudatPy
+   :caption: About
    :hidden:
 
    _src_about/about
    _src_about/api
    _src_about/developer_docs
    _src_about/documentation
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
 
