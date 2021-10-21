@@ -2,14 +2,22 @@ Tudat Space: Documentation
 ======================================
 
 Tudat Space is a platform and community for astrodynamics and space research.
-We are propelled by the idea of providing educators, researchers, students, and
-enthusiasts with accessibility to a powerful toolkit to fuel careers and
+Our mission is to provide educators, researchers, students, and
+enthusiasts access to a powerful toolkit, fuelling careers and
 passions in astrodynamics and space.
 
-The TU Delft Astrodynamics Toolbox (Tudat) is a powerful set of libraries that support astrodynamics and space research. One of the key strengths within Tudat is its ability to combine such libraries in a powerful simulator framework. Such framework can be used for a wide variety of purposes, ranging from the study of reentry dynamic to interplanetary missions. The functionality of Tudat is implemented in C++, but a Python interface, called Tudatpy, is now available, through which the core simulation functionality can be accessed. Tudat and Tudatpy are disseminated as conda packages, to get started on them, have a look at our 
+The TU Delft Astrodynamics Toolbox (Tudat) is a powerful set of libraries that support astrodynamics and space research.
+One of the key strengths within Tudat is its ability to combine such libraries in a powerful simulator framework.
+Such framework can be used for a wide variety of purposes, ranging from the study of reentry dynamic to interplanetary
+missions. The functionality of Tudat is implemented in C++, but a Python interface, called Tudatpy, is now available,
+through which the core simulation functionality can be accessed. Tudat and Tudatpy are disseminated as conda packages,
+to get started on them, have a look at our
 :ref:`installation guide<getting_started_tudatpy>`.
 
-On this website, you will find a user guide for Tudat, which walks you through the manner in which to set up a simulation, and start designing transfer orbits, propagating trajectories, analyzing uncertainties or estimating gravity fields! A detailed function-by-function description of our software can be found on our  `API website <https://tudatpy.readthedocs.io/en/latest/>`_. 
+On this website, you will find a user guide for Tudat, which walks you through the manner in which to set up a
+simulation, and start designing transfer orbits, propagating trajectories, analyzing uncertainties or estimating gravity
+fields! A detailed function-by-function description of our software can be found on
+our  `API website <https://tudatpy.readthedocs.io/en/latest/>`_.
 
 
 

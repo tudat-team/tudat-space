@@ -2,13 +2,16 @@
 Examples
 ************************
 
-================
-Generic examples
-================
+All the code of example applications is available at `this repository`_. Each example application is explained in detail
+in the pages linked below.
 
-Below you can find generic examples of what you can achieve with TudatPy.
+.. _`this repository`: https://github.com/tudat-team/tudatpy-examples`
 
-The example code is also available at this link: TODO add link.
+=====================
+Numerical simulations
+=====================
+
+Below you can find examples of numerical simulations that you can achieve with TudatPy.
 
 .. toctree::
    :maxdepth: 1
@@ -17,7 +20,7 @@ The example code is also available at this link: TODO add link.
    _src_examples/simulation_examples/var_equation_example_page
 
 ===================
-Examples with Pygmo
+Examples with PyGMO
 ===================
 
 Below you can find general examples, explained in detail, about optimizing an astrodynamical problem simulated in
