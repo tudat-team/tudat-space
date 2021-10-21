@@ -21,44 +21,26 @@ or of its derived classes.
 Gravitational accelerations
 ###########################
 
-.. note:: | **Notation**
-          | The notation for the following explanation is as follows:
-          | - :math:`\mathbf{r}_{BA} = \mathbf{r}_{B} - \mathbf{r}_{A}` - position vector of B with respect to A
-          | - :math:`U_{B}=U_{B}\left(\mathbf{r}_{B A}\right)` - gravitational potential due to body B at location :math:`\mathbf{r}_{BA}`
-          | - :math:`\mu_B` - gravitational parameter of body B
-
-In general, the gravitational acceleration exerted by a body B, with associated potential :math:`U_{B}`, on a body A
-located at `\mathbf{r}_{BA} with respect to body B can be expressed as follows:
+Tudat contains a number of different models for gravitational accelerations. In general, the gravitational acceleration exerted by a body B, with associated potential :math:`U_{B}`, on a body A can be expressed as follows:
 
 .. math::
-    \mathbf{a}_{B A}=\nabla U_{B}\left(\mathbf{r}_{B A}\right)
+    \mathbf{a}_{_{BA}}=\nabla U_{_{B}}\left(\mathbf{r}_{_{BA}}\right)
 
-Graphically, this means:
+with :math:`\mathbf{r}_{_{BA}}(=\mathbf{r}_{_{B}}-\mathbf{r}_{_{A}})` denoting the relative position vector of body A w.r.t. Body B.
 
-.. figure::
-    _static/gravitational_acceleration_general.png
-    :align: center
-    :height: 200px
+In Tudat, we currently provide three different formulations for the inertial gravitational acceleration of one body exerted on another:
 
+* :ref:`point_mass_acceleration`
+* :ref:`spherical_harmonic_acceleration`
+* :ref:`mutual_spherical_harmonic_acceleration` (relevant for, for instance, natural satellite dynamics).
+
+In addition to the three models listed above, which define different models for gravitational interactions between two bodies, you can of course define a third-body acceleration. In Tudat, however, you do *not* specify directly whether an acceleration is a 'third-body' acceleration. This is fully defined by what you've chosen as your center of propagation (TODO: insert link to trans prop. setup), and the bodies exerting and undergoing the acceleration. Similarly, when calculating the dynamics of a massive body, a correction is required for expressing the gravitational acceleraion exerted by the propagation origin (*e.g.* acceleration exerted by Earth on Moon, with Earth as propagation origin). We term this the 'central' acceleration. See :ref:`third_body_gravity` for details on both aspects
 
 .. _point_mass_acceleration:
 
 Point-mass Gravity
 ##################
 
-**Theory**
-
-For point-mass gravity, the gravitational potential is:
-
-.. math::
-    U_{B}\left(\mathbf{r}_{B A}\right)=\frac{\mu_{B}}{\left\|\mathbf{r}_{B A}\right\|}
-
-which in terms of acceleration means:
-
-.. math::
-    \mathbf{a}_{B A}=-\frac{\mu_{B}}{\left\|\mathbf{r}_{B A}\right\|^{2}} \hat{\mathbf{r}}_{B A}
-
-**Code**
 
 The point-mass gravity acceleration model can be created as indicated in the API `here <https://tudatpy.readthedocs.io/en/latest/acceleration.html#tudatpy.numerical_simulation.propagation_setup.acceleration.point_mass_gravity>`_.
 
@@ -108,6 +90,71 @@ Requires the following environment models to be defined:
 
 .. note::
   The spherical harmonic acceleration up to degree N and order M includes the point-mass gravity acceleration (which is the degree and order 0 term).
+
+.. _mutual_spherical_harmonic_acceleration:
+
+Mutual Spherical Harmonic Gravity Acceleration
+##############################################
+
+Settings for a mutual spherical harmonic gravity acceleration. This model is typically only used for detailed propagation of planetary systems. For example of acceleration exerted on “Io” by “Jupiter”:
+
+.. tabs::
+
+   .. tab:: Python
+
+    .. toggle-header::
+       :header: Required before **Show/Hide**
+
+       .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/req_acceleration_models.py
+          :language: python
+
+    .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/mutual_spherical_harmonic_gravity.py
+       :language: python
+
+    .. toggle-header::
+       :header: Required after **Show/Hide**
+
+       .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/req_acceleration_models_after.py
+          :language: python
+
+   .. tab:: C++
+
+    .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/mutual_spherical_harmonic_gravity.cpp
+       :language: cpp
+
+where the gravity fields of Io and Jupiter will be expanded up to degree and order 12 and 4, respectively, in the acceleration model. Requires the following environment models to be defined:
+
+- Spherical harmonic gravity field for body exerting acceleration and body undergoing acceleration, see :ref:`environment_gravity_field_model` for non-default models.
+- Rotation model from the inertial frame to the body-fixed frame and body undergoing acceleration, see :ref:`environment_rotational_model`.
+- Current state of bodies undergoing and exerting acceleration, either from an Ephemeris model or from the numerical propagation, see :ref:`environment_ephemeris_model`.
+
+For the case where a third-body mutual spherical harmonic acceleration (e.g. Ganymede on Io when propagating w.r.t. Jupiter), additional parameters have to be provided that denote the expansion degree/order of the central body, so:
+
+.. tabs::
+
+   .. tab:: Python
+
+    .. toggle-header::
+       :header: Required before **Show/Hide**
+
+       .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/req_acceleration_models.py
+          :language: python
+
+    .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/mutual_third_body_spherical_harmonic_gravity.py
+       :language: python
+
+    .. toggle-header::
+       :header: Required after **Show/Hide**
+
+       .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/req_acceleration_models_after.py
+          :language: python
+
+   .. tab:: C++
+
+    .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/mutual_third_body_spherical_harmonic_gravity.cpp
+       :language: cpp
+
+where Jupiter now takes the role of central body, instead of body exerting the acceleration.
 
 .. _third_body_gravity:
 
@@ -422,69 +469,6 @@ where the input variables represent:
 - Rise time, i.e. time required to reach the peak acceleration (same value for each impulsive shot).
 
 
-
-Mutual Spherical Harmonic Gravity Acceleration
-##############################################
-
-Settings for a mutual spherical harmonic gravity acceleration. This model is typically only used for detailed propagation of planetary systems. For example of acceleration exerted on “Io” by “Jupiter”:
-
-.. tabs::
-
-   .. tab:: Python
-
-    .. toggle-header::
-       :header: Required before **Show/Hide**
-
-       .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/req_acceleration_models.py
-          :language: python
-
-    .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/mutual_spherical_harmonic_gravity.py
-       :language: python
-
-    .. toggle-header::
-       :header: Required after **Show/Hide**
-
-       .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/req_acceleration_models_after.py
-          :language: python
-
-   .. tab:: C++
-
-    .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/mutual_spherical_harmonic_gravity.cpp
-       :language: cpp
-
-where the gravity fields of Io and Jupiter will be expanded up to degree and order 12 and 4, respectively, in the acceleration model. Requires the following environment models to be defined:
-
-- Spherical harmonic gravity field for body exerting acceleration and body undergoing acceleration, see :ref:`environment_gravity_field_model` for non-default models.
-- Rotation model from the inertial frame to the body-fixed frame and body undergoing acceleration, see :ref:`environment_rotational_model`.
-- Current state of bodies undergoing and exerting acceleration, either from an Ephemeris model or from the numerical propagation, see :ref:`environment_ephemeris_model`.
-
-For the case where a third-body mutual spherical harmonic acceleration (e.g. Ganymede on Io when propagating w.r.t. Jupiter), additional parameters have to be provided that denote the expansion degree/order of the central body, so:
-
-.. tabs::
-
-   .. tab:: Python
-
-    .. toggle-header::
-       :header: Required before **Show/Hide**
-
-       .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/req_acceleration_models.py
-          :language: python
-
-    .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/mutual_third_body_spherical_harmonic_gravity.py
-       :language: python
-
-    .. toggle-header::
-       :header: Required after **Show/Hide**
-
-       .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/req_acceleration_models_after.py
-          :language: python
-
-   .. tab:: C++
-
-    .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/mutual_third_body_spherical_harmonic_gravity.cpp
-       :language: cpp
-
-where Jupiter now takes the role of central body, instead of body exerting the acceleration.
 
 Tidal effect on natural satellites
 ##################################
