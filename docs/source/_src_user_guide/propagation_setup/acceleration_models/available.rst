@@ -1,32 +1,72 @@
 .. _available_acceleration_models:
 
 ===============================
-List of all Acceleration Models
+Available Acceleration Models
 ===============================
+
+In this page, all the acceleration models available in tudat(py) are explained. Regardless of the type of acceleration
+model, the procedure to link such acceleration model to the bodies exerting and undergoing the acceleration is
+explained in this page: :ref:`Acceleration Model Setup`. Therefore, this information will not be repeated in this page.
+
+For each model, both the theoretical basis and the related API reference are provided. In tudat(py), acceleration
+models are created through factory functions, which link an object to the ``DynamicsSimulator``. Such object is an
+instance of the ``AccelerationSettings`` class (see `API <https://tudatpy.readthedocs.io/en/latest/acceleration.html#tudatpy.numerical_simulation.propagation_setup.acceleration.AccelerationSettings>`_)
+or of its derived classes.
+
+
+.. contents:: List of available acceleration models
+    :depth: 3
+
+###########################
+Gravitational accelerations
+###########################
+
+.. note:: | **Notation**
+          | The notation for the following explanation is as follows:
+          | - :math:`\mathbf{r}_{BA} = \mathbf{r}_{B} - \mathbf{r}_{A}` - position vector of B with respect to A
+          | - :math:`U_{B}=U_{B}\left(\mathbf{r}_{B A}\right)` - gravitational potential due to body B at location :math:`\mathbf{r}_{BA}`
+          | - :math:`\mu_B` - gravitational parameter of body B
+
+In general, the gravitational acceleration exerted by a body B, with associated potential :math:`U_{B}`, on a body A
+located at `\mathbf{r}_{BA} with respect to body B can be expressed as follows:
+
+.. math::
+    \mathbf{a}_{B A}=\nabla U_{B}\left(\mathbf{r}_{B A}\right)
+
+Graphically, this means:
+
+.. figure::
+    _static/gravitational_acceleration_general.png
+    :align: center
+    :height: 200px
+
 
 .. _point_mass_acceleration:
 
 Point-mass Gravity
 ##################
 
-Settings for a point mass gravity acceleration. For example of acceleration exerted by Earth:
+**Theory**
 
-.. tabs::
+For point-mass gravity, the gravitational potential is:
 
-     .. tab:: Python
+.. math::
+    U_{B}\left(\mathbf{r}_{B A}\right)=\frac{\mu_{B}}{\left\|\mathbf{r}_{B A}\right\|}
 
-      .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/point_mass_gravity.py
-         :language: python
+which in terms of acceleration means:
 
-     .. tab:: C++
+.. math::
+    \mathbf{a}_{B A}=-\frac{\mu_{B}}{\left\|\mathbf{r}_{B A}\right\|^{2}} \hat{\mathbf{r}}_{B A}
 
-      .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/point_mass_gravity.cpp
-         :language: cpp
+**Code**
 
-Requires the following environment models to be defined:
+The point-mass gravity acceleration model can be created as indicated in the API `here <https://tudatpy.readthedocs.io/en/latest/acceleration.html#tudatpy.numerical_simulation.propagation_setup.acceleration.point_mass_gravity>`_.
 
-- Gravity field for body exerting acceleration, see :ref:`environment_gravity_field_model` for non-default models.
-- Current state of body exerting acceleration, either from a pre-defined ephemeris model (see :ref:`environment_ephemeris_model`) or from the numerical propagation of the translational dynamics of the body exerting the acceleration (Earth in the above example).
+It requires the following environment models to be defined:
+
+- Gravity field for body exerting acceleration (see :ref:`environment_gravity_field_model` for non-default models).
+- Current state of body exerting acceleration, either from a pre-defined ephemeris model (see :ref:`environment_ephemeris_model`) or from the numerical propagation of the translational dynamics of the body exerting the acceleration.
+
 
 .. _spherical_harmonic_acceleration:
 
