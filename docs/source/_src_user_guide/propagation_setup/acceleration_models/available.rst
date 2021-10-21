@@ -34,7 +34,7 @@ In Tudat, we currently provide three different formulations for the inertial gra
 * :ref:`spherical_harmonic_acceleration`
 * :ref:`mutual_spherical_harmonic_acceleration` (relevant for, for instance, natural satellite dynamics).
 
-In addition to the three models listed above, which define different models for gravitational interactions between two bodies, you can of course define a third-body acceleration. In Tudat, however, you do *not* specify directly whether an acceleration is a 'third-body' acceleration. This is fully defined by what you've chosen as your center of propagation (TODO: insert link to trans prop. setup), and the bodies exerting and undergoing the acceleration. Similarly, when calculating the dynamics of a massive body, a correction is required for expressing the gravitational acceleraion exerted by the propagation origin (*e.g.* acceleration exerted by Earth on Moon, with Earth as propagation origin). We term this the 'central' acceleration. See :ref:`third_body_gravity` for details on both aspects
+In addition to the three models listed above, which define different models for gravitational interactions between two bodies, you can of course define a third-body acceleration. In Tudat, however, you do *not* specify directly whether an acceleration is a 'third-body' acceleration. This is fully defined by what you've chosen as your center of propagation (TODO: insert link to trans prop. setup), and the bodies exerting and undergoing the acceleration. Similarly, when calculating the dynamics of a massive body, a correction is required for expressing the gravitational acceleraion exerted by the propagation origin (*e.g.* acceleration exerted by Earth on Moon, with Earth as propagation origin). We term this the 'central' acceleration. See :ref:`third_body_gravity` for details on both aspects.
 
 .. _point_mass_acceleration:
 
@@ -223,6 +223,7 @@ while the following will add the third-body spherical-harmonic acceleration of t
 
 Note that above two code blocks are identical to those given as example for the :ref:`point_mass_acceleration` and the :ref:`spherical_harmonic_acceleration`. It is through the definition *of the central body* that a direct, central or third-body acceleration is created.
 
+########################
 Aerodynamic Acceleration
 ########################
 
@@ -263,6 +264,7 @@ Requires the following environment models to be defined:
 .. warning::
   Defining settings for a vehicle’s orientation, which may influence your aerodynamic force, is done after creating the acceleration models, as discussed :ref:`body_orientation_guidance`.
 
+#############################
 Cannonball Radiation Pressure
 #############################
 
@@ -298,6 +300,7 @@ Requires the following environment models to be defined:
 - Cannonball radiation pressure model for body undergoing acceleration (from source equal to body exerting acceleration), see :ref:`environment_radiation_pressure_interface`.
 - Current state of body undergoing and body emitting radiation.
 
+####################################
 Relativistic Acceleration Correction
 ####################################
 
@@ -358,7 +361,7 @@ Lense-Thirring only:
 
      :language: cpp
 
-
+#######################
 Empirical Accelerations
 #######################
 
@@ -385,7 +388,7 @@ where in Tudat, the body 'exerting' the acceleration is considered to be the cen
 
 Here, :math:`R^{I/RSW}` is the rotation matrix from the RSW frame (of the body undergoing the acceleration w.r.t. the nody exerting the acceleration), :math:`theta` is the true anomaly, and the three constituent acceleration vectors are the inputs provided in the above code block.
 
-
+###################
 Thrust Acceleration
 ###################
 
@@ -396,6 +399,7 @@ Used to define the resulting accerelations of a thrust force, requiring:
 
 Setting up a thrust acceleration is discussed in more detail on the page (TODO) Thrust Guidance.
 
+###########################
 Panelled Radiation Pressure
 ###########################
 
@@ -430,7 +434,7 @@ Requires the following environment models to be defined:
 - Panelled radiation pressure model for body undergoing acceleration (from source equal to body exerting acceleration), see :ref:`environment_radiation_pressure_interface`.
 - Current state of body undergoing and body emitting radiation.
 
-
+#################################
 Quasi Impulsive Shot Acceleration
 #################################
 
@@ -469,7 +473,7 @@ where the input variables represent:
 - Rise time, i.e. time required to reach the peak acceleration (same value for each impulsive shot).
 
 
-
+##################################
 Tidal effect on natural satellites
 ##################################
 
