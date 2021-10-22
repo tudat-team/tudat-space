@@ -7,7 +7,7 @@ It is assumed that, before diving into this example, the reader is already acqua
 of optimizing a problem with PyGMO; in other words, the reader should be familiar with the content of this page:
 :ref:`pygmo_basics`.
 We will treat here the problem of the design of a mission around an asteroid, named `Itokawa`_. The full code that we
-will refer to in this page is available for download :download:`here <_static/asteroid_orbit_optimization.py>`.
+will refer to in this page can be found on `github <https://github.com/tudat-team/tudatpy-examples/blob/master/propagation/linear_sensitivity_analysis.py>`_.
 
 .. _`Itokawa`: https://en.wikipedia.org/wiki/25143_Itokawa
 

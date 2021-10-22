@@ -1,19 +1,8 @@
-from typing import Tuple, List
-import numpy as np
-import tudatpy
-from tudatpy.kernel.numerical_simulation import propagation_setup
-from tudatpy.kernel.astro import frame_conversion
-from tudatpy.kernel.astro import element_conversion
-
-
 class AsteroidOrbitProblem:
     """
     This class creates a PyGMO-compatible User Defined Problem (UDP).
-
     Attributes
     ----------
-
-
     Methods
     -------
     """
@@ -28,7 +17,6 @@ class AsteroidOrbitProblem:
                  design_variable_upper_boundaries: Tuple[float]):
         """
         Constructor for the AsteroidOrbitProblem class.
-
         Parameters
         ----------
         bodies : tudatpy.kernel.numerical_simulation.environment.SystemOfBodies:
@@ -40,7 +28,6 @@ class AsteroidOrbitProblem:
         """
         # Sets input arguments as lambda function attributes
         # NOTE: this is done so that the class is "pickable", i.e., can be serialized by pygmo
-        # TODO Dominic: add here, if needed
         self.bodies_function = lambda: bodies
         self.integrator_settings_function = lambda: integrator_settings
         self.propagator_settings_function = lambda: propagator_settings
@@ -55,16 +42,14 @@ class AsteroidOrbitProblem:
 
     def get_bounds(self) -> Tuple[List[float], List[float]]:
         """
-        Returns the search space.
-
+        Defines the search space.
         Parameters
         ----------
         none
-
         Returns
         -------
         Tuple[List[float], List[float]]
-            Two lists of size n (for this problem, n=4), containing respectively the lower and upper
+            Two lists of size n (for this problem, n=4), defining respectively the lower and upper
             boundaries of each variable.
         """
         return (list(self.design_variable_lower_boundaries), list(self.design_variable_upper_boundaries))
@@ -79,12 +64,10 @@ class AsteroidOrbitProblem:
                 orbit_parameters: List[float]) -> List[float]:
         """
         Computes the fitness value for the problem.
-
         Parameters
         ----------
         orbit_parameters : List[float]
             Vector of decision variables of size n (for this problem, n = 4).
-
         Returns
         -------
         List[float]
@@ -95,7 +78,7 @@ class AsteroidOrbitProblem:
         # Retrieves Itokawa gravitational parameter
         itokawa_gravitational_parameter = current_bodies.get("Itokawa").gravitational_parameter
         # Reset the initial state from the decision variable vector
-        new_initial_state = conversion.keplerian_to_cartesian(
+        new_initial_state = element_conversion.keplerian_to_cartesian_elementwise(
             gravitational_parameter=itokawa_gravitational_parameter,
             semi_major_axis=orbit_parameters[0],
             eccentricity=orbit_parameters[1],
@@ -108,10 +91,10 @@ class AsteroidOrbitProblem:
         # Retrieves integrator settings object
         integrator_settings = self.integrator_settings_function()
         # Reset the initial state
-        propagator_settings.reset_initial_states(new_initial_state)
+        propagator_settings.initial_states = new_initial_state
 
         # Propagate orbit
-        dynamics_simulator = propagation_setup.SingleArcSimulator(current_bodies,
+        dynamics_simulator = numerical_simulation.SingleArcSimulator(current_bodies,
                                                                           integrator_settings,
                                                                           propagator_settings,
                                                                           print_dependent_variable_data=False)
@@ -136,11 +119,3 @@ class AsteroidOrbitProblem:
             current_penalty += 1.0E4
 
         return [current_fitness + current_penalty, np.mean(distance) + current_penalty * 1.0E3]
-
-    def get_last_run_dynamics_simulator(self):
-        """
-        Returns the dynamics simulator lambda function.
-        """
-        return self.dynamics_simulator_function()
-
-

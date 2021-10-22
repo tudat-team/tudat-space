@@ -1,10 +1,10 @@
 .. _propagating_variational_equations:
 
-Propagating Variational Equations
-===========================================
+Linear Sensitivity Analysis using Variational Equations
+=======================================================
 
 
-In this example, we will propagate variational equations and show how to use the resulting state transition & sensitivity matrices to propagate variations through the orbiter's state.
+In this example, we will propagate variational equations and show how to use the resulting state transition & sensitivity matrices to propagate variations through the orbiter's state. The code for this example can be found on `github <https://github.com/tudat-team/tudatpy-examples/blob/master/propagation/linear_sensitivity_analysis.py>`_.
 
 
 Basic Setup

@@ -1,9 +1,9 @@
 .. _propagating_a_spacecraft_with_perturbations:
 
-Propagating a Spacecraft with Perturbations
-===========================================
+Propagating a Spacecraft Orbit with Perturbations
+=================================================
 
-In this example, we will propagate a spacecraft with several perturbations. Furthermore, we demonstrate how to plot your results in a variety of ways.
+In this example, we will propagate a spacecraft with several perturbations. Furthermore, we demonstrate how to plot your results in a variety of ways. The code for this example can be found on `github <https://github.com/tudat-team/tudatpy-examples/blob/master/propagation/perturbed_satellite_orbit.py>`_.
 
 Import Statements and Setup
 ###########################

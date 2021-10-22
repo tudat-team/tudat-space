@@ -5,11 +5,11 @@ Examples
 All the code of example applications is available at `this repository`_. Each example application is explained in detail
 in the pages linked below.
 
-.. _`this repository`: https://github.com/tudat-team/tudatpy-examples`
+.. _`this repository`: https://github.com/tudat-team/tudatpy-examples
 
-=====================
-Numerical simulations
-=====================
+=================================
+Numerical Propagation of Dynamics
+=================================
 
 Below you can find examples of numerical simulations that you can achieve with TudatPy.
 

@@ -68,6 +68,8 @@ Propagation Setup
 
 In Tudat, the term 'propagator' is used to denote the formulation of the differential equations that are to be numerically solved. This includes the type of dynamics (translational, rotational, mass), but also the formulation for a given type of dynamics (e.g. Encke, Cowell, Kepler elements for translational dynamics).
 
+.. _propagator_setup:
+
 ================
 Propagator Setup
 ================
@@ -75,7 +77,7 @@ Propagator Setup
 Tudat currently supports the propagation of three types of dynamics: translational, rotational and mass. Any combination of any number of types of dynamics, for any number of bodies, may be defined.
 
 .. toctree::
-    :maxdepth: 3
+    :maxdepth: 1
 
     propagation_setup/dynamics_types/translational
     propagation_setup/dynamics_types/rotational
