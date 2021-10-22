@@ -9,8 +9,9 @@ model, the procedure to link such acceleration model to the bodies exerting and 
 explained in this page: :ref:`Acceleration Model Setup`. Therefore, this information will not be repeated in this page.
 
 For each model, both the theoretical basis and the related API reference are provided. In tudat(py), acceleration
-models are created through factory functions, which link an object to the ``DynamicsSimulator``. Such object is an
-instance of the ``AccelerationSettings`` class (see `API <https://tudatpy.readthedocs.io/en/latest/acceleration.html#tudatpy.numerical_simulation.propagation_setup.acceleration.AccelerationSettings>`_)
+models are defined through factory functions, which define the properties required of the accelerations, but do not
+perform any calculations themselves. Such object is an instance of the ``AccelerationSettings`` class
+(see `API <https://tudatpy.readthedocs.io/en/latest/acceleration.html#tudatpy.numerical_simulation.propagation_setup.acceleration.AccelerationSettings>`_)
 or of its derived classes.
 
 

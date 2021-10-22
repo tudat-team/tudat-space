@@ -144,7 +144,7 @@ Torque models are handled in a similar manner to the translational acceleration 
 Output Variables
 =========================
 
-By default, propagating the dynamics of a body provides only the numerically integrated state history of your model as output. Tudat has the option to provide any number of additional outputs from your simulation, by defining the ``output_variables`` input to the propagator settings. A comprehensive list of available outputs is given below 
+By default, propagating the dynamics of a body provides only the numerically integrated state history of your model as output. Tudat has the option to provide any number of additional outputs from your simulation, by defining the ``output_variables`` input to the propagator settings. For more details, see the page below:
 
 .. toctree::
     :maxdepth: 2
