@@ -96,6 +96,7 @@ The spherical harmonic gravity acceleration model can be created as indicated in
 This model is typically only used for detailed propagation of planetary systems. With additional parameters, it can
 be used even if the bodies mutually exerting the spherical harmonic gravity acceleration are not the central body.
 It requires the following environment models to be defined:
+
 - Spherical harmonic gravity field for body exerting acceleration and body undergoing acceleration (see
   :ref:`environment_gravity_field_model` for non-default models)
 - Rotation model from the inertial frame to the body-fixed frame and body undergoing acceleration (see
@@ -169,7 +170,9 @@ while the following will add the third-body spherical-harmonic acceleration of t
     .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/spherical_harmonic_gravity_zonal.cpp
        :language: cpp
 
-Note that above two code blocks are identical to those given as example for the :ref:`point_mass_acceleration` and the :ref:`spherical_harmonic_acceleration`. It is through the definition *of the central body* that a direct, central or third-body acceleration is created.
+Note that above two code blocks are identical to those given as example in the API
+entries of :ref:`point_mass_acceleration` and :ref:`spherical_harmonic_acceleration`. It is through the definition
+*of the central body* that a direct, central or third-body acceleration is created.
 
 ########################
 Aerodynamic
@@ -179,18 +182,29 @@ The aerodynamic acceleration model can be created as indicated in the `API <http
 .io/en/latest/acceleration.html#tudatpy.numerical_simulation.propagation_setup.acceleration.aerodynamic>`_.
 It requires the following environment models to be defined:
 
-- Atmosphere model for body exerting acceleration, see :ref:`environment_atmosphere_model`.
-- Aerodynamic coefficient interface for body undergoing acceleration, see :ref:`environment_aerodynamic_coefficient_interface`.
+- Atmosphere model for body exerting acceleration (see :ref:`environment_atmosphere_model`).
+- Aerodynamic coefficient interface for body undergoing acceleration (see
+  :ref:`environment_aerodynamic_coefficient_interface`).
 - Mass model for body undergoing acceleration.
 - Current state of body undergoing acceleration and body with atmosphere.
 
 .. warning::
    Defining settings for a vehicle’s orientation, which may influence your aerodynamic force, is done after creating
-   the acceleration models, as discussed in :ref:`body_orientation_guidance`.
+   the acceleration models, as discussed in --.
+
+.. todo::
+   Add link above.
 
 #############################
 Radiation Pressure
 #############################
+
+There are two different radiation pressure models available in tudat(py):
+
+- :ref:`cannonball_radiation_pressure`
+- :ref:`panelled_radiation_pressure`
+
+.. _cannonball_radiation_pressure:
 
 Cannonball Radiation Pressure
 #############################
@@ -203,8 +217,14 @@ It requires the following environment models to be defined:
 - Cannonball radiation pressure model for body undergoing acceleration (from source equal to body exerting acceleration), see :ref:`environment_radiation_pressure_interface`.
 - Current state of body undergoing and body emitting radiation.
 
+
+.. _panelled_radiation_pressure:
+
 Panelled Radiation Pressure
 ###########################
+
+.. todo::
+   This entry is not yet exposed to tudatpy.
 
 Settings for a panelled radiation pressure acceleration.
 It requires the following environment models to be defined:
@@ -222,7 +242,8 @@ The relativistic correction acceleration model can be created as indicated in th
 This is a first-order (in 1/c^2) correction to the acceleration due to the influence of relativity, consisting of three
 distinct effects:the Schwarzschild, Lense-Thirring and de Sitter accelerations.
 
-TODO @dominic: requirements?
+.. todo::
+   Add requirements, if needed.
 
 
 #######################
@@ -236,7 +257,8 @@ This is constant/once-per-orbit acceleration, expressed in the RSW frame (see fo
 .inertial_to_rsw_rotation_matrix>`_), for which the magnitude is determined empirically (typically during an orbit
 determination process).
 
-TODO @dominic: requirements?
+.. todo::
+   Add requirements, if needed.
 
 ###################
 Thrust
@@ -247,7 +269,10 @@ Used to define the accelerations resulting from a thrust force, requiring:
 - Mass of body undergoing acceleration;
 - Settings for both the direction and magnitude of the thrust force. These models may in turn have additional environmental dependencies.
 
-Setting up a thrust acceleration is discussed in more detail on the page (TODO) Thrust Guidance.
+Setting up a thrust acceleration is discussed in more detail on the page Thrust Guidance.
+
+.. todo::
+   Add reference to thrust guidance page.
 
 
 ##################################
@@ -258,13 +283,15 @@ The cannonball radiation pressure acceleration model can be created as indicated
 .io/en/latest/acceleration.html#tudatpy.numerical_simulation.propagation_setup.direct_tidal_dissipation_acceleration>`_.
 It requires the following environment models to be defined:
 
-TODO @Dominic: requirements?
+.. todo::
+   Add requirements, if needed.
 
 #################################
 Quasi Impulsive Shot Acceleration
 #################################
 
-TODO: why is this not in the API?
+.. todo::
+   This entry is not yet exposed to tudatpy.
 
 Settings used to define the resulting acceleration of a quasi-impulsive shot, requiring:
 
@@ -272,39 +299,11 @@ Settings used to define the resulting acceleration of a quasi-impulsive shot, re
 - Settings for the characteristics of the quasi-impulsive shots (total duration, rise time, associated deltaVs), as well as the times at which they are applied.
 
 
-.. tabs::
-
-   .. tab:: Python
-
-    .. toggle-header::
-       :header: Required **Show/Hide**
-
-    .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/quasi_impulsive_shot.py
-       :language: python
-
-    .. toggle-header::
-       :header: Required after **Show/Hide**
-
-       .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/req_acceleration_models_after.py
-          :language: python
-
-   .. tab:: C++
-
-    .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/quasi_impulsive_shot.cpp
-       :language: cpp
-
-where the input variables represent:
-
-- Midtimes of the quasi-impulsive shots (assumed to be the time at which an ideal impulsive shot would have been applied).
-- DeltaVs (three-dimensional vectors) associated with the quasi-impulsive shots.
-- Total duration of the quasi-impulsive shots (same value for each of them).
-- Rise time, i.e. time required to reach the peak acceleration (same value for each impulsive shot).
-
-
 .. _acceleration_types:
 
+===================
 Acceleration Types
-------------------
+===================
 
 In certain pieces of code, such as when requesting the saving of a single acceleration, you will need to supply an
 identified for the type of acceleration. The list of supported types can be found in the `API <https://tudatpy
