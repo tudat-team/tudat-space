@@ -2,8 +2,11 @@
 Examples
 ************************
 
-All the code of example applications is available at `this repository`_. Each example application is explained in detail
-in the pages linked below.
+There are several example applications available in `this repository`_, in the form of Python scripts.
+At the top of each `.py` example file, the topic and goals of such example application are explained in detail.
+
+In addition, to facilitate the understanding of tudat(py) code, a selection of the example applications are
+illustrated in more detail in the pages linked below.
 
 .. _`this repository`: https://github.com/tudat-team/tudatpy-examples
 
