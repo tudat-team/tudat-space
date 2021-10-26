@@ -188,12 +188,11 @@ It requires the following environment models to be defined:
 - Mass model for body undergoing acceleration.
 - Current state of body undergoing acceleration and body with atmosphere.
 
-.. warning::
-   Defining settings for a vehicle’s orientation, which may influence your aerodynamic force, is done after creating
-   the acceleration models, as discussed in --.
-
-.. todo::
-   Add link above.
+.. note::
+   By default, a body's angle of attack, sideslip angle, and bank angle are all set to 0. Defining a vehicle orientation is
+   typically done in one of several ways: defining aerodynamic guidance directly (imposing these three angles), using the
+   definition of vehicle orientation from an existing model for the vehicle (for instance thrust), or propagation of the body's
+   rotational dynamics. TODO: add links and pages describing this
 
 #############################
 Radiation Pressure
@@ -203,6 +202,8 @@ There are two different radiation pressure models available in tudat(py):
 
 - :ref:`cannonball_radiation_pressure`
 - :ref:`panelled_radiation_pressure`
+
+The distinction between them lies in the type of radiation pressure interface that is used for the body undergoing acceleration (see below)
 
 .. _cannonball_radiation_pressure:
 
@@ -223,10 +224,9 @@ It requires the following environment models to be defined:
 Panelled Radiation Pressure
 ###########################
 
-.. todo::
-   This entry is not yet exposed to tudatpy.
-
-Settings for a panelled radiation pressure acceleration.
+The panelled radiation pressure acceleration model can be created as indicated in the `API <https://tudatpy
+.readthedocs
+.io/en/latest/acceleration.html#tudatpy.numerical_simulation.propagation_setup.panelled_radiation_pressure>`_.
 It requires the following environment models to be defined:
 
 - Panelled radiation pressure model for body undergoing acceleration (from source equal to body exerting acceleration), see :ref:`environment_radiation_pressure_interface`.
@@ -239,30 +239,33 @@ Relativistic Acceleration Correction
 
 The relativistic correction acceleration model can be created as indicated in the `API <https://tudatpy.readthedocs
 .io/en/latest/acceleration.html#tudatpy.numerical_simulation.propagation_setup.relativistic_correction>`_.
-This is a first-order (in 1/c^2) correction to the acceleration due to the influence of relativity, consisting of three
-distinct effects:the Schwarzschild, Lense-Thirring and de Sitter accelerations.
+This is a first-order (in 1/c^2) correction to the acceleration due to the influence of relativity for a
+massless body (*e.g.* spacecraft) orbiting a massive body (*e.g.* Earth), which in turn orbits a third body (*e.g.* Sun),
+consisting of three distinct effects: the Schwarzschild, Lense-Thirring and de Sitter accelerations.
 
-.. todo::
-   Add requirements, if needed.
+It requires the following environment models to be defined:
 
+- Mass of the orbited body and the third body (de Sitter only)
+- Current state of body undergoing acceleration, the orbited body, and the third body (de Sitter only)
 
 #######################
 Empirical Accelerations
 #######################
 
-The cannonball radiation pressure acceleration model can be created as indicated in the `API <https://tudatpy.readthedocs
+The empirical pressure acceleration model can be created as indicated in the `API <https://tudatpy.readthedocs
 .io/en/latest/acceleration.html#tudatpy.numerical_simulation.propagation_setup.empirical>`_.
-This is constant/once-per-orbit acceleration, expressed in the RSW frame (see for instance `this function
+This is constant and/or once-per-orbit sinusoidal acceleration, expressed in the RSW frame (see for instance `this function
 <https://tudatpy.readthedocs.io/en/latest/frame_conversion.html#tudatpy.astro.frame_conversion
 .inertial_to_rsw_rotation_matrix>`_), for which the magnitude is determined empirically (typically during an orbit
 determination process).
 
-.. todo::
-   Add requirements, if needed.
+It requires the following environment models to be defined:
 
-###################
+- Mass of the central body (for calculation of true anomaly)
+
+######
 Thrust
-###################
+######
 
 Used to define the accelerations resulting from a thrust force, requiring:
 
@@ -279,25 +282,39 @@ Setting up a thrust acceleration is discussed in more detail on the page Thrust 
 Tidal effect on natural satellites
 ##################################
 
-The cannonball radiation pressure acceleration model can be created as indicated in the `API <https://tudatpy.readthedocs
+The acceleration model for calculating the effect of tides on natural satellites can be created as indicated in the `API <https://tudatpy.readthedocs
 .io/en/latest/acceleration.html#tudatpy.numerical_simulation.propagation_setup.direct_tidal_dissipation_acceleration>`_.
+It is a rather specialist model, which is only relevant for the dynamics of natural satellies *themselves*. When calculating
+the dynamics of spacecraft orbiting natural satellites, use :ref:`gravity field variations <environment_gravity_field_variations>` instead.
+Two types of accelerations can be computed: acceleration on the satellite due to tide on the planet, or acceleration on the satellite
+due to tide on the satellite
+
 It requires the following environment models to be defined:
 
-.. todo::
-   Add requirements, if needed.
+- Masses of planet and satellite.
+- Current state of planet and satellite.
+- Spherical harmonic gravity field for body *on* which the tide is raised (planet or satellite)
+- Planet rotaion model (only for effect of tide on planet)
 
 #################################
 Quasi Impulsive Shot Acceleration
 #################################
 
-.. todo::
-   This entry is not yet exposed to tudatpy.
+The quasi-impulsive shots acceleration model can be created as indicated in the `API <https://tudatpy.readthedocs
+.io/en/latest/acceleration.html#tudatpy.numerical_simulation.propagation_setup.quasi_impulsive_shots_acceleration>`_.
+This is a manner in which to incorporate short bursts of thrust into a numerical propagation. When using this model, ensure
+that your integration step is sufficiently small to be able to capture the burst of thrust.
 
-Settings used to define the resulting acceleration of a quasi-impulsive shot, requiring:
+This acceleration model has no dependencies on the environment: all required information is provided through the associated
+factory function.
 
-- Mass of the body undergoing acceleration.
-- Settings for the characteristics of the quasi-impulsive shots (total duration, rise time, associated deltaVs), as well as the times at which they are applied.
+######
+Custom
+######
 
+Tudat allows you to write your own function in Python, as indicated in the `API <https://tudatpy.readthedocs
+.io/en/latest/acceleration.html#tudatpy.numerical_simulation.propagation_setup.custom>`_ to define an acceleration model as
+a function of time. The dependencies of this acceleration model are user-defined.
 
 .. _acceleration_types:
 
