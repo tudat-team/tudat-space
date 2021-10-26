@@ -10,7 +10,7 @@ In this section, the different stages of a typical simulation setup are describe
 Environment Setup
 ==================
 
-In Tudat, the physical environment is defined by a system of bodies, each encapsulated in a :class:`~tudatpy.numerical_simulation.environment.Body` object. Such an object may represent a celestial body, or a manmade vehicle, and Tudat makes *no* a priori distinction between the two. The distinction is made by the user when creating the bodies The combination of all Body objects is stored in a :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` object (typically named simple ``bodies`` in the code). Each body contains a list of properties (gravity field, ephemeris, *etc.*, see below for a comprehensive list), which may be interdependent  (TODO make diagram of bodies). During the propagation, all the required properties of bodies are extracted and combined to evaluated accelerations/torques/guidance/... and compute the state derivative of thee system (TODO make diagram of link between environment and propagation).
+In Tudat, the physical environment is defined by a system of bodies, each encapsulated in a :class:`~tudatpy.numerical_simulation.environment.Body` object. Such an object may represent a celestial body, or a manmade vehicle, and Tudat makes *no* a priori distinction between the two. The distinction is made by the user when creating the bodies The combination of all Body objects is stored in a :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` object (typically named simple ``bodies`` in the code). Each body contains a list of properties (gravity field, ephemeris, *etc.*, see below for a comprehensive list), which may be interdependent. During the propagation, all the required properties of bodies are extracted and combined to evaluated accelerations/torques/guidance/... and compute the state derivative of thee system.
 
 The typical procedure to create the environment is the following:
 
@@ -138,6 +138,17 @@ Torque models are handled in a similar manner to the translational acceleration 
     propagation_setup/torque_models/setup
     propagation_setup/torque_models/available
 
+
+
+Mass rate Model Setup
+---------------------
+
+To propagate a body's mass, you have to specify mass rate models, as described below
+
+.. toctree::
+    :maxdepth: 1
+
+    propagation_setup/mass_rate_models/setup
 
 
 .. _simulation_output_variables:
