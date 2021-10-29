@@ -82,17 +82,17 @@ Tudat currently supports the propagation of three types of dynamics: translation
     propagation_setup/dynamics_types/translational
     propagation_setup/dynamics_types/rotational
     propagation_setup/dynamics_types/mass
-    propagation_setup/dynamics_types/multi_type
 
-On the following page, we give a brief description of how propagate the dynamics of multiple bodies concurrently:
+You may also propagate any combination of dynamics types, for any number of bodies, as discussed on the pages below.
 
 .. toctree::
-    :maxdepth: 3
+    :maxdepth: 1
 
+    propagation_setup/dynamics_types/multi_type
     propagation_setup/dynamics_types/multi_body
 
 
-The following page provides you with the difference between *conventional* and *propagated* coordinates in the propagator settings. It is important to keep in mind that this page covers some details which happen 'under the hood'.
+The state that is propagated may be one of a number of state representations. For the case of translational dynamics, for instance, there are various options besides a simple Cartesian state representation. However, even when using a non-Cartesian state vector, the Cartesian representation still plays a role in calculating *e.g.* acceleration models. More on the role of different state representations is discussed on the page below:
 
 .. toctree::
     :maxdepth: 1
@@ -104,6 +104,7 @@ The following page provides you with the difference between *conventional* and *
 State Derivative Model Setup
 ==============================
 
+For each of the dynamics types, you must provide models to calculate the state derivative, specifics are discussed below
 
 Acceleration Model Setup
 -------------------------
@@ -143,13 +144,7 @@ Torque models are handled in a similar manner to the translational acceleration 
 Mass rate Model Setup
 ---------------------
 
-To propagate a body's mass, you have to specify mass rate models, as described below
-
-.. toctree::
-    :maxdepth: 1
-
-    propagation_setup/mass_rate_models/setup
-
+Due to the simplicity of setting up mass rate models, this functionality has already by included in the :ref:`mass propagator setings <mass_dynamics>`
 
 .. _simulation_output_variables:
 
@@ -175,6 +170,21 @@ The typical propagation is terminated when a specific final time is reached. Tud
     
     propagation_setup/termination/available
 
+
+Integrator Setup
+=================
+
+The environment and formulation of dynamical equations are now in place. In order to solve these equations you still need to define the numerical integrator settings. These settings specify *how* the equations are solved. In Tudat(Py) you can choose between different types of integrators.
+
+
+Since the choice of integrator strongly depends on the nature of the dynamical problem and the requirements of the user, there is no 'best' integrator that works in all cases. Details about the different types will **not** be given here; you are referred to existing literature on the topic of numerical integrators. We only show you how to create the integrator settings, given on the following page:
+
+.. toctree::
+  :maxdepth: 1
+
+  integrator_setup/settings
+
+    
 
 
 Parameter Setup
@@ -208,21 +218,6 @@ A description of how these parameters are to be defined and a comprehensive list
     sensitivity_analysis/available_parameters
 
 
-
-Integrator Setup
-=================
-
-The environment and formulation of dynamical equations are now in place. In order to solve these equations you still need to define the numerical integrator settings. These settings specify *how* the equations are solved. In Tudat(Py) you can choose between different types of integrators.
-
-
-Since the choice of integrator strongly depends on the nature of the dynamical problem and the requirements of the user, there is no 'best' integrator that works in all cases. Details about the different types will **not** be given here; you are referred to existing literature on the topic of numerical integrators. We only show you how to create the integrator settings, given on the following page:
-
-.. toctree::
-  :maxdepth: 1
-
-  integrator_setup/settings
-
-    
 Running the Simulation
 ======================
 
