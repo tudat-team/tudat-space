@@ -70,7 +70,11 @@ In your terminal navigate to the directory containing this file, and use the fol
 
     conda env create -f environment.yaml
 
-Congratulations! You have now installed Tudat and TudatPy, and are ready to get started running your simulations and analyses!
+
+Congratulations! You have now installed Tudat and TudatPy, and are ready to get started running your simulations and analyses! We recommend you get started by having a look at our :ref:`getting_started_examples`.
+
+If there are any other issues with the installation process, please submit an issue on the `tudatpy-feedstock`_. If there are issues running examples please submit an issue on the `tudatpy`_ repository.
+
 
 .. note::
 
@@ -136,8 +140,21 @@ Congratulations! You have now installed Tudat and TudatPy, and are ready to get 
 .. _`tudatpy`: https://github.com/tudat-team/tudatpy
 .. _`conda_build_config.yaml`: https://github.com/tudat-team/tudatpy-feedstock/blob/master/recipe/conda_build_config.yaml
 
-.. note::
 
-    - If there are any other issues with the installation process, please submit an issue
-    on the `tudatpy-feedstock`_.
-    - If there are issues running tutorials please submit an issue on the `tudatpy`_ repository.
+Updating Tudat(Py)
+##################
+
+To update an existing installation of tudatpy, activate your ``tudat-space`` environment:
+
+    .. code:: bash
+
+        conda activate tudat-space
+
+And then use the following command to install the latest version of tudatpy:
+
+    .. code:: bash
+
+        conda install -c tudat-team tudatpy
+
+Note that using this command may also update additional package (such as tudat) that are needed to run the latest version of tudatpy
+
