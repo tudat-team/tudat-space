@@ -8,7 +8,7 @@ data_derivatives = ...
 linear_interpolation_settings = interpolators.hermite_interpolation( )
 
 # Create interpolator
-interpolator = interpolators.create_one_dimensional_interpolator( data_to_interpolate, linear_interpolation_settings, data_derivatives )
+interpolator = interpolators.create_one_dimensional_scalar_interpolator( data_to_interpolate, linear_interpolation_settings, data_derivatives )
 
 # Interpolate data set in data_to_interpolate at t=100
 independent_variable = 100

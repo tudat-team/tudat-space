@@ -192,7 +192,10 @@ It requires the following environment models to be defined:
    By default, a body's angle of attack, sideslip angle, and bank angle are all set to 0. Defining a vehicle orientation is
    typically done in one of several ways: defining aerodynamic guidance directly (imposing these three angles), using the
    definition of vehicle orientation from an existing model for the vehicle (for instance thrust), or propagation of the body's
-   rotational dynamics. TODO: add links and pages describing this
+   rotational dynamics.
+
+.. todo::
+   Add reference to aerodynamic guidance page.
 
 #############################
 Radiation Pressure

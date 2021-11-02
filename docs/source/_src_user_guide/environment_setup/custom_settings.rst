@@ -1,11 +1,26 @@
-===========================
-Custom environment settings
-===========================
+===============
+Custom settings
+===============
 
-When working with a very specific model or application, it may happen that the model you want to use is not implemented in Tudat. If this is the case, we have the option for users to define 'custom' environment models. The use of these custom settings requires the user to define their own function for the specific environment model, as is shown below with a number of examples. Below, you can find a list of the currently supported custom environment models in Tudat:
+When working with a very specific model or application, it often happens that the model you want to use is not implemented in Tudat. If this is the case, we have the option for users to define 'custom' models for various models in both the environment and propagation setup modukes. The use of these custom settings requires the user to define their own function for the specific model, as is shown on this page with a number of examples. Below, you can find a list of the currently supported custom environment models in Tudat:
 
+Custom environment models:
+
+* :func:`tudatpy.numerical_simulation.environment_setup.aerodynamic_coefficients.custom`
+* :func:`tudatpy.numerical_simulation.environment_setup.atmosphere.custom_constant_temperature`
+* :func:`tudatpy.numerical_simulation.environment_setup.atmosphere.custom_four_dimensional_constant_temperature`
+* :func:`tudatpy.numerical_simulation.environment_setup.atmosphere.custom_wind_model`
 * :func:`tudatpy.numerical_simulation.environment_setup.ephemeris.custom`
-* TODO, extend list
+
+Custom propagation models:
+
+* :func:`tudatpy.numerical_simulation.propagation_setup.propagator.custom_termination`
+* :func:`tudatpy.numerical_simulation.propagation_setup.thrust.custom_thrust_orientation`
+* :func:`tudatpy.numerical_simulation.propagation_setup.thrust.custom_thrust_direction`
+* :func:`tudatpy.numerical_simulation.propagation_setup.thrust.custom_thrust_magnitude`
+* :func:`tudatpy.numerical_simulation.propagation_setup.torque.custom`
+* :func:`tudatpy.numerical_simulation.propagation_setup.acceleration.custom`
+* :func:`tudatpy.numerical_simulation.propagation_setup.mass_rate.custom`
 
 In each case, the user is required to define their own function, with a predefined set of inputs and outputs, which are different for each specific environment model (see API links above). 
 
