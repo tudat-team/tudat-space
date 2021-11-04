@@ -224,7 +224,7 @@ Propagating System State Only
 =================================
 
 Simulations in which only the system state is propagated are handled by simulator objects from the ``Simulator`` class.
-For propagation of the system state along a single arc, the ``SingleArcSimulator`` derivative of the ``Simulator`` base class should be used:
+For propagation of the system state along a single arc, the ``Simulator`` derived ``SingleArcSimulator`` class should be used:
 
 .. tabs::
 
@@ -247,16 +247,16 @@ For propagation of the system state along a single arc, the ``SingleArcSimulator
           .. literalinclude:: /_src_snippets/simulation/environment_setup/req_setup.cpp
              :language: cpp
              
-First, a ``SingleArcSimulator`` is created using the system of bodies, integrator settings, and propagator settings objects.
+First, a :class:`~tudatpy.numerical_simulation.SingleArcSimulator` is created using a :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies`, :class:`~tudatpy.numerical_simulation.propagation_setup.integrator.IntegratorSettings`, and :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.PropagatorSettings` objects.
 Tudat will then automatically read and setup the simulation accordingly.
-The state history is retrieved in the next line by accessing the ``state_history`` attribute of the ``Simulator``.
+The state history is retrieved in the next line by accessing the ``state_history`` attribute of the :class:`~tudatpy.numerical_simulation.SingleArcSimulator`.
 The ``state_history`` attribute is of type dictionary (Python) or map (C++) and contains the state of the propagated body at each epoch, which can be exported or used for subsequent analysis.
 
 It's important to realize that, *regardless* of the formulation of the equations of motion (Cowell, Gauss-Kepler, etc.), the ``state_history`` attribute will always provide the results of the propagation, converted to Cartesian elements (for the case of translational dynamics).
-In the case where a different formulation than the Cowell formulation is used, the states that were actually used during the numerical integration can be accessed through the ``unprocessed_state_history``. For instance, whe using the ``gauss_keplerian`` propagator, it is the equations of motion in Keplerian elements which are solved numerically.
+In the case where a different formulation than the Cowell formulation is used, the states that were used during the numerical integration can be accessed through the ``unprocessed_state_history`` attribute. For instance, whe using a propagator of :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.TranslationalPropagatorType` ``gauss_keplerian``, it is the equations of motion in Keplerian elements which are solved numerically.
 The ``unprocessed_state_history`` will provide you with the history of the Keplerian elements (as directly solved for by the integrator), while the  ``state_history`` provides the Cartesian elements, obtained from the conversion of the propagated Keplerian elements(see :ref:`convention_propagated_coordinates` for more details).
 
-If the user chose to export dependent variables, they can be extracted from the dynamics simulator as follows.
+If the user chooses to export dependent variables, they can be extracted from the dynamics simulator as follows.
 Just like the ``state_history``, the ``dependent_variable_history`` attribute is of kind dictionary (Python) or map (C++):
 
 .. tabs::
