@@ -11,11 +11,10 @@ page. Instead, for each model, a reference to the related API entry and the requ
 
 
 .. note::
-   In tudat(py), acceleration models are defined through factory functions, which define the properties required of
+   In TudatPy, acceleration models are defined through factory functions, which define the properties required of
    the accelerations, but do not perform any calculations themselves. These properties are stored through instances
-   of the
-   ``AccelerationSettings`` class (see `API <https://tudatpy.readthedocs.io/en/latest/acceleration.html#tudatpy
-   .numerical_simulation.propagation_setup.acceleration.AccelerationSettings>`_) or of its derived classes.
+   of the :class:`~tudatpy.numerical_simulation.propagation_setup.acceleration.AccelerationSettings` class or of its 
+   derived classes.
 
 
 .. contents:: List of available acceleration models
@@ -25,7 +24,7 @@ page. Instead, for each model, a reference to the related API entry and the requ
 Gravitational accelerations
 ###########################
 
-Tudat(py) contains a number of different models for gravitational accelerations. In general, the gravitational
+TudatPy contains a number of different models for gravitational accelerations. In general, the gravitational
 acceleration exerted by a body B, with associated potential :math:`U_{B}`, on a body A can be expressed as follows:
 
 .. math::
@@ -40,14 +39,15 @@ with respect to Body B.
 Point Mass Gravity
 ##################
 
-The point-mass gravity acceleration model can be created as indicated in the `API <https://tudatpy.readthedocs
-.io/en/latest/acceleration.html#tudatpy.numerical_simulation.propagation_setup.acceleration.point_mass_gravity>`_.
-It requires the following environment models to be defined:
+| **Description**
+| The point-mass gravity acceleration model can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.point_mass_gravity`
+  factory function.
 
-- Gravity field for body exerting acceleration (see :ref:`environment_gravity_field_model` for non-default models).
-- Current state of body exerting acceleration, either from a pre-defined ephemeris model
-  (see :ref:`environment_ephemeris_model`) or from the numerical propagation of the translational dynamics of the body
-  exerting the acceleration.
+| **Dependencies**
+| 1. Gravity field for body exerting acceleration (see :ref:`environment_gravity_field_model` for non-default models).
+| 2. Current state of body exerting acceleration, either from a pre-defined ephemeris model (see
+     :ref:`environment_ephemeris_model`) or from the numerical propagation of the translational dynamics of the body
+     exerting the acceleration.
 
 
 .. _spherical_harmonic_acceleration:
@@ -55,15 +55,17 @@ It requires the following environment models to be defined:
 Spherical Harmonic Gravity
 ##########################
 
-The spherical harmonic gravity acceleration model can be created as indicated in the `API <https://tudatpy.readthedocs.io/en/latest/acceleration.html#tudatpy.numerical_simulation.propagation_setup.acceleration.spherical_harmonic_gravity>`_.
-It requires the following environment models to be defined:
+| **Description**
+| The spherical harmonic gravity acceleration model can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.spherical_harmonic_gravity`
+  factory function.
 
-- Spherical harmonic gravity field for the body exerting acceleration. See :ref:`environment_gravity_field_model` for
-  options on how to define one (if the default gravity field model of the exerting body is not spherical harmonic)
-- Rotation model from the inertial frame to the body-fixed frame, either from a pre-defined rotation model
+| **Dependencies**
+| 1. Spherical harmonic gravity field for the body exerting acceleration. See :ref:`environment_gravity_field_model` for
+  options on how to define one (if the default gravity field model of the exerting body is not spherical harmonic).
+| 2. Rotation model from the inertial frame to the body-fixed frame, either from a pre-defined rotation model
   (:ref:`environment_rotational_model`) or from the numerical propagation of the rotational dynamics of the body
   exerting the acceleration (Earth in the above example).
-- Current state of body exerting acceleration, either from a pre-defined ephemeris model
+| 3. Current state of body exerting acceleration, either from a pre-defined ephemeris model
   (see :ref:`environment_ephemeris_model`) or from the numerical propagation of the translational dynamics of the body
   exerting the acceleration (Earth in the above example).
 
@@ -76,16 +78,20 @@ It requires the following environment models to be defined:
 Mutual Spherical Harmonic Gravity
 ##############################################
 
-The spherical harmonic gravity acceleration model can be created as indicated in the `API <https://tudatpy.readthedocs.io/en/latest/acceleration.html#tudatpy.numerical_simulation.propagation_setup.acceleration.mutual_spherical_harmonic_gravity>`_.
-This model is typically only used for detailed propagation of planetary systems. With additional parameters, it can
-be used even if the bodies mutually exerting the spherical harmonic gravity acceleration are not the central body.
-It requires the following environment models to be defined:
 
-- Spherical harmonic gravity field for body exerting acceleration and body undergoing acceleration (see
-  :ref:`environment_gravity_field_model` for non-default models)
-- Rotation model from the inertial frame to the body-fixed frame and body undergoing acceleration (see
-  :ref:`environment_rotational_model`)
-- Current state of bodies undergoing and exerting acceleration, either from an Ephemeris model or from the numerical
+| **Description**
+| The mutual spherical harmonic gravity acceleration model can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.mutual_spherical_harmonic_gravity`
+  factory function. This model is typically only used for detailed propagation of planetary systems. With additional
+  parameters, it can
+  be used even if the bodies mutually exerting the spherical harmonic gravity acceleration are not the central body.
+
+
+| **Dependencies**
+| 1. Spherical harmonic gravity field for body exerting acceleration and body undergoing acceleration (see
+  :ref:`environment_gravity_field_model` for non-default models).
+| 2. Rotation model from the inertial frame to the body-fixed frame and body undergoing acceleration (see
+  :ref:`environment_rotational_model` for non-default models).
+| 3. Current state of bodies undergoing and exerting acceleration, either from an Ephemeris model or from the numerical
   propagation (see :ref:`environment_ephemeris_model`).
 
 
@@ -94,60 +100,70 @@ It requires the following environment models to be defined:
 Third Body Gravity & Central Gravity
 ####################################
 
+| **Description**
+| In addition to the three models listed above, which define different models for gravitational interactions between two
+  bodies, you can of course define a **third-body acceleration**. In Tudat, however, you do *not* specify directly
+  whether an
+  acceleration is a 'third-body' acceleration. This is fully defined by what you've chosen as your center of propagation
+  (see :ref:`translational_dynamics`), and the bodies exerting and undergoing the acceleration. Similarly, when
+  calculating the dynamics of a massive body, a correction is required for expressing the gravitational acceleration
+  exerted by the propagation origin (*e.g.* acceleration exerted by Earth on Moon, with Earth as propagation origin).
+  We term this the 'central' acceleration.
 
-In addition to the three models listed above, which define different models for gravitational interactions between two
-bodies, you can of course define a **third-body acceleration**. In Tudat, however, you do *not* specify directly
-whether an
-acceleration is a 'third-body' acceleration. This is fully defined by what you've chosen as your center of propagation
-(see :ref:`translational_dynamics`), and the bodies exerting and undergoing the acceleration. Similarly, when
-calculating the dynamics of a massive body, a correction is required for expressing the gravitational acceleration
-exerted by the propagation origin (*e.g.* acceleration exerted by Earth on Moon, with Earth as propagation origin).
-We term this the 'central' acceleration (see :ref:`third_body_acceleration` for more details on both aspects).
+.. seealso::
+   For more details: :ref:`third_body_acceleration`.
 
-
+| **Dependencies**
+| The same for each gravitational acceleration type.
 
 ########################
 Aerodynamic
 ########################
 
-The aerodynamic acceleration model can be created as indicated in the `API <https://tudatpy.readthedocs
-.io/en/latest/acceleration.html#tudatpy.numerical_simulation.propagation_setup.acceleration.aerodynamic>`_.
-It requires the following environment models to be defined:
+| **Description**
+| The aerodynamic acceleration model can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.aerodynamic`
+  factory function.
 
-- Atmosphere model for body exerting acceleration (see :ref:`environment_atmosphere_model`).
-- Aerodynamic coefficient interface for body undergoing acceleration (see
+| **Dependencies**
+| 1. Atmosphere model for body exerting acceleration (see :ref:`environment_atmosphere_model`).
+| 2. Aerodynamic coefficient interface for body undergoing acceleration (see
   :ref:`environment_aerodynamic_coefficient_interface`).
-- Mass model for body undergoing acceleration.
-- Current state of body undergoing acceleration and body with atmosphere.
+| 3. Mass model for body undergoing acceleration.
+| 4. Current state of body undergoing acceleration and body with atmosphere.
 
-.. warning::
-   Defining settings for a vehicle’s orientation, which may influence your aerodynamic force, is done after creating
-   the acceleration models, as discussed in --.
+.. note::
+   By default, a body’s angle of attack, sideslip angle, and bank angle are all set to 0. Defining a vehicle
+   orientation is typically done in one of several ways: defining aerodynamic guidance directly (imposing these three
+   angles), using the definition of vehicle orientation from an existing model for the vehicle (for instance thrust),
+   or propagation of the body’s rotational dynamics.
 
 .. todo::
-   Add link above.
+   Add reference to aerodynamic guidance page.
 
 #############################
 Radiation Pressure
 #############################
 
-There are two different radiation pressure models available in tudat(py):
+There are two different radiation pressure models available in TudatPy:
 
 - :ref:`cannonball_radiation_pressure`
 - :ref:`panelled_radiation_pressure`
+
+The distinction between them lies in the type of radiation pressure interface that is used for the body undergoing
+acceleration (see below).
 
 .. _cannonball_radiation_pressure:
 
 Cannonball Radiation Pressure
 #############################
 
-The cannonball radiation pressure acceleration model can be created as indicated in the `API <https://tudatpy
-.readthedocs
-.io/en/latest/acceleration.html#tudatpy.numerical_simulation.propagation_setup.cannonball_radiation_pressure>`_.
-It requires the following environment models to be defined:
+| **Description**
+| The cannonball radiation pressure model can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.cannonball_radiation_pressure`
+  factory function.
 
-- Cannonball radiation pressure model for body undergoing acceleration (from source equal to body exerting acceleration), see :ref:`environment_radiation_pressure_interface`.
-- Current state of body undergoing and body emitting radiation.
+| **Dependencies**
+| 1. Cannonball radiation pressure model for body undergoing acceleration (from source equal to body exerting acceleration), see :ref:`environment_radiation_pressure_interface`.
+| 2. Current state of body undergoing and body emitting radiation.
 
 
 .. _panelled_radiation_pressure:
@@ -155,81 +171,134 @@ It requires the following environment models to be defined:
 Panelled Radiation Pressure
 ###########################
 
-.. todo::
-   This entry is not yet exposed to tudatpy.
+| **Description**
+| The panelled radiation pressure model can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.panelled_radiation_pressure`
+  factory function.
 
-Settings for a panelled radiation pressure acceleration.
-It requires the following environment models to be defined:
 
-- Panelled radiation pressure model for body undergoing acceleration (from source equal to body exerting acceleration), see :ref:`environment_radiation_pressure_interface`.
-- Current state of body undergoing and body emitting radiation.
+| **Dependencies**
+| 1. Panelled radiation pressure model for body undergoing acceleration (from source equal to body exerting acceleration), see :ref:`environment_radiation_pressure_interface`.
+| 2. Current state of body undergoing and body emitting radiation.
 
 
 ####################################
 Relativistic Acceleration Correction
 ####################################
 
-The relativistic correction acceleration model can be created as indicated in the `API <https://tudatpy.readthedocs
-.io/en/latest/acceleration.html#tudatpy.numerical_simulation.propagation_setup.relativistic_correction>`_.
-This is a first-order (in 1/c^2) correction to the acceleration due to the influence of relativity, consisting of three
-distinct effects:the Schwarzschild, Lense-Thirring and de Sitter accelerations.
+| **Description**
+| The relativistic correction acceleration model can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.relativistic_correction`
+  factory function. This is a first-order (in 1/c^2) correction to the acceleration due to the influence of relativity
+  for a massless body (e.g. spacecraft) orbiting a massive body (e.g. Earth), which in turn orbits a third body (e.g.
+  Sun), consisting of three distinct effects: the Schwarzschild, Lense-Thirring and de Sitter accelerations.
 
-.. todo::
-   Add requirements, if needed.
+| **Dependencies**
+| 1. Mass of the orbited body and the third body (de Sitter only)
+| 2. Current state of body undergoing acceleration, the orbited body, and the third body (de Sitter only)
 
 
 #######################
 Empirical Accelerations
 #######################
 
-The cannonball radiation pressure acceleration model can be created as indicated in the `API <https://tudatpy.readthedocs
-.io/en/latest/acceleration.html#tudatpy.numerical_simulation.propagation_setup.empirical>`_.
-This is constant/once-per-orbit acceleration, expressed in the RSW frame (see for instance `this function
-<https://tudatpy.readthedocs.io/en/latest/frame_conversion.html#tudatpy.astro.frame_conversion
-.inertial_to_rsw_rotation_matrix>`_), for which the magnitude is determined empirically (typically during an orbit
-determination process).
+| **Description**
+| The empirical acceleration model can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.empirical`
+  factory function. This is constant/once-per-orbit acceleration, expressed in the RSW frame (see for instance
+  :func:`~tudatpy.astro.frame_conversion.inertial_to_rsw_rotation_matrix`), for which the magnitude is determined
+  empirically (typically during an orbit determination process).
 
-.. todo::
-   Add requirements, if needed.
+| **Dependencies**
+| 1. Mass of the central body (for calculation of true anomaly).
 
 ###################
 Thrust
 ###################
 
-Used to define the accelerations resulting from a thrust force, requiring:
+There are currently three different ways to create thrust acceleration models in TudatPy:
 
-- Mass of body undergoing acceleration;
-- Settings for both the direction and magnitude of the thrust force. These models may in turn have additional environmental dependencies.
+- :ref:`thrust_direction_and_magnitude`
+- :ref:`thrust_custom_function`
+- :ref:`thrust_isp_custom_function`
 
-Setting up a thrust acceleration is discussed in more detail on the page Thrust Guidance.
+.. _`thrust_direction_and_magnitude`:
+
+From direction and magnitude
+#############################
+
+| **Description**
+| The thrust from direction and magnitude can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.thrust_from_direction_and_magnitude`
+  factory function. The direction and magnitude are supplied to the function as two separate objects, which can be
+  created in different ways (see :mod:`tudatpy.numerical_simulation.propagation_setup.thrust`).
+
+| **Dependencies**
+| 1. Mass of body undergoing acceleration.
+
+
+.. seealso::
+   To create thrust direction and magnitude settings, more details are provided at `this link <https://tudatpy.readthedocs.io/en/latest/thrust.html>`_.
 
 .. todo::
-   Add reference to thrust guidance page.
+   Create dedicated thrust page on tudat-space and add link.
+
+
+.. _`thrust_custom_function`:
+
+From custom function (with constant specific impulse)
+############################################################
+
+| **Description**
+| The thrust from a custom function can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.thrust_from_custom_function`
+  factory function. Instead of separating the direction and magnitude of the thrust acceleration, this function
+  accepts a function of time that returns the thrust acceleration vector and a constant specific impulse.
+
+| **Dependencies**
+| 1. Mass of body undergoing acceleration.
+
+.. _`thrust_isp_custom_function`:
+
+From custom function (with variable specific impulse)
+############################################################
+
+| **Description**
+| The thrust from a custom function and variable specific impulse can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.thrust_and_isp_from_custom_function`
+  factory function. Instead of separating the direction and magnitude of the thrust acceleration, this function
+  accepts a function that returns the thrust acceleration vector. With respect to the previous thrust acceleration,
+  in this case the specific impulse can vary and it is supplied as a function of time.
+
+
+| **Dependencies**
+| 1. Mass of body undergoing acceleration.
+
 
 
 ##################################
 Tidal effect on natural satellites
 ##################################
 
-The cannonball radiation pressure acceleration model can be created as indicated in the `API <https://tudatpy.readthedocs
-.io/en/latest/acceleration.html#tudatpy.numerical_simulation.propagation_setup.direct_tidal_dissipation_acceleration>`_.
-It requires the following environment models to be defined:
+| **Description**
+| The acceleration accounting for the tidal effect on natural satellites can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.direct_tidal_dissipation_acceleration`
+  factory function. It is a rather specialist model, which is only relevant for the dynamics of natural satellites
+  themselves. When calculating the dynamics of spacecraft orbiting natural satellites, use gravity field variations
+  instead. Two types of accelerations can be computed: acceleration on the satellite due to tide on the planet, or
+  acceleration on the satellite due to tide on the satellite.
 
-.. todo::
-   Add requirements, if needed.
+| **Dependencies**
+| 1. Masses of planet and satellite.
+| 2. Current state of planet and satellite.
+| 3. Spherical harmonic gravity field for body on which the tide is raised (planet or satellite)
+| 4. Planet rotation model (only for effect of tide on planet)
 
 #################################
-Quasi Impulsive Shot Acceleration
+Quasi-Impulsive Shot Acceleration
 #################################
 
-.. todo::
-   This entry is not yet exposed to tudatpy.
+| **Description**
+| The acceleration accounting for the tidal effect on natural satellites can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.quasi_impulsive_shots_acceleration`
+  factory function. This is a manner in which to incorporate short bursts of thrust into a numerical propagation.
+  When using this model, ensure that your integration step is sufficiently small to be able to capture the burst of
+  thrust.
 
-Settings used to define the resulting acceleration of a quasi-impulsive shot, requiring:
-
-- Mass of the body undergoing acceleration.
-- Settings for the characteristics of the quasi-impulsive shots (total duration, rise time, associated deltaVs), as well as the times at which they are applied.
-
+| **Dependencies**
+| None.
 
 .. _acceleration_types:
 
@@ -238,5 +307,7 @@ Acceleration Types
 ===================
 
 In certain pieces of code, such as when requesting the saving of a single acceleration, you will need to supply an
-identified for the type of acceleration. The list of supported types can be found in the `API <https://tudatpy
-.readthedocs.io/en/latest/acceleration.html#tudatpy.numerical_simulation.propagation_setup.acceleration.AvailableAcceleration>`_.
+identified for the type of acceleration.
+
+.. seealso::
+   List of supported types in the API documentation: :class:`~tudatpy.numerical_simulation.propagation_setup.acceleration.AvailableAcceleration`.
