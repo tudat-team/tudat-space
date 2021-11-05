@@ -7,7 +7,7 @@ Available Acceleration Models
 In this page, all the acceleration models available in tudat(py) are explained. Regardless of the type of acceleration
 model, the procedure to link such acceleration model to the bodies exerting and undergoing the acceleration is
 explained in this page: :ref:`Acceleration Model Setup`. Therefore, this information will not be repeated in this
-page. Instead, for each model, a reference to the related API entry and the requirements are provided.
+page. Instead, for each model, a reference to the related API documentation entry and the requirements are provided.
 
 
 .. note::
@@ -170,7 +170,7 @@ while the following will add the third-body spherical-harmonic acceleration of t
     .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/spherical_harmonic_gravity_zonal.cpp
        :language: cpp
 
-Note that above two code blocks are identical to those given as example in the API
+Note that above two code blocks are identical to those given as example in the API documentation
 entries of :ref:`point_mass_acceleration` and :ref:`spherical_harmonic_acceleration`. It is through the definition
 *of the central body* that a direct, central or third-body acceleration is created.
 

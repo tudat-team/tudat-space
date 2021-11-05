@@ -17,7 +17,7 @@ to get started on them, have a look at our
 On this website, you will find a user guide for Tudat, which walks you through the manner in which to set up a
 simulation, and start designing transfer orbits, propagating trajectories, analyzing uncertainties or estimating gravity
 fields! A detailed function-by-function description of our software can be found on
-our  `API website <https://tudatpy.readthedocs.io/en/latest/>`_.
+our  `API documentation website <https://tudatpy.readthedocs.io/en/latest/>`_.
 
 
 
