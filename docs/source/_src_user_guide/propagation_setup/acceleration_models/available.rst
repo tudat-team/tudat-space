@@ -20,6 +20,10 @@ page. Instead, for each model, a reference to the related API documentation entr
 .. contents:: List of available acceleration models
     :depth: 3
 
+In certain pieces of code, such as when requesting the saving of a single acceleration (see :ref:`available_dependent_variables`
+for saving of dependent variables), you will need to supply an identifier for the type of acceleration you are requesting.
+See the list of supported identifier types in the API documentation: :class:`~tudatpy.numerical_simulation.propagation_setup.acceleration.AvailableAcceleration`.
+
 ###########################
 Gravitational accelerations
 ###########################
@@ -302,14 +306,3 @@ Quasi-Impulsive Shot Acceleration
 | **Dependencies**
 | None.
 
-.. _acceleration_types:
-
-===================
-Acceleration Types
-===================
-
-In certain pieces of code, such as when requesting the saving of a single acceleration, you will need to supply an
-identified for the type of acceleration.
-
-.. seealso::
-   List of supported types in the API documentation: :class:`~tudatpy.numerical_simulation.propagation_setup.acceleration.AvailableAcceleration`.
