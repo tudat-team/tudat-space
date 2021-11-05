@@ -4,7 +4,7 @@
 Available Acceleration Models
 ===============================
 
-In this page, all the acceleration models available in tudat(py) are explained. Regardless of the type of acceleration
+In this page, all the acceleration models available in TudatPy are explained. Regardless of the type of acceleration
 model, the procedure to link such acceleration model to the bodies exerting and undergoing the acceleration is
 explained in this page: :ref:`Acceleration Model Setup`. Therefore, this information will not be repeated in this
 page. Instead, for each model, a reference to the related API entry and the requirements are provided.
@@ -34,22 +34,6 @@ acceleration exerted by a body B, with associated potential :math:`U_{B}`, on a 
 with :math:`\mathbf{r}_{_{BA}}(=\mathbf{r}_{_{B}}-\mathbf{r}_{_{A}})` denoting the relative position vector of body A
 with respect to Body B.
 
-In Tudat, we currently provide three different formulations for the inertial gravitational acceleration of one body exerted on another:
-
-* :ref:`point_mass_acceleration`
-* :ref:`spherical_harmonic_acceleration`
-* :ref:`mutual_spherical_harmonic_acceleration` (relevant for, for instance, natural satellite dynamics).
-
-
-.. note::
-    In addition to the three models listed above, which define different models for gravitational interactions between two
-    bodies, you can of course define a **third-body acceleration**. In Tudat, however, you do *not* specify directly
-    whether an
-    acceleration is a 'third-body' acceleration. This is fully defined by what you've chosen as your center of propagation
-    (see :ref:`translational_dynamics`), and the bodies exerting and undergoing the acceleration. Similarly, when
-    calculating the dynamics of a massive body, a correction is required for expressing the gravitational acceleration
-    exerted by the propagation origin (*e.g.* acceleration exerted by Earth on Moon, with Earth as propagation origin).
-    We term this the 'central' acceleration (see :ref:`third_body_gravity` for details on both aspects).
 
 .. _point_mass_acceleration:
 
@@ -110,69 +94,17 @@ It requires the following environment models to be defined:
 Third Body Gravity & Central Gravity
 ####################################
 
-Settings for a third-body and central gravitational acceleration are defined identically to direct gravitational accelerations. During the creation and processing of the acceleration models, Tudat distinguishes three different cases, for the body :math:`A` exerting the acceleration, the body :math:`B` undergoing the acceleration, and the body :math:`C` as the center of propagation.
 
-* **Third-body perturbation** The central body is non-inertial (e.g. is not the SSB), and the acceleration *is not* exerted by central body. The acceleration is then computed from:
-
-.. math::
-
- \mathbf{a}=\nabla U_{B}(\mathbf{r}_{A})-\nabla U_{B}(\mathbf{r}_{C})
-
-This is the typical *third body* perturbation, for instance for the case where :math:`A` is a spacecraft orbiting the Moon, :math:`B` is the Earth and :math:`C` is the Moon
-
-
-* **Central gravitational acceleration** The central body is non-inertial (e.g. is not the SSB), and the acceleration *is* exerted by the central body. If the body undergoing the acceleration itself possesses a gravity field, the gravitational back-reaction is accounted for when setting up the gravitational acceleration.
-
-.. math::
-
- \mathbf{a}=\nabla U_{B}(\mathbf{r}_{A})-\nabla U_{A}(\mathbf{r}_{B})
-
-The backreaction (accounted for by the second term) becomes relevant when computing the mutual dynamics of two natural bodies. For instance, when propagating the Moon w.r.t. the Earth, and adding the point-mass gravitational acceleration of the Earth on the Moon, the following acceleration will be used:
-
-.. math::
-
- \mathbf{a}=-\frac{\mu_{A}+\mu_{B}}{||\mathbf{r}||^{2}}\hat{\mathbf{r}}
-
-with :math:`\mathbf{r}` the position of the Moon w.r.t. the Earth. The backreaction is taken into account by using the sum of the gravitational parameters (as opposed to only the gravitational parameter of the Earth).
+In addition to the three models listed above, which define different models for gravitational interactions between two
+bodies, you can of course define a **third-body acceleration**. In Tudat, however, you do *not* specify directly
+whether an
+acceleration is a 'third-body' acceleration. This is fully defined by what you've chosen as your center of propagation
+(see :ref:`translational_dynamics`), and the bodies exerting and undergoing the acceleration. Similarly, when
+calculating the dynamics of a massive body, a correction is required for expressing the gravitational acceleration
+exerted by the propagation origin (*e.g.* acceleration exerted by Earth on Moon, with Earth as propagation origin).
+We term this the 'central' acceleration (see :ref:`third_body_acceleration` for more details on both aspects).
 
 
-* **Direct gravitational acceleration** The central body is inertial (e.g. is the SSB). In this case, the direct acceleration is used:
-
-.. math::
-
- \mathbf{a}=\nabla U_{B}(\mathbf{r}_{A})
-
-We stress that the above works equally well for **point-mass**, **spherical-harmonic** and **mutual-spherical-harmonic** accelerations. When propagating the dynamics of a spacecraft w.r.t. the Moon, the following will add the third-body point-mass acceleration of the Earth:
-
-.. tabs::
-
-     .. tab:: Python
-
-      .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/point_mass_gravity.py
-         :language: python
-
-     .. tab:: C++
-
-      .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/point_mass_gravity.cpp
-         :language: cpp
-
-while the following will add the third-body spherical-harmonic acceleration of the Earth (zonal coefficients up to degree 4)
-
-.. tabs::
-
-   .. tab:: Python
-
-    .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/spherical_harmonic_gravity_zonal.py
-       :language: python
-
-   .. tab:: C++
-
-    .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/spherical_harmonic_gravity_zonal.cpp
-       :language: cpp
-
-Note that above two code blocks are identical to those given as example in the API
-entries of :ref:`point_mass_acceleration` and :ref:`spherical_harmonic_acceleration`. It is through the definition
-*of the central body* that a direct, central or third-body acceleration is created.
 
 ########################
 Aerodynamic
