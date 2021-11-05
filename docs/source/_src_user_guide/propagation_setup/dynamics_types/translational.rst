@@ -61,7 +61,9 @@ This example defines a termination condition using a dependent variable: the sim
 Translational Dynamics Propagators
 ==================================
 
-Tudat(Py) currently supports seven types of translational propagators, each having its own advantages and drawbacks. They are exposed in the ``propagation_setup.propagator`` module:
+Tudat(Py) currently supports seven types of translational state dynamics formulations (propagators) (see
+:class:`tudatpy.numerical_simulation.propagation_setup.propagator.TranslationalPropagatorType`) each having its own
+advantages and drawbacks:
 
   - Cartesian coordinates (with ``cowell`` propagator); state size: 6
   - Cartesian coordinates (with ``encke`` propagator); state size: 6

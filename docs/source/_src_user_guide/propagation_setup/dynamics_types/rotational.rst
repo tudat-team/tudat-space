@@ -32,8 +32,12 @@ Defining settings for the rotational dynamics is done by:
           .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
              :language: cpp
 
+Rotational Dynamics Propagators
+==================================
 
-where the final three inputs are all optional (see :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.rotational`)
+Tudat(Py) currently supports three types of rotational state dynamics formulations (propagators) (see
+:class:`tudatpy.numerical_simulation.propagation_setup.propagator.RotationalPropagatorType`) each having its own
+advantages and drawbacks:
 
 .. class:: Rotational Motion Propagators
 
