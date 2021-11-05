@@ -6,21 +6,21 @@ When working with a very specific model or application, it often happens that th
 
 Custom environment models:
 
-* :func:`tudatpy.numerical_simulation.environment_setup.aerodynamic_coefficients.custom`
-* :func:`tudatpy.numerical_simulation.environment_setup.atmosphere.custom_constant_temperature`
-* :func:`tudatpy.numerical_simulation.environment_setup.atmosphere.custom_four_dimensional_constant_temperature`
-* :func:`tudatpy.numerical_simulation.environment_setup.atmosphere.custom_wind_model`
-* :func:`tudatpy.numerical_simulation.environment_setup.ephemeris.custom`
+* :func:`~tudatpy.numerical_simulation.environment_setup.aerodynamic_coefficients.custom`
+* :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.custom_constant_temperature`
+* :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.custom_four_dimensional_constant_temperature`
+* :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.custom_wind_model`
+* :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.custom`
 
 Custom propagation models:
 
-* :func:`tudatpy.numerical_simulation.propagation_setup.propagator.custom_termination`
-* :func:`tudatpy.numerical_simulation.propagation_setup.thrust.custom_thrust_orientation`
-* :func:`tudatpy.numerical_simulation.propagation_setup.thrust.custom_thrust_direction`
-* :func:`tudatpy.numerical_simulation.propagation_setup.thrust.custom_thrust_magnitude`
-* :func:`tudatpy.numerical_simulation.propagation_setup.torque.custom`
-* :func:`tudatpy.numerical_simulation.propagation_setup.acceleration.custom`
-* :func:`tudatpy.numerical_simulation.propagation_setup.mass_rate.custom`
+* :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.custom_termination`
+* :func:`~tudatpy.numerical_simulation.propagation_setup.thrust.custom_thrust_orientation`
+* :func:`~tudatpy.numerical_simulation.propagation_setup.thrust.custom_thrust_direction`
+* :func:`~tudatpy.numerical_simulation.propagation_setup.thrust.custom_thrust_magnitude`
+* :func:`~tudatpy.numerical_simulation.propagation_setup.torque.custom`
+* :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.custom`
+* :func:`~tudatpy.numerical_simulation.propagation_setup.mass_rate.custom`
 
 In each case, the user is required to define their own function, with a predefined set of inputs and outputs, which are different for each specific environment model (see API links above). 
 

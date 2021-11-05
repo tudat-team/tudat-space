@@ -27,13 +27,13 @@ The regular default body settings use the spice toolbox to determine the ephemer
 The difference w.r.t. the `regular creation<creating_celestial_bodies>` of default body settings being the use of the :func:`~tudatpy.numerical_simulation.environment_setup.get_default_body_settings_time_limited` function (instead of :func:`~tudatpy.numerical_simulation.environment_setup.get_default_body_settings`). What is done when using this alternative setup:
 
  * When *creating* the bodies, spice is queried at a linearly spaced set of times (defined by the ``initial_time``, ``final_time`` and ``time_step``, the latter of which has a default of 300 s), resulting in a table of states for each body that is to be created
- * A 6-step Lagrange interpolator (TODO link) is created for each body using these tables of states, and is used to define the ephemeris of the body
+ * A 6-point :func:`~tudatpy.math.interpolators.lagrange_interpolation` is created for each body using these tables of states, and is used to define the ephemeris of the body
  * When requiring the state of a body during the simulation, the interpolator is queried, instead of spice
 
 Extracting a state from the interpolator is significantly faster than extracting it from spice. However, this approach comes with a number of downsides:
 
 * This setup require large tables of states (and associated data for the interpolator) to be stored in active memory, leading to significant memory usage when used for large simulation time intervals
-* Using the interpolator will produce a *slightly* different result for the states that if they would be extracted from spice directly. For most solar system bodies, this is limited, but for bodies with short orbital periods (*e.g.* solar system moons), the interpolation error may be excessive. In such cases, users can define a different ``time_step`` for a single body by using the ``get_default_single_body_settings_time_limited`` (TODO: API link) function.
+* Using the interpolator will produce a *slightly* different result for the states that if they would be extracted from spice directly. For most solar system bodies, this is limited, but for bodies with short orbital periods (*e.g.* solar system moons), the interpolation error may be excessive. In such cases, users can define a different ``time_step`` for a single body by using the :func:`~tudatpy.numerical_simulation.environment_setup.get_default_single_body_settings_time_limited` function.
 * The ephemeris that is created in this manner is *only* valid within a given time range, which means that you need to know beforehand which the time interval of your simulation will be
 
 .. warning::
