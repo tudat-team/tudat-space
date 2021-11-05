@@ -22,7 +22,7 @@ Custom propagation models:
 * :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.custom`
 * :func:`~tudatpy.numerical_simulation.propagation_setup.mass_rate.custom`
 
-In each case, the user is required to define their own function, with a predefined set of inputs and outputs, which are different for each specific environment model (see API links above). 
+In each case, the user is required to define their own function, with a predefined set of inputs and outputs, which are different for each specific environment model (see API documentation links above).
 
 For most environment models, the custom model can be fully defined by a standalone function , and can be fully defined by a free function (which may of course call other functions from tudat, other packages or your own code
 

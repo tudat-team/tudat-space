@@ -17,6 +17,6 @@ All variables are saved in SI units. Dependent variables can be added to the pro
 
 Then, add this list to the :ref:`propagating settings <propagator_setup>`, through the :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.translational`, :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.rotational` or :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.mass` functions.
 
-You can find a full list of dependent variables that can be saved `in our API <https://tudatpy.readthedocs.io/en/latest/dependent_variable.html#functions>`_.
+You can find a full list of dependent variables that can be saved `in our API documentation<https://tudatpy.readthedocs.io/en/latest/dependent_variable.html#functions>`_.
 
 				

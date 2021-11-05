@@ -14,7 +14,7 @@ page. Instead, for each model, a reference to the related API entry and the requ
    In tudat(py), acceleration models are defined through factory functions, which define the properties required of
    the accelerations, but do not perform any calculations themselves. These properties are stored through instances
    of the
-   ``AccelerationSettings`` class (see `API <https://tudatpy.readthedocs.io/en/latest/acceleration.html#tudatpy
+   ``AccelerationSettings`` class (see `API documentation <https://tudatpy.readthedocs.io/en/latest/acceleration.html#tudatpy
    .numerical_simulation.propagation_setup.acceleration.AccelerationSettings>`_) or of its derived classes.
 
 
@@ -56,7 +56,7 @@ In Tudat, we currently provide three different formulations for the inertial gra
 Point Mass Gravity
 ##################
 
-The point-mass gravity acceleration model can be created as indicated in the `API <https://tudatpy.readthedocs
+The point-mass gravity acceleration model can be created as indicated in the `API documentation <https://tudatpy.readthedocs
 .io/en/latest/acceleration.html#tudatpy.numerical_simulation.propagation_setup.acceleration.point_mass_gravity>`_.
 It requires the following environment models to be defined:
 
@@ -71,7 +71,7 @@ It requires the following environment models to be defined:
 Spherical Harmonic Gravity
 ##########################
 
-The spherical harmonic gravity acceleration model can be created as indicated in the `API <https://tudatpy.readthedocs.io/en/latest/acceleration.html#tudatpy.numerical_simulation.propagation_setup.acceleration.spherical_harmonic_gravity>`_.
+The spherical harmonic gravity acceleration model can be created as indicated in the `API documentation <https://tudatpy.readthedocs.io/en/latest/acceleration.html#tudatpy.numerical_simulation.propagation_setup.acceleration.spherical_harmonic_gravity>`_.
 It requires the following environment models to be defined:
 
 - Spherical harmonic gravity field for the body exerting acceleration. See :ref:`environment_gravity_field_model` for
@@ -92,7 +92,7 @@ It requires the following environment models to be defined:
 Mutual Spherical Harmonic Gravity
 ##############################################
 
-The spherical harmonic gravity acceleration model can be created as indicated in the `API <https://tudatpy.readthedocs.io/en/latest/acceleration.html#tudatpy.numerical_simulation.propagation_setup.acceleration.mutual_spherical_harmonic_gravity>`_.
+The spherical harmonic gravity acceleration model can be created as indicated in the `API documentation <https://tudatpy.readthedocs.io/en/latest/acceleration.html#tudatpy.numerical_simulation.propagation_setup.acceleration.mutual_spherical_harmonic_gravity>`_.
 This model is typically only used for detailed propagation of planetary systems. With additional parameters, it can
 be used even if the bodies mutually exerting the spherical harmonic gravity acceleration are not the central body.
 It requires the following environment models to be defined:
@@ -178,7 +178,7 @@ entries of :ref:`point_mass_acceleration` and :ref:`spherical_harmonic_accelerat
 Aerodynamic
 ########################
 
-The aerodynamic acceleration model can be created as indicated in the `API <https://tudatpy.readthedocs
+The aerodynamic acceleration model can be created as indicated in the `API documentation <https://tudatpy.readthedocs
 .io/en/latest/acceleration.html#tudatpy.numerical_simulation.propagation_setup.acceleration.aerodynamic>`_.
 It requires the following environment models to be defined:
 
@@ -213,7 +213,7 @@ The distinction between them lies in the type of radiation pressure interface th
 Cannonball Radiation Pressure
 #############################
 
-The cannonball radiation pressure acceleration model can be created as indicated in the `API <https://tudatpy
+The cannonball radiation pressure acceleration model can be created as indicated in the `API documentation <https://tudatpy
 .readthedocs
 .io/en/latest/acceleration.html#tudatpy.numerical_simulation.propagation_setup.cannonball_radiation_pressure>`_.
 It requires the following environment models to be defined:
@@ -227,7 +227,7 @@ It requires the following environment models to be defined:
 Panelled Radiation Pressure
 ###########################
 
-The panelled radiation pressure acceleration model can be created as indicated in the `API <https://tudatpy
+The panelled radiation pressure acceleration model can be created as indicated in the `API documentation <https://tudatpy
 .readthedocs
 .io/en/latest/acceleration.html#tudatpy.numerical_simulation.propagation_setup.panelled_radiation_pressure>`_.
 It requires the following environment models to be defined:
@@ -240,7 +240,7 @@ It requires the following environment models to be defined:
 Relativistic Acceleration Correction
 ####################################
 
-The relativistic correction acceleration model can be created as indicated in the `API <https://tudatpy.readthedocs
+The relativistic correction acceleration model can be created as indicated in the `API documentation <https://tudatpy.readthedocs
 .io/en/latest/acceleration.html#tudatpy.numerical_simulation.propagation_setup.relativistic_correction>`_.
 This is a first-order (in 1/c^2) correction to the acceleration due to the influence of relativity for a
 massless body (*e.g.* spacecraft) orbiting a massive body (*e.g.* Earth), which in turn orbits a third body (*e.g.* Sun),
@@ -255,7 +255,7 @@ It requires the following environment models to be defined:
 Empirical Accelerations
 #######################
 
-The empirical pressure acceleration model can be created as indicated in the `API <https://tudatpy.readthedocs
+The empirical pressure acceleration model can be created as indicated in the `API documentation <https://tudatpy.readthedocs
 .io/en/latest/acceleration.html#tudatpy.numerical_simulation.propagation_setup.empirical>`_.
 This is constant and/or once-per-orbit sinusoidal acceleration, expressed in the RSW frame (see for instance `this function
 <https://tudatpy.readthedocs.io/en/latest/frame_conversion.html#tudatpy.astro.frame_conversion
@@ -285,7 +285,7 @@ Setting up a thrust acceleration is discussed in more detail on the page Thrust 
 Tidal effect on natural satellites
 ##################################
 
-The acceleration model for calculating the effect of tides on natural satellites can be created as indicated in the `API <https://tudatpy.readthedocs
+The acceleration model for calculating the effect of tides on natural satellites can be created as indicated in the `API documentation <https://tudatpy.readthedocs
 .io/en/latest/acceleration.html#tudatpy.numerical_simulation.propagation_setup.direct_tidal_dissipation_acceleration>`_.
 It is a rather specialist model, which is only relevant for the dynamics of natural satellies *themselves*. When calculating
 the dynamics of spacecraft orbiting natural satellites, use :ref:`gravity field variations <environment_gravity_field_variations>` instead.
@@ -303,7 +303,7 @@ It requires the following environment models to be defined:
 Quasi Impulsive Shot Acceleration
 #################################
 
-The quasi-impulsive shots acceleration model can be created as indicated in the `API <https://tudatpy.readthedocs
+The quasi-impulsive shots acceleration model can be created as indicated in the `API documentation <https://tudatpy.readthedocs
 .io/en/latest/acceleration.html#tudatpy.numerical_simulation.propagation_setup.quasi_impulsive_shots_acceleration>`_.
 This is a manner in which to incorporate short bursts of thrust into a numerical propagation. When using this model, ensure
 that your integration step is sufficiently small to be able to capture the burst of thrust.
@@ -315,7 +315,7 @@ factory function.
 Custom
 ######
 
-Tudat allows you to write your own function in Python, as indicated in the `API <https://tudatpy.readthedocs
+Tudat allows you to write your own function in Python, as indicated in the `API documentation <https://tudatpy.readthedocs
 .io/en/latest/acceleration.html#tudatpy.numerical_simulation.propagation_setup.custom>`_ to define an acceleration model as
 a function of time. The dependencies of this acceleration model are user-defined.
 
@@ -326,5 +326,5 @@ Acceleration Types
 ===================
 
 In certain pieces of code, such as when requesting the saving of a single acceleration, you will need to supply an
-identified for the type of acceleration. The list of supported types can be found in the `API <https://tudatpy
+identified for the type of acceleration. The list of supported types can be found in the `API documentation <https://tudatpy
 .readthedocs.io/en/latest/acceleration.html#tudatpy.numerical_simulation.propagation_setup.acceleration.AvailableAcceleration>`_.
