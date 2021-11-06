@@ -18,14 +18,14 @@ page. Instead, for each model, a reference to the related API documentation entr
 
 
 .. contents:: List of available acceleration models
-    :depth: 3
+    :depth: 2
 
 In certain pieces of code, such as when requesting the saving of a single acceleration (see :ref:`available_dependent_variables`
 for saving of dependent variables), you will need to supply an identifier for the type of acceleration you are requesting.
 See the list of supported identifier types in the API documentation: :class:`~tudatpy.numerical_simulation.propagation_setup.acceleration.AvailableAcceleration`.
 
 ###########################
-Gravitational accelerations
+Gravitational
 ###########################
 
 TudatPy contains a number of different models for gravitational accelerations. In general, the gravitational
@@ -37,6 +37,15 @@ acceleration exerted by a body B, with associated potential :math:`U_{B}`, on a 
 with :math:`\mathbf{r}_{_{BA}}(=\mathbf{r}_{_{B}}-\mathbf{r}_{_{A}})` denoting the relative position vector of body A
 with respect to Body B.
 
+There are different gravitational models available in TudatPy:
+
+- :ref:`point_mass_acceleration`
+- :ref:`spherical_harmonic_acceleration`
+- :ref:`mutual_spherical_harmonic_acceleration`
+- :ref:`third_body_gravity`
+
+The distinction between them lies in the type of radiation pressure interface that is used for the body undergoing
+acceleration (see below).
 
 .. _point_mass_acceleration:
 
@@ -101,8 +110,8 @@ Mutual Spherical Harmonic Gravity
 
 .. _third_body_gravity:
 
-Third Body Gravity & Central Gravity
-####################################
+Third Body Gravity vs. Central Gravity
+#######################################
 
 | **Description**
 | In addition to the three models listed above, which define different models for gravitational interactions between two
@@ -114,11 +123,11 @@ Third Body Gravity & Central Gravity
   exerted by the propagation origin (*e.g.* acceleration exerted by Earth on Moon, with Earth as propagation origin).
   We term this the 'central' acceleration.
 
-.. seealso::
-   For more details: :ref:`third_body_acceleration`.
-
 | **Dependencies**
 | The same for each gravitational acceleration type.
+
+.. seealso::
+   For more details: :ref:`third_body_acceleration`.
 
 ########################
 Aerodynamic
@@ -186,7 +195,7 @@ Panelled Radiation Pressure
 
 
 ####################################
-Relativistic Acceleration Correction
+Relativistic Correction
 ####################################
 
 | **Description**
@@ -203,7 +212,7 @@ Relativistic Acceleration Correction
 - Current state of body undergoing acceleration, the orbited body, and the third body (de Sitter only)
 
 #######################
-Empirical Accelerations
+Empirical
 #######################
 
 | **Description**
@@ -294,7 +303,7 @@ Tidal effect on natural satellites
 | 4. Planet rotation model (only for effect of tide on planet)
 
 #################################
-Quasi-Impulsive Shot Acceleration
+Quasi-Impulsive Shot
 #################################
 
 | **Description**

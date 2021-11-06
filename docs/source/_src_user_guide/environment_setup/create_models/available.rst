@@ -1,7 +1,7 @@
 .. _available_environment_models:
 
 ==============================
-List of available Environment Models
+Available Environment Models
 ==============================
 
 .. contents:: List of available environment models
@@ -10,7 +10,7 @@ List of available Environment Models
 .. _environment_ephemeris_model:
 
 ################
-Ephemeris Models
+Ephemeris
 ################
 
 Ephemeris model settings are intended to be assigned to the ``ephemeris_settings`` property of a :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings` object.
@@ -57,7 +57,7 @@ For code examples and additional (model) information, please follow the links to
 .. _environment_gravity_field_model:
 
 ####################
-Gravity Field Models
+Gravity Field
 ####################
 
 Gravity field model settings are intended to be assigned to the ``gravity_field_settings`` property of a :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings` object.
@@ -83,7 +83,7 @@ For code examples and additional (model) information, please follow the links to
 .. _environment_atmosphere_model:
 
 #################
-Atmosphere Models
+Atmosphere
 #################
 
 Atmosphere model settings (which include wind model settings) are to be assigned to the atmosphere_settings property of a :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings` object.
@@ -129,7 +129,7 @@ For code examples and additional (model) information, please follow the links to
 .. _environment_shape_model:
 
 #################
-Body Shape Models
+Body Shape
 #################
 
 Shape model settings are intended to be assigned to the ``shape_settings`` property of a :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings` object.
@@ -153,7 +153,7 @@ For code examples and additional (model) information, please follow the links to
 .. _environment_rotational_model:
 
 #################
-Rotational Models
+Rotational
 #################
 
 Shape model settings are intended to be assigned to the ``rotation_model_settings`` property of a :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings` object.

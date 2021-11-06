@@ -2,7 +2,7 @@
 .. _single_arc_propagation:
 
 ======================
-Single-arc Propagation
+Single-Arc Propagation
 ======================
 
 Example usage
@@ -96,5 +96,6 @@ More details on the specifics of the termination can be extracted from the
 :attr:`~tudatpy.numerical_simulation.SingleArcSimulator.propagation_termination_details` attribute, which provides the
 specific reason for termination.
 
-For a complete example of a perturbed single-arc propagation, please see the tutorial
-:ref:`propagating_a_spacecraft_with_perturbations`.
+.. seealso::
+   For a complete example of a perturbed single-arc propagation, please see the tutorial
+   :ref:`propagating_a_spacecraft_with_perturbations`.
