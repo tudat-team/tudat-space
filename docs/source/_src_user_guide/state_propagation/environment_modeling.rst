@@ -1,8 +1,8 @@
 .. _environment_setup:
 
-=====================
-Environment Modeling
-=====================
+=================
+Environment Setup
+=================
 
 
 General information
