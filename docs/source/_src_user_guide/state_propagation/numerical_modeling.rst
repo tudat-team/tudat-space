@@ -12,5 +12,3 @@ Since the choice of integrator strongly depends on the nature of the dynamical p
   :maxdepth: 1
 
   integrator_setup/settings
-Numerical
-modeling

@@ -21,16 +21,11 @@ There are three separate input types necessary to create a simulation:
 
 Each part is presented in detail in the pages linked above.
 
-Simulator
-=========
+Simulation & Output
+===================
 
-Once all the settings are in place, the simulation must be run by creating a `Simulator` object. All the details
-about this part are explained in :ref:`running_simulation`.
-
-Output
-=======
-
-All the output of the simulation is stored as different attributes of the `Simulator` object. For more information
-about the output, please refer to :ref:`single_arc_propagation`.
+Once all the settings are in place, the solution can be generated. All the details
+about this part, including the interpretation and availability of outptuts, are explained in the page on :ref:`running_simulation`.
+For simulations in which the dynamics and associated variational equations are propagated, see the page on :ref:`running_variatitonal_simulation`.
 
 
