@@ -21,6 +21,7 @@ Some kernels have been reduced in size, so that we can host them through Github,
 
 Using the data from these Spice kernels into Tudat, the following default models are used by Tudat when calling the :func:`~tudatpy.interface.spice.load_standard_kernels` function
 
+
 * **Ephemeris** Directly from Spice (any body available through Spice kernels). For our default settings, this includes solar system planets and Martian, Jovian and Saturnian satellites. Users can append this list with additional ephemeris files, for instance for small bodies or other satellite systems, through the use of the :func:`~tudatpy.interface.spice.load_kernel`
 * **Rotation model** Directly from Spice (any body available through Spice kernels). For body Foo, Tudat uses the frame IAU_Foo defined in Spice as the body-fixed frame. These rotation models are implementations of results published by the IAU Working Group on Cartographic Coordinates and Rotational Elements
 * **Shape model** Directly loaded from Spice (any body available through Spice kernels). Tudat uses the average radius from Spice to define a spherical shape model for all bodies
