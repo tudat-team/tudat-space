@@ -1,3 +1,5 @@
+.. _environment_during_propagation:
+
 =====================================
 Use of Environment During Propagation
 =====================================
@@ -40,7 +42,7 @@ Each body object and its constituent members is updated to the current state and
 
 - **The current flight conditions**
 
-        The :class:`~tudatpy.numerical_simulation.environment.FlightConditions` class, and its derived class `:class:`~tudatpy.numerical_simulation.environment.AtmosphericFlightConditions` stores data relating to altitude, flight angles, atmospheric properties, etc. Follow the links for their detailed description.
+        The :class:`~tudatpy.numerical_simulation.environment.FlightConditions` class, and its derived class :class:`~tudatpy.numerical_simulation.environment.AtmosphericFlightConditions` stores data relating to altitude, flight angles, atmospheric properties, etc. Follow the links for their detailed description.
 
 
 .. note::
