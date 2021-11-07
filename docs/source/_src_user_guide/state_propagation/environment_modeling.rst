@@ -39,7 +39,7 @@ In addition, if needed:
    assign properties to them (see :ref:`create_artificial_bodies`).
 
 .. figure:: _static/tudatpy_environment.png
-   :width: 1000
+   :width: 600
 
 Environment information during the propagation
 ===============================================

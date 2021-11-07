@@ -1,6 +1,6 @@
 .. _integrator_setup:
 
-Integrator Setup
+Integration Setup
 =================
 
 The environment and formulation of dynamical equations are now in place. In order to solve these equations you still need to define the numerical integrator settings. These settings specify *how* the equations are solved. In Tudat(Py) you can choose between different types of integrators.
