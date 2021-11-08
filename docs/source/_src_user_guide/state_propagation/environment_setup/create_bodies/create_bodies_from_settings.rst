@@ -5,7 +5,7 @@ Creation of system of bodies from settings
 ===========================================
 
 Once all settings for the bodies are defined as described in :ref:`create_celestial_body_settings`, the bodies are
-created and linked as shown in the example below:
+created and linked as shown in the example below, using the :func:`~tudatpy.numerical_simulation.environment_setup.create_system_of_bodies` function:
 
     .. tabs::
 
@@ -27,15 +27,13 @@ created and linked as shown in the example below:
           .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
              :language: cpp
 
-.. todo::
-   Add reference to `create_system_of_bodies` entry (not yet existing) in API Documentation.
 
 The body system (``bodies`` in the above simulation) are the heart of many Tudat simulations: they contain all
 properties of your
 celestial and manmade bodies, and are used to retieve properties of your accelerations, state derivative models, output
 variables, etc.
 
-It is crucial to understand the distinction between ``body_settings`` and ``bodies``. The former is merely a list of
+It is crucial to understand the distinction between ``body_settings`` (of type :func:`~tudatpy.numerical_simulation.environment_setup.BodyListSettings`) and ``bodies`` (of type :func:`~tudatpy.numerical_simulation.environment.SystemOfBodies`). The former is merely a list of
 settings for the models in the environment, and do not provide any functionality to perform any specific
 calculations: it describes what the models should do. The latter (``bodies``) is the object which is actually used
 during the propagation, and performs all required calculations (updating an ephemeris to the current time, calculating
