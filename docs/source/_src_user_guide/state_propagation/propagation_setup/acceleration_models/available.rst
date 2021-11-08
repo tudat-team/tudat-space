@@ -18,7 +18,8 @@ page. Instead, for each model, a reference to the related API documentation entr
 
 
 .. contents:: List of available acceleration models
-    :depth: 2
+   :depth: 1
+   :local:
 
 In certain pieces of code, such as when requesting the saving of a single acceleration (see :ref:`available_dependent_variables`
 for saving of dependent variables), you will need to supply an identifier for the type of acceleration you are requesting.

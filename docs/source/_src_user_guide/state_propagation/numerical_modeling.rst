@@ -5,12 +5,15 @@ Integration Setup
 
 The environment and formulation of dynamical equations are now in place. In order to solve these equations
 you still need to define the numerical integrator settings. These settings specify *how* the equations are solved.
-In Tudat(Py) you can choose between different types of integrators.
+
+.. contents:: Content of this page
+   :local:
+
 
 Integrator types
 ----------------
-
-For code examples and additional information on the interfacees, please follow the links to the API documentation given below.
+In TudatPy you can choose between different types of integrators.
+For code examples and additional information on the interfaces, please follow the links to the API documentation given below.
 
 Euler integrator
 ^^^^^^^^^^^^^^^^
@@ -38,7 +41,7 @@ tolerances (using the :func:`~tudatpy.numerical_simulation.propagation_setup.int
 In the case of the former, the same absolute and relative tolerance is used for each state entry. In the latter case, the tolerances
 can be made to vary for the different state entries. Several different Butcher Tableaus, corresponding to different
 specific integrators, and integrator error, can be specified by using the :class:`~tudatpy.numerical_simulation.propagation_setup.integrator.RKCoefficientSets` enum.
-Normallly, this integrator uses a :ref:`step size control <integrator_step_size_control>` to adapt its step, but it can also
+Normally, this integrator uses a :ref:`step size control <integrator_step_size_control>` to adapt its step, but it can also
 be :ref:`forced to take a fixed step <integrator_force_fixed_step>`.
 
 **General considerations** This type of integrator is generally robust, and can be applied to a broad variety of dynamical systems
@@ -49,19 +52,19 @@ Bulirsch-Stoer integrator
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Variable step-size extrapolation integrator, defined using the :func:`~tudatpy.numerical_simulation.propagation_setup.integrator.bulirsch_stoer` function.
-Normallly, this integrator uses a :ref:`step size control <integrator_step_size_control>` to adapt its step, but it can also
+Normally, this integrator uses a :ref:`step size control <integrator_step_size_control>` to adapt its step, but it can also
 be :ref:`forced to take a fixed step <integrator_force_fixed_step>`.
 
 **General considerations** For orbital mechanics problems, the Bulirsch-Stoer integrator is popular for long integration
 periods, owing to its generally good trade-off between computational efficiency and solution quality. However, since it
 takes exceptionally long time steps (may be on the order of an orbital period), the results are generally not useful
-for creating interpolator to obtain continuous results (Tudat has no options for dense output).
+for creating interpolator to obtain continuous results (TudatPy has no options for dense output).
 
 Adams-Bashforth-Moulton integrator
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Variable step-size, variable-order multi-step integrator, defined using the :func:`~tudatpy.numerical_simulation.propagation_setup.integrator.adams_bashforth_moulton` function.
-Normallly, this integrator uses a :ref:`step size control <integrator_step_size_control>` to adapt its step, but it can also
+Normally, this integrator uses a :ref:`step size control <integrator_step_size_control>` to adapt its step, but it can also
 be :ref:`forced to take a fixed step <integrator_force_fixed_step>`.
 
 **General considerations** The ABM method generally takes relatively short time steps, and therefore produces very dense
@@ -80,7 +83,8 @@ Step-size control
 
 For step-size control, the relative tolerance has the largest impact on the solution quality.
 Typical ranges for its value are :math:`10^{-14}-10^{-10}`. The absolute tolerance only becomes active when one or more of the state
-elements get close to 0. It is standard (but not necesarilly ideal) practice to set the absolute tolerance equal to the relative
+elements get close to 0. It is standard (but not necessarily ideal) practice to set the absolute tolerance equal to
+the relative
 tolerance.
 
 .. _integrator_force_fixed_step:
@@ -90,6 +94,7 @@ Forcing fixed step-size
 
 Many of the above integrators allow you to supply absolute and relative tolerances, which the integrators use to adapt the
 step size that is taken, based on the behaviour of the dynamics. You can force these integrators to a fixed step size by:
+
 * Setting the initial time step, minimum time step and maximum time step to the same value (the fixed time step you wish to impose)
 * Setting the relative and absolute tolerances to infinity (or a similarly high value)
 
