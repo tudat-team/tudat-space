@@ -243,7 +243,7 @@ From direction and magnitude
 | **Description**
 | The thrust from direction and magnitude can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.thrust_from_direction_and_magnitude`
   factory function. The direction and magnitude are supplied to the function as two separate objects, which can be
-  created in different ways (see :mod:`tudatpy.numerical_simulation.propagation_setup.thrust`).
+  created in different ways (see :mod:`~tudatpy.numerical_simulation.propagation_setup.thrust`).
 
 | **Dependencies**
 | 1. Mass of body undergoing acceleration.
