@@ -18,7 +18,8 @@ page. Instead, for each model, a reference to the related API documentation entr
 
 
 .. contents:: List of available acceleration models
-    :depth: 2
+   :depth: 1
+   :local:
 
 In certain pieces of code, such as when requesting the saving of a single acceleration (see :ref:`available_dependent_variables`
 for saving of dependent variables), you will need to supply an identifier for the type of acceleration you are requesting.
@@ -242,7 +243,7 @@ From direction and magnitude
 | **Description**
 | The thrust from direction and magnitude can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.thrust_from_direction_and_magnitude`
   factory function. The direction and magnitude are supplied to the function as two separate objects, which can be
-  created in different ways (see :mod:`tudatpy.numerical_simulation.propagation_setup.thrust`).
+  created in different ways (see :mod:`~tudatpy.numerical_simulation.propagation_setup.thrust`).
 
 | **Dependencies**
 | 1. Mass of body undergoing acceleration.

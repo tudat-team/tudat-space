@@ -5,7 +5,9 @@ Available Environment Models
 ==============================
 
 .. contents:: List of available environment models
-    :depth: 3
+   :depth: 2
+   :local:
+
 
 .. _environment_ephemeris_model:
 

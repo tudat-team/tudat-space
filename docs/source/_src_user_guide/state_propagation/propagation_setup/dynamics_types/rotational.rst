@@ -4,18 +4,13 @@
 Rotational Dynamics
 ===================
 
-Settings to define the propagation of rotational dynamics are largely similar to those of translational dynamics. Differences are:
+Settings to define the propagation of rotational dynamics are largely similar to those of :ref:`translational_dynamics`. Differences are:
 
 * A set of torque models has to be supplied, as opposed to acceleration models. See :ref:`available_torque_models` for the list of options for torques in Tudat.
 * No 'central body' is specified. The rotational state that is propagated is always that from the global inertial orientation, to the body-fixed orientation of the propagated body.
-* The propagated state formulation is, by default, a vector of size 7 (for a single body), with:
+* The propagated state formulation is depends on the choice of propagator for rotational dynamics, with the full list of options and their definition enumerated by :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.RotationalPropagatorType`. The default rotational propagator is the  ``quaternions`` option in this enumeration.
 
-   * Entries 1-4: The quaternion defining the rotation from inertial to body-fixed frame, see :ref:`this page<quaternion_definition>` for a definition of quaternion entries in Tudat.
-   * Entries 5-7: The body's angular velocity vector, expressed in its body-fixed frame.
-Quaternions are used in lieu of e.g. Euler angles because they get rid of ambiguities and gimbal locks.
-* Alternative formulations for the propagated state vector can be selected from the list at the end of this page.
-
-Defining settings for the rotational dynamics is done by:
+Defining settings for the rotational dynamics is done as follows, using the :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.rotational` function:
 
     .. tabs::
 
@@ -32,15 +27,3 @@ Defining settings for the rotational dynamics is done by:
           .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
              :language: cpp
 
-Rotational Dynamics Propagators
-==================================
-
-Tudat(Py) currently supports three types of rotational state dynamics formulations (propagators) (see
-:class:`tudatpy.numerical_simulation.propagation_setup.propagator.RotationalPropagatorType`) each having its own
-advantages and drawbacks:
-
-.. class:: Rotational Motion Propagators
-
-  - Quaternions (with ``quaternions`` propagator); state size: 7
-  - Modified Rodrigues parameters, or MRPs (with ``modified_rodrigues_parameters`` propagator); state size: 7
-  - Exponential map (with ``exponential_map`` propagator); state size: 7
