@@ -1,14 +1,18 @@
 .. _`mga_dsm_optimization`:
 
-************************************
-Optimization of MGA-DSM trajectories
-************************************
+*****************************
+Optimize MGA-DSM trajectories
+*****************************
 
 In the following sections the optimization of MGA-DSM trajectories within the context of the CDL is explained through an
 example. If you are unfamiliar with optimizations within Tudat(py) and/or Pygmo, please refer to :ref:`pygmo_basics` first.
 The optimizer will search for optimal solutions in terms of two objectives: :math:`\Delta V` and time of flight. The Pareto
 fronts that result from the optimization are always saved and can be viewed in order to identify specific solutions that
 are to be analyzed further, in terms of available communication time, incident solar flux and other quantities.
+
+.. warning::
+    TODO: link to pygmo documentation
+
 
 1. Definition of inputs and optimization settings
 -------------------------------------------------
@@ -50,9 +54,9 @@ year after the nominal date.
 
 1.4. Semi-major axes and eccentricities (optional)
 ===========================================================
-Here, one can specify the semi-major axis and eccentricity of both the departure and insertion orbits. Do note that this
-is optional, by default it is assumed :math:`a = \infty` and :math:`e=0`, which means that the spacecraft
-departs from/arrives at the edge of the sphere of influence of the departure/arrival planet.
+As explained in the introductory guide to :ref:`Transfer trajectory design`, specifying the semi-major axis and eccentricity
+of the departure and insertion orbits is optional. By default it is assumed :math:`a = \infty` and :math:`e=0`, which means
+that the spacecraft departs from/arrives at the edge of the sphere of influence of the departure/arrival planet.
 
 1.5. Number of evolutions and population size
 ===========================================================
@@ -67,27 +71,6 @@ departure and destination planet). In contrast, the number of parameters within 
 of planets that are flown by (including the departure and destination planet) *plus* four times the number of legs that are
 flown. The number of parameters for a problem *with* DSMs is thus significantly larger than for one *without*. This more
 elaborate problem definition makes it computationally more expensive to optimize.
-
-.. note::
-
-    | Both problems *with* and *without* DSMs have the departure date and time of flight per leg as parameters.
-    | Problems *without* DSMs have no additional parameters.
-    | Problems *with* DSMs have the following as additional parameters:
-    - fraction of the time of flight at which the DSM takes place per leg
-
-    - magnitude of the relative velocity w.r.t. the departure planet after departure
-
-    - in-plane angle of the relative velocity
-
-    - out-of-plane angle of the relative velocity
-
-    - the pericenter radius per gravity assist
-
-    - the rotation angle per gravity assist
-
-    - the magnitude of :math:`\Delta V` applied per gravity assists
-
-.. End of note
 
 The following table presents a good choice of optimization settings for two case studies along with their problem characteristics:
 

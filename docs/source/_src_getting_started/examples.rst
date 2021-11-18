@@ -38,15 +38,27 @@ consider reading our introductory guide: :ref:`Optimization with PyGMO`.
 
    _src_examples/pygmo_examples/pygmo_orbit_optimization
 
-=============================
-Examples of MGA-DSM transfers
-=============================
+=========================================
+Examples of MGA-DSM transfer trajectories
+=========================================
 
 Below you can find general examples, explained in detail, about using the tools (initially developed for the Concurrent
-Design Lab (CDL) available for analyzing Multi-Gravity-Assist Deep-Space-Maneuver (MGA-DSM) transfer trajectory. 
+Design Lab (CDL)) available for analyzing Multiple Gravity Assist transfer trajectories with Deep Space Maneuvers (MGA-DSM).
 
 .. toctree::
    :maxdepth: 1
 
-   _src_examples/cdl_examples/cdl_examples
+   _src_examples/mga_dsm_examples/mga_dsm_analysis
+   _src_examples/mga_dsm_examples/mga_dsm_optimization
+   _src_examples/mga_dsm_examples/CDL_SPECIFICS
+
+.. warning::
+    TODO: Check if the CDL/MGA-DSM tab still disappears from the TOC on the left sometimes (e.g. when clicking on Simulations
+    with TudatPy)
+
+.. warning::
+    TODO: Is there some reference for the CDL? (Both CDL code and documentation)
+
+
+
  
