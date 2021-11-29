@@ -2,10 +2,6 @@
 Setting Up a Development Environment
 ####################################
 
-.. note::
-
-    Your choice of development environment will differ greatly depending on your intended development purpose. **For
-    students of Numerical Astrodynamics**, Jupyter(Lab/Notebook) will be used for assignments, and for examples during lectures. PyCharm may be used for examples during lectures.
 
 Setting up JupyterLab in a Conda Environment
 --------------------------------------------

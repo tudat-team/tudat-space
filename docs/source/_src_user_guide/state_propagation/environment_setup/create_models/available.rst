@@ -1,20 +1,22 @@
 .. _available_environment_models:
 
 ==============================
-List of available Environment Models
+Available Environment Models
 ==============================
 
 .. contents:: List of available environment models
-    :depth: 3
+   :depth: 2
+   :local:
+
 
 .. _environment_ephemeris_model:
 
 ################
-Ephemeris Models
+Ephemeris
 ################
 
 Ephemeris model settings are intended to be assigned to the ``ephemeris_settings`` property of a :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings` object.
-For code examples and additional (model) information, please follow the links to the API reference.
+For code examples and additional (model) information, please follow the links to the API documentation.
 
 
 | **Direct Spice Ephemeris**
@@ -57,11 +59,11 @@ For code examples and additional (model) information, please follow the links to
 .. _environment_gravity_field_model:
 
 ####################
-Gravity Field Models
+Gravity Field
 ####################
 
 Gravity field model settings are intended to be assigned to the ``gravity_field_settings`` property of a :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings` object.
-For code examples and additional (model) information, please follow the links to the API reference.
+For code examples and additional (model) information, please follow the links to the API documentation.
 
 | **Point Mass Gravity**
 | Point-mass gravity field models can be created via the :func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.central` function.
@@ -83,13 +85,13 @@ For code examples and additional (model) information, please follow the links to
 .. _environment_atmosphere_model:
 
 #################
-Atmosphere Models
+Atmosphere
 #################
 
 Atmosphere model settings (which include wind model settings) are to be assigned to the atmosphere_settings property of a :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings` object.
 Atmosphere models describe other atmospheric conditions such as local density, temperature and pressure and their settings objects can be matched directly with the ``atmosphere_settings`` property.
 Wind models can be used to retrieve local wind vectors and their settings objects must be assigned to the ``wind_settings`` member of the ``atmosphere_settings`` property (i.e. ``BodySettings.atmosphere_settings.wind_settings``)
-For code examples and additional (model) information, please follow the links to the API reference.
+For code examples and additional (model) information, please follow the links to the API documentation.
 
 
 | **Constant Wind Model**
@@ -129,11 +131,11 @@ For code examples and additional (model) information, please follow the links to
 .. _environment_shape_model:
 
 #################
-Body Shape Models
+Body Shape
 #################
 
 Shape model settings are intended to be assigned to the ``shape_settings`` property of a :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings` object.
-For code examples and additional (model) information, please follow the links to the API reference.
+For code examples and additional (model) information, please follow the links to the API documentation.
 
 
 | **Spherical Body Shape**
@@ -153,11 +155,11 @@ For code examples and additional (model) information, please follow the links to
 .. _environment_rotational_model:
 
 #################
-Rotational Models
+Rotational
 #################
 
 Shape model settings are intended to be assigned to the ``rotation_model_settings`` property of a :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings` object.
-For code examples and additional (model) information, please follow the links to the API reference.
+For code examples and additional (model) information, please follow the links to the API documentation.
 
 
 | **Simple Rotation Model**
@@ -194,7 +196,7 @@ Aerodynamic Coefficient Interfaces
 
 Aerodynamic coefficient settings are intended to be used by the :func:`~tudatpy.numerical_simulation.environment_setup.add_aerodynamic_coefficient_interface` function,
 which creates and assigns aerodynamic coefficient interfaces to the specified artificial bodies.
-For code examples and additional (model) information, please follow the links to the API reference.
+For code examples and additional (model) information, please follow the links to the API documentation.
 
 | **Constant Aerodynamic Coefficient**
 | Constant (not a function of any independent variables) aerodynamic coefficient settings can be created via the :func:`~tudatpy.numerical_simulation.environment_setup.aerodynamic_coefficients.constant` function.
@@ -225,7 +227,7 @@ Radiation Pressure Interfaces
 
 Radiation pressure interface settings are intended to be used by the :func:`~tudatpy.numerical_simulation.environment_setup.add_radiation_pressure_interface` function,
 which creates and assigns radiation pressure interfaces to the specified artificial bodies.
-For code examples and additional (model) information, please follow the links to the API reference.
+For code examples and additional (model) information, please follow the links to the API documentation.
 
 | **Cannonball Radiation Pressure**
 | Radiation pressure interface settings for a cannonball model can be created via the :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.cannonball` function.
