@@ -24,6 +24,7 @@ Below you can find examples of numerical simulations that you can achieve with T
 
    _src_examples/simulation_examples/delfi_simple_example_page
    _src_examples/simulation_examples/var_equation_example_page
+   _src_examples/simulation_examples/multi_body_propagation_inner_SS
 
 ===================
 Examples with PyGMO
