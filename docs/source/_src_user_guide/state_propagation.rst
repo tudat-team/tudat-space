@@ -1,3 +1,4 @@
+.. _state_propagation_intro:
 
 ******************
 State Propagation
