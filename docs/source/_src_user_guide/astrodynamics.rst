@@ -9,4 +9,3 @@ Astrodynamics
     astrodynamics/two_body_dynamics
     astrodynamics/ephemerides
     astrodynamics/trajectory_design
-

@@ -1,4 +1,4 @@
-.. _`mga_dsm_trajectory`:
+.. _`mga_dsm_analysis`:
 
 Analyzing MGA-DSM trajectories
 ===============================
@@ -10,11 +10,7 @@ any DSMs, the second example does. The full code, containing both examples, can 
 An MGA trajectory without DSMs
 ##############################
 
-The first transfer is ..... (Cassini Huygens?) trajectory towards Saturn, which does not apply DSMs in between GAs.
-
-.. warning::
-
-    CHECK the above
+The first example transfer is like Cassini's trajectory towards Saturn, but without DSMs in between the GAs.
 
 Import statements and Setup
 ***************************
@@ -29,7 +25,6 @@ The following imports allow the use of the required ``tudatpy`` tools.
     from tudatpy.util import result2array
     from tudatpy.kernel import constants
 
-
 Setup and inputs
 ******************
 
@@ -37,7 +32,7 @@ A simplified system of bodies suffices for this application, with the Sun as cen
 for a GA are defined in the list ``transfer_body_order``. The departure and arrival orbit can be specified, but don't
 necessarily need to be. By default, a transfer trajectory departs from / arrives at the edge of the SOI of the corresponding bodies
 (i.e. :math:`a = \infty`,  :math:`e=0`). In this example, the spacecraft departs from the edge of Earth's SOI and is
-inserted into a highly elliptical orbit around Saturn. We can specify *not* using DSMs by using the unpowered/unperturbed
+inserted into a highly elliptical orbit around Saturn. We can specify *not* using DSMs by using the unpowered and unperturbed
 leg type.
 
 .. code-block:: python
@@ -51,9 +46,40 @@ leg type.
     arrival_eccentricity = 0.98
     leg_type = transfer_trajectory.unpowered_unperturbed_leg_type
 
+Create trajectory
+******************
 
-In addition, the transfer parameters have to be specified, as explained in :ref:`trajectory_design`. Here, these only constitute
-the times at which the GA's are executed.
+The specified inputs can not be used directly, but they have to be translated to distinct settings, relating to
+either the nodes (GAs at planets) or legs (trajectories in between planets), first. These settings are, in turn, used to
+create the transfer trajectory object.
+
+.. code-block:: python
+
+    transfer_leg_settings, transfer_node_settings = transfer_trajectory.mga_transfer_settings(
+        transfer_body_order,
+        leg_type,
+        departure_orbit = ( departure_semi_major_axis, departure_eccentricity ),
+        arrival_orbit = ( arrival_semi_major_axis, arrival_eccentricity) )
+
+    transfer_trajectory_object = transfer_trajectory.create_transfer_trajectory(
+        bodies,
+        transfer_leg_settings,
+        transfer_node_settings,
+        transfer_body_order,
+        central_body )
+
+
+
+Transfer parameters
+*********************
+
+The advantage of having a transfer trajectory object is that it allows for analyzing many different sets of transfer
+parameters for the defined transfer settings. For this example *without* DSMs, the transfer parameters only constitute
+the times at which the powered GA's are executed, i.e. at the nodes. Since the magnitude and direction of each
+:math:`\Delta V` is determined by the planet positions at the node times, there is no need to specify node free
+parameters. There are no DSMs in between the planets, i.e. on the legs, so there is also no need to specify leg free
+parameters. However, for compatibility reasons it is required to define the free parameters as a list containing empty
+arrays.
 
 .. code-block:: python
 
@@ -74,57 +100,38 @@ the times at which the GA's are executed.
         node_free_parameters.append( np.zeros(0))
 
 
-Create trajectory
-******************
-
-With these inputs the transfer settings are defined and the transfer trajectory object is created.
-
-.. code-block:: python
-
-    transfer_leg_settings, transfer_node_settings = transfer_trajectory.mga_transfer_settings(
-        transfer_body_order,
-        leg_type,
-        departure_orbit = ( departure_semi_major_axis, departure_eccentricity ),
-        arrival_orbit = ( arrival_semi_major_axis, arrival_eccentricity) )
-
-    transfer_trajectory_object = transfer_trajectory.create_transfer_trajectory(
-        bodies,
-        transfer_leg_settings,
-        transfer_node_settings,
-        transfer_body_order,
-        central_body )
-
 Evaluate trajectory
 *******************
 
-The previously defined transfer parameters are now used to evaluate the transfer trajectory and obtain the quantities we
-are interested in. In addition, the parameter definitions are printed.
+The transfer parameters are now used to evaluate the transfer trajectory and obtain the quantities we
+are interested in: :math:`\Delta V`s and time of flight. The transfer parameter definitions are printed for reference
+and the state at 500 instances per leg is retrieved to plot the 3D trajectory.
 
 .. code-block:: python
 
     transfer_trajectory_object.evaluate( node_times, leg_free_parameters, node_free_parameters )
 
-    delta_v = transfer_trajectory_object.delta_v                   # m/s
-    time_of_flight = transfer_trajectory_object.time_of_flight     # s
-    delta_v_per_leg = transfer_trajectory_object.delta_v_per_leg   # m/s
-    delta_v_per_node = transfer_trajectory_object.delta_v_per_node # m/s
+    delta_v = transfer_trajectory_object.delta_v                   # Total Delta V [m/s]
+    time_of_flight = transfer_trajectory_object.time_of_flight     # Total time of flight [s]
+    delta_v_per_leg = transfer_trajectory_object.delta_v_per_leg   # List of Delta V's in each leg (here list of zeroes) [m/s]
+    delta_v_per_node = transfer_trajectory_object.delta_v_per_node # List of Delta V's at each node [m/s]
 
     transfer_trajectory.print_parameter_definitions( transfer_leg_settings, transfer_node_settings )
 
     state_history = result2array(transfer_trajectory_object.states_along_trajectory(500))
 
 
-The 3D trajectory is depicted below.
-
 .. figure:: _static/No_DSM_3d.png
 
 An MGA trajectory with DSMs
 ##############################
 
-For the transfer rajectory *with* DSMs a mission to Mercury is considered. Both departure and arrival are defined at the SOI
-of Earth and Mercury, respectively. With respect to a transfer *without* DSMs, only a few modifications are required.
-Each leg is now defined by the DSM Velocity-based formulation. In addition, the transfer parameters have to be extended
-to include both the free leg and free node parameters.
+For the transfer trajectory *with* DSMs a mission to Mercury is considered. Both departure and arrival are defined at
+the SOI of Earth and Mercury, respectively. With respect to a transfer *without* DSMs, only a few modifications are
+required. Each leg is now defined by the DSM Velocity-based formulation. This leg type requires that the leg free and
+node free parameters are specified. That is, there is a free parameter for each leg and three free parameters for the
+departure leg and for each swing-by leg that need to be defined. The specific definitions of these free parameters can
+be found in :ref:`transfer_trajectory`.
 
 .. code-block:: python
 
@@ -152,7 +159,7 @@ to include both the free leg and free node parameters.
     node_free_parameters.append( np.array( [ ] ) )
 
 
-With these, the transfer trajectory object can again be created and evaluated with the same approach. The resulting trajectory
-depicted below in the x-y plane.
+Again, a transfer trajectory object is created and is evaluated with the same approach. The resulting
+trajectory is depicted below in the x-y plane.
 
 .. figure:: _static/DSM_2d.png

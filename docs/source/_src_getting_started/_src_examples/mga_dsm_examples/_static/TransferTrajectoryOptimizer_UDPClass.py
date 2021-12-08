@@ -1,26 +1,3 @@
-# General imports
-import os
-from typing import List, Tuple
-import numpy as np
-import pygmo as pg
-
-# Tudat imports
-import BuildDirectory
-from tudatpy.kernel import constants
-from tudatpy.kernel.astro import trajectory_design
-from tudatpy.kernel.simulation import environment_setup, astro_setup
-import tudatpy
-
-# CDL imports
-import TransferTrajectoryAnalysis
-from TransferTrajectoryUtilities import get_all_pareto_info, select_results_directory
-from constants import MINIMUM_TIME_OF_FLIGHT_DICT, MAXIMUM_TIME_OF_FLIGHT_DICT
-
-
-###########################################################################
-# CREATE PROBLEM CLASS ####################################################
-###########################################################################
-
 class TransferTrajectoryOptimizer:
     """
         Class to initialize, simulate and optimize the MultiGravityAssist-DeepSpaceManeuver transfer trajectory
@@ -45,8 +22,9 @@ class TransferTrajectoryOptimizer:
         -------
         get_nobj()
         get_bounds()
+	get_number_of_parameters()
         fitness()
-        perform_optimization_or_load_data
+        perform_optimization
 
         """
     def __init__(self,
@@ -55,7 +33,7 @@ class TransferTrajectoryOptimizer:
                  departure_date: float,
                  departure_date_margin: float,
                  maximum_delta_v: float,
-                 leg_type: tudatpy.kernel.astro.trajectory_design.TransferLegTypes,
+                 leg_type: tudatpy.kernel.trajectory_design.transfer_trajectory.TransferLegTypes,
                  transfer_body_order: List[str],
                  departure_eccentricity: float = 0,
                  departure_semi_major_axis: float = np.inf,
@@ -80,20 +58,20 @@ class TransferTrajectoryOptimizer:
         bodies = environment_setup.create_simplified_system_of_bodies()
 
         # Retrieve settings for nodes and legs of the transfer
-        transfer_leg_settings, transfer_node_settings = trajectory_design.mga_transfer_settings(
+        transfer_leg_settings, transfer_node_settings = transfer_trajectory.mga_transfer_settings(
             self.transfer_body_order,
             self.leg_type,
             departure_orbit=(self.departure_semi_major_axis, self.departure_eccentricity),
             arrival_orbit=(self.arrival_semi_major_axis, self.arrival_eccentricity))
 
         # Create transfer trajectory object
-        transfer_trajectory = astro_setup.create_transfer_trajectory(bodies,
+        transfer_trajectory_obj = transfer_trajectory.create_transfer_trajectory(bodies,
                                                                      transfer_leg_settings,
                                                                      transfer_node_settings,
                                                                      self.transfer_body_order,
                                                                      'Sun')
 
-        self.transfer_trajectory_function = lambda: transfer_trajectory
+        self.transfer_trajectory_function = lambda: transfer_trajectory_obj
 
     def get_nobj(self) -> int:
         """
@@ -106,9 +84,9 @@ class TransferTrajectoryOptimizer:
         Returns the boundaries of the decision variables.
         """
         # Retrieve objects and variables
-        transfer_trajectory = self.transfer_trajectory_function()
-        number_of_nodes = transfer_trajectory.number_of_nodes
-        number_of_legs = transfer_trajectory.number_of_legs
+        transfer_trajectory_obj = self.transfer_trajectory_function()
+        number_of_nodes = transfer_trajectory_obj.number_of_nodes
+        number_of_legs = transfer_trajectory_obj.number_of_legs
         transfer_body_order = self.transfer_body_order
         leg_type = self.leg_type
 
@@ -131,7 +109,7 @@ class TransferTrajectoryOptimizer:
             upper_bound[i + 1] = maximum_time_of_flight * constants.JULIAN_DAY
 
         # Add bounds for DSM legs
-        if leg_type == trajectory_design.dsm_velocity_based_leg_type:
+        if leg_type == transfer_trajectory.dsm_velocity_based_leg_type:
             # Add excess velocity at departure node
             lower_bound[number_of_nodes] = 0. + 1e-4
             upper_bound[number_of_nodes] = 5000.
@@ -147,7 +125,7 @@ class TransferTrajectoryOptimizer:
             # Add periapsis radius, orbit orientation rotation and swingby delta V at node 1 through n-1
             for i in range(number_of_nodes - 2):
                 current_body = transfer_body_order[i + 1]
-                minimum_pericenter_dict = trajectory_design.DEFAULT_MINIMUM_PERICENTERS
+                minimum_pericenter_dict = transfer_trajectory.DEFAULT_MINIMUM_PERICENTERS
 
                 minimum_pericenter = minimum_pericenter_dict[current_body]
                 maximum_pericenter = 10. * minimum_pericenter
@@ -176,14 +154,14 @@ class TransferTrajectoryOptimizer:
         Returns number of parameters that will be optimized
         """
 
-        transfer_trajectory = self.transfer_trajectory_function()
-        number_of_nodes = transfer_trajectory.number_of_nodes
-        number_of_legs = transfer_trajectory.number_of_legs
+        transfer_trajectory_obj = self.transfer_trajectory_function()
+        number_of_nodes = transfer_trajectory_obj.number_of_nodes
+        number_of_legs = transfer_trajectory_obj.number_of_legs
         leg_type = self.leg_type
 
-        if leg_type == trajectory_design.unpowered_unperturbed_leg_type:
+        if leg_type == transfer_trajectory.unpowered_unperturbed_leg_type:
             number_of_parameters = number_of_nodes
-        elif leg_type == trajectory_design.dsm_velocity_based_leg_type:
+        elif leg_type == transfer_trajectory.dsm_velocity_based_leg_type:
             number_of_parameters = number_of_nodes + 4 * number_of_legs
 
         return number_of_parameters
@@ -220,7 +198,8 @@ class TransferTrajectoryOptimizer:
 
         return [delta_v, time_of_flight]
 
-    def perform_optimization(self) -> Tuple[np.ndarray, str]:
+    def perform_optimization(self,
+                             current_dir: str) -> Tuple[np.ndarray, str]:
         """
         Runs optimization, saves results and finds Pareto front
 
@@ -233,9 +212,8 @@ class TransferTrajectoryOptimizer:
         # Setup directory to save data and plots
         ###########################################################################
 
-        print(self.transfer_body_order)
-
-        results_dir = select_results_directory(self.transfer_body_order, self.leg_type) + 'optimization/'
+        results_dir = TransferTrajectoryUtilities.select_results_directory(
+            self.transfer_body_order, self.leg_type, current_dir) + 'optimization/'
 
         if not os.path.isdir(results_dir):
             os.makedirs(results_dir)
@@ -243,13 +221,12 @@ class TransferTrajectoryOptimizer:
         ###########################################################################
         # Run optimization
         ###########################################################################
-        print('Running optimization...')
 
         generations_dir = results_dir + 'generations/'
         if not os.path.isdir(generations_dir):
             os.makedirs(generations_dir)
 
-        # Create Pygmo problem, this is this class
+        # Create Pygmo problem, which is this class
         transfer_problem = self
 
         # Select algorithm from Pygmo with default settings
@@ -275,7 +252,7 @@ class TransferTrajectoryOptimizer:
             np.savetxt(generations_dir + 'Gen' + str((i+1)*100) + '_parameters.dat', trajectory_parameters)
 
         # Find Pareto front in final generation
-        pareto_fitness, pareto_parameters = get_all_pareto_info(fitness, trajectory_parameters)
+        pareto_fitness, pareto_parameters = TransferTrajectoryUtilities.get_all_pareto_info(fitness, trajectory_parameters)
 
         # Save pareto
         np.savetxt(results_dir + 'Pareto_parameters.dat', pareto_parameters)

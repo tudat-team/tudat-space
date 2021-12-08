@@ -20,7 +20,7 @@ and we will expect to generate a Pareto front of optimal solutions. The two **ob
 formulation are:
 
 1. the spacecraft must be able to observe most of the asteroid's surface (or maximize the mean value of the absolute
-   longitude with respect to Itokawa over the full propagation;
+   latitude with respect to Itokawa over the full propagation;
 2. the spacecraft must be close to the asteroid (or minimize the mean value of the distance from the asteroid's center
    of mass over the full propagation).
 
