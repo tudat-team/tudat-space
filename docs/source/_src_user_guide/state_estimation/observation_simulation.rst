@@ -74,6 +74,19 @@ In many cases, you will not have the full list of observation times *a priori*. 
 - **Body avoidance angle**: the line-of-sight vector from a link end to a given third body must have an angle w.r.t. the line-of-sight between link ends that is sufficiently large. This constraint is typically used to prevent the Sun from being too close to the field-of-view of the telescope(s).
 - **Body occultation**: the link must not be obscured by a given third body. For instance: the Moon occulting a link between Earth and Mars.
 
+As an example, 
+
+.. code-block:: python
+    
+    station_id = [ "Earth", "NNO" ];
+    
+    single_viability_settings = observation_setup.elevation_angle_viability( 
+       station_id,
+       np.deg2rad( 15 ) )
+ 
+ 
+elevation_angle_viability
+
 Defining noise levels
 ^^^^^^^^^^^^^^^^^^^^^
 
@@ -83,7 +96,7 @@ If no noise is defined, the observations are simulated according to the determin
 - **Generic noise**: By specifying an arbitrary function that generates noise (as a function of time), a user can add noise from any type of distribution to the simulated observations
 
 
-
 Defining additional output
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+As is the case with the state propagation (add link TODO), you can define any number of dependent variable to be saved along with the observations. These include distances between link ends, angles between link ends, and a variety of other options. Note that this functionality is relatively new, and the list of implemented dependent variables is currently limited. A full list of options can be found in TODO

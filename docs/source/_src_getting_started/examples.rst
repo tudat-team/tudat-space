@@ -24,6 +24,17 @@ Below you can find examples of numerical simulations that you can achieve with T
 
    _src_examples/simulation_examples/delfi_simple_example_page
    _src_examples/simulation_examples/var_equation_example_page
+   
+=====================================
+Estimation of Dynamics and Parameters
+=====================================
+
+Below you can find examples of estimation that you can achieve with TudatPy.
+
+.. toctree::
+   :maxdepth: 1
+
+   _src_examples/estimation_examples/basic_estimation
 
 ===================
 Examples with PyGMO
