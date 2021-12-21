@@ -11,7 +11,6 @@ TudatPy is organized as shown in the figure below.
  .. figure:: _static/tudatpy_high_level.png
     :width: 600
 
-
 Inputs
 =======
 
@@ -43,6 +42,7 @@ variation simulations*.
 
 
 .. toctree::
+   :titlesonly:
    :maxdepth: 1
 
    state_propagation/running_simulation

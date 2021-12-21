@@ -31,7 +31,8 @@ our  `API documentation website <https://tudatpy.readthedocs.io/en/latest/>`_.
    _src_getting_started/examples
 
 .. toctree::
-   :maxdepth: 2
+   :titlesonly:
+   :maxdepth: 1
    :caption: User guide
    :hidden:
 

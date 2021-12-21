@@ -1,7 +1,7 @@
 .. _environment_during_propagation:
 
 =====================================
-Use of Environment During Propagation
+Use of environment during propagation
 =====================================
 
 Each body object and its constituent members is updated to the current state and time automatically during the numerical propagation. We stress that only those models that are relevant for a given propagation are updated every time step (this is handled automatically, without user intervention). Some time-dependent properties of the body are set in the environment models themselves. Others are updated and stored directly in the Body object. Below is a full list of (possibly) time varying environment models, and how to retrieve them from a body object during propagation.

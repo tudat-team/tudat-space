@@ -1,7 +1,7 @@
 .. _reference_frames:
 
 ===================================================
-Reference Frames in the Environment and Propagation
+Reference frames in the environment and propagation
 ===================================================
 
 In any state propagation tool, the careful use of reference frames is essential: small mistakes in definitions and conventions are a notorious source of errors in simulations. The environment and state propagation framework in Tudat handles all the relevant state translations/rotations/transformations. On this page, we describe various manners in which reference frames are used in Tudat, and what the differences are when extracting a state from different places in Tudat.
