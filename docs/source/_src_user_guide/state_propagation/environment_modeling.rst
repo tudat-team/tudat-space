@@ -10,9 +10,9 @@ Environment Setup
    :maxdepth: 1
 
    environment_setup/create_bodies/create_body_settings
-   environment_setup/create_bodies/default_settings
    environment_setup/create_bodies/create_bodies_from_settings
    environment_setup/create_bodies/create_artificial_bodies
+   environment_setup/create_bodies/default_settings
    environment_setup/environment_during_propagation
    environment_setup/use_of_reference_frames
    environment_setup/valid_time_range

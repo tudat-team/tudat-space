@@ -1,5 +1,5 @@
 
-.. _running_variatitonal_simulation:
+.. _running_variational_simulation:
 
 Propagating Variational Equations
 =================================

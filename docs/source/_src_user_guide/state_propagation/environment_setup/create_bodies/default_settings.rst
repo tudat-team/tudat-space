@@ -1,7 +1,7 @@
 .. _default_environment_models:
 
 ==========================
-Default Environment Models
+Default environment models
 ==========================
 
 To facilitate the creation of the celestial bodies in your simulation, Tudat provides the option of loading default models for a broad range of solar system bodies. 
