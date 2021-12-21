@@ -18,7 +18,8 @@ Environment Setup
    environment_setup/valid_time_range
 
 
-**General information**
+General information
+========================
 
 In TudatPy, the physical environment is defined by a system of bodies, each encapsulated in a
 :class:`~tudatpy.numerical_simulation.environment.Body` object. Each body contains a list of properties
@@ -34,7 +35,8 @@ The combination of all Body objects is stored in a
 simple ``bodies`` in the code). During the propagation, all the required properties of bodies are extracted and combined
 to evaluated accelerations/torques/guidance/... and compute the state derivative of thee system.
 
-**Procedure**
+Procedure
+========================
 
 The typical procedure to create the environment is represented in the figure and explained below.
 
@@ -52,7 +54,9 @@ In addition, if needed:
 .. figure:: _static/tudatpy_environment.png
    :width: 600
 
-**Environment information during the propagation**
+Environment information during the propagation
+=================================================
+
 
 In some cases, you may need to interact with the simulation environment *during* the propagation.
 You can find details on how to extract information (states, orientations, altitude, *etc.*) from the simulation
