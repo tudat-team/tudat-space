@@ -1,16 +1,43 @@
-.. _acceleration_model_setup:
+.. _acceleration_models_setup:
 
 ========================
 Acceleration Model Setup
 ========================
 
-In Tudat, an acceleration acting on a body is defined by
+In Tudat, an acceleration acting on a body is defined by:
 
-*  The body undergoing acceleration
-*  The body exerting the acceleration
-*  The type and settings of the acceleration
+*  the body undergoing acceleration;
+*  the body exerting the acceleration;
+*  the type and settings of the acceleration.
 
-A user defines these settings for each acceleration in their simulation. These settings are then used to create the acceleration models:
+These settings are defined via factory functions for each acceleration in the simulation.
+
+.. note::
+   A comprehensive list of all available acceleration models in Tudat and the manner in which to define
+   them is given in :ref:`available_acceleration_models`.
+
+These settings are organized in nested key-value containers (``dict`` in Python). In general:
+
+- ``key``: body undergoing acceleration
+- ``value``: dictionary with:
+
+  - ``key``: body exerting the acceleration
+  - ``value``: :class:`~tudatpy.numerical_simulation.propagation_setup.acceleration.AccelerationSettings` object.
+
+This container will be supplied to the
+:func:`~tudatpy.numerical_simulation.propagation_setup.create_acceleration_models` function to create the
+acceleration models. This is illustrated in the example below.
+
+Example
+=======
+
+In this example, a spherical harmonic (degree and order 5) gravitational acceleration and aerodynamic acceleration
+exerted by the Earth are defined, as well as the point-mass gravity of Sun and Moon. The variable
+``accelerations_settings_vehicle`` denotes the list of bodies exerting accelerations and the types of accelerations,
+while the variable ``acceleration_settings`` associates this list with the body undergoing the acceleration. The
+function :func:`~tudatpy.numerical_simulation.propagation_setup.create_acceleration_models` creates the list of
+models that compute the accelerations during the propagation.
+
 
 
     .. tabs::
@@ -20,7 +47,7 @@ A user defines these settings for each acceleration in their simulation. These s
           .. toggle-header:: 
              :header: Required **Show/Hide**
 
-          .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/acceleration_setup.py
+          .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/acceleration_example.py
              :language: python
 
          .. tab:: C++
@@ -28,9 +55,9 @@ A user defines these settings for each acceleration in their simulation. These s
           .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
              :language: cpp
 
-where a spherical harmonic (degree and order 5) gravitational acceleration, and aerodynamic acceleration, of the Earth are defined, as well as a point-mass gravity of Sun and Moon. The variable ``accelerations_settings_vehicle`` denotes the list of bodies exerting accelerations, and the types of accelerations, and the variable ``acceleration_settings`` associates this list with the body undergoing the acceleration. The function ``create_acceleration_models`` creates the list of models that compute the accelerations during the propagation.
-
-When propagating multiple bodies (see :ref:`multi_body_propagation`), the same list of settings may be re-used for multiple bodies. Below, an example is given for the definition of ``acceleration_settings`` for multiple bodies (``Vehicle1`` and ``Vehicle2``) which are undergoing identical accelerations:
+When propagating multiple bodies, the same list of settings may be re-used for multiple bodies. Below,
+an example is given for the definition of ``acceleration_settings`` for multiple bodies (``Vehicle1`` and
+``Vehicle2``) which are undergoing identical accelerations:
 
     .. tabs::
 
@@ -39,7 +66,7 @@ When propagating multiple bodies (see :ref:`multi_body_propagation`), the same l
           .. toggle-header:: 
              :header: Required **Show/Hide**
 
-          .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/acceleration_setup_multi_vehicle.py
+          .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/acceleration_example_multi_vehicle.py
              :language: python
 
          .. tab:: C++
@@ -47,7 +74,8 @@ When propagating multiple bodies (see :ref:`multi_body_propagation`), the same l
           .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
              :language: cpp
 
-Or separate acceleration settings may be defined for separate bodies, and then combined into a ``acceleration_settings`` variable. Below, an example for such a case is given when propagating the Earth and Moon: 
+Alternatively, separate acceleration settings may be defined for separate bodies and then combined into an
+``acceleration_settings`` variable. Below, an example for such a case is given when propagating the Earth and Moon:
 
     .. tabs::
 
@@ -56,7 +84,7 @@ Or separate acceleration settings may be defined for separate bodies, and then c
           .. toggle-header:: 
              :header: Required **Show/Hide**
 
-          .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/acceleration_setup_multi.py
+          .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/acceleration_example_multi.py
              :language: python
 
          .. tab:: C++

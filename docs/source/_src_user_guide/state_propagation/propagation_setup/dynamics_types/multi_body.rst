@@ -1,7 +1,7 @@
-.. _multi_body_propagation:
+.. _multi_body_dynamics:
 
 ===================
-Multi-body Dynamics
+Multi-body dynamics
 ===================
 
 The propagation framework in Tudat is implemented such that any number of bodies may be propagated numerically. Taking the translational dynamics as an example, propagating multiple bodies is achieved simply by extending the list of propagated bodies and central bodies:

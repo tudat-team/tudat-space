@@ -1,7 +1,7 @@
-.. _available_termination_settings:
+.. _termination_settings:
 
 ==============================
-Available Termination Settings
+Termination Settings
 ==============================
 
 The termination settings are a key parameter in the propagation of a body’s orbit, since these will determine the computational time and the size of the output file. Depending on the application, the user may want to end the body propagation according to different criteria. Once the ``termination_settings`` have been defined, the propagation settings are then subsequently created using

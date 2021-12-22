@@ -1,5 +1,7 @@
+.. _multi_type_dynamics:
+
 ===================
-Multi-type Dynamics
+Multi-type dynamics
 ===================
 
 Tudat permits the propagation of any combination of types of dynamics, for any number of bodies
