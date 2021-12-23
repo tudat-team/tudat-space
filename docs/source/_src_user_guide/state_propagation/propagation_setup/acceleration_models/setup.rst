@@ -4,6 +4,12 @@
 Acceleration Model Setup
 ========================
 
+Acceleration models can be created through the factory function
+:func:`~tudatpy.numerical_simulation.propagation_setup.create_acceleration_models`.
+
+How to select accelerations
+============================
+
 In Tudat, an acceleration acting on a body is defined by:
 
 *  the body undergoing acceleration;

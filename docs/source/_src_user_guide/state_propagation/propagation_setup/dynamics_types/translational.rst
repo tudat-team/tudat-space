@@ -10,19 +10,22 @@ detail in the API reference, which creates an object of type
 :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.TranslationalStatePropagatorSettings` (see below
 an :ref:`example`).
 
-Acceleration Model Setup
-========================
+In this page, only the Tudat-native objects necessary as input will be described. For all the other inputs, please
+refer to the related API entry (:func:`~tudatpy.numerical_simulation.propagation_setup.propagator.translational`).
 
-To propagate translational dynamics, a set of acceleration models must be provided. This can be created via the
-:func:`~tudatpy.numerical_simulation.propagation_setup.create_acceleration_models` factory function, described in the
-API reference and in the page :ref:`acceleration_models_setup`.
+Inputs
+=======
 
+The Tudatpy-native inputs to create the settings for a translational propagator are the following:
 
-Propagators
-============
+- :ref:`acceleration_models_setup`: set of acceleration models;
+- :ref:`convention_propagated_coordinates`: type of propagator (the translational state can have different
+  representations), see also `the API reference <https://tudatpy.readthedocs.io/en/latest/propagator.html#tudatpy.numerical_simulation.propagation_setup.propagator.TranslationalPropagatorType>`_.
+- :ref:`termination_settings`: settings to terminate the propagation;
+- :ref:`dependent_variables`: dependent variables that should be saved.
 
-As explained in :ref:`convention_propagated_coordinates`, the translational state can have different representations.
-The available propagators are listed in `the API reference <https://tudatpy.readthedocs.io/en/latest/propagator.html#tudatpy.numerical_simulation.propagation_setup.propagator.TranslationalPropagatorType>`_.
+.. todo::
+  Add actual API intersphinx link instead of regular url (when available).
 
 .. _example:
 

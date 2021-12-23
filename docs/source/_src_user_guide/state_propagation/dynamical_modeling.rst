@@ -23,16 +23,18 @@ Propagation Setup
 Introduction
 ============
 
-
 In Tudat, it is possible to perform the numerical propagation of different types of dynamics, namely:
 
 - :ref:`translational_dynamics`: the translational state of a body is propagated;
 - :ref:`rotational_dynamics`: the rotational state of a body is propagated;
 - :ref:`mass_dynamics`: the mass of a body is propagated.
 
-Furthermore, any combination of any number of types of dynamics, for any number of bodies, can be defined. When more
-than one dynamical quantity is propagated, we refer to a :ref:`multi_type_dynamics` simulation. Conversely, when more
-than one body is numerically propagated, we refer to a :ref:`multi_body_dynamics` simulation.
+Furthermore, any combination of any number of types of dynamics for any number of bodies can be defined. Therefore,
+in Tudat we also have:
+
+- :ref:`multi_type_dynamics`: more than one dynamical quantity is propagated for a single body;
+- :ref:`multi_body_dynamics`: only one dynamical quantity is propagated for multiple bodies;
+- a combination of the two: more than one dynamical quantity is propagated for multiple bodies.
 
 .. note::
 
@@ -48,32 +50,7 @@ Inputs
 ======
 
 As the figure shows, there are some input arguments common to all types of dynamics, while some others are
-dynamics-specific.
+specific to the type of propagator. More information about inputs are explained in the dynamic-specific pages linked
+above.
 
-Common inputs
-*************************
-
-These are input arguments that are common to all types of dynamics and should always be defined. These are:
-
-- the names of the bodies to be propagated numerically;
-- when the propagation should stop (see :ref:`termination_settings`);
-- what dependent variables should be saved (see :ref:`dependent_variables`);
-- how often the current state and time should be printed to the console.
-
-
-Dynamics-specific inputs
-*************************
-
-These are input arguments that are specific to a type of dynamics. These are described in more detail in the page
-related to a specific type of dynamics, but they are summarized below:
-
-- *Dynamical model*, defining the equations of motion of the propagated bodies;
-- *Initial conditions*, defining the initial states of the propagated bodies;
-
-In addition, only for rotational and translational dynamics:
-
-- *Propagator type*, defining the representation of the states
-
-Finally, only for the translational dynamics:
-
-- *Central bodies*, defining a central body for each propagated body (only for translational dynamics)
+.. figure:: propagation_setup/_static/tudatpy_propagation_settings.png

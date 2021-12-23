@@ -23,6 +23,8 @@ Each dependent variable is created via a dedicated factory function. See the exa
 .. note::
 
    All variables are saved in SI units.
+
+.. seealso::
    You can find a full list of dependent variables that can be saved `in our API documentation <https://tudatpy.readthedocs.io/en/latest/dependent_variable.html#functions>`_.
 
 				
