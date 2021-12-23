@@ -50,3 +50,16 @@ consider reading our introductory guide: :ref:`Optimization with PyGMO`.
    :maxdepth: 1
 
    _src_examples/pygmo_examples/pygmo_orbit_optimization
+
+=========================================
+Examples of MGA-DSM transfer trajectories
+=========================================
+
+Below you can find general examples, explained in detail, about using the tools available for analyzing Multiple Gravity
+Assist transfer trajectories with Deep Space Maneuvers (MGA-DSM).
+
+.. toctree::
+   :maxdepth: 1
+
+   _src_examples/mga_dsm_examples/mga_dsm_analysis
+   _src_examples/mga_dsm_examples/mga_dsm_optimization
