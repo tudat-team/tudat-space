@@ -18,11 +18,12 @@ Inputs
 
 The Tudatpy-native inputs to create the settings for a translational propagator are the following:
 
-- :ref:`acceleration_models_setup`: set of acceleration models;
-- :ref:`convention_propagated_coordinates`: type of propagator (the translational state can have different
-  representations), see also `the API reference <https://tudatpy.readthedocs.io/en/latest/propagator.html#tudatpy.numerical_simulation.propagation_setup.propagator.TranslationalPropagatorType>`_.
-- :ref:`termination_settings`: settings to terminate the propagation;
-- :ref:`dependent_variables`: dependent variables that should be saved.
+- a set of acceleration models (see :ref:`acceleration_models_setup`);
+- a type of propagator, since the translational state can have different representations (see the
+  `list of propagator types <https://tudatpy.readthedocs.io/en/latest/propagator.html#tudatpy.numerical_simulation.propagation_setup.propagator.TranslationalPropagatorType>`_ in the API
+  reference or the page about :ref:`convention_propagated_coordinates`;
+- settings to terminate the propagation (see :ref:`termination_settings`);
+- dependent variables that should be saved (see :ref:`dependent_variables`).
 
 .. todo::
   Add actual API intersphinx link instead of regular url (when available).
