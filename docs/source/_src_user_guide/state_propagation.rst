@@ -17,7 +17,7 @@ Inputs
 There are three separate input types necessary to create a simulation:
 
 - :ref:`environment_setup`: physical modeling of environment properties (for both celestial and artificial bodies)
-- :ref:`simulation_propagator_setup`: formulation of the differential equations representing the problem
+- :ref:`propagation_setup`: formulation of the differential equations representing the problem
 - :ref:`integrator_setup`: numerical integration settings used to solve such differential equations
 
 
