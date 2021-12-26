@@ -22,6 +22,9 @@ The user defines these settings for each torque in their simulation. These setti
           .. toggle-header::
              :header: Required **Show/Hide**
 
+                from tudatpy.kernel.numerical_simulation import propagation_setup
+                from tudatpy.kernel.astro import element_conversion
+
           .. literalinclude:: /_src_snippets/simulation/propagation_setup/torque_models/torque_setup.py
              :language: python
 

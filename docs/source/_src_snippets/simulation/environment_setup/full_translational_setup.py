@@ -1,5 +1,5 @@
 # Define bodies that are propagated
-bodies_to_propagate = ["Vehicle"]
+bodies_to_propagate = ["Spacecraft"]
 
 # Define central bodies
 central_bodies = ["Earth"]
@@ -31,10 +31,10 @@ termination_settings = propagation_setup.propagator.dependent_variable_terminati
 
 # Define output variables
 dependent_variables_to_save = [
-    propagation_setup.dependent_variable.total_acceleration( "Delfi-C3" ),
-    propagation_setup.dependent_variable.keplerian_state( "Delfi-C3", "Earth" ),
-    propagation_setup.dependent_variable.latitude( "Delfi-C3", "Earth" ),
-    propagation_setup.dependent_variable.longitude( "Delfi-C3", "Earth" )
+    propagation_setup.dependent_variable.total_acceleration( "Spacecraft" ),
+    propagation_setup.dependent_variable.keplerian_state( "Spacecraft", "Earth" ),
+    propagation_setup.dependent_variable.latitude( "Spacecraft", "Earth" ),
+    propagation_setup.dependent_variable.longitude( "Spacecraft", "Earth" )
     ]
 
 # Define settings for propagator

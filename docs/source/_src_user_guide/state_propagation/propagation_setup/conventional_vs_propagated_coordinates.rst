@@ -1,4 +1,4 @@
-.. _convention_propagated_coordinates:
+.. _propagator_types:
 
 =======================================
 Formulation of state coordinates

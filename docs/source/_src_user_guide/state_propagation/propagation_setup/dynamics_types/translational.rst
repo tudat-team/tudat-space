@@ -19,21 +19,17 @@ Inputs
 The Tudatpy-native inputs to create the settings for a translational propagator are the following:
 
 - a set of acceleration models (see :ref:`acceleration_models_setup`);
-- a type of propagator, since the translational state can have different representations (see the
-  `list of propagator types <https://tudatpy.readthedocs.io/en/latest/propagator.html#tudatpy.numerical_simulation.propagation_setup.propagator.TranslationalPropagatorType>`_ in the API
-  reference or the page about :ref:`convention_propagated_coordinates`;
+- a type of propagator, since the translational state can have different representations (see
+  :ref:`propagator_types`);
 - settings to terminate the propagation (see :ref:`termination_settings`);
 - dependent variables that should be saved (see :ref:`dependent_variables`).
-
-.. todo::
-  Add actual API intersphinx link instead of regular url (when available).
 
 .. _example:
 
 Example
 ========
 
-In the example below, the body "Vehicle" will be propagated w.r.t. body "Earth", using given acceleration models (not
+In the example below, the body "Spacecraft" will be propagated w.r.t. body "Earth", using given acceleration models (not
 provided), a given initial state which defines the initial Cartesian state of the center
 of mass of "Vehicle" w.r.t. the center of mass of "Earth". The propagation will terminate once the
 ``simulation_end_epoch`` epoch is reached. Furthermore, this example defines a termination condition using a dependent
@@ -48,6 +44,12 @@ the state will be propagated through the Encke formulation.
 
           .. toggle-header::
              :header: Required **Show/Hide**
+
+                .. code-block:: python
+
+                    from tudatpy.kernel.numerical_simulation import propagation_setup
+                    from tudatpy.kernel.astro import element_conversion
+                    import numpy as np
 
           .. literalinclude:: /_src_snippets/simulation/environment_setup/full_translational_setup.py
              :language: python

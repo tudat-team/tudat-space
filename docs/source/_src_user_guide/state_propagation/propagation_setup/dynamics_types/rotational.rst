@@ -1,16 +1,49 @@
 .. _rotational_dynamics:
 
-===================
+======================
 Rotational Dynamics
-===================
+======================
 
-Settings to define the propagation of rotational dynamics are largely similar to those of :ref:`translational_dynamics`. Differences are:
+Settings to propagate numerically the translational state of a body can be created through the
+:func:`~tudatpy.numerical_simulation.propagation_setup.propagator.rotational` factory function, described in
+detail in the API reference, which creates an object of type
+:class:`~tudatpy.numerical_simulation.propagation_setup.propagator.RotationalStatePropagatorSettings` (see below
+an :ref:`example`).
 
-* A set of torque models has to be supplied, as opposed to acceleration models. See :ref:`available_torque_models` for the list of options for torques in Tudat.
-* No 'central body' is specified. The rotational state that is propagated is always that from the global inertial orientation, to the body-fixed orientation of the propagated body.
-* The propagated state formulation is depends on the choice of propagator for rotational dynamics, with the full list of options and their definition enumerated by :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.RotationalPropagatorType`. The default rotational propagator is the  ``quaternions`` option in this enumeration.
+In this page, only the Tudat-native objects necessary as input will be described. For all the other inputs, please
+refer to the related API entry (:func:`~tudatpy.numerical_simulation.propagation_setup.propagator.rotational`).
 
-Defining settings for the rotational dynamics is done as follows, using the :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.rotational` function:
+.. note::
+  Settings to define the propagation of rotational dynamics reflect those specificied in :ref:`translational_dynamics`.
+  Besides the obvious differences, an important one is that no 'central body' is specified. The rotational state that
+  is propagated is always the one from the global inertial orientation to the body-fixed orientation of the propagated
+  body.
+
+
+Inputs
+=======
+
+The Tudatpy-native inputs to create the settings for a translational propagator are the following:
+
+- a set of acceleration models (see :ref:`torque_model_setup`);
+- a type of propagator, since the rotational state can have different representations (see
+  :ref:`propagator_types`);
+- settings to terminate the propagation (see :ref:`termination_settings`);
+- dependent variables that should be saved (see :ref:`dependent_variables`).
+
+.. _example:
+
+Example
+========
+
+In the example below, the body "Spacecraft" will be propagated w.r.t. body "Earth", using given torque models (not
+provided), a given initial state which defines the orientation of "Spacecraft" w.r.t. the inertial reference frame.
+The propagation will terminate once the
+``simulation_end_epoch`` epoch is reached. Furthermore, the
+propagator is asked to save the total torque norm as
+dependent variable. The time and rotational state will be printed on the terminal once every 24 hours (simulation
+time), while the state will be propagated through the quaternion formulation.
+
 
     .. tabs::
 
@@ -18,6 +51,12 @@ Defining settings for the rotational dynamics is done as follows, using the :fun
 
           .. toggle-header:: 
              :header: Required **Show/Hide**
+
+                .. code-block:: python
+
+                    from tudatpy.kernel.numerical_simulation import propagation_setup
+                    from tudatpy.kernel.astro import element_conversion
+                    import numpy as np
 
           .. literalinclude:: /_src_snippets/simulation/environment_setup/full_rotational_setup.py
              :language: python
