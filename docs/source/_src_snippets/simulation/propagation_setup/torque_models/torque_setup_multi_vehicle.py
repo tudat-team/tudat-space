@@ -15,8 +15,8 @@ torque_settings_vehicle = dict(
     ]
 )
 
-# Create global accelerations settings dictionary.
-acceleration_settings = {
+# Create global torque settings dictionary.
+torque_settings = {
     "Vehicle1": torque_settings_vehicle,
 	"Vehicle2": torque_settings_vehicle
 }
