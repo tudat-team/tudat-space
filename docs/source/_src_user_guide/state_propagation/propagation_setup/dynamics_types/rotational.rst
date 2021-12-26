@@ -14,7 +14,7 @@ In this page, only the Tudat-native objects necessary as input will be described
 refer to the related API entry (:func:`~tudatpy.numerical_simulation.propagation_setup.propagator.rotational`).
 
 .. note::
-  Settings to define the propagation of rotational dynamics reflect those specificied in :ref:`translational_dynamics`.
+  Settings to define the propagation of rotational dynamics reflect those specified in :ref:`translational_dynamics`.
   Besides the obvious differences, an important one is that no 'central body' is specified. The rotational state that
   is propagated is always the one from the global inertial orientation to the body-fixed orientation of the propagated
   body.
