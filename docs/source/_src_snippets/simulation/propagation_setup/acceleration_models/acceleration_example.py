@@ -21,7 +21,7 @@ accelerations_settings_vehicle = dict(
     ])
 
 # Create global accelerations settings dictionary
-acceleration_settings = {"Delfi-C3": accelerations_settings_delfi_c3}
+acceleration_settings = {"Vehicle": accelerations_settings_vehicle}
 
 # Create acceleration models
 acceleration_models = propagation_setup.create_acceleration_models(

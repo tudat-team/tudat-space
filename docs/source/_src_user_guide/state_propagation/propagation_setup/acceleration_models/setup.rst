@@ -18,11 +18,11 @@ In Tudat, an acceleration acting on a body is defined by:
 
 These settings are defined via factory functions for each acceleration in the simulation.
 
-.. note::
+.. seealso::
    A comprehensive list of all available acceleration models in Tudat and the manner in which to define
    them is given in :ref:`available_acceleration_models`.
 
-These settings are organized in nested key-value containers (``dict`` in Python). In general:
+These settings are organized in nested key-value containers (``std::map<>`` in C++, ``dict`` in Python). In general:
 
 - ``key``: body undergoing acceleration
 - ``value``: dictionary with:
@@ -37,10 +37,23 @@ acceleration models. This is illustrated in the example below.
 Example
 =======
 
-In this example, a spherical harmonic (degree and order 5) gravitational acceleration and aerodynamic acceleration
-exerted by the Earth are defined, as well as the point-mass gravity of Sun and Moon. The variable
-``accelerations_settings_vehicle`` denotes the list of bodies exerting accelerations and the types of accelerations,
-while the variable ``acceleration_settings`` associates this list with the body undergoing the acceleration. The
+In this example, the following accelerations are exerted on the vehicle:
+
+- by the Earth:
+
+    - spherical harmonic gravitational acceleration (degree and order 5)
+    - aerodynamic acceleration
+
+- by the Sun:
+    - point-mass gravity
+
+- by the Moon:
+    - point-mass gravity
+
+The variable ``accelerations_settings_vehicle`` denotes the list of bodies exerting accelerations and the types of
+accelerations, while the variable ``acceleration_settings`` associates this list with the body undergoing the
+acceleration.
+The
 function :func:`~tudatpy.numerical_simulation.propagation_setup.create_acceleration_models` creates the list of
 models that compute the accelerations during the propagation.
 
@@ -52,6 +65,10 @@ models that compute the accelerations during the propagation.
 
           .. toggle-header:: 
              :header: Required **Show/Hide**
+
+                .. code-block:: python
+
+                    from tudatpy.kernel.numerical_simulation import propagation_setup
 
           .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/acceleration_example.py
              :language: python
@@ -72,6 +89,10 @@ an example is given for the definition of ``acceleration_settings`` for multiple
           .. toggle-header:: 
              :header: Required **Show/Hide**
 
+                .. code-block:: python
+
+                    from tudatpy.kernel.numerical_simulation import propagation_setup
+
           .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/acceleration_example_multi_vehicle.py
              :language: python
 
@@ -89,6 +110,10 @@ Alternatively, separate acceleration settings may be defined for separate bodies
 
           .. toggle-header:: 
              :header: Required **Show/Hide**
+
+                .. code-block:: python
+
+                    from tudatpy.kernel.numerical_simulation import propagation_setup
 
           .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/acceleration_example_multi.py
              :language: python
