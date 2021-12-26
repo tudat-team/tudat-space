@@ -18,6 +18,7 @@ dependent_variables_to_save = [
     propagation_setup.dependent_variable.longitude("Spacecraft", "Earth")
 ]
 
+# Create mass propagator settings
 mass_propagator_settings = propagation_setup.propagator.mass(
     mass_rate_models,
     bodies_to_propagate,
