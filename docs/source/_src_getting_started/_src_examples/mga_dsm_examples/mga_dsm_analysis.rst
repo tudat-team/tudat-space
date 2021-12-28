@@ -30,10 +30,10 @@ Setup and inputs
 
 A simplified system of bodies suffices for this application, with the Sun as central body. The planets that are visited
 for a GA are defined in the list ``transfer_body_order``. The departure and arrival orbit can be specified, but don't
-necessarily need to be. By default, a transfer trajectory departs from / arrives at the edge of the SOI of the corresponding bodies
-(i.e. :math:`a = \infty`,  :math:`e=0`). In this example, the spacecraft departs from the edge of Earth's SOI and is
-inserted into a highly elliptical orbit around Saturn. We can specify *not* using DSMs by using the unpowered and unperturbed
-leg type.
+necessarily need to be. If not specified, the departure and arrival planets are considered swing-by nodes. Specifying
+:math:`a = \infty` and :math:`e=0` defines departure from / arrival at the edge of the SOI of the corresponding bodies.
+In this example, the spacecraft departs from the edge of Earth's SOI and is inserted into a highly elliptical orbit
+around Saturn. We can specify *not* using DSMs by using the unpowered and unperturbed leg type.
 
 .. code-block:: python
 
