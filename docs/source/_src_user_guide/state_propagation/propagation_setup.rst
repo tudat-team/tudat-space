@@ -14,13 +14,9 @@ Propagation Setup
    propagation_setup/dynamics_types/mass
    propagation_setup/dynamics_types/multi_type
    propagation_setup/dynamics_types/multi_body
-   propagation_setup/state_coordinate_types
+   propagation_setup/propagator_types
    propagation_setup/termination_settings
    propagation_setup/dependent_variables
-   propagation_setup/acceleration_models/setup
-   propagation_setup/torque_models/setup
-   propagation_setup/acceleration_models/available
-   propagation_setup/torque_models/available
 
 Introduction
 ============
@@ -45,7 +41,7 @@ in Tudat we also have:
    dynamics, for instance, there are various options besides a simple Cartesian state representation. However, even
    when using a non-Cartesian state vector, the Cartesian representation still plays a role in calculating, *e.g.*,
    acceleration models. For more information on the role of different state representations, please visit
-   the page :ref:`convention_propagated_coordinates`.
+   the page :ref:`propagator_types`.
 
 
 Inputs

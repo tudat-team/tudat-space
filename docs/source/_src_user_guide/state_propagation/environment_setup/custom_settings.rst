@@ -1,6 +1,6 @@
-===============
-Custom settings
-===============
+==========================
+Custom environment models
+==========================
 
 When working with a very specific model or application, it often happens that the model you want to use is not implemented in Tudat. If this is the case, we have the option for users to define 'custom' models for various models in both the environment and propagation setup modukes. The use of these custom settings requires the user to define their own function for the specific model, as is shown on this page with a number of examples. Below, you can find a list of the currently supported custom environment models in Tudat:
 

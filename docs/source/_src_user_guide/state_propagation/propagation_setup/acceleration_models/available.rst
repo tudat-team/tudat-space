@@ -21,7 +21,7 @@ page. Instead, for each model, a reference to the related API documentation entr
    :depth: 1
    :local:
 
-In certain pieces of code, such as when requesting the saving of a single acceleration (see :ref:`available_dependent_variables`
+In certain pieces of code, such as when requesting the saving of a single acceleration (see :ref:`dependent_variables`
 for saving of dependent variables), you will need to supply an identifier for the type of acceleration you are requesting.
 See the list of supported identifier types in the API documentation: :class:`~tudatpy.numerical_simulation.propagation_setup.acceleration.AvailableAcceleration`.
 

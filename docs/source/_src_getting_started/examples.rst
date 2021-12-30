@@ -24,6 +24,7 @@ Numerical Propagation of Dynamics
 Below you can find examples of numerical simulations that you can achieve with TudatPy.
 
 .. toctree::
+   :titlesonly:
    :maxdepth: 1
 
    _src_examples/simulation_examples/delfi_simple_example_page

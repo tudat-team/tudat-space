@@ -133,12 +133,12 @@ have two methods:
   lower and upper boundaries of each variable. The dimension of the problem (i.e. the value of :math:`n`) is
   automatically inferred by the return type of the this function.
 
-More information about the definition of an UDP class is available
-`here <https://esa.github.io/pygmo2/tutorials/coding_udp_simple.html>`_.
-
-
 .. literalinclude:: ./_static/himmelblau_udp.py
              :language: python
+
+.. seealso::
+   For more information, see the PyGMO documentation about
+   `defining an UDP class <https://esa.github.io/pygmo2/tutorials/coding_udp_simple.html>`_.
 
 2. Creation of a PyGMO problem
 ------------------------------
@@ -148,7 +148,7 @@ an instance of our class to ``pygmo.problem``. Note that an instance of the UDP 
 must be passed as input to pygmo.problem() and NOT the class itself. It is also possible to use a PyGMO UDP, i.e.
 a problem that is already defined in PyGMO, but it will not be shown in this tutorial. In this example,
 we will use only one generation. More information about the PyGMO problem class is available
-`here <https://esa.github.io/pygmo2/tutorials/using_problem.html>`_.
+`on the PyGMO website <https://esa.github.io/pygmo2/tutorials/using_problem.html>`_.
 
 .. literalinclude:: ./_static/pygmo_problem.py
              :language: python
@@ -160,10 +160,11 @@ Now we must choose a specific optimization algorithm to be passed to ``pygmo.alg
 the Differential Evolution algorithm (DE). Many different algorithms are available
 through PyGMO, including heuristic methods and local optimizers. It is also possible to create a User-Defined Algorithm
 (UDA), but in this tutorial we will use an algorithm readily available in PyGMO. Since the algorithm internally uses a
-random number generator, a seed can be passed as an optional input argument to ensure reproducibility. More information
-about the available algorithms and the PyGMO algorithm class is available respectively
-`here <https://esa.github.io/pygmo2/overview.html#list-of-algorithms>`_ and
-`here <https://esa.github.io/pygmo2/tutorials/using_algorithm.html>`_.
+random number generator, a seed can be passed as an optional input argument to ensure reproducibility.
+
+.. seealso::
+   For more information, see the PyGMO documentation about `available algorithms <https://esa.github.io/pygmo2/overview
+   .html#list-of-algorithms>`_ and the `PyGMO algorithm class <https://esa.github.io/pygmo2/tutorials/using_algorithm.html>`_.
 
 .. note::
     During the actual optimization process, fixing the seed is probably what you do **not** want to do.
@@ -180,12 +181,14 @@ decision vector which can change (evolution), the resulting fitness vector, and 
 The population is initialized starting from a specific problem to ensure that all individuals are
 compatible with the UDP. The default population size is 0; in this example, we use 1000 individuals.
 Similarly to what was done for the algorithm, since the population initialization is random,
-a seed can be passed as an optional input argument to ensure reproducibility. More information
-about the PyGMO population class is available
-`here <https://esa.github.io/pygmo2/tutorials/using_population.html>`_.
+a seed can be passed as an optional input argument to ensure reproducibility.
 
 .. literalinclude:: ./_static/pygmo_population.py
              :language: python
+
+.. seealso::
+   For more information, see the page from the PyGMO documentation about
+   `the PyGMO population class <https://esa.github.io/pygmo2/tutorials/using_population.html>`_.
 
 5. Evolve the population
 ------------------------
@@ -197,11 +200,14 @@ method and, analogously, the related fitness values with ``get_f()``. If we are 
 of each evolution stage, we can find its index through the ``pop.best_idx()`` method. On the contrary, the ``champion_x``
 (and the related ``champion_f``) attributes retrieves the decision variable vector and its fitness value. Note that the
 *champion* is the best individual across all evolutionary stages (not necessarily the best individual found at the last
-evolution). More information about evolving a PyGMO population is available
-`here <https://esa.github.io/pygmo2/tutorials/evolving_a_population.html>`_.
+evolution).
 
 .. literalinclude:: ./_static/pygmo_evolution.py
              :language: python
+
+.. seealso::
+   For more information, see the PyGMO documentation about
+   `evolving a PyGMO population <https://esa.github.io/pygmo2/tutorials/evolving_a_population.html>`_.
 
 6. Visualization of the results
 -------------------------------
@@ -232,6 +238,7 @@ As it can be noticed, the DE algorithm reaches a fitness level several orders of
 despite using only 10% of the computational resources.
 
 .. tabularcolumns:: |l|c|c|c|
+
 +-----------------------------------------------+------------------------------+-----------------------------------------------------+----------------------------+
 | **Optimization method**                       | **Fitness value**            | **Decision variable difference wrt (3,2)**          | **Function evaluations**   |
 +-----------------------------------------------+------------------------------+-----------------------------------------------------+----------------------------+

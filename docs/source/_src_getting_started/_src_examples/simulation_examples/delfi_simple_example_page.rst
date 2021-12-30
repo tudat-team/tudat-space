@@ -217,7 +217,9 @@ At the beginning of your script, you have defined a simulation start epoch, but 
 Define dependent variables to save
 ----------------------------------
 
-Apart from the state history, you can specify certain dependent variables to be saved, which you can later use for analysis. For *Delfi-C3*, we want to save the total acceleration, Keplerian state, latitude and longitude and the acceleration norms of all the accelerations, which we will plot later. Here is a list of all the :ref:`available_dependent_variables`.
+Apart from the state history, you can specify certain dependent variables to be saved, which you can later use for
+analysis. For *Delfi-C3*, we want to save the total acceleration, Keplerian state, latitude and longitude and the
+acceleration norms of all the accelerations, which we will plot later (see :ref:`dependent_variables`).
 
 .. code-block:: python
       
@@ -337,7 +339,7 @@ Let's make some plots to visualize our simulation results. In order to make plot
 
   .. note::
 
-    These columns correspond to the dependent variables we have saved. To make your own list, visit :ref:`available_dependent_variables`.
+    These columns correspond to the dependent variables we have saved. To make your own list, visit :ref:`dependent_variables`.
 
     .. list-table:: Column indices for the dependent variables.
      :widths: 50 50

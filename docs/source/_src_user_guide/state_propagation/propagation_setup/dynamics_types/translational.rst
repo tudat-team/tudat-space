@@ -4,6 +4,14 @@
 Translational Dynamics
 ======================
 
+.. toctree::
+   :titlesonly:
+   :hidden:
+   :maxdepth: 1
+
+   ../acceleration_models/setup
+   ../acceleration_models/available
+
 Settings to propagate numerically the translational state of a body can be created through the
 :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.translational` factory function, described in
 detail in the API reference, which creates an object of type

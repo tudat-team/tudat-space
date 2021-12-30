@@ -50,6 +50,8 @@ objects. Using the function as above, Tudat will then automatically set up and s
 In our API documentation, you can find several additional options for creating the
 :class:`~tudatpy.numerical_simulation.SingleArcSimulator`.
 
+.. _simulation_output:
+
 Retrieving the output
 ---------------------
 
@@ -84,7 +86,7 @@ The :attr:`~tudatpy.numerical_simulation.SingleArcSimulator.unprocessed_state_hi
 ``SingleArcSimulator`` class will provide you with the history of the Keplerian elements, which were directly solved
 for by the integrator, while the  :attr:`~tudatpy.numerical_simulation.SingleArcSimulator.state_history` provides
 the Cartesian elements, obtained from the conversion of the propagated Keplerian elements (see
-:ref:`convention_propagated_coordinates` for more details).
+:ref:`propagator_types` for more details).
 
 Checking the outcome of the propagation
 ---------------------------------------

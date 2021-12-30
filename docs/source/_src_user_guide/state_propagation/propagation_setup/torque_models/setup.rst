@@ -79,7 +79,7 @@ models that compute the torques during the propagation.
              :language: cpp
 
 
-When propagating multiple bodies (see :ref:`multi_body_propagation`), the same list of settings may be re-used for
+When propagating multiple bodies (see :ref:`multi_body_dynamics`), the same list of settings may be re-used for
 multiple bodies. Below, an example is given for the definition of ``torque_settings`` for multiple bodies
 (``Vehicle1`` and ``Vehicle2``) which are undergoing identical torques:
 

@@ -40,7 +40,7 @@ Dependent variable
 ===================
 
 The simulation stops once a dependent variable meets a given criterion. The termination variable can be any dependent
-variable listed in :ref:`available_dependent_variables` (where the way to create those is also explained).
+variable listed in :ref:`dependent_variables` (where the way to create those is also explained).
 Such variable, together with the limit value, can be used as lower or upper boundary.
 
 For more information, see the API reference entry:
