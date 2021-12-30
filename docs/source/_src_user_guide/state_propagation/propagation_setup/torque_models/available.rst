@@ -1,82 +1,62 @@
 .. _available_torque_models:
 
 ====================================
-List of all Available Torque Models
+Available Torque Models
 ====================================
+
+In this page, all the torque models available in TudatPy are explained. Regardless of the type of torque
+model, the procedure to link such torque model to the bodies exerting and undergoing the torque is
+explained in this page: :ref:`torque_model_setup`. Therefore, this information will not be repeated in this
+page. Instead, for each model, a reference to the related API documentation entry and the requirements are provided.
+
+
+.. note::
+   In TudatPy, torque models are defined through factory functions, which define the properties required of
+   the torques, but do not perform any calculations themselves. These properties are stored through instances
+   of the :class:`~tudatpy.numerical_simulation.propagation_setup.torque.TorqueSettings` class or of its
+   derived classes.
+
+
+.. contents:: List of available torque models
+   :depth: 1
+   :local:
+
+In certain pieces of code, such as when requesting the saving of a single torque (see :ref:`available_dependent_variables`
+for saving of dependent variables), you will need to supply an identifier for the type of torque you are requesting.
+See the list of supported identifier types in the API documentation:
+:class:`~tudatpy.numerical_simulation.propagation_setup.torque.AvailableTorque`.
 
 
 Aerodynamic Torque
 ######################
 
-Torque exerted by a body with an atmosphere model and shape model on another body.
-The settings are created as follows, for an aerodynamic torque exerted by "Earth" on the propagated body "Vehicle":
+| **Description**
+| The aerodynamic torque model can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.torque.aerodynamic` factory function.
 
-.. tabs::
-
-     .. tab:: Python
-
-      .. toggle-header::
-         :header: Required **Show/Hide**
-
-      .. literalinclude:: /_src_snippets/simulation/propagation_setup/torque_models/aerodynamic_torque_example.py
-         :language: python
-
-     .. tab:: C++
-
-      .. code-block:: cpp
-
-            SelectedTorqueMap selectedTorqueModelMap;
-            selectedTorqueModelMap[ "Vehicle" ][ "Earth" ].push_back( std::make_shared< TorqueSettings >( aerodynamic_torque ) );
-
-
-Requires the following environment models to be defined:
-
-* Atmospheric model for body exerting torque (see :ref:`environment_atmosphere_model`)
-
-* Shape model for body exerting torque (see :ref:`environment_shape_model`).
-
-* Aerodynamic coefficient interface for body undergoing torque (see :ref:`environment_aerodynamic_coefficient_interface`).
+| **Dependencies**
+| 1. Atmosphere model for body exerting acceleration (see :ref:`environment_atmosphere_model`).
+| 2. Aerodynamic coefficient interface for body undergoing acceleration (see
+  :ref:`environment_aerodynamic_coefficient_interface`).
+| 3. Inertia tensor model for body undergoing acceleration.
+| 4. Current states of body undergoing acceleration and body with atmosphere.
 
 .. note::
 
     In the case that the aerodynamic coefficients are defined as a function of the vehicle orientation (e.g. angle of attack and sideslip angle), these angles can be manually or automatically defined.
 
-* Current state of bodies undergoing and exerting torque, either from an Ephemeris model (see :ref:`environment_ephemeris_model`) or from the numerical propagation.
-
+.. todo::
+    Is the shape model for body exerting acceleration a requirement?
 
 Second Degree Gravitational Torque
 ###################################
 
-Torque exerted by a point mass on a body with a defined inertia tensor.
-The settings are created as follows, for a torque exerted by body "Earth" on propagated body "Vehicle":
+| **Description**
+| The second degree gravitational torque model can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.torque.second_degree_gravitational` factory function.
 
-.. tabs::
-
-     .. tab:: Python
-
-      .. toggle-header::
-         :header: Required **Show/Hide**
-
-      .. literalinclude:: /_src_snippets/simulation/propagation_setup/torque_models/seconddegree_torque_example.py
-         :language: python
-
-     .. tab:: C++
-
-      .. code-block:: cpp
-
-            SelectedTorqueMap selectedTorqueModelMap;
-            selectedTorqueModelMap[ "Vehicle" ][ "Earth" ].push_back( std::make_shared< TorqueSettings >( second_order_gravitational_torque ) );
-
-
-Requires the following environment models to be defined:
-
-* Gravity field (at least point-mass) for body exerting torque (see :ref:`environment_gravity_field_model`).
-
-* Inertia tensor of body undergoing torque (see :ref:`environment_inertia_tensor`).
-
-* Current state of bodies undergoing and exerting torque, either from an Ephemeris model (see :ref:`environment_ephemeris_model`) or from the numerical propagation.
-
-
+| **Dependencies**
+| 1. Gravity field model for body exerting acceleration (see :ref:`environment_atmosphere_model`).
+| 2. Inertia tensor model for body undergoing acceleration.
+| 3. Current states of body undergoing acceleration and body with atmosphere.
 
 .. tip::
 
@@ -84,42 +64,16 @@ Requires the following environment models to be defined:
     It is therefore convenient for modelling the gravitational torque acting on a custom body, such as a vehicle, because its custom spherical harmonics model does not have to be created manually.
 
 
-
 Spherical Harmonics Gravitational Torque
 ##########################################
 
-Torque exerted by a point mass on a body with an arbitrary degree/order spherical harmonics mass distribution.
-As an example, for a spherical harmonic torque, expanded to degree and order 8, exerted by body "Earth" on propagated body "Moon":
+| **Description**
+| The second degree gravitational torque model can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.torque.spherical_harmonic_gravitational` factory function.
 
-.. tabs::
-
-     .. tab:: Python
-
-      .. toggle-header::
-         :header: Required **Show/Hide**
-
-      .. literalinclude:: /_src_snippets/simulation/propagation_setup/torque_models/sphericalharmonics_torque_example.py
-         :language: python
-
-     .. tab:: C++
-
-      .. code-block:: cpp
-
-            SelectedTorqueMap selectedTorqueModelMap;
-            int maximumDegree = 8;
-            int maximumOrder = 8;
-            selectedTorqueModelMap[ "Moon" ][ "Earth" ].push_back( std::make_shared< SphericalHarmonicTorqueSettings >( maximumDegree, maximumOrder ) );
-
-
-Requires the following environment models to be defined:
-
-* Gravity field (at least point-mass) for body exerting torque (see :ref:`environment_gravity_field_model`).
-
-* Spherical harmonic gravity field for body undergoing torque (see :ref:`environment_gravity_field_model`).
-
-* Current state of bodies undergoing and exerting torque, either from an Ephemeris model (see :ref:`environment_ephemeris_model`) or from the numerical propagation.
-
-
+| **Dependencies**
+| 1. Gravity field model for body exerting acceleration (see :ref:`environment_atmosphere_model`).
+| 2. Spherical harmonic gravity field for body undergoing torque (see :ref:`environment_gravity_field_model`).
+| 3. Current states of body undergoing acceleration and body with atmosphere.
 
 .. tip::
 
@@ -131,4 +85,8 @@ Requires the following environment models to be defined:
 Custom Torque
 #################
 
-This section is WIP and will be updated soon.
+| **Description**
+| The custom torque model can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.torque.custom` factory function.
+
+| **Dependencies**
+| None.

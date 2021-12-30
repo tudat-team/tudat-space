@@ -22,9 +22,8 @@ torque_settings_earth = dict(
     ]
 )
 
-# Create global accelerations settings dictionary and
-# assign the torque selections to respective bodies that act upon
-acceleration_settings = {
+# Create global torque settings dictionary and assign the torque selections to respective bodies that act upon
+torque_settings = {
     "Moon": torque_settings_moon,
     "Earth": torque_settings_earth
 }
