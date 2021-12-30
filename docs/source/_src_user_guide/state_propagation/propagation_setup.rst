@@ -1,4 +1,3 @@
-
 .. _propagation_setup:
 
 =================
@@ -10,15 +9,18 @@ Propagation Setup
    :hidden:
    :maxdepth: 1
 
-    propagation_setup/dynamics_types/translational
-    propagation_setup/dynamics_types/rotational
-    propagation_setup/dynamics_types/mass
-    propagation_setup/dynamics_types/multi_type
-    propagation_setup/dynamics_types/multi_body
-    propagation_setup/conventional_vs_propagated_coordinates
-    propagation_setup/termination_settings
-    propagation_setup/dependent_variables
-    propagation_setup/acceleration_models/available
+   propagation_setup/dynamics_types/translational
+   propagation_setup/dynamics_types/rotational
+   propagation_setup/dynamics_types/mass
+   propagation_setup/dynamics_types/multi_type
+   propagation_setup/dynamics_types/multi_body
+   propagation_setup/state_coordinate_types
+   propagation_setup/termination_settings
+   propagation_setup/dependent_variables
+   propagation_setup/acceleration_models/setup
+   propagation_setup/torque_models/setup
+   propagation_setup/acceleration_models/available
+   propagation_setup/torque_models/available
 
 Introduction
 ============

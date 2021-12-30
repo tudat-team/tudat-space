@@ -5,6 +5,9 @@
 Single-Arc Propagation
 ======================
 
+.. contents:: Content of this page
+   :local:
+
 Example usage
 --------------
 

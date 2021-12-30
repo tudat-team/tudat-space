@@ -2,6 +2,9 @@
 Contribute to tudat-space
 **********************************
 
+.. contents:: Content of this page
+   :local:
+
 Compiling Documentation Locally
 ################################
 

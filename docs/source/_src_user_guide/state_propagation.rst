@@ -26,9 +26,9 @@ There are three separate input types necessary to create a simulation:
    :hidden:
    :maxdepth: 1
 
-   state_propagation/environment_modeling
-   state_propagation/dynamical_modeling
-   state_propagation/numerical_modeling
+   state_propagation/environment_setup
+   state_propagation/propagation_setup
+   state_propagation/integration_setup
 
 
 Simulation & Output

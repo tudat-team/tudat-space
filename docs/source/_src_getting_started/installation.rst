@@ -5,6 +5,9 @@
 Installation
 ******************************
 
+.. contents:: Content of this page
+   :local:
+
 This page will guide you through the installation of Tudat(Py). The installation is supported exclusively through the use of the ``conda``
 package manager, such as ``Anaconda``. Additional installation procedures are not currently
 supported by the team, although there are plans to add additional support in the future. If the current situation does not satisfy your

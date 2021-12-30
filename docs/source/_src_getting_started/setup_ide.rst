@@ -2,6 +2,8 @@
 Setting Up a Development Environment
 ####################################
 
+.. contents:: Content of this page
+   :local:
 
 Setting up JupyterLab in a Conda Environment
 --------------------------------------------

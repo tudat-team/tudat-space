@@ -13,6 +13,9 @@ to employ it jointly with tudatpy.
 
 .. _`PyGMO`: https://esa.github.io/pygmo2/index.html
 
+.. contents:: Content of this page
+   :local:
+
 About PyGMO
 ######################
 

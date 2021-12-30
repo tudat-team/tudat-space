@@ -13,6 +13,10 @@ illustrated in more detail in the pages linked below.
 
 .. _`this repository`: https://github.com/tudat-team/tudatpy-examples
 
+.. contents:: Categories of example applications
+   :local:
+
+
 =================================
 Numerical Propagation of Dynamics
 =================================

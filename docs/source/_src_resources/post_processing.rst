@@ -2,6 +2,9 @@
 Post-processing Results in Python
 *********************************
 
+.. contents:: Content of this page
+   :local:
+
 The ``tudat`` C++ libraries were build around the use of a ``std::map<double, Eigen::vectorXd>`` as the data type of the
 state and dependent variable histories. In Python, this is returned as a ``dict[float, np.ndarray]``.
 
