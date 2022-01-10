@@ -65,7 +65,7 @@ Download this ``environment.yaml`` (:download:`yaml <_static/environment.yaml>`)
 
 .. code:: bash
 
-    wget https://tudat-space.readthedocs.io/en/latest/_downloads/2ff196b0ef4830f53d754f6a3972d2e8/environment.yaml
+    wget https://tudat-space.readthedocs.io/en/latest/_downloads/dfbbca18599275c2afb33b6393e89994/environment.yaml
 
 In your terminal navigate to the directory containing this file, and use the following command (see below for tips on using the command line):
 
