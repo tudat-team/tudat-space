@@ -60,10 +60,11 @@ retrieved from the module directly:
     dsm_velocity_based_leg_type = transfer_trajectory.dsm_velocity_based_leg_type
     dsm_position_based_leg_type = transfer_trajectory.dsm_position_based_leg_type
 
-
-The departure and arrival orbit characteristics are optional inputs. By default it is assumed :math:`a = \infty` and
-:math:`e=0`, which means that the spacecraft departs from / arrives at the edge of the SOI of the
-departure / arrival planet.
+The departure and arrival orbit characteristics are optional inputs. By default, Tudat(Py) assumes that :math:`a` and
+:math:`e` are ``NaN``, in which case the departure / arrival planets are analysed as swing-by nodes instead of departure
+/ arrival nodes. This is useful when combining multiple types of trajectories into one or when a mission's objective
+is to do a fly-by of the final target. Defining :math:`a=\infty` defines the departure / arrival orbit at the SOI of the
+corresponding body.
 
 Besides the general inputs, trajectory specific inputs are required, which are called transfer parameters. Which
 transfer parameters need to be defined, depends on the leg type. For all trajectories, *with* and *without* DSMs, it is
@@ -114,6 +115,11 @@ presents the additional parameters, so called leg and node free parameters, requ
 +---------------------------------------+-----------------------+-------------------------------------------------------+------------------------------------------------------------------------------+
 |                                       |                       | Magnitude of :math:`\Delta V` applied at periapsis    |                                                                              |
 +---------------------------------------+-----------------------+-------------------------------------------------------+------------------------------------------------------------------------------+
+
+In case the default departure / arrival orbit characteristics are used, such that these are considered swing-by nodes,
+the transfer parameters change accordingly. For a transfer *without* DSMs, an extra set of swing-by node parameters
+is included for the final node. For a transfer *with* DSMs, the departure node parameters will change into swing-by node
+parameters and an extra set of swing-by node parameters is included for the final node.
 
 
 General procedure
