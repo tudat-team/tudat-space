@@ -101,7 +101,5 @@ To create interpolator settings, there are a number of additional settings that 
 * the look-up scheme, through the enum :class:`~tudatpy.math.interpolators.AvailableLookupScheme`;
 * the behaviour beyond the boundaries of the domain, through the enum :class:`~tudatpy.math.interpolators.BoundaryInterpolationType`;
 * the behaviour close to the boundaries of the domain, through the enum :class:`~tudatpy.math.interpolators.LagrangeInterpolatorBoundaryHandling`
-  (for the :func:`~tudatpy.math.interpolators.hermite_spline_interpolation` only).
-
-
+  (for the :func:`~tudatpy.math.interpolators.lagrange_interpolation` only).
 
