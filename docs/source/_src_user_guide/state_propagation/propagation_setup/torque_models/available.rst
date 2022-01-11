@@ -42,8 +42,13 @@ Aerodynamic Torque
 | 5. Shape model for the body exerting an acceleration (to allow for the calculation of vehicle altitude)
 
 .. note::
+   By default, a body’s angle of attack, sideslip angle, and bank angle are all set to 0. Defining a vehicle
+   orientation is typically done in one of several ways: defining aerodynamic guidance directly (imposing these three
+   angles), using the definition of vehicle orientation from an existing model for the vehicle (for instance thrust),
+   or propagation of the body’s rotational dynamics.
 
-    In the case that the aerodynamic coefficients are defined as a function of the vehicle orientation (e.g. angle of attack and sideslip angle), these angles can be manually or automatically defined.
+.. todo::
+   Add reference to aerodynamic guidance page.
 
 Second Degree Gravitational Torque
 ###################################
