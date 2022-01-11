@@ -39,13 +39,11 @@ Aerodynamic Torque
   :ref:`environment_aerodynamic_coefficient_interface`).
 | 3. Inertia tensor model for body undergoing acceleration.
 | 4. Current states of body undergoing acceleration and body with atmosphere.
+| 5. Shape model for the body exerting an acceleration (to allow for the calculation of vehicle altitude)
 
 .. note::
 
     In the case that the aerodynamic coefficients are defined as a function of the vehicle orientation (e.g. angle of attack and sideslip angle), these angles can be manually or automatically defined.
-
-.. todo::
-    Is the shape model for body exerting acceleration a requirement?
 
 Second Degree Gravitational Torque
 ###################################
