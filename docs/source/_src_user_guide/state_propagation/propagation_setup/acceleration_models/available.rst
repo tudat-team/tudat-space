@@ -45,8 +45,7 @@ There are different gravitational models available in TudatPy:
 - :ref:`mutual_spherical_harmonic_acceleration`
 - :ref:`third_body_gravity`
 
-The distinction between them lies in the type of radiation pressure interface that is used for the body undergoing
-acceleration (see below).
+These are explained in more detail below.
 
 .. _point_mass_acceleration:
 
