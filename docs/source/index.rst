@@ -14,8 +14,10 @@ passions in astrodynamics and space. It contains user guides and tutorials to us
 - *Resources:* guides for external tools that a user might need when using Tudat.
 - *About:* additional information about Tudat and its ecosystem.
 
-.. note::
-    Some resources related to Tudatpy are located elsewhere. See below!
+External Tudatpy resources
+============================
+
+Some resources related to Tudatpy are located elsewhere. See below!
 
 .. panels::
 
@@ -130,11 +132,11 @@ to get started with them, have a look at our
     **Preliminary mission design tools**
     ^^^
 
-    | Several tools for preliminary mission design, including Lambert targeters, patched conic multiple-gravity
-    | assists, and shape-based low-thrust models.
+    Several tools for preliminary mission design, including Lambert targeters, patched conic multiple-gravity
+    assists, and shape-based low-thrust models.
 
     +++
-    .. link-button:: _src_user_guide/state_propagation/integration_setup
+    .. link-button:: _src_user_guide/astrodynamics/two_body_dynamics
             :type: ref
             :text: Find out more
             :classes: stretched-link btn-outline-primary
@@ -149,9 +151,9 @@ to get started with them, have a look at our
 
 
     +++
-    .. link-button:: _src_user_guide/state_propagation/integration_setup
+    .. link-button:: index
             :type: ref
-            :text: Find out more
+            :text: Coming soon :)
             :classes: stretched-link btn-outline-primary
 
 
