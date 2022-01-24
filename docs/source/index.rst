@@ -21,6 +21,9 @@ Some resources related to Tudatpy are located elsewhere. See below!
 
 .. panels::
 
+    ---
+    :column: col-lg-4 p-3
+
     **TudatPy API reference**
     ^^^
 
@@ -33,6 +36,7 @@ Some resources related to Tudatpy are located elsewhere. See below!
         :classes: btn-outline-primary btn-block stretched-link
 
     ---
+    :column: col-lg-4 p-3
 
     **Developer Documentation**
     ^^^
@@ -44,6 +48,21 @@ Some resources related to Tudatpy are located elsewhere. See below!
     .. link-button:: https://tudat-developer.readthedocs.io/en/latest/
         :text: Go to the website
         :classes: btn-outline-primary btn-block stretched-link
+
+    ---
+    :column: col-lg-4 p-3
+
+    **Mathematical model definition**
+    ^^^
+
+    A manual with all the definitions of mathematical models implemented in Tudat.
+
+    +++
+
+    .. link-button:: https://drive.google.com/file/d/1w8L7E-deBHlbNXkcxe5DR62EClEnaXFx/view?usp=sharing
+        :text: Download the manual
+        :classes: btn-outline-primary btn-block stretched-link
+
 
 
 
