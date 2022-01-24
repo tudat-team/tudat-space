@@ -59,7 +59,7 @@ Some resources related to Tudatpy are located elsewhere. See below!
 
     +++
 
-    .. link-button:: https://drive.google.com/file/d/1w8L7E-deBHlbNXkcxe5DR62EClEnaXFx/view?usp=sharing
+    .. link-button:: https://github.com/tudat-team/tudat-space/raw/master/Tudat_mathematical_model_definition.pdf
         :text: Download the manual
         :classes: btn-outline-primary btn-block stretched-link
 
