@@ -14,12 +14,66 @@ passions in astrodynamics and space. It contains user guides and tutorials to us
 - *Resources:* guides for external tools that a user might need when using Tudat.
 - *About:* additional information about Tudat and its ecosystem.
 
-External Tudatpy resources
+Quickstart
+==========
+
+.. panels::
+    :body: text-left
+    :header: text-center
+
+    ---
+    :column: col-lg-4 p-3
+
+    **Installation**
+    ^^^
+
+    Learn how to install the tudatpy package via conda.
+
+    +++
+
+    .. link-button:: _src_getting_started/installation
+        :type: ref
+        :text: Read our guide
+        :classes: btn-outline-primary btn-block stretched-link
+
+    ---
+    :column: col-lg-4 p-3
+
+    **Online examples**
+    ^^^
+
+    Run the examples on mybinder and see how tudatpy works: you don't need to install any package or IDE.
+
+    +++
+
+    .. link-button:: https://mybinder.org/v2/gh/tudat-team/tudatpy-examples/master
+        :text: Try it out
+        :classes: btn-outline-primary btn-block stretched-link
+
+    ---
+    :column: col-lg-4 p-3
+
+    **Success stories**
+    ^^^
+
+    Find out what you can do with tudatpy by having a look at our success stories.
+
+    +++
+
+    .. link-button:: index
+        :type: ref
+        :text: Coming soon :)
+        :classes: btn-outline-primary btn-block stretched-link
+
+
+External resources
 ============================
 
 Some resources related to Tudatpy are located elsewhere. See below!
 
 .. panels::
+    :body: text-left
+    :header: text-center
 
     ---
     :column: col-lg-4 p-3

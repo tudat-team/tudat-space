@@ -5,13 +5,59 @@
 Examples
 ************************
 
-There are several example applications available in `this repository`_, in the form of Python scripts.
-At the top of each `.py` example file, the topic and goals of such example application are explained in detail.
+There are several example applications disseminated in various forms.
 
-In addition, to facilitate the understanding of tudat(py) code, a selection of the example applications are
-illustrated in more detail in the pages linked below.
 
-.. _`this repository`: https://github.com/tudat-team/tudatpy-examples
+
+.. panels::
+    :body: text-left
+    :header: text-center
+
+    ---
+    :column: col-lg-4 p-3
+
+    **Mybinder**
+    ^^^
+
+    Here examples written as Jupyter notebooks can be run online, without the need of installing tudatpy and/or an IDE.
+
+    +++
+
+    .. link-button:: https://mybinder.org/v2/gh/tudat-team/tudatpy-examples/master
+        :text: Try it out
+        :classes: btn-outline-primary btn-block stretched-link
+
+    ---
+    :column: col-lg-4 p-3
+
+    **Github repo**
+    ^^^
+
+    The same examples are available on Github, both as Jupyter notebooks and regular *.py* files.
+
+    +++
+
+    .. link-button:: https://github.com/tudat-team/tudatpy-examples
+        :text: Go to the repo
+        :classes: btn-outline-primary btn-block stretched-link
+
+    ---
+    :column: col-lg-4 p-3
+
+    **Online documentation**
+    ^^^
+
+    Alternatively, you can go through the examples directly from this website.
+
+    +++
+
+    .. link-button:: examples
+        :type: ref
+        :text: See below
+        :classes: btn-outline-primary btn-block stretched-link
+
+
+
 
 .. contents:: Categories of example applications
    :local:
