@@ -62,7 +62,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'tudat.space'
-copyright = '2020, Tudat Space'
+copyright = '2022, Tudat Space'
 author = 'Tudat Space'
 
 # The version info for the project you're documenting, acts as replacement for
