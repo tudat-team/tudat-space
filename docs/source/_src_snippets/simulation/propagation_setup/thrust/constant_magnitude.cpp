@@ -1,0 +1,2 @@
+ConstantThrustMagnitudeSettings(
+    thrustMagnitude, specificImpulse, bodyFixedThrustDirection ):
