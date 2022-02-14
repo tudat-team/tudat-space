@@ -37,11 +37,17 @@ The two settings are used to create a :class:`ThrustAccelerationSettings` object
 
    Class containing the properties of the thrust acceleration (direction and magnitude). Set by the settings classes described below.
 
-
 Thrust direction
 ~~~~~~~~~~~~~~~~
 
-For the direction of the thrust, there are presently four available types of guidance.
+Four distinct methods have been implemented to define the direction of the thrust.
+
+.. class:: ThrustDirectionGuidanceSettings
+
+    Base class for the thrust magnitude settings.
+
+   .. note:: The thrust direction that is defined by this class is always in the **inertial frame**.
+             The direction of the thrust in the body-fixed frame can be additionally defined in the :class:`ThrustMagnitudeSettings` class.
 
 .. class:: ThrustDirectionFromStateGuidanceSettings
 
@@ -83,9 +89,9 @@ For the direction of the thrust, there are presently four available types of gui
           .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/custom_thrust_direction.cpp
              :language: cp
 
-.. warning:: When using the :class:`CustomThrustDirectionSettings`, the inertial to body-fixed rotation cannot be unambiguously defined. If you require this rotation (for instance when you also incorporate aerodynamic forces), the :class:`CustomThrustOrientationSettings` class should be used instead.
+   .. warning:: When using the :class:`CustomThrustDirectionSettings`, the inertial to body-fixed rotation cannot be unambiguously defined. If you require this rotation (for instance when you also incorporate aerodynamic forces), the :class:`CustomThrustOrientationSettings` class should be used instead.
 
-.. warning:: The direction vector that is being returned by the custom function should be a unit vector.
+   .. warning:: The direction vector that is being returned by the custom function should be a unit vector.
 
 .. class:: CustomThrustOrientationSettings
 
@@ -133,8 +139,6 @@ For the direction of the thrust, there are presently four available types of gui
           .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/from_existing_orientation.cpp
              :language: cp
 
-
-
 Thrust magnitude
 ~~~~~~~~~~~~~~~~
 
@@ -146,8 +150,8 @@ Two distinct ways are available in Tudat(Py) to implement the magnitude of the t
 
 .. class:: ConstantThrustMagnitudeSettings
 
-    Thrust magnitude settings may be used to specified a constant thrust and a constant specific impulse.
-    Optionally, the direction of the thrust with respect to the body can be specified, for instance to define Thrust Vectoring Control.
+    Thrust magnitude settings may be used to specified a constant thrust (in Newtons) and a constant specific impulse (in seconds).
+    Optionally, the direction of the thrust with respect to the body can also be specified, for instance to define Thrust Vectoring Control.
 
     This constant thrust magnitude can be setup using the following:
    
@@ -202,6 +206,29 @@ Thrust with the environment
  - Mass rate settings from thrust (add note in thrust magnitude that specific impulse is basically useless if a custom mass rate is used).
  - Later on (maybe?): explain how to use thrust direction from rotational dynamics.
 
+Thrust Vectoring Control
+~~~~~~~~~~~~~~~~~~~~~~~~
+In some cases, the thrust may not be aligned with the orientation of the vehicle that has been defined.
+
+For instance, if Thrust Vectoring Control is to be used, with a nozzle deflection that varies over time, the true thrust direction will vary from the x-axis of the vehicle.
+
+In Tudat(Py), this deviation in thrust direction from the vehicle can be defined in the body-fixed frame, trough the :class:`ThrustMagnitudeSettings`.
+When using the :class:`ConstantThrustMagnitudeSettings`, a constant body-fixed thrust direction can be defined where,
+when using the :class:`FromFunctionThrustMagnitudeSettings`, this body-fixed thrust direction can be defined as a function of time.
+
+This can be done as follows:
+
+.. tabs::
+
+   .. tab:: Python
+
+      .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/thrust_orientation_body_fixed.py
+         :language: python
+
+   .. tab:: C++
+
+      .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/thrust_orientation_body_fixed.cpp
+         :language: cp
 
 Thrust and aerodynamic guidance
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
