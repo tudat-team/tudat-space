@@ -45,9 +45,11 @@ In this example, the following accelerations are exerted on the vehicle:
     - aerodynamic acceleration
 
 - by the Sun:
+
     - point-mass gravity
 
 - by the Moon:
+
     - point-mass gravity
 
 The variable ``accelerations_settings_vehicle`` denotes the list of bodies exerting accelerations and the types of

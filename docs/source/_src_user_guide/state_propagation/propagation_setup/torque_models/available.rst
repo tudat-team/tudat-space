@@ -39,13 +39,16 @@ Aerodynamic Torque
   :ref:`environment_aerodynamic_coefficient_interface`).
 | 3. Inertia tensor model for body undergoing acceleration.
 | 4. Current states of body undergoing acceleration and body with atmosphere.
+| 5. Shape model for the body exerting an acceleration (to allow for the calculation of vehicle altitude)
 
 .. note::
-
-    In the case that the aerodynamic coefficients are defined as a function of the vehicle orientation (e.g. angle of attack and sideslip angle), these angles can be manually or automatically defined.
+   By default, a body’s angle of attack, sideslip angle, and bank angle are all set to 0. Defining a vehicle
+   orientation is typically done in one of several ways: defining aerodynamic guidance directly (imposing these three
+   angles), using the definition of vehicle orientation from an existing model for the vehicle (for instance thrust),
+   or propagation of the body’s rotational dynamics.
 
 .. todo::
-    Is the shape model for body exerting acceleration a requirement?
+   Add reference to aerodynamic guidance page.
 
 Second Degree Gravitational Torque
 ###################################

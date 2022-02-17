@@ -45,8 +45,7 @@ There are different gravitational models available in TudatPy:
 - :ref:`mutual_spherical_harmonic_acceleration`
 - :ref:`third_body_gravity`
 
-The distinction between them lies in the type of radiation pressure interface that is used for the body undergoing
-acceleration (see below).
+These are explained in more detail below.
 
 .. _point_mass_acceleration:
 
@@ -144,6 +143,7 @@ Aerodynamic
   :ref:`environment_aerodynamic_coefficient_interface`).
 | 3. Mass model for body undergoing acceleration.
 | 4. Current state of body undergoing acceleration and body with atmosphere.
+| 5. Shape model for the body exerting an acceleration (to allow for the calculation of vehicle altitude)
 
 .. note::
    By default, a body’s angle of attack, sideslip angle, and bank angle are all set to 0. Defining a vehicle

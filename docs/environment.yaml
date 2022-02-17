@@ -5,6 +5,7 @@ dependencies:
   - python=3.7
   - sphinx
   - sphinx_rtd_theme
+  - sphinx-panels
   - sphinx-tabs
   - sphinx-copybutton
   - pip
