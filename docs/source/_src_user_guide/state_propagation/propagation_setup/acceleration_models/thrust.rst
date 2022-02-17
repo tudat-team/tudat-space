@@ -30,26 +30,21 @@ In fact, when creating acceleration settings from a thrust force, the user needs
 
 In the above code snippet, two things may stand out.
 First of all, we define the thrust acceleration as one that the vehicle exerts on itself.
-Secondly, to define the thrust acceleration, the user must provide two objects: one of type (derived from) :class:`ThrustDirectionSettings` and one of type (derived from) :class:`ThrustMagnitudeSettings`.
-The two settings are used to create a :class:`ThrustAccelerationSettings` object. 
-
-.. class:: ThrustAccelerationSettings
-
-   Class containing the properties of the thrust acceleration (direction and magnitude). Set by the settings classes described below.
+Secondly, to define the thrust acceleration, the user must provide two objects: one of type (derived from) :class:`~tudatpy.numerical_simulation.propagation_setup.thrust.ThrustDirectionSettings` and one of type (derived from) :class:`~tudatpy.numerical_simulation.propagation_setup.thrust.ThrustMagnitudeSettings`.
+The two settings (direction and magnitude) are used to create a :class:`~tudatpy.numerical_simulation.propagation_setup.acceleration.ThrustAccelerationSettings` object. 
 
 Thrust direction
 ~~~~~~~~~~~~~~~~
 
 Four distinct methods have been implemented to define the direction of the thrust.
 
-.. class:: ThrustDirectionGuidanceSettings
+In all of these methods, the thrust direction that is defined is always in the **inertial frame**.
+The direction of the thrust in the body-fixed frame can be additionally defined in the :class:`~tudatpy.numerical_simulation.propagation_setup.thrust.ThrustMagnitudeSettings` class.
 
-    Base class for the thrust magnitude settings.
+The base class for the thrust direction settings in TudatPy is the :class:`~tudatpy.numerical_simulation.propagation_setup.thrust.ThrustDirectionSettings` class.
 
-   .. note:: The thrust direction that is defined by this class is always in the **inertial frame**.
-             The direction of the thrust in the body-fixed frame can be additionally defined in the :class:`ThrustMagnitudeSettings` class.
-
-.. class:: ThrustDirectionFromStateGuidanceSettings
+Thrust direction from state guidance settings
+=============================================
 
     In various simplified cases, the thrust direction can be assumed to be in line with either the position or velocity w.r.t. some body.
 
@@ -59,7 +54,7 @@ Four distinct methods have been implemented to define the direction of the thrus
 
          .. tab:: Python
 
-          The Tudat(Py) API docs give more details on the :literal:`thrust_direction_from_state_guidance()` function `on this page <https://tudatpy.readthedocs.io/en/latest/thrust.html#tudatpy.numerical_simulation.propagation_setup.thrust.thrust_direction_from_state_guidance>`_.
+          The Tudat(Py) API docs give more details on the :func:`~tudatpy.numerical_simulation.propagation_setup.thrust.thrust_direction_from_state_guidance` function.
 
           .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/thrust_direction_from_state_guidance.py
              :language: python
@@ -69,7 +64,8 @@ Four distinct methods have been implemented to define the direction of the thrus
           .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/thrust_direction_from_state_guidance.cpp
              :language: cp
 
-.. class:: CustomThrustDirectionSettings
+Custom thrust direction settings
+================================
 
    For a generalized thrust direction guidance, the thrust direction can be defined as an arbitrary function of time. This allows a broad range of options to be defined, at the expense of increased complexity — somehow this thrust direction needs to be manually defined.
 
@@ -79,7 +75,7 @@ Four distinct methods have been implemented to define the direction of the thrus
 
          .. tab:: Python
 
-          The Tudat(Py) API docs give more details on the :literal:`custom_thrust_direction()` function `on this page <https://tudatpy.readthedocs.io/en/latest/thrust.html#tudatpy.numerical_simulation.propagation_setup.thrust.custom_thrust_direction>`_.
+          The Tudat(Py) API docs give more details on the :func:`~tudatpy.numerical_simulation.propagation_setup.thrust.custom_thrust_direction` function.
 
           .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/custom_thrust_direction.py
              :language: python
@@ -89,11 +85,12 @@ Four distinct methods have been implemented to define the direction of the thrus
           .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/custom_thrust_direction.cpp
              :language: cp
 
-   .. warning:: When using the :class:`CustomThrustDirectionSettings`, the inertial to body-fixed rotation cannot be unambiguously defined. If you require this rotation (for instance when you also incorporate aerodynamic forces), the :class:`CustomThrustOrientationSettings` class should be used instead.
+   .. warning:: When using the :class:`~tudatpy.numerical_simulation.propagation_setup.thrust.CustomThrustDirectionSettings`, the inertial to body-fixed rotation cannot be unambiguously defined. If you require this rotation (for instance when you also incorporate aerodynamic forces), the :class:`~tudatpy.numerical_simulation.propagation_setup.thrust.CustomThrustOrientationSettings` class should be used instead.
 
    .. warning:: The direction vector that is being returned by the custom function should be a unit vector.
 
-.. class:: CustomThrustOrientationSettings
+Custom thrust orientation settings
+==================================
 
    Thrust orientation settings can also be created trough a custom function that returns this time not the direction but the orientation of the thrust.
 
@@ -103,7 +100,7 @@ Four distinct methods have been implemented to define the direction of the thrus
 
          .. tab:: Python
 
-          The Tudat(Py) API docs give more details on the :literal:`custom_thrust_orientation()` function `on this page <https://tudatpy.readthedocs.io/en/latest/thrust.html#tudatpy.numerical_simulation.propagation_setup.thrust.custom_thrust_orientation>`_.
+          The Tudat(Py) API docs give more details on the :func:`~tudatpy.numerical_simulation.propagation_setup.thrust.custom_thrust_orientation` function.
 
           .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/custom_thrust_orientation.py
              :language: python
@@ -113,7 +110,8 @@ Four distinct methods have been implemented to define the direction of the thrus
           .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/custom_thrust_orientation.cpp
              :language: cp
 
-.. class:: Thrust direction from existing orientation
+Thrust direction from existing orientation
+==========================================
 
     The orientation of the vehicle is in some cases already defined. This could be thanks to aerodynamic guidance or to the propagation of rotational dynamics.
 
@@ -121,7 +119,7 @@ Four distinct methods have been implemented to define the direction of the thrus
 
     In such a case, the thrust direction is computed from the existing vehicle orientation.
     Do note that an additional angle from the vehicle can be defined, for instance in case Thrust Vectoring Control is used.
-    This angle, the body fixed thrust direction, can be defined in the :class:`ThrustMagnitudeSettings` class.
+    This angle, the body fixed thrust direction, can be defined in the :class:`~tudatpy.numerical_simulation.propagation_setup.thrust.ThrustMagnitudeSettings` class.
     
     This thrust direction does not require a specific derived class, but instead only requires the use of the following function:
    
@@ -129,7 +127,7 @@ Four distinct methods have been implemented to define the direction of the thrus
 
          .. tab:: Python
 
-          The Tudat(Py) API docs give more details on the :literal:`thrust_from_existing_body_orientation()` function `on this page <https://tudatpy.readthedocs.io/en/latest/thrust.html#tudatpy.numerical_simulation.propagation_setup.thrust.thrust_from_existing_body_orientation>`_.
+          The Tudat(Py) API docs give more details on the :func:`~tudatpy.numerical_simulation.propagation_setup.thrust.thrust_from_existing_body_orientation` function.
 
           .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/from_existing_orientation.py
              :language: python
@@ -144,11 +142,10 @@ Thrust magnitude
 
 Two distinct ways are available in Tudat(Py) to implement the magnitude of the thrust. It can either be fixed to a constant force, or be specified as a function of time.
 
-.. class:: ThrustMagnitudeSettings
+The base class for the thrust magnitude settings in TudatPy is the :class:`~tudatpy.numerical_simulation.propagation_setup.thrust.ThrustMagnitudeSettings` class.
 
-    Base class for the thrust magnitude settings.
-
-.. class:: ConstantThrustMagnitudeSettings
+Constant thrust magnitude settings
+==================================
 
     Thrust magnitude settings may be used to specified a constant thrust (in Newtons) and a constant specific impulse (in seconds).
     Optionally, the direction of the thrust with respect to the body can also be specified, for instance to define Thrust Vectoring Control.
@@ -159,7 +156,7 @@ Two distinct ways are available in Tudat(Py) to implement the magnitude of the t
 
          .. tab:: Python
 
-          The Tudat(Py) API docs give more details on the :literal:`constant_thrust_magnitude()` function `on this page <https://tudatpy.readthedocs.io/en/latest/thrust.html#tudatpy.numerical_simulation.propagation_setup.thrust.constant_thrust_magnitude>`_.
+          The Tudat(Py) API docs give more details on the :func:`~tudatpy.numerical_simulation.propagation_setup.thrust.constant_thrust_magnitude` function.
 
           .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/constant_magnitude.py
              :language: python
@@ -169,8 +166,8 @@ Two distinct ways are available in Tudat(Py) to implement the magnitude of the t
           .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/constant_magnitude.cpp
              :language: cp
 
-
-.. class:: FromFunctionThrustMagnitudeSettings
+From function thrust magnitude settings
+=======================================
 
     Thrust magnitude settings can also be created trough a custom function that returns it in Newton as a function of time.
 
@@ -185,7 +182,7 @@ Two distinct ways are available in Tudat(Py) to implement the magnitude of the t
 
          .. tab:: Python
 
-          The Tudat(Py) API docs give more details on the :literal:`custom_thrust_magnitude()` function `on this page <https://tudatpy.readthedocs.io/en/latest/thrust.html#tudatpy.numerical_simulation.propagation_setup.thrust.custom_thrust_magnitude>`_.
+          The Tudat(Py) API docs give more details on the :func:`~tudatpy.numerical_simulation.propagation_setup.thrust.custom_thrust_magnitude` function.
 
           .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/custom_magnitude.py
              :language: python
@@ -195,7 +192,7 @@ Two distinct ways are available in Tudat(Py) to implement the magnitude of the t
           .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/custom_magnitude.cpp
              :language: cp
 
-    .. note:: When :class:`FromFunctionThrustMagnitudeSettings` are used, it is recommended to setup a custom :literal:`thrust` class, encompassing all of the following functions:
+    .. note:: When :class:`~tudatpy.numerical_simulation.propagation_setup.thrust.FromFunctionThrustMagnitudeSettings` are used, it is recommended to setup a custom :literal:`thrust` class, encompassing all of the following functions:
               :literal:`thrust_magnitude_function()`, :literal:`specific_impulse_function()`, and :literal:`is_engine_on_function()`. Potentially, one may also wish to include the following functions in this class:
               :literal:`body_fixed_thrust_direction()`, :literal:`custom_thrust_reset_function()`, and/or :literal:`thrust_direction_function()`.
               The idea being that using one global user-defined :literal:`thrust` class gives more control on all of the aspects that have to be updated to define whether thrust is turned on, what is its magnitude, and orientation.
@@ -212,9 +209,9 @@ In some cases, the thrust may not be aligned with the orientation of the vehicle
 
 For instance, if Thrust Vectoring Control is to be used, with a nozzle deflection that varies over time, the true thrust direction will vary from the x-axis of the vehicle.
 
-In Tudat(Py), this deviation in thrust direction from the vehicle can be defined in the body-fixed frame, trough the :class:`ThrustMagnitudeSettings`.
-When using the :class:`ConstantThrustMagnitudeSettings`, a constant body-fixed thrust direction can be defined where,
-when using the :class:`FromFunctionThrustMagnitudeSettings`, this body-fixed thrust direction can be defined as a function of time.
+In Tudat(Py), this deviation in thrust direction from the vehicle can be defined in the body-fixed frame, trough the :class:`~tudatpy.numerical_simulation.propagation_setup.thrust.ThrustMagnitudeSettings`.
+When using the :class:`~tudatpy.numerical_simulation.propagation_setup.thrust.ConstantThrustMagnitudeSettings`, a constant body-fixed thrust direction can be defined where,
+when using the :class:`~tudatpy.numerical_simulation.propagation_setup.thrust.FromFunctionThrustMagnitudeSettings`, this body-fixed thrust direction can be defined as a function of time.
 
 This can be done as follows:
 
