@@ -41,7 +41,7 @@ Thrust direction
 Below, the different methods that have been implemented to define the direction of the thrust are outlined. Note that these settings are *only* relevant if you use the :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.thrust_from_direction_and_magnitude` function.
 
 In all of these methods, the thrust direction that is defined is always in the **inertial frame**, either directly or indirectly. It is important to realize that, when specifying a thrust direction, the vehicle orientation itself is automatically defined.
-The direction of the thrust in the body-fixed frame can be additionally defined when specifying the <#thrust-magnitude>`_ (note that this design is currently under review, and may well be refactored in the near future).
+The direction of the thrust in the body-fixed frame can be additionally defined when specifying the `thrust magnitude <#thrust-magnitude>`_ (note that this design is currently under review, and may well be refactored in the near future).
 
 
 Thrust direction from state guidance settings
