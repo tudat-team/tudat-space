@@ -269,27 +269,31 @@ In this section, we will discuss the option of defining the orientation of the v
 Separate orientations
 =====================
 
-The orientation of the thrust of the vehicle, and its aerodynamics, can be separately defined.
+.. todo::
+   An explanation on how to define thrust orientation separately from aerodynamic guidance is to be added here later.
 
-For instance, let's say that we define our thrust orientation as being colinear with velocity, using the :func:`~tudatpy.numerical_simulation.propagation_setup.thrust.thrust_direction_from_state_guidance` function.
-Then, the orientation of the vehicle itself is still undefined for our aerodynamic acceleration computation.
-This can be fixed by adding, for instance, aerodynamic guidance, using the :class:`~tudatpy.numerical_simulation.propagation.AerodynamicGuidance` class.
+..
+   The orientation of the thrust of the vehicle, and its aerodynamics, can be separately defined.
 
-This leads to the overall simulation setup of the following code snippet, using an aerodynamic guidance class that varies the angle of attack between -1.5deg and 1.5deg:
+   For instance, let's say that we define our thrust orientation as being colinear with velocity, using the :func:`~tudatpy.numerical_simulation.propagation_setup.thrust.thrust_direction_from_state_guidance` function.
+   Then, the orientation of the vehicle itself is still undefined for our aerodynamic acceleration computation.
+   This can be fixed by adding, for instance, aerodynamic guidance, using the :class:`~tudatpy.numerical_simulation.propagation.AerodynamicGuidance` class.
 
-   .. tabs::
+   This leads to the overall simulation setup of the following code snippet, using an aerodynamic guidance class that varies the angle of attack between -1.5deg and 1.5deg:
 
-      .. tab:: Python
+      .. tabs::
 
-         .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/thrust_vs_aero_orientation.py
-            :language: python
+         .. tab:: Python
 
-      .. tab:: C++
+            .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/thrust_vs_aero_orientation.py
+               :language: python
 
-         .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/thrust_vs_aero_orientation.cpp
-            :language: cp
+         .. tab:: C++
 
-The above example then shows how to have full but separate control over the vehicle orientation used to compute the thrust and the  aerodynamic acceleration.
+            .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/thrust_vs_aero_orientation.cpp
+               :language: cp
+
+   The above example then shows how to have full but separate control over the vehicle orientation used to compute the thrust and the  aerodynamic acceleration.
 
 Thrust direction from aerodynamics
 ==================================
