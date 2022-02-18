@@ -266,9 +266,33 @@ Thrust and aerodynamic guidance
 
 This section elaborates on the definition of the thrust orientation in case aerodynamics are also taken into account in the simulation model.
 
+For instance, let's say that an aerodynamic coefficient interface is setup, as well as aerodynamic accelerations. The orientation of the vehicle must also somehow be specified.
+In this section, we will discuss the option of defining the orientation of the vehicle for thrust and aerodynamic either separately, or linked to one another. 
+
 Separate orientations
 =====================
-Explain how to use custom direction for thrust, and then manually specify aerodynamic angles (using aerodynamic guidance).
+
+The orientation of the thrust of the vehicle, and its aerodynamics, can be separately defined.
+
+For instance, let's say that we define our thrust orientation as being colinear with velocity, using the :func:`~tudatpy.numerical_simulation.propagation_setup.thrust.thrust_direction_from_state_guidance` function.
+Then, the orientation of the vehicle itself is still undefined for our aerodynamic acceleration computation.
+This can be fixed by adding, for instance, aerodynamic guidance, using the :class:`~tudatpy.numerical_simulation.propagation.AerodynamicGuidance` class.
+
+This leads to the overall simulation setup of the following code snippet, using an aerodynamic guidance class that varies the angle of attack between -1.5deg and 1.5deg:
+
+   .. tabs::
+
+      .. tab:: Python
+
+         .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/thrust_vs_aero_orientation.py
+            :language: python
+
+      .. tab:: C++
+
+         .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/thrust_vs_aero_orientation.cpp
+            :language: cp
+
+The above example then shows how to have full but separate control over the vehicle orientation used to compute the thrust and the  aerodynamic acceleration.
 
 Thrust direction from aerodynamics
 ==================================

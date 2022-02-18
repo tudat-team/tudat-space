@@ -4,4 +4,4 @@ def thrust_direction_function(time):
     return thrust_direction/np.linalg.norm(thrust_direction)
 
 # Define thrust direction settings based on a function of time
-thrust.thrust_direction_from_state_guidance(thrust_direction_function)
+thrust.custom_thrust_direction(thrust_direction_function)
