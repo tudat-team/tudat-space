@@ -1,0 +1,2 @@
+CustomThrustOrientationSettings(
+        thrustOrientationFunction );
