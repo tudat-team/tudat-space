@@ -11,4 +11,7 @@ def body_fixed_thrust_direction_function(time):
     return [np.cos(TVC_deflection_angle), np.sin(TVC_deflection_angle), 0]
 
 # Define custom thrust magnitude settings with the variable TVC deflection
-thrust.custom_thrust_magnitude(lambda t: 1.5e3, lambda t: 315, body_fixed_thrust_direction_function)
+thrust.custom_thrust_magnitude( 
+	thrust_magnitude_function = lambda t: 1.5e3, 
+	specific_impulse_function = lambda t: 315, 
+	body_fixed_thrust_direction = body_fixed_thrust_direction_function)
