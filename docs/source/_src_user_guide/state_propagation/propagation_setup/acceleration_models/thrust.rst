@@ -2,9 +2,12 @@
 
 
 ========================
-Thrust Guide
+Use of thrust models
 ========================
-This page deals with the inclusion of a thrust force into the dynamical model. Note that when using thrust, it may often be desirable to propagate the mass of the vehicle at the same time (removing burnt propellant for instance).
+
+This page deals with the inclusion of a thrust force into the dynamical model. Note that, when using thrust models, it
+may often be desirable to propagate the mass of the vehicle at the same time (removing mass of the burnt propellant,
+for instance).
 Details on how to propagate the mass of a body are given in :ref:`mass_dynamics`. Details on combining translation and mass propagators is given in :ref:`multi_type_dynamics`.
 
 Thrust acceleration methods
@@ -14,10 +17,16 @@ In Tudat, the acceleration that a body undergoes due to the addition of thrust c
 
    - :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.thrust_from_custom_function`: this method lets you specify a custom variable thrust vector as a function, a constant specific impulse, and the frame in which the thrust is defined (default: inertial orientation).
    - :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.thrust_and_isp_from_custom_function`: this method adds the capability of specifying a custom variable specific impulse as a function.
-   - :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.thrust_from_direction_and_magnitude`: this method takes :class:`~tudatpy.numerical_simulation.propagation_setup.thrust.ThrustDirectionSettings` and :class:`~tudatpy.numerical_simulation.propagation_setup.thrust.ThrustMagnitudeSettings` as inputs. These thrust `direction are discussed further on this page: <#thrust-direction>`_ and `magnitude <#thrust-magnitude>`_. The settings are created using factory functions, in the same was as acceleration settings, environment settings, etc.
+   - :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.thrust_from_direction_and_magnitude`: this
+     method takes :class:`~tudatpy.numerical_simulation.propagation_setup.thrust.ThrustDirectionSettings` and
+     :class:`~tudatpy.numerical_simulation.propagation_setup.thrust.ThrustMagnitudeSettings` as inputs. These thrust
+     objects are presented below separately for thrust `direction <#thrust-direction>`_ and
+     `magnitude <#thrust-magnitude>`_. The settings are created using factory functions, in the same was as
+     acceleration settings, environment settings, etc.
    
 
-An typical representative example on how the thrust acceleration can be set up, using the available :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.thrust_from_direction_and_magnitude` function, is provided below:
+A typical representative example on how the thrust acceleration can be set up, using the available :func:`~tudatpy
+.numerical_simulation.propagation_setup.acceleration.thrust_from_direction_and_magnitude` function, is provided below:
 
    .. tabs::
 
@@ -40,8 +49,13 @@ Thrust direction
 
 Below, the different methods that have been implemented to define the direction of the thrust are outlined. Note that these settings are *only* relevant if you use the :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.thrust_from_direction_and_magnitude` function.
 
-In all of these methods, the thrust direction that is defined is always in the **inertial frame**, either directly or indirectly. It is important to realize that, when specifying a thrust direction, the vehicle orientation itself is automatically defined.
-The direction of the thrust in the body-fixed frame can be additionally defined when specifying the `thrust magnitude <#thrust-magnitude>`_ (note that this design is currently under review, and may well be refactored in the near future).
+.. note::
+   In all of these methods, the thrust direction that is defined is always in the **inertial frame**, either directly
+   or indirectly. It is important to realize that, when specifying a thrust direction, the vehicle orientation itself
+   is automatically defined.
+   The direction of the thrust in the body-fixed frame can be additionally defined when specifying the `thrust
+   magnitude <#thrust-magnitude>`_ (note that this design is currently under review, and may well be refactored in the
+   near future).
 
 
 Thrust direction from state guidance settings
@@ -114,7 +128,8 @@ This thrust orientation needs to be provided through a rotation matrix represent
 Thrust direction from existing orientation
 ==========================================
 
-The orientation of the vehicle is in some cases already defined. This could be thanks to aerodynamic guidance or to the propagation of rotational dynamics. In this context, the thrust direction can be computed from the body-fixed direction. 
+The orientation of the vehicle is in some cases already defined. This could be because of the aerodynamic guidance or
+the propagation of rotational dynamics. In this context, the thrust direction can be computed from the body-fixed direction.
 
 In such a case, the thrust direction is computed from the existing vehicle orientation.
 Do note that an additional angle from the vehicle can be defined, for instance in case Thrust Vectoring Control is used.
@@ -171,7 +186,8 @@ Custom thrust magnitude
 Thrust magnitude settings can also be created trough a custom function that returns the magnitude in Newton as a function of time.
 
 These settings can additionally be used to first specify whether the engine is on or off.
-This can save precious CPU time by avoiding to waste CPU time computing the thrust magnitude, by first checking wether the engine is indeed turned on.
+This can save precious CPU time by avoiding to waste CPU time computing the thrust magnitude, by first checking
+whether the engine is indeed turned on.
 A so-called thrust reset function can also be specified, so that Tudat(Py) calls it first, before calling any of the other thrust magnitude-related functions.
 This thrust reset function can for instance be used to update all relevant aspects of the environment.
 
@@ -238,11 +254,14 @@ Thrust Vectoring Control
 ~~~~~~~~~~~~~~~~~~~~~~~~
 In some cases, the thrust may not be aligned with the orientation of the vehicle that has been defined.
 
-For instance, if Thrust Vectoring Control is to be used, with a nozzle deflection that varies over time, the true thrust direction will vary from the x-axis of the vehicle.
+For instance, if Thrust Vectoring Control (TVC) is to be used, with a nozzle deflection that varies over time, the true
+thrust direction will vary from the x-axis of the vehicle.
 
-In Tudat(Py), this deviation in thrust direction from the vehicle can be defined in the body-fixed frame, trough the thr thrust magnitude definition.
+In Tudat(Py), this deviation in thrust direction from the vehicle can be defined in the body-fixed frame through the
+thrust magnitude definition.
 When using the :func:`~tudatpy.numerical_simulation.propagation_setup.thrust.constant_thrust_magnitude`, a constant body-fixed thrust direction can be defined where,
-when using the :func:`~tudatpy.numerical_simulation.propagation_setup.thrust.custom_thrust_magnitude`, this body-fixed thrust direction can be defined as a function of time, alowing TVC to be incorporated.
+when using the :func:`~tudatpy.numerical_simulation.propagation_setup.thrust.custom_thrust_magnitude`, this
+body-fixed thrust direction can be defined as a function of time, allowing TVC to be incorporated.
 
 This can be done as follows:
 
@@ -263,7 +282,9 @@ Thrust and aerodynamic guidance
 
 This section elaborates on the definition of the thrust orientation in case aerodynamics are also taken into account in the simulation model.
 
-For instance, let's say that an aerodynamic coefficient interface is set up, in which the aerodynamic coefficients depend on the vehicle's orientation (angle of attack/sideslip), and that an aerodynamic acceleration is used in the propagated. The orientation of the vehicle must then somehow be specified.
+For instance, let's assume that an aerodynamic coefficient interface is set up, in which the aerodynamic coefficients
+depend on the vehicle's orientation (angle of attack/sideslip), and that an aerodynamic acceleration is used in the
+propagation. The orientation of the vehicle must then somehow be specified.
 In this section, we will discuss the option of defining the orientation of the vehicle for thrust and aerodynamic either separately, or linked to one another. 
 
 Separate orientations
