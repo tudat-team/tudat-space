@@ -51,6 +51,34 @@ Here, the main simulation settings are summarized:
   :math:`10^{-8}`
 - *propagator settings:* Cowell propagator
 
+Design Space Exploration
+------------------------
+
+A design space exploration is performed. The goal of this exploration is to
+gain preliminary insight into how your domain of decision variables maps to
+values of constraint and objective variables. This insight is to be used to
+guide your optimization settings and analysis in the subsequent questions.
+
+Numerous methods for exploring the design space are possible, here only a few
+will be discussed: Monte Carlo, Fractional Factorial Design, Factorial Design.
+This selection covers various kinds of analysis, ranging from simple and
+brainless, to systematic and focussed.
+
+Monte Carlo Results
+~~~~~~~~~~~~~~~~~~
+
+Applying the Monte Carlo method here, a number of interesting results come out. The analysis was run both when varying all parameters simultaneously and one-by-one.
+
+In the figure below, the Mean Distance is plotted vs the Semi-Major Axis scaled to all decision variables. Immediately some color trends can be determined, showing an interaction between the various variables.
+.. figure:: _static/MonteCarlo/All_Distance_smavsorbitparam_scatter.png
+In the following two figures, the Mean Latitude is plotted vs the Inclination and Longitude of the Node scaled again to all decision variables. Again, there is quite some information that can be extracted from these figures.
+.. figure:: _static/MonteCarlo/All_Latitude_incvsorbitparam_scatter.png
+.. figure:: _static/MonteCarlo/All_Latitude_lonvsorbitparam_scatter.png
+For visual purposes, the trajectories were visualized when running a Monte Carlo analysis that changed the decision variables one-by-one.
+.. figure:: _static/MonteCarlo/Onebyone_Trajectoryfamilies.png
+
+
+
 Optimization settings
 ---------------------
 
