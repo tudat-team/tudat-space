@@ -8,6 +8,8 @@ dependencies:
   - sphinx-panels
   - sphinx-tabs
   - sphinx-copybutton
+  - nbsphinx
+  - sphinx-gallery
   - pip
   - pip:
     - rtcat_sphinx_theme
