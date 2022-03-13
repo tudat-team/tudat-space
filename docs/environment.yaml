@@ -10,6 +10,7 @@ dependencies:
   - sphinx-copybutton
   - nbsphinx
   - sphinx-gallery
+  - ipython
   - pip
   - pip:
     - rtcat_sphinx_theme
