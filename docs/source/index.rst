@@ -271,4 +271,5 @@ to get started with them, have a look at our
    _src_about/api
    _src_about/developer_docs
    _src_about/documentation
+   _src_about/changelog_link
 
