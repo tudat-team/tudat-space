@@ -66,6 +66,8 @@ nbsphinx_prolog = """
     .. _Jupyter: https://jupyter.org/
     .. _repo: https://github.com/tudat-team/tudatpy-examples
 """
+# This option prevents from re-executing the notebooks. The content stored from the latest execution will be displayed.
+nbsphinx_execute = 'never'
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
 #
