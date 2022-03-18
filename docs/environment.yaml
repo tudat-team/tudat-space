@@ -8,11 +8,13 @@ dependencies:
   - sphinx-panels
   - sphinx-tabs
   - sphinx-copybutton
-  - nbsphinx
   - sphinx-gallery
   - ipython
+  - ipykernel
+  - ipympl
   - pip
   - pip:
     - rtcat_sphinx_theme
     - sphinxcontrib-contentui
+    - nbsphinx
 
