@@ -1,6 +1,6 @@
-**************************
-Use of external tools
-**************************
+***********************************
+Primers for coding tools
+***********************************
 
 Below, you can find introductory guides to some tools that can (git) or have to (Conda, Python) be used in combination
 with TudatPy.

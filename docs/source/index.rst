@@ -11,7 +11,9 @@ passions in astrodynamics and space. It contains user guides and tutorials to us
 - *Getting Started:* all the information for new users, including how to install tudatpy and some examples
   showcasing its functionalities.
 - *User Guide:* several guides explaining how different parts of tudatpy code are used together to create a simulation.
-- *Resources:* guides for external tools that a user might need when using Tudat.
+- *Advanced topics*: guides for more advanced topics (e.g., optimization with Tudat).
+- *Resources from Tudat ecosystem:* links to other Tudat resources (API reference, developer documentation, etc...)
+  not hosted directly on tudat-space.
 - *About:* additional information about Tudat and its ecosystem.
 
 Quickstart
@@ -109,7 +111,7 @@ Some resources related to Tudatpy are located elsewhere. See below!
     **Mathematical model definition**
     ^^^
 
-    A manual with all the definitions of mathematical models implemented in Tudat.
+    A manual containing definitions of mathematical models implemented in Tudat.
 
     +++
 
@@ -240,6 +242,7 @@ to get started with them, have a look at our
 
    _src_getting_started/installation
    _src_getting_started/setup_ide
+   _src_getting_started/use_of_tools
    _src_getting_started/examples
 
 .. toctree::
@@ -255,12 +258,20 @@ to get started with them, have a look at our
 
 .. toctree::
    :maxdepth: 2
-   :caption: Resources
+   :caption: Advanced topics
    :hidden:
 
    _src_resources/post_processing
    _src_resources/pygmo_basics
-   _src_resources/use_of_tools
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Resources from Tudat ecosystem
+   :hidden:
+
+   _src_about/api
+   _src_about/developer_docs
+   _src_about/technical_docs
 
 .. toctree::
    :maxdepth: 2
@@ -268,8 +279,6 @@ to get started with them, have a look at our
    :hidden:
 
    _src_about/about
-   _src_about/api
-   _src_about/developer_docs
    _src_about/documentation
    _src_about/changelog_link
 
