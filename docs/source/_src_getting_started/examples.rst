@@ -58,59 +58,24 @@ There are several example applications disseminated in various forms.
 
 
 
+.. nbgallery::
+   :caption: Numerical propagation of dynamics
+   :glob:
 
-.. contents:: Categories of example applications
-   :local:
+   _src_examples/notebooks/propagation/*
 
+.. nbgallery::
+   :caption: Estimation of dynamics and parameters
+   :glob:
 
-=================================
-Numerical Propagation of Dynamics
-=================================
+   _src_examples/notebooks/estimation/*
 
-Below you can find examples of numerical simulations that you can achieve with TudatPy.
+.. nbgallery::
+   :caption: Optimization with PyGMO
+   :glob:
 
-.. toctree::
-   :titlesonly:
-   :maxdepth: 1
+   _src_examples/notebooks/pygmo/*
 
-   _src_examples/simulation_examples/delfi_simple_example_page
-   _src_examples/simulation_examples/var_equation_example_page
-   _src_examples/simulation_examples/multi_body_propagation_inner_SS
-   
-=====================================
-Estimation of Dynamics and Parameters
-=====================================
-
-Below you can find examples of estimation that you can achieve with TudatPy.
-
-.. toctree::
-   :maxdepth: 1
-
-   _src_examples/estimation_examples/basic_estimation
-
-
-===================
-Examples with PyGMO
-===================
-
-Below you can find general examples, explained in detail, about optimizing an astrodynamical problem simulated in
-TudatPy through `Pygmo <https://esa.github.io/pygmo2/index.html>`_. If you have never used PyGMO before, please
-consider reading our introductory guide: :ref:`Optimization with PyGMO`.
-
-.. toctree::
-   :maxdepth: 1
-
-   _src_examples/pygmo_examples/pygmo_orbit_optimization
-
-=========================================
-Examples of MGA-DSM transfer trajectories
-=========================================
-
-Below you can find general examples, explained in detail, about using the tools available for analyzing Multiple Gravity
-Assist transfer trajectories with Deep Space Maneuvers (MGA-DSM).
-
-.. toctree::
-   :maxdepth: 1
-
-   _src_examples/mga_dsm_examples/mga_dsm_analysis
-   _src_examples/mga_dsm_examples/mga_dsm_optimization
+.. note::
+   If you have never used PyGMO before, please
+   consider reading our introductory guide: :ref:`Optimization with PyGMO`.

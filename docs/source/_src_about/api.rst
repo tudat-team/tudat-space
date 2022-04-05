@@ -1,7 +1,10 @@
 ========================
-API documentation
+API reference
 ========================
 
-The API documentation for TudatPy is hosted on a separate website. You can access it from `here`_.
+The API reference for TudatPy is hosted on a separate website. You can access it through the button below.
 
-.. _here: https://tudatpy.readthedocs.io/en/latest/
+.. link-button:: https://tudatpy.readthedocs.io/en/latest/
+    :text: Go to the API reference
+    :classes: btn-outline-primary
+

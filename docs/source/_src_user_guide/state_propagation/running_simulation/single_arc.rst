@@ -88,11 +88,22 @@ for by the integrator, while the  :attr:`~tudatpy.numerical_simulation.SingleArc
 the Cartesian elements, obtained from the conversion of the propagated Keplerian elements (see
 :ref:`propagator_types` for more details).
 
+Moreover, when different state types are propagated, the state output contains the states in following order:
+
+- Translational state ( **T** )
+- Rotational state ( **R** )
+- Body mass state ( **M** )
+- Custom state ( **C** )
+
+When multiple bodies are propagated, the state output will contain the translational state of all bodies, followed by the rotational state of all bodies, and so on.
+Propagating all possible state types for two bodies (Body 1 and Body 2) will result in a state output of the following form:
+[ **T** Body 1, **T** Body 2, **R** Body 1, **R** Body 2, **M** Body 1, **M** Body 2, **C** Body 1, **C** Body 2 ]
+
 Checking the outcome of the propagation
 ---------------------------------------
 
-For various reasons, occurence of a NaN or Inf value, segmentation fault in underlying (user-defined) code, *etc.*,
-the propagation may not propagate succesfully to the final user-specified conditions.
+For various reasons, occurrence of a NaN or Inf value, segmentation fault in underlying (user-defined) code, *etc.*,
+the propagation may not propagate successfully to the final user-specified conditions.
 Even in the case of a segmentation fault during the propagation, the propagation results - up until the time of
 termination - will be saved and accessible as indicated above. To determine whether the propagation encountered any
 issues, the :attr:`~tudatpy.numerical_simulation.SingleArcSimulator.integration_completed_successfully`

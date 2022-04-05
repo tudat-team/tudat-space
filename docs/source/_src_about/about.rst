@@ -1,5 +1,5 @@
 ====================
-About TudatPy
+About Tudat
 ====================
 
 Tudat's core functionality is in everything related to numerical progation of dynamics, including functionality such as:
