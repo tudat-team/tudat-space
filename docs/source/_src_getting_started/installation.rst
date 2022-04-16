@@ -159,5 +159,13 @@ And then use the following command to install the latest version of tudatpy:
 
         conda install -c tudat-team tudatpy
 
-Note that using this command may also update additional package (such as tudat) that are needed to run the latest version of tudatpy
+Note that using this command may also update additional package (such as tudat) that are needed to run the latest version of tudatpy.
 
+
+.. warning::
+
+    It can happen that running the update command above does not update tudatpy to the latest version (which can be seen on the `Anaconda website <https://anaconda.org/tudat-team/tudatpy>`_). It is then recommended to run the following command, while still in the ``tudat-space`` environment:
+
+       .. code:: bash
+
+           conda install --update-deps -c tudat-team tudatpy
