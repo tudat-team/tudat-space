@@ -74,6 +74,15 @@ In your terminal navigate to the directory containing this file, and use the fol
     conda env create -f environment.yaml
 
 
+.. note::
+    At this point, you may choose to install the **development version of tudatpy**, which is a conda package that is updated as soon as changes are merged to the development branch of the code on GitHub. 
+    To do so, you can run the following command:
+
+    .. code:: bash
+
+        conda install -c tudat-team/label/dev tudatpy
+
+
 Congratulations! You have now installed Tudat and TudatPy, and are ready to get started running your simulations and analyses! We recommend you get started by having a look at our :ref:`getting_started_examples`.
 
 If there are any other issues with the installation process, please submit an issue on the `tudatpy-feedstock`_. If there are issues running examples please submit an issue on the `tudatpy`_ repository.
