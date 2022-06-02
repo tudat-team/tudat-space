@@ -73,6 +73,11 @@ In your terminal navigate to the directory containing this file, and use the fol
 
     conda env create -f environment.yaml
 
+With the environment now installed, you can activate it to work in it using:
+
+.. code:: bash
+
+        conda activate tudat-space
 
 .. note::
     At this point, you may choose to install the **development version of tudatpy**, which is a conda package that is updated as soon as changes are merged to the development branch of the code on GitHub. 
