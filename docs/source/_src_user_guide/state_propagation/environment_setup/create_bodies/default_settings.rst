@@ -32,6 +32,10 @@ planets and Martian, Jovian and Saturnian satellites. Users can append this list
 instance for small bodies or other satellite systems, through the use of the
 :func:`~tudatpy.interface.spice.load_kernel`.
 
+.. note:: 
+  Note that the ephemerides that are used by default are only valid for a somewhat limited time interval (on the order of a century, depending on the specific body).
+
+
 Rotation model
 --------------
 
