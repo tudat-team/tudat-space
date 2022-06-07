@@ -9,6 +9,8 @@ In any state propagation tool, the careful use of reference frames is essential:
 .. contents:: Content of this page
    :local:
 
+.. _translational_reference_frames:
+
 Translational states
 ====================
 
@@ -90,6 +92,8 @@ When :ref:`creating a set of body objects<creating_celestial_bodies>`, you defin
 * Any time the state (or position or velocity) are retrieved directly from a body. This will, for instance, be done in custom guidance models.
 * When high numerical precision is relevant, the global frame origin should be set such that numerical error in evaluating the strongest acceleration(s) is minimized
 
+.. _rotational_reference_frames:
+
 Rotational states
 =================
 
@@ -104,7 +108,7 @@ However, Tudat presently requires all **translational** state vectors to be defi
 .. _quaternion_definition:
 
 Definition of rotational state
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------------
 
 The basic definition of a rotational states in Tudat uses quaternions, which is a typical non-singular choice of elements.
 However, the exact definition of the quaternion entries :math:`q_{0},q_{1},q_{2},q_{3}` is non-unique, with several conventions
