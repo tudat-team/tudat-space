@@ -4,6 +4,14 @@
 Default environment models
 ==========================
 
+.. toctree::
+   :titlesonly:
+   :hidden:
+   :maxdepth: 1
+
+   valid_time_range
+
+   
 To facilitate the creation of the celestial bodies in your simulation, Tudat provides the option of loading default
 models for a broad range of solar system bodies.
 
@@ -33,8 +41,9 @@ instance for small bodies or other satellite systems, through the use of the
 :func:`~tudatpy.interface.spice.load_kernel`.
 
 .. note:: 
-  Note that the ephemerides that are used by default are only valid for a somewhat limited time interval (on the order of a century, depending on the specific body).
+  Note that the ephemerides that are used by default are only valid for a somewhat limited time interval (on the order of a century, depending on the specific body), which is limited by the valid range of the Spice kernels provided in Tudat by default.
 
+In some cases, the extraction of the state of bodies from Spice kernels can be a computational bottleneck. Tudat has an :ref:`alternative set of default options <valid_time_range>`, which make this process signicantly faster, at the expense of higher RAM usage, and an environment that is only valid over a very limited time interval.
 
 Rotation model
 --------------
@@ -42,6 +51,8 @@ Rotation model
 Directly from Spice (any body available through Spice kernels). For body ``Foo``, Tudat uses the frame
 ``IAU_Foo`` defined in Spice as the body-fixed frame. These rotation models are implementations of results published by
 the IAU Working Group on Cartographic Coordinates and Rotational Elements.
+
+In some cases, the extraction of the rotational sstate of bodies from Spice kernels can be a computational bottleneck. Tudat has an :ref:`alternative set of default options <valid_time_range>`, which make this process signicantly faster, at the expense of higher RAM usage, and an environment that is only valid over a very limited time interval.
 
 Shape model
 --------------

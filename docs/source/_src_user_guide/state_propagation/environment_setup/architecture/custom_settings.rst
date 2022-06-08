@@ -76,7 +76,7 @@ The custom thrust magnitude model can then be used as follows to define the thru
 
 
 Custom model (multiple), class member
-===================================
+=====================================
 
 Below, a skeleton is given for a custom class for the calculation of both thrust magnitude and aerodynamic angles.
 

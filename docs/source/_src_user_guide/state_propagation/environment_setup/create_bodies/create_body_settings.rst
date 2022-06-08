@@ -1,8 +1,8 @@
 .. _create_celestial_body_settings:
 
-===============================================
+===================================
 Creation of celestial body settings
-===============================================
+===================================
 
 The usual workflow to create celestial body settings is composed of two subsequent steps, described separately:
 
@@ -142,6 +142,36 @@ Some bodies do not have any default settings, and in some cases all default sett
              :language: cpp
 
 In this example, empty body settings for a body 'Oumuamua' are first added. When adding such settings, no properties whatsoever are assigned to the body, the only thing that it assigned to it is its existence, but it has no ephemeris, gravity field, etc. Each environment model setting has to be manually added.
+
+The above setup is also one that is typically used for artificial bodies, for which no default settings are currently implemented. Even though the type and settings of a vehicle's constituent environment (and system) models are typically very different from a natural body, the manner in which such a body is set up is not fundamentally different in Tudat. See below for a representative example:
+
+    .. tabs::
+
+         .. tab:: Python
+
+          .. toggle-header::
+             :header: Required **Show/Hide**
+
+             .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.py
+             .. literalinclude:: /_src_snippets/simulation/environment_setup/default_bodies.py
+                :language: python
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/add_new_vehicle_settings.py
+             :language: python
+
+         .. tab:: C++
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
+             :language: cpp
+             
+In the above code snippet, you may notice two seemingly different aspects from the other environment models:
+
+* The settings for the radiation pressure interface, which has ``Sun`` as key, unlike any of the other environment models. This is due to the fact that a body may have radiation pressure settings for any number of source bodies
+* The body mass, which is set directly as a value (here 500 kg). This is due to the fact that the mass is stored in the :class:`~tudatpy.numerical_simulation.environment.Body` object directly as a value (or a function, if it is time-variable) rather than as a dedicated environment model class
+
+
+
+
 
 
 

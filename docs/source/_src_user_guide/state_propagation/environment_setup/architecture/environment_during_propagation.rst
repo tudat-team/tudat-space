@@ -22,7 +22,7 @@ In what follows below, we will assume that you have create a :class:`~tudatpy.nu
 
 - **Translational state**
 
-    Retrieved directly from the ``Body`` object with the :func:`~tudatpy.numerical_simulation.environment.Body.state`  function as Cartesian elements. Note that this state is always in the global frame origin and orientation (see :ref:`translational state reference frames<translational_reference_frames>`). To retrieve the state of one body w.r.t. the other, if neither body is the global frame origin, you can use:   
+    Retrieved directly from the :class:`~tudatpy.numerical_simulation.environment.Body` object with the :attr:`~tudatpy.numerical_simulation.environment.Body.state`  function as Cartesian elements. Note that this state is always in the global frame origin and orientation (see :ref:`translational state reference frames<translational_reference_frames>`). To retrieve the state of one body w.r.t. the other, if neither body is the global frame origin, you can use:
     
 	.. code-block:: python
 	    
@@ -30,18 +30,18 @@ In what follows below, we will assume that you have create a :class:`~tudatpy.nu
 	
     to retrieve the current state of a body name 'Vehicle' w.r.t. the Earth. Note that if the Earth is the global frame origin, the above will still work fine. However, the Earth state will be a zero-vector, and its subtraction from the vehicle state may be omitted for a 
 
-    NOTE: If you are only interested in the position or velocity components, you can use the :func:`~tudatpy.numerical_simulation.environment.Body.position` or :func:`~tudatpy.numerical_simulation.environment.Body.velocity` functions. 
+    NOTE: If you are only interested in the position or velocity components, you can use the :attr:`~tudatpy.numerical_simulation.environment.Body.position` or :attr:`~tudatpy.numerical_simulation.environment.Body.velocity` functions.
 
 
 - **Rotational state**
 
-    The current rotational state of a body is defined by its current orientation w.r.t. the global frame orientation (see :ref:`reference_frames_global_orientation`). This orientation is defined by a quaternion (see :ref:`quaternion_definition`), but during a simulation a user will typically interact with the rotation matrix. The rotation matrix from the inertial to body-fixed frame is retrieved from a ``Body`` object using the :func:`~tudatpy.numerical_simulation.environment.Body.inertial_to_body_fixed_frame` function. The inverse rotation matrix (body-fixed to inertial) is retrieved using the :func:`~tudatpy.numerical_simulation.environment.Body.body_fixed_to_inertial_frame` function.
+    The current rotational state of a body is defined by its current orientation w.r.t. the global frame orientation (see :ref:`reference_frames_global_orientation`). This orientation is defined by a quaternion (see :ref:`quaternion_definition`), but during a simulation a user will typically interact with the rotation matrix. The rotation matrix from the inertial to body-fixed frame is retrieved from a :class:`~tudatpy.numerical_simulation.environment.Body` object using the :attr:`~tudatpy.numerical_simulation.environment.Body.inertial_to_body_fixed_frame` function. The inverse rotation matrix (body-fixed to inertial) is retrieved using the :attr:`~tudatpy.numerical_simulation.environment.Body.body_fixed_to_inertial_frame` function.
     
-    The time-derivative of the orientation is provided in two formulations (with equivalent information content): the angular velocity vector of the body-fixed frame, and the time derivative of the rotation matrix. The angular velocity vector, in inertial and body-fixed coordinates, is obtained from the :func:`~tudatpy.numerical_simulation.environment.Body.inertial_angular_velocity` and :func:`~tudatpy.numerical_simulation.environment.Body.body_fixed_angular_velocity` functions respectively. Note that the latter is the formulation that is used to represent the time-variation of the rotation when propagating rotational dynamics (see :ref:`TODO`). Alternatively, the time-derivative of the rotation matrix from inertial to body-fixed frame is given by :func:`~tudatpy.numerical_simulation.environment.Body.inertial_to_body_fixed_frame`, while the derivative of the inverse rotation is taken from :func:`~tudatpy.numerical_simulation.environment.Body.body_fixed_to_inertial_frame_derivative`.
+    The time-derivative of the orientation is provided in two formulations (with equivalent information content): the angular velocity vector of the body-fixed frame, and the time derivative of the rotation matrix. The angular velocity vector, in inertial and body-fixed coordinates, is obtained from the :attr:`~tudatpy.numerical_simulation.environment.Body.inertial_angular_velocity` and :attr:`~tudatpy.numerical_simulation.environment.Body.body_fixed_angular_velocity` functions respectively. Note that the latter is the formulation that is used to represent the time-variation of the rotation when propagating rotational dynamics (see :ref:`TODO`). Alternatively, the time-derivative of the rotation matrix from inertial to body-fixed frame is given by :attr:`~tudatpy.numerical_simulation.environment.Body.inertial_to_body_fixed_frame`, while the derivative of the inverse rotation is taken from :attr:`~tudatpy.numerical_simulation.environment.Body.body_fixed_to_inertial_frame_derivative`.
 
 - **Body inertial mass**
 
-    Retrieved directly from a ``Body`` object with the :func:`~tudatpy.numerical_simulation.environment.Body.mass` function. Note that this mass is *not* necessarilly the mass used for calculation of gravitional interactions (gravitational mass), but the mass used to convert forced to accelerations and vice verse (inertial mass).
+    Retrieved directly from a :class:`~tudatpy.numerical_simulation.environment.Body` object with the :attr:`~tudatpy.numerical_simulation.environment.Body.mass` function. Note that this mass is *not* necessarilly the mass used for calculation of gravitional interactions (gravitational mass), but the mass used to convert forced to accelerations and vice verse (inertial mass).
 	
 - **Spherical harmonic gravity field coefficients**
 
