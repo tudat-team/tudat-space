@@ -1,237 +1,117 @@
+==================
+Environment Models
+==================
+
+On this page, we provide an overview of the categories of environment models that are available (with links to API documentation), as well as some general notes on their usages, typical pitfalls, hints, etc.
+
 .. _available_environment_models:
 
-==============================
-Available Environment Models
-==============================
+Available Model Types
+=====================
 
-.. contents:: List of available environment models
-   :depth: 2
-   :local:
+The complete list of available environment model settings can be found on our API documentation. Below is a list with the different categories of models, and a link to the corresponding Tudatpy module
 
+* `Aerodynamic coefficients <https://py.api.tudat.space/en/latest/aerodynamic_coefficients.html>`_, to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.aerodynamic_coefficient_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`. 
+  
+  * These models provide various ways in which to define aerodynamics force (and if required, moment) coefficients of a body. 
+  
+* `Atmosphere models <https://py.api.tudat.space/en/latest/atmosphere.html>`_, to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.atmosphere_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`.  
+  
+  * These models provide various ways in which to define atmospheric properties of a body. For state propagation, the density will typically be the most important one. However, many of the models here include outputs of temperature, density, etc. as well. Depending on the model, the atmospheric properties may be only altitude-dependent, or fully time- and position-dependent. Note that the atmosphere settings can include wind settings (default: none)
+  
+* `Ephemeris models <https://py.api.tudat.space/en/latest/ephemeris.html>`_, , to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.ephemeris_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`.  
+  
+  * These models provide various ways in which to define predetermined (e.g. not coming from a Tudat propagation) translational states of bodies in the solar system
+  
+* `Gravity field models <https://py.api.tudat.space/en/latest/gravity_field.html>`_, to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.gravity_field_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`.  
 
-.. _environment_ephemeris_model:
+  * These models provide various ways in which to define the gravitational field of solar system bodies. Note: the mass associated with these gravitational field is the gravitational mass, which does *not* need to be equal to its inertial mass.
+  
+* `Gravity field variation models <https://py.api.tudat.space/en/latest/gravity_field_variation.html>`_, to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.gravity_field_variation_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`. Note: this attribute is a list, and any number of variation models may be added.  
 
-################
-Ephemeris
-################
+  * These models provide various ways in which to define the time-variability of a body's (spherical harmonic) gravitaty field.
+  
+* `Rotation models <https://py.api.tudat.space/en/latest/rotation_model.html>`_, to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.rotation_model_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`. 
 
-Ephemeris model settings are intended to be assigned to the ``ephemeris_settings`` property of a :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings` object.
-For code examples and additional (model) information, please follow the links to the API documentation.
+  * These models provide various ways in which to define the orientation of a body w.r.t. inertial space, and produces a quaternion/rotation matrix, and angular velocity vector/rotation matrix derivative. Note that Tudat can also produce such models by numerical propagation of the Euler equations (see :ref:`rotational_dynamics`).
+  
+* `Shape models <https://py.api.tudat.space/en/latest/shape.html>`_, to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.shape_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`. 
 
+  * These models provide various ways in which to define the exterior of a *natural* body and is typically used to calculate (for instance) altitude, ground station position, etc. Note: the exterior shape of an artificial body, from which aerodynamic and radiation pressure properties can be evaluated, uses a different interface, which is currently under development
 
-| **Direct Spice Ephemeris**
-| Spice ephemeris models can be created via the :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.direct_spice` function.
+* `Radiation pressure <https://py.api.tudat.space/en/latest/radiation_pressure.html>`_, to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.rotation_model_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`. Note: this attribute is a dictionary, with one radiation pressure model per source body. 
 
+  * These models provide various ways in which to define the response of a body to incident radation pressure.
 
-| **Interpolated Spice Ephemeris**
-| Interpolated Spice ephemeris models can be created via the :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.interpolated_spice` function.
+.. _specific_environment_considerations:
 
 
-| **Approximate JPL Ephemeris**
-| Approximate planet ephemeris models (from `JPL model <https://ssd.jpl.nasa.gov/planets/approx_pos.html>`_) can be created via the :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.approximate_jpl_model` function.
+Specific Considerations
+=======================
 
+On this page, we give an overview of some aspects of the environment models that may be useful for a user to select and understand their choice of environment models.
+This page is meant to supplement the API documentation, and is *not* a comprehensive overview of all environment models (which can be found there). 
 
-| **Constant Ephemeris**
-| Constant ephemeris models can be created via the :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.constant` function.
+Rotation models
+---------------
 
+Tudat has a broad range of rotation models available. In principle, these models can be assigned to both celestial bodies and natural bodies. 
+However, a subset of these models is typically only applied to natural *or* artificial bodies. Rotation models have a wide range of, sometimes indirect, influences on the dynamics
 
-| **Custom Ephemeris**
-| Custom ephemeris models from tabulated data can be created via the :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.custom` function.
+* A spherical harmonic acceleration exerted by a central body is first evaluated in a body-fixed frame, and the transformed to an inertial frame. Consequently, the central body's rotation has a fundamental influence on the exerted spherical harmonic acceleration
+* A thrust acceleration in Tudat is calculated from two models: (1) an engine model, which defined the body-fixed direction of the thrust, and the magnitude of the thrust (2) the orientation of the body in space, defined by its rotation model
+* For a non-spherical central body, the current orientation of a body has an indirect influence on the altitude at which a vehicle with a given *inertial* state is located
 
+Two rotation models, which are typically used for vehicles under thrust, and/or vehicles in an atmosphere, are the following:
 
-| **Kepler Ephemeris**
-| Kepler ephemeris models can be created via the :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.keplerian` function.
+* The rotation model :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.aerodynamic_angle_based`, which calculates the body's rotation based on the angle of attack, sideslip angle and bank angle. Note that these angles are definend w.r.t. the relative wind. This model is typical when using, for instance, a re-entry simulation. It imposes these three angles, and calculates the body orientation by combination with the latitude, longitude, heading angle, flight path angles. There is a related model, :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.zero_pitch_moment_aerodynamic_angle_based`, that uses the same setup, but does not impose the angle of attack, but caculates by imposing aerodynamic pitch trim (zero pitch moment).
+* The rotation model :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.custom_inertial_direction_based`, which is typical when calcualting dynamics of a vehicle under thrust. It is based on linking a body-fixed  direction (now limited to the body-fixed x-axis) to an arbitrary inertial direction. This allows the thrust (assuming that this is aligned with this same body-fixed direction) to be guided in an inertial direction determined by a user-defined model. 
 
+Ephemeris models
+----------------
 
-| **Kepler Ephemeris from Spice**
-| Kepler ephemeris models from Spice can be created via the :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.keplerian_from_spice` function.
+An ephemeris is arguably the most fundamental of the environment models: it defines *where* a body is located in space. 
 
+Use of Spice
+~~~~~~~~~~~~
 
-| **Scaled Ephemeris**
-| Ephemeris models can be scaled via either of the :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.scaled_by_constant`, :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.scaled_by_vector`, :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.scaled_by_vector_function` functions.
+For many typical applications, natural body ephemerides will be calculated from Spice kernels. In some cases, a user may find that the default Spice kernels are insufficient for their purposes, due to one of two reasons:
 
+* The body for which the state is required *is* in the ephemeris Spice kernel, but the time at which the state is neede lies outside of the bounds for which the Spice kernel has data
+* The body for which the state is required *is not* in the ephemeris Spice kernel
 
-| **Tabulated Ephemeris**
-| Ephemeris models from tabulated data can be created via the :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.tabulated` function.
+In both cases, a user should load additional Spice kernels. This can be done using the :func:`~tudatpy.interface.spice.load_kernel`. Spice kernels for many bodies may be found in a number of places. The 'goto' place for Spice kernels for ephemerides is the NAIF website (developers of Spice), which you can find `here <https://naif.jpl.nasa.gov/pub/naif/generic_kernels/spk/>`_.
 
+Use of scaled models
+~~~~~~~~~~~~~~~~~~~~
 
+For a sensitivity analysis (among others) it may be useful to modify the ephemeris of a body, for instance to emulate the influence of a 1 km offset in the state provided by the nominal ephemeris. Unlike most other environment models, this cannot be achieved (at least not for most types of ephemerides) by modifying a single defining parameter of the model. Instead, we provide the functions 
+:func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.scaled_by_vector` and :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.scaled_by_vector_function`, which take nominal ephemeris settings, and add a user-defined variation (constant or time-varying; absolute or relative) to the inertial Cartesian state elements produced by the ephemeris.
 
-.. _environment_gravity_field_model:
 
-####################
-Gravity Field
-####################
+Gravity fields
+--------------
 
-Gravity field model settings are intended to be assigned to the ``gravity_field_settings`` property of a :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings` object.
-For code examples and additional (model) information, please follow the links to the API documentation.
+There are two options in Tudat for creating either a spherical harmonic gravity field, and a point mass gravity field:
 
-| **Point Mass Gravity**
-| Point-mass gravity field models can be created via the :func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.central` function.
+* Point mass: defining the gravitational parameter manually (:func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.central`) or requiring the gravitional parameter to be extracted from Spice (:func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.central_spice`).
+* Spherical harmonics: defining all the settings manually (:func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.spherical_harmonic`) or calculating the spherical harmonic coefficients (up to a given degree) based on an ellipsoidal homogeneous mass distribution (:func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.spherical_harmonic_triaxial_body`)
 
+Wind models
+-----------
 
-| **Point Mass Gravity from Spice**
-| Point-mass gravity field models using the gravitational parameter from Spice data can be created via the :func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.central_from_spice` function.
+Wind models may be added to an atmosphere model by using the :attr:`~tudatpy.numerical_simulation.environment_setup.atmosphere.AtmosphereSettings.wind_settings` attribute of the atmosphere settings, as in the following example:
 
+    .. tabs::
 
-| **Spherical Harmonics Gravity**
-| Spherical harmonics gravity field models can be created via the :func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.spherical_harmonic` function.
+         .. tab:: Python
 
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/adding_wind.py
+             :language: python
 
-| **Spherical Harmonics Gravity - Triaxial body**
-| Spherical harmonics gravity field models derived from homogenous, triaxial bodies can be created via the :func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.spherical_harmonic_triaxial_body` function.
+Here, a wind vector in the positive z-direction of the vertical frame (downward) of 10 m/s is added, using the :attr:`~tudatpy.numerical_simulation.environment_setup.atmosphere.constant_wind_model`.
+            
+By default, an atmosphere has 'zero wind', which means that the atmosphere corotates with the body. A user may add a wind model to this atmosphere model, which will modify the freestream velocity that a vehicle in the atmosphere experiences/
 
 
 
-.. _environment_atmosphere_model:
-
-#################
-Atmosphere
-#################
-
-Atmosphere model settings (which include wind model settings) are to be assigned to the atmosphere_settings property of a :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings` object.
-Atmosphere models describe other atmospheric conditions such as local density, temperature and pressure and their settings objects can be matched directly with the ``atmosphere_settings`` property.
-Wind models can be used to retrieve local wind vectors and their settings objects must be assigned to the ``wind_settings`` member of the ``atmosphere_settings`` property (i.e. ``BodySettings.atmosphere_settings.wind_settings``)
-For code examples and additional (model) information, please follow the links to the API documentation.
-
-
-| **Constant Wind Model**
-| Constant wind models can be created via the :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.constant_wind_model` function.
-
-
-| **Custom Wind Model**
-| Custom wind models can be created via the :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.custom_wind_model` function.
-
-
-| **Predefined Exponential Atmosphere**
-| Exponential atmosphere models from predefined settings can be created via the :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.exponential_predefined` function.
-
-
-| **Exponential Atmosphere**
-| Exponential atmosphere models can be created via the :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.exponential` function.
-
-
-| **NRLMSISE-00**
-| NRLMSISE-00 atmosphere models can be created via the :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.nrlmsise00` function.
-
-
-| **Custom Constant Temperature Atmosphere**
-| Custom atmosphere models with custom one-dimensional density profile, constant temperature and composition can be created via the :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.custom_constant_temperature` function.
-
-
-| **Custom Four-Dimensional Constant Temperature Atmosphere**
-| Custom atmosphere models with custom four-dimensional density profile, constant temperature and composition can be created via the :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.custom_four_dimensional_constant_temperature` function.
-
-
-| **Scaled Atmosphere Model**
-| Atmosphere models can be scaled via either of the :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.scaled_by_constant`, :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.scaled_by_function` functions.
-
-
-
-
-.. _environment_shape_model:
-
-#################
-Body Shape
-#################
-
-Shape model settings are intended to be assigned to the ``shape_settings`` property of a :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings` object.
-For code examples and additional (model) information, please follow the links to the API documentation.
-
-
-| **Spherical Body Shape**
-| Spherical body shape models can be created via the :func:`~tudatpy.numerical_simulation.environment_setup.shape.spherical` function.
-
-
-| **Spherical Body Shape from Spice**
-| Spherical body shape models can be created from Spice data via the :func:`~tudatpy.numerical_simulation.environment_setup.shape.spherical_spice` function.
-
-
-| **Oblate Spherical Body Shape**
-| Oblate spherical body shape models can be created via the :func:`~tudatpy.numerical_simulation.environment_setup.shape.oblate_spherical` function.
-
-
-
-
-.. _environment_rotational_model:
-
-#################
-Rotational
-#################
-
-Shape model settings are intended to be assigned to the ``rotation_model_settings`` property of a :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings` object.
-For code examples and additional (model) information, please follow the links to the API documentation.
-
-
-| **Simple Rotation Model**
-| Simple rotation models (constant rotation rate, fixed rotation axis) can be created via the :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.simple` function.
-
-
-| **Simple Rotation Model from Spice**
-| Simple rotation models (constant rotation rate, fixed rotation axis) can be created from Spice data via the :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.simple_from_spice` function.
-
-
-| **Synchronous Rotation Model**
-| Synchronous rotation models can be created via the :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.synchronous` function.
-
-
-| **Spice Rotation Model**
-| Rotation models (non-simplified) from Spice can be created via the :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.spice` function.
-
-
-| **Gcrs to Itrs Rotation Model**
-| High-accuracy Earth rotation models (Gcrs to Itrs) can be created via the :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.gcrs_to_itrs` function.
-
-
-| **Constant Rotation Model**
-| Constant rotation models (single time-invariant rotation matrix) can be created via the :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.constant` function.
-
-
-
-
-.. _environment_aerodynamic_coefficient_interface:
-
-##################################
-Aerodynamic Coefficient Interfaces
-##################################
-
-Aerodynamic coefficient settings are intended to be used by the :func:`~tudatpy.numerical_simulation.environment_setup.add_aerodynamic_coefficient_interface` function,
-which creates and assigns aerodynamic coefficient interfaces to the specified artificial bodies.
-For code examples and additional (model) information, please follow the links to the API documentation.
-
-| **Constant Aerodynamic Coefficient**
-| Constant (not a function of any independent variables) aerodynamic coefficient settings can be created via the :func:`~tudatpy.numerical_simulation.environment_setup.aerodynamic_coefficients.constant` function.
-
-
-| **Custom Aerodynamic Coefficient**
-| Custom aerodynamic coefficient settings can be created via the :func:`~tudatpy.numerical_simulation.environment_setup.aerodynamic_coefficients.custom` function.
-
-
-| **Tabulated Aerodynamic Coefficient**
-| Aerodynamic coefficient settings can be created from tabulated data via the :func:`~tudatpy.numerical_simulation.environment_setup.aerodynamic_coefficients.tabulated` function.
-
-
-| **Tabulated Force Only Aerodynamic Coefficient**
-| Aerodynamic coefficient settings can be created from tabulated force coefficient data via the :func:`~tudatpy.numerical_simulation.environment_setup.aerodynamic_coefficients.tabulated_force_only` function.
-
-
-| **Scaled Atmosphere Model**
-| Aerodynamic coefficient settings can be scaled via either of the :func:`~tudatpy.numerical_simulation.environment_setup.aerodynamic_coefficients.scaled_by_constant`, :func:`~tudatpy.numerical_simulation.environment_setup.aerodynamic_coefficients.scaled_by_function`, :func:`~tudatpy.numerical_simulation.environment_setup.aerodynamic_coefficients.scaled_by_vector_function` functions.
-
-
-
-.. _environment_radiation_pressure_interface:
-
-#############################
-Radiation Pressure Interfaces
-#############################
-
-Radiation pressure interface settings are intended to be used by the :func:`~tudatpy.numerical_simulation.environment_setup.add_radiation_pressure_interface` function,
-which creates and assigns radiation pressure interfaces to the specified artificial bodies.
-For code examples and additional (model) information, please follow the links to the API documentation.
-
-| **Cannonball Radiation Pressure**
-| Radiation pressure interface settings for a cannonball model can be created via the :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.cannonball` function.
-
-
-| **Panelled Radiation Pressure**
-| Radiation pressure interface settings for a panelled model can be created via the :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.panelled` function.

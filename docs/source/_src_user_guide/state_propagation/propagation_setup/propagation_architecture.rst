@@ -7,6 +7,7 @@ Propagation Architecture
 
 The core of a numerical integration is the succesive evaluation of the state derivative :math:`\dot{\mathbf{x}}=\mathbf{f}(\mathbf{x},s;\mathbf{p})`. Here, :math:`\mathbf{x}` is the propagated state which may be a combination of any types of dynamics of any set of bodies (see :ref:`TODO`), and may also include the variational equations associated with this dynamics. The variable :math:`s` is the indpendent variable of the differential equation governing the state (typically but not necesarilly the time :math:`t`), and the vector :math:`\mathbf{p}` denotes a set of parameters which are held constant during the propagation, but which do influence the solution of the equations of motion.
 
+.. _propagator_pre_processing:
 
 Propagator pre-processing
 =========================
@@ -40,6 +41,8 @@ The top-level calculation of a single state derivative evaluation :math:`\dot{\m
 * Each state derivative model (acceleration, torque, etc.) required for the calculation of the state derivative is evaluated. If variational equations are required, the state derivative partials are evaluated
 * The derivative of each propagated state :math:`\mathbf{x}_{i}` is evaluated from the separate state derivatives (e.g. accelerations are used to compute derivative of Kepler elements, if propagating Kepler elements), and concatenated into the complete state derivative vector :math:`\dot{\mathbf{x}}`
 
+.. _single_propagator_time_step:
+
 A single time step
 ==================
 
@@ -62,6 +65,8 @@ Depending on the integrator that is used, a single time step may require one or 
   * If the termination condition is a given time (:func:`~tudatpy.numerical_simulation.propagation_setup.propagator.time_termination`), the final time step is adjusted such that the final time is reached exactly
   * If the termination confition is a given dependent variable value (:func:`~tudatpy.numerical_simulation.propagation_setup.propagator.dependent_variable_termination`), a root finding algorithm is used to iterate to the time :math:`t_{i+1}` at which the given value is achieved.
 * In either case, the :class:`~tudatpy.numerical_simulation.propagation.PropagationTerminationReason` is set to `termination_condition_reached``, and the state and dependent variable history is returned.
+
+.. _propagator_post_processing:
 
 Propagator post-processing
 ==========================

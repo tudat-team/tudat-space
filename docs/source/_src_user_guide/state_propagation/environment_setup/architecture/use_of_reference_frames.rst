@@ -39,6 +39,8 @@ Presently, Tudat does not support the automatic rotation of states between the s
 Consequenly, the frame *orientation* of each must be equal, as well as inertial. Currently, the frame orientations
 ``J2000`` and ``ECLIPJ2000`` are supported (see :ref:`below<predefined_orientations>`).
 
+.. _translational_frame_origins:
+
 Frame origin
 ------------
 Due to the above setup, three different definitions of states are used, where each may have its own distinct origin.
