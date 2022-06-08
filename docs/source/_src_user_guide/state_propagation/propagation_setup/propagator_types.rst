@@ -49,6 +49,8 @@ The available propagator types for rotational dynamics are:
   The list of available rotational propagator type and a brief description with references to literature are
   available in the API reference (see :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.RotationalPropagatorType`).
 
+.. _conventional_propagated_states:
+
 Conventional vs. Propagated Coordinates
 =======================================
 

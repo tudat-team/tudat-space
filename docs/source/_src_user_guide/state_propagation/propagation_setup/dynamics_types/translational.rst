@@ -23,7 +23,7 @@ In this page, only the Tudat-native objects necessary as input will be described
 refer to the related API entry (:func:`~tudatpy.numerical_simulation.propagation_setup.propagator.translational`).
 
 Inputs
-=======
+======
 
 The Tudatpy-native inputs to create the settings for a translational propagator are the following:
 
@@ -36,9 +36,9 @@ The Tudatpy-native inputs to create the settings for a translational propagator 
 .. _example:
 
 Example
-========
+=======
 
-In the example below, the body "Spacecraft" will be propagated w.r.t. body "Earth", using given acceleration models (not
+In the example below, the body "Spacecraft" will be propagated w.r.t. body "Earth" (also termed the 'propagation origin'), using given acceleration models (not
 provided), a given initial state which defines the initial Cartesian state of the center
 of mass of "Vehicle" w.r.t. the center of mass of "Earth". The propagation will terminate once the
 ``simulation_end_epoch`` epoch is reached. Furthermore, this example defines a termination condition using a dependent

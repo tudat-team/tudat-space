@@ -18,5 +18,8 @@ An overview of the architecture of the Tudat environment is given in the figure 
 Interdependencies of environment models
 =======================================
 
+Updating the environment during propagation
+===========================================
+
 
 

@@ -17,6 +17,7 @@ Environment Setup
    environment_setup/architecture/specific_environment_considerations
    environment_setup/architecture/environment_during_propagation
    environment_setup/architecture/use_of_reference_frames
+   environment_setup/architecture/environment_architecture
 
 
 General information

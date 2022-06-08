@@ -17,6 +17,8 @@ Propagation Setup
    propagation_setup/propagator_types
    propagation_setup/termination_settings
    propagation_setup/dependent_variables
+   propagation_setup/propagation_architecture
+   
 
 Introduction
 ============
