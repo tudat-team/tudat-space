@@ -21,7 +21,7 @@ In Tudat, the acceleration that a body undergoes due to the addition of thrust c
   *  The body-fixed thrust direction :math:`\hat{\mathbf{T}}_{B}` (which direction is the nozzle pointed, in a frame fixed to the spacecraft
   *  What is the thrust magnitude exerted by the engine (typically as a force in N, but can be defined as acceleration in m/s:sup:`2`, see below)
   *  (When using the mass rate due to thrust: the specific impulse of the engine)
-*  A rotation model for the vehicle, which is used to provide the inertial thrust direction  :math:`\hat{\mathbf{T}}`. Here, we can distinguish three different approaches in the context of thrust:
+*  A rotation model for the vehicle, which is used to provide the inertial thrust direction  :math:`\hat{\mathbf{T}}`. Here, we can distinguish three different approaches in the context of thrustaero:
   
   *  The vehicle has a rotation model defined using the :attr:`~tudatpy.numerical_simulation.environment_setup.rotation_model.custom_inertial_direction_based` settings. By using this model, the inertial direction if the thrust can be provided by the user *directly*. The orientation of the vehicle is then derived from this direction 
   *  The vehicle has any other rotation model defined, in this case the inertial thrust direction is computed from :math:`\hat{\mathbf{T}}=\mathbf{R}^{(I/B)}\hat{\mathbf{T}}_{B}` 
@@ -79,6 +79,8 @@ Thrust Vectoring Control
 In some cases, it may be desirable to have the body-fixed thrust direction :math:`\hat{\mathbf{T}}_{B}` be time-varying. A typical application of this is for implementing thrust vector control (TVC). Alternatively, such a model may be incorporated in, for instance, a sensitivity analysis to gauge the impact of variations in :math:`\hat{\mathbf{T}}_{B}`.
 
 In Tudat, the body-fixed thrust direction for the vehicle is defined in the ``EngineModel`` class. We showed an example :ref:`above <thrust_acceleration_setup>` on how to create an engine model using the :func:`~tudatpy.numerical_simulation.environment_setup.add_engine_model`, which takes a *fixed* body-fixed thrust direction. To define a time-variable body-fixed thrust direction, you can use the similar :func:`~tudatpy.numerical_simulation.environment_setup.add_variable_direction_engine_model` function. This model takes a custom function as input to define the thrust direction. See :ref:`custom_models` for more details on how to define such inputs. In particular, when applying TVC, it is likely that the guidance algorithm used to define the current body-fixed thrust direction is linked to the algorithm for thrust magnitude, body orientation, etc. For such a case, see the section on :ref:`couple_custom_models` in particular.
+
+.. _thrust_and_aerodynamics:
 
 Thrust and aerodynamics
 ~~~~~~~~~~~~~~~~~~~~~~~

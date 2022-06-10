@@ -94,7 +94,7 @@ For a high-fidelity vehicle entry/ascent trajectory propagation, it will often b
 * A name (which is used to reference the specific control surface)
 * A current deflection (initiated at 0)
 
-A control surface is created as follows:
+A control surface is created as follows: 
 
 If a body has :math:`N` control surfaces assigned to it, the coefficient increments will be added to the total coefficients during each time step, without any required user interaction. User interaction with the control surfaces is typically limited to definig an algorithm defining theit deflections as a function of time. 
 
