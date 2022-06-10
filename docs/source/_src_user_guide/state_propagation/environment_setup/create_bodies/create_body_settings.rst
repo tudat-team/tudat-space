@@ -89,8 +89,9 @@ Default settings may be overridden as follows:
 
           .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
              :language: cpp
+             
+The above works equally well if the existing environment model settings are empty. Where the above example creates a new gravity field settings object, and overrides the default setting for the Sun's gravity field with this new object. The new settings define a point-mass gravity field with a gravitational parameter of 1.32712440042 :math:`\cdot` 10 :superscript:`20` m :superscript:`3` / s :superscript:`2`.
 
-Where the above example creates a new gravity field settings object, and overrides the default setting for the Sun's gravity field with this new object. The new settings define a point-mass gravity field with a gravitational parameter of 1.32712440042 :math:`\cdot` 10 :superscript:`20` m :superscript:`3` / s :superscript:`2`.
 
 Modifying parameters in existing settings objects
 -------------------------------------------------

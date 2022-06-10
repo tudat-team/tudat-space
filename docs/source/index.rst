@@ -244,6 +244,7 @@ to get started with them, have a look at our
    _src_getting_started/setup_ide
    _src_getting_started/use_of_tools
    _src_getting_started/examples
+   _src_getting_started/submodules
 
 .. toctree::
    :titlesonly:

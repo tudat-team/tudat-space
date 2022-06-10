@@ -21,7 +21,7 @@ In Tudat, the acceleration that a body undergoes due to the addition of thrust c
   *  The body-fixed thrust direction :math:`\hat{\mathbf{T}}_{B}` (which direction is the nozzle pointed, in a frame fixed to the spacecraft
   *  What is the thrust magnitude exerted by the engine (typically as a force in N, but can be defined as acceleration in m/s:sup:`2`, see below)
   *  (When using the mass rate due to thrust: the specific impulse of the engine)
-*  A rotation model for the vehicle, which is used to provide the inertial thrust direction  :math:`\hat{\mathbf{T}}`. Here, we can distinguish three different approaches:
+*  A rotation model for the vehicle, which is used to provide the inertial thrust direction  :math:`\hat{\mathbf{T}}`. Here, we can distinguish three different approaches in the context of thrust:
   
   *  The vehicle has a rotation model defined using the :attr:`~tudatpy.numerical_simulation.environment_setup.rotation_model.custom_inertial_direction_based` settings. By using this model, the inertial direction if the thrust can be provided by the user *directly*. The orientation of the vehicle is then derived from this direction 
   *  The vehicle has any other rotation model defined, in this case the inertial thrust direction is computed from :math:`\hat{\mathbf{T}}=\mathbf{R}^{(I/B)}\hat{\mathbf{T}}_{B}` 

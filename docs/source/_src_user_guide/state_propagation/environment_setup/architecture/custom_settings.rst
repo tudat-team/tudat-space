@@ -1,8 +1,15 @@
 .. _custom_models:
 
-==========================
-Custom environment models
-==========================
+=============
+Custom models
+=============
+
+.. toctree::
+   :titlesonly:
+   :hidden:
+   :maxdepth: 1
+
+   environment_during_propagation
 
 When working with a very specific model or application, it often happens that the model you want to use is not implemented in Tudat. If this is the case, we have the option for users to define 'custom' models for various models in both the environment and propagation setup modukes. The use of these custom settings requires the user to define their own function for the specific model, as is shown on this page with a number of examples. Below, you can find a list of the currently supported custom environment models in Tudat:
 
@@ -33,7 +40,7 @@ In each case, the user is required to define their own function, with a predefin
 
 The latter choice permits complex guidance algorithms to be implemented, in which (for instance) the algorithm for the control surface deflection, thrust magnitude and body-fixed thrust direction (thrust vector control) are calculated in a coupled manner.
 
-For most environment models, the custom model can be fully defined by a standalone function , and can be fully defined by a free function (which may of course call other functions from tudat, other packages or your own code
+For most environment models, the custom model can be fully defined by a standalone function , and can be fully defined by a free function (which may of course call other functions from tudat, other packages or your own code. A custom function will, in numerous cases, have to depend on properties of bodies (states, altitude, density, etc.). How to access such properties of the environment *during* the propagation is described on the page on :ref:`environment_during_propagation`.
 
 Custom model, free function
 ===========================

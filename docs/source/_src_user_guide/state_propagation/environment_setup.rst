@@ -14,7 +14,6 @@ Environment Setup
    environment_setup/create_bodies/available
    environment_setup/create_bodies/default_settings
    environment_setup/architecture/custom_settings
-   environment_setup/architecture/environment_during_propagation
    environment_setup/architecture/use_of_reference_frames
    environment_setup/architecture/environment_architecture
 

@@ -12,6 +12,7 @@ Translational Dynamics
    ../acceleration_models/setup
    ../acceleration_models/available
    ../acceleration_models/thrust
+   ../acceleration_models/aerodynamics
 
 Settings to propagate numerically the translational state of a body can be created through the
 :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.translational` factory function, described in
