@@ -20,7 +20,8 @@ Below, we give a list of the ways in which to retrieve the relevant information 
 
 In what follows below, we will assume that you have create a :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` variable name ``bodies``, from which you want to access various properties during the propagation. 
 
-- **Translational state**
+Translational state
+-------------------
 
     Retrieved directly from the :class:`~tudatpy.numerical_simulation.environment.Body` object with the :attr:`~tudatpy.numerical_simulation.environment.Body.state`  function as Cartesian elements. Note that this state is always in the global frame origin and orientation (see :ref:`translational state reference frames<translational_reference_frames>`). To retrieve the state of one body w.r.t. the other, if neither body is the global frame origin, you can use:
     
@@ -33,17 +34,20 @@ In what follows below, we will assume that you have create a :class:`~tudatpy.nu
     NOTE: If you are only interested in the position or velocity components, you can use the :attr:`~tudatpy.numerical_simulation.environment.Body.position` or :attr:`~tudatpy.numerical_simulation.environment.Body.velocity` functions.
 
 
-- **Rotational state**
+Rotational state
+----------------
 
     The current rotational state of a body is defined by its current orientation w.r.t. the global frame orientation (see :ref:`reference_frames_global_orientation`). This orientation is defined by a quaternion (see :ref:`quaternion_definition`), but during a simulation a user will typically interact with the rotation matrix. The rotation matrix from the inertial to body-fixed frame is retrieved from a :class:`~tudatpy.numerical_simulation.environment.Body` object using the :attr:`~tudatpy.numerical_simulation.environment.Body.inertial_to_body_fixed_frame` function. The inverse rotation matrix (body-fixed to inertial) is retrieved using the :attr:`~tudatpy.numerical_simulation.environment.Body.body_fixed_to_inertial_frame` function.
     
     The time-derivative of the orientation is provided in two formulations (with equivalent information content): the angular velocity vector of the body-fixed frame, and the time derivative of the rotation matrix. The angular velocity vector, in inertial and body-fixed coordinates, is obtained from the :attr:`~tudatpy.numerical_simulation.environment.Body.inertial_angular_velocity` and :attr:`~tudatpy.numerical_simulation.environment.Body.body_fixed_angular_velocity` functions respectively. Note that the latter is the formulation that is used to represent the time-variation of the rotation when propagating rotational dynamics (see :ref:`TODO`). Alternatively, the time-derivative of the rotation matrix from inertial to body-fixed frame is given by :attr:`~tudatpy.numerical_simulation.environment.Body.inertial_to_body_fixed_frame`, while the derivative of the inverse rotation is taken from :attr:`~tudatpy.numerical_simulation.environment.Body.body_fixed_to_inertial_frame_derivative`.
 
-- **Body inertial mass**
+Body inertial mass
+------------------
 
     Retrieved directly from a :class:`~tudatpy.numerical_simulation.environment.Body` object with the :attr:`~tudatpy.numerical_simulation.environment.Body.mass` function. Note that this mass is *not* necessarilly the mass used for calculation of gravitional interactions (gravitational mass), but the mass used to convert forced to accelerations and vice verse (inertial mass).
 	
-- **Spherical harmonic gravity field coefficients**
+Spherical harmonic gravity field coefficients
+---------------------------------------------
 
     These coefficients may be time variable (see :mod:`~tudatpy.numerical_simulation.environment_setup.gravity_field_variation`). The current cosine and sine coefficients can be retrieved from a body object through its gravity field model. A piece of example code on retrieving these coefficients is given below for the case of Earth:
 
@@ -56,7 +60,8 @@ In what follows below, we will assume that you have create a :class:`~tudatpy.nu
 
     Note the above will only work if the ``earth_gravity_field`` is of the type :func:`~tudatpy.numerical_simulation.environment.SphericalHarmonicGravityFieldModel`, which typically means that the body has default spherical harmonic gravity field settings (see :ref:`default_environment_models`) or that spherical harmonic gravity field settings were defined using the :func:`tudatpy.numerical_simulation.environment_setup.gravity_field.spherical_harmonic` function). For safety, the above could be put inside the ``try`` block of a ``try/except`` construction,  wherethe ``except`` block will be entered in case the gravity field model type of the Earth is not spherical harmonic
 
-- **Flight conditions**
+Flight conditions
+-----------------
 
     The :class:`~tudatpy.numerical_simulation.environment.FlightConditions` class, and its derived class :class:`~tudatpy.numerical_simulation.environment.AtmosphericFlightConditions` stores data relating to altitude, flight angles, local atmospheric properties, etc. Follow the links for their detailed description. The ``FlightConditions`` class is 'atypical', in the sense that a user does not provide settigs for the flight conditions when creating a body object. The reason is that the ``FlightConditions`` does not contain any 'new' information. Instead, it is resposible for using the existing properties of the environment and the propagation to calculate various properties related to the current state. 
     
@@ -86,10 +91,39 @@ In what follows below, we will assume that you have create a :class:`~tudatpy.nu
         bank_angle = angle_calculator.get_angle( environment.bank_angle )
         rotation_matrix_vertical_to_body_fixed = angle_calculator.get_rotation_matrix_between_frames( environment.vertical_frame, environment.body_frame )
         
+
+.. _aerodynamics_during_propagation:
+
+Aerodynamic coefficients
+------------------------
+
+    Aerodynamic coefficients in Tudat can be a function of any number of independent variables, such as angle of attack, Mach number, etc. During the propagation, the :class:`~tudatpy.numerical_simulation.environment.AtmosphericFlightConditions` object (see above) automatically calculates the values independent variables, and passes the list of independent variables to an :class:`~tudatpy.numerical_simulation.environment.AerodynamicCoefficientInterface` of the body (if it possesses any) to update the aerodynamic coefficients to the current state/time. The current values can be extracted from the flight conditions using the :attr:`~tudatpy.numerical_simulation.environment.AtmosphericFlightConditions.aero_coefficient_independent_variables` attribute. The current force and moment coefficients can be exracted from the coefficient interface using the :attr:`~tudatpy.numerical_simulation.environment.AerodynamicCoefficientInterface.current_force_coefficients` and :attr:`~tudatpy.numerical_simulation.environment.AerodynamicCoefficientInterface.current_moment_coefficients` attributes, respectively.
     
+    It may happen that a custom model influences the values of the independent variables, for instance when specifying a custom function for the angle of attack using the :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.aerodynamic_angle_based` rotation model. If the algorithm *itself* depends on these angles, it may be necessary to update the aerodynamic coefficients in the guidance algorithm. One example is shown in the :ref:`TODO` example. 
     
+    .. code-block:: python
+
+
+        # Extract Mach number from fliht conditions
+        mach_number = vehicle_flight_conditions.mach_number        
+        # Compute angle attach attack according to user-defined guidance law
+        angle_of_attack = np.deg2rad(30 / (1 + np.exp(-2*(mach_number-9))) + 10)        
+        # Update the variables on which the aerodynamic coefficients are based (AoA and Mach)
+        current_aerodynamics_independent_variables = [self.angle_of_attack, mach_number]        
+        # Update the aerodynamic coefficients
+        aerodynamic_coefficient_interface.update_coefficients(
+                    current_aerodynamics_independent_variables, current_time)
+        # Extract the current force coefficients (in order: C_D, C_S, C_L)
+        current_force_coefficients = aerodynamic_coefficient_interface.current_force_coefficients
+        # Compute bank angle using guidance law requiring current_force_coefficients as input
+        bank_angle = ... #=f(current_force_coefficients)
+   
+   In the above example, the aerodynamic coefficients were a function of angle of attack and Mach number (in that order). For an arbitrary coefficient interface, the independent variable types may be       extracted using the :attr:`~tudatpy.numerical_simulation.environment.AerodynamicCoefficientInterface.independent_variable_names` attribute.
+   
+   Note that the :attr:`~tudatpy.numerical_simulation.environment.AerodynamicCoefficientInterface.current_force_coefficients` may represent the set :math:`\pm[C_{D}, C_{S}, C_{L}]` (in the aerodynamic frame) or :math:`\pm[C_{X}, C_{Y}, C_{Z}]` (in the body-fixed frame). This information can be determined using the :attr:`~tudatpy.numerical_simulation.environment.AerodynamicCoefficientInterface.are_coefficients_in_aerodynamic_frame` (for aerodynamic or body frame) and :attr:`~tudatpy.numerical_simulation.environment.AerodynamicCoefficientInterface.are_coefficients_in_negative_direction` (for plus or minus sign).
+           
     
-    
+     
     
     
 

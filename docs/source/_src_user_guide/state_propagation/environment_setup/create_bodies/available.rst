@@ -109,9 +109,18 @@ Wind models may be added to an atmosphere model by using the :attr:`~tudatpy.num
           .. literalinclude:: /_src_snippets/simulation/environment_setup/adding_wind.py
              :language: python
 
-Here, a wind vector in the positive z-direction of the vertical frame (downward) of 10 m/s is added, using the :attr:`~tudatpy.numerical_simulation.environment_setup.atmosphere.constant_wind_model`.
+Here, a wind vector in the positive z-direction of the vertical frame (downward) of 10 m/s is added, using the :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.constant_wind_model`.
             
-By default, an atmosphere has 'zero wind', which means that the atmosphere corotates with the body. A user may add a wind model to this atmosphere model, which will modify the freestream velocity that a vehicle in the atmosphere experiences/
+By default, an atmosphere has 'zero wind', which means that the atmosphere corotates with the body. A user may add a wind model to this atmosphere model, which will modify the freestream velocity that a vehicle in the atmosphere experiences
+
+Aerodynamic coefficients
+========================
+
+See the section on :ref:`aerodynamic coefficients during the propagation <aerodynamics_during_propagation>` concerning a number of points of attention regarding the aerodynamic coefficients.
+
+Inertia tensor
+==============  
+
 
 
 

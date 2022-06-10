@@ -1,3 +1,5 @@
+.. _custom_models:
+
 ==========================
 Custom environment models
 ==========================
@@ -73,7 +75,7 @@ The custom thrust magnitude model can then be used as follows to define the thru
           .. literalinclude:: /_src_snippets/simulation/environment_setup/custom_thrust_magnitude_example.py
              :language: python
 
-
+.. _couple_custom_models:
 
 Custom model (multiple), class member
 =====================================
