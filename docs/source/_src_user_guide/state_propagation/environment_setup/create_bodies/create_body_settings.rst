@@ -16,10 +16,10 @@ The usual workflow to create celestial body settings is composed of two subseque
 
 .. _default_body_settings:
 
-Generation of default body settings
-===================================
+Creating body settings
+======================
 
-Generating default settings prevents a user from having to manually define a variety of 'typical' models for
+In most cases, the starting point for the creation of body settings will be the extraction of *default settings*. This prevents a user from having to manually define a variety of 'typical' models for
 solar-system bodies. The full list of default body settings is given at :ref:`default_environment_models`, and
  can be retrieved as follows, using the :func:`~tudatpy.numerical_simulation.environment_setup.get_default_body_settings` function:
 
@@ -39,12 +39,29 @@ solar-system bodies. The full list of default body settings is given at :ref:`de
 
 where the ``global_frame_origin`` and ``global_frame_orientation`` define the reference frame in which state vectors
 stored in the environment `during` propagation are represented. In general, it is recommended to choose this as the most 'intuitive' frame origin for your propagation
-(e.g. SSB or Sun for solar system scale propagations, Earth for an Earth orbiter, Mars for a Martian mission, etc.). The `frame_orientation` may be omitted altogether, in which case the default ECLIPJ2000 is used.
+(e.g. SSB or Sun for solar system scale propagations, Earth for an Earth orbiter, Mars for a Martian mission, etc.). The `frame_orientation` may be omitted altogether, in which case the default ECLIPJ2000 is used. The above function creates an object of type :class:`~tudatpy.numerical_simulation.environment_setup.BodyListSettings`, which stores the settings for all bodies (as a list of :class:`tudatpy.numerical_simulation.environment_setup.BodySettings` objects)
 
 Note that the frame origin definitions is *distinct* from the 
 center of propagation that you can define for the propagation of translational dynamics (see :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.translational` function, and the :ref:`translational_dynamics` page). For more information about this distinction, and the use of these reference frames in general, see :ref:`reference_frames`.
 
 In addition to the above method of creating default bodies, we offer an alternative which is more computationally efficient, at the expense of higher RAM usage and a more limited time interval in which the environment is valid. Such an approach is typically only used when computational speed is very important, and is described in more detail :ref:`here<valid_time_range>`.
+
+Finally, in case you want to initialize body settings without *any* default settings, the ``body_settings`` in the above script can also be created manually as:
+
+    .. tabs::
+
+         .. tab:: Python
+
+          .. toggle-header:: 
+             :header: Required **Show/Hide**
+
+             .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.py
+                :language: python
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/body_list_settings_manual.py
+             :language: python
+
+where the frame origin and orientation have been defined manually as "Earth" and "J2000", respectively.
 
 
 .. _custom_body_settings:

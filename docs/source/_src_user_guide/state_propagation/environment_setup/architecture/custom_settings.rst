@@ -11,26 +11,27 @@ Custom models
 
    environment_during_propagation
 
-When working with a very specific model or application, it often happens that the model you want to use is not implemented in Tudat. If this is the case, we have the option for users to define 'custom' models for various models in both the environment and propagation setup modukes. The use of these custom settings requires the user to define their own function for the specific model, as is shown on this page with a number of examples. Below, you can find a list of the currently supported custom environment models in Tudat:
+When working with a very specific model or application, it often happens that the model you want to use is not implemented in Tudat. If this is the case, we have the option for users to define 'custom' models for various models in both the environment and propagation setup modukes. The use of these custom settings requires the user to define their own function for the specific model, as is shown on this page with a number of examples. Below, you can find a list of the currently supported custom environment models in Tudat. In most cases, the input to the custom function is the current time *only*. In case the user wants to define other state/environment dependencies, these can be implemented using a user-defined custom class, as shown below. Custom functions that have additional dependencies are noted explicitly below. The *ouput* of the custom function will differ per model type (*e.g.* density custom model: float output; state custom model: vector output), and are specified in the API entries that are linked to.
 
 Custom environment models:
 
-* Custom aerodynamic coefficients (with suppported dependencies from :class:`~tudatpy.numerical_simulation.environment.AerodynamicCoefficientsIndependentVariables`) :func:`~tudatpy.numerical_simulation.environment_setup.aerodynamic_coefficients.custom`
-* Custom atmosphere model (function of time only) :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.custom_constant_temperature`
-* Custom atmosphere model (function of position and time) :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.custom_four_dimensional_constant_temperature`
+* Custom aerodynamic coefficients (with suppported dependencies from :class:`~tudatpy.numerical_simulation.environment.AerodynamicCoefficientsIndependentVariables`) :func:`~tudatpy.numerical_simulation.environment_setup.aerodynamic_coefficients.custom_aerodynamic_force_coefficients` or :func:`~tudatpy.numerical_simulation.environment_setup.aerodynamic_coefficients.custom_aerodynamic_force_and_moment_coefficients` (only force, and force and moment coefficients, respectively)
+* Custom atmospheric density model (function of time only) :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.custom_constant_temperature`
+* Custom atmospheric density model (function of position and time) :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.custom_four_dimensional_constant_temperature` *Note:* this custom function has current time, altitude, latitude and longitude as input.
 * Custom wind model: :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.custom_wind_model`
-* Custom ephemeris: :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.custom`
+* Custom ephemeris: :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.custom_ephemeris`
 
 Custom propagation models:
 
-* Custom termination setting :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.custom_termination`
 * Custom body orientation :func:`~tudatpy.numerical_simulation.propagation_setup.thrust.custom_thrust_orientation`
 * Custom body direction :func:`~tudatpy.numerical_simulation.propagation_setup.thrust.custom_thrust_direction`
 * Custom thrust magnitude :func:`~tudatpy.numerical_simulation.propagation_setup.thrust.custom_thrust_direction`
-* Custom torque :func:`~tudatpy.numerical_simulation.propagation_setup.torque.custom`
-* Custom acceleration :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.custom`
-* Custom mass rate :func:`~tudatpy.numerical_simulation.propagation_setup.mass_rate.custom`
-* Custom state :func:`~tudatpy.numerical_simulation.propagation_setup.propagation.custom`
+* Custom torque :func:`~tudatpy.numerical_simulation.propagation_setup.torque.custom_torque`
+* Custom acceleration :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.custom_acceleration`
+* Custom mass rate :func:`~tudatpy.numerical_simulation.propagation_setup.mass_rate.custom_mass_rate`
+* Custom state :func:`~tudatpy.numerical_simulation.propagation_setup.propagation.custom_state` *Note:* this custom function has current time, and the current custom state, as input
+* Custom termination setting :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.custom_termination`  *Note:* this custom function takes no inputs, if the current time is needed, it can be retrieved from the :attr:`~tudatpy.numerical_simulation.environment.SystemOfBodies.current_time` attribute of the :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies`
+* Custom dependent variable :func:`~tudatpy.numerical_simulation.propagation_setup.dependent_variable.custom_dependent_variable` *Note:* this custom function takes no inputs, if the current time is needed, it can be retrieved from the :attr:`~tudatpy.numerical_simulation.environment.SystemOfBodies.current_time` attribute of the :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies`
 
 In each case, the user is required to define their own function, with a predefined set of inputs and outputs, which are different for each specific environment model (see API documentation links above). We can distinguish (roughly) three different ways in which to provide such custom functions to Tudat:
 
@@ -97,7 +98,7 @@ Below, a skeleton is given for a custom class for the calculation of both thrust
              :language: python
 
          
-Here, we see a different setup compared to the previous case. There is a single function, named ``updateGuidance`` that calculates both the thrust magnitude and the aerodynamic angles. This allows the calculation of the two models to be coupled, which is required for many more advanced applications. The two functions ``getAerodynamicAngles`` and ``getThrustMagnitude`` are then linked to the environment as follows:
+Here, we see a different setup compared to the previous case. There is a single function, named ``update_guidance`` that calculates both the thrust magnitude and the aerodynamic angles. This allows the calculation of the two models to be coupled, which is required for many more advanced applications. The two functions ``getAerodynamicAngles`` and ``getThrustMagnitude`` are then linked to the environment as follows:
 
     .. tabs::
 
@@ -110,6 +111,6 @@ Here, we see a different setup compared to the previous case. There is a single 
 In setting up the custom guidance class, we now need to take care of one crucial point: even though data is retrieved from teh objec *twice* per function evaluation of the state derivative, the calculation should only be done *once*. Since it is often difficult to predict which of the custom functions will be called first, we use a different setup: defining a ``current_time`` member variable, and letting the code check whether an update needs to be done. This is achieved as follows:
 
 * After the guidance function is evaluated, the class member time is set to the input time, and the guidance is not evaluated a second time during the same state derivative function evaluation
-* At the very start of a state derivative function evaluation, the ``updateGuidance`` function is called with a NaN input (done by each custom function) signalling that a new function evaluation has started, and the class needs to recompute the guidance. This is done to support integrators such as the RK4 integrator, where two succesive state derivatives are evaluataed using the same time, but different states
+* At the very start of a state derivative function evaluation, the ``update_guidance`` function is called with a NaN input (done by each custom function) signalling that a new function evaluation has started, and the class needs to recompute the guidance. This is done to support integrators such as the RK4 integrator, where two succesive state derivatives are evaluataed using the same time, but different states
 * If the current time of the class is NaN, the guidance is by definition recomputed when called
 
