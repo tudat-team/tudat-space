@@ -1,8 +1,8 @@
 .. _environment_during_propagation:
 
-==============================
-Environment during propagation
-==============================
+===================================================
+Interacting with the environment during propagation
+===================================================
 
 Each body object and its constituent members is updated to the current state and time automatically during the numerical propagation. We stress that only those models that are relevant for a given propagation are updated every time step (this is handled automatically, without user intervention). 
 
@@ -44,7 +44,7 @@ Rotational state
 Body inertial mass
 ------------------
 
-    Retrieved directly from a :class:`~tudatpy.numerical_simulation.environment.Body` object with the :attr:`~tudatpy.numerical_simulation.environment.Body.mass` function. Note that this mass is *not* necessarilly the mass used for calculation of gravitional interactions (gravitational mass), but the mass used to convert forced to accelerations and vice verse (inertial mass).
+    Retrieved directly from a :class:`~tudatpy.numerical_simulation.environment.Body` object with the :attr:`~tudatpy.numerical_simulation.environment.Body.mass` function. Note that this mass is *not* necessarilly the mass used for calculation of gravitional interactions (the gravitational mass :math:`m_{g}`, as you would find it in Newton's law of gravity :math:`a=\frac{Gm_{g}}{r^{2}}`), but the mass used to convert forces to accelerations and vice versa (the inertial mass :math:`m_{i}`, as you would find it in Newton's law of motion :math:`F=m_{i}a`). Although, to our best knowledge, the two masses are equal for all bodies, various alternatives to general relativity predict a difference between the two. Moreover, we have found it useful to *not* define a gravity field for any body which happens to have a mass assigned to it. For instance, a spacecraft will have an (inertial) mass which is needed for computing most non-gravitational accelerations. But, it does *not* require its own gravity field to compute gravitational accelerations.
 	
 Spherical harmonic gravity field coefficients
 ---------------------------------------------
@@ -65,9 +65,9 @@ Spherical harmonic gravity field coefficients
 Flight conditions
 -----------------
 
-    The :class:`~tudatpy.numerical_simulation.environment.FlightConditions` class, and its derived class :class:`~tudatpy.numerical_simulation.environment.AtmosphericFlightConditions` stores data relating to altitude, flight angles, local atmospheric properties, etc. Follow the links for their detailed description. The ``FlightConditions`` class is 'atypical', in the sense that a user does not provide settigs for the flight conditions when creating a body object. The reason is that the ``FlightConditions`` does not contain any 'new' information. Instead, it is resposible for using the existing properties of the environment and the propagation to calculate various properties related to the current state. 
+    The :class:`~tudatpy.numerical_simulation.environment.FlightConditions` class, and its derived class :class:`~tudatpy.numerical_simulation.environment.AtmosphericFlightConditions` stores data relating to altitude, flight angles, local atmospheric properties, etc. Follow the links for their detailed description. The ``FlightConditions`` class is 'atypical', in the sense that a user does not provide settings for the flight conditions when creating a body object. The reason is that the ``FlightConditions`` does not contain any 'new' information. Instead, it is resposible for using the existing properties of the environment and the propagation to calculate various properties related to the current state. 
     
-    The ``FlightConditions`` are related to a central body, and the object is created automatically whenever the code identifies that it is required for any of its calculations (state derivative; dependent variables, etc.). A user may also create the class themselves by using the :func:`~tudatpy.numerical_simulation.add_flight_conditions` function. The choice between the two classes (``FlightConditions`` and ``AtmosphericFlightConditions``, with the latter derived from teh former) is made based on the central body: if this has an atmospher model, ``AtmosphericFlightConditions`` are created, if it does not, the ``FlightConditions`` are created.
+    The ``FlightConditions`` are related to a central body, and the object is created automatically whenever the code identifies that it is required for any of its calculations (state derivative; dependent variables, etc.). A user may also create the class themselves by using the :func:`~tudatpy.numerical_simulation.add_flight_conditions` function. The choice between the two classes (``FlightConditions`` and ``AtmosphericFlightConditions``, with the latter derived from teh former) is made based on the central body: if this has an atmosphere model, ``AtmosphericFlightConditions`` are created, if it does not, the ``FlightConditions`` are created.
             
     Below are some examples of information that can be retrieved from the flight conditions (base class): 
 
@@ -99,7 +99,7 @@ Flight conditions
 Aerodynamic coefficients
 ------------------------
 
-    Aerodynamic coefficients in Tudat can be a function of any number of independent variables, such as angle of attack, Mach number, etc. During the propagation, the :class:`~tudatpy.numerical_simulation.environment.AtmosphericFlightConditions` object (see above) automatically calculates the values independent variables, and passes the list of independent variables to an :class:`~tudatpy.numerical_simulation.environment.AerodynamicCoefficientInterface` of the body (if it possesses any) to update the aerodynamic coefficients to the current state/time. The current values can be extracted from the flight conditions using the :attr:`~tudatpy.numerical_simulation.environment.AtmosphericFlightConditions.aero_coefficient_independent_variables` attribute. The current force and moment coefficients can be exracted from the coefficient interface using the :attr:`~tudatpy.numerical_simulation.environment.AerodynamicCoefficientInterface.current_force_coefficients` and :attr:`~tudatpy.numerical_simulation.environment.AerodynamicCoefficientInterface.current_moment_coefficients` attributes, respectively.
+    Aerodynamic coefficients in Tudat can be a function of any number of independent variables, such as angle of attack, Mach number, etc. During the propagation, the :class:`~tudatpy.numerical_simulation.environment.AtmosphericFlightConditions` object (see above) automatically calculates the values independent variables, and passes the list of independent variables to an :class:`~tudatpy.numerical_simulation.environment.AerodynamicCoefficientInterface` of the body (if it possesses any) to update the aerodynamic coefficients to the current state/time. The current values can be extracted from the flight conditions using the :attr:`~tudatpy.numerical_simulation.environment.AtmosphericFlightConditions.aero_coefficient_independent_variables` attribute. The current force and moment coefficients can be extracted from the coefficient interface using the :attr:`~tudatpy.numerical_simulation.environment.AerodynamicCoefficientInterface.current_force_coefficients` and :attr:`~tudatpy.numerical_simulation.environment.AerodynamicCoefficientInterface.current_moment_coefficients` attributes, respectively.
     
     It may happen that a custom model influences the values of the independent variables, for instance when specifying a custom function for the angle of attack using the :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.aerodynamic_angle_based` rotation model. If the algorithm *itself* depends on these angles, it may be necessary to update the aerodynamic coefficients in the guidance algorithm. One example is shown in the :ref:`TODO` example. 
     

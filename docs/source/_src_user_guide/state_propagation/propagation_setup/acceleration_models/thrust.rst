@@ -23,7 +23,7 @@ In Tudat, the acceleration that a body undergoes due to the addition of thrust c
   *  (When using the mass rate due to thrust: the specific impulse of the engine)
 *  A rotation model for the vehicle, which is used to provide the inertial thrust direction  :math:`\hat{\mathbf{T}}`. Here, we can distinguish three different approaches in the context of thrustaero:
   
-  *  The vehicle has a rotation model defined using the :attr:`~tudatpy.numerical_simulation.environment_setup.rotation_model.custom_inertial_direction_based` settings. By using this model, the inertial direction if the thrust can be provided by the user *directly*. The orientation of the vehicle is then derived from this direction 
+  *  The vehicle has a rotation model defined using the :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.custom_inertial_direction_based` settings. By using this model, the inertial direction if the thrust can be provided by the user *directly*. The orientation of the vehicle is then derived from this direction
   *  The vehicle has any other rotation model defined, in this case the inertial thrust direction is computed from :math:`\hat{\mathbf{T}}=\mathbf{R}^{(I/B)}\hat{\mathbf{T}}_{B}` 
   *  The rotational dynamics of the vehicle is propagated, and the orientation of the vehicle is taken from the current rotational state. The inertial thrust direction then follows from :math:`\hat{\mathbf{T}}=\mathbf{R}^{(I/B)}\hat{\mathbf{T}}_{B}`.
 

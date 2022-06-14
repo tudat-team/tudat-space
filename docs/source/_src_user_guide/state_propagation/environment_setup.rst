@@ -16,6 +16,7 @@ Environment Setup
    environment_setup/architecture/custom_settings
    environment_setup/architecture/use_of_reference_frames
    environment_setup/architecture/environment_architecture
+   environment_setup/thrust_refactor/thrust_refactor
 
 
 
