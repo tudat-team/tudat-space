@@ -131,7 +131,7 @@ For the definition of pre-defined states and rotations, Tudat relies heavily on 
 * ``J2000``: Right-handed inertial frame which has :math:`x`-axis towards vernal equinox, and the :math:`z`-axis aligned
   with Earth’s rotation axis as it was at the J2000 epoch. We stress that this frame is inertial, and its
   :math:`z`-axis direction does *not* move with the Earth's rotation axis. (Note that this frame is *almost* identical
-  to teh GCRS frame, with a small frame bias between the two, see for instance section 2.5 of `this document <https://www.iausofa.org/2013_1202_F/sofa/sofa_pn.pdf>`_)
+  to the GCRS frame, with a small frame bias between the two, see for instance section 2.5 of `this document <https://www.iausofa.org/2013_1202_F/sofa/sofa_pn.pdf>`_)
 * ``ECLIPJ2000``: Right-handed inertial frame which has :math:`x`-axis towards vernal equinox, and the :math:`z`-axis
   perpendicular to the ecliptic, at the J2000 epoch.
 
