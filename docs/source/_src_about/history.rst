@@ -29,27 +29,31 @@ Below, there is a list of contributors to Tudat. Mostly, these have been staff a
 .. 
    * Dominic Dirkx
    * Geoffrey Garrett
-   * Jacco Geul
    * Marie Fayolle
-   * Kartik Kumar
-   * Jeroen Melman
    * Jeremie Gaffarel
    * Filippo Oggionni
    * Jonas Hener
    * Miguel Avillez
    * Maarten van Nistelrooij
    * Sean Cowan
+   * Michael Plumaris
+   * ...
    * Aleix Pinardell
    * Rene Hoogendoorn
    * Elmar Puts
    * Iosto Fodde
    * Frank Hogervorst
-   * Michael Plumaris
-   * Giacomo Aciarini
    * Alejandro Gonzalez-Puerta
-   * Sebastian Villamil
    * Tineke Roegiers
    * Evianne Brandon
    * Bryan Tong Minh
    * Alexander Ronse
    *   ...
+   * Sebastian Villamil
+   * Giacomo Aciarini
+   *   ...
+   * Kartik Kumar
+   * Jeroen Melman
+   * Jacco Geul
+
+
