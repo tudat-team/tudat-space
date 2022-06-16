@@ -11,7 +11,12 @@ Custom models
 
    environment_during_propagation
 
-When working with a very specific model or application, it often happens that the model you want to use is not implemented in Tudat. If this is the case, we have the option for users to define 'custom' models for various models in both the environment and propagation setup modukes. The use of these custom settings requires the user to define their own function for the specific model, as is shown on this page with a number of examples. Below, you can find a list of the currently supported custom environment models in Tudat. In most cases, the input to the custom function is the current time *only*. In case the user wants to define other state/environment dependencies, these can be implemented using a user-defined custom class, as shown below. Custom functions that have additional dependencies are noted explicitly below. The *ouput* of the custom function will differ per model type (*e.g.* density custom model: float output; state custom model: vector output), and are specified in the API entries that are linked to.
+When working with a very specific model or application, it often happens that the model you want to use is not implemented in Tudat. Two important examples are:
+
+* :ref:`Aerodynamic models and guidance <aerodynamic_models>`
+* :ref:`Thrust models and guidance <thrust_models>`
+
+If this is the case, we have the option for users to define 'custom' models for various models in both the environment and propagation setup modules. The use of these custom settings requires the user to define their own function for the specific model, as is shown on this page with a number of examples. Below, you can find a list of the currently supported custom environment models in Tudat. In most cases, the input to the custom function is the current time *only*. In case the user wants to define other state/environment dependencies, these can be implemented using a user-defined custom class, as shown below. Custom functions that have additional dependencies are noted explicitly below. The *output* of the custom function will differ per model type (*e.g.* density custom model: float output; state custom model: vector output), and are specified in the API entries that are linked to.
 
 Custom environment models:
 
@@ -108,9 +113,9 @@ Here, we see a different setup compared to the previous case. There is a single 
              :language: python
 
 
-In setting up the custom guidance class, we now need to take care of one crucial point: even though data is retrieved from the objec *twice* per function evaluation of the state derivative, the calculation should only be done *once*. Since it is often difficult to predict which of the custom functions will be called first, we use a different setup: defining a ``current_time`` member variable, and letting the code check whether an update needs to be done. This is achieved as follows:
+In setting up the custom guidance class, we now need to take care of one crucial point: even though data is retrieved from the object *twice* per function evaluation of the state derivative, the calculation should only be done *once*. Since it is often difficult to predict which of the custom functions will be called first, we use a different setup: defining a ``current_time`` member variable, and letting the code check whether an update needs to be done. This is achieved as follows:
 
 * After the guidance function is evaluated, the class member time is set to the input time, and the guidance is not evaluated a second time during the same state derivative function evaluation
-* At the very start of a state derivative function evaluation, the ``update_guidance`` function is called with a NaN input (done by each custom function) signalling that a new function evaluation has started, and the class needs to recompute the guidance. This is done to support integrators such as the RK4 integrator, where two succesive state derivatives are evaluataed using the same time, but different states
+* At the very start of a state derivative function evaluation, the ``update_guidance`` function is called with a NaN input (done by each custom function) signalling that a new function evaluation has started, and the class needs to recompute the guidance. This is done to support integrators such as the RK4 integrator, where two successive state derivatives are evaluated using the same time, but different states
 * If the current time of the class is NaN, the guidance is by definition recomputed when called
 

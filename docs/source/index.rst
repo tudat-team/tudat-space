@@ -222,13 +222,13 @@ to get started with them, have a look at our
     **Guidance models**
     ^^^
 
-    Possibility to embed built-in or user-defined aerodynamic and thrust guidance models in the simulation.
+    Possibility to embed built-in or user-defined aerodynamic, thrust, and other guidance models in the simulation.
 
 
     +++
-    .. link-button:: index
+    .. link-button:: _src_user_guide/state_propagation/environment_setup/architecture/custom_models
             :type: ref
-            :text: Coming soon :)
+            :text: Find out more
             :classes: stretched-link btn-outline-primary
 
 
