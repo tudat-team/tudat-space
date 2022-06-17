@@ -16,20 +16,56 @@ Any contribution you have to Tudat is very welcome! This can come in the form of
 * Join our Slack chat! This is where most of our coding discussion takes place. Send an `e-mail <https://www.tudelft.nl/staff/d.dirkx/>`_ to get an invite. 
 * Part of our development workflow is documented on our `developer docs <https://tudat-developer.readthedocs.io/en/latest/>`_. This site is still under construction, and any input is more than welcome!
 
+.. _contributors:
 
 Contributor list
 ================
 
-Below, there is a list of contributors to Tudat. Mostly, these have been staff and students of TU Delft who have worked on Tudat as part of their research project(s) and/or as TAs. Many of them have put a lot of their free time and research time into making Tudat what it is. If you think your name is missing here, please let us know!  (list forthcoming)
+Below, there is a list of contributors to Tudat. Mostly, these have been staff and students of TU Delft who have worked on Tudat as part of their research project(s) and/or as TAs. Many of them have put a lot of their free time and research time into making Tudat what it is. If you think your name is missing here, please let us know! 
 
-.. 
-   * Dominic Dirkx
-   * Geoffrey Garrett
-   * Jacco Geul
-   * Marie Fayolle
+**Currently and recently active contributors**
+
+* Dominic Dirkx
+* Geoffrey Garrett
+* Marie Fayolle
+* Miguel Avillez
+* Sean Cowan
+* Kevin Cowan
+* Joao Encarnacao
+* Carlos Fortuny Lombrana
+* Jeremie Gaffarel
+* Jonas Hener
+* Gregorio Marchesini
+* Maarten van Nistelrooij
+* Filippo Oggionni
+* Michael Plumaris
+
+**Past Contributors**
+
+* `Frank Engelen <https://www.linkedin.com/in/frankengelen/>`_
+* `Michele Facchinelli <https://www.linkedin.com/in/mfacchinelli/>`_
+* `Iosto Fodde <https://www.linkedin.com/in/iosto-fodde-572b81129/>`_
+* `David Gondelach <https://www.linkedin.com/in/david-gondelach/>`_
+* `Alejandro Gonzalez Puerta <https://www.linkedin.com/in/alejandrogonzalezpuerta/>`_
+* `Linda van der Ham <https://www.linkedin.com/in/linda-van-der-ham-1606594a/>`_
+* `Frank Hogervorst <https://www.linkedin.com/in/frankhogervorst/>`_
+* `René Hoogendoorn <https://www.linkedin.com/in/rene-hoogendoorn-107/>`_
+* `Jonatan Leloux <https://www.linkedin.com/in/jonatanleloux/>`_
+* `Francesco Lupi <https://www.linkedin.com/in/francesco-lupi-b23a658/>`_
+* `Aleix Pinardell <https://www.linkedin.com/in/aleixpinardell/>`_
+* `Bart Römgens <https://www.linkedin.com/in/bart-r%C3%B6mgens-b7a19314/>`_
+* `Alexander Ronse <https://www.linkedin.com/in/alexander-ronse-1401a5b/>`_
+
+
+..
+   * Elmar Puts
+   * Tineke Roegiers
+   * Evianne Brandon
+   * Bryan Tong Minh
+   * Giacomo Aciarini
+   *   ...
+   * Sebastian Villamil
+   *   ...
    * Kartik Kumar
    * Jeroen Melman
-   * Filippo Oggionni
-   * Jonas Hener
-   * Miguel Avillez
-   *   ...
+   * Jacco Geul

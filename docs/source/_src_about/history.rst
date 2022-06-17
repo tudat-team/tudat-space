@@ -2,15 +2,15 @@
 History
 =======
 
-The idea of creating Tudat started in 2010, in the Astrodynamics and Space Missions section at TU Delft. There, we found that many students working on their thesis project were reinventing the wheel by writing their own numerical integrators, acceleration models, *etc.* and were losing a lot of time on this. Some attempts were made to share software, but without proper documentation or consistent coding practices, this quickly led to an unmaintainable codebase. A small group of Ph.D. students, supported by staff members and a number of M.Sc. students, then started to figure out how to set up a large software project like Tudat. After a number of discussions, it was chosen to write the software in C++.
+The idea of creating Tudat started in 2010, in the Astrodynamics and Space Missions section at TU Delft. There, we found that many students working on their thesis project were reinventing the wheel by writing their own numerical integrators, acceleration models, *etc.* and were losing a lot of time on this. Some attempts were made to share software, but without proper documentation or consistent coding practices, this quickly led to an unmaintainable codebase. A small group of Ph.D. students, supported by staff members and a number of M.Sc. students, then started to figure out how to set up a large software project like Tudat.  After a number of discussions, it was chosen to write the software in C++. Ever since, our project has been fortunate enough to have had made many enthusiastic people, mostly students, contribute to it. Please see our :ref:`contributors` for a full list
 
 **First steps**
 
-The scope of the software has evolved since then. Although it was initially conceptualized to primarily support trajectory optimization problems, the codebase evolved more towards supporting numerical propagation problems, both in an optimization loop, and outside of it. Since starting the software, it has gone through a number of significant evolutionary stages. Several years into the project, a thorough rewrite of much of the internal workings was undertaken, based on our own experience and input from several external coding experts. Around 2012, it was decided to use Tudat as the core tool for WP3 (Laser Ranging) of the European ESPaCE project. In the context of this project, functionality was developed to support batch least squares state estimation, first only from laser ranging data but later on from more general data types. This functionality was applied to a number of real and simulated test cases, and led to a number or publications. After this project ended, Tudat continued to be used in this context, as the main tool for simulating the contribution of the PRIDE experiment on the JUICE mission, an ongoing collaboration between TU Delft, JIVE, and others.
+The scope of the software has evolved since the first steps were made. Although it was initially conceptualized to primarily support trajectory optimization problems, the codebase evolved more towards supporting numerical propagation problems, both in an optimization loop, and outside of it. Since starting the software, it has gone through a number of significant evolutionary stages. Several years into the project, a thorough rewrite of much of the internal workings was undertaken, based on our own experience and input from several external coding experts. Around 2012, it was decided to use Tudat as the core tool for WP3 (Laser Ranging) of the European ESPaCE project. In the context of this project, functionality was developed to support batch least squares state estimation, first only from laser ranging data but later on from more general data types. This functionality was applied to a number of real and simulated test cases, and led to a number or publications. After this project ended, Tudat continued to be used in this context, as the main tool for simulating the contribution of the PRIDE experiment on the JUICE mission, an ongoing collaboration between TU Delft, JIVE, and others.
 
 **Improving accessibility**
 
-In 2016, another substantial addition was made to Tudat: the 'simulation setup' layer. Before, a user would manually have to link all their objects together manually, which ended being very time-consuming and required significant C++ expertise on the side of the user. Since much of the user base was then TU Delft M.Sc. students, this led to significant issues, as the expected/required skills of students and their background did not match. The simulation setup layer (which is now the ``numerical_simulation.environment_setup/propagation_setup/estimation_setup`` submodule) made the use of Tudat much easier, by no longer requiring as much C++ expertise. Still, the required coding expertise to use Tudat was daunting. Around the same time, Tudat was migrated from a privately hosted website, and moved onto Github. Also, Tudat was incorporated into the Space Exploration curriculum of TU Delft further, first in a course named 'Space Project', now renamed to 'Numerical Astrodynamics'. Initially, this course was meant primarilly to give students academic credit for the time they put into getting familiar with Tudat. Now, it is a full-fledged course which focusses on setting up and interpreting astrodynamics problems, where Tudat is 'merely' the tool that happens to be used. A year later, this course was supplemented by the 'Propagation and Optimization in Astrodynamics' course, where the focus is on selecting suitable models for a numerical problem, where we use both Tudat and Pagmo/Pygmo.
+In 2016, another substantial addition was made to Tudat: the 'simulation setup' layer. Before, a user would manually have to link all their objects together manually, which ended being very time-consuming and required significant C++ expertise on the side of the user. Since much of the user base was then TU Delft M.Sc. students, this led to significant issues, as the expected/required skills of students and their background did not match. The simulation setup layer (which is now the ``numerical_simulation.environment_setup/propagation_setup/estimation_setup`` submodule) made the use of Tudat much easier, by no longer requiring as much C++ expertise. Still, the required coding expertise to use Tudat was daunting. Around the same time, Tudat was migrated from a privately hosted website, and moved onto Github. Also, Tudat was incorporated into the Space Exploration curriculum of TU Delft further, first in a course named 'Space Project', now renamed to `Numerical Astrodynamics <https://studiegids.tudelft.nl/a101_displayCourse.do?course_id=60207>`_. Initially, this course was meant primarilly to give students academic credit for the time they put into getting familiar with Tudat. Now, it is a full-fledged course which focusses on setting up and interpreting astrodynamics problems, where Tudat is 'merely' the tool that happens to be used. A year later, this course was supplemented by the `Propagation and Optimization in Astrodynamics <https://studiegids.tudelft.nl/a101_displayCourse.do?course_id=60206>`_ course, where the focus is on selecting suitable models for a numerical problem, where we use both Tudat and `Pagmo/Pygmo <https://esa.github.io/pygmo2/>`_.
 
 **The Python interface**
 
@@ -19,41 +19,5 @@ The last (latest?) large change in the project started in 2019, when one of our 
 **Where we are**
         
 As of mid-2022, Tudatpy is in a state where we are happy and confident to release it into the wild. Before the Python interface, the amount of support from us to get stuff working properly meant that it was difficult to use by anyone in the community. Getting the Python interface up and running, exposing much of our functionality, and documenting this, has been a long process, but Tudat is now in a much better state than it has ever been. In terms of functionality, it provides many state-of-the-art, and some unique, functionality for numerical orbit propagation for numerous kinds of space missions, from orbital analysis of LEO spacecraft, to trajectory optimization of interplanetary transfers, orbit determination and ephemeris generation for planetary missions, and high-accuracy natural satellite dynamics. There are many plans for the future, and many students who will come into our faculty every year and use it. It is our hope that the use of Tudat will spread even further into the community, and that we can provide a sustainable, flexible and useful tool for researchers, students and enthusiasts in the field of astrodynamics. 
-
-
-Contributor list
-================
-
-Below, there is a list of contributors to Tudat. Mostly, these have been staff and students of TU Delft who have worked on Tudat as part of their research project(s) and/or as TAs. Many of them have put a lot of their free time and research time into making Tudat what it is. If you think your name is missing here, please let us know!  (list forthcoming)
-
-.. 
-   * Dominic Dirkx
-   * Geoffrey Garrett
-   * Marie Fayolle
-   * Jeremie Gaffarel
-   * Filippo Oggionni
-   * Jonas Hener
-   * Miguel Avillez
-   * Maarten van Nistelrooij
-   * Sean Cowan
-   * Michael Plumaris
-   * ...
-   * Aleix Pinardell
-   * Rene Hoogendoorn
-   * Elmar Puts
-   * Iosto Fodde
-   * Frank Hogervorst
-   * Alejandro Gonzalez-Puerta
-   * Tineke Roegiers
-   * Evianne Brandon
-   * Bryan Tong Minh
-   * Alexander Ronse
-   *   ...
-   * Sebastian Villamil
-   * Giacomo Aciarini
-   *   ...
-   * Kartik Kumar
-   * Jeroen Melman
-   * Jacco Geul
 
 
