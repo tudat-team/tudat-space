@@ -31,7 +31,7 @@ Below, there is a list of contributors to Tudat. Mostly, these have been staff a
 * Miguel Avillez
 * Sean Cowan
 * Kevin Cowan
-* `João Encarnação <https://www.linkedin.com/in/joaoencarnacao/>`
+* `João Encarnação <https://www.linkedin.com/in/joaoencarnacao/>`_
 * Carlos Fortuny Lombrana
 * Jeremie Gaffarel
 * Jonas Hener
