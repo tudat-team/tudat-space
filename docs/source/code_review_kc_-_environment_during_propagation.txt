@@ -9,16 +9,10 @@ Each body object and its constituent members
 		
 during the numerical propagation. We stress that only those models 
 
-# kccomment:
-# - Separately, there is some niggling dissonance for me about the idea of 'models' that are updated during computation. For my feeling (which may need updating, mea culpa), models (in general) are a fixed thing that a simulation is based on. Change the model, and it feels like one is by (my) definition running a different simulation.
-
 that are relevant for a given propagation are updated every time step (this is handled automatically, without user intervention). 
 
 When wriing a custom model (see :ref:`custom_models`) you will in many cases need to access the properties of bodies in the environment to perform your calculations. Some examples are:
 
-# kccomment:
-# Something might have gone awry with some/all of the cross-references in this document, eg. :ref:`custom_models`. That is, when the `rst` code is processed, these links also show up 'raw'.
-# Are these 'properties' different (or a different type of terminology) from the 'objects' and 'members' mentioned above?
 
 * Retrieving the translational state of a spacecraft w.r.t. a central body to calculate your thrust direction 
 
@@ -45,11 +39,7 @@ Translational state
 	    
 	    current_relate_state = bodies.get('Vehicle').state - bodies.get('Earth').state
 	
-# kccomment:
-# > current_relative_state
-# name > named
-
-    to retrieve the current state of a body name 'Vehicle' w.r.t. the Earth. Note that if the Earth is the global frame origin, the above will still work fine. However, the Earth state will be a zero-vector, and its subtraction from the vehicle state may be omitted for a 
+    to retrieve the c	 name 'Vehicle' w.r.t. the Earth. Note that if the Earth is the global frame origin, the above will still work fine. However, the Earth state will be a zero-vector, and its subtraction from the vehicle state may be omitted for a 
 
   NOTE: If you are only interested in the position or velocity components, you can use the :attr:`~tudatpy.numerical_simulation.environment.Body.position` or :attr:`~tudatpy.numerical_simulation.environment.Body.velocity` functions.
 
@@ -57,31 +47,15 @@ Translational state
 Rotational state
 ----------------
 
-    The current rotational state of a body is defined by its current orientation w.r.t. the global frame orientation (see :ref:`reference_frames_global_orientation`). This orientation is defined by a quaternion (see :ref:`quaternion_definition`), but during a simulation a user will typically interact with the rotation matrix. The rotation matrix from the inertial to body-fixed frame is retrieved from a :class:`~tudatpy.numerical_simulation.environment.Body` object using the :attr:`~tudatpy.numerical_simulation.environment.Body.inertial_to_body_fixed_frame` function. The inverse rotation matrix (body-fixed to inertial) is retrieved using the :attr:`~tudatpy.numerical_simulation.environment.Body.body_fixed_to_inertial_frame` function.
+    The rotational state of a body during the propagation is defined by the orientation of its body-fixed frame w.r.t. the global frame orientation (see :ref:`reference_frames_global_orientation`). This orientation is defined by a quaternion (see :ref:`quaternion_definition`), but during a simulation a user will typically interact with the rotation matrix. The rotation matrix from the inertial to body-fixed frame is retrieved from a :class:`~tudatpy.numerical_simulation.environment.Body` object using the :attr:`~tudatpy.numerical_simulation.environment.Body.inertial_to_body_fixed_frame` function. The inverse rotation matrix (body-fixed to inertial) is retrieved using the :attr:`~tudatpy.numerical_simulation.environment.Body.body_fixed_to_inertial_frame` function.
 
-# kccomment:
-# Sorry, but again, does a user interact with a rotation matrix _during_ a simulation?
-# I would be explicit about how the rotational state of a body is represented internally. So, is it inertial? Is the global frame orientation inertial? Does this mean that if we want to access the rotational state w.r.t. an inertial frame, that we do not need the rotation matrix described here?
-# How is this precisely used: does the inertial-to-body-fixed-frame rotation matrix get pre-multiplied by an (inertial, rotational state) vector to produce as output a vector in the body-fixed frame? [I ask this because sometimes wording is fuzzy (as opposed to formulas), and it could be the other way around.]
-    
     The time-derivative of the orientation is provided in two formulations (with equivalent information content): the angular velocity vector of the body-fixed frame, and the time derivative of the rotation matrix. The angular velocity vector, in inertial and body-fixed coordinates, is obtained from the :attr:`~tudatpy.numerical_simulation.environment.Body.inertial_angular_velocity` and :attr:`~tudatpy.numerical_simulation.environment.Body.body_fixed_angular_velocity` functions respectively. Note that the latter is the formulation that is used to represent the time-variation of the rotation when propagating rotational dynamics (see :ref:`TODO`). Alternatively, the time-derivative of the rotation matrix from inertial to body-fixed frame is given by :attr:`~tudatpy.numerical_simulation.environment.Body.inertial_to_body_fixed_frame`, while the derivative of the inverse rotation is taken from :attr:`~tudatpy.numerical_simulation.environment.Body.body_fixed_to_inertial_frame_derivative`.
 
-# kccomment:
-# I would increase the clarity here. It reads as though everything is designated as an angular velocity vector, but the "formulation that is used to represent the time-variation of the rotation when propagating rotational dynamics" sounds like an angular acceleration vector. This paragraph also makes it sound as though an angular velocity vector can exist w.r.t. the body-fixed frame, but this seems nonsensical in the case of a rigid body.
 
 Body inertial mass
 ------------------
 
     Retrieved directly from a :class:`~tudatpy.numerical_simulation.environment.Body` object with the :attr:`~tudatpy.numerical_simulation.environment.Body.mass` function. Note that this mass is *not* necessarilly the mass used for calculation of gravitional interactions (the gravitational mass :math:`m_{g}`, as you would find it in Newton's law of gravity :math:`a=\frac{Gm_{g}}{r^{2}}`), but the mass used to convert forces to accelerations and vice versa (the inertial mass :math:`m_{i}`, as you would find it in Newton's law of motion :math:`F=m_{i}a`). Although, to our best knowledge, the two masses are equal for all bodies, various alternatives to general relativity predict a difference between the two. Moreover, we have found it useful to *not* define a gravity field for any body which happens to have a mass assigned to it. For instance, a spacecraft will have an (inertial) mass which is needed for computing most non-gravitational accelerations. But, it does *not* require its own gravity field to compute gravitational accelerations.
-
-# kccomment:
-# > The body inertial mass is retrieved directly from ...
-# Note this mass is not necessarily the mass used > Note this mass is not the mass used ...
-# typo: necessarilly > necessarily
-# Although, to our ... > To the best of our knowledge the two masses are equal for all bodies, but various formulations of general relativity ...
-# ^ AFAIK there aren't widely accepted alternatives to general relativity, unless one wants to cross swords with the string theory cult.
-# Moreover, we have found... > We find it useful to _not_ define a gravity field for every body which ...
-# accelerations ... But, it ... > accelerations, but it does not require its own gravity field to compute gravitational accelerations on it.
 	
 Spherical harmonic gravity field coefficients
 ---------------------------------------------

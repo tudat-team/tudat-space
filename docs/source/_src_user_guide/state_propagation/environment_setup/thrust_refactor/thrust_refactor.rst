@@ -95,7 +95,7 @@ The above example is discussed in detail on the :ref:`entry example page <TODO>`
 Summary
 ~~~~~~~
 
-You may continue to use a very similar guidance class as before, but the class now requires a function that provides [:math:`\alpha`,:math:`\beta`,:math:`\sigma`], with :math:`t` as a input. This function is now linked to the environment nopot through an aerodynamics-specific function, but through the definition of a rotation model. An example of Python code using the old and new setup is found on our examples repository `here <https://github.com/tudat-team/tudatpy-examples/blob/9c658213e661e8afc31738eba04f4973c38c90e2/propagation/reentry_trajectory.py>`_ and `here <https://github.com/tudat-team/tudatpy-examples/blob/master/propagation/reentry_trajectory.py>`_, respectively.
+You may continue to use a very similar guidance class as before, but the class now requires a function that provides [:math:`\alpha`,:math:`\beta`,:math:`\sigma`], with :math:`t` as a input. This function is now linked to the environment not through an aerodynamics-specific function, but through the definition of a rotation model. An example of Python code using the old and new setup is found on our examples repository `here <https://github.com/tudat-team/tudatpy-examples/blob/9c658213e661e8afc31738eba04f4973c38c90e2/propagation/reentry_trajectory.py>`_ and `here <https://github.com/tudat-team/tudatpy-examples/blob/master/propagation/reentry_trajectory.py>`_, respectively.
 
 
 Thrust acceleration

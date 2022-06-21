@@ -15,26 +15,29 @@ Translational states
 ====================
 
 The translational state of a body is a critical piece of information for numerous calculations in the Tudat propagation framework. For instance, (almost) any acceleration acting on a body :math:`A` will require the Cartesian state of this body as input. 
-
+        
 When running a state propagation, one of the first steps that is performed when evaluating the state derivative
-function :math:`\mathbf{f}(\mathbf{x},t)` is to update the full environment to the current time :math:`t` and state
-:math:`\mathbf{x}` (in a basic simulation, :math:`\mathbf{x}` is the translational state of a single body). This update
-step ensures that each Body object (see :class:`~tudatpy.numerical_simulation.environment.Body`) has all time/state
-dependent properties updated before any calculations of the state derivative are performed. Once this update step is
-performed, each body relevant for the simulation will have their current translational state computed and set. Even
-when propagating the dynamics using a non-Cartesian propagator, for instance Keplerian elements,
+function :math:`\mathbf{f}(\mathbf{x},t)` (see :ref:`single_propagation_evaluation`) is to update the full environment to the current time :math:`t` and state 
+:math:`\mathbf{x}`. Note that in a basic simulation, :math:`\mathbf{x}` is the translational state of a single body. See :ref:`environment_during_propagation` for details on how to access the current properties of the environment during a propagation.
+
+..
+  This update
+  step ensures that each Body object (see :class:`~tudatpy.numerical_simulation.environment.Body`) has all time/state
+  dependent properties updated before any calculations of the state derivative are performed. Once this update step is
+  performed, each body relevant for the simulation will have their current translational state computed and set. 
+
+Even when propagating the dynamics using a non-Cartesian propagator, for instance Keplerian elements,
 (see :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.TranslationalPropagatorType`
 for full list of options), the translational state of a body is *always* set as its Cartesian state,
 with any relevant element conversions performed automatically. The Cartesian state may extracted from one
 of two places when the body is updated:
 
-* **State vector**: if the translational state of body :math:`A` is among the states that is numerically propagated,
-these elements will be extracted from the full state, and any relevant frame and elements conversions performed to define the current state of the body :math:`A`
-* **Ephemeris of a body**: if the translational state of a body is required for a simulation, and this body is *not*
-numerically propagated, its state is retrieved from this body's ephemeris (see :class:`~tudatpy.numerical_simulation.environment.Ephemeris`).
+  *  **State vector**: if the translational state of body :math:`A` is among the states that is numerically propagated, these elements will be extracted from the full state, and any relevant frame and elements conversions performed to define the current state of the body :math:`A`
+  *  **Ephemeris of a body**: if the translational state of a body is required for a simulation, and this body is *not* numerically propagated, its state is retrieved from this body's ephemeris (see :class:`~tudatpy.numerical_simulation.environment.Ephemeris`).
 
 Frame orientation
 -----------------
+
 Presently, Tudat does not support the automatic rotation of states between the state vector, ephemeris, or body objects.
 Consequenly, the frame *orientation* of each must be equal, as well as inertial. Currently, the frame orientations
 ``J2000`` and ``ECLIPJ2000`` are supported (see :ref:`below<predefined_orientations>`).
