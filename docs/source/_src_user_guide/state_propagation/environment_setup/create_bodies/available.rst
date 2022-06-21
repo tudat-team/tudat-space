@@ -49,26 +49,18 @@ The complete list of available environment model settings can be found on our AP
 .. _specific_environment_considerations:
 
 
-Specific Considerations
-=======================
+Points of attention
+===================
 
 On this page, we give an overview of some aspects of the environment models that may be useful for a user to select and understand their choice of environment models.
 This page is meant to supplement the API documentation, and is *not* a comprehensive overview of all environment models (which can be found there). 
 
-Rotation models
----------------
 
-Tudat has a broad range of rotation models available. In principle, these models can be assigned to both celestial bodies and natural bodies. 
-However, a subset of these models is typically only applied to natural *or* artificial bodies. Rotation models have a wide range of, sometimes indirect, influences on the dynamics
+Aerodynamic coefficients
+========================
 
-* A spherical harmonic acceleration exerted by a central body is first evaluated in a body-fixed frame, and the transformed to an inertial frame. Consequently, the central body's rotation has a fundamental influence on the exerted spherical harmonic acceleration
-* A thrust acceleration in Tudat is calculated from two models: (1) an engine model, which defined the body-fixed direction of the thrust, and the magnitude of the thrust (2) the orientation of the body in space, defined by its rotation model
-* For a non-spherical central body, the current orientation of this central body has an indirect influence on the altitude at which a vehicle with a given *inertial* state is located
+See the section on :ref:`aerodynamic coefficients during the propagation <aerodynamics_during_propagation>` concerning a number of points of attention regarding the aerodynamic coefficients.
 
-Two rotation models, which are typically used for vehicles under thrust, and/or vehicles in an atmosphere, are the following:
-
-* The rotation model :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.aerodynamic_angle_based`, which calculates the body's rotation based on the angle of attack, sideslip angle and bank angle. Note that these angles are definend w.r.t. the relative wind. This model is typical when using, for instance, a re-entry simulation. It imposes these three angles, and calculates the body orientation by combination with the latitude, longitude, heading angle, flight path angles. There is a related model, :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.zero_pitch_moment_aerodynamic_angle_based`, that uses the same setup, but does not impose the angle of attack, but caculates by imposing aerodynamic pitch trim (zero pitch moment).
-* The rotation model :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.custom_inertial_direction_based`, which is typical when calculating dynamics of a vehicle under thrust. It is based on linking a body-fixed  direction (now limited to the body-fixed x-axis) to an arbitrary inertial direction. This allows the thrust (assuming that this is aligned with this same body-fixed direction) to be guided in an inertial direction determined by a user-defined model. 
 
 Ephemeris models
 ----------------
@@ -100,6 +92,27 @@ There are two options in Tudat for creating either a spherical harmonic gravity 
 * Point mass: defining the gravitational parameter manually (:func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.central`) or requiring the gravitational parameter to be extracted from Spice (:func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.central_spice`).
 * Spherical harmonics: defining all the settings manually (:func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.spherical_harmonic`) or calculating the spherical harmonic coefficients (up to a given degree) based on an ellipsoidal homogeneous mass distribution (:func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.spherical_harmonic_triaxial_body`)
 
+
+
+Inertia tensor
+--------------
+
+
+Rotation models
+---------------
+
+Tudat has a broad range of rotation models available. In principle, these models can be assigned to both celestial bodies and natural bodies. 
+However, a subset of these models is typically only applied to natural *or* artificial bodies. Rotation models have a wide range of, sometimes indirect, influences on the dynamics
+
+* A spherical harmonic acceleration exerted by a central body is first evaluated in a body-fixed frame, and the transformed to an inertial frame. Consequently, the central body's rotation has a fundamental influence on the exerted spherical harmonic acceleration
+* A thrust acceleration in Tudat is calculated from two models: (1) an engine model, which defined the body-fixed direction of the thrust, and the magnitude of the thrust (2) the orientation of the body in space, defined by its rotation model
+* For a non-spherical central body, the current orientation of this central body has an indirect influence on the altitude at which a vehicle with a given *inertial* state is located
+
+Two rotation models, which are typically used for vehicles under thrust, and/or vehicles in an atmosphere, are the following:
+
+* The rotation model :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.aerodynamic_angle_based`, which calculates the body's rotation based on the angle of attack, sideslip angle and bank angle. Note that these angles are definend w.r.t. the relative wind. This model is typical when using, for instance, a re-entry simulation. It imposes these three angles, and calculates the body orientation by combination with the latitude, longitude, heading angle, flight path angles. There is a related model, :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.zero_pitch_moment_aerodynamic_angle_based`, that uses the same setup, but does not impose the angle of attack, but caculates by imposing aerodynamic pitch trim (zero pitch moment).
+* The rotation model :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.custom_inertial_direction_based`, which is typical when calculating dynamics of a vehicle under thrust. It is based on linking a body-fixed  direction (now limited to the body-fixed x-axis) to an arbitrary inertial direction. This allows the thrust (assuming that this is aligned with this same body-fixed direction) to be guided in an inertial direction determined by a user-defined model. 
+
 Wind models
 -----------
 
@@ -115,14 +128,6 @@ Wind models may be added to an atmosphere model by using the :attr:`~tudatpy.num
 Here, a wind vector in the positive z-direction of the vertical frame (downward) of 10 m/s is added, using the :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.constant_wind_model`.
             
 By default, an atmosphere has 'zero wind', which means that the atmosphere corotates with the body. A user may add a wind model to this atmosphere model, which will modify the freestream velocity that a vehicle in the atmosphere experiences
-
-Aerodynamic coefficients
-========================
-
-See the section on :ref:`aerodynamic coefficients during the propagation <aerodynamics_during_propagation>` concerning a number of points of attention regarding the aerodynamic coefficients.
-
-Inertia tensor
-==============  
 
 
 

@@ -8,9 +8,9 @@ Each body object and its constituent members is updated to the current state and
 
 Even though the environment is updated automatically, in various cases a user has control over *how* it gets updated. This is the case when using any of the :ref:`custom models <custom_models>` in Tudat. Typical examples of such models are aerodynamic guidance, or thrust guidance. When defining such custom models, you will in many cases need to access the properties of bodies in the environment to perform your calculations. This page lists how to access such properties, and how to use/interpret them (if relevant). Some examples are:
 
-* Retrieving the translational state of a spacecraft w.r.t. a central body to calculate its thrust direction 
+* Retrieving the translational state of a spacecraft w.r.t. a central body to calculate its thrust direction  
 * Retrieving the current atmospheric density during entry to calculate the required vehicle orientation
-* Retrieving properties that cannot be saved as a dependent variable to calculate a custom dependent variable
+* Retrieving properties that cannot be saved as a dependent variable to calculate a custom dependent variable (note - this option does not influence the propagation results, but can be used to obtain more flexible output, see :function:`~tudatpy.numerical_simulation.propagation_setup.dependent_variable.custom_dependent_variable`)
 * ...
 
 Below, we list how to retrieve the relevant information of the current properties of a Body in Tudat. Note that these can *only* be used during a propagation, and therefore are only relevant when setting up custom models. Retrieving properties of bodies outside of a propagation requires a different workflow (see :ref:`TODO`, as the various models are then not automatically updated.) 
@@ -19,6 +19,8 @@ Below, we list how to retrieve the relevant information of the current propertie
   Some (time-dependent properties) of a body are set in the environment models themselves (e.g. . Others are updated and stored directly in the Body object. Below is a full list of (possibly) time varying environment models, and how to retrieve them from a body object during propagation.
 
 In what follows below, we will assume that you have created a :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` variable named ``bodies``, from which you want to access various properties during the propagation. 
+
+.. _translational_state_during_propagation:
 
 Translational state
 -------------------
@@ -39,7 +41,7 @@ Rotational state
 
     The current rotational state of a body is defined by its current orientation w.r.t. the global frame orientation (see :ref:`reference_frames_global_orientation`). This orientation is defined by a quaternion (see :ref:`quaternion_definition`), but during a simulation a user will typically interact with the rotation matrix. The rotation matrix from the inertial to body-fixed frame is retrieved from a :class:`~tudatpy.numerical_simulation.environment.Body` object using the :attr:`~tudatpy.numerical_simulation.environment.Body.inertial_to_body_fixed_frame` function. The inverse rotation matrix (body-fixed to inertial) is retrieved using the :attr:`~tudatpy.numerical_simulation.environment.Body.body_fixed_to_inertial_frame` function.
     
-    The time-derivative of the orientation is provided in two formulations (with equivalent information content): the angular velocity vector of the body-fixed frame, and the time derivative of the rotation matrix. The angular velocity vector, in inertial and body-fixed coordinates, is obtained from the :attr:`~tudatpy.numerical_simulation.environment.Body.inertial_angular_velocity` and :attr:`~tudatpy.numerical_simulation.environment.Body.body_fixed_angular_velocity` functions respectively. Note that the latter is the formulation that is used to represent the time-variation of the rotation when propagating rotational dynamics (see :ref:`TODO`). Alternatively, the time-derivative of the rotation matrix from inertial to body-fixed frame is given by :attr:`~tudatpy.numerical_simulation.environment.Body.inertial_to_body_fixed_frame`, while the derivative of the inverse rotation is taken from :attr:`~tudatpy.numerical_simulation.environment.Body.body_fixed_to_inertial_frame_derivative`.
+    The time-derivative of the orientation is provided in two formulations (with equivalent information content): the angular velocity vector of the body-fixed frame, and the time derivative of the rotation matrix. The angular velocity vector, in inertial and body-fixed coordinates, is obtained from the :attr:`~tudatpy.numerical_simulation.environment.Body.inertial_angular_velocity` and :attr:`~tudatpy.numerical_simulation.environment.Body.body_fixed_angular_velocity` functions respectively. Note that the latter is the formulation that is used to represent the time-variation of the rotation when propagating rotational dynamics (see :ref:`TODO`). Alternatively, the time-derivative of the rotation matrix from inertial to body-fixed frame is given by :attr:`~tudatpy.numerical_simulation.environment.Body.inertial_to_body_fixed_frame_derivative`, while the derivative of the inverse rotation is taken from :attr:`~tudatpy.numerical_simulation.environment.Body.body_fixed_to_inertial_frame_derivative`.
 
 Body inertial mass
 ------------------
@@ -65,7 +67,7 @@ Spherical harmonic gravity field coefficients
 Flight conditions
 -----------------
 
-    The :class:`~tudatpy.numerical_simulation.environment.FlightConditions` class, and its derived class :class:`~tudatpy.numerical_simulation.environment.AtmosphericFlightConditions` stores data relating to altitude, flight angles, local atmospheric properties, etc. The ``FlightConditions`` class is atypical, in the sense that a user does not provide settings for the flight conditions when creating a body object. The reason is that the ``FlightConditions`` does not contain any 'new' information. Instead, it is resposible for using the existing properties of the environment and the propagation to calculate various properties related to the current state. 
+    The :class:`~tudatpy.numerical_simulation.environment.FlightConditions` class, and its derived class :class:`~tudatpy.numerical_simulation.environment.AtmosphericFlightConditions` stores data relating to altitude, flight angles, local atmospheric properties, etc. The ``FlightConditions`` class is atypical, in the sense that a user does not provide settings for the flight conditions when creating a body object. The reason is that the ``FlightConditions`` does not contain any 'new' information. Instead, it is responsible for using the existing properties of the environment and the propagation to calculate various properties related to the current state. 
     
     The reason is that ``FlightConditions`` are related to a central body, and the object is created automatically whenever the code identifies that it is required for any of its calculations (state derivative; dependent variables, etc.). A user may also create the class themselves by using the :func:`~tudatpy.numerical_simulation.add_flight_conditions` function. The choice between the two classes (``FlightConditions`` and ``AtmosphericFlightConditions``, with the latter derived from the former) is made based on the central body: if this has an atmosphere model, ``AtmosphericFlightConditions`` are created, if it does not, then ``FlightConditions`` are created.
             
