@@ -25,8 +25,8 @@ Below, there is a list of contributors to Tudat. Mostly, these have been staff a
 
 **Currently and recently active contributors**
 
-* Dominic Dirkx
-* Geoffrey Garrett
+* `Dominic Dirkx <https://www.linkedin.com/in/dominic-dirkx-2806a5b6>`_
+* `Geoffrey Garrett <https://www.linkedin.com/in/ghgarrett/>`_
 * Marie Fayolle
 * Miguel Avillez
 * Sean Cowan
