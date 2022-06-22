@@ -43,11 +43,13 @@ Below, there is a list of contributors to Tudat. Mostly, these have been staff a
 **Tudat Alumni Hall-of-fame**
 
 * `Kartik Kumar <https://www.linkedin.com/in/kumarkartik/>`_ - For starting it all, developing numerous core features, and leading the project through the crucial first few years with huge passion and commitment
-* `Jacco Geul <https://jacco.geul.net/>`_ - For supporting Tudat for the duration of his Ph.D. project, resolving more bugs than we can count and professionalizing the setup of the project
+* `Jacco Geul <https://jacco.geul.net/>`_ - For supporting Tudat for the duration of his Ph.D. project, resolving more bugs and answering more questions than we can count and professionalizing the setup of the project
+* `Jeroen Melman <https://www.linkedin.com/in/jeroen-melman-9533148>`_ - For helping to build up the Tudat project in its very first years with code development and project setup, without which it may never have survived 
 
 **Past Contributors**
 
 * `Giacomo Aciarini <https://www.linkedin.com/in/giacomo-acciarini-470712151/>`_
+* `Evianne Brandon <https://www.linkedin.com/in/eviannebrandon/>`_
 * `Frank Engelen <https://www.linkedin.com/in/frankengelen/>`_
 * `Michele Facchinelli <https://www.linkedin.com/in/mfacchinelli/>`_
 * `Iosto Fodde <https://www.linkedin.com/in/iosto-fodde-572b81129/>`_
@@ -68,7 +70,5 @@ Below, there is a list of contributors to Tudat. Mostly, these have been staff a
 
 ..
    * Elmar Puts
-   * Evianne Brandon
    * Bryan Tong Minh
-   * Jeroen Melman
    * Sebastian Villamil
