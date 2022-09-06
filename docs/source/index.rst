@@ -267,15 +267,6 @@ to get started with them, have a look at our
 
 .. toctree::
    :maxdepth: 2
-   :caption: Resources from Tudat ecosystem
-   :hidden:
-
-   _src_about/api
-   _src_about/developer_docs
-   _src_about/technical_docs
-
-.. toctree::
-   :maxdepth: 2
    :caption: About
    :hidden:
 

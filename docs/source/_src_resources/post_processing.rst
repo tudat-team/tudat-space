@@ -96,15 +96,13 @@ As a one-liner:
     t_end = 1000
     t_period_array = states_array[(states_array[:, 0] > t_start) & (states_array[:, 0] < t_end)]
 
-Converting simulator results to ``numpy.ndarray``
--------------------------------------------------
 
 Using pandas DataFrames
 =======================
 
 .. tip::
     Download the ``pandas`` cheatsheet!
-    :download:`pdf <_static/Pandas_Cheat_Sheet.pdf>`
+    :download:`pdf <https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf>`
 
 Converting simulator results to ``pandas.DataFrame``
 ----------------------------------------------------
