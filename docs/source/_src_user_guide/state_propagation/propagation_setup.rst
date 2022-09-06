@@ -19,6 +19,7 @@ Propagation Setup
    propagation_setup/dependent_variables
    propagation_setup/propagation_architecture
    
+.. _propagation_setup_intro:
 
 Introduction
 ============

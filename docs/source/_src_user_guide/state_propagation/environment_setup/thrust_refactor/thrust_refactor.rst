@@ -1,3 +1,5 @@
+.. _backwards_incompatibility:
+
 ==================================================
 Thrust and Aerodynamic Orientation - Code Refactor
 ==================================================
@@ -9,7 +11,7 @@ Thrust and Aerodynamic Orientation - Code Refactor
 
    thrust_old
    
-The framework in Tudat to calculate inertial thrust direction and aerodynamic guidance was overhaulen in mid-2022. The reasons for this were:
+The framework in Tudat to calculate inertial thrust direction and aerodynamic guidance was overhauled in mid-2022. The reasons for this were:
 
 * Uninformative error warnings for certain models (primarily: custom thrust directions)
 * Inconsistent ways in which a vehicle's orientation is defined (implicitly by both aerodynamic guidance and thrust guidance)
@@ -90,7 +92,7 @@ It is then linked to the environment as follows:
 
 The function computing the aerodynamic angles in the guidance object (``aerodynamic_guidance_object.getAerodynamicAngles``) is linked to the specific rotation model settings :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.aerodynamic_angle_based`` which defines the rotation model we want.
 
-The above example is discussed in detail on the :ref:`entry example page <TODO>`. Note that in the above code snippet, we have used a slightly more simplified guidance object than in the example application. They are functionally equivalent, but the code in the example application lends itself better to incorporation into more complex guidance classes. The type of guidance class used in the code snippet and the example application are of the type :ref:`single_custom_models` and :ref:`couple_custom_models`, respectively.
+The above example is discussed in detail on the `entry example page <https://docs.tudat.space/en/stable/_src_getting_started/_src_examples/notebooks/propagation/reentry_trajectory.html>`_. Note that in the above code snippet, we have used a slightly more simplified guidance object than in the example application. They are functionally equivalent, but the code in the example application lends itself better to incorporation into more complex guidance classes. The type of guidance class used in the code snippet and the example application are of the type :ref:`single_custom_models` and :ref:`couple_custom_models`, respectively.
 
 Summary
 ~~~~~~~

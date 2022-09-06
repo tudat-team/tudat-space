@@ -6,9 +6,12 @@ Dependent Variables
 Dependent variables can be added to the propagation settings by first defining
 a list of desired dependent variables, which is supplied as input argument to the
 :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.translational`,
-:func:`~tudatpy.numerical_simulation.propagation_setup.propagator.rotational`,
-or :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.mass` functions.
-Each dependent variable is created via a dedicated factory function. See the example below:
+:func:`~tudatpy.numerical_simulation.propagation_setup.propagator.`,
+:func:`~tudatpy.numerical_simulation.propagation_setup.propagator.mass`
+:func:`~tudatpy.numerical_simulation.propagation_setup.propagator.custom_state` or
+:func:`~tudatpy.numerical_simulation.propagation_setup.propagator.multitype`
+
+Each dependent variable is created via a dedicated factory function. See the example below for the definition of four separate dependent variables:
 
 
 .. code-block:: python
@@ -20,11 +23,6 @@ Each dependent variable is created via a dedicated factory function. See the exa
         propagation_setup.dependent_variable.longitude( "Delfi-C3", "Earth" )
     ]
 
-.. note::
+this list is then added to one of the propagator setting functions listed above.
 
-   All variables are saved in SI units.
-
-.. seealso::
-   You can find a full list of dependent variables that can be saved `in our API documentation <https://tudatpy.readthedocs.io/en/latest/dependent_variable.html#functions>`_.
-
-				
+You can find a full list of dependent variables that can be saved `in our API documentation <https://tudatpy.readthedocs.io/en/latest/dependent_variable.html#functions>`_. Notet that **all** dependent variables are porivded in SI units (meters, radians, kilograms, seconds since J2000).

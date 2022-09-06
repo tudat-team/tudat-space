@@ -4,6 +4,10 @@
 Custom models
 =============
 
+.. attention::
+
+  This page is only compatible for Tudatpy version >= 0.7. See :ref:`thrust and rotation refactor <backwards_incompatibility>` for more information on this page for older versions.
+  
 .. toctree::
    :titlesonly:
    :hidden:
@@ -25,12 +29,12 @@ Custom environment models:
 * Custom atmospheric density model (function of position and time) :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.custom_four_dimensional_constant_temperature` *Note:* this custom function has current time, altitude, latitude and longitude as input.
 * Custom wind model: :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.custom_wind_model`
 * Custom ephemeris: :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.custom_ephemeris`
+* Custom body orientation :func:`~tudatpy.numerical_simulation.propagation_setup.rotation.custom_rotation_model`
+* Custom inertial direction (typical for basic thrust guidance) :func:`~tudatpy.numerical_simulation.propagation_setup.rotation.custom_inertial_direction_based`
 
 Custom propagation models:
 
-* Custom body orientation :func:`~tudatpy.numerical_simulation.propagation_setup.thrust.custom_thrust_orientation`
-* Custom body direction :func:`~tudatpy.numerical_simulation.propagation_setup.thrust.custom_thrust_direction`
-* Custom thrust magnitude :func:`~tudatpy.numerical_simulation.propagation_setup.thrust.custom_thrust_direction`
+* Custom thrust magnitude :func:`~tudatpy.numerical_simulation.propagation_setup.thrust.custom_thrust_magnitude`
 * Custom torque :func:`~tudatpy.numerical_simulation.propagation_setup.torque.custom_torque`
 * Custom acceleration :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.custom_acceleration`
 * Custom mass rate :func:`~tudatpy.numerical_simulation.propagation_setup.mass_rate.custom_mass_rate`

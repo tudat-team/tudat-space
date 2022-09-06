@@ -32,11 +32,6 @@ The distinction betweenn the ``foo` and ``foo_setup` libraries is the following:
 * The ``numerical_simulation.foo_setup`` submodule contains no actual functionality to perform any calculations. It contains a long list of *settings* that are used to create the models that do the actual calculations. The functionality in this library largely consists of factory functions to create ``Settings`` objects.
 * The ``numerical_simulation.foo`` submodule contains the functionality to perform the actual calculations. Typically, the objects in this submodule are created from one or more ``Settings`` objects created in the ``foo_setup`` library. These objects may have various interdependencies which are difficult to manually implement, but straightforward to conceptually define with a string, boolean, etc. For instance: it is easy to state that a set of aerodynamic coefficients dependent on angle of attack (this is defined in the ``environment_setup`` submodule), while it is rather cumbersome to manually extract the angle of attack, and input it to the aerodynamic coefficient during every time step. The objects that do this automatically come from the ``environment`` submodule. In addition, the ``numerical_simulation.foo`` libraries also contain a number of functions that can be used to process propagation results, or extract information from one or more objects in the ``numerical_simulation.foo`` library.
 
-The numerical_simulation submodules - an example
-================================================
-
-TODO?
-
 
 
 

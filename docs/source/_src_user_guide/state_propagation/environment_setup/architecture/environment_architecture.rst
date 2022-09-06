@@ -13,13 +13,15 @@ An overview of the architecture of the Tudat environment is given in the figure 
 
 * The environment is defined by a single :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` object.
 * The :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` contains a list of :class:`~tudatpy.numerical_simulation.environment.Body` objects, each of which represents a single natural or artificial body, and contains all of this body's properties. In the C++ code, each body is stored as a ``shared_ptr< Body >``. Every body is assigned a unique name by which it can be retrieved. A body can be extracted using the :func:`~tudatpy.numerical_simulation.environment.SystemOfBodies.get` functionn.
-* Each :class:`~tudatpy.numerical_simulation.environment.Body` object contains a number of environment models (see :ref:`available_environment_models` for a complete list). By default, each of these objects is initialized as a ``nullptr``, and is only assigned when specified during the creation of the body (:ref:`TODO`) or if added after the creation of the body (:ref:`TODO`).
+* Each :class:`~tudatpy.numerical_simulation.environment.Body` object contains a number of environment models (see :ref:`available_environment_models` for a complete list). By default, each of these objects is initialized as a ``nullptr``, and is only assigned when specified during the creation of the body (:ref:`create_bodies_from_settings_first`), or when added after the creation of the body (:ref:`decorate_empty_body`).
 
 As discussed :ref:`here <single_propagation_evaluation>`, the properties in the environment get updated to the current time and state of the numerical integration at the start of every function evaluation. Only those properties that are relevant for the propagation being performed are updated. Interaction with the environment during the propagation is described in more detail :ref:`here <environment_during_propagation>`
 
 
 Interdependencies of environment models
 =======================================
+
+TODO
 
 
 

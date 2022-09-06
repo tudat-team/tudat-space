@@ -8,6 +8,8 @@ Creating and modifying the bodies
 Once all settings for the bodies are defined as described in :ref:`create_celestial_body_settings`, the bodies are
 created and linked together, so that all required interdependencies are automatically satisfied.  
 
+.. _create_bodies_from_settings_first:
+
 Creation of system of bodies from settings
 ===========================================
 
@@ -101,6 +103,7 @@ Properties can be added to an existing body after the body's creation (with the 
 * Mass
 * Aerodynamic coefficients
 * Radiation pressure properties
+* Engine model
 
     .. tabs::
 

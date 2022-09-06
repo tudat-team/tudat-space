@@ -144,15 +144,15 @@ Aerodynamic
 | 3. Mass model for body undergoing acceleration.
 | 4. Current state of body undergoing acceleration and body with atmosphere.
 | 5. Shape model for the body exerting an acceleration (to allow for the calculation of vehicle altitude)
+| 6. Roation model for the body undergoing an acceleration (or numerical propagation of this body's rotational dynamics)
 
 .. note::
-   By default, a body’s angle of attack, sideslip angle, and bank angle are all set to 0. Defining a vehicle
-   orientation is typically done in one of several ways: defining aerodynamic guidance directly (imposing these three
-   angles), using the definition of vehicle orientation from an existing model for the vehicle (for instance thrust),
-   or propagation of the body’s rotational dynamics.
+   The aerodynamic acceleration is calculated in the vehicles body-fixed or aerodynamic frame. Expressing the
+   acceleration in an inertial frame (as required by the propagation) requires the vehicle's orientation to be defined.
+   For a simple definition, in which the body’s angle of attack, sideslip angle, and bank angle are all set to 0, see
+   :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.aerodynamic_angle_based`.
 
-.. todo::
-   Add reference to aerodynamic guidance page.
+   More details on aerodynamic guidance can be found on :ref:`this page <aerodynamic_models>`.
 
 #############################
 Radiation Pressure
@@ -223,69 +223,26 @@ Empirical
   empirically (typically during an orbit determination process).
 
 | **Dependencies**
-| 1. Mass of the central body (for calculation of true anomaly).
+| 1. Gravity field of the central body (for calculation of true anomaly).
 
 ######
 Thrust
 ######
 
-There are currently three different ways to create thrust acceleration models in TudatPy:
-
-- :ref:`thrust_direction_and_magnitude`
-- :ref:`thrust_custom_function`
-- :ref:`thrust_isp_custom_function`
-
-.. _`thrust_direction_and_magnitude`:
-
-From direction and magnitude
-#############################
-
 | **Description**
-| The thrust from direction and magnitude can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.thrust_from_direction_and_magnitude`
-  factory function. The direction and magnitude are supplied to the function as two separate objects, which can be
-  created in different ways (see :mod:`~tudatpy.numerical_simulation.propagation_setup.thrust`).
+| The thrust acceleration model can be created through one of the factory functions:
+
+  * :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.thrust_from_engine` (use single specific engine)
+  * :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.thrust_from_engines` (use multiple specific engines)
+  * :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.thrust_from_all_engines` (use all engines)
+
+  Which differ only in the manner in which the user selects the engine model(s) this is(are) to be used for calculating the thrust.
+  The details of the model used for the thrust is given on a :ref:`dedicated page <thrust_acceleration_setup>`
 
 | **Dependencies**
-| 1. Mass of body undergoing acceleration.
-
-
-.. seealso::
-   To create thrust direction and magnitude settings, more details are provided at `this link <https://tudatpy.readthedocs.io/en/latest/thrust.html>`_.
-
-.. todo::
-   Create dedicated thrust page on tudat-space and add link.
-
-
-.. _`thrust_custom_function`:
-
-From custom function (with constant specific impulse)
-############################################################
-
-| **Description**
-| The thrust from a custom function can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.thrust_from_custom_function`
-  factory function. Instead of separating the direction and magnitude of the thrust acceleration, this function
-  accepts a function of time that returns the thrust acceleration vector and a constant specific impulse.
-
-| **Dependencies**
-| 1. Mass of body undergoing acceleration.
-
-.. _`thrust_isp_custom_function`:
-
-From custom function (with variable specific impulse)
-############################################################
-
-| **Description**
-| The thrust from a custom function and variable specific impulse can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.thrust_and_isp_from_custom_function`
-  factory function. Instead of separating the direction and magnitude of the thrust acceleration, this function
-  accepts a function that returns the thrust acceleration vector. With respect to the previous thrust acceleration,
-  in this case the specific impulse can vary and it is supplied as a function of time.
-
-
-| **Dependencies**
-| 1. Mass of body undergoing acceleration.
-
-
-
+| 1. One or more engine models for the body under thrust
+| 2. A rotation model for the body under thrust
+| 3. Mass of the body under thrust (if the thrust magnitude model for the engine defines a force, and not an acceleration)
 ##################################
 Tidal effect on natural satellites
 ##################################

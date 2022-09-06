@@ -208,10 +208,10 @@ to get started with them, have a look at our
     ^^^
 
     Several tools for preliminary mission design, including Lambert targeters, patched conic multiple-gravity
-    assists, and shape-based low-thrust models.
+    assists, and shape-based low-thrust models. Extended documentation
 
     +++
-    .. link-button:: _src_user_guide/astrodynamics/two_body_dynamics
+    .. link-button:: _src_user_guide/astrodynamics/trajectory_design
             :type: ref
             :text: Find out more
             :classes: stretched-link btn-outline-primary
@@ -226,7 +226,7 @@ to get started with them, have a look at our
 
 
     +++
-    .. link-button:: _src_user_guide/state_propagation/environment_setup/architecture/custom_models
+    .. link-button:: _src_user_guide/state_propagation/environment_setup/architecture/custom_settings
             :type: ref
             :text: Find out more
             :classes: stretched-link btn-outline-primary

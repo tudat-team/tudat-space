@@ -37,7 +37,7 @@ The combination of all Body objects is stored in a
 simple ``bodies`` in the code). During the propagation, all the required properties of bodies are extracted and combined
 to evaluated accelerations/torques/guidance/... and compute the state derivative of the system (see :ref:`propagation_setup` for setting up a numerical propagation).
 
-Even though the primary role of the environment is in numerical state propagation, it is also used to define properties of celestial bodies in, for instance, (semi-)analytical trajectory design (see :ref:`TODO`).
+Even though the primary role of the environment is in numerical state propagation, it is also used to define properties of celestial bodies in, for instance, (semi-)analytical trajectory design (see :ref:`transfer_trajectory`).
 
 Body Creation - Procedure
 -------------------------

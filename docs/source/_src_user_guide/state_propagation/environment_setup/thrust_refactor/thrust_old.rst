@@ -5,6 +5,9 @@
 Use of thrust models - Legacy
 =============================
 
+.. warning::
+   This page is only for the **old** versions of Tudatpy (< 0.6.x). It is included purely to temporarily support people using such legacy versions of Tudatpy. See :ref:`thrust and rotation refactor <backwards_incompatibility>` for more information on the changes between 0.6.x and 0.7.
+
 This page deals with the inclusion of a thrust force into the dynamical model. Note that, when using thrust models, it
 may often be desirable to propagate the mass of the vehicle at the same time (removing mass of the burnt propellant,
 for instance).
@@ -266,9 +269,8 @@ More details and options on mass propagation are provided on the :ref:`mass_dyna
 
 Thrust and rotational dynamics - Legacy
 =======================================
-.. todo::
-   A more detailed explanation on how to integrate and use thrust direction from rotational dynamics is to be added here later. As discussed above, the :func:`~tudatpy.numerical_simulation.propagation_setup.thrust.thrust_from_existing_body_orientation` can be used to automatically use the current body orientation to calculate the thrust. Details on how to incorporate the thrust torque are to be added later.
-   
+
+For support in this functionality using the Tudatpy legacy versions, please contact the Tudat development team.
 
 Thrust Vectoring Control - Legacy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -311,33 +313,9 @@ In this section, we will discuss the option of defining the orientation of the v
 Separate orientations - Legacy
 ==============================
 
-.. todo::
-   An explanation on how to define thrust orientation separately from aerodynamic guidance is to be added here later.
-
-..
-   The orientation of the thrust of the vehicle, and its aerodynamics, can be separately defined.
-
-   For instance, let's say that we define our thrust orientation as being colinear with velocity, using the :func:`~tudatpy.numerical_simulation.propagation_setup.thrust.thrust_direction_from_state_guidance` function.
-   Then, the orientation of the vehicle itself is still undefined for our aerodynamic acceleration computation.
-   This can be fixed by adding, for instance, aerodynamic guidance, using the :class:`~tudatpy.numerical_simulation.propagation.AerodynamicGuidance` class.
-
-   This leads to the overall simulation setup of the following code snippet, using an aerodynamic guidance class that varies the angle of attack between -1.5deg and 1.5deg:
-
-      .. tabs::
-
-         .. tab:: Python
-
-            .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/thrust_vs_aero_orientation.py
-               :language: python
-
-         .. tab:: C++
-
-            .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/thrust_vs_aero_orientation.cpp
-               :language: cp
-
-   The above example then shows how to have full but separate control over the vehicle orientation used to compute the thrust and the  aerodynamic acceleration.
+For support in this functionality using the Tudatpy legacy versions, please contact the Tudat development team.
 
 Thrust direction from aerodynamics - Legacy
 ===========================================
-.. todo::
-   An explanation on how to use thrust direction from existing orientation defined by aerodynamic guidance is to be added here later.
+
+For support in this functionality using the Tudatpy legacy versions, please contact the Tudat development team.

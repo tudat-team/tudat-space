@@ -5,6 +5,11 @@
 Use of thrust models
 ====================
 
+.. attention::
+
+  This page is only compatible for Tudatpy version >= 0.7. See :ref:`thrust and rotation refactor <backwards_incompatibility>` for more information on this page for older versions.
+  
+  
 This page deals with the inclusion of a thrust force into the dynamical model. Note that, when using thrust models, it
 may often be desirable to propagate the mass of the vehicle at the same time (removing mass of the burnt propellant,
 for instance). Details on how to propagate the mass of a body are given in :ref:`mass_dynamics`. Details on combining translation and mass propagators is given in :ref:`multi_type_dynamics`.
@@ -27,7 +32,20 @@ In Tudat, the acceleration that a body undergoes due to the addition of thrust c
   *  The vehicle has any other rotation model defined, in this case the inertial thrust direction is computed from :math:`\hat{\mathbf{T}}=\mathbf{R}^{(I/B)}\hat{\mathbf{T}}_{B}` 
   *  The rotational dynamics of the vehicle is propagated, and the orientation of the vehicle is taken from the current rotational state. The inertial thrust direction then follows from :math:`\hat{\mathbf{T}}=\mathbf{R}^{(I/B)}\hat{\mathbf{T}}_{B}`.
 
-Once an engine model, and a rotation model, for the vehicle are defined, the thrust acceleration can simply be adde to the acceleration settings as any other acceleration model. 
+Three functions are provided to define a thrust acceleration:
+
+*  :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.thrust_from_engine`.
+*  :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.thrust_from_engines`
+*  :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.thrust_from_all_engines`
+
+which differ only in the manner that the engine models are selected. For a thrust acceleration comprised of :math:`N` engines, the total thrust acceleration is calculated from:
+
+.. math::
+
+ \mathbf{a}_{T}=\mathbf{R}^{(I/B)}\sum_{i=1}^{N}\hat{\mathbf{T}}_{B,i}a_{T,i}
+
+where :math:`\mathbf{T}}_{B,i}` is the body-fixed thrust direction of body :math:`i`, and :math:`a_{T,i}` is the thrust acceleration norm exerted by engine :math:`i`. In the (typical) case that the engine thrust force :math:`F_{T,i}` is defined directly (instead of the acceleration, see :ref:`below <thrust_acceleration_magnitude>`), we have :math:`a_{T,i}=F_{T,i}/,m`, with :math:`m` the mass of the body.
+Once one (or more) engine models, and a rotation model, for the vehicle are defined, the thrust acceleration can simply be adde to the acceleration settings as any other acceleration model.
 
 
     .. code-block:: python
@@ -36,7 +54,7 @@ Once an engine model, and a rotation model, for the vehicle are defined, the thr
             Vehicle=[  propagation_setup.acceleration.thrust_from_engine( 'MainEngine') ],
             ...
 
-Where the thrust acceleration due to the single engine model named 'MainEngine' will be used, see :func:`tudatpy.numerical_simulation.propagation_setup.acceleration.thrust_from_engine`. Alternatively, a single thrust acceleration model may be created from a list of user-provided engine names (:func:`tudatpy.numerical_simulation.propagation_setup.acceleration.thrust_from_engines`), or from all engines assigned to the vehicle (:func:`tudatpy.numerical_simulation.propagation_setup.acceleration.thrust_from_all_engines`)
+Where the thrust acceleration due to the single engine model named 'MainEngine' will be used
 
 Thrust torque
 ~~~~~~~~~~~~~
@@ -50,6 +68,8 @@ Thrust guidance
 ===============
 
 A typical thrust acceleration application will include some sort of guidance for the thrust. The inertial *direction* of the thrust acceleration is defined by the rotation model of the body under consideration (see :ref:`thrust_acceleration_setup`). Below, we provide more details on how to define the thrust magnitude and body-fixed thrust direction, as well as some considerations on typical manners in which to define the body's rotation (e.g. inertial thrust direction).
+
+.. _thrust_acceleration_magnitude:
 
 Thrust magnitude
 ~~~~~~~~~~~~~~~~
@@ -85,7 +105,7 @@ In Tudat, the body-fixed thrust direction for the vehicle is defined in the ``En
 Thrust and aerodynamics
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-This section elaborates on the use of thrust orientation in case aerodynamics are also taken into account in the simulation model. Even though, in principle, the thrust model is not affected by the presence of an aerodynamic acceleration, there are a number of considerations that may be useful to take into account when setting up such a simulation. In particular, this relates to the manner in which the body's orientation is typically defined in such cases, and how the body's orientation influences the accelerations.  For aerodynamics, the body's orientation is typically defined w.r.t. the trajectory frame (which is itself defined by the body's relative translational state w.r.t. a central body) by the angle of attack :math:`alpha`, the sideslip angle :math:`beta` and the bank angle :math:`sigma` (see :ref:`TODO`). The thrust and aerodynamic accelerations are influenced by the body's  orientation as follows:
+This section elaborates on the use of thrust orientation in case aerodynamics are also taken into account in the simulation model. Even though, in principle, the thrust model is not affected by the presence of an aerodynamic acceleration, there are a number of considerations that may be useful to take into account when setting up such a simulation. In particular, this relates to the manner in which the body's orientation is typically defined in such cases, and how the body's orientation influences the accelerations.  For aerodynamics, the body's orientation is typically defined w.r.t. the trajectory frame (which is itself defined by the body's relative translational state w.r.t. a central body) by the angle of attack :math:`\alpha`, the sideslip angle :math:`\beta` and the bank angle :math:`\sigma` (see :ref:`TODO`). The thrust and aerodynamic accelerations are influenced by the body's  orientation as follows:
 
 * For thrust, the body's orientation influences the inertial acceleration, as it influences the direction in which the engine is pointed (see :ref:`thrust_acceleration_setup:`)
 * For aerodynamics, the body's orientation influences the inertial acceleration, as the aerodynamic force is typically computed in either aerodynamic frame, or body-fixed frame. In these cases the either :math:`\sigma`, or :math:`alpha`, :math:`beta` and :math:`sigma`, respectively. In addition, in many cases the aerodynamic coeficients *themselves* are a function of the :math:`alpha` (and :math:`beta`).
