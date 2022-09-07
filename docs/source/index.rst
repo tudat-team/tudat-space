@@ -55,16 +55,16 @@ Quickstart
     ---
     :column: col-lg-4 p-3
 
-    **Success stories**
+    **Research output**
     ^^^
 
-    Find out what you can do with tudatpy by having a look at our success stories.
+    Find out some state-of-the-art examples of what you can do with tudat(py) by having a look at our list of publications
 
     +++
 
-    .. link-button:: index
+    .. link-button:: _src_about/research_output
         :type: ref
-        :text: Coming soon :)
+        :text: Have a look
         :classes: btn-outline-primary btn-block stretched-link
 
 

@@ -42,6 +42,8 @@ Ephemerides from Spice kernels are only valid for a somewhat limited time interv
 .. note::
    In some cases, the extraction of the state of bodies from Spice kernels can be a computational bottleneck. Tudat has an :ref:`alternative set of default options <valid_time_range>`, which make this process signicantly faster, at the expense of higher RAM usage, and an environment that is only valid over a very limited time interval.
 
+.. _default_rotation_models:
+
 Rotation model
 --------------
 

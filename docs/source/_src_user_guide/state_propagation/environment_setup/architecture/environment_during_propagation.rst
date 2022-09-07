@@ -33,11 +33,25 @@ Translational state
     NOTE: If you are only interested in the position or velocity components, you can use the :attr:`~tudatpy.numerical_simulation.environment.Body.position` or :attr:`~tudatpy.numerical_simulation.environment.Body.velocity` functions.
 
 
+.. _rotation_during_propagation:
+
 Rotational state
 ----------------
-    The rotational state of a body during the propagation is defined by the orientation of its body-fixed frame w.r.t. the global frame orientation, which is *always* an inertial orientation (see :ref:`reference_frames_global_orientation`). This orientation is defined internally by a quaternion (see :ref:`quaternion_definition`), but during a simulation a user will interact with the rotation matrix if they wish to use any current rotation in their custom models. The rotation matrix from the inertial to body-fixed frame is retrieved from a :class:`~tudatpy.numerical_simulation.environment.Body` object using the :attr:`~tudatpy.numerical_simulation.environment.Body.inertial_to_body_fixed_frame` function. The inverse rotation matrix (body-fixed to inertial) is retrieved using the :attr:`~tudatpy.numerical_simulation.environment.Body.body_fixed_to_inertial_frame` function.
+    The rotational state of a body during the propagation is defined by the orientation of its body-fixed frame w.r.t. the global frame orientation,
+    which is *always* an inertial orientation (see :ref:`reference_frames_global_orientation`). This orientation is defined internally by a quaternion
+    (see :ref:`quaternion_definition`), but during a simulation a user will interact with the rotation matrix if they wish to use any current rotation in
+    their custom models. The rotation matrix :math:`\mathbf{R}^{B/I}` from the inertial :math:`I` to body-fixed frame :math:`B` is retrieved from a :class:`~tudatpy.numerical_simulation.environment.Body`
+    object using the :attr:`~tudatpy.numerical_simulation.environment.Body.inertial_to_body_fixed_frame` function. The inverse rotation matrix :math:`\mathbf{R}^{I/B}` (body-fixed to
+    inertial) is retrieved using the :attr:`~tudatpy.numerical_simulation.environment.Body.body_fixed_to_inertial_frame` function.
 
-    The time-derivative of the orientation is provided in two formulations (with equivalent information content): the angular velocity vector of the body-fixed frame, and the time derivative of the rotation matrix. The angular velocity vector, in inertial and body-fixed coordinates, is obtained from the :attr:`~tudatpy.numerical_simulation.environment.Body.inertial_angular_velocity` and :attr:`~tudatpy.numerical_simulation.environment.Body.body_fixed_angular_velocity` functions respectively. Note that the latter is the formulation that is used to represent the time-variation of the rotation when propagating rotational dynamics (see :ref:`rotational_dynamics`). Alternatively, the time-derivative of the rotation matrix from inertial to body-fixed frame is given by :attr:`~tudatpy.numerical_simulation.environment.Body.inertial_to_body_fixed_frame_derivative`, while the derivative of the inverse rotation is taken from :attr:`~tudatpy.numerical_simulation.environment.Body.body_fixed_to_inertial_frame_derivative`.
+    The time-derivative of the orientation is provided in two formulations (with equivalent information content): the angular velocity vector of the
+    body-fixed frame, and the time derivative of the rotation matrix. The angular velocity vector (of :math:`B` w.r.t. inertial space), in inertial and body-fixed coordinates, is obtained from
+    the :attr:`~tudatpy.numerical_simulation.environment.Body.inertial_angular_velocity` and
+    :attr:`~tudatpy.numerical_simulation.environment.Body.body_fixed_angular_velocity` functions respectively.
+    Note that the latter is the formulation that is used to represent the time-variation of the rotation when propagating rotational dynamics
+    (see :ref:`rotational_dynamics`). Alternatively, the time-derivative of the rotation matrix from inertial to body-fixed frame :math:`\dot{\mathbf{R}}^{B/I}` is given by
+    :attr:`~tudatpy.numerical_simulation.environment.Body.inertial_to_body_fixed_frame_derivative`, while the derivative of the inverse rotation :math:`\dot{\mathbf{R}}^{I/B}`
+    is taken from :attr:`~tudatpy.numerical_simulation.environment.Body.body_fixed_to_inertial_frame_derivative`.
 
 Body inertial mass
 ------------------

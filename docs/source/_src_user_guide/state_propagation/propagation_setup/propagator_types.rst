@@ -1,8 +1,8 @@
 .. _propagator_types:
 
-=======================================
-Formulation of state coordinates
-=======================================
+================================================
+Propagated state elements - conversion and usage
+================================================
 
 In Tudat, the translational and rotational states (and the way they are propagated numerically) can have different
 formulations. For instance, the most

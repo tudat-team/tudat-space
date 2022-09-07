@@ -1,10 +1,17 @@
 .. _reference_frames:
 
-===================================================
-Reference frames in the environment and propagation
-===================================================
+=========================
+Frames in the Environment
+=========================
 
-In any state propagation tool, the careful use of reference frames is essential: small mistakes in definitions and conventions are a notorious source of errors in simulations. The environment and state propagation framework in Tudat handles all the relevant state translations/rotations/transformations. On this page, we describe various manners in which reference frames are used in Tudat, and what the differences are when extracting a state from different places in Tudat.
+
+In any state propagation tool, the careful use of reference frames is essential: small mistakes in definitions and conventions
+are a notorious source of errors in simulations. The environment and state propagation framework in Tudat handles all the
+relevant state translations/rotations/transformations. On this page, we describe various manners in which reference frames
+are used in the environment Tudat, in particular in the :class:`~tudatpy.numerical_simulation.environment.Body` objects (which
+constitute the environment). In addition, we highlight what the differences are when extracting a state from different places in Tudat.
+This page is limited mainly in the manner that Tudat *automatically* deals with various different frames. A comprehensive list of
+all available frames that are available to the user can be found :ref:`here <manual_state_definitions>`.
 
 .. contents:: Content of this page
    :local:
@@ -14,8 +21,29 @@ In any state propagation tool, the careful use of reference frames is essential:
 Translational states
 ====================
 
-The translational state of a body is a critical piece of information for numerous calculations in the Tudat propagation framework. For instance, (almost) any acceleration acting on a body :math:`A` will require the Cartesian state of this body as input. 
-        
+The translational state of a body is a critical piece of information for numerous calculations in the Tudat propagation framework.
+For instance, (almost) any acceleration acting on a body :math:`A` will require the Cartesian state of this body as input.
+
+In Tudat, we use the terms *frame* and *element* to describe the following disinct concepts:
+
+- **Frame orientation**: Defines the orientation in inertial space of the set of unit vectors the :math:`x`, :math:`y` and :math:`z` axes.
+  These orientations may be constant in time, in which case the frame is said to have an inertial orientation (for instance the J2000 frame orientation),
+  or a time-dependent orientation (for instance an Earth-fixed frame orientation).
+- **Frame origin**: Defines the point in inertial space that defines the :math:`\mathbf{0}` position (:math:`x=y=z=0`).
+  This point may be constant in time, in which case the frame is said to have an inertial origin (for instance: the solar
+  system barycentric origin), or a time-dependent orientation (for instance an Earth-centered origin).
+- **Elements**: The physical meaning of the values of a state vector that represent a (translational) state.
+  Examples are Cartesian, Keplerian and Modified Equinoctial. With the exception of possible singularities,
+  these different element types can use six (or more) values to defines the same physical state, but using a very different set of numbers.
+
+The frame itself does not define anything concerning the (state) vector, instead it defines how a specific set of elements represents
+a specific physical state. In Tudat, a state vector is represented as a vector (numpy in Python; Eigen in C++).
+The state vector itself cannot store the element set or frame orientation in which it is defined.
+This information is tracked by Tudat (for internal compuations) or should be tracked by a user (for any user-defined state vector).
+
+In the rest of this section, we will present how Tudat deals with the calculation and transformation of frame origins and orientations.
+Through out, we will assume that all translational state vectors are represented in Cartesian coordinates.
+
 When running a state propagation, one of the first steps that is performed when evaluating the state derivative
 function :math:`\mathbf{f}(\mathbf{x},t)` (see :ref:`single_propagation_evaluation`) is to update the full environment to the current time :math:`t` and state 
 :math:`\mathbf{x}`. Note that in a basic simulation, :math:`\mathbf{x}` is the translational state of a single body. See :ref:`environment_during_propagation` for details on how to access the current properties of the environment during a propagation.
@@ -34,13 +62,6 @@ of two places when the body is updated:
 
   *  **State vector**: if the translational state of body :math:`A` is among the states that is numerically propagated, these elements will be extracted from the full state, and any relevant frame and elements conversions performed to define the current state of the body :math:`A`
   *  **Ephemeris of a body**: if the translational state of a body is required for a simulation, and this body is *not* numerically propagated, its state is retrieved from this body's ephemeris (see :class:`~tudatpy.numerical_simulation.environment.Ephemeris`).
-
-Frame orientation
------------------
-
-Presently, Tudat does not support the automatic rotation of states between the state vector, ephemeris, or body objects.
-Consequenly, the frame *orientation* of each must be equal, as well as inertial. Currently, the frame orientations
-``J2000`` and ``ECLIPJ2000`` are supported (see :ref:`below<predefined_orientations>`).
 
 .. _translational_frame_origins:
 
@@ -81,7 +102,7 @@ Each body that is not numerically propagated is typically (but not necessarily) 
 
 | **How a user defines the ephemeris origin**: through the definition of ephemeris settings when creating the settings for the body objects (see :ref:`environment_ephemeris_model`). Often, the default settings will be used in the case of celestial bodies (see :ref:`default_environment_models`).
 |
-| **When the propagation origin is relevant to a user:**:
+| **When the propagation origin is relevant to a user:**
 * When directly retrieving the state from an ephemeris object.
 
 .. _global_origin:
@@ -89,13 +110,33 @@ Each body that is not numerically propagated is typically (but not necessarily) 
 The global origin - the current states in the bodies
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-When :ref:`creating a set of body objects<creating_celestial_bodies>`, you define a global frame origin, and a global frame orientation. When a body's state gets updated, regardless of whether it is retrieved from the propagated state vector, or an ephemeris, it is *always* converted to this global frame origin/orientation before being assigned to a body object. Consequently, any time that a state is retrieved directly from a body object, it will be defined in this global frame. The global frame is the same for each body in a simulation. It are also these states in the global frame which are used for *any* calculations of the state derivative. Consequently, an (in)judicious choice of global frame origin may have an impact on the numerical noise in a simulation. For instance, when calculating the dynamics of a spacecraft w.r.t. the Earth, the relative position of the spacecraft w.r.t. the Earth is computed by extracting the position :math:`\mathbf{r}` from the body object representing Earth, and from the body representing the spacecraft. If the global frame origin is Earth, we will have :math:`\mathbf{r}=\mathbf{0}`, by definition. However, if the global frame origin set to ``SSB``, the relative position of spacecraft w.r.t. Earth will be calculated by subtracting the barycentric positions of the spacecraft and Earth (of order :math:`10^{11}` m) to compute the relative position (or order :math:`10^{7}` m for low-to-medium altitude orbits). As a result, 4 orders of magnitude of numerical precision may be lost in the calulcation of the spacecraft position that is used in the calculation of the accelerations.
+When :ref:`creating a set of body objects<creating_celestial_bodies>`, you define a global frame origin, and a global frame orientation.
+When a body's state gets updated (see :ref:`propagation architecture page <single_propagator_time_step>`, regardless of whether it is retrieved
+from the propagated state vector, or an ephemeris, it is *always*
+converted to this global frame origin/orientation before being assigned to a body object.
+Consequently, any time that a state is retrieved directly from a body object during the propagation using the :attr:`~tudatpy.numerical_simulation.environment.Body.state`
+function (as described :ref:`here <translational_state_during_propagation>`), it will *always* be defined in this global frame.
+
+The global frame is the same for each body in a simulation. All used for calculations of the state derivative are in this global frame.
+Consequently, an (in)judicious choice of global frame origin may have an impact on the numerical noise in a simulation.
+For instance, when calculating the dynamics of a spacecraft w.r.t. the Earth, the relative position of the spacecraft w.r.t. the
+Earth is computed by extracting the position :math:`\mathbf{r}` from the body object representing Earth, and from the body representing the spacecraft.
+If the global frame origin is Earth, we will have :math:`\mathbf{r}=\mathbf{0}`, by definition. However, if the global frame origin set to ``SSB``, the relative position of spacecraft w.r.t. Earth will be calculated by subtracting the barycentric positions of the spacecraft and Earth (of order :math:`10^{11}` m) to compute the relative position (or order :math:`10^{7}` m for low-to-medium altitude orbits). As a result, 4 orders of magnitude of numerical precision may be lost in the calulcation of the spacecraft position that is used in the calculation of the accelerations.
 
 | **How a user defines the global origin**: when creating the settings for the body objects (or the bodies themselves in case of manual body creation).
 |
 | **When the global frame origin is relevant to a user:**
 * Any time the state (or position or velocity) are retrieved directly from a body. This will, for instance, be done in custom guidance models.
 * When high numerical precision is relevant, the global frame origin should be set such that numerical error in evaluating the strongest acceleration(s) is minimized
+
+
+Frame orientation
+-----------------
+
+Presently, Tudat does not support the automatic rotation of states between the state vector, ephemeris, or body objects (as it does
+for the frame origin). Consequently, the frame *orientation* of each must be equal, as well as inertial. Currently, the frame orientations
+``J2000`` and ``ECLIPJ2000`` are supported (see :ref:`here<predefined_orientations>`). A large number of additional frame orientations can be
+used (either by the user or built-in functionality), a comprehensive list of which is provided :ref:`here <frame_orientations>`
 
 .. _rotational_reference_frames:
 
@@ -123,27 +164,6 @@ a rotation matrix to the corresponding quaternion :func:`~tudatpy.astro.element_
 and the inverse :func:`~tudatpy.astro.element_conversion.quaterion_entries_to_rotation_matrix`. Here, we stress that, in
 the context of these functions, we are not dealing with actual quaternions (in the sense of mathematical operators that can
 rotate a vector), but merely with 4x1 arrays which store the four quaternion elements, using the correct conventions.
-
-.. _predefined_orientations:
-
-Predefined orientations
-=======================
-
-For the definition of pre-defined states and rotations, Tudat relies heavily on the spice toolkit. In fact, most of the default ephemerides and rotational models are taken directly from spice (see :ref:`default_environment_models`). Through spice, the following two inertial reference frame orientations are defined:
-
-* ``J2000``: Right-handed inertial frame which has :math:`x`-axis towards vernal equinox, and the :math:`z`-axis aligned
-  with Earth’s rotation axis as it was at the J2000 epoch. We stress that this frame is inertial, and its
-  :math:`z`-axis direction does *not* move with the Earth's rotation axis. (Note that this frame is *almost* identical
-  to the GCRS frame, with a small frame bias between the two, see for instance section 2.5 of `this document <https://www.iausofa.org/2013_1202_F/sofa/sofa_pn.pdf>`_)
-* ``ECLIPJ2000``: Right-handed inertial frame which has :math:`x`-axis towards vernal equinox, and the :math:`z`-axis
-  perpendicular to the ecliptic, at the J2000 epoch.
-
-In our default rotation models, we use spice kernels that implement the models developed by the IAU Working Group on
-Cartographic Coordinates and Rotational Elements. The resulting body-fixed frames for solar system bodies are denoted
-in spice (and therefore in Tudat), as ``IAU_XXXX`` for body ``XXXX``. For instance, the default body-fixed frame of Mars
-is denoted ``IAU_Mars``. We stress that it is not required that the body-fixed frames follow this nomenclature, but this
-is merely the default. To change the identifier associated with a rotation model, you can modify the ``base_frame``
-input for a body's rotational ephemeris settings when calling the associated `factory functions <https://tudatpy.readthedocs.io/en/latest/rotation_model.html#functions>`_.
 
 
 
