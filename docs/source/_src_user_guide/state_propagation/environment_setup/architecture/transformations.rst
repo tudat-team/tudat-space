@@ -20,6 +20,33 @@ center of mass of the body for natural bodies. However, in case (for instance) t
 with non-zero degree 1 coefficients, the gravity field -which determines the internal mass distribution- can define an offset between
 the origin of the body-centered frame, and its center-of-mass.
 
+When retrieving the state from a ``Body`` :ref:`during the propagation <translational_state_during_propagation>`, this state is
+*always* w.r.t. the :ref:`global frame origin <global_origin>`. Therefore, performing origin translations *during* the propagation
+between states from the environment is simply done as:
+
+.. code-block:: python
+
+        bodies = ...
+        mars_state_wrt_global_origin = bodies.get( "Mars" ).state
+        earth_state_wrt_global_origin = bodies.get( "Mars" ).state
+
+        mars_state_wrt_earth = mars_state_wrt_global_origin - earth_state_wrt_global_origin
+
+You can also bypass body and ephemeris objects altogether, and use ``spice`` to obtain the relative state.
+Note, however, that this will use whichever ``spice`` kernels you have loaded, and **may not be consistent with the states
+you are using the bodies in your simulation**s.
+
+.. code-block:: python
+
+        current_time = ...
+
+        mars_state_wrt_earth = spice_interface.get_body_cartesian_state_at_epoch(
+                target_body_name="Moon"
+                observer_body_name="Earth",
+                reference_frame_name="J2000",
+                ephemeris_time=current_time )
+
+
 .. _frame_orientations:
 
 Frame Orientations Conversions
@@ -31,7 +58,8 @@ Position, velocity and Cartesian state (column) vectors are denoted as :math:`\m
 To explicitly denote the frame, we will write :math:`\mathbf{r}^{A}`.
 
 Below, a list of numerous frame orientations, and the associated Tudat functionality to compute the associated rotation matrices, is discussed.
-First, we note a fundamental difference between rotating a state between two frames that are inertial, and a rotation where one of the two frames :math:`A` or :math:`B` is non-inertial.
+First, we note a fundamental difference between rotating a state between two frames that are inertial, and a rotation where one of the two frames
+:math:`A` or :math:`B` is non-inertial.
 
 For the general case, where at last one frame :math:`A` or :math:`B` is non-inertial, we have:
 
@@ -40,7 +68,8 @@ For the general case, where at last one frame :math:`A` or :math:`B` is non-iner
  \mathbf{r}^{B}&=\mathbf{R}^{(B/A)}\mathbf{r}^{A}\\
  \mathbf{v}^{B}&=\dot{\mathbf{R}}^{(B/A)}\mathbf{r}^{A} + \mathbf{R}^{(B/A)}\mathbf{v}^{A}\\
 
-where :math:`\dot{\mathbf{R}}^{(B/A)}` is the time-derivative of the associated rotation matrix. When both frames :math:`A` and :math:`B` are inertial, this time-derivative vanishes, and we have:
+where :math:`\dot{\mathbf{R}}^{(B/A)}` is the time-derivative of the associated rotation matrix. When both frames :math:`A` and :math:`B` are inertial,
+this time-derivative vanishes, and we have:
 
 .. math::
 
@@ -52,6 +81,35 @@ which we take to represent the angular velocity of frame :math:`A`, w.r.t. frame
 For the typical case where :math:`B` is an inertial frame, :math:`\boldsymbol{\omega}_{BA}(=\boldsymbol{\omega}_{A})` is simply the angular
 velocity of :math:`A` (w.r.t. inertial space), represented in the frame fixed to body :math:`A` (TODO: link to propagation).
 More information is provided in the `Tudat mathematical model pdf <https://github.com/tudat-team/tudat-space/raw/master/Tudat_mathematical_model_definition.pdf>`_
+
+Manually, the above transformations would be done simply as:
+
+Manually, the state may then be transformed as:
+
+.. code-block:: python
+
+        rotation_to_frame = ... # 3D Matrix
+        time_derivative_of_rotation_to_frame  = ... # 3D Matrix
+        original_state = ... # 6D Vector
+
+        rotated_state = np.zeros(6, dtype=float);
+        rotated_state[ :3] = rotation_to_frame * original_state[ :3 ];
+        rotated_state[3: ] = rotation_to_frame * original_state[ 3: ] + time_derivative_of_rotation_to_frame * original_state[ :3 ];
+
+Where the rotation matrix and its derivative (for body-fixed to inertial frames) can be obtained from the ``Body`` object during propagation, or a ``RotationalEphemeris``
+object outside of the propagation, see :ref:`below <body_fixed_frames>` for more details.
+
+Below, we give an overview of the available frames, and frame transformations, in Tudat, and discuss how they can be accessed both during
+(when setting up a :ref:`custom model <custom_models:>`), and outside of a propagation. The available frames are:
+
+  * :ref:`body_fixed_frames` Each ``Body`` in Tudat can have a fixed frame assigned to it (see `API documentation <https://py.api.tudat.space/en/latest/rotation_model.html#functions>`_ for a list of options for model types)
+  * :ref:`gcrs_itrs_frames` The high-accuracy rotation from GCRS to ITRS is implemented in Tudat. The ITRS, TIRS, CIRS and ICRS frames are defined
+  * :ref:`aero_frames` A number of frames typically used in entry and ascent trajectories: the Vertical, Trajectory and Aerodynamic frames
+  * :ref:`orbital_frames` The TNW and RSW frames (defined by the current relative translational state)
+  * :ref:`spice_frames` Any frame defined by the currently loaded Spice kernels can be accessed
+  * :ref:`predefined_orientations` The J2000 and ECLIPJ2000 frame orientations (at present, the only two supported options for the global frame orientation)
+  * :ref:`topocentric_frames` Each ground station/lander on a body has a frame (East-North-Up) automatically associated with it
+  * :ref:`additional_frames` The TEME, (TODO) frame
 
 .. _body_fixed_frames:
 
@@ -75,10 +133,29 @@ for the Earth outside of a propagation (assuming a ``SystemOfBodies`` object, na
         current_time = ....
 
         # Determine R^{(I/B)} rotation matrix
-        rotation_matrix_to_inertial_frame = bodies.at( "Earth" ).body_fixed_to_inertial_rotation( current_time )
+        rotation_matrix_to_inertial_frame = earth_rotation_model.body_fixed_to_inertial_rotation( current_time )
 
         # Determine first derivative of R^{(I/B)} rotation matrix
-        rotation_matrix_to_inertial_frame = bodies.at( "Earth" ).time_derivative_body_fixed_to_inertial_rotation( current_time )
+        rotation_matrix_to_inertial_frame = earth_rotation_model.time_derivative_body_fixed_to_inertial_rotation( current_time )
+
+To automatically rotate a vector from the body-fixed frame to the inertial frame using the ``RotationalEphemeris``, we provide the
+:class:`~tudatpy.numerical_simulation.environment.transform_to_inertial_orientation` function, which automatically
+performs the rotation with the rotation matrix and its derivative:
+
+.. code-block:: python
+
+        earth_rotation_model = bodies.at( "Earth" ).rotation_model
+
+        # Define time at which to determine rotation quantities
+        current_time = ....
+
+        # Set the body-fixed state
+        body_fixed_state = ....
+
+        # Transform state to inertial frame, using Earth rotation model
+        inertial_state = environment.transform_to_inertial_orientation(
+            body_fixed_state, current_time, earth_rotation_model )
+
 
 The full list of functions to extract rotational quantities from a rotational model can be found under
 :class:`~tudatpy.numerical_simulation.environment.RotationalEphemeris`. Depending on the selected rotation model,
@@ -129,6 +206,8 @@ conventions (chapter 5 of 2010 conventions), and can be extracted from the :clas
 and the :class:`~tudatpy.numerical_simulation.environment.EarthOrientationAnglesCalculator` (where the latter can be obtained from the
 former).
 
+.. _aero_frames:
+
 Aerodynamic/vehicle frames
 --------------------------
 
@@ -136,12 +215,12 @@ Typically in, but not exclusively to, the calculation of aerodynamic quantities 
 are used, which link the inertial frame to the body-fixed frame of the vehicle. Identifiers for these frames are defined in the
 :class:`~tudatpy.numerical_simulation.environment.AerodynamicsReferenceFrames` enumeration. They are listed here for completeness:
 
-- Inertial frame
-- Central-body-fixed frame
+- Inertial frame (corresponding exactly to the global frame orientation of the environment)
+- Central-body-fixed frame (corresponding exactly to the :ref:`body-fixed frame <body_fixed_frames>` of the central body)
 - Vertical frame
 - Trajectory frame
 - Aerodynamic frame
-- Vehicle body-fixed frame
+- Vehicle body-fixed frame (corresponding exactly to the :ref:`body-fixed frame <body_fixed_frames>` of the central body)
 
 For the mathematical model definition (and graphical representation), we refer the reader to `Mooij (1994) <https://repository.tudelft.nl/islandora/object/uuid:e5fce5a0-7bce-4d8e-8249-e23293edbb55/datastream/OBJ/download>`_.
 
@@ -156,6 +235,8 @@ can be used. The constituent angles that define this rotation can be saved using
 :func:`~tudatpy.numerical_simulation.propagation_setup.dependent_variable.sideslip_angle` and :func:`~tudatpy.numerical_simulation.propagation_setup.dependent_variable.bank_angle` functions.
 
 At present, the functionality to compute these matrices/angles *outside* of the propagation is not exposed to Python. Please contact the development team if you require this functionality.
+
+.. _orbital_frames:
 
 Orbital frames
 --------------
@@ -205,6 +286,8 @@ Through Spice, the following two inertial reference frame orientations are defin
 
 The J2000 and ECLIPJ2000 frame names can be used for the base or target frames in any of the :ref:`spice rotation functions<spice_frames>`).
 
+.. _topocentric_frames:
+
 Station topocentric frames
 --------------------------
 
@@ -226,19 +309,21 @@ returns the required rotation matrix. The axes of the topocentric frame are defi
 the body's surface sphere (typically: sphere or flattened sphere). The y-axis completes the frame, and is in northern direction.
 For more details see the API docs entries for this function.
 
+.. _additional_frames:
+
 Additional frames
 -----------------
 
 A number of other frames are defined in Tudat, which can be used either during or outside of a propagation
 
-TEME frame
-~~~~~~~~~~
+**TEME frame**
+
 
 
 Element Types
 ======================
 
-Depending on your application, you will be using any of a number of translational state (position and velocity) representations.
+**Translational** Depending on your application, you will be using any of a number of translational state (position and velocity) representations.
 In Tudat, conversions involving the following state representations are available:
 
 - Cartesian elements.
@@ -251,30 +336,35 @@ For each of these element types, conversions to/from Cartesian elements are avai
 where neither is Cartesian, will typically involve first transforming to Cartesian elements, and then transforming to your output
 state type. For a number of combinations of state types, a direct conversion is available.
 
+TODO: introduce element index enums
+
 Note that most, but not all, of these types of elements can also be used for the definition of a :ref:`translational state propagator <translational_propagator_types>`,
 where these elements are numerically propagated (instead of the typical Cartesian elements of the Cowell propagator). By definition,
 each element set that can be propagated has conversion functions available in Tudat, but not necesarilly vice versa.
 
-In case you are also working with rotational motion, in Tudat the following representations for attitude/orientation are available:
+**Rotational** In case you are also working with rotational motion, in Tudat the following representations for attitude/orientation are available:
 
 - Quaternions.
 - Modified Rodrigues parameters.
 - Exponential map.
 
 Transformation between these elements is done by passing through quaternions first (TODO: include link to rotational state propagation).
-For rotational dynamics, the derivative can
-be expressed as either angular velocity, or time-derivative of the rotation matrix.
+For rotational dynamics, the derivative can be expressed as either angular velocity, or time-derivative of the rotation matrix (see :ref:`above <frame_orientations>`)
 
 Kepler elements
 ---------------
 
+The Kepler elements are the standard orbital elements used in classical celestial mechanics, and are represented as a size 6 vector in Tudat.
+The meaning of each of the six entries is given in the `API docs <https://py.api.tudat.space/en/latest/element_conversion.html#notes>`_.
+In this list you can see something peculiar: both the Semi-major Axis index and Semi-latus Rectum index are defined as index 0.
+The latter option is only applicable when the orbit is parabolic (when the eccentricity is 1.0). That is, if the orbit is parabolic,
+element 0 does not represent the semi-major axis (as it is not defined) but the semi-latus rectum.
+Converting to/from Cartesian state is done using the :func:`~tudatpy.astro.element_conversion.cartesian_to_keplerian` and
+:func:`~tudatpy.astro.element_conversion.keplerian_to_cartesian` functions, and requires the gravitational parameter of the body
+w.r.t. which the Keplerian elements are defined, in addition to the state itself.
 
-The Kepler elements are the standard orbital elements used in classical celestial mechanics, and are represented as a size 6 vector in Tudat. The meaning of each of the six entries is given in the `API docs <https://py.api.tudat.space/en/latest/element_conversion.html#notes>`_.
-In this list you can see something peculiar: both the Semi-major Axis index and Semi-latus Rectum index are defined as index 0. The latter option is only applicable when the orbit is parabolic (when the eccentricity is 1.0). That is, if the orbit is parabolic, element 0 does not represent the semi-major axis (as it is not defined) but the semi-latus rectum.
-Converting to/from Cartesian state is done using the :func:`~tudatpy.astro.element_conversion.cartesian_to_keplerian` and :func:`~tudatpy.astro.element_conversion.keplerian_to_cartesian` functions, and requires the gravitational parameter of the body w.r.t. which the Keplerian elements are defined, in addition to the state itself.
-
-Often, these functions will be used in conjunction with numerical propagation, where the properties of bodies are stored in an object of type :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies`
-
+Often, these functions will be used in conjunction with numerical propagation, where the properties of bodies are stored in an
+object of type :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies`
 
 .. code-block:: python
 
@@ -284,25 +374,24 @@ Often, these functions will be used in conjunction with numerical propagation, w
    central_body_gravitational_parameter = bodies.get( central_body ).gravitational_parameter
    keplerian_state = conversion.cartesian_to_keplerian( cartesian_state, central_body_gravitational_parameter )
 
-Similarly, the inverse operation is done as:
+In the above examples, it is crucial to be aware that the Cartesian and Keplerian elements are the representation
+of a state in the same **frame**. That is, if the ``cartesian_state`` in the first example is in the `ECLIPJ2000` frame orientation,
+with the Earth as frame origin, the ``keplerian_state`` will also be defined w.r.t. the axes of this frame.
+As a result, the inclination (for example) will be measured w.r.t. the x-y plane of the `ECLIPJ2000`  frame, **not** w.r.t. the Earth's equator.
 
-.. code-block:: python
+.. note::
+    A Keplerian state cannot be computed w.r.t. the Solar System Barycenter (SSB), as it does not possess a gravitational parameter/
 
-   keplerian_state = ...
+In the definition of the state elements, you will notice that element 5 is the *true* anomaly, not the *eccentric* or *mean* anomaly.
+Tudat also contains functions to convert to these alternative anomalies. The various available functions are found in our
+:ref:`API documentation <https://py.api.tudat.space/en/latest/element_conversion.html>`
 
-   central_body = 'Earth'
-   central_body_gravitational_parameter = bodies.get( central_body ).gravitational_parameter
-   cartesian_state = conversion.keplerian_to_cartesian( keplerian_state, central_body_gravitational_parameter )
-
-In the above examples, it is crucial to be aware that the Cartesian and Keplerian elements are the representation of a state in the same *frame*. That is, if the ``cartesian_state`` in the first example is in the `ECLIPJ2000` frame, the ``keplerian_state`` will also be defined w.r.t. the axes of this frame. As a result, the inclination (for example) will be measured w.r.t. the x-y plane of the `ECLIPJ2000`  frame, not w.r.t. the Earth's equator.
-
-In the definition of the state elements, you will notice that element 5 is the *true* anomaly, not the *eccentric* or *mean* anomaly. Tudat also contains functions to convert to these alternative anomalies. Converting between true and eccentric anomaly is done as follows:
+As ann example, converting from true to eccentric anomaly is done as follows:
 
 .. code-block:: python
 
         true_anomaly = ...
         eccentricity = ...
-
         eccentric_anomaly = conversion.true_anomaly_to_eccentric_anomaly( true_anomaly, eccentricity )
 
 or directly from the orbital elements:
@@ -310,11 +399,11 @@ or directly from the orbital elements:
 .. code-block:: python
 
         keplerian_state = ...
-
         eccentric_anomaly = conversion.true_anomaly_to_eccentric_anomaly( keplerian_state( true_anomaly_index ), keplerian_state( eccentricity_index ) )
 
 
-Note that this function automatically identifies whether the orbit is elliptical or hyperbolic, and computes the associated eccentric anomaly. The function for the inverse operation is ``eccentric_anomaly_to_true_anomaly``. Similarly, Tudat contains functions to convert from eccentric to mean anomaly (automatically checking whether the orbit is elliptical or hyperbolic):
+Note that this function automatically identifies whether the orbit is elliptical or hyperbolic, and computes the associated eccentric anomaly.
+Similarly, Tudat contains functions to convert from eccentric to mean anomaly (automatically checking whether the orbit is elliptical or hyperbolic):
 
 .. code-block:: python
 
@@ -324,16 +413,11 @@ Note that this function automatically identifies whether the orbit is elliptical
         eccentric_anomaly = conversion.true_anomaly_to_eccentric_anomaly( true_anomaly, eccentricity )
         mean_anomaly = conversion.eccentric_anomaly_to_mean_anomaly( eccentric_anomaly, eccentricity )
 
-The inverse operation, mean to eccentric anomaly, is done separately for hyperbolic and elliptical orbits, through the functions ``mean_anomaly_to_eccentric_anomaly`` for elliptical and ``_mean_anomaly_to_hyperbolic_eccentric_anomaly`` for hyperbolic orbits. In general, you will use them as follows:
-
-.. code-block:: python
-
-        mean_anomaly = ...
-        eccentricity = ...
-
-        eccentric_anomaly = conversion.mean_anomaly_to_eccentric_anomaly( eccentricity, mean_anomaly )
-
-However, this conversion involves the solution of an implicit algebraic equation, for which a root finder is used. Root finders are discussed in more detail here. When calling the function as in the above example, a root finder is created internally. However, in some cases you may want to specify your own root finder, as well as a first initial guess for the eccentric anomaly (which the root finder uses at its first iteration). When doing so, you create a root finder object and pass it to the conversion function as follows:
+The conversion from mean to eccentric anomaly involves the solution of an implicit algebraic equation (Kepler's equation), for which a root finder is used.
+Root finders are discussed in more detail here (TODO: insert link). Tudat has a default root finder, and default selection for
+initial guess of the foot-finding implemented see :func:`~tudatpy.astro.element_conversion.mean_to_eccentric_anomaly`
+However, in some cases you may want to specify your own initial guess for the eccentric anomaly, and/or your own root finder.
+You can do this as follows:
 
 .. code_block:: python
 
@@ -342,17 +426,17 @@ However, this conversion involves the solution of an implicit algebraic equation
         initial_guess = ...
         root_finder = ...
 
-        eccentric_anomaly = conversion.mean_anomaly_to_eccentric_anomaly( eccentricity, mean_anomaly, False, initial_guess, root_finder )
+        eccentric_anomaly = conversion.mean_anomaly_to_eccentric_anomaly(
+            eccentricity = eccentricity,
+            mean_anomaly = mean_anomaly,
+            use_default_initial_guess = False, #Optional; set to False to use optional user-defined initial guess
+            non_default_initial_guess = initial_guess, #optional
+            root_finder = root_finder #optional
+            )
 
-where the argument ``False`` indicates that the user-specified initial guess is to be used. If you want to use a custom-defined root finder, but not an initial guess, use the following:
+The above function can be used with only the eccentricity and mean anomaly inputs, in which case the defaults are used for the
+initial guess and root finder.s
 
-.. code_block:: python
-
-        mean_anomaly = ...
-        eccentricity = ...
-        root_finder = ...
-
-        eccentric_anomaly = conversion.mean_anomaly_to_eccentric_anomaly( eccentricity, mean_anomaly, True, root_finder )
 
 
 .. class:: Spherical-orbital Elements
@@ -563,95 +647,4 @@ where the argument ``False`` indicates that the user-specified initial guess is 
 		Similarly to MRPs, the exponential map elements also make use of the shadow flag. In this case, this flag signals whether the shadow exponential map (SEM) is in use. This flag is also introduces to avoid the singularity at :math:`\pm 2 \pi` radians, but interestingly, there is no difference between the equations of motion and transformations in terms of EM or SEM. In fact, they are only introduced to make sure that when converting from EM to quaternions, the resulting quaternion sign history is continuous. The switch between EM and SEM occurs whenever the magnitude of the rotation represented by the EM vector is larger than :math:`\pi`.
 
 
-Frame Transformations
-######################
-
-Every state, regardless of its representation is expressed with a particular origin and orientation. This is most easy to understand for Cartesian elements, where the origin represents the (0,0,0) position, and the orientation defines the direction of the x-, y- and z-axes. Below, we discuss how to perform these operations in Tudat.
-
-Transformations in ``tudatpy`` requires this import statement:
-
-.. code-block:: python
-	
-        from tudatpy.kernel.astro import frame_conversion
-
-
-.. warning::
-	
-	Do not use the ``get_current_state`` or ``get_current_rotation`` function in the body objects! These functions are used during numerical propagation, and calling them outside of the numerical propagation will generally not lead to meaningful results.
-
-.. class:: Frame Translations
-
-	To change the origin of a Cartesian, one can simply add a Cartesian state that represents the difference between the original and the new origin. For instance, when transforming a vector (state of a vehicle) from Earth-centered to Moon-centered (keeping the orientation constant):
-
-	.. code-block:: python
-
-		vehicle_cartesian_state_in_earth_centered_frame = ...
-		moon_cartesian_state_in_earth_centered_frame = ...
-
-		vehicle_cartesian_state_in_moon_centered_frame = vehicle_cartesian_state_in_earth_centered_frame + moon_cartesian_state_in_earth_centered_frame
-
-	The challenge here, of course, is determining the ``moon_cartesian_state_in_earth_centered_frame`` vector. We provide a few ways in which to achieve this. When performing a numerical simulation using a set of body objects, you can use the following (assuming that ``bodiesz`` contains both an ``"Earth"`` and ``"Moon"`` entry):
-
-	.. code-block:: python
-
-		bodies = ...
-		current_time = ...
-
-                moon_cartesian_state_in_earth_centered_frame = bodies.at( "Moon" ).state_in_base_frame_from_ephemeris( current_time ) - bodies.at( "Earth" ).state_in_base_frame_from_ephemeris( current_time )
-
-	You can also bypass the body map altogether, and use ``spice`` to obtain the relative state. Note, however, that this will use whichever ``spice`` kernels you have loaded, and may not be consistent with the states you are using the bodies in your simulation.
-
-	.. code-block:: python
-
-		current_time = ...
-		frame_orientation = "J2000"
-
-		moon_cartesian_state_in_earth_centered_frame = spice_interface.get_body_cartesian_state_at_epoch(
-				target_body_name="Moon"
-			observer_body_name="Earth",
-			reference_frame_name=frame_orientation,
-			aberration_corrections="NONE",
-			ephemeris_time=current_time
-		)
-
-	where the ``"NONE"`` arguments indicates that no light-time corrections are used, and the frame orientation denotes the orientation of the frame in which the relative state is returned.
-
-.. class:: Frame Rotations
-
-	Rotating the frame in which a Cartesian state is expressed requires two pieces of information:
-
-	1. The rotation matrix from one frame to the other
-	2. The first time derivative of the rotation matrix from one frame to the other
-
-	Manually, the state may then be transformed as:
-
-	.. code-block:: python
-
-		rotation_to_frame = ... # 3D Matrix
-		time_derivative_of_rotation_to_frame  = ... # 3D Matrix
-		original_state = ... # 6D Vector
-
-		rotated_state = np.zeros(6, dtype=float);
-		rotated_state[ :3 ] = rotation_to_frame * original_state[ :3 ];
-		rotated_state[ 3: ] = rotation_to_frame * original_state[ 3: ] + time_derivative_of_rotation_to_frame * original_state[ :3 ];
-
-	In many cases, however, your frame rotation will be from the inertial frame to a body-fixed frame. All information required for this is stored in the rotational ephemeris objects. This object contains a base (inertial) and target (body-fixed) frame and defines the rotation between the two. Assuming that you are using a body map to store your environment, you can transform the state from an inertial to a body-fixed frame as follows, for the example of transforming a vehicle’s Cartesian state from an inertial to the body-fixed frame of the Earth:
-
-	.. code-block:: python
-
-		bodies = ...
-		current_time = ...
-		inertial_state = ...
-
-                body_fixed_state = environment.transform_to_inertial_orientation( inertial_state, current_time, bodies.at( "Earth" ).rotational_ephemeris( ) )
-
-	The inverse is done as follows:
-
-	.. code-block:: python
-
-		bodies = ...
-		current_time = ...
-		body_fixed_state = ...
-
-                inertial_state = environment.transform_to_inertial_orientation( body_fixed_state, current_time, bodies.at( "Earth" ).rotational_ephemeris( ) )
 

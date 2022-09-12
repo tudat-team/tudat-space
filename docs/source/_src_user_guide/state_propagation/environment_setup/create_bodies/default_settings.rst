@@ -37,7 +37,7 @@ planets, the Sun, Earth's moon, the main Martian, Jovian and Saturnian satellite
 instance for small bodies or other satellite systems, through the use of the
 :func:`~tudatpy.interface.spice.load_kernel`.
 
-Ephemerides from Spice kernels are only valid for a somewhat limited time interval (on the order of one or several centuries, depending on the specific body), which is limited by the valid range of the Spice kernels provided in Tudat by default. You can load additional Spice kernels with a longer coverage by using the :func:`~tudatpy.interface.spice.load_kernel` function for any additional kernels you like (see, for instance, the `generic kernels <https://naif.jpl.nasa.gov/naif/data_generic.html>'_ listed on the Spice website. Note that the contents will override data in the default kernels (if applicable).
+Ephemerides from Spice kernels are only valid for a somewhat limited time interval (on the order of one or several centuries, depending on the specific body), which is limited by the valid range of the Spice kernels provided in Tudat by default. You can load additional Spice kernels with a longer coverage by using the :func:`~tudatpy.interface.spice.load_kernel` function for any additional kernels you like (see, for instance, the `generic kernels <https://naif.jpl.nasa.gov/naif/data_generic.html>`_ listed on the Spice website. Note that the contents will override data in the default kernels (if applicable).
 
 .. note::
    In some cases, the extraction of the state of bodies from Spice kernels can be a computational bottleneck. Tudat has an :ref:`alternative set of default options <valid_time_range>`, which make this process signicantly faster, at the expense of higher RAM usage, and an environment that is only valid over a very limited time interval.
@@ -53,7 +53,8 @@ the IAU Working Group on Cartographic Coordinates and Rotational Elements.
 
 For the Earth, a high-accuracy rotation model is available, which is *not* loaded by default, but can be added to the default settings using the :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.gcrs_to_itrs` function.
 
-In some cases, the extraction of the rotational state of bodies from Spice kernels can be a computational bottleneck. Tudat has an :ref:`alternative set of default options <valid_time_range>`, which make this process signicantly faster, at the expense of higher RAM usage, and an environment that is only valid over a very limited time interval.
+.. note::
+   In some cases, the extraction of the rotational state of bodies from Spice kernels can be a computational bottleneck. Tudat has an :ref:`alternative set of default options <valid_time_range>`, which make this process signicantly faster, at the expense of higher RAM usage, and an environment that is only valid over a very limited time interval.
 
 Shape model
 --------------
@@ -70,13 +71,13 @@ TODO: fix gravity field references
 
 * Spherical harmonic gravity field for the following bodies:
 
-    - Earth: Full gravity field up to degree and order 200, described `here <https://link.springer.com/article/10.1007/s10712-016-9406-y>`_ (GOCO05c, data obtained from `GFZ <https://dataservices.gfz-potsdam.de/icgem/showshort.php?id=escidoc:1504398>`_; coefficient are available up to degree/order 720, but are not all loaded by default for efficiency purposes)
-    - Moon: Full gravity field up to degree and order 200, described `here <https://pgda.gsfc.nasa.gov/products/50>`_ (gggrx1200, data obtained from `PDS <https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/shadr/>`_; coefficient are available up to degree/order 1199, but are not all loaded by default for efficiency purposes)
-    - Mars: Full gravity field up to degree and order 120, described `here <https://www.sciencedirect.com/science/article/pii/S0019103516001305>`_ (jgmro120d, data obtained from `PDS <https://pds-geosciences.wustl.edu/mro/mro-m-rss-5-sdp-v1/mrors_1xxx/data/shadr/>`_)
-    - Venus: Full gravity field up to degree and order 180, described `here <https://www.sciencedirect.com/science/article/pii/S0019103599960864>`_ (shgj180u, data obtained from `PDS <https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/gravity/>`_)
-    - Mercury: Full gravity field up to degree and order 160, described `here <https://www.sciencedirect.com/science/article/pii/S0019103519302192>`_ (jgmess160a, data obtained from `PDS <https://pds-geosciences.wustl.edu/messenger/mess-h-rss_mla-5-sdp-v1/messrs_1001/data/shadr/>`_)
-    - Jupiter: Zonal coefficients up to degree 8 from, described `here <https://www.nature.com/articles/nature25776/>`_
-    - Galilean Moons (Io, Europa, Ganymede, Callisto), :math:`\mu`, :math:`C_{20}` and :math:`C_{22}` from IMCCE ephemerides
+   - **Earth**: Full gravity field up to degree and order 200, described `here <https://link.springer.com/article/10.1007/s10712-016-9406-y>`_ (GOCO05c, data obtained from `GFZ <https://dataservices.gfz-potsdam.de/icgem/showshort.php?id=escidoc:1504398>`_; coefficient are available up to degree/order 720, but are not all loaded by default for efficiency purposes)
+   - **Moon**: Full gravity field up to degree and order 200, described `here <https://pgda.gsfc.nasa.gov/products/50>`_ (gggrx1200, data obtained from `PDS <https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/shadr/>`_; coefficient are available up to degree/order 1199, but are not all loaded by default for efficiency purposes)
+   - **Mars**: Full gravity field up to degree and order 120, described `here <https://www.sciencedirect.com/science/article/pii/S0019103516001305>`_ (jgmro120d, data obtained from `PDS <https://pds-geosciences.wustl.edu/mro/mro-m-rss-5-sdp-v1/mrors_1xxx/data/shadr/>`_)
+   - **Venus**: Full gravity field up to degree and order 180, described `here <https://www.sciencedirect.com/science/article/pii/S0019103599960864>`_ (shgj180u, data obtained from `PDS <https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/gravity/>`_)
+   - **Mercury**: Full gravity field up to degree and order 160, described `here <https://www.sciencedirect.com/science/article/pii/S0019103519302192>`_ (jgmess160a, data obtained from `PDS <https://pds-geosciences.wustl.edu/messenger/mess-h-rss_mla-5-sdp-v1/messrs_1001/data/shadr/>`_)
+   - **Jupiter**: Zonal coefficients up to degree 8 from, described `here <https://www.nature.com/articles/nature25776/>`_
+   - **Galilean Moons** (Io, Europa, Ganymede, Callisto), :math:`\mu`, :math:`C_{20}` and :math:`C_{22}` from IMCCE ephemerides
 
 * For all the other bodies not mentioned above, point-mass gravity field with gravitational parameter loaded from Spice are used
   (for any body available through Spice kernels).
@@ -91,7 +92,7 @@ Atmosphere
 - Earth: NRLMSISE-00 density model (see :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.nrlmsise00`; default input file is used)
 - All other bodies: none
 
-.. _spice_in_tudat:
+.. _c:
 
 SPICE in Tudat
 ===============

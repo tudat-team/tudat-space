@@ -23,14 +23,15 @@ In Tudat, the acceleration that a body undergoes due to the addition of thrust c
 
 *  One or several ``EngineModel`` objects assigned to the vehicle that is using thrust. For the thrust acceleration, this is used to compute/define:
 
-  *  The body-fixed thrust direction :math:`\hat{\mathbf{T}}_{B}` (which direction is the nozzle pointed, in a frame fixed to the spacecraft
-  *  What is the thrust magnitude exerted by the engine (typically as a force in N, but can be defined as acceleration in m/s:sup:`2`, see below)
-  *  (When using the mass rate due to thrust: the specific impulse of the engine)
-*  A rotation model for the vehicle, which is used to provide the inertial thrust direction  :math:`\hat{\mathbf{T}}`. Here, we can distinguish three different approaches in the context of thrustaero:
+   *  The body-fixed thrust direction :math:`\hat{\mathbf{T}}_{B}` (which direction is the nozzle pointed, in a frame fixed to the spacecraft
+   *  What is the thrust magnitude exerted by the engine (typically as a force in N, but can be defined as acceleration in m/s\ :sup:`2`\, see below)
+   *  (When using the mass rate due to thrust: the specific impulse of the engine)
+
+*  A rotation model for the vehicle, which is used to provide the inertial thrust direction  :math:`\hat{\mathbf{T}}`. Here, we can distinguish three different approaches in the context of thrust:
   
-  *  The vehicle has a rotation model defined using the :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.custom_inertial_direction_based` settings. By using this model, the inertial direction if the thrust can be provided by the user *directly*. The orientation of the vehicle is then derived from this direction
-  *  The vehicle has any other rotation model defined, in this case the inertial thrust direction is computed from :math:`\hat{\mathbf{T}}=\mathbf{R}^{(I/B)}\hat{\mathbf{T}}_{B}` 
-  *  The rotational dynamics of the vehicle is propagated, and the orientation of the vehicle is taken from the current rotational state. The inertial thrust direction then follows from :math:`\hat{\mathbf{T}}=\mathbf{R}^{(I/B)}\hat{\mathbf{T}}_{B}`.
+   *  The vehicle has a rotation model defined using the :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.custom_inertial_direction_based` settings. By using this model, the inertial direction of the thrust can be provided by the user *directly*. The orientation of the vehicle is then derived from this direction
+   *  The vehicle has any other rotation model defined, in this case the inertial thrust direction is computed from :math:`\hat{\mathbf{T}}=\mathbf{R}^{(I/B)}\hat{\mathbf{T}}_{B}`
+   *  The rotational dynamics of the vehicle is propagated, and the orientation of the vehicle is taken from the current rotational state. The inertial thrust direction then follows from :math:`\hat{\mathbf{T}}=\mathbf{R}^{(I/B)}\hat{\mathbf{T}}_{B}`.
 
 Three functions are provided to define a thrust acceleration:
 
@@ -44,7 +45,7 @@ which differ only in the manner that the engine models are selected. For a thrus
 
  \mathbf{a}_{T}=\mathbf{R}^{(I/B)}\sum_{i=1}^{N}\hat{\mathbf{T}}_{B,i}a_{T,i}
 
-where :math:`\mathbf{T}}_{B,i}` is the body-fixed thrust direction of body :math:`i`, and :math:`a_{T,i}` is the thrust acceleration norm exerted by engine :math:`i`. In the (typical) case that the engine thrust force :math:`F_{T,i}` is defined directly (instead of the acceleration, see :ref:`below <thrust_acceleration_magnitude>`), we have :math:`a_{T,i}=F_{T,i}/,m`, with :math:`m` the mass of the body.
+where :math:`\mathbf{T}_{B,i}` is the body-fixed thrust direction of body :math:`i`, and :math:`a_{T,i}` is the thrust acceleration norm exerted by engine :math:`i`. In the (typical) case that the engine thrust force :math:`F_{T,i}` is defined directly (instead of the acceleration, see :ref:`below <thrust_acceleration_magnitude>`), we have :math:`a_{T,i}=F_{T,i}/m`, with :math:`m` the mass of the body.
 Once one (or more) engine models, and a rotation model, for the vehicle are defined, the thrust acceleration can simply be adde to the acceleration settings as any other acceleration model.
 
 

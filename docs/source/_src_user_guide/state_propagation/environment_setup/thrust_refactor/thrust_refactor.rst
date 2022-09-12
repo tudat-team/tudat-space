@@ -4,6 +4,10 @@
 Thrust and Aerodynamic Orientation - Code Refactor
 ==================================================
 
+.. attention::
+
+  This page discusses the non-backwards compatible changes that were introduced in Tudatpy from version 0.7.
+
 .. toctree::
    :titlesonly:
    :hidden:
@@ -79,7 +83,7 @@ In the new version of the code, the definition of a body's orientation through a
           .. literalinclude:: /_src_snippets/simulation/environment_setup/thrust_refactor/guidance_class_new.py
              :language: python
 
-The main requirement on this new guidance class is the following: it should have a function that takes time as input, and returns a vector containing [:math:`\alpha`,:math:`\beta`,:math:`\sigma`]
+The main requirement on this new guidance class is the following: it should have a function that takes time as input, and returns a vector containing [:math:`\alpha`, :math:`\beta`, :math:`\sigma`]
 
 It is then linked to the environment as follows:
 
