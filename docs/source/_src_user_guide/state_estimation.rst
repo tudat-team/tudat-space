@@ -4,8 +4,8 @@ State Estimation
 
 In this section, we discuss the functionality that is required for state estimation in TudatPy. Before starting this section, make sure to go through our page on :ref:`state_propagation_intro`, since the state *estimation* function requires the full functionality from state *propagation*.
 
-Inputs
-=======
+Estimation Inputs
+=================
 
 In addition to the inputs required for state propagation, we need the following input types:
 
@@ -22,7 +22,6 @@ In addition to the inputs required for state propagation, we need the following 
    state_estimation/link_ends
    state_estimation/observation_model_setup
    state_estimation/observation_simulation
-   state_estimation/estimation_settings
 
 
 Simulation/Analysis & Output

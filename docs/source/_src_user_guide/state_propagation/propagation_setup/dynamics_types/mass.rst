@@ -9,16 +9,10 @@ Settings to propagate numerically the translational state of a body can be creat
 :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.mass` factory function, described in
 detail in the API reference, which creates an object of type
 :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.MassPropagatorSettings` (see below
-an :ref:`example`).
+an :ref:`example`). Propagating the mass of a body is typically (but not exclusively) coupled with the use of a thrust model.
+See the page on :ref:`thrust_models` for more details..
 
-.. tip::
-  Propagating the mass of a body is typically (but not exclusively) coupled with the use of a
-  thrust model.
-
-.. todo::
-    Add page and link to thrust guidance.
-
-In this page, only the Tudat-native objects necessary as input will be described. For all the other inputs, please
+On this page, only the Tudat-native objects necessary as input will be described. For all the other inputs, please
 refer to the related API entry (:func:`~tudatpy.numerical_simulation.propagation_setup.propagator.mass`).
 
 .. note::

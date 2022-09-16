@@ -1,8 +1,8 @@
 .. _third_body_acceleration:
 
-==================================
-Third-body acceleration in TudatPy
-==================================
+========================
+Third-body accelerations
+========================
 
 Settings for a third-body and central gravitational acceleration are defined identically to direct gravitational
 accelerations. During the creation and processing of the acceleration models, TudatPy distinguishes three different
@@ -85,7 +85,6 @@ while the following will add the third-body spherical-harmonic acceleration of t
 
    .. tab:: C++
 
-    .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/spherical_harmonic_gravity_zonal.cpp
        :language: cpp
 
 Note that above two code blocks are identical to those given as example in the API documentation

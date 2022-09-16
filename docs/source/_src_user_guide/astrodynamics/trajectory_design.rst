@@ -1,8 +1,8 @@
 .. _`transfer_trajectory`:
 
-==========================
-Transfer trajectory design
-==========================
+=================================
+Muliple Flyby Transfer Trajectory
+=================================
 
 Multiple Gravity Assists and Deep Space Maneuvers
 ==============================================================

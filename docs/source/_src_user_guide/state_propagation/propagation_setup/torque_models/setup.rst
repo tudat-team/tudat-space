@@ -75,7 +75,6 @@ models that compute the torques during the propagation.
 
          .. tab:: C++
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_setup.cpp
              :language: cpp
 
 
@@ -99,7 +98,6 @@ multiple bodies. Below, an example is given for the definition of ``torque_setti
 
          .. tab:: C++
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_setup.cpp
              :language: cpp
 
 Or separate torque settings may be defined for separate bodies, and then combined into a ``torque_settings`` variable.
@@ -121,5 +119,4 @@ Below, an example for such a case is given when propagating the Earth and Moon:
 
          .. tab:: C++
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_setup.cpp
              :language: cpp

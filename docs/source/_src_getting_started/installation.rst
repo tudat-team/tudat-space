@@ -47,6 +47,13 @@ Install Anaconda on your system, see the `Installation`_ guide provided by the A
 Installing Tudat(Py)
 ####################
 
+.. attention::
+
+  As of Tudatpy version 0.7, a number of modifications have been made to how Tudatpy deals with vehicle orientations,
+  in particular in the context of thrust and aerodynamic guidance. These changes are, in part, not backwards compatible.
+  See :ref:`this page <backwards_incompatibility>` for more details. To continue to use the last older version of Tudat, install
+  version 0.6.3.
+
 To install Tudat(Py), we recommend the use of a terminal (command line) interface. On Unix system (Linux and Mac), ``conda`` should be integrated with the terminal, and you can open your terminal directly. On Windows, you can find a program called ``Anaconda Prompt`` in the Windows search. The ``Anaconda Prompt`` is equivalent to the terminal use of ``conda`` on Unix. Some Unix commands are made available in this prompt, although most usage is equivalent to the Windows shell (see below for some useful terminal commands).
 
 Open a terminal. Then, first verify that Conda is Installed via using the following command:
@@ -72,6 +79,20 @@ In your terminal navigate to the directory containing this file, and use the fol
 .. code:: bash
 
     conda env create -f environment.yaml
+
+With the environment now installed, you can activate it to work in it using:
+
+.. code:: bash
+
+        conda activate tudat-space
+
+.. note::
+    At this point, you may choose to install the **development version of tudatpy**, which is a conda package that is updated as soon as changes are merged to the development branch of the code on GitHub. 
+    To do so, you can run the following command:
+
+    .. code:: bash
+
+        conda install -c tudat-team/label/dev tudatpy
 
 
 .. note::
