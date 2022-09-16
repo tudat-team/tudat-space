@@ -4,6 +4,11 @@
 Default environment models
 ==========================
 
+.. attention::
+
+  This page is only exact for Tudatpy version >= 0.7. Older versions use several slightly different Spice kernels and gravity fields.
+  To use default Spice kernels from older versions, use the :func:`~tudatpy.interface.spice.load_standard_deprecated_kernels` instead of :func:`~tudatpy.interface.spice.load_standard_kernels`
+
 .. toctree::
    :titlesonly:
    :hidden:
