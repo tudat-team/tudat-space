@@ -16,6 +16,13 @@ passions in astrodynamics and space. It contains user guides and tutorials to us
   not hosted directly on tudat-space.
 - *About:* additional information about Tudat and its ecosystem.
 
+.. attention::
+
+  As of Tudatpy version 0.7, a number of modifications have been made to how Tudatpy deals with vehicle orientations,
+  in particular in the context of thrust and aerodynamic guidance. These changes are, in part, not backwards compatible.
+  See :ref:`this page <backwards_incompatibility>` for more details. To continue to use the last older version of Tudat, install
+  version 0.6.3.
+
 Quickstart
 ==========
 
@@ -55,16 +62,16 @@ Quickstart
     ---
     :column: col-lg-4 p-3
 
-    **Success stories**
+    **Research output**
     ^^^
 
-    Find out what you can do with tudatpy by having a look at our success stories.
+    Find out some state-of-the-art examples of what you can do with tudat(py) by having a look at our list of publications
 
     +++
 
-    .. link-button:: index
+    .. link-button:: _src_about/research_output
         :type: ref
-        :text: Coming soon :)
+        :text: Have a look
         :classes: btn-outline-primary btn-block stretched-link
 
 
@@ -208,10 +215,10 @@ to get started with them, have a look at our
     ^^^
 
     Several tools for preliminary mission design, including Lambert targeters, patched conic multiple-gravity
-    assists, and shape-based low-thrust models.
+    assists, and shape-based low-thrust models. Extended documentation
 
     +++
-    .. link-button:: _src_user_guide/astrodynamics/two_body_dynamics
+    .. link-button:: _src_user_guide/astrodynamics/trajectory_design
             :type: ref
             :text: Find out more
             :classes: stretched-link btn-outline-primary
@@ -222,13 +229,13 @@ to get started with them, have a look at our
     **Guidance models**
     ^^^
 
-    Possibility to embed built-in or user-defined aerodynamic and thrust guidance models in the simulation.
+    Possibility to embed built-in or user-defined aerodynamic, thrust, and other guidance models in the simulation.
 
 
     +++
-    .. link-button:: index
+    .. link-button:: _src_user_guide/state_propagation/environment_setup/architecture/custom_settings
             :type: ref
-            :text: Coming soon :)
+            :text: Find out more
             :classes: stretched-link btn-outline-primary
 
 
@@ -244,6 +251,7 @@ to get started with them, have a look at our
    _src_getting_started/setup_ide
    _src_getting_started/use_of_tools
    _src_getting_started/examples
+   _src_getting_started/submodules
 
 .. toctree::
    :titlesonly:
@@ -263,15 +271,6 @@ to get started with them, have a look at our
 
    _src_resources/post_processing
    _src_resources/pygmo_basics
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Resources from Tudat ecosystem
-   :hidden:
-
-   _src_about/api
-   _src_about/developer_docs
-   _src_about/technical_docs
 
 .. toctree::
    :maxdepth: 2

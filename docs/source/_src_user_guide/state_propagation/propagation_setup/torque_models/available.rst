@@ -40,15 +40,15 @@ Aerodynamic Torque
 | 3. Inertia tensor model for body undergoing acceleration.
 | 4. Current states of body undergoing acceleration and body with atmosphere.
 | 5. Shape model for the body exerting an acceleration (to allow for the calculation of vehicle altitude)
+| 6. Roation model for the body undergoing an acceleration (or numerical propagation of this body's rotational dynamics)
 
 .. note::
-   By default, a body’s angle of attack, sideslip angle, and bank angle are all set to 0. Defining a vehicle
-   orientation is typically done in one of several ways: defining aerodynamic guidance directly (imposing these three
-   angles), using the definition of vehicle orientation from an existing model for the vehicle (for instance thrust),
-   or propagation of the body’s rotational dynamics.
+   The aerodynamic acceleration is calculated in the vehicles body-fixed or aerodynamic frame. Expressing the
+   acceleration in an inertial frame (as required by the propagation) requires the vehicle's orientation to be defined.
+   For a simple definition, in which the body’s angle of attack, sideslip angle, and bank angle are all set to 0, see
+   :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.aerodynamic_angle_based`.
 
-.. todo::
-   Add reference to aerodynamic guidance page.
+   More details on aerodynamic guidance can be found on :ref:`this page <aerodynamic_models>`.
 
 Second Degree Gravitational Torque
 ###################################

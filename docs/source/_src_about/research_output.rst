@@ -1,3 +1,5 @@
+.. _research_output:
+
 ===============
 Research output
 ===============
@@ -6,6 +8,10 @@ Tudat has also been used extensively in research projects. Many of those that re
 
 **Journal publications**
 
+- `Graveyard orbits for future Mars missions <https://www.sciencedirect.com/science/article/pii/S027311772200624X>`_ Aggarwal, K., & Noomen, R. (2022). Advances in Space Research (in press)
+- `Cold Atom Interferometry for Enhancing the Radio Science Gravity Experiment: A Phobos Case Study <https://www.mdpi.com/2072-4292/14/13/3030>`_ Plumaris, M., Dirkx, D., Siemes, C., & Carraz, O. (2022). Remote Sensing, 14(13), 3030.
+- `The Influence of Dynamic Solar Oblateness on Tracking Data Analysis from Past and Future Mercury Missions <https://www.mdpi.com/2072-4292/14/17/4139>`_ van der Zwaard, R., & Dirkx, D. (2022).  Remote Sensing, 14(17), 4139.
+- `Decoupled and coupled moons’ ephemerides estimation strategies application to the JUICE mission <https://www.sciencedirect.com/science/article/pii/S0032063322001179>`_. Fayolle, M., Dirkx, D., Lainey, V., Gurvits, L. I., & Visser, P. N. A. M. (2022). Planetary and Space Science, 219, 105531.
 - `Analytical framework for mutual approximations-Derivation and application to Jovian satellites <https://www.aanda.org/articles/aa/abs/2021/08/aa41261-21/aa41261-21.html>`_. Fayolle, M., Dirkx, D., Visser, P. N. A. M., & Lainey, V. (2021).  Astronomy & Astrophysics, 652, A93.
 - `Improvement of orbit determination using laser altimeter crossovers: JUICE mission case study <https://www.sciencedirect.com/science/article/abs/pii/S0094576521000795>`_. Villamil, S., Dirkx, D., Stark, A., & Hussmann, H. (2021). Acta Astronautica, 182, 587-598.
 - `Propagation and estimation of the dynamical behaviour of gravitationally interacting rigid bodies <https://link.springer.com/article/10.1007/s10509-019-3521-4>`_, Dirkx, D., Mooij, E., & Root, B. Astrophysics and Space Science, 364(2), 2019, 37.

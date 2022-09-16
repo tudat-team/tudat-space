@@ -42,7 +42,6 @@ class should be used. An example is provided below:
 
      .. tab:: C++
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_setup.cpp
              :language: cpp
 
 First, a ``SingleArcSimulator`` is created using the system of bodies, integrator settings, and propagator settings

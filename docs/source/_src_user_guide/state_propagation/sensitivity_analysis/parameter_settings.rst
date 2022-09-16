@@ -28,7 +28,6 @@ When only wishing to propagate the state transition matrix :math:`\Phi(t,t_{0})`
 
          .. tab:: C++
 
-          .. literalinclude:: /_src_snippets/simulation/sensitivity_analysis/state_only_parameters.cpp
              :language: cpp
              
 which defines the initial state parameters to be fully consistent with the settings in the `propagator_settings`. 
@@ -48,8 +47,6 @@ When wishing to propagate the sensitivity matrix :math:`S(t)` (or depending on y
              :language: python
 
          .. tab:: C++
-
-          .. literalinclude:: /_src_snippets/simulation/sensitivity_analysis/full_parameter_settings.cpp
 	
          
 In the snippet above, parameters are created to estimate the initial states in the `propagator_settings` (presumably Delfi C-3 initial translational states), the gravitational parameter of the Earth, the constant drag and the radiation pressure coefficient of Delfi-C3.
