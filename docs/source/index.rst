@@ -16,6 +16,13 @@ passions in astrodynamics and space. It contains user guides and tutorials to us
   not hosted directly on tudat-space.
 - *About:* additional information about Tudat and its ecosystem.
 
+.. attention::
+
+  As of Tudatpy version 0.7, a number of modifications have been made to how Tudatpy deals with vehicle orientations,
+  in particular in the context of thrust and aerodynamic guidance. These changes are, in part, not backwards compatible.
+  See :ref:`this page <backwards_incompatibility>` for more details. To continue to use the last older version of Tudat, install
+  version 0.6.3.
+
 Quickstart
 ==========
 
