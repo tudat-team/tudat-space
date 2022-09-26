@@ -96,6 +96,14 @@ Unlike most other environment model options in Tudat, there are multiple options
 * Point mass: defining the gravitational parameter manually (:func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.central`) or requiring the gravitational parameter to be extracted from Spice (:func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.central_spice`).
 * Spherical harmonics: defining all the settings manually (:func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.spherical_harmonic`), loading a pre-defined model for a soalr system body (:func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.from_file_spherical_harmonic`) or calculating the spherical harmonic coefficients (up to a given degree) based on an ellipsoidal homogeneous mass distribution (:func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.spherical_harmonic_triaxial_body`)
 
+Polyhedron models
+-----------------
+A polyhedron can be used to define both gravity (:func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.polyhedron_from_gravitational_parameter`)
+and shape (:func:`~tudatpy.numerical_simulation.shape.gravity_field.polyhedron`) models. Since both models tend to be computationally intensive (the gravity
+model more so), it is recommended to use polyhedra with the lowest number of facets that allows meeting the desired accuracy. The number of facets of a polyhedron
+model can be reduced using any mesh processing software, for example `PyMeshLab <https://pymeshlab.readthedocs.io/en/latest/>`_.
+Additionally, different functions to process a polyhedron are available in `Polyhedron utilities <https://py.api.tudat.space/en/latest/polyhedron_utilities.html>`_.
+
 Inertia tensor
 --------------
 
