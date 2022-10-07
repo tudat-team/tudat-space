@@ -104,7 +104,9 @@ If there are any issues with the installation process, please submit an issue on
     | List the contents of the current working directory    | ``ls``                   | ``dir``               |
     +-------------------------------------------------------+--------------------------+-----------------------+
 
-    For more help on getting started with the command-line interface (CLI), you could start with [a tutorial](https://blog.balthazar-rouberol.com/discovering-the-terminal).
+    For more help on getting started with the command-line interface (CLI), you could start with a `tutorial`_.
+
+.. _`tutorial`: https://blog.balthazar-rouberol.com/discovering-the-terminal
 
 Updating Tudat(Py)
 ##################
