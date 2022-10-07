@@ -9,7 +9,7 @@ Installation
    :local:
 
 This page will guide you through the installation of Tudat(Py). The installation is supported exclusively through the use of a ``conda``
-package manager, such as ``miniconda`` or ``Anaconda``. Alternative installation procedures are not currently
+package manager, such as ``Miniconda`` or ``Anaconda``. Alternative installation procedures are not currently
 supported, although support for alternatives may be added in the future. If the current procedure is not suitable for your
 application, then please make a feature request under the respective package at https://github.com/tudat-team or show
 support for an existing request.
@@ -21,7 +21,7 @@ For more details on how to use ``conda``, please refer to our detailed guide (:r
     `Miniconda`_ or `Anaconda`_: when refering to a ``conda`` package manager, "Anaconda" will be used regardless of whether you are using the ``Miniconda`` or ``Anaconda`` interface to ``conda``. See also `Anaconda or Miniconda?`_.
 
 .. _`Miniconda`: https://docs.conda.io/en/latest/miniconda.html
-.. _`Anaconda`: https://docs.anaconda.com/anaconda/navigator/#anaconda-navigator
+.. _`Anaconda`: https://docs.anaconda.com/navigator
 .. _`Anaconda or Miniconda?`: https://docs.conda.io/projects/conda/en/latest/user-guide/install/download.html#anaconda-or-miniconda
 
 Installing Anaconda
@@ -87,6 +87,8 @@ Congratulations! You have now installed Tudat and TudatPy and are ready to start
 
 If there are any issues with the installation process, please submit an issue on the `tudatpy-feedstock`_. If there are issues running examples, please submit an issue on the `tudatpy`_ repository.
 
+.. _`tudatpy-feedstock`: https://github.com/tudat-team/tudatpy-feedstock
+.. _`tudatpy`: https://github.com/tudat-team/tudatpy
 
 .. note::
 
@@ -102,6 +104,7 @@ If there are any issues with the installation process, please submit an issue on
     | List the contents of the current working directory    | ``ls``                   | ``dir``               |
     +-------------------------------------------------------+--------------------------+-----------------------+
 
+    For more help on getting started with the command-line interface (CLI), you could start with [a tutorial](https://blog.balthazar-rouberol.com/discovering-the-terminal).
 
 Updating Tudat(Py)
 ##################
