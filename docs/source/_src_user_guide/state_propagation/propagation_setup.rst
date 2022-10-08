@@ -14,9 +14,12 @@ Propagation Setup
    propagation_setup/dynamics_types/mass
    propagation_setup/dynamics_types/multi_type
    propagation_setup/dynamics_types/multi_body
+   propagation_setup/dynamics_types/multi_arc
    propagation_setup/propagator_types
+   propagation_setup/integration_setup
    propagation_setup/termination_settings
    propagation_setup/dependent_variables
+   propagation_setup/console_output
    propagation_setup/propagation_architecture
    
 .. _propagation_setup_intro:
@@ -47,11 +50,21 @@ in Tudat we also have:
    representations, please visit the page :ref:`propagator_types`.
 
 
-Inputs
-======
+The above list defines different types of dynamics that are propagated over a single continuous arc. Propagation using a :ref:`multi-arc setup <multi_arc_dynamics>` is also supported in Tudat.
 
-As the figure shows, there are some input arguments common to all types of dynamics, while some others are
+
+Inputs and setup
+================
+
+As the figure shows, there are some input arguments common to all types of single-arc dynamics, while some others are
 specific to the type of propagator. More information about inputs are explained in the dynamic-specific pages linked
 above.
 
 .. figure:: propagation_setup/_static/tudatpy_propagation_settings.png
+
+The propagation of a given type of dynamics is defined by calling the `associated factory function<https://py.api.tudat.space/en/latest/propagator.html#functions>`. Each of these factory functions returns an object (derived from the :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.SingleArcPropagatorSettings class`) defining the settings of the propagation. The specifics of how to change the settings for the different types of dynamics are discussed on the pages linked to above.s
+
+  
+
+
+

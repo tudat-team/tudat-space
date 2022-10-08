@@ -29,11 +29,14 @@ Inputs
 
 The Tudatpy-native inputs to create the settings for a translational propagator are the following:
 
-- a set of acceleration models (see :ref:`acceleration_models_setup`);
-- a type of propagator, since the translational state can have different representations (see
+- List of bodies and central bodies of propagation
+- A set of acceleration models (see :ref:`acceleration_models_setup`)
+- Settings for the numerical integration (see :ref:`integrator_setup`)
+- The initial conditions for the propagation (state and time, see AAAs)
+- A type of propagator, since the translational state can have different representations (see
   :ref:`propagator_types`);
-- settings to terminate the propagation (see :ref:`termination_settings`);
-- dependent variables that should be saved (see :ref:`dependent_variables`).
+- Settings to terminate the propagation (see :ref:`termination_settings`);
+- Dependent variables that should be saved (see :ref:`dependent_variables`).
 
 .. _example:
 
