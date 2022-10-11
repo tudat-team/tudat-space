@@ -33,7 +33,7 @@ This example shows the use of the translational, rotational and mass dynamics of
    
  .. Warning:: 
 
-    When using multi-type propagator settings, the output variables, termination settings, and print interval defined through the ``propagation_setup.propagator.multi_type`` function are used. Settings of the same kind are also stored in the constituent single-type propagator settings, but these are fully ignored when using multi-type settings 
+    When using multi-type propagator settings, the output variables, termination settings, and print interval defined through the ``propagation_setup.propagator.multitype`` function are used. Settings of the same kind are also stored in the constituent single-type propagator settings, but these are fully ignored when using multi-type settings 
 
  .. note::
     

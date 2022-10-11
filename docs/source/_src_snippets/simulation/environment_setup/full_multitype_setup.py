@@ -5,7 +5,7 @@ propagator_settings_list =[
 # Define settings for multi-type propagator
 termination_condition = propagation_setup.propagator.time_termination(
     simulation_end_epoch )
-propagator_settings = propagation_setup.propagator.multi_type(
+propagator_settings = propagation_setup.propagator.multitype(
     propagator_settings_list,
     termination_condition,
     output_variables =  dependent_variables_to_save,
