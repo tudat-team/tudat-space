@@ -14,11 +14,10 @@ TudatPy is organized as shown in the figure below.
 Inputs
 =======
 
-There are three separate input types necessary to create a simulation:
+There are two separate input types necessary to create a simulation:
 
 - :ref:`environment_setup`: physical modeling of environment properties (for both celestial and artificial bodies)
-- :ref:`propagation_setup`: formulation of the differential equations representing the problem
-- :ref:`integrator_setup`: numerical integration settings used to solve such differential equations
+- :ref:`propagation_setup`: formulation of the differential equations representing the problem, and how to solve them
 
 
 .. toctree::
@@ -28,7 +27,6 @@ There are three separate input types necessary to create a simulation:
 
    state_propagation/environment_setup
    state_propagation/propagation_setup
-   state_propagation/integration_setup
 
 
 Simulation & Output

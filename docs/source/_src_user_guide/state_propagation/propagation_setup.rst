@@ -14,6 +14,7 @@ Propagation Setup
    propagation_setup/dynamics_types/mass
    propagation_setup/dynamics_types/multi_type
    propagation_setup/dynamics_types/multi_body
+   propagation_setup/integration_setup
    propagation_setup/propagator_types
    propagation_setup/termination_settings
    propagation_setup/dependent_variables

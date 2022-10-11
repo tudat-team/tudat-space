@@ -104,6 +104,7 @@ Properties can be added to an existing body after the body's creation (with the 
 * Aerodynamic coefficients
 * Radiation pressure properties
 * Engine model
+*
 
     .. tabs::
 
@@ -127,6 +128,8 @@ Properties can be added to an existing body after the body's creation (with the 
              :language: cpp
 
 In this example, the settings for the aerodynamic coefficients and radiation pressure are defined as the most simple models available (constant drag-only aerodynamic coefficients, and cannonball radiation pressure). The above approach uses the settings for environment models, just as the `creation of bodies from settings<create_celestial_body_settings>` (which is the preferred and recommended approach in most cases). However, instead of storing these environment settings in a larger object defining the settings for the full bodies, and for all bodies together, here we use the environment model settings *one at a time*. For each supported environment model, an ``add....`` function is provided in the :mod:`~tudatpy.numerical_simulation.environment_setup` module.  
+
+Note that a similar approach is typically taken to add ground stations to a body (see
 
 .. seealso::
    A comprehensive list of settings for both types of models can be found in :ref:`available_environment_models`.

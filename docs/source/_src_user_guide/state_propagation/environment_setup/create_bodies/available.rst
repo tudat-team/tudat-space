@@ -46,6 +46,7 @@ The complete list of available environment model settings can be found on our AP
 
    * These models provide various ways in which to define the response of a body to incident radation pressure.
 
+
 .. _specific_environment_considerations:
 
 
@@ -142,5 +143,19 @@ Here, a wind vector in the positive z-direction of the :ref:`vertical frame<aero
 By default, an atmosphere has 'zero wind', which means that the atmosphere corotates with the body. A user may add a wind model to this atmosphere model, which will modify the freestream velocity that a vehicle in the atmosphere experiences
 
 
+.. _ground_stations:
 
+Ground stations
+---------------
+
+Although ground stations are considered part of the environment in Tudat (as properties of a ``Body`` object), they do not influence the numerical propagation (unless a custom model imposing this is implemented by the user). Ground stations are, at present, not created through the ``BodySettings``, but are added to a body after it is created. The process is similar to the one described for :ref: `decorate_empty_body`. Specifically, ground station settings are created, and these are then used to create a ground station and add it to the body. The specifics of creating ground station settings is described `in the API documentation <https://py.api.tudat.space/en/latest/ground_stations.html>`_. An example is given below:
+
+    .. tabs::
+
+         .. tab:: Python
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/adding_ground_station.py
+             :language: python
+             
+where a simple ground station is created (with only a name and a position), with its position defined in geodetic elements.
 
