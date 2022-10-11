@@ -3,8 +3,12 @@ bodies_to_propagate = ["Spacecraft"]
 
 # Set initial rotation matrix (identity matrix)
 initial_rotation_matrix = np.eye(3)
-# Set initial state by converting a rotation matrix to quaternions
+
+# Set initial orientation by converting a rotation matrix to quaternions
 initial_state = element_conversion.rotation_matrix_to_quaternion_entries(initial_rotation_matrix)
+
+# Complete initial state by adding angular velocity vector (zero in this case)
+initial_state.append([0,0,0])
 
 # Define termination settings
 termination_condition = propagation_setup.propagator.time_termination(

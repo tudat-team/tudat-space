@@ -33,11 +33,12 @@ Inputs
 
 The Tudatpy-native inputs to create the settings for a translational propagator are the following:
 
-- a set of acceleration models (see :ref:`torque_model_setup`);
-- a type of propagator, since the rotational state can have different representations (see
-  :ref:`propagator_types`);
-- settings to terminate the propagation (see :ref:`termination_settings`);
-- dependent variables that should be saved (see :ref:`dependent_variables`).
+- A set of acceleration models (see :ref:`torque_model_setup`)
+- An initial state vector (Quaternions defining rotation to body-fixed frame, angular velocity vector in body-fixed frame; see :ref:`conventional_states`)
+- A propagator type, since the rotational state can have different representations (see
+  :ref:`propagator_types`) NOTE: the initial state must be provided as quaternions/angular velocity, regardless of the propagator type
+- Settings to terminate the propagation (see :ref:`termination_settings`)
+- Dependent variables that should be saved (see :ref:`dependent_variables`)
 
 .. _example:
 

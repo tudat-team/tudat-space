@@ -24,7 +24,7 @@ The available propagator types for translational dynamics are:
 
 - Cowell
 - Encke
-- Gauss-Kepleria
+- Gauss-Keplerian
 - Gauss Modified Equinoctial
 - Unified State Model (USM)
 - Unified State Model (USM) with Rodrigues parameters
@@ -57,8 +57,8 @@ Conventional vs. Propagated Coordinates
 In the description of some of the objects in this part of the wiki about the simulation setup, you may have noticed the
 use of two names to describe the propagated states of an object. These two names are:
 
-- *conventional* state;
-- *propagated* state.
+- *Conventional* state - the 'standard' formulation of a state (e.g. Cartesian for translational state), used in an ephemeris, to define an initial state, etc.
+- *Propagated* state - the formulation of the state that is propagated (user-defined, Cartesian, Keplerian, USM, ...)
 
 They describe two different manners to describe the state and are used in different parts of
 the code. What was described above in the page (in :ref:`translational_propagator_types` and
@@ -77,6 +77,8 @@ For instance, when using the formulation of the equations of motion in Keplerian
 the propagated state is the current state, as defined in Keplerian elements, and the conventional state is its
 conversion to Cartesian elements.
 
+.. _conventional_states:
+
 Conventional Coordinates
 --------------------------
 
@@ -86,20 +88,20 @@ that is being fed to the numerical integrator.
 For the supported dynamics types, the following formulations are defined to be the conventional formulation:
 
 - **Translational Motion**: Cartesian coordinates
-- **Rotational Motion**: Quaternions defining rotation to body-fixed frame, angular velocity vector in body-fixed frame (see :ref:`rotational_dynamics`)
+- **Rotational Motion**: Quaternions defining rotation from inertial to body-fixed frame (see :ref:`quaternion_definition`), angular velocity vector of the body, in body-fixed frame
 - **Mass Dynamics**: Current mass (no other formulation is used)
 
 You will find and need to use *conventional* coordinates in these scenarios:
 
-- o describe the initial conditions of an object when creating propagator settings (typically using the :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.translational` or :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.rotational` functions)
+- To describe the initial conditions of an object when creating propagator settings (typically using the :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.translational` or :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.rotational` functions)
 - As an output to the ``state_history`` function from a ``Simulator`` object (such as the :class:`~tudatpy.numerical_simulation.SingleArcSimulator` class)
 - When extracting the current state from a :class:`~tudatpy.numerical_simulation.environment.Body` object
 
 Internally, Tudat uses the *conventional* state in the following places:
 
-- to update the environment model of an object (this also means that the states extracted from the body are expressed
-  in the conventional coordinates);
-- to update the acceleration model of an object.
+- To update the environment model of an object (this also means that the states extracted from the body are expressed
+  In the conventional coordinates);
+- Tso update the acceleration model of an object.
 
 
 Propagated Coordinates

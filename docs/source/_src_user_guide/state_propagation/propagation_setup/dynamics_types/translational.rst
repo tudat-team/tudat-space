@@ -17,11 +17,9 @@ Translational Dynamics
 
 Settings to propagate numerically the translational state of a body can be created through the
 :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.translational` factory function, described in
-detail in the API reference, which creates an object of type
-:class:`~tudatpy.numerical_simulation.propagation_setup.propagator.TranslationalStatePropagatorSettings` (see below
-an :ref:`example`).
+detail in the API reference.
 
-In this page, only the Tudat-native objects necessary as input will be described. For all the other inputs, please
+In this page, only the Tudat-specific aspects of theinput will be described. For all the other inputs, please
 refer to the related API entry (:func:`~tudatpy.numerical_simulation.propagation_setup.propagator.translational`).
 
 Inputs
@@ -29,11 +27,12 @@ Inputs
 
 The Tudatpy-native inputs to create the settings for a translational propagator are the following:
 
-- a set of acceleration models (see :ref:`acceleration_models_setup`);
-- a type of propagator, since the translational state can have different representations (see
-  :ref:`propagator_types`);
-- settings to terminate the propagation (see :ref:`termination_settings`);
-- dependent variables that should be saved (see :ref:`dependent_variables`).
+- A set of acceleration models (see :ref:`acceleration_models_setup`)
+- An initial state vector (Cartesian states of each propagated body; see :ref:`conventional_states`)
+- Settings to terminate the propagation (see :ref:`termination_settings`)
+- A propagator type, since the translational state can have different representations (see
+  :ref:`propagator_types`). NOTE: the initial state must be provided in Cartesian elements, regardless of the propagator type
+- Dependent variables that should be saved (see :ref:`dependent_variables`)
 
 .. _example:
 
