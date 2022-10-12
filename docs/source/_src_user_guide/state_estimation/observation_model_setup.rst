@@ -3,6 +3,13 @@
 Observation Model Setup
 =======================
 
+.. toctree::
+   :titlesonly:
+   :hidden:
+   :maxdepth: 1
+
+   available_observations
+   
 Having defined the :ref:`link ends <linkEndSetup>`, you can now define and create the observation models, below the top-level workflow for this is discussed.
 
 .. _observationTypes:
@@ -10,7 +17,7 @@ Having defined the :ref:`link ends <linkEndSetup>`, you can now define and creat
 Defining observation settingss
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Tudat supports a diverse set of observation types, (see `API documentation <https://py.api.tudat.space/en/latest/observation.html>`_ for a comprehensive list). The creation of an observation model is done in a similar manner as models used for the numerical propagation: an object defining the settings of each observation model is created, which is then processed to created the actual obserevation model.
+Tudat supports a diverse set of observation types, (see :ref:`observation_model_overview` for a comprehensive list). The creation of an observation model is done in a similar manner as models used for the numerical propagation: an object defining the settings of each observation model is created, which is then processed to created the actual obserevation model.
 
 A basic observation is defined by a combination of its type, and a link definition. Most observation types may (or must) have additional settings, such as light-time corrctions, biases, etc. 
 
@@ -101,6 +108,10 @@ Depending on the type of simulation you are using, you can use one of two manner
 In either case, the ``observation_simulators`` variable is a list of objects derived from :class:`~tudatpy.numerical_simulation.estimation.ObservationSimulator`, with a single object responsible for the simulation of a single *type* of observable (*e.g.* one-way range, one-way Doppler, *etc.*). The ``observation_simulators`` list of simulators can then be used for :ref:`observationSimulation`.
 
 For 'manual' simulation of observations, you can extract an :class:`~tudatpy.ObservationModel` object from the ``ObservationSimulator`` (TODO example). Whereas the ``ObservationSimulator`` is responsible for *all* observations of a given kind, the ``ObservationModel`` simulates observations of a single kind, for a single set of link ends (e.g. one-way range observations between a given ground station and a single spacecraft). Details on the associated options can be found in the API documentation.
+
+
+
+
 
 
 
