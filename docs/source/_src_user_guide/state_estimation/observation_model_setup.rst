@@ -10,25 +10,25 @@ Observation Model Setup
 
    available_observations
    
-Having defined the :ref:`link ends <linkEndSetup>`, you can now define and create the observation models, below the top-level workflow for this is discussed.
+Having defined the :ref:`link ends <linkEndSetup>`, you can now define and create the observation models. Below the general workflow for this is discussed.
 
 .. _observationTypes:
 
 Defining observation settingss
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Tudat supports a diverse set of observation types, (see :ref:`observation_model_overview` for a comprehensive list). The creation of an observation model is done in a similar manner as models used for the numerical propagation: an object defining the settings of each observation model is created, which is then processed to created the actual obserevation model.
+Tudat supports a diverse set of observation types, (see :ref:`observation_model_overview` for a comprehensive list). The creation of an observation model is done in a similar manner as models used for the numerical propagation: an object defining the settings of each observation model is created, which is then processed to create the actual observation model.
 
-A basic observation is defined by a combination of its type, and a link definition. Most observation types may (or must) have additional settings, such as light-time corrctions, biases, etc. 
+A basic observation is defined by a combination of its type, and a link definition. Most observation types may (or must) have additional settings, such as light-time corrections, biases, etc. 
 
-Below is a basic example of creating a list of settings for observation models.
+Below is a basic example of creating settings for two observation models.s
 
 .. code-block:: python
 
     # Define link ends
     one_way_nno_mex_link_ends = dict( );
-    one_way_nno_mex_link_ends[ transmitter ] = ( "Earth", "NNO" );
-    one_way_nno_mex_link_ends[ receiver ] = ( "MeX", "" );
+    one_way_nno_mex_link_ends[ transmitter ] = estimation_setup.observation.body_reference_point_link_end_id( "Earth", "NNO" );
+    one_way_nno_mex_link_ends[ receiver ] = estimation_setup.observation.body_origin_link_end_id( "MeX" );
     one_way_nno_mex_link_definition = estimation_setup.link_definition( one_way_nno_mex_link_ends )
 
     

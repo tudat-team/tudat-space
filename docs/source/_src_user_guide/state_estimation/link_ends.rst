@@ -20,16 +20,16 @@ Creating a Set of Link Ends
 
 The creation of the link definition requires the definition of a set of link ends used for a given observable. These are stored in a dictionary as follows:
 
- - The dictitonary key represents the :class:`~tudatpy.numerical_simulation.estimation_setup.LinkEndType`, denoting the role in the observation (e.g. receiver, transmitter, *setc.*)
- - The dictitonary  value represents the identifier of the link end (spacecraft, ground station, *etc.*). The basic creation of a link definition requires a pair of strings for each link end. The first entry of the string is the body on which the link end is placed, the second entry the reference point on this body (typically the ground station). In the case where the second entry is empty, the body's center of mass is used. Although using a center of mass is unrealistic for data analysis, such a setup can often be useful for a simulated analysis. An example of defining link ends is given below:
+ - The dictionary key denotes the role in the observation (e.g. receiver, transmitter, *etc.*), given by an entry from the :class:`~tudatpy.numerical_simulation.estimation_setup.LinkEndType` enum. For each observation model in the `API documentation <https://py.api.tudat.space/en/latest/observation.html>`_, it is specified which link end typs are required.
+ - The dictionary value represents the identifier of the link end (spacecraft, ground station, *etc.*), as a :class:`~tudatpy.numerical_simulation.estimation_setup.LinkEndId` object.  To use a reference point on a body (for instance, a ground station on Earth), the :func:`~tudatpy.numerical_simulation.estimation_setup.observation.body_reference_point_link_end_id` function can be used to create an object of this type. To use the origin (typically, but not necesarilly its center of mass) of a body as link end, use the :func:`~tudatpy.numerical_simulation.estimation_setup.observation.body_origin_link_end_id` function.  Although using a center of mass is unrealistic for data analysis, such a setup can often be useful for a simulated analysis. Example of defining link ends are given below:
 
-Each type of observable requires a specific combination of *types* of link ends. Below, a number of examples are given for one-, two- and three-way observables
+Each type of observable requires a specific combination of *types* of link ends. Below, a number of examples are given for one-, two- and three-way observables (see :ref:`here <two_three_way_observables>` for the distinction between two- and three-way observables when creating observation models):
 
 .. code-block:: python
                 
     one_way_link_ends = dict( );
-    one_way_link_ends[ transmitter ] = ( "Earth", "Graz" );
-    one_way_link_ends[ receiver ] = ( "LRO", "" );
+    one_way_link_ends[ transmitter ] = estimation_setup.observation.body_reference_point_link_end_id( "Earth", "Graz" );
+    one_way_link_ends[ receiver ] = estimation_setup.observation.body_origin_link_end_id( "LRO" );
     
 This defines a link for which the ground station termed Graz on the body called Earth acts as transmitter, and the body called LRO is used as the receiver (in this case placed at the body's center of mass).
 
@@ -38,18 +38,18 @@ An example of link-ends for a two-way link from Graz to LRO and back to Graz is:
 .. code-block:: python
 
     two_way_link_ends = dict( );
-    two_way_link_ends[ transmitter ] = ( "Earth", "Graz" );
-    two_way_link_ends[ reflector ] = ( "LRO", "" );
-    two_way_link_ends[ receiver ] = ( "Earth", "Graz" );
+    two_way_link_ends[ transmitter ] = estimation_setup.observation.body_reference_point_link_end_id( "Earth", "Graz" );
+    two_way_link_ends[ reflector ] = estimation_setup.observation.body_origin_link_end_id( "LRO" );
+    two_way_link_ends[ receiver ] = estimation_setup.observation.body_reference_point_link_end_id( "Earth", "Graz" );
 
 Where the Graz station now acts as both transmitter and receiver. Similarly, the receiver may be different from the transmitter (in what is typically called a three-way observable in Deep Space tracking ), so:
 
 .. code-block:: python
 
     two_way_link_ends = dict( );
-    two_way_link_ends[ transmitter ] = ( "Earth", "Graz" );
-    two_way_link_ends[ reflector ] = ( "LRO", "" );
-    two_way_link_ends[ receiver ] = ( "Earth", "Matera" );
+    two_way_link_ends[ transmitter ] = estimation_setup.observation.body_reference_point_link_end_id( "Earth", "Graz" );
+    two_way_link_ends[ reflector ] = estimation_setup.observation.body_origin_link_end_id( "LRO" );
+    two_way_link_ends[ receiver ] = estimation_setup.observation.body_reference_point_link_end_id( "Earth", "Matera" );
     
 where the signal is transmitter by Graz station, retransmitter or reflected by LRO, and then received by the Matera station.
 
