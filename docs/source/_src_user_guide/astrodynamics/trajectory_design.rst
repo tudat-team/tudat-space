@@ -1,24 +1,23 @@
 .. _`transfer_trajectory`:
 
 =================================
-Muliple Flyby Transfer Trajectory
+Multiple Gravity Assists Transfer
 =================================
 
-Multiple Gravity Assists and Deep Space Maneuvers
+In this section, the design of multiple-leg interplanetary transfer trajectories is discussed. This module
+provides the functionalities for creating transfer trajectories consisting of multiple transfer legs with powered
+and unpowered gravity assists. This allows defining high-, low-, and hybrid-thrust transfers.
+
+The module is defined under the assumptions of the patched-conics approximation. As such, it allows the flexible design
+of transfers using only analytical and semi-analytical methods, without any required numerical integration. This is
+particularly useful for preliminary mission design, where having a fast method is particularly important.
+
+A multiple gravity-assist transfer (MGA) is constituted by a series of nodes and legs. The nodes correspond to the departure,
+gravity assist, and arrival planets. The legs to the trajectories between the nodes. A transfer can be constituted by
+a minimum of one leg and two nodes (there is always one more node than legs).
+
+General Procedure
 ==============================================================
-
-In this section, the TudapPy module that is used for the design and analysis of high thrust transfer trajectories is
-described. The module considers multiple (powered) gravity assists (MGA) and deep space maneuvers (DSM). An MGA-DSM
-trajectory is defined by a series of nodes, i.e. the planets where the GAs are executed, connected
-by a series of legs, i.e. the trajectories in between the nodes. A maximum of 1 DSM can be executed per leg.
-
-For details about the theory behind this module, please see `Musegaas`_.
-
-.. _`Musegaas`:  http://resolver.tudelft.nl/uuid:02468c77-5c64-4df8-9a24-1ed7ad9d1408
-
-
-The module
-------------------
 
 The transfer trajectory module can be imported with:
 
@@ -26,119 +25,163 @@ The transfer trajectory module can be imported with:
 
     from tudatpy.kernel.trajectory_design import transfer_trajectory
 
-The transfer trajectory module contains of a set of methods, factory functions, enumerations and classes. Here, the
-most important functionality of the module is explained. For more details about the module, please see the `API`_.
+In general, the procedure for analyzing an MGA transfer consists of:
 
-.. _`API`: https://tudatpy.readthedocs.io/en/latest/transfer_trajectory.html#
+- **Define transfer settings**: These include the body order (bodies through which the spacecraft will pass), the
+  settings of each transfer leg, and the settings of each transfer node. The leg and node settings can either be created
+  manually or using a factory function.
+- **Create the transfer trajectory object**: Through :func:`~tudatpy.trajectory_design.transfer_trajectory.create_transfer_trajectory`.
+- **Evaluate the transfer**: Select the node times, node parameters, and leg parameters, and use them to evaluate the
+  transfer through :func:`~tudatpy.trajectory_design.transfer_trajectory.TransferTrajectory.evaluate`.
+- **Retrieve the results**: Use :class:`~tudatpy.trajectory_design.transfer_trajectory.TransferTrajectory`'s
+  properties or functions to retrieve the :math:`\Delta V`, time of flight, state history, acceleration history, etc.
 
-The :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_transfer_settings` method is used to create the settings
-of the transfer trajectory. The module also provides the possibility to retrieve only the settings of a specific type,
-e.g. :func:`~tudatpy.trajectory_design.transfer_trajectory.dsm_velocity_based_leg` and
-:class:`~tudatpy.trajectory_design.transfer_trajectory.EscapeAndDepartureNodeSettings`. The resulting leg and node
-settings are required to create a transfer trajectory object through
-:func:`~tudatpy.trajectory_design.transfer_trajectory.create_transfer_trajectory`. This transfer trajectory object can
-be used to analyze various implementations of the defined transfer trajectory. This can be done through the object's
-:func:`~tudatpy.trajectory_design.transfer_trajectory.TransferTrajectory.evaluate` method. Having done this, various
-transfer characteristics can be retrieved, such as the total :math:`\Delta V`, time of flight and :math:`\Delta V` per
-leg.
+All available functions and classes are described in detail in the relevant entry of the `API reference`_.
+For example applications see :ref:`mga_dsm_analysis`.
 
-Inputs
-----------
+.. _`API reference`: https://tudatpy.readthedocs.io/en/latest/transfer_trajectory.html#
 
-The general inputs required to define an MGA-DSM transfer trajectory are:
+Transfer Model Description
+==============================================================
 
-- *body order*: order of the bodies that are visited for GAs (the nodes)
-- *leg type*: type of the legs, either excluding or including DSMs
-- *departure and arrival orbit semi-major axes and eccentricities*: departure and arrival orbit characteristics
+To evaluate the transfer one needs to select a series of transfer parameters: node times, leg parameters, and node
+parameters. The node times always need to be specified, and correspond to the epoch when the spacecraft reaches each
+planet/body. The node and leg parameters depend on the specific node and leg type, which are described next.
 
-``leg_type`` must be of the ``tudatpy.kernel.trajectory_design.transfer_trajectory.TransferLegTypes`` type and can be
-retrieved from the module directly:
+Legs
+--------------------------------------------------------------
 
-.. code-block:: python
+The following types of legs are support:
 
-    no_dsm_leg_type = transfer_trajectory.unpowered_unperturbed_leg_type
-    dsm_velocity_based_leg_type = transfer_trajectory.dsm_velocity_based_leg_type
-    dsm_position_based_leg_type = transfer_trajectory.dsm_position_based_leg_type
+- :func:`~tudatpy.trajectory_design.transfer_trajectory.unpowered_leg`. Unpowered leg, does not have leg parameters.
 
-The departure and arrival orbit characteristics are optional inputs. By default, Tudat(Py) assumes that :math:`a` and
-:math:`e` are ``NaN``, in which case the departure / arrival planets are analysed as swing-by nodes instead of departure
-/ arrival nodes. This is useful when combining multiple types of trajectories into one or when a mission's objective
-is to do a fly-by of the final target. Defining :math:`a=\infty` defines the departure / arrival orbit at the SOI of the
-corresponding body.
+- :func:`~tudatpy.trajectory_design.transfer_trajectory.dsm_velocity_based_leg`: High-thrust leg with one impulsive
+  deep space maneuver (DSM). Its leg parameters are:
 
-Besides the general inputs, trajectory specific inputs are required, which are called transfer parameters. Which
-transfer parameters need to be defined, depends on the leg type. For all trajectories, *with* and *without* DSMs, it is
-required to define the ``node_times``, which indicate when the spacecraft is at the periapsis of the GA at each planet.
-Through a simple conversion these can be obtained from a departure date and times of flight per leg. The table below
-presents the additional parameters, so called leg and node free parameters, required per leg type.
+      - Fraction of the leg's time-of-flight at which DSM is applied (:math:`\in [0,1]`).
 
-+---------------------------------------+-----------------------+-------------------------------------------------------+------------------------------------------------------------------------------+
-| Parameter type                        | No DSM                | DSM Velocity based                                    | DSM Position based                                                           |
-+=======================================+=======================+=======================================================+==============================================================================+
-| Node times *(per node)*               | Node times            | Node times                                            | Node times                                                                   |
-+---------------------------------------+-----------------------+-------------------------------------------------------+------------------------------------------------------------------------------+
-| Leg free parameters                   |                       | Time of flight fraction at                            | Time of flight fraction at                                                   |
-|                                       |                       |                                                       |                                                                              |
-| *(per leg)*                           |                       | which the DSM takes place                             | which the DSM takes place                                                    |
-+---------------------------------------+-----------------------+-------------------------------------------------------+------------------------------------------------------------------------------+
-|                                       |                       |                                                       | The dimensionless distance of the DSM to the Sun, which                      |
-|                                       |                       |                                                       |                                                                              |
-|                                       |                       |                                                       | which is scaled to the distance of the departure planet to the Sun           |
-+---------------------------------------+-----------------------+-------------------------------------------------------+------------------------------------------------------------------------------+
-|                                       |                       |                                                       | In-plane angle, defined as the angle between the position of the departure   |
-|                                       |                       |                                                       |                                                                              |
-|                                       |                       |                                                       | planet and the projection of the DSM location in the orbital plane of the    |
-|                                       |                       |                                                       |                                                                              |
-|                                       |                       |                                                       | departure planet                                                             |
-+---------------------------------------+-----------------------+-------------------------------------------------------+------------------------------------------------------------------------------+
-|                                       |                       |                                                       | Out-of-plane angle, defined as the angle between the DSM location and the    |
-|                                       |                       |                                                       |                                                                              |
-|                                       |                       |                                                       | orbital plane of the departure planet                                        |
-+---------------------------------------+-----------------------+-------------------------------------------------------+------------------------------------------------------------------------------+
-| Node free parameters                  |                       | Magnitude of the relative velocity w.r.t.             |                                                                              |
-|                                       |                       |                                                       |                                                                              |
-| *(departure node only)*               |                       | the departure planet after departure                  |                                                                              |
-+---------------------------------------+-----------------------+-------------------------------------------------------+------------------------------------------------------------------------------+
-|                                       |                       | In-plane angle of the relative velocity w.r.t.        |                                                                              |
-|                                       |                       |                                                       |                                                                              |
-|                                       |                       | the departure planet after departure                  |                                                                              |
-+---------------------------------------+-----------------------+-------------------------------------------------------+------------------------------------------------------------------------------+
-|                                       |                       | Out-of-plane angle of the relative velocity           |                                                                              |
-|                                       |                       |                                                       |                                                                              |
-|                                       |                       | w.r.t. the departure  planet after departure          |                                                                              |
-+---------------------------------------+-----------------------+-------------------------------------------------------+------------------------------------------------------------------------------+
-| Node free parameters                  |                       | Periapsis radius                                      |                                                                              |
-|                                       |                       |                                                       |                                                                              |
-| *(per swing-by node)*                 |                       |                                                       |                                                                              |
-+---------------------------------------+-----------------------+-------------------------------------------------------+------------------------------------------------------------------------------+
-|                                       |                       | Rotation angle                                        |                                                                              |
-+---------------------------------------+-----------------------+-------------------------------------------------------+------------------------------------------------------------------------------+
-|                                       |                       | Magnitude of :math:`\Delta V` applied at periapsis    |                                                                              |
-+---------------------------------------+-----------------------+-------------------------------------------------------+------------------------------------------------------------------------------+
+- :func:`~tudatpy.trajectory_design.transfer_trajectory.dsm_position_based_leg`. High-thrust leg with one impulsive
+  DSM. Its leg parameters are:
 
-In case the default departure / arrival orbit characteristics are used, such that these are considered swing-by nodes,
-the transfer parameters change accordingly. For a transfer *without* DSMs, an extra set of swing-by node parameters
-is included for the final node. For a transfer *with* DSMs, the departure node parameters will change into swing-by node
-parameters and an extra set of swing-by node parameters is included for the final node.
+      - Fraction of the leg's time-of-flight at which DSM is applied (:math:`\in [0,1]`).
+      - Position of the DSM in spherical coordinates, with respect to a frame with the x-axis aligned with the position
+        of the departure body, z-axis aligned with the angular momentum of the departure body, y-axis selected to form a
+        right-handed frame. The spherical position is specified as: dimensionless radial position (using as unit of length
+        the radial position of the departure body), in-plane angle, out-of-plane angle.
 
+- :func:`~tudatpy.trajectory_design.transfer_trajectory.spherical_shaping_leg`. Low-thrust leg. Its leg parameters are:
 
-General procedure
------------------
+      - Integer number of revolution (:math:`\geq 0`).
 
-In general, the procedure for analyzing an MGA-DSM transfer trajectory constitutes the following steps:
+- :func:`~tudatpy.trajectory_design.transfer_trajectory.hodographic_shaping_leg`. Low-thrust leg. Its leg parameters are:
 
-* *Define settings*
-    Use a body order, leg type and optionally departure/arrival orbit characteristics to define settings, e.g. through
-    :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_transfer_settings`.
+      - Integer number of revolution (:math:`\geq 0`).
+      - Free coefficients of shaping functions (number of coefficients in :math:`\geq 0`).
 
-* *Create and evaluate transfer object*
-    Use the settings in :func:`~tudatpy.trajectory_design.transfer_trajectory.create_transfer_trajectory` and apply
-    user-defined transfer parameters to :func:`~tudatpy.trajectory_design.transfer_trajectory.TransferTrajectory.evaluate`
-    the transfer trajectory object.
+The inputs and outputs associated with each of these leg types are summarized in the following table.
 
-* *Retrieve the desired results from the evaluated object*
-    Use any of :class:`~tudatpy.trajectory_design.transfer_trajectory.TransferTrajectory`'s properties or functions to
-    retrieve :math:`\Delta V`, time of flight, spacecraft state during the transfer, etc.
++----------------------+-----------------------+-----------------------+---------------------+---------------------+
+|                      | Leg initial position  | Leg initial velocity  | Leg final position  | Leg final velocity  |
++======================+=======================+=======================+=====================+=====================+
+| Unpowered            | Input                 | Output                | Input               | Output              |
++----------------------+-----------------------+-----------------------+---------------------+---------------------+
+| DSM-Velocity         | Input                 | Input                 | Input               | Output              |
++----------------------+-----------------------+-----------------------+---------------------+---------------------+
+| DSM-Position         | Input                 | Output                | Input               | Output              |
++----------------------+-----------------------+-----------------------+---------------------+---------------------+
+| Spherical shaping    | Input                 | Input                 | Input               | Input               |
++----------------------+-----------------------+-----------------------+---------------------+---------------------+
+| Hodographic shaping  | Input                 | Input                 | Input               | Input               |
++----------------------+-----------------------+-----------------------+---------------------+---------------------+
+
+Nodes
+--------------------------------------------------------------
+
+There are three main types of nodes: departure, swingby, and arrival nodes (these types are specified by the user).
+The nodes connect the legs, computing the inputs for each leg based on the
+outputs of the other legs or the user-specified node parameters. As such, depending on the inputs/outputs of the legs
+that precede and follow a node, different variants of the previous three node types are used (these variants are
+selected automatically). Each of these variants is described next, including a summary of their node
+parameters and the operations executed by them.
+
+Based on the following description and on
+the table specifying the inputs and output of each leg, it is possible to predict exactly which nodes are used
+for a given set of legs, as well as the required node parameters. Note that the incoming velocity of a node corresponds to the
+final velocity of the previous leg and the outgoing velocity of a node to the initial velocity of the following leg.
+
+- :func:`~tudatpy.trajectory_design.transfer_trajectory.departure_node`
+    Usually, this is the initial node of the
+    transfer. The outgoing relative velocity at the node (i.e. the excess velocity) is either
+    retrieved from the following leg or specified by the user. The node computes the impulsive :math:`\Delta V` that
+    needs to be applied at the periapsis of the departure elliptic orbit to enter a hyperbolic orbit with the target excess velocity.
+    This node is subdivided into the following types:
+
+    - **Node with leg-defined outgoing velocity**: Does not require node parameters.
+    - **Node with user-defined outgoing velocity**: Node parameters:
+
+      - Outgoing velocity vector relative to the node, specified with respect to a TNW reference frame defined using the node's
+        inertial state. The outgoing relative velocity is specified in spherical coordinates: norm of the velocity,
+        in-plane angle, out-of-plane angle.
+
+- :func:`~tudatpy.trajectory_design.transfer_trajectory.capture_node`
+      Usually, this is the final node of the
+      transfer. The incoming relative velocity at the node (i.e. the excess velocity) is either
+      retrieved from the previous leg or specified by the user. The node computes the impulsive :math:`\Delta V` that
+      needs to be applied at the periapsis of the hyperbolic orbit with the specified excess velocity to enter the
+      arrival elliptical orbit. This node is subdivided into the following types:
+
+      - **Node with leg-defined incoming velocity**: Does not require node parameters.
+      - **Node with user-defined incoming velocity**: Node parameters:
+
+        - Incoming velocity vector relative to the node, specified with respect to a TNW reference frame defined using the node's
+          inertial state. The incoming relative velocity is specified in spherical coordinates: norm  of the velocity, in-plane angle,
+          out-of-plane angle.
 
 
-For example applications of this module, please see :ref:`mga_dsm_analysis`.
+- :func:`~tudatpy.trajectory_design.transfer_trajectory.swingby_node`
+
+      These are usually the intermediate nodes of the
+      transfer. However, the initial and final nodes might also be selected to be swingby nodes; this is useful when individually
+      analyzing different parts of a transfer or when a mission's objective is to do a swingby of the final body.
+      The swingby node is subdivided into the following types:
+
+      - **Node with leg-defined incoming and outgoing velocity**: Does not require node parameters. Computes the
+        :math:`\Delta V \geq 0` that needs to be applied during the swingby to patch the incoming and outgoing
+        velocities, according to section 4.5.2 of `Musegaas (2012)`_.
+
+      - **Node with leg-defined incoming velocity, user-defined swingby**: Given the known incoming velocity,
+        the node forward propagates the swingby using the user-specified parameters, according to sections 4.4.2/3
+        of `Musegaas (2012)`_. Node parameters:
+
+            - Swingby periapsis radius
+            - Swingby :math:`\Delta V` (applied at the periapsis)
+            - Outgoing-velocity rotation angle. Defined according to Appendix 7a of "Spacecraft Trajectory Optimization",
+              `Conway (2010)`_. This angle defines the plane in which the swingby occurs (different from the bending angle,
+              which is defined inside that plane). This angle can take values in :math:`[0, 2\pi]`.
+
+      - **Node with user-defined swingby, leg-defined outgoing velocity**: Given the known outgoing velocity,
+        the node backward propagates the swingby using the user-specified parameters. Analogous to sections 4.4.2/3
+        of `Musegaas (2012)`_. Node parameters:
+
+            - Swingby periapsis radius
+            - Swingby :math:`\Delta V` (applied at the periapsis)
+            - Incoming-velocity rotation angle. Defined analogously to the outgoing-velocity rotation angle, which in turn is
+              defined according to Appendix 7a of "Spacecraft Trajectory Optimization",
+              `Conway (2010)`_. This angle defines the plane in which the swingby occurs (different from the bending angle,
+              which is defined inside that plane). This angle can take values in :math:`[0, 2\pi]`.
+
+      - **Node with user-defined incoming, user-defined swingby**: Given the known incoming velocity,
+        the node forward propagates the swingby using the user-specified parameters, according to sections 4.4.2/3
+        of `Musegaas (2012)`_. Node parameters:
+
+            - Incoming velocity vector relative to the node, specified with respect to a TNW reference frame defined using the node's
+              inertial state. The incoming relative velocity is specified in spherical coordinates: norm of the velocity, in-plane angle,
+              out-of-plane angle.
+            - Swingby periapsis radius
+            - Swingby :math:`\Delta V` (applied at the periapsis)
+            - Outgoing-velocity rotation angle. Defined according to Appendix 7a of "Spacecraft Trajectory Optimization",
+              `Conway (2010)`_. This angle defines the plane in which the swingby occurs (different from the bending angle,
+              which is defined inside that plane). This angle can take values in :math:`[0, 2\pi]`.
+
+.. _`Musegaas (2012)`:  http://resolver.tudelft.nl/uuid:02468c77-5c64-4df8-9a24-1ed7ad9d1408
+.. _`Conway (2010)`:  https://doi.org/10.1017/CBO9780511778025
