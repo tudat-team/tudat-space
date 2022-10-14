@@ -47,7 +47,7 @@ in Tudat we also have:
    dynamics, for instance, there are various options besides a simple Cartesian state representation. However, even
    when using a non-Cartesian state vector, the Cartesian representation still plays a role in calculating, *e.g.*,
    acceleration models, as well as in defining the initial state. For more information on the role of different state
-   representations, please visit the page :ref:`propagator_types`.
+   representations, please visit the page :ref:`conventional_propagated_states`.
 
 
 The above list defines different types of dynamics that are propagated over a single continuous arc. Propagation using a :ref:`multi-arc setup <multi_arc_dynamics>` is also supported in Tudat.

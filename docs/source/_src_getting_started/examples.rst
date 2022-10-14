@@ -1,4 +1,8 @@
 
+.. attention::
+  
+  As of Tudatpy version 0.7, a number of modifications have been made to how Tudatpy deals with vehicle orientations, in particular in the context of thrust and aerodynamic guidance. These changes are, in part, :ref:`not backwards compatible<backwards_incompatibility>`. The examples below dealing with thrust and aerodynamics are **not yet up-to-date**. This will be corrected by mid-October.
+
 .. _getting_started_examples:
 
 ************************
@@ -56,12 +60,7 @@ There are several example applications disseminated in various forms.
         :text: See below
         :classes: btn-outline-primary btn-block stretched-link
 
-.. attention::
 
-  As of Tudatpy version 0.7, a number of modifications have been made to how Tudatpy deals with vehicle orientations,
-  in particular in the context of thrust and aerodynamic guidance. These changes are, in part,
-  :ref:`not backwards compatible<backwards_incompatibility>`. The examples below dealing with thrust and aerodynamics
-  are **not yet up-to-date**. This will be corrected by the first week of October.
 
 .. nbgallery::
    :caption: Numerical propagation of dynamics

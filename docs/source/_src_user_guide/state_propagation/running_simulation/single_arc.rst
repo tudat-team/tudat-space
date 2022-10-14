@@ -85,7 +85,7 @@ The :attr:`~tudatpy.numerical_simulation.SingleArcSimulator.unprocessed_state_hi
 ``SingleArcSimulator`` class will provide you with the history of the Keplerian elements, which were directly solved
 for by the integrator, while the  :attr:`~tudatpy.numerical_simulation.SingleArcSimulator.state_history` provides
 the Cartesian elements, obtained from the conversion of the propagated Keplerian elements (see
-:ref:`propagator_types` for more details).
+:ref:`conventional_propagated_states` for more details).
 
 Moreover, when different state types are propagated, the state output contains the states in following order:
 

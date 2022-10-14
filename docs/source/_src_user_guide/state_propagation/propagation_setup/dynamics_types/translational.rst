@@ -17,26 +17,27 @@ Translational Dynamics
 
 Settings to propagate numerically the translational state of a body can be created through the
 :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.translational` factory function, described in
-detail in the API reference, which creates an object of type
-:class:`~tudatpy.numerical_simulation.propagation_setup.propagator.TranslationalStatePropagatorSettings` (see below
-an :ref:`example`).
+detail in the API documentation. In this page, only the Tudat-specific aspects of the input will be briefly described.
 
-In this page, only the Tudat-native objects necessary as input will be described. For all the other inputs, please
-refer to the related API entry (:func:`~tudatpy.numerical_simulation.propagation_setup.propagator.translational`).
+The default (conventional) representation for solving the translational equations of motion is by using the Cowell propagator
+(using Cartesian elements as the propagated states), but other formulations can be used (see below and :ref:`conventional_propagated_states`).
 
 Inputs
 ======
 
-The Tudatpy-native inputs to create the settings for a translational propagator are the following:
+The Tudatpy-specific inputs to create the settings for a translational propagator are the following:
 
-- List of bodies and central bodies of propagation
 - A set of acceleration models (see :ref:`acceleration_models_setup`)
 - Settings for the numerical integration (see :ref:`integrator_setup`)
-- The initial conditions for the propagation (state and time, see AAAs)
-- A type of propagator, since the translational state can have different representations (see
-  :ref:`propagator_types`);
+- The initial conditions for the propagation (Cartesian state, and time)
+- A type of propagator, since the translational state can have different representations
+  (listed in :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.TranslationalPropagatorType`).
 - Settings to terminate the propagation (see :ref:`termination_settings`);
 - Dependent variables that should be saved (see :ref:`dependent_variables`).
+
+.. note::
+
+    The initial state must be provided in Cartesian elements, regardless of the propagator type
 
 .. _example:
 

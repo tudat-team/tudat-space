@@ -13,7 +13,7 @@ With all the necessary simulation settings in place, it is time to run the simul
       \mathbf{x}(t_{0})&=\mathbf{x}_{0}
 
 where :math:`\mathbf{x}` defines the state vector that is to be propagated (defined by the choice of your
-:ref:`propagator <propagator_types>`),
+:ref:`propagator <conventional_propagated_states>`),
 :math:`t_{0}` and :math:`\mathbf{x}_{0}` define the initial time and state, defined in the
 :ref:`propagation_setup` and :ref:`integrator_setup` pages, respectively. The parameter vector :math:`\mathbf{p}` is
 included explicitly in the state derivative function to denote its dependence on various environmental and system

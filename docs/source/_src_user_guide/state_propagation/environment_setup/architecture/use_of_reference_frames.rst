@@ -143,13 +143,17 @@ used (either by the user or built-in functionality), a comprehensive list of whi
 Rotational states
 =================
 
-The handling of rotational states in the environment and propagation framework follows that of the translational states to a large degree. However, there is one fewer complication for rotational states: no frame 'origin' has to be defined, which simplifies the overall book-keeping of the states. Still, a rotation may be extracted from one of three places during the numerical propagation:
+The handling of rotational states in the environment and propagation framework follows that of the translational states to a large degree.
+However, there is one fewer complication for rotational states: no frame 'origin' has to be defined, which simplifies the overall book-keeping
+of the states. A rotation may be extracted from/defined in one of three places:
 
-* State vector (if a rotational state is propagated)
+* During the propagation: directly from a Body object (see :ref:`rotation_during_propagation`)
 * Rotational ephemeris
-* Body
+* State vector (if a rotational state is propagated, see :ref:`rotational_dynamics`)
 
-However, Tudat presently requires all **translational** state vectors to be defined w.r.t. the same inertial orientation (J2000 or ECLIPJ2000, selected by the user). As such, rotations in Tudat that are defined in one of the above three places will always be from this inertial frame to the body-fixed frame (of the body associated with it). 
+Since Tudat presently requires all **translational** state vectors to be defined w.r.t. the same inertial orientation
+(J2000 or ECLIPJ2000, selected by the user), all **rotational states** in Tudat that are will always be from this inertial
+frame to the body-fixed frame (of the body associated with it).
 
 .. _quaternion_definition:
 
@@ -161,7 +165,7 @@ However, the exact definition of the quaternion entries :math:`q_{0},q_{1},q_{2}
 in use. Our quaternion definition is that used in the `Eigen library <https://eigen.tuxfamily.org/dox/classEigen_1_1Quaternion.html>`_.
 Instead of having to manually determine each of the quaternion entries for a given rotation, we provide a function which converts
 a rotation matrix to the corresponding quaternion :func:`~tudatpy.astro.element_conversion.rotation_matrix_to_quaternion_entries`,
-and the inverse :func:`~tudatpy.astro.element_conversion.quaterion_entries_to_rotation_matrix`. Here, we stress that, in
+and the inverse :func:`~tudatpy.astro.element_conversion.quaternion_entries_to_rotation_matrix`. Here, we stress that, in
 the context of these functions, we are not dealing with actual quaternions (in the sense of mathematical operators that can
 rotate a vector), but merely with 4x1 arrays which store the four quaternion elements, using the correct conventions.
 

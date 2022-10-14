@@ -12,17 +12,20 @@ Rotational Dynamics
    ../torque_models/setup
    ../torque_models/available
 
-Settings to propagate numerically the translational state of a body can be created through the
+Settings to propagate numerically the rotational state of a body can be created through the
 :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.rotational` factory function, described in
-detail in the API reference, which creates an object of type
-:class:`~tudatpy.numerical_simulation.propagation_setup.propagator.RotationalStatePropagatorSettings` (see below
-an :ref:`example`).
+detail in the API documentation. In this page, only the Tudat-specific aspects of the input will be briefly described.
 
-In this page, only the Tudat-native objects necessary as input will be described. For all the other inputs, please
-refer to the related API entry (:func:`~tudatpy.numerical_simulation.propagation_setup.propagator.rotational`).
+The default (conventional) representation for solving the rotationa equations of motion is by using a vector of 7 elements:
+
+  * The quaternion elements (vector :math:`\mathbf{q}` of size 4) of the rotation from body-fixed to inertial frame (see :ref:`quaternion_definition`)
+  * The angular velocity (vector :math:`\boldsymbol{\omega}` of size 3) of the body w.r.t. the inertial frame, expressed in the body-fixed frame.
+
+Severeal other formulations can be used if wanted (see below and :ref:`conventional_propagated_states`).
 
 .. note::
-  Settings to define the propagation of rotational dynamics reflect those specified in :ref:`translational_dynamics`.
+
+  Settings to define the propagation of rotational dynamics largely reflect those specified in :ref:`translational_dynamics`.
   Besides the obvious differences, an important one is that no 'central body' is specified. The rotational state that
   is propagated is always the one from the global inertial orientation to the body-fixed orientation of the propagated
   body.
@@ -31,14 +34,17 @@ refer to the related API entry (:func:`~tudatpy.numerical_simulation.propagation
 Inputs
 =======
 
-The Tudatpy-native inputs to create the settings for a translational propagator are the following:
+The Tudatpy-specifics inputs to create the settings for a translational propagator are the following:
 
 - A set of torque models (see :ref:`torque_model_setup`);
-- A type of propagator, since the rotational state can have different representations (see
-  :ref:`propagator_types`);
-- The initial conditions for the propagation (rotational state and time, see AAAs)
+- The initial conditions for the propagation (rotational state as :math:`[\mathbf{q};\boldsymbol{\omega}]` and time)
+- A propagator type, since the rotational state can have different representations (listed in :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.RotationalPropagatorType`).
 - Settings to terminate the propagation (see :ref:`termination_settings`);
 - Dependent variables that should be saved (see :ref:`dependent_variables`).
+
+.. warning::
+
+    The initial state must be provided as conventional state formulation :math:`[\mathbf{q};\boldsymbol{\omega}]`, regardless of the propagator type
 
 .. _example:
 
