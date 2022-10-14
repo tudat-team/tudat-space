@@ -43,7 +43,7 @@ This defines a one-way range and one-way Doppler (open-loop) observable, each wi
 When defining observation models, you can for most types of models define settings for:
 
 * **Biases:** A bias in TudatPy is applied to the observable after its 'ideal' value computed from the environment is computed. You can find a list of settings for observation biases in our `API documentation <https://py.api.tudat.space/en/latest/observation.html>`_
-* **Light-time corrections:** When using an observable that involves the observation of one point/body in space by another (including any observable that involves the exchange of elecromagnetic signals), it is automatically assumed that the signal travels at the speed of light, and the associated light-time is determined when calcialting the observable. Deviations from the signal's ideal trajectory (straight line at speed of light) may be defind by adding light-time correction settings, as listed in our`API documentation <https://py.api.tudat.space/en/latest/observation.html>`_
+* **Light-time corrections:** When using an observable that involves the observation of one point/body in space by another (including any observable that involves the exchange of elecromagnetic signals), it is automatically assumed that the signal travels at the speed of light, and the associated light-time is determined when calcialting the observable. Deviations from the signal's ideal trajectory (straight line at speed of light) may be defind by adding light-time correction settings, as listed in our`API documentation `<https://py.api.tudat.space/en/latest/observation.html>`_
 
 
 The above options are added to the calls of the observation model settings factory functions. Below is an example 
@@ -52,8 +52,8 @@ The above options are added to the calls of the observation model settings facto
 
     # Define link ends
     one_way_nno_mex_link_ends = dict( );
-    one_way_nno_mex_link_ends[ transmitter ] = ( "Earth", "NNO" );
-    one_way_nno_mex_link_ends[ receiver ] = ( "MeX", "" );
+    one_way_nno_mex_link_ends[ transmitter ] = estimation_setup.observation.body_reference_point_link_end_id( "Earth", "NNO" );
+    one_way_nno_mex_link_ends[ receiver ] = estimation_setup.observation.body_origin_link_end_id( "MeX" );
     one_way_nno_mex_link_definition = estimation_setup.link_definition( one_way_nno_mex_link_ends )
     
     # Define settings for light-time calculations

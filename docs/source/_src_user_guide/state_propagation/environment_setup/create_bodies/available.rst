@@ -167,7 +167,7 @@ Although ground stations are considered part of the environment in Tudat (as pro
              
 where a simple ground station is created (with only a name and a position), with its position defined in geodetic elements. The position of a ground station in a body-fixed frame can have two sources of time-variability:
 
-* From `shape deformation models <https://py.api.tudat.space/en/latest/shape_deformation.html>`_ on which it is located
+* From `shape deformation models <https://py.api.tudat.space/en/latest/shape_deformation.html>`_ of the body on which it is located
 * From a list of :class:`~tudatpy.numerical_simulation.environment_setup.ground_station.GroundStationMotionSettings` objects, which can be assigned to the ground station settings (see e.g. :func:`~tudatpy.numerical_simulation.environment_setup.ground_station.basic_station`). These models define time-variability of individual ground stations, in addition to the global shape deformation.
 
 To automatically create a list of settings for all DSN stations (which are then typically assigned to the ``ground_station_settings`` of Earth), the :func:`~tudatpy.numerical_simulation.environment_setup.ground_station.dsn_station_settings` can be used.
