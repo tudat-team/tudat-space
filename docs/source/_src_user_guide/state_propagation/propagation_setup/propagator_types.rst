@@ -27,8 +27,11 @@ You will find and need to use *conventional* coordinates in these scenarios:
 - To describe the initial conditions of an object when creating propagator settings
   (typically using the :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.translational` or
   :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.rotational` functions)
-- As an output to the ``state_history`` function from a ``Simulator`` object
-  (such as the :class:`~tudatpy.numerical_simulation.SingleArcSimulator` class)
+- As an output from the numerical propagation, extracted from the
+:attr:`~tudatpy.numerical_simulation.propagation.SingleArcPropagatorResults.state_history` of the
+:class:`~tudatpy.numerical_simulation.propagation.SingleArcPropagatorResults` (see :ref:`propagation_results`)
+
+
 - When extracting the current state from a :class:`~tudatpy.numerical_simulation.environment.Body` object during the propagation
 
 Internally, Tudat uses the *conventional* state in the following places:
@@ -51,8 +54,9 @@ rotational motion is specified when calling the  :func:`~tudatpy.numerical_simul
 
 In Tudat, you will find the propagated elements in the following place:
 
-- As an output to the ``unprocessed_state_history`` function of a
-  ``Simulator`` object (such as the :class:`~tudatpy.numerical_simulation.SingleArcSimulator` class)
+- As an output from the numerical propagation, extracted from the
+:attr:`~tudatpy.numerical_simulation.propagation.SingleArcPropagatorResults.unprocessed_state_history` of the
+:class:`~tudatpy.numerical_simulation.propagation.SingleArcPropagatorResults` (see :ref:`propagation_results`)
 
 Internally, Tudat uses the *propagated* state in the following place:
 

@@ -24,8 +24,8 @@ Propagation Setup
    
 .. _propagation_setup_intro:
 
-Introduction
-============
+Dynamics types
+==============
 
 In Tudat, it is possible to perform the numerical propagation of different types of dynamics, namely:
 
@@ -50,8 +50,10 @@ in Tudat we also have:
    representations, please visit the page :ref:`conventional_propagated_states`.
 
 
-The above list defines different types of dynamics that are propagated over a single continuous arc. Propagation using a :ref:`multi-arc setup <multi_arc_dynamics>` is also supported in Tudat.
+The above list defines different types of dynamics that are propagated over a single continuous arc.
+Propagation using a :ref:`multi-arc setup <multi_arc_dynamics>` is also supported in Tudat.
 
+.. _propagation_inputs:
 
 Inputs and setup
 ================
@@ -62,9 +64,26 @@ above.
 
 .. figure:: propagation_setup/_static/tudatpy_propagation_settings.png
 
-The propagation of a given type of dynamics is defined by calling the `associated factory function<https://py.api.tudat.space/en/latest/propagator.html#functions>`. Each of these factory functions returns an object (derived from the :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.SingleArcPropagatorSettings class`) defining the settings of the propagation. The specifics of how to change the settings for the different types of dynamics are discussed on the pages linked to above.s
+The propagation of a given type of dynamics is defined by calling the
+`associated factory function <https://py.api.tudat.space/en/latest/propagator.html#functions>`_.
+For the different types of single are dynamics, these factory functions return an object (derived from the
+:class:`~tudatpy.numerical_simulation.propagation_setup.propagator.SingleArcPropagatorSettings` class)
+defining the settings of the propagation. The specifics of how to change the settings for the different
+types of dynamics are discussed on the pages linked to above.
 
-  
+There are various options in the propagator settings that can be provided by a user to modify the behaviour before, during and after
+the propagation. These are described in more detail in the following pages:
+
+- **Dependent variables**: which quantities to save as output, in addition to the states, described :ref:`here <dependent_variables>`.
+- **Numerical integrator**: the solver used to create an approximate solution, described :ref:`here <integrator_setup>`
+- **Termination conditions**: when to terminate the propagation, described :ref:`here <termination_settings>`;
+- **Processing of numerical results**: what to do with the numerical results after propagation, described :ref:`here <auto_processing>`;
+- **Terminal output**: what to print to the terminal before, during and after propagation, described :ref:`here <auto_processing>`;
+
+In addition, each type of dynamics has its own unique input requirements (e.g. acceleration models for translational dynamics).
+These are described on the dedicated pages describing the specific type of dynamics.
+
+
 
 
 

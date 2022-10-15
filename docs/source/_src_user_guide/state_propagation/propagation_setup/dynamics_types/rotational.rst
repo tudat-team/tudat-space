@@ -21,26 +21,18 @@ The default (conventional) representation for solving the rotationa equations of
   * The quaternion elements (vector :math:`\mathbf{q}` of size 4) of the rotation from body-fixed to inertial frame (see :ref:`quaternion_definition`)
   * The angular velocity (vector :math:`\boldsymbol{\omega}` of size 3) of the body w.r.t. the inertial frame, expressed in the body-fixed frame.
 
-Severeal other formulations can be used if wanted (see below and :ref:`conventional_propagated_states`).
+Several other formulations can be used if wanted (see below and :ref:`conventional_propagated_states`).
 
-.. note::
-
-  Settings to define the propagation of rotational dynamics largely reflect those specified in :ref:`translational_dynamics`.
-  Besides the obvious differences, an important one is that no 'central body' is specified. The rotational state that
-  is propagated is always the one from the global inertial orientation to the body-fixed orientation of the propagated
-  body.
 
 
 Inputs
 =======
 
-The Tudatpy-specifics inputs to create the settings for a translational propagator are the following:
+In addition to the settings described :ref:`here <propagation_inputs>`, the definition of rotatitonal dynamics settings requires:
 
 - A set of torque models (see :ref:`torque_model_setup`);
 - The initial conditions for the propagation (rotational state as :math:`[\mathbf{q};\boldsymbol{\omega}]` and time)
 - A propagator type, since the rotational state can have different representations (listed in :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.RotationalPropagatorType`).
-- Settings to terminate the propagation (see :ref:`termination_settings`);
-- Dependent variables that should be saved (see :ref:`dependent_variables`).
 
 .. warning::
 
