@@ -5,7 +5,7 @@
 Propagation results
 ===================
 
-After numerically propagating the dynamics:
+After numerically propagating the dynamics, as follows:
 
 .. code-block:: python
 
@@ -13,7 +13,7 @@ After numerically propagating the dynamics:
         body_system, propagator_settings)
     propagation_results = dynamics_simulator.propagation_results
 
-The results can be retrieved. All such results, including details of propagation termination, etc., are stored in the
+the results are stored in the
 ``propagation_results`` object. For a single-arc propagation, this object is of the type
 :class:`~tudatpy.numerical_simulation.propagation.SingleArcPropagatorResults`.
 Multi- and hybrid-arc results are discussed briefly :ref:`below <multi_hybrid_arc_results>`.
@@ -24,18 +24,23 @@ The three primary numerical results of the propagation are:
   (e.g. Cartesian elements for translational dynamics, see :ref:`conventional_states`), stored in the
   :attr:`~tudatpy.numerical_simulation.propagation.SingleArcPropagatorResults.dependent_variable_history.state_history` attribute
 - The numerical results of the propagation, in the propagated coordinates, stored in the
-:attr:`~tudatpy.numerical_simulation.propagation.SingleArcPropagatorResults.dependent_variable_history.unprocessed_state_history` attribute
+  :attr:`~tudatpy.numerical_simulation.propagation.SingleArcPropagatorResults.dependent_variable_history.unprocessed_state_history` attribute
 - The dependent variables of the propagation (if any, see :ref:`dependent_variables`), stored in the
-:attr:`~tudatpy.numerical_simulation.propagation.SingleArcPropagatorResults.dependent_variable_history.dependent_variable_history` attribute
+  :attr:`~tudatpy.numerical_simulation.propagation.SingleArcPropagatorResults.dependent_variable_history.dependent_variable_history` attribute
 
 Each of these is returned as a dictionary, with the numerical integration epochs as key, and the current state/dependent variable
 as value. For example:
 
 .. code-block:: python
 
+    # Propagate dynamics
     dynamics_simulator = numerical_simulation.create_dynamics_simulator(
         body_system, propagator_settings)
+
+    # Retrieve object with full results
     propagation_results = dynamics_simulator.propagation_results
+
+    # Retrieve the individual result histories
     states = propagation_results.state_history
     unprocessed_states = propagation_results.unprocessed_state_history
     dependent_variables = propagation_results.dependent_variable_history

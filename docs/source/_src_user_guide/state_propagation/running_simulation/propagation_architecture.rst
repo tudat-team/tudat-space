@@ -1,7 +1,7 @@
 .. _propagation_architecture:
 
 ========================
-Propagation Architecture
+Propagation architecture
 ========================
 
 The core of a numerical integration is the succesive evaluation of the state derivative :math:`\dot{\mathbf{x}}=\mathbf{f}(\mathbf{x},s;\mathbf{p})`. Here, :math:`\mathbf{x}` is the propagated state. For a typical propagation, this is the translaional state of a single body, but it may be a combination of any types of dynamics for any number of bodies (see :ref:`here <propagation_setup_intro>`), and may also include the variational equations associated with this dynamics. The variable :math:`s` is the indpendent variable of the differential equation governing the state (typically but not necesarilly the time :math:`t`), and the vector :math:`\mathbf{p}` denotes a set of parameters which are held constant during the propagation, but which do influence the solution of the equations of motion.

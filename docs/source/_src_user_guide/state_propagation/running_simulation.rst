@@ -41,11 +41,11 @@ physical environment. By default, creating the dynamics simulator immediately st
 The choice of single-, multi- or hybrid-arc is defined by the choice of ``propagator_settings``, resulting in the ``dynamics_simulator``
 being of type :class:`~tudatpy.numerical_simulation.SingleArcSimulator`, :class:`~tudatpy.numerical_simulation.MultiArcSimulator` or
 :class:`~tudatpy.numerical_simulation.HybridArcSimulator`, respectively.
-The results of the numerical integration are stored in the ``propagation_results``, which is described in more detail :ref:`here <propagation_results>`
-
+The results of the numerical integration are stored in the ``propagation_results``, which is described in more below, along with a
+more detailed description of the process that is executed during the propagation:
+s
 .. toctree::
    :titlesonly:
-   :hidden:
    :maxdepth: 1
 
    running_simulation/propagation_results
