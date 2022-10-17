@@ -36,8 +36,9 @@ In general, the procedure for analyzing an MGA transfer consists of:
 
 - **Define the transfer settings**: The transfer settings include the leg settings and node settings. These are defined
   using the body order (bodies through which the spacecraft will pass), the departure and arrival orbit (semi-major axis
-  and eccentricity) and other settings specific to each leg type. The transfer settings can be created using factory
-  functions for the following leg types:
+  and eccentricity) and other settings specific to each leg type. Selecting the semi-major axis of the departure/arrival
+  orbit as :math:`a = \infty` corresponds to having the spacecraft depart/arrive from/to the edge of the initial/final
+  body's sphere of influence. The transfer settings can be created using factory functions for the following leg types:
 
     - **Unpowered legs**: Unpowered legs. Settings can be created via
       :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_settings_unpowered_unperturbed_legs`.
@@ -175,7 +176,7 @@ Nodes and Their Parameters
 --------------------------------------------------------------
 
 As already mentioned, there are three main types of nodes: departure, swingby, and arrival nodes. These are the only
-types with which the user has contact. However, internally, these are further divided into subtypes. While a user does
+types with which the user has direct contact. However, internally, these are further divided into subtypes. While a user does
 not need to understand these subtypes for using the MGA model, the user does need to if he/she wishes to understand what
 a given node is doing behind the scenes and what node parameters are required for a given transfer.
 
