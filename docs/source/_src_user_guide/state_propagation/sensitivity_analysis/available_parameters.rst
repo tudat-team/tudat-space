@@ -1,9 +1,9 @@
 
 .. _parameterSettingCreation:
 
-===================================
-Available ("Estimated") Parameters
-===================================
+====================
+Available Parameters
+====================
 
 The framework discussed in the previous section explains how the :literal:`parameter_settings` list is populated. The goal of this section is to list the available parameters that can be used in the variational equations (and which are therefore available for estimation in a state estimation problem), what syntax they use, and explain to which environment models they are linked.
 

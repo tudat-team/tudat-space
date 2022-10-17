@@ -17,22 +17,24 @@ Translational Dynamics
 
 Settings to propagate numerically the translational state of a body can be created through the
 :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.translational` factory function, described in
-detail in the API reference.
+detail in the API documentation. In this page, only the Tudat-specific aspects of the input will be briefly described.
 
-In this page, only the Tudat-specific aspects of theinput will be described. For all the other inputs, please
-refer to the related API entry (:func:`~tudatpy.numerical_simulation.propagation_setup.propagator.translational`).
+The default (conventional) representation for solving the translational equations of motion is by using the Cowell propagator
+(using Cartesian elements as the propagated states), but other formulations can be used (see below and :ref:`conventional_propagated_states`).
 
 Inputs
 ======
 
-The Tudatpy-native inputs to create the settings for a translational propagator are the following:
+In addition to the settings described :ref:`here <propagation_inputs>`, the definition of translational dynamics settings requires:
 
 - A set of acceleration models (see :ref:`acceleration_models_setup`)
-- An initial state vector (Cartesian states of each propagated body; see :ref:`conventional_states`)
-- Settings to terminate the propagation (see :ref:`termination_settings`)
-- A propagator type, since the translational state can have different representations (see
-  :ref:`propagator_types`). NOTE: the initial state must be provided in Cartesian elements, regardless of the propagator type
-- Dependent variables that should be saved (see :ref:`dependent_variables`)
+- The initial conditions for the propagation (Cartesian state, and time)
+- A type of propagator, since the translational state can have different representations
+  (listed in :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.TranslationalPropagatorType`).
+
+.. warning::
+
+    The initial state must be provided in Cartesian elements, **regardless of the propagator type**
 
 .. _example:
 

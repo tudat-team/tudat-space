@@ -1,7 +1,7 @@
 .. _dependent_variables:
 
 Dependent Variables
-##########################
+###################
 
 Dependent variables can be added to the propagation settings by first defining
 a list of desired dependent variables, which is supplied as input argument to the

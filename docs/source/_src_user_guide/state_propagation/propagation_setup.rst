@@ -14,16 +14,18 @@ Propagation Setup
    propagation_setup/dynamics_types/mass
    propagation_setup/dynamics_types/multi_type
    propagation_setup/dynamics_types/multi_body
-   propagation_setup/integration_setup
+   propagation_setup/dynamics_types/multi_arc
    propagation_setup/propagator_types
+   propagation_setup/integration_setup
    propagation_setup/termination_settings
    propagation_setup/dependent_variables
+   propagation_setup/console_output
    propagation_setup/propagation_architecture
-   
+
 .. _propagation_setup_intro:
 
-Introduction
-============
+Dynamics types
+==============
 
 In Tudat, it is possible to perform the numerical propagation of different types of dynamics, namely:
 
@@ -45,14 +47,43 @@ in Tudat we also have:
    dynamics, for instance, there are various options besides a simple Cartesian state representation. However, even
    when using a non-Cartesian state vector, the Cartesian representation still plays a role in calculating, *e.g.*,
    acceleration models, as well as in defining the initial state. For more information on the role of different state
-   representations, please visit the page :ref:`propagator_types`.
+   representations, please visit the page :ref:`conventional_propagated_states`.
 
 
-Inputs
-======
+The above list defines different types of dynamics that are propagated over a single continuous arc.
+Propagation using a :ref:`multi-arc setup <multi_arc_dynamics>` is also supported in Tudat.
 
-As the figure shows, there are some input arguments common to all types of dynamics, while some others are
+.. _propagation_inputs:
+
+Inputs and setup
+================
+
+As the figure shows, there are some input arguments common to all types of single-arc dynamics, while some others are
 specific to the type of propagator. More information about inputs are explained in the dynamic-specific pages linked
 above.
 
 .. figure:: propagation_setup/_static/tudatpy_propagation_settings.png
+
+The propagation of a given type of dynamics is defined by calling the
+`associated factory function <https://py.api.tudat.space/en/latest/propagator.html#functions>`_.
+For the different types of single are dynamics, these factory functions return an object (derived from the
+:class:`~tudatpy.numerical_simulation.propagation_setup.propagator.SingleArcPropagatorSettings` class)
+defining the settings of the propagation. The specifics of how to change the settings for the different
+types of dynamics are discussed on the pages linked to above.
+
+There are various options in the propagator settings that can be provided by a user to modify the behaviour before, during and after
+the propagation. These are described in more detail in the following pages:
+
+- **Dependent variables**: which quantities to save as output, in addition to the states, described :ref:`here <dependent_variables>`.
+- **Numerical integrator**: the solver used to create an approximate solution, described :ref:`here <integrator_setup>`
+- **Termination conditions**: when to terminate the propagation, described :ref:`here <termination_settings>`;
+- **Processing of numerical results**: what to do with the numerical results after propagation, described :ref:`here <auto_processing>`;
+- **Terminal output**: what to print to the terminal before, during and after propagation, described :ref:`here <auto_processing>`;
+
+In addition, each type of dynamics has its own unique input requirements (e.g. acceleration models for translational dynamics).
+These are described on the dedicated pages describing the specific type of dynamics.
+
+
+
+
+

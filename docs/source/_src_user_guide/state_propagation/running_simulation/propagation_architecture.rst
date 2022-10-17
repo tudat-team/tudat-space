@@ -1,7 +1,7 @@
 .. _propagation_architecture:
 
 ========================
-Propagation Architecture
+Propagation architecture
 ========================
 
 The core of a numerical integration is the succesive evaluation of the state derivative :math:`\dot{\mathbf{x}}=\mathbf{f}(\mathbf{x},s;\mathbf{p})`. Here, :math:`\mathbf{x}` is the propagated state. For a typical propagation, this is the translaional state of a single body, but it may be a combination of any types of dynamics for any number of bodies (see :ref:`here <propagation_setup_intro>`), and may also include the variational equations associated with this dynamics. The variable :math:`s` is the indpendent variable of the differential equation governing the state (typically but not necesarilly the time :math:`t`), and the vector :math:`\mathbf{p}` denotes a set of parameters which are held constant during the propagation, but which do influence the solution of the equations of motion.
@@ -18,7 +18,7 @@ Before starting the propagation, several steps are taken to initialize the varia
   
   * An ``EnvironmentUpdater`` object (in C++; not exposed to Python), which decided which environment models need to be updated for each function evaluation (:ref:`single_propagation_evaluation:` and how)
   * A ``ReferenceFrameManager`` object (in C++; not *yet* exposed to Python), which allows translations between ephemerides with different origins to be performed
-  * If the ``set_integrated_result`` to the :class:`~tudatpy.numerical_simulation.SingleArcSimulator` is set to true: A set of ``IntegratedStateProcessor`` objects (in C++; not exposed to Python) which is used to post-process the propagation results, and make any required transformations to reset the ephemerides of the propagated bodies.   
+  * If the ``set_integrated_result`` to the :class:`~tudatpy.numerical_simulation.propagator.SingleArcOutputSettings` is set to true: A set of ``IntegratedStateProcessor`` objects (in C++; not exposed to Python) which is used to post-process the propagation results, and make any required transformations to reset the ephemerides of the propagated bodies.
   * A ``DynamicsStateDerivativeModel`` (in C++; not exposed to Python) object that handles the calculation of a single state derivative evaluation (see :ref:`single_propagation_evaluation`)
   * A ``PropagationTerminationCondition`` (in C++; not exposed to Python) object that checks whether the propagation is terminated for a given time/state pair
   * A set of functions that extract the dependent variables from the environment is created (if any)
@@ -72,10 +72,17 @@ Propagator post-processing
 
 After the propagation is finished, the following post-processing steps are performed before returning the simulation to the user:
 
-* The propagated states are converted to conventional states. After the propagation, the time histories of both may be extracted from the :attr:`~tudatpy.numerical_simulation.SingleArcSimulator.unprocessed_state_history` and :attr:`~tudatpy.numerical_simulation.SingleArcSimulator.state_history` atributes, respectively
-* If the ``set_integrated_result`` to the :class:`~tudatpy.numerical_simulation.SingleArcSimulator` is set to true, the propagated states (in conventional formulation) are used to reset the environment of the propagated body/bodies. For the different state types, this means:
+* The propagated states are converted to conventional states. After the propagation, the time histories of both may be extracted from the :attr:`~tudatpy.numerical_simulation.propagation.SingleArcPropagatorResults.unprocessed_state_history` and :attr:`~tudatpy.numerical_simulation.propagation.SingleArcPropagatorResults.state_history` attributes, respectively
+* If the ``set_integrated_result`` to the :class:`~tudatpy.numerical_simulation.propagator.SingleArcOutputSettings` is set to true, the propagated states (in conventional formulation) are used to reset the environment of the propagated body/bodies. For the different state types, this means:
 
   * Translational dynamics: the propagated translational state of the body is used to create an interpolator (:func:`~tudatpy.math.interpolators.lagrange_interpolation`, ``number_of_points``=6), which is used to update the :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.tabulated` ephemeris of the body. If needed, a translation from the propagation origin to the ephemeris origin is applied (see :ref:`translational_frame_origins`). NOTE: this is *only* possible if the body has a tabulated ephemeris alreacy, or no ephemeris. In the latter case a tabulated ephemeris is created, with ephemeris origin equal to the propagation origin. In case you want to use a non-tabulated ephemeris for the propagated body, you can use the :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.tabulated_from_existing` function to override existing body settings (see :ref:`override_body_settings`). When doing so, the behaviour of the non-tabulated ephemeris will be emulated by a non-tabulated ephemeris.
   *  Rotational dynamics: the propagated rotational state of the body is used to create an interpolator (:func:`~tudatpy.math.interpolators.lagrange_interpolation`, ``number_of_points``= 6), which is used to create a tabulated rotation model (not yet exposed to Python). At present, this option is only possible if the propagated body starts out with *no* rotation model. An update to allow the same flexibility as for the translational dynamics (see above) is planned
   *  Mass dynamics: the propagated mass of the body is used to create an interpolator (:func:`~tudatpy.math.interpolators.lagrange_interpolation`, ``number_of_points``=6), which is used to update the mass function of the body.
-* If the ``clear_numerical_solutions`` to the :class:`~tudatpy.numerical_simulation.SingleArcSimulator` is set to true, the state (processed and unprocessed) and dependent variable history are deleted, *after* having reset the environment (if ``set_integrated_result`` was set to true; see above). In this case, the ephemerides are reset with the propagated dynamics, but the the results of the propagation cannot be extracted from the :attr:`~tudatpy.numerical_simulation.SingleArcSimulator.unprocessed_state_history`, :attr:`~tudatpy.numerical_simulation.SingleArcSimulator.state_history` and :attr:`~tudatpy.numerical_simulation.SingleArcSimulator.dependent_variable_history` attributes. Note that the dependent variable history will be lost entirely in this case.
+* If the ``clear_numerical_solutions`` to the :class:`~tudatpy.numerical_simulation.propagator.SingleArcOutputSettings` is set to true, the state
+  (processed and unprocessed) and dependent variable history are deleted, *after* having reset the environment
+  (if ``set_integrated_result`` was set to true; see above). In this case, the ephemerides are reset with the propagated dynamics,
+  but the the results of the propagation cannot be extracted from the
+  :attr:`~tudatpy.numerical_simulation.propagation.SingleArcPropagatorResults.unprocessed_state_history`,
+  :attr:`~tudatpy.numerical_simulation.propagation.SingleArcPropagatorResults.state_history` and
+  :attr:`~tudatpy.numerical_simulation.propagation.SingleArcPropagatorResults.dependent_variable_history` attributes.
+  Note that the dependent variable history will be lost entirely in this case.
