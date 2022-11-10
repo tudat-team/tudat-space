@@ -16,7 +16,7 @@ state and dependent variable histories. In Python, this is returned as a ``dict[
     dynamics_simulator = numerical_simulation.create_dynamics_simulator(
         bodies,
         propagator_settings )
-    state_history = dynamics_simulator.propagation_results.sstate_history
+    state_history = dynamics_simulator.propagation_results.state_history
 
 The returned data type from the simulator is returned as (for a single translational popagation):
 

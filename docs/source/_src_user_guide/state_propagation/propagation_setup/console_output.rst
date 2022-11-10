@@ -62,10 +62,10 @@ where the tabulated ephemeris is populated by states from the original (non-tabu
 
 For specific applications, most notably a state estimation, a user may want the numerical solution to *only* be used to reset the environment,
 while not needing access to the numerical results directly.
-To enable this behavious, the boolean attribute
+To enable this behavior, the boolean attribute
 :attr:`~tudatpy.numerical_simulation.propagation_setup.PropagatorProcessingSettings.clear_solution` of
 the :class:`~tudatpy.numerical_simulation.propagation_setup.PropagatorProcessingSettings` class is provided.
-When set to try, the numerical results of the propagation are completely deleted after the propagation is performed.
+When set to true, the numerical results of the propagation are completely deleted after the propagation is performed.
 When this option is selected, the numerical results 'live on' *only* in the updated environment models,
 but are no longer available from the :ref:`propagation results <propagation_results>`.
 This option may be attractive when memory usage of the application is a concern.
@@ -103,7 +103,7 @@ Console Output
 ==============
 
 Tudat also provides a range of options on information to be printed to the console *during* the process of the propagation.
-These settings are specified through an :class:`~tudatpy.numerical_simulation.propagation_setup.PropagationPrintSettings` object.
+These settings are specified through a :class:`~tudatpy.numerical_simulation.propagation_setup.PropagationPrintSettings` object.
 Typical examples of information that can be printed to the console are:
 
 * The indices in the full dependent variable vector
@@ -171,7 +171,7 @@ For the multi- and hybrid arc simulations, the console output is specified in it
 in principle, these settings can be different for each arc, and are processed independently.
 However, a number of additional options are available for printing output to the console for multi- and hybrid-arc propagation,
 in the :class:`~tudatpy.numerical_simulation.propagation_setup.MultiArcPropagatorProcessingSettings` and
-:class:`~tudatpy.numerical_simulation.propagation_setup.HybridArcPropagatorProcessingSettings` classes.
+:class:`~tudatpy.numerical_simulation.propagation_setup.HybridArcPropagatorProcessingSettings` classes:
 
 * For the multi-arc propagation, there is an option to ensure identical print settings for each arc (see :attr:`~tudatpy.numerical_simulation.propagation_setup.MultiArcPropagatorProcessingSettings.set_consistent_print_settings`)
 * For the multi-arc propagation, there is an option to automatically suppress all output for all arcs *except* the first arc (see :attr:`~tudatpy.numerical_simulation.propagation_setup.MultiArcPropagatorProcessingSettings.print_first_arc_only`)

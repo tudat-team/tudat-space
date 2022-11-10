@@ -66,7 +66,7 @@ above.
 
 The propagation of a given type of dynamics is defined by calling the
 `associated factory function <https://py.api.tudat.space/en/latest/propagator.html#functions>`_.
-For the different types of single are dynamics, these factory functions return an object (derived from the
+For the different types of single-arc dynamics, these factory functions return an object (derived from the
 :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.SingleArcPropagatorSettings` class)
 defining the settings of the propagation. The specifics of how to change the settings for the different
 types of dynamics are discussed on the pages linked to above.

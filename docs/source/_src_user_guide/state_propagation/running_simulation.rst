@@ -21,8 +21,8 @@ included explicitly in the state derivative function to denote its dependence on
 parameters, as defined through the :ref:`environment_setup`. Finally, the state derivative function :math:`\mathbf{f}`
 is created through the definition of the state :math:`\mathbf{x}` and associated state derivative models (such as accelerations and torques)
 
-The above differential equations is solved using the specific :ref:`choice of integrator <integrator_setup>`, and is
-terminated by used-specified :ref:`termination settings <termination_settings>`. The output of
+The above differential equations are solved using the specific :ref:`choice of integrator <integrator_setup>`, and are
+terminated by user-specified :ref:`termination settings <termination_settings>`. The output of
 the propagation consists of the state that is propagated, as well as any number of :ref:`output (dependent) variables <simulation_output>`.
 
 Simulations in which only the system state is propagated are handled by simulator objects derived from the ``Simulator`` base class. 
@@ -40,7 +40,7 @@ physical environment. By default, creating the dynamics simulator immediately st
 The choice of single-, multi- or hybrid-arc (see :ref:`here <multi_arc_dynamics>`) is defined by the choice of ``propagator_settings``, resulting in the ``dynamics_simulator``
 being of type :class:`~tudatpy.numerical_simulation.SingleArcSimulator`, :class:`~tudatpy.numerical_simulation.MultiArcSimulator` or
 :class:`~tudatpy.numerical_simulation.HybridArcSimulator`, respectively.
-The results of the numerical integration are stored in the ``propagation_results``, which is described in more below, along with a
+The results of the numerical integration are stored in the ``propagation_results``, which is described in more detail below, along with a
 more detailed description of the process that is executed during the propagation:
 
 .. toctree::
