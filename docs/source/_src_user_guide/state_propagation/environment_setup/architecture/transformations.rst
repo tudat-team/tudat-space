@@ -127,7 +127,7 @@ for the Earth outside of a propagation (assuming a ``SystemOfBodies`` object, na
 
 .. code-block:: python
 
-        earth_rotation_model = bodies.at( "Earth" ).rotation_model
+        earth_rotation_model = bodies.get( "Earth" ).rotation_model
 
         # Define time at which to determine rotation quantities
         current_time = ....
@@ -144,7 +144,7 @@ performs the rotation with the rotation matrix and its derivative:
 
 .. code-block:: python
 
-        earth_rotation_model = bodies.at( "Earth" ).rotation_model
+        earth_rotation_model = bodies.get( "Earth" ).rotation_model
 
         # Define time at which to determine rotation quantities
         current_time = ....
@@ -195,7 +195,7 @@ When this rotation model is assigned to Earth, it can be extraced as an object o
         bodies = environment_setup.create_system_of_bodies(body_settings)
 
         # Extract GcrsToItrsRotationModel object
-        high_fidelity_earth_rotation_model = bodies.at( "Earth" ).rotation_model
+        high_fidelity_earth_rotation_model = bodies.get( "Earth" ).rotation_model
 
 The rotation matrices produced by the ``high_fidelity_earth_rotation_model`` will not have the GCRS as their base frame,
 but rather the global frame orientation of the environment (typically J2000 or ECLIPJ2000), as defined in the ``body_settings``.
@@ -297,7 +297,7 @@ frame asigned to it. The rotation matrix from body-fixed to topocentric frame ca
 .. code-block:: python
 
         # Extract station, and object storing its state
-        delft_station = bodies.at( "Earth" ).rotation_model.get_ground_station( "DopTrack" )
+        delft_station = bodies.get( "Earth" ).rotation_model.get_ground_station( "DopTrack" )
         delft_station_state = station.station_state
 
         # Extract rotation from Earth-fixed to station topocentric frame.
