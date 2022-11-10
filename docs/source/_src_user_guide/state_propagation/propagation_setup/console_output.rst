@@ -176,7 +176,11 @@ in the :class:`~tudatpy.numerical_simulation.propagation_setup.MultiArcPropagato
 * For the multi-arc propagation, there is an option to ensure identical print settings for each arc (see :attr:`~tudatpy.numerical_simulation.propagation_setup.MultiArcPropagatorProcessingSettings.set_consistent_print_settings`)
 * For the multi-arc propagation, there is an option to automatically suppress all output for all arcs *except* the first arc (see :attr:`~tudatpy.numerical_simulation.propagation_setup.MultiArcPropagatorProcessingSettings.print_first_arc_only`)
   This is typically used in cases where the settings for each arc are largely identical
-
+* For the multi-arc propagation, there is an option to automatically suppress all output for all arcs *except* the first arc (see :attr:`~tudatpy.numerical_simulation.propagation_setup.MultiArcPropagatorProcessingSettings.print_first_arc_only`)
+  This is typically used in cases where the settings for each arc are largely identical
+* For the hybrid-arc propagation, the constituent single- and multi-arc settings can be independently modified. These settings can 
+  be extracted from the :attr:`~tudatpy.numerical_simulation.propagation_setup.HybridArcPropagatorProcessingSettings.single_arc_settings` and 
+  :attr:`~tudatpy.numerical_simulation.propagation_setup.HybridArcPropagatorProcessingSettings.multi_arc_settings attributes.
 
 
 
