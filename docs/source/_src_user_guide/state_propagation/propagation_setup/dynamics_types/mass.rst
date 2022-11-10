@@ -4,9 +4,10 @@
 Mass Dynamics
 =============
 
-Settings to propagate numerically the mass of a body can be created through the
-:func:`~tudatpy.numerical_simulation.propagation_setup.propagator.mass` factory function, described in
-detail in the API documentation. In this page, only the Tudat-specific aspects of the input will be briefly described.
+Settings to propagate the mass of a body numerically can be created through the
+:func:`~tudatpy.numerical_simulation.propagation_setup.propagator.mass` factory function, described
+in detail in the `API documentation <https://py.api.tudat.space/en/latest/>`_. In the current page, only the
+Tudat-specific aspects of the input will be briefly described.
 
 The mass is typically propagated numerically to account for the influence of thrust on a vehicle's mass. Unlike other
 types of dynamics, there are no alternative representations (propagators) for the mass.
@@ -14,7 +15,7 @@ types of dynamics, there are no alternative representations (propagators) for th
 Inputs
 ======
 
-In addition to the settings described :ref:`here <propagation_inputs>`, the definition of rotatitonal dynamics settings requires:
+In addition to the general propagation settings described :ref:`here <propagation_inputs>`, the definition of rotational dynamics settings requires:
 
 - A set of mass models (created via the :func:`~tudatpy.numerical_simulation.propagation_setup.create_mass_rate_models` factory function; see below)
 - The initial conditions for the propagation (initial mass and time)
@@ -23,12 +24,12 @@ In addition to the settings described :ref:`here <propagation_inputs>`, the defi
 Mass-rate models
 ================
 
-The setup of a mass rate model in Tudat is substantially simpler than for the :ref:`accelerations <acceleration_model_setup>` and :ref:`torques <torque_model_setup>`.
+The setup of a mass rate model in Tudat is substantially simpler than for the :ref:`accelerations <acceleration_models_setup>` and :ref:`torques <torque_model_setup>`.
 This is, in part, due to the very limited set of options for computing mass rates.
 
-Typically (but not necessarilly), a mass rate is directly related to a body's thrust. An example of this is shown below,
+Typically (but not necessarily), a mass rate is directly related to a body's thrust. An example of this is shown below,
 where all thrust accelerations acting on a vehicle (which include a definition of specific impulse) are used to compute
-the mass rate. Note that the acceleration models, created as discussed :ref:`here <acceleration_model_setup>`, are
+the mass rate. Note that the acceleration models, created as discussed :ref:`here <acceleration_models_setup>`, are
 required as input, to link the thrust acceleration to the mass rate.
 
     .. tabs::

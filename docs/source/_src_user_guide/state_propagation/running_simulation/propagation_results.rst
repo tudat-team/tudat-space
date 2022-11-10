@@ -77,7 +77,7 @@ the Cartesian elements, obtained from the conversion of the propagated Keplerian
 Checking the outcome of the propagation
 ---------------------------------------
 
-For various reasons, such as th occurrence of a NaN or Inf value in the state during a propagation,
+For various reasons, such as the occurrence of a NaN or Inf value in the state during a propagation,
 segmentation fault in underlying (user-defined) code, *etc.*,
 the propagation may not propagate successfully to the final :ref:`user-specified conditions <termination_settings>`.
 In the case of any such errors, the propagation results will be saved and are accessible as indicated above
@@ -104,9 +104,9 @@ When performing a multi- or hybrid-arc propagation, the results are stored in a
 :class:`~tudatpy.numerical_simulation.propagation.MultiArcPropagatorResults` and
 :class:`~tudatpy.numerical_simulation.propagation.HybridArcPropagatorResults` object, respectively.
 The main contents of these objects are a set of :class:`~tudatpy.numerical_simulation.propagation.SingleArcPropagatorResults`
-objects, which contain the results of the constituent single arcs, as desribed above.
+objects, which contain the results of the constituent single arcs, as described above.
 In addition, the multi- and hybrid arc results objects contain a number of pieces of information that are specific to the
-full propagation, as opposed to its separate arcs. The reader is referred to the API documentation for more details. A small example is shown below:
+full propagation, as opposed to its separate arcs. The reader is referred to the `API documentation <https://py.api.tudat.space/en/latest/>`_ for more details. A small example is shown below:
 
 .. code-block:: python
 
