@@ -297,7 +297,7 @@ frame asigned to it. The rotation matrix from body-fixed to topocentric frame ca
 .. code-block:: python
 
         # Extract station, and object storing its state
-        delft_station = bodies.get( "Earth" ).rotation_model.get_ground_station( "DopTrack" )
+        delft_station = bodies.get( "Earth" ).get_ground_station( "DopTrack" )
         delft_station_state = station.station_state
 
         # Extract rotation from Earth-fixed to station topocentric frame.
