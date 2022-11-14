@@ -4,60 +4,135 @@
 Multiple Gravity Assists Transfer
 =================================
 
-In this section, the design of multiple-leg interplanetary transfer trajectories is discussed. This module
-provides the functionalities for creating transfer trajectories consisting of multiple transfer legs with powered
-and unpowered gravity assists. This allows defining high-, low-, and hybrid-thrust transfers.
-
-The module is defined under the assumptions of the patched-conics approximation. As such, it allows the flexible design
-of transfers using only analytical and semi-analytical methods, without any required numerical integration. This is
-particularly useful for preliminary mission design, where having a fast method is particularly important.
+In this section, the preliminary design of multiple-leg interplanetary transfer trajectories is discussed. This module
+provides the functionalities for creating transfer trajectories consisting of multiple transfer legs or various types with powered
+and unpowered gravity assists. This allows high-thrust or low-thrust transfer trajectories with multiple flybys to be 
+designed, as well as a hybrid of low- and high-thrust. For per-function details see the `API documentation <https://py.api.tudat.space/en/latest/transfer_trajectory.html>`_. 
 
 A multiple gravity-assist transfer (MGA) is constituted by a series of nodes and legs. The nodes correspond to the departure,
-gravity assist, and arrival planets, and the legs correspond to the trajectories between the nodes. Therefore, there is
-always one more node than legs.
+gravity assist, and arrival planets (bodies), and the legs correspond to the trajectories between the nodes. Therefore, there is
+always one more node than legs. Note that the initial or final node may be departure/capture or a flyby. The legs may
+be of a number of different types. For a series of unpowered legs, the typical multiple flyby MGA trajectory is retrieved.
+
+The module is implemented using simplified dynamical models for the nodes and legs. For the unpowered leg trajectory,
+the transfer is for instance defined under the assumptions of the patched-conics approximation.This module allows the flexible design
+of transfers using only analytical and semi-analytical methods, typically without any required numerical integration. This is
+particularly useful for preliminary mission design, where having a fast method is particularly important.
+
 
 .. note::
 
     The MGA model also allows defining transfers with a single leg (without any gravity assist).
 
+Supported models
+================
+
+At present, the types of legs are supported (more details can be found below):
+
+- Unpowered legs: A purely ballistic (Keplerian) trajectory between nodes
+- Velocity-based deep-space maneuver (DSM)  legs: A ballistic trajectory betweene nodes, with the addition of a single impulsive maneuver during the leg (parameterized by its velocity)
+- Position-based DSM legs: A ballistic trajectory betweene nodes, with the addition of a single impulsive maneuver during the leg (parameterized by its position)
+- Spherical-shaping legs: A shape-based low-thrust trajectory using the spherical shaping method
+- Hodographic-shaping legs: A shape-based low-thrust trajectory using the hodographic shaping method
+
+At present, the types of nodes are supported (more details can be found below):
+
+- Departure node: Only available for the first node, to incorporate :math:`\Delta V` required to escape from a parking orbit around the first node
+- Swingby node: A node assuming a hyperbolic trajectory w.r.t. the node, with the possibility of performing an impulsive maneuver at periapsis (see :ref:`transfer_nodes`).
+- Arrival node: Only available for the final node, to incorporate :math:`\Delta V` required to enter a closed orbit around the final node
+
+Each leg and node has its own free parameters, which must be provided by the user to evaluate the performance of the overall trajectory (see below).
+
 General Procedure
-==============================================================
+=================
 
-The most commonly-used for procedure for creating an MGA transfer, i.e. using factory functions to get the transfer
-settings, is here presented. For the manual creation of the transfer settings see the next section.
+To create a transfer trajectory, the user must define settings for the nodes and legs, after which these settings
+are processed to create the transfer trajectory. 
 
-The transfer trajectory module can be imported with:
+First, the transfer trajectory module can be imported with:
 
 .. code-block:: python
 
     from tudatpy.kernel.trajectory_design import transfer_trajectory
 
-In general, the procedure for analyzing an MGA transfer consists of:
+The most commonly-used for procedure for creating an settings of the trajectory is to use factory functions to get the transfer
+leg has the same type (e.g. all unpowered, all spherical-shaping, etc.). The factory functions to create a set of
+node and leg settings is:
 
-- **Define the transfer settings**: The transfer settings include the leg settings and node settings. These are defined
+  - Unpowered legs: :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_settings_unpowered_unperturbed_legs`.
+  - Velocity-based DSM legs: :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_settings_dsm_velocity_based_legs`.
+  - Position-based DSM legs: :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_settings_dsm_position_based_legs`.
+  - Spherical-shaping legs: :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_settings_spherical_shaping_legs`.
+  - Hodographic-shaping legs: :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_settings_hodographic_shaping_legs` or
+    :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_settings_hodographic_shaping_legs_with_recommended_functions` 
+    (for manual definition or recommended automatic definition of shaping functions, respectively).
+
+Manually creating settings for single legs and nodes is described :ref:`below <manual_transfer_legs_nodes>`.
+
+The complete procedure for creating and analyzing an MGA transfer consists of the following. The associated code snippets are taken from 
+an `example application <this example>`_, for an unpowered leg Cassini (EVVEJS) transfer trajectory:
+
+- **Define the transfer settings**: The transfer leg settings and node settings a are created. These are defined
   using the body order (bodies through which the spacecraft will pass), the departure and arrival orbit (semi-major axis
   and eccentricity) and other settings specific to each leg type. Selecting the semi-major axis of the departure/arrival
   orbit as :math:`a = \infty` corresponds to having the spacecraft depart/arrive from/to the edge of the initial/final
-  body's sphere of influence. The transfer settings can be created using factory functions for the following leg types:
+  body's sphere of influence (e.g. with zero hyperbolic excess velocity). 
+.. code-block:: python
 
-    - **Unpowered legs**: Unpowered legs. Settings can be created via
-      :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_settings_unpowered_unperturbed_legs`.
-    - **Velocity-based deep-space maneuver (DSM) legs**: High-thrust legs with one impulsive DSM. Settings can be created
-      via :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_settings_dsm_velocity_based_legs`.
-    - **Position-based DSM legs**: High-thrust legs with one impulsive DSM. Settings can be created
-      via :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_settings_dsm_position_based_legs`.
-    - **Spherical-shaping legs**: Low-thrust legs. Settings can be created
-      via :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_settings_spherical_shaping_legs`.
-    - **Hodographic-shaping legs**: Low-thrust legs. Settings can be created
-      via :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_settings_hodographic_shaping_legs` or
-      :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_settings_hodographic_shaping_legs_with_recommended_functions`.
+    # Define central body
+    central_body = 'Sun'
+
+    # Define the order of bodies (nodes) for gravity assists
+    transfer_body_order = ['Earth', 'Venus', 'Venus', 'Earth',  'Jupiter',  'Saturn']
+
+    # Define the departure and insertion orbits
+    departure_semi_major_axis = np.inf
+    departure_eccentricity = 0.
+
+    arrival_semi_major_axis = 1.0895e8 / 0.02
+    arrival_eccentricity = 0.98
+
+    # Define the trajectory settings for both the legs and at the nodes
+    transfer_leg_settings, transfer_node_settings = transfer_trajectory.mga_settings_unpowered_unperturbed_legs(
+        transfer_body_order,
+        departure_orbit=(departure_semi_major_axis, departure_eccentricity),
+        arrival_orbit=(arrival_semi_major_axis, arrival_eccentricity))
 
 - **Create the transfer trajectory object**: Through :func:`~tudatpy.trajectory_design.transfer_trajectory.create_transfer_trajectory`.
+.. code-block:: python
+
+    # Create physical environment
+    bodies = ...
+
+    # Create the transfer calculation object
+    transfer_trajectory_object = transfer_trajectory.create_transfer_trajectory(
+        bodies,
+        transfer_leg_settings,
+        transfer_node_settings,
+        transfer_body_order,
+        central_body)
+  
 - **Evaluate the transfer**: Select the node times, node parameters, and leg parameters, and use them to evaluate the
   transfer through :meth:`~tudatpy.trajectory_design.transfer_trajectory.TransferTrajectory.evaluate`. These parameters
-  are described in one of the following sections.
+  are described in the following sections. Note that, in the case of an optimization, this function is called repeatedly
+  to evaluate the transfer trajectory with differeent properties.
+.. code-block:: python
+
+    # Define free parameters
+    node_times = ...
+    leg_free_parameters = ... # (empty)
+    node_free_parameters = ... # (empty)
+
+    # Evaluate the transfer with given parameters
+    transfer_trajectory_object.evaluate( node_times, leg_free_parameters, node_free_parameters )
+
 - **Retrieve the results**: Use :class:`~tudatpy.trajectory_design.transfer_trajectory.TransferTrajectory`'s
   properties or functions to retrieve the :math:`\Delta V`, time of flight, state history, acceleration history, etc.
+.. code-block:: python
+
+    # Retrieve total Delta V
+    total_delta_v = transfer_trajectory_object.delta_v
+
 
 All available functions and classes are described in detail in the relevant entry of the `API reference`_.
 For applications see `this example`_ and `this PyGMO example`_.
@@ -66,11 +141,12 @@ For applications see `this example`_ and `this PyGMO example`_.
 .. _`this example`: /tudat-space/docs/build/_src_getting_started/_src_examples/notebooks/propagation/mga_dsm_analysis.html
 .. _`this PyGMO example`: /tudat-space/docs/build/_src_getting_started/_src_examples/notebooks/pygmo/gtop_cassini1_mga_optimization.html
 
+.. _manual_transfer_legs_nodes:
 Manually Creating the Transfer Settings
---------------------------------------------------------------
+---------------------------------------
 
-While in most cases the transfer settings should be created using the mentioned factory functions, there are some cases
-where the manual creation of these should be preferred. These include e.g. transfers with mixed types of legs. The
+While in many casses the transfer settings can be created using the factory functions listed in the previous section, there are some cases
+where the manual creation of these should be preferred. These include transfers with mixed types of legs. The
 creation of the transfer settings can be divided into two steps: creation of the legs settings and creation of the nodes
 settings.
 
@@ -85,7 +161,7 @@ can be retrieved using the appropriate factory function:
 
 The nodes settings are a list with the settings of each node constituting the transfer. There are three main types of
 nodes: departure, swingby, and arrival nodes. The initial node is usually a departure node (although it can also be
-a swingby node), the intermediate nodes are always swingby nodes, and the final is usually an arrival node (although it
+a swingby node), the intermediate nodes are always swingby nodes (at the time of writing), and the final is usually an arrival node (although it
 can also be a swingby node). Selecting the initial and final nodes as swingby nodes is useful when individually
 analyzing different parts of a transfer or when a mission's objective is to do a swingby of the final body.
 
@@ -106,17 +182,23 @@ Having created the legs and nodes settings, the same procedure described above f
 object, evaluating it, and retrieving the computed data can be followed.
 
 Model Description
-==============================================================
+=================
 
-To evaluate the transfer one needs to select a series of transfer parameters: node times, leg parameters, and node
-parameters. It is possible to a see a list of the parameters required for a given transfer via
-:func:`~tudatpy.trajectory_design.transfer_trajectory.print_parameter_definitions`.
+To evaluate the transfer one needs to provide a list of transfer parameters. These are: 
 
-The node times always need to be specified, and correspond to the epoch when the spacecraft reaches each
-planet/body. The node and leg parameters, which depend on the specific node and leg type, are described next.
+- **Node times**
+- **Leg parameters**
+- **Node parameters**
+
+It is possible to a see a list of the parameters required for a given transfer via the
+:func:`~tudatpy.trajectory_design.transfer_trajectory.print_parameter_definitions` function.
+
+The node times *always* need to be specified (regardless of the leg and node times), and correspond to the epoch when the spacecraft reaches each
+planet/body. The node and leg parameters, which depend on the specific node and leg type, are described next. Note that, for certain
+leg and node types, there are no free parameters and the trajectory is fully defined by the node times (as is the case for an a series of unpowered legs).
 
 Legs and Their Parameters
---------------------------------------------------------------
+-------------------------
 
 The parameters associated with each type of leg are listed below. For more detailed descriptions, the reader is referred
 to the literature listed in the API reference for the factory function of each leg type.
@@ -150,7 +232,7 @@ to the literature listed in the API reference for the factory function of each l
       - Free coefficients of shaping functions (number of coefficients is greater or equal to zero).
 
 Finally, and before moving on to the description of the node parameters, it is important to analyze the boundary conditions used
-in the evaluation of each leg of the transfer. These conditions are dealt with internally by the model; hence, the user never
+for the evaluation of each leg of the transfer. These conditions are dealt with internally by the model; hence, the user never
 has direct contact with them. Nevertheless, understanding them is essential for describing the node parameters.
 
 Four types of boundary conditions are possible: initial position, initial velocity,
@@ -172,6 +254,7 @@ DSM leg receives as input its initial position, initial velocity, and final posi
 | Hodographic shaping  | Input                 | Input                 | Input               | Input               |
 +----------------------+-----------------------+-----------------------+---------------------+---------------------+
 
+.. _transfer_nodes:
 Nodes and Their Parameters
 --------------------------------------------------------------
 
