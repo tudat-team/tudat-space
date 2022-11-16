@@ -54,7 +54,8 @@ attributes.
 
 Additional results of the propagation, such as the runtime (e.g. real clock time) and number of function
 evaluations as a function of simulation time  (e.g. epoch in th simulation) can also be extracted from
-the :class:`~tudatpy.numerical_simulation.propagation.SingleArcPropagatorResult` class.
+the :class:`~tudatpy.numerical_simulation.propagation.SingleArcPropagatorResult` class. See the API documentation entries for this
+class for a comprehensive list of options.
 
 Understanding the state output
 ------------------------------

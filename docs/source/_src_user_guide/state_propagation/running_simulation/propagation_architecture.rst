@@ -16,7 +16,7 @@ Before starting the propagation, several steps are taken to initialize the varia
 * It is checked whether the propagator settings are feasible (e.g. no body A propagated w.r.t. B, *and* body B propagated w.r.t. body A, etc.).
 * Several objects are created that are used during/after the propagation
   
-  * An ``EnvironmentUpdater`` object (in C++; not exposed to Python), which decides which environment models need to be updated for each function evaluation (:ref:`single_propagation_evaluation:` and how)
+  * An ``EnvironmentUpdater`` object (in C++; not exposed to Python), which decides which environment models need to be updated for each function evaluation (:ref:`single_propagation_evaluation` and how)
   * A ``ReferenceFrameManager`` object (in C++; not *yet* exposed to Python), which allows translations between ephemerides with different origins to be performed
   * If the ``set_integrated_result`` to the :class:`~tudatpy.numerical_simulation.propagator.SingleArcOutputSettings` is set to true: A set of ``IntegratedStateProcessor`` objects (in C++; not exposed to Python) which is used to post-process the propagation results, and make any required transformations to reset the ephemerides of the propagated bodies.
   * A ``DynamicsStateDerivativeModel`` (in C++; not exposed to Python) object that handles the calculation of a single state derivative evaluation (see :ref:`single_propagation_evaluation`)

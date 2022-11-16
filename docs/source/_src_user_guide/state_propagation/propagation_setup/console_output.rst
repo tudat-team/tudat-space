@@ -30,7 +30,7 @@ Automatic processing
 
 Retrieving the results of the numerical propagation is discussed in detail :ref:`here <propagation_results>`.
 In addition to returning data for further analysis by the user, Tudat can be set up to automatically use
-the results of the numerical propagation to update the environment upon the successful completion of the propagation.
+the results of the numerical propagation to reset properties in the environment upon the successful completion of the propagation.
 This option can be toggled using the boolean attribute :attr:`~tudatpy.numerical_simulation.propagation_setup.PropagatorProcessingSettings.set_integrated_result` of
 the :class:`~tudatpy.numerical_simulation.propagation_setup.PropagatorProcessingSettings` class:
 
@@ -41,11 +41,11 @@ the :class:`~tudatpy.numerical_simulation.propagation_setup.PropagatorProcessing
 
 Specifically, this will result in:
 
-* Translational dynamics: use the numerical results to update the ephemeris of the body with (using the default)
+* Translational dynamics: use the numerical results to reset the ephemeris of the body with (using the default)
   a 6-th order Lagrange interpolation scheme to create a tabulated ephemeris
-* Rotational dynamics: use the numerical results to update the rotational ephemeris of the body with (using the default)
+* Rotational dynamics: use the numerical results to reset the rotational ephemeris of the body with (using the default)
   a 6-th order Lagrange interpolation scheme to create a tabulated rotation model
-* Mass dynamics: use the numerical results to update the mass function of the body with (using the default)
+* Mass dynamics: use the numerical results to reset the mass function of the body with (using the default)
   a 6-th order Lagrange interpolation scheme
 * Multi-type dynamics: automatically processes all of the constituent dynamics as listed above
 * Custom dynamics: no action
@@ -66,7 +66,7 @@ To enable this behavior, the boolean attribute
 :attr:`~tudatpy.numerical_simulation.propagation_setup.PropagatorProcessingSettings.clear_solution` of
 the :class:`~tudatpy.numerical_simulation.propagation_setup.PropagatorProcessingSettings` class is provided.
 When set to true, the numerical results of the propagation are completely deleted after the propagation is performed.
-When this option is selected, the numerical results 'live on' *only* in the updated environment models,
+When this option is selected, the numerical results 'live on' *only* in the environment models that have been reset,
 but are no longer available from the :ref:`propagation results <propagation_results>`.
 This option may be attractive when memory usage of the application is a concern.
 

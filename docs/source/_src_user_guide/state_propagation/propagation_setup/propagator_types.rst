@@ -60,7 +60,7 @@ In Tudat, you will find the propagated elements in the following place:
 
 Internally, Tudat uses the *propagated* state in the following place:
 
-- As the input/output of the numerical integrator's state derivative function (see :ref:`single_propagation_evaluation:` for more details).
+- As the input/output of the numerical integrator's state derivative function (see :ref:`single_propagation_evaluation` for more details).
 
 As a user, you will generally only interact with the conventional coordinates, but you will have the choice over which
 propagated coordinate to use for propagation/integration. Even though you may rarely interact with the propagated

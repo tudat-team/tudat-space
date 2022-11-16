@@ -27,7 +27,8 @@ Mass-rate models
 The setup of a mass rate model in Tudat is substantially simpler than for the :ref:`accelerations <acceleration_models_setup>` and :ref:`torques <torque_model_setup>`.
 This is, in part, due to the very limited set of options for computing mass rates.
 
-Typically (but not necessarily), a mass rate is directly related to a body's thrust. An example of this is shown below,
+Typically, a mass rate is directly related to a body's thrust (a user may use thrust without mass propagation, although this will neglect part of the physics of the problem(. 
+An example of this is shown below,
 where all thrust accelerations acting on a vehicle (which include a definition of specific impulse) are used to compute
 the mass rate. Note that the acceleration models, created as discussed :ref:`here <acceleration_models_setup>`, are
 required as input, to link the thrust acceleration to the mass rate.
@@ -50,7 +51,7 @@ required as input, to link the thrust acceleration to the mass rate.
 
              :language: cpp
 
-For a full description of available functions, see associated pages of `mass-rate models <https://tudatpy.readthedocs.io/en/latest/mass_rate.html>`_ and `thrust models <https://tudatpy.readthedocs.io/en/latest/thrust.html>`_ in the API documentation.
+For a full description of available functions, see associated pages of `mass-rate models <https://tudatpy.readthedocs.io/en/latest/mass_rate.html>`_ and `thrust models <https://tudatpy.readthedocs.io/en/latest/thrust.html>`_ in the API documentation. For mass rate models that are not internally associated with thrust (for whatever reason), the user is recommended to use the :func:`~tudatpy.numerical_simulation.propagation_setup.mass_rate.custom_mass_rate` function.
 
 .. _mass_example:
 
