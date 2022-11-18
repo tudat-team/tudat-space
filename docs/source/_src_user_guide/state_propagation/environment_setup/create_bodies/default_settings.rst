@@ -72,8 +72,6 @@ spherical shape model for all bodies.
 Gravity field
 -------------------
 
-TODO: fix gravity field references
-
 * Spherical harmonic gravity field for the following bodies:
 
    - **Earth**: Full gravity field up to degree and order 200, described `here <https://link.springer.com/article/10.1007/s10712-016-9406-y>`_ (GOCO05c, data obtained from `GFZ <https://dataservices.gfz-potsdam.de/icgem/showshort.php?id=escidoc:1504398>`_; coefficient are available up to degree/order 720, but are not all loaded by default for efficiency purposes)

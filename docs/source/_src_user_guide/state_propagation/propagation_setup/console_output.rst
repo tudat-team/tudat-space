@@ -1,3 +1,5 @@
+.. _printing_processing_results:
+
 ###################################
 Printing and processing the results
 ###################################
@@ -28,7 +30,7 @@ Automatic processing
 
 Retrieving the results of the numerical propagation is discussed in detail :ref:`here <propagation_results>`.
 In addition to returning data for further analysis by the user, Tudat can be set up to automatically use
-the results of the numerical propagation to update the environment upon the successful completion of the propagation.
+the results of the numerical propagation to reset properties in the environment upon the successful completion of the propagation.
 This option can be toggled using the boolean attribute :attr:`~tudatpy.numerical_simulation.propagation_setup.PropagatorProcessingSettings.set_integrated_result` of
 the :class:`~tudatpy.numerical_simulation.propagation_setup.PropagatorProcessingSettings` class:
 
@@ -39,11 +41,11 @@ the :class:`~tudatpy.numerical_simulation.propagation_setup.PropagatorProcessing
 
 Specifically, this will result in:
 
-* Translational dynamics: use the numerical results to update the ephemeris of the body with (using the default)
+* Translational dynamics: use the numerical results to reset the ephemeris of the body with (using the default)
   a 6-th order Lagrange interpolation scheme to create a tabulated ephemeris
-* Rotational dynamics: use the numerical results to update the rotational ephemeris of the body with (using the default)
+* Rotational dynamics: use the numerical results to reset the rotational ephemeris of the body with (using the default)
   a 6-th order Lagrange interpolation scheme to create a tabulated rotation model
-* Mass dynamics: use the numerical results to update the mass function of the body with (using the default)
+* Mass dynamics: use the numerical results to reset the mass function of the body with (using the default)
   a 6-th order Lagrange interpolation scheme
 * Multi-type dynamics: automatically processes all of the constituent dynamics as listed above
 * Custom dynamics: no action
@@ -60,11 +62,11 @@ where the tabulated ephemeris is populated by states from the original (non-tabu
 
 For specific applications, most notably a state estimation, a user may want the numerical solution to *only* be used to reset the environment,
 while not needing access to the numerical results directly.
-To enable this behavious, the boolean attribute
+To enable this behavior, the boolean attribute
 :attr:`~tudatpy.numerical_simulation.propagation_setup.PropagatorProcessingSettings.clear_solution` of
 the :class:`~tudatpy.numerical_simulation.propagation_setup.PropagatorProcessingSettings` class is provided.
-When set to try, the numerical results of the propagation are completely deleted after the propagation is performed.
-When this option is selected, the numerical results 'live on' *only* in the updated environment models,
+When set to true, the numerical results of the propagation are completely deleted after the propagation is performed.
+When this option is selected, the numerical results 'live on' *only* in the environment models that have been reset,
 but are no longer available from the :ref:`propagation results <propagation_results>`.
 This option may be attractive when memory usage of the application is a concern.
 
@@ -101,7 +103,7 @@ Console Output
 ==============
 
 Tudat also provides a range of options on information to be printed to the console *during* the process of the propagation.
-These settings are specified through an :class:`~tudatpy.numerical_simulation.propagation_setup.PropagationPrintSettings` object.
+These settings are specified through a :class:`~tudatpy.numerical_simulation.propagation_setup.PropagationPrintSettings` object.
 Typical examples of information that can be printed to the console are:
 
 * The indices in the full dependent variable vector
@@ -125,7 +127,19 @@ are to be provided as a floating point value. To enable all console printing tha
 To disable *all* console printing, us the :func:`~tudatpy.numerical_simulation.propagation_setup.PropagationPrintSettings.disable_all_printing`
 function.
 
-An example of console output that can be provided is given below.
+An example of defining console output is:
+
+.. code-block:: python
+
+    propagator_settings = propagator.translational( ... )
+    console_print_settings = propagator_settings.print_settings
+    console_print_settings.print_state_indices = True
+    console_print_settings.print_dependent_variable_indices = True
+    console_print_settings.print_propagation_clock_time = True
+    console_print_settings.print_termination_reason = True
+    console_print_settings.print_number_of_function_evaluations = True
+    
+which will result in the following terminal output (for a specific script propagating dynamics of Delfi C-3 w.r.t. Earth):
 
 .. code-block:: python
 
@@ -155,12 +169,18 @@ Multi- and hybrid-arc console output
 
 For the multi- and hybrid arc simulations, the console output is specified in its constituent single-arc propagation settings where,
 in principle, these settings can be different for each arc, and are processed independently.
-However, a number of additional options are available for printing output to the console for multi- and hybrid-arc propagation:
+However, a number of additional options are available for printing output to the console for multi- and hybrid-arc propagation,
+in the :class:`~tudatpy.numerical_simulation.propagation_setup.MultiArcPropagatorProcessingSettings` and
+:class:`~tudatpy.numerical_simulation.propagation_setup.HybridArcPropagatorProcessingSettings` classes:
 
-* For the multi-arc propagation, there is an option to ensure identical print settings for each arc (see AAAAA)
-* For the multi-arc propagation, there is an option to automatically suppress all output for all arcs *except* the first arc.
+* For the multi-arc propagation, there is an option to ensure identical print settings for each arc (see :attr:`~tudatpy.numerical_simulation.propagation_setup.MultiArcPropagatorProcessingSettings.set_consistent_print_settings`)
+* For the multi-arc propagation, there is an option to automatically suppress all output for all arcs *except* the first arc (see :attr:`~tudatpy.numerical_simulation.propagation_setup.MultiArcPropagatorProcessingSettings.print_first_arc_only`)
   This is typically used in cases where the settings for each arc are largely identical
-
+* For the multi-arc propagation, there is an option to automatically suppress all output for all arcs *except* the first arc (see :attr:`~tudatpy.numerical_simulation.propagation_setup.MultiArcPropagatorProcessingSettings.print_first_arc_only`)
+  This is typically used in cases where the settings for each arc are largely identical
+* For the hybrid-arc propagation, the constituent single- and multi-arc settings can be independently modified. These settings can 
+  be extracted from the :attr:`~tudatpy.numerical_simulation.propagation_setup.HybridArcPropagatorProcessingSettings.single_arc_settings` and 
+  :attr:`~tudatpy.numerical_simulation.propagation_setup.HybridArcPropagatorProcessingSettings.multi_arc_settings attributes.
 
 
 

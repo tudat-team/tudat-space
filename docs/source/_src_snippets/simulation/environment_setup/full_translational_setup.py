@@ -37,13 +37,17 @@ dependent_variables_to_save = [
     propagation_setup.dependent_variable.longitude( "Spacecraft", "Earth" )
     ]
 
+# Define numerical integrator (RK4; step size 2 seconds)
+integrator_settings = propagation_setup.integrator.runge_kutta_4( 2.0 )
+
 # Define settings for propagator
 translational_propagator_settings = propagation_setup.propagator.translational(
     central_bodies,
     acceleration_models,
     bodies_to_propagate,
     initial_state,
+    simulation_start_epoch,
+    integrator_settings,
     termination_settings,
     propagator = propagation_setup.propagator.encke,
-    output_variables =  dependent_variables_to_save,
-    print_interval = 86400.0 )
+    output_variables =  dependent_variables_to_save )
