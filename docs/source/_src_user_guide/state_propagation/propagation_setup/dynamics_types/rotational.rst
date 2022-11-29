@@ -40,14 +40,13 @@ In addition to the settings described :ref:`here <propagation_inputs>`, the defi
 Example
 ========
 
-In the example below, the body "Spacecraft" will be propagated w.r.t. body "Earth", using given torque models (not
-provided), a given initial state which defines the orientation of "Spacecraft" w.r.t. the inertial reference frame.
-The propagation will terminate once the
-``simulation_end_epoch`` epoch is reached. Furthermore, the
-propagator is asked to save the total torque norm as
-dependent variable. The time and rotational state will be printed on the terminal once every 24 hours (simulation
-time), while the state will be propagated through the quaternion formulation.
-
+In the example below, the body "Spacecraft" will be propagated w.r.t. body "Earth", using given
+torque models. A given initial state which defines the orientation of "Spacecraft" w.r.t. the
+inertial reference frame is defined. A Runge Kutta 4 integrator is defined with step-size of 2
+seconds. The propagation will terminate once the ``simulation_end_epoch`` termination condition is
+reached. A rotational propagator that uses quaternions is defined. Next to that, the propagator is
+asked to save the total torque norm as dependent variable. The time and rotational state will be
+printed on the terminal once every 24 hours (simulation time).
 
     .. tabs::
 

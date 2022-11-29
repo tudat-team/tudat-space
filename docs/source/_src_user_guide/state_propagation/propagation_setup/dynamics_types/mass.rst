@@ -58,15 +58,12 @@ For a full description of available functions, see associated pages of `mass-rat
 Example
 ========
 
-In the example below, the body "Spacecraft" will be propagated w.r.t. body "Earth", using given mass rate models (not
-provided) and a given initial mass.
-The propagation will terminate once the ``simulation_end_epoch`` epoch is reached.
-Next to that, the propagator is asked to save the total acceleration, Keplerian state, latitude, and longitude of the
-spacecraft as
-dependent variables. The time and state will be printed on the terminal once every 24 hours (simulation time), while
-the state will be propagated through the Encke formulation.
-dependent variable. The time and rotational state will be printed on the terminal once every 24 hours (simulation
-time).
+In the example below, the body "Spacecraft" will be propagated w.r.t. body "Earth", using given mass
+rate models and a given initial mass. A Runge Kutta 4 integrator is defined with step-size of 2
+seconds. The propagation will terminate once the ``simulation_end_epoch`` termination condition is
+reached. Next to that, the propagator is asked to save the Keplerian state of the spacecraft as
+dependent variable. The time and rotational state will be printed on the terminal once every 24
+hours (simulation time).
 
     .. tabs::
 
