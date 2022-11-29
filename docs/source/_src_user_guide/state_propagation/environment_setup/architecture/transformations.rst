@@ -338,7 +338,8 @@ state type. For a number of combinations of state types, a direct conversion is 
 
 TODO: introduce element index enums
 
-Note that most, but not all, of these types of elements can also be used for the definition of a :ref:`translational state propagator <translational_propagator_types>`,
+Note that most, but not all, of these types of elements can also be used for the definition of a
+:ref:`translational state propagator <conventional_propagated_states>`,
 where these elements are numerically propagated (instead of the typical Cartesian elements of the Cowell propagator). By definition,
 each element set that can be propagated has conversion functions available in Tudat, but not necesarilly vice versa.
 

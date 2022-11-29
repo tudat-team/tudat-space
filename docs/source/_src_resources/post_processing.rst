@@ -13,13 +13,10 @@ state and dependent variable histories. In Python, this is returned as a ``dict[
     # ...
 
     # Create simulation object and propagate dynamics.
-    dynamics_simulator = propagation_setup.SingleArcSimulator(
+    dynamics_simulator = numerical_simulation.create_dynamics_simulator(
         bodies,
-        integrator_settings,
-        propagator_settings,
-        True
-    )
-    state_history = dynamics_simulator.state_history
+        propagator_settings )
+    state_history = dynamics_simulator.propagation_results.state_history
 
 The returned data type from the simulator is returned as (for a single translational popagation):
 

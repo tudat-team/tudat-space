@@ -15,38 +15,37 @@ Translational Dynamics
    ../acceleration_models/thrust
    ../acceleration_models/aerodynamics
 
-Settings to propagate numerically the translational state of a body can be created through the
-:func:`~tudatpy.numerical_simulation.propagation_setup.propagator.translational` factory function, described in
-detail in the API reference.
+Settings to propagate the translational state of a body numerically can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.translational` factory function, described in detail in the `API documentation <https://py.api.tudat.space/en/latest/>`_. In the current page, only the Tudat-specific aspects of the input will be briefly described.
 
-In this page, only the Tudat-specific aspects of theinput will be described. For all the other inputs, please
-refer to the related API entry (:func:`~tudatpy.numerical_simulation.propagation_setup.propagator.translational`).
+The default (conventional) representation for solving the translational equations of motion is by using the Cowell propagator
+(using Cartesian elements as the propagated states), but other formulations can be used (see below and :ref:`conventional_propagated_states`).
 
 Inputs
 ======
 
-The Tudatpy-native inputs to create the settings for a translational propagator are the following:
+In addition to the settings described :ref:`here <propagation_inputs>`, the definition of translational dynamics settings requires:
 
 - A set of acceleration models (see :ref:`acceleration_models_setup`)
-- An initial state vector (Cartesian states of each propagated body; see :ref:`conventional_states`)
-- Settings to terminate the propagation (see :ref:`termination_settings`)
-- A propagator type, since the translational state can have different representations (see
-  :ref:`propagator_types`). NOTE: the initial state must be provided in Cartesian elements, regardless of the propagator type
-- Dependent variables that should be saved (see :ref:`dependent_variables`)
+- The initial conditions for the propagation (Cartesian state, and time)
+- A type of propagator, since the translational state can have different representations
+  (listed in :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.TranslationalPropagatorType`).
+
+.. warning::
+
+    The initial state must be provided in Cartesian elements, **regardless of the propagator type**
 
 .. _example:
 
 Example
 =======
 
-In the example below, the body "Spacecraft" will be propagated w.r.t. body "Earth" (also termed the 'propagation origin'), using given acceleration models (not
-provided), a given initial state which defines the initial Cartesian state of the center
-of mass of "Vehicle" w.r.t. the center of mass of "Earth". The propagation will terminate once the
-``simulation_end_epoch`` epoch is reached. Furthermore, this example defines a termination condition using a dependent
-variable: the simulation will stop when the propagated vehicle reaches an altitude of 25.0 km. Next to that, the
-propagator is asked to save the total acceleration, Keplerian state, latitude, and longitude of the spacecraft as
-dependent variables. The time and state will be printed on the terminal once every 24 hours (simulation time), while
-the state will be propagated through the Encke formulation.
+In the example below, the body "Spacecraft" will be propagated w.r.t. body "Earth" (also termed the
+'propagation origin'), using given acceleration models, a given initial state which defines the
+initial Cartesian state of the center of mass of "Spacecraft" w.r.t. the center of mass of "Earth".
+A Runge Kutta 4 integrator is defined with step-size of 2 seconds. The propagation will terminate
+once the ``simulation_end_epoch`` termination condition is reached. The state will be propagated
+through the Encke formulation. Next to that, the propagator is asked to save the total acceleration.
+The time and state will be printed on the terminal once every 24 hours. 
 
     .. tabs::
 

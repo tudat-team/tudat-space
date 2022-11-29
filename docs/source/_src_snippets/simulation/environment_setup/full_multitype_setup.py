@@ -7,6 +7,7 @@ termination_condition = propagation_setup.propagator.time_termination(
     simulation_end_epoch )
 propagator_settings = propagation_setup.propagator.multitype(
     propagator_settings_list,
+    integrator_settings,
+    initial_time,
     termination_condition,
-    output_variables =  dependent_variables_to_save,
-    print_interval = 86400.0 )
+    output_variables =  dependent_variables_to_save )
