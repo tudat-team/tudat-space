@@ -73,7 +73,7 @@ Propagator post-processing
 
 After the propagation is finished, the following post-processing steps are performed before returning the simulation to the user:
 
-* The propagated states are converted to conventional states. After the propagation, the time histories of both may be extracted from the :attr:`~tudatpy.numerical_simulation.propagation.SingleArcPropagatorResults.unprocessed_state_history` and :attr:`~tudatpy.numerical_simulation.propagation.SingleArcPropagatorResults.state_history` attributes, respectively
+* The propagated states are converted to conventional states. After the propagation, the time histories of both may be extracted from the :attr:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults.unprocessed_state_history` and :attr:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults.state_history` attributes, respectively
 * If the ``set_integrated_result`` to the :class:`~tudatpy.numerical_simulation.propagator.SingleArcOutputSettings` is set to true, the propagated states (in conventional formulation) are used to reset the environment of the propagated body/bodies. For the different state types, this means:
 
   * Translational dynamics: the propagated translational state of the body is used to create an interpolator (:func:`~tudatpy.math.interpolators.lagrange_interpolation`, ``number_of_points`` =6), which is used to update the :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.tabulated` ephemeris of the body. If needed, a translation from the propagation origin to the ephemeris origin is applied (see :ref:`translational_frame_origins`). NOTE: this is *only* possible if the body has a tabulated ephemeris alreacy, or no ephemeris. In the latter case a tabulated ephemeris is created, with ephemeris origin equal to the propagation origin. In case you want to use a non-tabulated ephemeris for the propagated body, you can use the :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.tabulated_from_existing` function to override existing body settings (see :ref:`override_body_settings`). When doing so, the behaviour of the non-tabulated ephemeris will be emulated by a non-tabulated ephemeris.
@@ -83,7 +83,7 @@ After the propagation is finished, the following post-processing steps are perfo
   (processed and unprocessed) and dependent variable history are deleted, *after* having reset the environment
   (if ``set_integrated_result`` was set to true; see above). In this case, the ephemerides are reset with the propagated dynamics,
   but the results of the propagation cannot be extracted from the
-  :attr:`~tudatpy.numerical_simulation.propagation.SingleArcPropagatorResults.unprocessed_state_history`,
-  :attr:`~tudatpy.numerical_simulation.propagation.SingleArcPropagatorResults.state_history` and
-  :attr:`~tudatpy.numerical_simulation.propagation.SingleArcPropagatorResults.dependent_variable_history` attributes.
+  :attr:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults.unprocessed_state_history`,
+  :attr:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults.state_history` and
+  :attr:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults.dependent_variable_history` attributes.
   Note that the dependent variable history will be lost entirely in this case.

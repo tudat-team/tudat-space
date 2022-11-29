@@ -107,7 +107,8 @@ Depending on the type of simulation you are using, you can use one of two manner
         
 In either case, the ``observation_simulators`` variable is a list of objects derived from :class:`~tudatpy.numerical_simulation.estimation.ObservationSimulator`, with a single object responsible for the simulation of a single *type* of observable (*e.g.* one-way range, one-way Doppler, *etc.*). The ``observation_simulators`` list of simulators can then be used for :ref:`observationSimulation`.
 
-For 'manual' simulation of observations, you can extract an :class:`~tudatpy.ObservationModel` object from the ``ObservationSimulator`` (TODO example). Whereas the ``ObservationSimulator`` is responsible for *all* observations of a given kind, the ``ObservationModel`` simulates observations of a single kind, for a single set of link ends (e.g. one-way range observations between a given ground station and a single spacecraft). Details on the associated options can be found in the API documentation.
+For 'manual' simulation of observations, you can extract an :class:`~tudatpy.ObservationModel` object from the ``ObservationSimulator`` (TODO example).
+Whereas the ``ObservationSimulator`` is responsible for *all* observations of a given kind, the ``ObservationModel`` simulates observations of a single kind, for a single set of link ends (e.g. one-way range observations between a given ground station and a single spacecraft). Details on the associated options can be found in the API documentation.
 
 
 

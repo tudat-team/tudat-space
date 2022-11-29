@@ -50,7 +50,7 @@ The weight matrix is typically not provided as a full matrix, as the its size of
 * Constant weight for all observation .
 * Constant weight for all observations of a given observation type
 * Constant weight for all observations of a given observation type, with a given set of link ends
-* Manual link end definition, per observation. See TODO for the meaning of entry :math:`i` in the observations vector.
+* Manual link end definition, per observation. See :ref:`here <accessing_observations>` for the meaning of entry :math:`i` in the observations vector.
 
 .. _fullEstimationSettings:
 
