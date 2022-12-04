@@ -176,7 +176,37 @@ The settings of an individual node can be retrieved using the appropriate factor
     The nodes and legs settings should have the same number of elements as the number of, respectively, nodes and legs
     in the transfer.
 
-An example of manual creation of nodes and legs settings can be found here [TODO].
+An example of manual creation of nodes and legs settings can be found below. The transfer body
+order, time of flight values per leg, and number of revolutions per leg are given as input. The
+definition of the departure and arrival input is necessary as well for the departure and capture
+nodes, respectively. Subsequently, as shaping functions have to be given for each leg, a loop is
+performed over the number of legs that add the recommended shaping functions as given by
+`[Gondelach, 2012] <http://resolver.tudelft.nl/uuid:6a4f1673-88b1-4823-b2ef-9d864c84ab11>`_.
+Finally, a node for each planet in the transfer body order must be given: A departure node,
+swingby nodes equal to the number of GA's, and a capture node. 
+
+.. tabs::
+
+     .. tab:: Python
+
+      .. toggle-header::
+         :header: Required **Show/Hide**
+
+            .. code-block:: python
+
+                from tudatpy.kernel.numerical_simulation import propagation_setup
+                from tudatpy.kernel.numerical_simulation import environment_setup
+                from tudatpy.kernel.trajectory_design import shape_based_thrust
+                from tudatpy.kernel.trajectory_design import transfer_trajectory
+                import numpy as np
+
+      .. literalinclude:: /_src_snippets/astrodynamics/manual_node_leg_settings.py
+         :language: python
+
+     .. tab:: C++
+
+      .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
+         :language: cpp
 
 Having created the legs and nodes settings, the same procedure described above for creating the transfer trajectory
 object, evaluating it, and retrieving the computed data can be followed.
