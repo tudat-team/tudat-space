@@ -42,10 +42,19 @@ The complete list of available environment model settings can be found on our AP
 
    * These models provide various ways in which to define the exterior of a *natural* body and is typically used to calculate (for instance) altitude, ground station position, etc. Note: the exterior shape of an artificial body, from which aerodynamic and radiation pressure properties can be evaluated, uses a different interface, which is currently under development
 
+* `Shape deformation models <https://py.api.tudat.space/en/latest/shape_deformation.html>`_, to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.shape_deformation_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`.  Note: this attribute is a list, and any number of deformation models may be added.  
+
+   * These models provide various ways in which to define time variability of the shape of a body. These are typically relevant for detailed position models of ground stations (note that the models assigned here are global; station-specific models can be assigned to individual stations)
+ 
 * `Radiation pressure <https://py.api.tudat.space/en/latest/radiation_pressure.html>`_, to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.rotation_model_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`. Note: this attribute is a dictionary, with one radiation pressure model per source body. 
 
    * These models provide various ways in which to define the response of a body to incident radation pressure.
 
+* `Ground stations <https://py.api.tudat.space/en/latest/ground_station.html>`_, to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.ground_station_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`.  Note: this attribute is a list, and any number of stations may be added.  
+
+   * These models define ground stations (which includes planetary landers) on a celestial body. Each ground station may have any number of station motion models assigned to it. 
+ 
+  
 .. _specific_environment_considerations:
 
 
@@ -142,5 +151,24 @@ Here, a wind vector in the positive z-direction of the :ref:`vertical frame<aero
 By default, an atmosphere has 'zero wind', which means that the atmosphere corotates with the body. A user may add a wind model to this atmosphere model, which will modify the freestream velocity that a vehicle in the atmosphere experiences
 
 
+.. _ground_stations:
 
+Ground stations
+---------------
+
+Although ground stations are considered part of the environment in Tudat (as properties of a ``Body`` object), they do not influence the numerical propagation (unless a custom model imposing this is implemented by the user). Ground stations can be defined through the ``BodySettings`` as any other model. But, as the rest of the environment does not depend on them, they can safely be added to a body after it is created. The process is similar to the one described for :ref: `decorate_empty_body`. Specifically, ground station settings are created, and these are then used to create a ground station and add it to the body. The specifics of creating ground station settings is described `in the API documentation <https://py.api.tudat.space/en/latest/ground_stations.html>`_. An example is given below:
+
+    .. tabs::
+
+         .. tab:: Python
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/add_ground_station.py
+             :language: python
+             
+where a simple ground station is created (with only a name and a position), with its position defined in geodetic elements. The position of a ground station in a body-fixed frame can have two sources of time-variability:
+
+* From `shape deformation models <https://py.api.tudat.space/en/latest/shape_deformation.html>`_ of the body on which it is located
+* From a list of :class:`~tudatpy.numerical_simulation.environment_setup.ground_station.GroundStationMotionSettings` objects, which can be assigned to the ground station settings (see e.g. :func:`~tudatpy.numerical_simulation.environment_setup.ground_station.basic_station`). These models define time-variability of individual ground stations, in addition to the global shape deformation.
+
+To automatically create a list of settings for all DSN stations (which are then typically assigned to the ``ground_station_settings`` of Earth), the :func:`~tudatpy.numerical_simulation.environment_setup.ground_station.dsn_station_settings` can be used.
 
