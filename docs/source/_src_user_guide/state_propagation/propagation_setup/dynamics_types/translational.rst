@@ -27,12 +27,13 @@ In addition to the settings described :ref:`here <propagation_inputs>`, the defi
 
 - A set of acceleration models (see :ref:`acceleration_models_setup`)
 - The initial conditions for the propagation (Cartesian state, and time)
+- The central bodies of the propagation
 - A type of propagator, since the translational state can have different representations
-  (listed in :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.TranslationalPropagatorType`).
+  (listed in :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.TranslationalPropagatorType`; default is Cowell).
 
 .. warning::
 
-    The initial state must be provided in Cartesian elements, **regardless of the propagator type**
+    The initial state must be provided in Cartesian elements w.r.t. the central body(/bodies), **regardless of the propagator type**
 
 .. _example:
 

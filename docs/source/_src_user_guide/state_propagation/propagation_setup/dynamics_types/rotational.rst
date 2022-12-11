@@ -29,7 +29,7 @@ In addition to the settings described :ref:`here <propagation_inputs>`, the defi
 
 - A set of torque models (see :ref:`torque_model_setup`);
 - The initial conditions for the propagation (rotational state as :math:`[\mathbf{q};\boldsymbol{\omega}]` and time)
-- A propagator type, since the rotational state can have different representations (listed in :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.RotationalPropagatorType`).
+- A propagator type, since the rotational state can have different representations (listed in :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.RotationalPropagatorType`; default is quaternions and angular velocity).
 
 .. warning::
 

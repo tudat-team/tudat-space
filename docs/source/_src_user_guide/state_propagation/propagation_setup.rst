@@ -35,7 +35,7 @@ categories of numerical propagation.
 .. - The output that is to be printed to the console during the propagation
 .. - ...
 
-.. _propagation_setup_intro:
+.. _propagation_inputs:
 
 Inputs and setup
 ================
@@ -52,15 +52,13 @@ be defined. More in-depth information about inputs are explained in the dynamic-
 linked below.
 
 There are various options in the propagator settings that must (or can) be provided by a user to
-modify the behaviour before, during and after the propagation. These are described in more detail in
-the following pages:
+modify the behaviour before, during and after the propagation. The ones that are common to all dynamics types
+are described in more detail in the following pages:
 
-- **Dependent variables**: which quantities to save as output, in addition to the states, described :ref:`here <dependent_variables>`.
-- **Numerical integrator**: the solver used to create an approximate solution, described :ref:`here <integrator_setup>`
-- **Termination conditions**: when to terminate the propagation, described :ref:`here <termination_settings>`;
-- **Processing of numerical results**: what to do with the numerical results after propagation, described :ref:`here <auto_processing>`;
-- **Terminal output**: what to print to the terminal before, during and after propagation, described :ref:`here <auto_processing>`;
-
+- **Dependent variables**: which quantities to save as output, in addition to the states, described :ref:`here <dependent_variables>`. These settings are optional (none by default).
+- **Numerical integrator**: the solver used to create an approximate solution, described :ref:`here <integrator_setup>`. This setting is mandatory
+- **Termination conditions**: when to terminate the propagation, described :ref:`here <termination_settings>`. This setting is mandatory
+- **Processing/output settings**: what to print to the terminal before, during and after propagation, and what to do with the numerical results after propagation, both described :ref:`here <auto_processing>`. This setting is optional (no terminal output or resetting of environment by default)
 
 .. figure:: propagation_setup/_static/tudatpy_propagation_settings.png
 
@@ -70,9 +68,10 @@ single-arc dynamics, these factory functions return an object (derived from the
 :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.SingleArcPropagatorSettings`
 class) defining the settings of the propagation. The specifics of how to change the settings for the
 different types of dynamics, some of which are specific to the dynamics type (e.g. accelerations for
-translational dynamics), and some of which are common to all, are discussed on the :ref:`specific
-type of pages linked to below <propagation_setup_intro>`.
+translational dynamics), and some of which are common to all, are discussed on the specific
+pages linked to in the next section
 
+.. _dynamics_types_intro:
 
 Dynamics types
 ==============
@@ -103,9 +102,6 @@ Propagation using a :ref:`multi-arc setup <multi_arc_dynamics>` is also supporte
    acceleration models, as well as in defining the initial state. For more information on the role of different state
    representations, please visit the page :ref:`conventional_propagated_states`.
 
-
-
-.. _propagation_inputs:
 
 
 
