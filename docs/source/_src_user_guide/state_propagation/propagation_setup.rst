@@ -55,6 +55,7 @@ There are various options in the propagator settings that must (or can) be provi
 modify the behaviour before, during and after the propagation. The ones that are common to all dynamics types
 are described in more detail in the following pages:
 
+- **List of propagated bodies**: the names of the bodies for which the dynamics is to be propagated.
 - **Dependent variables**: which quantities to save as output, in addition to the states, described :ref:`here <dependent_variables>`. These settings are optional (none by default).
 - **Numerical integrator**: the solver used to create an approximate solution, described :ref:`here <integrator_setup>`. This setting is mandatory
 - **Termination conditions**: when to terminate the propagation, described :ref:`here <termination_settings>`. This setting is mandatory
