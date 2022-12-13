@@ -16,6 +16,29 @@ Any contribution you have to Tudat is very welcome! This can come in the form of
 * Join our Slack chat! This is where most of our coding discussion takes place. Send an `e-mail <https://www.tudelft.nl/staff/d.dirkx/>`_ to get an invite. 
 * Part of our development workflow is documented on our `developer docs <https://tudat-developer.readthedocs.io/en/latest/>`_. This site is still under construction, and any input is more than welcome!
 
+Ongoing and planned developments
+================================
+
+Below is a (non enirely comprehensive) list of features and functionalities that are under active development, or or our near(ish)-term wishlist. For some of them, the requied development would be ython-only. If you're interested in the status of these points, in contributing, or in proposing additional ones, please feel free to contact us!
+
+* Extenstion of TudaIt estimation functionality for real tracking data analysis, with a focus on planetary missions
+
+  * Reading typical radio tracking data files (ODF, TNF, TDF) into Tudat-compatible data structures (**Python**?)
+  * Linking JPL Horizons and Minor Planet Center databases to Tudat environment, to make setup of planetary mission scenarios easier, both will use the astroquery package (**Python**)
+  * Adding models for media corrections for radio tracking (troposphere, ionosphere, corona)
+  * Implement sparse matrices for partials matrices
+  * ...
+
+* Adding better functionality to automate the plotting of numerical propagation results, including easier access to specific dependent variables (**Python**)
+* Linking SGP4 propagator to Tudat (**Python**?)
+* Use a dedicated Time object to represent time (rather than just a double)
+* Linking the preliminary mission design module to the numerical propagation, including automated differential corrections
+* Supporting events during the propagation (i.e. modify models when a specific condition is met)
+* Implementing regularized propagators (e.g. Dromo)
+* Implement detailed radiation pressure models
+* Extend CR3BP propagation and mission design functionality (including differential correction to account for perturbations)
+* ...
+
 .. _contributors:
 
 Contributor list
