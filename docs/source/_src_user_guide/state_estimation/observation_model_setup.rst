@@ -43,7 +43,8 @@ This defines a one-way range and one-way Doppler (open-loop) observable, each wi
 When defining observation models, you can for most types of models define settings for:
 
 * **Biases:** A bias in TudatPy is applied to the observable after its 'ideal' value computed from the environment is computed. You can find a list of settings for observation biases in our `API documentation <https://py.api.tudat.space/en/latest/observation.html>`_
-* **Light-time corrections:** When using an observable that involves the observation of one point/body in space by another (including any observable that involves the exchange of elecromagnetic signals), it is automatically assumed that the signal travels at the speed of light, and the associated light-time is determined when calcialting the observable. Deviations from the signal's ideal trajectory (straight line at speed of light) may be defind by adding light-time correction settings, as listed in our`API documentation `<https://py.api.tudat.space/en/latest/observation.html>`_
+* **Light-time corrections:** When using an observable that involves the observation of one point/body in space by another (including any observable that involves the exchange of elecromagnetic signals), it is automatically assumed that the signal travels at the speed of light, and the associated light-time is determined when calcialting the observable. Deviations from the signal's ideal trajectory (straight line at speed of light) may be defind by adding light-time correction settings, as listed in our `API documentation <https://py.api.tudat.space/en/latest/observation.html>`_
+* **Light-time convergence settings:** Calculating the light time between two link ends requires the iterative solution of the light-time equation. Default settings for convergence criteria for this solution are implemented, but a user may modify these settings if so desired. The associated settings object can be created using the :func:`~tudatpy.numerical_simulation.estimation_setup.observation.light_time_convergence_settings` function.
 
 
 The above options are added to the calls of the observation model settings factory functions. Below is an example 
@@ -72,7 +73,7 @@ The above options are added to the calls of the observation model settings facto
         one_way_nno_mex_link_ends, 
         light_time_correction_settings = light_time_correction_settings ) )
                 
-where we have defined that, for both observation models for which settings are created, the light-time calculation will take into account the first-order relativistic correction of the Sun, by using the :func:`~tudatpy.numerical_simulation.estimation_setup.first_order_relativistic_correction` function. For the range observable, we have defined an absolute bias of 1 cm (0.01 m) using the :func:`~tudatpy.numerical_simulation.estimation_setup.absolute_bias`, while leaving the Doppler observable unbiased.
+where we have defined that, for both observation models for which settings are created, the light-time calculation will take into account the first-order relativistic correction of the Sun, by using the :func:`~tudatpy.numerical_simulation.estimation_setup.observation.first_order_relativistic_correction` function. For the range observable, we have defined an absolute bias of 1 cm (0.01 m) using the :func:`~tudatpy.numerical_simulation.estimation_setup.absolute_bias`, while leaving the Doppler observable unbiased.
 
 
 Creating the models
