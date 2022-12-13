@@ -214,6 +214,41 @@ object, evaluating it, and retrieving the computed data can be followed.
 Model Description
 =================
 
+Before evaluating any transfer, it is useful to introduce the concept of nodes and legs. To assist in this, a schematic
+representation is given in the figure below. An MGA trajectory is given, with an arbitrary sequence. A number of nodes,
+that represent the celestial body used as GA body, and a number of legs that connect the nodes together. A central body
+is given, as this is required for the heliocentric evaluation of the legs, but more on that later. A number of different
+nodes are used and annotated; these are explained below under 'Legs and Their parameters'. 
+
+It is crucial to understand that both the nodes and legs have an incoming and outgoing velocity vector and that these are
+determined in different ways. A key difference being that the legs are evaluated in a heliocentric frame -- assuming the
+Sun is the central body -- and the GA is evaluated in a planetocentric frame -- assuming a planet is the GA target. The
+velocity vectors are converted in to the respective frame to evaluate the unknown parameters. What parameters are
+unknown depends on the type of leg and node, which is discussed later.
+
+.. figure:: _static/MGA_legs_and_nodes.png
+   :width: 800
+
+GA evaluation
+-------------
+
+To evaluate a GA, a number of equations are used:
+
+.. math::
+      e = 1 + \frac{r_p}{\mu \mid \vec{V}_{\infty,in}^2 \mid}
+
+where e is the eccentricity of the planetocentric GA arc, :math:`r_p` is pericenter radius, :math:`\mu` is the gravitational
+parameter of the GA target, and :math:`\vec{V}_{\infty,in}` is the hyperbolic planetocentric incoming velocity vector.
+
+.. math::
+      \delta = 2 \arcsin(\frac{1}{e})
+
+where :math:`\delta` is the declination. With these two equations, one can calculate the declination -- which represents
+the in-plane angle between the incoming and outgoing hyperbolic planetocentric velocity vectors.
+
+
+
+
 To evaluate the transfer one needs to provide a list of transfer parameters. These are: 
 
 - **Node times**
