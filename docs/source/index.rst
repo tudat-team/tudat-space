@@ -280,5 +280,4 @@ to get started with them, have a look at our
    _src_about/contribute
    _src_about/research_output
    _src_about/history
-   _src_about/changelog_link
 

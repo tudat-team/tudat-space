@@ -5,24 +5,65 @@ Multiple Gravity Assists Transfer
 =================================
 
 In this section, the preliminary design of multiple-leg interplanetary transfer trajectories is discussed. This module
-provides the functionalities for creating transfer trajectories consisting of multiple transfer legs or various types with powered
-and unpowered gravity assists. This allows high-thrust or low-thrust transfer trajectories with multiple flybys to be 
-designed, as well as a hybrid of low- and high-thrust. For per-function details see the `API documentation <https://py.api.tudat.space/en/latest/transfer_trajectory.html>`_. 
+provides the functionalities for creating transfer trajectories consisting of multiple transfer legs or various types
+with powered and unpowered gravity assists. This allows high-thrust or low-thrust transfer trajectories with multiple
+flybys to be designed, as well as a hybrid of low- and high-thrust. For per-function details see the `API documentation
+<https://py.api.tudat.space/en/latest/transfer_trajectory.html>`_. 
 
-A multiple gravity-assist transfer (MGA) is constituted by a series of nodes and legs. The nodes correspond to the departure,
-gravity assist, and arrival planets (bodies), and the legs correspond to the trajectories between the nodes. Therefore, there is
-always one more node than legs. Note that the initial or final node may be departure/capture or a flyby. The legs may
-be of a number of different types. For a series of unpowered legs, the typical multiple flyby MGA trajectory is retrieved.
+A multiple gravity-assist transfer (MGA) is constituted by a series of nodes and legs. The nodes correspond to the
+departure, gravity assist, and arrival planets (bodies), and the legs correspond to the trajectories between the nodes.
+Therefore, there is always one more node than leg. Note that the initial or final node may be departure/capture or a
+flyby. The legs may be of a number of different types, which is discussed more in-depth later on. 
 
 The module is implemented using simplified dynamical models for the nodes and legs. For the unpowered leg trajectory,
-the transfer is for instance defined under the assumptions of the patched-conics approximation.This module allows the flexible design
-of transfers using only analytical and semi-analytical methods, typically without any required numerical integration. This is
-particularly useful for preliminary mission design, where having a fast method is particularly important.
-
+for example, the transfer is for instance defined under the assumptions of the patched-conics approximation. This module
+allows for the flexible design of transfers using only analytical and semi-analytical methods, typically without any
+required numerical integration. This is particularly useful for preliminary mission design, where having a fast method
+is particularly important.
 
 .. note::
 
     The MGA model also allows defining transfers with a single leg (without any gravity assist).
+
+General Model Description
+=================
+
+Before evaluating any transfer, it is useful to introduce the concept of nodes and legs more. To assist in this, a
+schematic representation is given in the figure below. An MGA trajectory is given, with an arbitrary sequence. A number
+of nodes can be seen that represent the celestial body used as GA body, as well as a number of legs that connect the
+nodes together. A central body is given, as this is required for the heliocentric evaluation of the legs, but more on
+that later. A number of different nodes are used and annotated; these are explained below under 'Nodes and Their
+parameters'. 
+
+It is crucial to understand that both the nodes and legs have an incoming and outgoing velocity vector and that these
+are determined in different frames. The key difference being that the incoming/outgoing velocities of the legs are
+evaluated in a heliocentric frame -- assuming the Sun is the central body -- and the incoming/outoing velocities of the
+nodes are evaluated in a planetocentric frame -- assuming a planet is the GA target. The velocity vectors are converted
+in to the respective frame to evaluate the unknown parameters. Which parameters are unknown depends on the type of leg
+and node, which is explained later. For more details on the difference in reference frame and the patching of these
+trajectories, see section 4.4.2/3 Musegaas (2012)`_.
+
+.. figure:: _static/MGA_legs_and_nodes.jpg
+   :width: 800
+
+.. The short section below could be added, but it may provide too many details.
+
+.. GA evaluation
+.. -------------
+..
+.. To evaluate a GA, a number of equations are used:
+..
+.. .. math::
+..       e = 1 + \frac{r_p}{\mu \mid \vec{V}_{\infty,in}^2 \mid}
+..
+.. where e is the eccentricity of the planetocentric GA arc, :math:`r_p` is pericenter radius, :math:`\mu` is the gravitational
+.. parameter of the GA target, and :math:`\vec{V}_{\infty,in}` is the hyperbolic planetocentric incoming velocity vector.
+..
+.. .. math::
+..       \delta = 2 \arcsin(\frac{1}{e})
+..
+.. where :math:`\delta` is the declination. With these two equations, one can calculate the declination -- which represents
+.. the in-plane angle between the incoming and outgoing hyperbolic planetocentric velocity vectors.
 
 Supported models
 ================
@@ -210,9 +251,6 @@ swingby nodes equal to the number of GA's, and a capture node.
 
 Having created the legs and nodes settings, the same procedure described above for creating the transfer trajectory
 object, evaluating it, and retrieving the computed data can be followed.
-
-Model Description
-=================
 
 To evaluate the transfer one needs to provide a list of transfer parameters. These are: 
 
