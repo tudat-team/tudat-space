@@ -1,5 +1,5 @@
 
-.. _getting_started_tudatpy:
+.. _getting_started_installation:
 
 ******************************
 Installation

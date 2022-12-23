@@ -1,4 +1,4 @@
-.. _runningEstimation:
+.. _perform_estimation:
 
 Performing the estimation
 =========================

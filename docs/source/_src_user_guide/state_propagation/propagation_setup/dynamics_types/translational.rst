@@ -9,10 +9,10 @@ Translational Dynamics
    :hidden:
    :maxdepth: 1
 
-   ../acceleration_models/setup
-   ../acceleration_models/available
+   ../acceleration_models/acceleration_model_setup
+   ../acceleration_models/available_acceleration_models
    ../acceleration_models/third_body_acceleration
-   ../acceleration_models/thrust
+   ../acceleration_models/thrust_models
    ../acceleration_models/aerodynamics
 
 Settings to propagate the translational state of a body numerically can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.translational` factory function, described in detail in the `API documentation <https://py.api.tudat.space/en/latest/>`_. In the current page, only the Tudat-specific aspects of the input will be briefly described.

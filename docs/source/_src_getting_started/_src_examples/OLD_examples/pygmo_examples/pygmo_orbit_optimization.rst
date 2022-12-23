@@ -5,7 +5,7 @@ Optimize orbit for asteroid surface characterization
 In this example it will be shown how to use PyGMO functionalities in the context of an astrodynamics problem.
 It is assumed that, before diving into this example, the reader is already acquainted with the basic concepts
 of optimizing a problem with PyGMO; in other words, the reader should be familiar with the content of this page:
-:ref:`pygmo_basics`.
+:ref:`optimization_pygmo`.
 We will treat here the problem of the design of a mission around an asteroid, named `Itokawa`_. The full code that we
 will refer to in this page can be found on `github <https://github.com/tudat-team/tudatpy-examples/blob/master/pygmo/asteroid_orbit_optimization.py>`_.
 

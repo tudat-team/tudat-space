@@ -1,4 +1,4 @@
-.. _create_celestial_body_settings:
+.. _creation_celestial_body_settings:
 
 ===================================
 Creation of celestial body settings
@@ -11,7 +11,7 @@ The usual workflow to create celestial body settings is composed of two subseque
 
 .. warning::
    Body settings are not used in the propagation: they are only used to define the *settings* of the body objects, and are used to create ``Body`` objects, which are used during the propagation and contain the actual objects/functions performing the relevant calculations. This procedure is
-   described in the separate page :ref:`create_bodies_from_settings`.
+   described in the separate page :ref:`create_modifying_bodies`.
 
 
 .. _default_body_settings:
@@ -20,7 +20,7 @@ Creating body settings
 ======================
 
 In most cases, the starting point for the creation of body settings will be the extraction of *default settings*. This prevents a user from having to manually define a variety of 'typical' models for
-solar-system bodies. The full list of default body settings is given at :ref:`default_environment_models`, and
+solar-system bodies. The full list of default body settings is given at :ref:`default_env_models`, and
  can be retrieved as follows, using the :func:`~tudatpy.numerical_simulation.environment_setup.get_default_body_settings` function:
 
     .. tabs::
@@ -44,7 +44,7 @@ stored in the environment `during` propagation are represented. In general, it i
 Note that the frame origin definitions is *distinct* from the 
 center of propagation that you can define for the propagation of translational dynamics (see :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.translational` function, and the :ref:`translational_dynamics` page). For more information about this distinction, and the use of these reference frames in general, see :ref:`reference_frames`.
 
-In addition to the above method of creating default bodies, we offer an alternative which is more computationally efficient, at the expense of higher RAM usage and a more limited time interval in which the environment is valid. Such an approach is typically only used when computational speed is very important, and is described in more detail :ref:`here<valid_time_range>`.
+In addition to the above method of creating default bodies, we offer an alternative which is more computationally efficient, at the expense of higher RAM usage and a more limited time interval in which the environment is valid. Such an approach is typically only used when computational speed is very important, and is described in more detail :ref:`here<default_bodies_limited_time_range>`.
 
 Finally, in case you want to initialize body settings without *any* default settings, the ``body_settings`` in the above script can also be created manually as:
 

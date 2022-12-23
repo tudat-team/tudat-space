@@ -1,4 +1,4 @@
-.. _default_environment_models:
+.. _default_env_models:
 
 ==========================
 Default environment models
@@ -14,7 +14,7 @@ Default environment models
    :hidden:
    :maxdepth: 1
 
-   valid_time_range
+   default_bodies_limited_time_range 
 
    
 To facilitate the creation of the celestial bodies in your simulation, Tudat provides the option of loading default
@@ -45,7 +45,7 @@ instance for small bodies or other satellite systems, through the use of the
 Ephemerides from Spice kernels are only valid for a somewhat limited time interval (on the order of one or several centuries, depending on the specific body), which is limited by the valid range of the Spice kernels provided in Tudat by default. You can load additional Spice kernels with a longer coverage by using the :func:`~tudatpy.interface.spice.load_kernel` function for any additional kernels you like (see, for instance, the `generic kernels <https://naif.jpl.nasa.gov/naif/data_generic.html>`_ listed on the Spice website. Note that the contents will override data in the default kernels (if applicable).
 
 .. note::
-   In some cases, the extraction of the state of bodies from Spice kernels can be a computational bottleneck. Tudat has an :ref:`alternative set of default options <valid_time_range>`, which make this process signicantly faster, at the expense of higher RAM usage, and an environment that is only valid over a very limited time interval.
+   In some cases, the extraction of the state of bodies from Spice kernels can be a computational bottleneck. Tudat has an :ref:`alternative set of default options <default_bodies_limited_time_range>`, which make this process signicantly faster, at the expense of higher RAM usage, and an environment that is only valid over a very limited time interval.
 
 .. _default_rotation_models:
 
@@ -59,8 +59,7 @@ the IAU Working Group on Cartographic Coordinates and Rotational Elements.
 For the Earth, a high-accuracy rotation model is available, which is *not* loaded by default, but can be added to the default settings using the :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.gcrs_to_itrs` function.
 
 .. note::
-   In some cases, the extraction of the rotational state of bodies from Spice kernels can be a computational bottleneck. Tudat has an :ref:`alternative set of default options <valid_time_range>`, which make this process signicantly faster, at the expense of higher RAM usage, and an environment that is only valid over a very limited time interval.
-
+   In some cases, the extraction of the rotational state of bodies from Spice kernels can be a computational bottleneck. Tudat has an :ref:`alternative set of default options <default_bodies_limited_time_range>`, which make this process signicantly faster, at the expense of higher RAM usage, and an environment that is only valid over a very limited time interval.
 Shape model
 --------------
 

@@ -5,7 +5,7 @@ Optimize MGA-DSM trajectories
 *****************************
 
 In the following section, an example of the optimization of MGA-DSM trajectories is provided. If you are unfamiliar with
-optimizations within Tudat(py) and/or `Pygmo`_, please visit :ref:`pygmo_basics` first. The optimizer will search for
+optimizations within Tudat(py) and/or `Pygmo`_, please visit :ref:`optimization_pygmo` first. The optimizer will search for
 transfer parameters that yield optimal solutions in terms of two objectives: :math:`\Delta V` and time of flight.
 
 The full code for this example was developed for the Collaborative Design Lab (CDL) and can be found in the

@@ -7,4 +7,4 @@ Different tools are available for preliminary mission design. These are discusse
 .. toctree::
     :maxdepth: 1
 
-    astrodynamics/trajectory_design
+    prelim_mission_design/mga_transfer
