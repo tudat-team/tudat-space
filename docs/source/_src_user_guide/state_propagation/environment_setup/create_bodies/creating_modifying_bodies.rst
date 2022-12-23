@@ -1,11 +1,11 @@
 
-.. _create_bodies_from_settings:
+.. _create_modifying_bodies:
 
 =================================
 Creating and modifying the bodies
 =================================
 
-Once all settings for the bodies are defined as described in :ref:`create_celestial_body_settings`, the bodies are
+Once all settings for the bodies are defined as described in :ref:`creation_celestial_body_settings`, the bodies are
 created and linked together, so that all required interdependencies are automatically satisfied.  
 
 .. _create_bodies_from_settings_first:
@@ -63,7 +63,7 @@ custom bodies may be added to the simulation. Such an approach can be useful whe
 One crucial downside of adding bodies to an existing ``SystemOfBodies`` is that the dependencies between the bodies can only go in 'one direction': the newly added body may depend on the existing bodies, but the existing bodies can typically not be updated to depend on the newly added body. 
 
 .. warning::
-   The (semi-)manual creation of bodies, or the modification of environment models of existing bodies, is *not* the recommended approach to take. Unless you have a good reason to take this approach (such as those listed above), we recommend the creation of bodies using :ref:`creation of body settings <create_celestial_body_settings>`
+   The (semi-)manual creation of bodies, or the modification of environment models of existing bodies, is *not* the recommended approach to take. Unless you have a good reason to take this approach (such as those listed above), we recommend the creation of bodies using :ref:`creation of body settings <creation_celestial_body_settings>`
 
 
 The first step is to add an empty :class:`~tudatpy.numerical_simulation.environment.Body` object to the existing
@@ -127,7 +127,7 @@ Properties can be added to an existing body after the body's creation (with the 
           .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
              :language: cpp
 
-In this example, the settings for the aerodynamic coefficients and radiation pressure are defined as the most simple models available (constant drag-only aerodynamic coefficients, and cannonball radiation pressure). The above approach uses the settings for environment models, just as the `creation of bodies from settings<create_celestial_body_settings>` (which is the preferred and recommended approach in most cases). However, instead of storing these environment settings in a larger object defining the settings for the full bodies, and for all bodies together, here we use the environment model settings *one at a time*. For each supported environment model, an ``add....`` function is provided in the :mod:`~tudatpy.numerical_simulation.environment_setup` module.  
+In this example, the settings for the aerodynamic coefficients and radiation pressure are defined as the most simple models available (constant drag-only aerodynamic coefficients, and cannonball radiation pressure). The above approach uses the settings for environment models, just as the `creation of bodies from settings<creation_celestial_body_settings>` (which is the preferred and recommended approach in most cases). However, instead of storing these environment settings in a larger object defining the settings for the full bodies, and for all bodies together, here we use the environment model settings *one at a time*. For each supported environment model, an ``add....`` function is provided in the :mod:`~tudatpy.numerical_simulation.environment_setup` module.  
 
 Note that a similar approach is typically taken to add ground stations to a body (see :ref:`ground_stations`)
 

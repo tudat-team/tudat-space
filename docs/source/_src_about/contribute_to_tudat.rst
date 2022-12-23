@@ -21,7 +21,7 @@ Ongoing and planned developments
 
 Below is a (non enirely comprehensive) list of features and functionalities that are under active development, or or our near(ish)-term wishlist. For some of them, the requied development would be ython-only. If you're interested in the status of these points, in contributing, or in proposing additional ones, please feel free to contact us!
 
-* Extenstion of TudaIt estimation functionality for real tracking data analysis, with a focus on planetary missions
+* Extension of Tudat estimation functionality for real tracking data analysis, with a focus on planetary missions
 
   * Reading typical radio tracking data files (ODF, TNF, TDF) into Tudat-compatible data structures (**Python**?)
   * Linking JPL Horizons and Minor Planet Center databases to Tudat environment, to make setup of planetary mission scenarios easier, both will use the astroquery package (**Python**)

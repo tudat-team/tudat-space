@@ -100,7 +100,7 @@ The ephemeris origin - the states computed by an ephemeris
 
 Each body that is not numerically propagated is typically (but not necessarily) endowed with an ephemeris, which contains a pre-defined function of the body's translational state as a function of time. Unlike the global origin, the ephemeris origin of each body may be different. In the context of a numerical simulation, users do not often interrogate the ephemeris directly. However, it can be useful to do so outside of a numerical propagation, for instance to analyze the predefined trajectory of a body outside of the propagation framework
 
-| **How a user defines the ephemeris origin**: through the definition of ephemeris settings when creating the settings for the body objects (see :ref:`environment_ephemeris_model`). Often, the default settings will be used in the case of celestial bodies (see :ref:`default_environment_models`).
+| **How a user defines the ephemeris origin**: through the definition of ephemeris settings when creating the settings for the body objects (see :ref:`environment_ephemeris_model`). Often, the default settings will be used in the case of celestial bodies (see :ref:`default_env_models`).
 |
 | **When the propagation origin is relevant to a user:**
 * When directly retrieving the state from an ephemeris object.

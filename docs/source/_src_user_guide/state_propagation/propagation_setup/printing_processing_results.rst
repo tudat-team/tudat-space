@@ -52,7 +52,7 @@ Specifically, this will result in:
 
 To be able to perform the reset of the ephemeris (or other environment model), the existing ephemeris must be of the suitable type.
 This means that it must either be a tabulated ephemeris already (in which case the tabulation is reset) or the body must contain no ephemeris
-(in which case one is created on the fly when :ref:`creating the dynamics simulator <running_simulation>`.
+(in which case one is created on the fly when :ref:`creating the dynamics simulator <propagating_dynamics>`.
 
 In cases where a user wants to use a
 non-tabulated ephemeris for a body, but still use the functionality described here to reset the ephemeris later on, the ephemeris type of the
@@ -81,7 +81,7 @@ by the settings in the multi- or hybrid-arc propagation settings.
 To reset the dynamics of a body with the results of a multi-arc propagation (e.g. if the
 :attr:`~tudatpy.numerical_simulation.propagation_setup.PropagatorProcessingSettings.set_integrated_result` option is set to true),
 the ephemeris of this body must be a multi-arc ephemeris. If the body has no ephemeris before propagation,
-one is created on the fly when :ref:`creating the dynamics simulator <running_simulation>`.
+one is created on the fly when :ref:`creating the dynamics simulator <propagating_dynamics>`.
 In cases where a user wants to use a
 single-arc ephemeris for a body, but still use the functionality described here to reset the ephemeris from multi-arc results later on,
 the ephemeris type can be forced to multi-arc by using the
