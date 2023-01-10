@@ -55,13 +55,9 @@ Below, there is a list of contributors to Tudat. Mostly, these have been staff a
 * Sean Cowan
 * Kevin Cowan
 * `João Encarnação <https://www.linkedin.com/in/joaoencarnacao/>`_
-* Carlos Fortuny Lombrana
-* Jeremie Gaffarel
 * Jonas Hener
 * Gregorio Marchesini
 * Maarten van Nistelrooij
-* Filippo Oggionni
-* Michael Plumaris
 
 **Tudat Alumni Hall-of-fame**
 
@@ -76,6 +72,8 @@ Below, there is a list of contributors to Tudat. Mostly, these have been staff a
 * `Frank Engelen <https://www.linkedin.com/in/frankengelen/>`_
 * `Michele Facchinelli <https://www.linkedin.com/in/mfacchinelli/>`_
 * `Iosto Fodde <https://www.linkedin.com/in/iosto-fodde-572b81129/>`_
+* Carlos Fortuny Lombrana
+* Jeremie Gaffarel
 * `Jacco Geul <https://jacco.geul.net/>`_
 * `David Gondelach <https://www.linkedin.com/in/david-gondelach/>`_
 * `Alejandro Gonzalez Puerta <https://www.linkedin.com/in/alejandrogonzalezpuerta/>`_
@@ -85,10 +83,13 @@ Below, there is a list of contributors to Tudat. Mostly, these have been staff a
 * `Kartik Kumar <https://www.linkedin.com/in/kumarkartik/>`_
 * `Jonatan Leloux <https://www.linkedin.com/in/jonatanleloux/>`_
 * `Francesco Lupi <https://www.linkedin.com/in/francesco-lupi-b23a658/>`_
+* Filippo Oggionni
 * `Aleix Pinardell <https://www.linkedin.com/in/aleixpinardell/>`_
+* Michael Plumaris
 * `Bart Römgens <https://www.linkedin.com/in/bart-r%C3%B6mgens-b7a19314/>`_
 * `Tineke Roegiers <https://www.linkedin.com/in/roegiers/>`_
 * `Alexander Ronse <https://www.linkedin.com/in/alexander-ronse-1401a5b/>`_
+* `Mattia Topini <https://www.linkedin.com/in/mattia-topini-796448175/>`_
 
 
 ..
