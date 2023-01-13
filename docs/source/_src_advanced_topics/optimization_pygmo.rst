@@ -252,17 +252,58 @@ despite using only 10% of the computational resources.
 .. [Biscani2020] Biscani et al., (2020). A parallel global multiobjective framework for optimization: pagmo.
    Journal of Open Source Software, 5(53), 2338, https://doi.org/10.21105/joss.02338.
 
-Parallelisation with Python and PyGMO
+
+Parallelization with Python and PyGMO
 #########################################
 
 In this section, a short guide is given on the parallelization of tasks in Python, and specifically for application with
-PyGMO UDP.
+PyGMO.
 
 
 General parallelization with Python
 ------------------------------------
 
-In Python, you can parallelize data processing in various ways. One way is
+In Python, you can parallelize data processing in various ways. One possible way is to use GPU's, but this is not
+discussed here. For Python CPU-based parallelization, there are generally two types: multi-processing and
+multi-threading. Multi-processing is a method that initializes multiple processes. This means that different processes
+are running on independent CPU's, with independent memory management. Multi-threading is a method that uses multiple
+threads for a single parent process with shared memory. Child processes can be run on separate threads. There are
+generally two threads per CPU, and each computer system has their own amount of CPU's with their own specs. The amount
+of parallellity is therefore determined by the system you want to run on.
+
+To start, parallelization does not have to be within PyGMO, it can be used for any simulation. Though, it should be
+noted that it does not always make sense to parallelize your simulations. The initialization takes longer, so there is a
+break even point beyond which it is worthwhile, which is discussed in :ref:`Multi-threading with Batch Fitness
+Evaluation`. Below is a code snippet that shows in pseudo code how one can implement parallelization without PyGMO. To
+enable this behavior with Python, the ``multiprocessing`` module is used. Other alternatives exist as well that are more
+modern, but they are not as widely spread or as thoroughly documented. Ray, for instance, is one of these packages, it
+is arguably more seemless, but it is also rather new and focused on AI applications.
+
+All parallel processing should be put under ``if __name__ == "__main__" :``. This line ensures that the code is only run
+if that file is the file being executed directly (so not imported, for example). This prevents an infinite loop when
+creating new child processes -- or starting calculations on other threads.  If this line is omitted, child processes
+import the python script, which then run the same script again, thereby spawning more child processes. This results in
+an infinite loop. Next, ``mp.get_context("spawn")`` is  a context object that has the attributes of the multiprocessing
+module. Here, the ``"spawn"`` argument refers to the method that creates a new Python process. ``"spawn"`` specifically
+starts a fresh Python interpreter process -- which is default on macOS and Windows. ``"fork"`` copies a Python process
+using ``os.fork()``-- which is the default on Linux. ``"forkserver"`` creates a server process; a new process is then
+requested and the server uses ``"fork"`` to create it. This method can generally be left at the default value.
+
+A ``Pool`` object is temporarily created, which is just a collection of available processes that can be allocated to
+computational tasks. The number of cores you would like to appoint to the ``Pool`` is given as an argument.
+Subsequently, the ``map()`` or ``starmap`` method allows for a function to be applied to an iterable, rather than a
+single argument. ``map()`` allows for a single argument to be passed to the function, ``starmap()`` allows for multiple
+arguments. The inputs are all the sets of input arguments in the form of a list of tuples, which constitutes the
+iterable mentioned previously. The outputs are formatted analogously, where the tuples are the various outputs rather
+than the input arguments. 
+
+.. note::
+
+    The memory will be freed only after all the outputs are collected. It may be wise to split the list of
+    inputs into smaller batches in case a high number of simulations are run, to avoid overflowing the memory.
+
+Other ways to specify the context or create a Pool object are also possible, more can be read on `the multiprocessing
+documentation page <https://docs.python.org/3/library/multiprocessing.html>`_.
 
 .. code:: python
     
@@ -271,12 +312,11 @@ In Python, you can parallelize data processing in various ways. One way is
     import numpy as np
     
     from tudatpy.kernel.numerical_simulation import environment_setup, propagation_setup
-    from tudatpy.kernel.interface import spice # This setup works with SPICE :)
+    from tudatpy.kernel.interface import spice
     
     # Functions
     def run_simulation(arg_1, arg_2):
         # Do some tudat things...
-        # Even better, save results directly into a database using sqlite3 to avoid 
         return 1, arg_1 + arg_2
     
     # Main script
@@ -295,14 +335,195 @@ In Python, you can parallelize data processing in various ways. One way is
         n_cores = mp.cpu_count()//2
         with mp.get_context("spawn").Pool(n_cores) as pool:
             outputs = pool.starmap(run_simulation, inputs)
-        # Outputs is a list of tuples (just like inputs); each tuple contains the output of a simulation
-    
-        # Note: the memory will be freed only after all the outputs are collected.
-        # It is then wise to split the list of inputs into smaller batches in case
-        # a high number of simulations are run, to avoid overflowing the memory.
-
-
 
 Parallelization with PyGMO User-Defined Problem (UDP)
 -----------------------------------------------------
+
+Parallelization is also very useful for optimization problems, because optimizations are generally quite resource
+intensive processes, and this can be curbed by applying some form of parallellity. There are two flavors of parallelity
+in PyGMO. One utilizing multi-processing, one multi-threading, presented in :ref:`Multi-threading with Batch Fitness
+Evaluation` and :ref:`Multi-processing with Archipelagos`, respectively.
+
+
+Multi-threading with Batch Fitness Evaluation 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Multi-threading in PyGMO is used with so-called Batch Fitness Evaluation (BFE); simply evaluating some fitness function
+in a batch, similar to the examples explained before. For this, PyGMO has classes and methods to help setup a
+multi-threaded optimisation. For this section, code snippets are used from an adapted version of `the hodographic
+shaping MGA trajectory example
+<https://github.com/tudat-team/tudatpy-examples/blob/master/pygmo/hodographic_shaping_mga_optimization.py>`_, seen
+below. You can either define your own User-Defined Batch Fitness Evaluator (UDBFE), explained `here
+<https://esa.github.io/pygmo2/bfe.html>`_, but here the `batch_fitness()` method is explained, as this follows more
+naturally from :ref:`1. Creation of the UDP class` above. Furthermore, you have no control over exactly what happens
+with using UDBFE's implemented in PyGMO, though it can be easier in some cases.
+
+In a UDP, BFE can be enabled by adding a `batch_fitness()` method to the class, as seen below. This method receives as
+input a 1D flattened array of all the design parameter vectors -- the first vector ranges from index [0, n], the second
+from [n, 2n] and so on, with a design variable vector of length n. The output is constructed analogously, where the
+length n is equal to the number of objectives. The `batch_fitness` method is somewhat of a wrapper for the `fitness()`
+method, all it has to do is convert the input array into a list of lists, then create a pool of worker processes that
+can be used.
+
+.. code:: python
+
+    def batch_fitness(self,
+                design_parameter_vectors: np.ndarray) -> List[float]:
+        """
+        Function to evaluate the fitness. A single-objective optimization is used, in which the objective is the deltaV
+        necessary to execute the transfer.
+        """
+
+        # Compute the final index of each type of parameters
+        time_of_flight_index = 3 + self.no_of_legs
+        incoming_velocity_index = time_of_flight_index + self.no_of_swingbys
+        swingby_periapsis_index = incoming_velocity_index + self.no_of_swingbys
+        shaping_free_coefficient_index = swingby_periapsis_index + self.total_no_shaping_free_coefficients
+        revolution_index = shaping_free_coefficient_index + self.no_of_legs
+
+        len_single_dpv = revolution_index
+        dpvs = design_parameter_vectors.reshape(len(design_parameter_vectors)//len_single_dpv, len_single_dpv)
+
+        inputs, fitnesses = [], []
+        for dpv in dpvs:
+            inputs.append([list(dpv)])
+
+        # cpu_count = len(os.sched_getaffinity(0))
+        cpu_count = mp.cpu_count()
+        with mp.get_context("spawn").Pool(processes=int(cpu_count-4)) as pool:
+            outputs = pool.map(self.fitness, inputs)
+
+        for output in outputs:
+            fitnesses.append(output)
+
+        return fitnesses
+
+Next, a code snippet is shown that invokes the BFE capabilities. The `batch_fitness()` function is part of the UDP,
+which is called. There are two distinct things to do. 
+
+.. code:: python
+
+    bfe = True
+
+    seed = 42
+    pop_size = 500
+
+    # Create Pygmo problem
+    transfer_optimization_problem = MGAHodographicShapingTrajectoryOptimizationProblem(
+        central_body, transfer_body_order, bounds, departure_semi_major_axis, departure_eccentricity,
+        arrival_semi_major_axis, arrival_eccentricity)
+    prob= pg.problem(transfer_optimization_problem)
+
+    # Create algorithm and define its seed
+    algo = pg.gaco()
+    if bfe:
+        algo.set_bfe(pg.bfe())
+    algo = pg.algorithm(algo)
+
+    bfe_pop = pg.default_bfe() if bfe else None
+    pop = pg.population(prob=prob, size=pop_size, seed=seed, b=bfe_pop)
+
+    num_gen = 150
+
+    # Initialize lists with the best individual per generation
+    list_of_champion_f = [pop.champion_f]
+    list_of_champion_x = [pop.champion_x]
+
+    # mp.freeze_support() needs to be called when using multiprocessing on windows
+    # mp.freeze_support()
+
+    for i in range(num_gen):
+        print(f'Evolution: {i+1} / {num_gen}', end='\r')
+        pop =algo.evolve(pop)
+
+        # Save current champion
+        list_of_champion_x.append(pop.champion_x)
+        list_of_champion_f.append(pop.champion_f)
+    print('Evolution finished')
+
+
+To show that this actually works well, a few tests are done with various complexities. Normally, the number of function
+evaluations would be a good indication of runtime complexity, however this parallellity does not change that number. CPU
+time can be and clock time to show that it makes a difference, though this should be taken with a grain of.
+
+.. note::
+
+   These simulations are tested on macOS Ventura 13.1 with a 3.1 GHz Quad-Core Intel Core i7 processor.
+
+
++--------------------+-------------------------+---------------------------+---------------+----------------+-----------------+
+| Transfer Sequence  | Gen count and Pop size  | Batch Fitness Evaluation  | CPU time [s]  | CPU usage [-]  | Clock time [s]  |
++====================+=========================+===========================+===============+================+=================+
+| EJ                 | gen30pop100             | no                        | 17.6          | 106%           | 16.7            |
+|                    |                         +---------------------------+---------------+----------------+-----------------+
+|                    |                         | yes                       | 130.7         | 443%           | 29.5            |
+|                    +-------------------------+---------------------------+---------------+----------------+-----------------+
+|                    | gen300pop1000           | no                        | 4500          | 78%            | 5770            |
+|                    |                         +---------------------------+---------------+----------------+-----------------+
+|                    |                         | yes                       | 3000          | 405%           | 735             |
++--------------------+-------------------------+---------------------------+---------------+----------------+-----------------+
+| EMEJ               | gen30pop100             | no                        | 70.1          | 97%            | 72.3            |
+|                    |                         +---------------------------+---------------+----------------+-----------------+
+|                    |                         | yes                       | 159.2         | 428%           | 37.2            |
+|                    +-------------------------+---------------------------+---------------+----------------+-----------------+
+|                    | gen300pop1000           | no                        | 4440          | 60%            | 7440            |
+|                    |                         +---------------------------+---------------+----------------+-----------------+
+|                    |                         | yes                       | 5946          | 404%           | 1470            |
++--------------------+-------------------------+---------------------------+---------------+----------------+-----------------+
+
+Multi-processing with Islands
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This section presents multi-processing with PyGMO using the ``pg.island`` and/or ``pg.archipelago`` class. An island is
+an object that enables asynchronous optimization of its population. An archipelago is a network that connects multiple
+islands -- `pg.island` objects -- through a topology. Islands can exchange individuals with one another through a
+topology -- a `pg.topology` object. This topology can configure the exchange of individuals between islands in an
+archipelago. 
+
+.. Finally, the optimization can be executed by successively evolving the island. To do so, the method
+.. `island.evolve()` is called the desired number of times inside a loop. After starting each evolution of the island,
+.. the method `island.wait_check()` is called, which makes the program wait for all the evolutions running in parallel
+.. to finish. After each evolution is finished, the best fitness and parameters vector are saved.
+
+.. code:: python
+
+    seed = 42
+    pop_size = 1000
+
+    # Create Pygmo problem
+    transfer_optimization_problem = MGAHodographicShapingTrajectoryOptimizationProblem(
+        central_body, transfer_body_order, bounds, departure_semi_major_axis, departure_eccentricity,
+        arrival_semi_major_axis, arrival_eccentricity)
+    problem = pg.problem(transfer_optimization_problem)
+
+    # Create algorithm and define its seed
+    algorithm = pg.algorithm(pg.sga(gen=1))
+    algorithm.set_seed(seed)
+
+    # Create island
+    island = pg.island(algo=algorithm, prob=problem, size=pop_size, seed=seed)
+
+    num_gen = 40
+
+    # Initialize lists with the best individual per generation
+    list_of_champion_f = [island.get_population().champion_f]
+    list_of_champion_x = [island.get_population().champion_x]
+
+    # mp.freeze_support() needs to be called when using multiprocessing on windows
+    # mp.freeze_support()
+
+    for i in range(num_gen):
+        print('Evolution: %i / %i' % (i+1, num_gen))
+
+        island.evolve() # Evolve island
+        island.wait_check() # Wait until all evolution tasks in the island finish
+
+        # Save current champion
+        list_of_champion_x.append(island.get_population().champion_x)
+        list_of_champion_f.append(island.get_population().champion_f)
+
+    print('Evolution finished')
+
+
+TBC.
 
