@@ -1,10 +1,10 @@
 
-.. _running_variational_simulation:
+.. _propagating_variational_simulation:
 
 Propagating Variational Equations
 =================================
 
-In addition to :ref:`running_simulation`, Tudat is also capable of propagating the so-called variational equations associated with the dynamics to produce the state transition matrix :math:`\Phi(t,t_{0})` and sensitivity matrix :math:`S(t)`, which we define here as:
+In addition to :ref:`propagating_dynamics`, Tudat is also capable of propagating the so-called variational equations associated with the dynamics to produce the state transition matrix :math:`\Phi(t,t_{0})` and sensitivity matrix :math:`S(t)`, which we define here as:
 
 .. math::
 
@@ -28,8 +28,8 @@ A description of how these parameters are to be defined and a comprehensive list
 .. toctree::
     :maxdepth: 3
 
-    sensitivity_analysis/parameter_settings
-    sensitivity_analysis/available_parameters
+    propagating_variational_equations/parameter_settings
+    propagating_variational_equations/available_parameters
 
 
 Performing the Propagation
@@ -41,4 +41,4 @@ For propagation of the system state and variational equations along a single arc
 .. toctree::
   :maxdepth: 1
 
-  running_simulation/single_variational_arc
+  propagating_variational_equations/single_arc_variational_propagation

@@ -7,4 +7,4 @@ Tudat contains various pieces of functionality of a purely mathematical nature, 
 .. toctree::
     :maxdepth: 3
 
-    math/interpolators
+    mathematics/interpolators

@@ -137,7 +137,7 @@ Such framework can be used for a wide variety of purposes, ranging from the stud
 missions. The functionality of Tudat is implemented in C++, but a Python interface, called Tudatpy, is now available,
 through which the core simulation functionality can be accessed. Tudat and Tudatpy are disseminated as conda packages;
 to get started with them, have a look at our
-:ref:`installation guide<getting_started_tudatpy>`.
+:ref:`installation guide<getting_started_installation>`.
 
 .. panels::
     :body: text-left
@@ -203,7 +203,7 @@ to get started with them, have a look at our
     (various orders), Bulirsch-Stoer, and Adams-Bashfort-Moulton.
 
     +++
-    .. link-button:: _src_user_guide/state_propagation/integration_setup
+    .. link-button:: _src_user_guide/state_propagation/propagation_setup/integration_setup
             :type: ref
             :text: Find out more
             :classes: stretched-link btn-outline-primary
@@ -218,7 +218,7 @@ to get started with them, have a look at our
     assists, and shape-based low-thrust models. Extended documentation
 
     +++
-    .. link-button:: _src_user_guide/astrodynamics/trajectory_design
+    .. link-button:: _src_user_guide/prelim_mission_design/mga_transfer
             :type: ref
             :text: Find out more
             :classes: stretched-link btn-outline-primary
@@ -233,7 +233,7 @@ to get started with them, have a look at our
 
 
     +++
-    .. link-button:: _src_user_guide/state_propagation/environment_setup/architecture/custom_settings
+    .. link-button:: _src_user_guide/state_propagation/environment_setup/architecture/custom_models
             :type: ref
             :text: Find out more
             :classes: stretched-link btn-outline-primary
@@ -248,10 +248,10 @@ to get started with them, have a look at our
    :hidden:
 
    _src_getting_started/installation
-   _src_getting_started/setup_ide
-   _src_getting_started/use_of_tools
+   _src_getting_started/setup_dev_environment
+   _src_getting_started/primers_coding_tools
    _src_getting_started/examples
-   _src_getting_started/submodules
+   _src_getting_started/tudatpy_submodules
 
 .. toctree::
    :titlesonly:
@@ -261,7 +261,7 @@ to get started with them, have a look at our
 
    _src_user_guide/state_propagation
    _src_user_guide/state_estimation
-   _src_user_guide/astrodynamics
+   _src_user_guide/prelim_mission_design
    _src_user_guide/mathematics
 
 .. toctree::
@@ -269,15 +269,15 @@ to get started with them, have a look at our
    :caption: Advanced topics
    :hidden:
 
-   _src_resources/post_processing
-   _src_resources/pygmo_basics
+   _src_advanced_topics/post_processing_python
+   _src_advanced_topics/optimization_pygmo
 
 .. toctree::
    :maxdepth: 2
    :caption: About
    :hidden:
 
-   _src_about/contribute
+   _src_about/contribute_to_tudat
    _src_about/research_output
    _src_about/history
 

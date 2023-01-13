@@ -15,12 +15,11 @@ Propagation Setup
    propagation_setup/dynamics_types/multi_type
    propagation_setup/dynamics_types/multi_body
    propagation_setup/dynamics_types/multi_hybrid_arc
-   propagation_setup/propagator_types
+   propagation_setup/conventional_propagated_elements
    propagation_setup/integration_setup
    propagation_setup/termination_settings
    propagation_setup/dependent_variables
-   propagation_setup/console_output
-   propagation_setup/propagation_architecture
+   propagation_setup/printing_processing_results
    
 
 In this part of the user guide, we will explain the relevant inputs as well as present the different

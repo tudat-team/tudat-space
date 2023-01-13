@@ -8,7 +8,7 @@ Observation Model Setup
    :hidden:
    :maxdepth: 1
 
-   available_observations
+   observation_models
    
 Having defined the :ref:`link ends <linkEndSetup>`, you can now define and create the observation models. Below the general workflow for this is discussed.
 
@@ -95,7 +95,7 @@ Depending on the type of simulation you are using, you can use one of two manner
         # Create observation simulators
         observation_simulators = create_observation_simulators( observation_settings_list, bodies )       
   
-* Create an ::class:`~tudatpy.numerical_simulation.estimation_setup.Estimator` object (discussed further :ref:`here <runningEstimation>`), which creates the observation simulators automatically
+* Create an ::class:`~tudatpy.numerical_simulation.estimation_setup.Estimator` object (discussed further :ref:`here <perform_estimation>`), which creates the observation simulators automatically
 
     .. code-block:: python
 

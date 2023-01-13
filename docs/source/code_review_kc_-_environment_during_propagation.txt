@@ -73,7 +73,7 @@ Spherical harmonic gravity field coefficients
 		sine_coefficients = earth_gravity_field.cosine_coefficients
 
 
-    Note the above will only work if the ``earth_gravity_field`` is of the type :func:`~tudatpy.numerical_simulation.environment.SphericalHarmonicGravityFieldModel`, which typically means that the body has default spherical harmonic gravity field settings (see :ref:`default_environment_models`) or that spherical harmonic gravity field settings were defined using the :func:`tudatpy.numerical_simulation.environment_setup.gravity_field.spherical_harmonic` function). For safety, the above could be put inside the ``try`` block of a ``try/except`` construction,  wherethe ``except`` block will be entered in case the gravity field model type of the Earth is not spherical harmonic
+    Note the above will only work if the ``earth_gravity_field`` is of the type :func:`~tudatpy.numerical_simulation.environment.SphericalHarmonicGravityFieldModel`, which typically means that the body has default spherical harmonic gravity field settings (see :ref:`default_env_models`) or that spherical harmonic gravity field settings were defined using the :func:`tudatpy.numerical_simulation.environment_setup.gravity_field.spherical_harmonic` function). For safety, the above could be put inside the ``try`` block of a ``try/except`` construction,  wherethe ``except`` block will be entered in case the gravity field model type of the Earth is not spherical harmonic
 
 .. _flight_conditions_during_propagation:
 

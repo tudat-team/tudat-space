@@ -1,5 +1,5 @@
 
-.. _running_simulation:
+.. _propagating_dynamics:
 
 Propagating Dynamics
 ====================
@@ -47,5 +47,5 @@ more detailed description of the process that is executed during the propagation
    :titlesonly:
    :maxdepth: 1
 
-   running_simulation/propagation_results
-   running_simulation/propagation_architecture
+   propagating_dynamics/propagation_results
+   propagating_dynamics/propagation_architecture

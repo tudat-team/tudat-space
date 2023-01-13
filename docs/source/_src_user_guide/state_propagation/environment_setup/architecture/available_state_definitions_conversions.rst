@@ -180,7 +180,7 @@ provides functionality for high-accuracy Earth-orientation calculations.
 
 This functionality is implemented as a rotation model, defined using the
 :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.gcrs_to_itrs` function
-which will in most cases be created during the :ref:`setup of the environment <create_celestial_body_settings>`
+which will in most cases be created during the :ref:`setup of the environment <creation_celestial_body_settings>`
 (and, typically, assigned to the body object representing Earth).
 
 When this rotation model is assigned to Earth, it can be extraced as an object of type :func:`~tudatpy.numerical_simulation.environment.GcrsToItrsRotationModel`
