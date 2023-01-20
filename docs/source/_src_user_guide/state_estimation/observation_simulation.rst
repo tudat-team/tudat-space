@@ -3,11 +3,11 @@
 Observation Simulation
 ======================
 
-Having defined the :ref:`observation models <_observationModelSetup>`, you can now simulate actual observations to use in your analysis,
-or load real data into your analysis. Below, we first describe :ref:`observationTypes`, and how to analyze the
+Having defined the :ref:`available_observation_models`, you can now simulate actual observations to use in your analysis,
+or load real data into your analysis. Below, we first describe :ref:`observationTypes2`, and how to analyze the
 resulting data structures. Finally, we provide a (preliminary) introduction to :ref:`loading_data`.
 
-.. _observationTypes:
+.. _observationTypes2:
 
 Defining observation simulation settings
 ----------------------------------------
@@ -31,7 +31,7 @@ In addition to the definition of the observation model, simulating the observati
        
 where a list of times (:math:`t=10,20,30` s) is explicitly specified, and an observation simulation settings object is created, which specifies that a one-way range observation is to be simulated at these times, with the link ends specified by ``one_way_nno_mex_link_definition``.
 
-By default, the reference time for the one-way range observable is the receiver (see :ref:`~tudatpy.numerical_simulation.estimation_setup.observation.get_default_reference_link_end`). This means that, for the above, these settings will simulate observations which are *received* by MeX at t=10, t=20, and t=30, respectively. To override this behaviour, we can specify a reference link end manually:
+By default, the reference time for the one-way range observable is the receiver (see :attr:`~tudatpy.numerical_simulation.estimation_setup.observation.get_default_reference_link_end`). This means that, for the above, these settings will simulate observations which are *received* by MeX at t=10, t=20, and t=30, respectively. To override this behaviour, we can specify a reference link end manually:
 
 .. code-block:: python
     
@@ -54,6 +54,7 @@ As an extension of the above, you can also use :func:`~tudatpy.numerical_simulat
 Instead of creating a single object to simulate observations, it contains a list of objects, for any number of observable types and link ends.
 
 The :func:`~tudatpy.numerical_simulation.estimation_setup.observation.tabulated_settings` is the simplest manner in which to define the times (and other settings) at which to simulate observations. By adding observation constraints (see :ref:`below <observation_constraints>`), this list of times may be filtered during the observation simulation process to only retain those times at which specific conditions are met (e.g. target above the horizon). For many practical cases, it is desirable to have continuous tracking passes of a given length that are not interrupted by such constraints. The :func:`~tudatpy.numerical_simulation.estimation_setup.continuous_arc_simulation_settings` can be used to achieve such behaviour.
+
 .. _additional_observation_settings:
 
 Defining additional settings
@@ -68,7 +69,7 @@ In addition to defining the observable type, link ends, observation times and (o
 
 Typically, these settings are defined and added to the observation simulation settings *after* the nominal settings have been defined (in the process outlined above). 
 
-To efficiently achieve this, there are several functions available in Tudat, which take a list of ``ObservationSimulationSettings`` objects (such as those returned by the :func:`~tudatpy.tabulated_settings_list` function), and add specifics for on of the above options to any number of observation simulation settings. For each of the above three options, three separate functions are provided to modify the list of observation simulation settings (see :ref:`observation_constraints`, :ref:`noise_levels` and :ref:`observation_dependent_variable` for API links, and examples):
+To efficiently achieve this, there are several functions available in Tudat, which take a list of ``ObservationSimulationSettings`` objects (such as those returned by the :func:`~tudatpy.tabulated_settings_list` function), and add specifics for on of the above options to any number of observation simulation settings. For each of the above three options, three separate functions are provided to modify the list of observation simulation settings (see :ref:`observation_constraints`, :ref:`noise_levels` and :ref:`observation_dependent_variables` for API links, and examples):
 
 - One function modifying each ``ObservationSimulationSettings`` object in the list (for instance: regardless of the type or link end of the observation, always save the light-time as dependent variable)
 - One function modifying each ``ObservationSimulationSettings`` object in the list which contains settings for a given :func:`~tudatpy.ObservableType` (for instance: regardless of link ends, use 1 mm/s random noise for all two-way Doppler observables)
@@ -180,7 +181,7 @@ Creating observations
 Simulating the observations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Having fully defined the list of observation simulation settings ``observation_simulation_settings``, as well as the ``observation_simulators`` (see :ref:`observationSimulatorCreation`), the actual observations can be simulated as follows:
+Having fully defined the list of observation simulation settings ``observation_simulation_settings``, as well as the ``observation_simulators`` (see :func:`~tudatpy.numerical_simulation.estimation_setup.create_observation_simulators`), the actual observations can be simulated as follows:
 
 .. code-block:: python
 

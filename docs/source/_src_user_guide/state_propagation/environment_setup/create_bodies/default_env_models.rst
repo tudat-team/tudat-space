@@ -60,8 +60,9 @@ For the Earth, a high-accuracy rotation model is available, which is *not* loade
 
 .. note::
    In some cases, the extraction of the rotational state of bodies from Spice kernels can be a computational bottleneck. Tudat has an :ref:`alternative set of default options <default_bodies_limited_time_range>`, which make this process signicantly faster, at the expense of higher RAM usage, and an environment that is only valid over a very limited time interval.
+
 Shape model
---------------
+-----------
 
 Directly from Spice (any body available through Spice kernels). Tudat uses the average radius from Spice to define a
 spherical shape model for all bodies.
@@ -69,16 +70,16 @@ spherical shape model for all bodies.
 .. _default_gravity_fields:
 
 Gravity field
--------------------
+-------------
 
 * Spherical harmonic gravity field for the following bodies:
 
-   - **Earth**: Full gravity field up to degree and order 200, described `here <https://link.springer.com/article/10.1007/s10712-016-9406-y>`_ (GOCO05c, data obtained from `GFZ <https://dataservices.gfz-potsdam.de/icgem/showshort.php?id=escidoc:1504398>`_; coefficient are available up to degree/order 720, but are not all loaded by default for efficiency purposes)
-   - **Moon**: Full gravity field up to degree and order 200, described `here <https://pgda.gsfc.nasa.gov/products/50>`_ (gggrx1200, data obtained from `PDS <https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/shadr/>`_; coefficient are available up to degree/order 1199, but are not all loaded by default for efficiency purposes)
-   - **Mars**: Full gravity field up to degree and order 120, described `here <https://www.sciencedirect.com/science/article/pii/S0019103516001305>`_ (jgmro120d, data obtained from `PDS <https://pds-geosciences.wustl.edu/mro/mro-m-rss-5-sdp-v1/mrors_1xxx/data/shadr/>`_)
-   - **Venus**: Full gravity field up to degree and order 180, described `here <https://www.sciencedirect.com/science/article/pii/S0019103599960864>`_ (shgj180u, data obtained from `PDS <https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/gravity/>`_)
-   - **Mercury**: Full gravity field up to degree and order 160, described `here <https://www.sciencedirect.com/science/article/pii/S0019103519302192>`_ (jgmess160a, data obtained from `PDS <https://pds-geosciences.wustl.edu/messenger/mess-h-rss_mla-5-sdp-v1/messrs_1001/data/shadr/>`_)
-   - **Jupiter**: Zonal coefficients up to degree 8 from, described `here <https://www.nature.com/articles/nature25776/>`_
+   - **Earth**: Full gravity field up to degree and order 200, described `here <https://link.springer.com/article/10.1007/s10712-016-9406-y>`__ (GOCO05c, data obtained from `GFZ <https://dataservices.gfz-potsdam.de/icgem/showshort.php?id=escidoc:1504398>`__; coefficient are available up to degree/order 720, but are not all loaded by default for efficiency purposes)
+   - **Moon**: Full gravity field up to degree and order 200, described `here <https://pgda.gsfc.nasa.gov/products/50>`__ (gggrx1200, data obtained from `PDS <https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/shadr/>`__; coefficient are available up to degree/order 1199, but are not all loaded by default for efficiency purposes)
+   - **Mars**: Full gravity field up to degree and order 120, described `here <https://www.sciencedirect.com/science/article/pii/S0019103516001305>`__ (jgmro120d, data obtained from `PDS <https://pds-geosciences.wustl.edu/mro/mro-m-rss-5-sdp-v1/mrors_1xxx/data/shadr/>`__)
+   - **Venus**: Full gravity field up to degree and order 180, described `here <https://www.sciencedirect.com/science/article/pii/S0019103599960864>`__ (shgj180u, data obtained from `PDS <https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/gravity/>`__)
+   - **Mercury**: Full gravity field up to degree and order 160, described `here <https://www.sciencedirect.com/science/article/pii/S0019103519302192>`__ (jgmess160a, data obtained from `PDS <https://pds-geosciences.wustl.edu/messenger/mess-h-rss_mla-5-sdp-v1/messrs_1001/data/shadr/>`__)
+   - **Jupiter**: Zonal coefficients up to degree 8 from, described `here <https://www.nature.com/articles/nature25776/>`__
    - **Galilean Moons** (Io, Europa, Ganymede, Callisto), :math:`\mu`, :math:`C_{20}` and :math:`C_{22}` from IMCCE ephemerides
 
 * For all the other bodies not mentioned above, point-mass gravity field with gravitational parameter loaded from Spice are used
@@ -96,6 +97,8 @@ Atmosphere
 
 .. _c:
 
+.. _spice_in_tudat:
+
 SPICE in Tudat
 ===============
 
@@ -106,4 +109,4 @@ The Spice toolkit has extensive `lessons <https://naif.jpl.nasa.gov/naif/lessons
 
 Spice relies on a set of user-supplier input files (kernels) to perform its calculations. A number of these kernels are installed automatically with Tudat, and loaded when calling the :func:`~tudatpy.interface.spice.load_standard_kernels` function (see this API docs entry for list of kernels).
 
-When using the default kernels/body settings, we have introduced one small difference for the sake of expediency. For the cases of Uranus, Neptune and Pluto, where we only have the ephemeris of the barycenter of the planetary system loaded, the planet is placed at the barycenter of the planetary system. This introduces a minor offset in the position of this planet (Mercury and Venus have no moons, and therefore their state coincides with their planetary system barycenter; dedicated planetary system ephemerides are loaded for teh Earth, Mars, Jupiter and Saturn system). For Uranus, for example, the default settings will place Uranus at the center of mass (barycenter) of the combined system of Uranus and its moons. To correct this behaviour, a user can load a kernel for this body's planetary system (see `here <https://naif.jpl.nasa.gov/pub/naif/generic_kernels/spk/satellites/>`_, for example), and modify the default settings.
+When using the default kernels/body settings, we have introduced one small difference for the sake of expediency. For the cases of Uranus, Neptune and Pluto, where we only have the ephemeris of the barycenter of the planetary system loaded, the planet is placed at the barycenter of the planetary system. This introduces a minor offset in the position of this planet (Mercury and Venus have no moons, and therefore their state coincides with their planetary system barycenter; dedicated planetary system ephemerides are loaded for teh Earth, Mars, Jupiter and Saturn system). For Uranus, for example, the default settings will place Uranus at the center of mass (barycenter) of the combined system of Uranus and its moons. To correct this behaviour, a user can load a kernel for this body's planetary system (see `here <https://naif.jpl.nasa.gov/pub/naif/generic_kernels/spk/satellites/>`__, for example), and modify the default settings.

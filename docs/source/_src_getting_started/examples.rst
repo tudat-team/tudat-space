@@ -90,4 +90,4 @@ There are several example applications disseminated in various forms.
 
 .. note::
    If you have never used PyGMO before, please
-   consider reading our introductory guide: :ref:`Optimization with PyGMO`.
+   consider reading our introductory guide: :ref:`optimization_pygmo`.

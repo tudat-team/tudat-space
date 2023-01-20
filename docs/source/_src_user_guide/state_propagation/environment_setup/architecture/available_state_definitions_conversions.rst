@@ -34,7 +34,7 @@ between states from the environment is simply done as:
 
 You can also bypass body and ephemeris objects altogether, and use ``spice`` to obtain the relative state.
 Note, however, that this will use whichever ``spice`` kernels you have loaded, and **may not be consistent with the states
-you are using the bodies in your simulation**s.
+you are using the bodies in your simulations.**
 
 .. code-block:: python
 
@@ -100,7 +100,7 @@ Where the rotation matrix and its derivative (for body-fixed to inertial frames)
 object outside of the propagation, see :ref:`below <body_fixed_frames>` for more details.
 
 Below, we give an overview of the available frames, and frame transformations, in Tudat, and discuss how they can be accessed both during
-(when setting up a :ref:`custom model <custom_models:>`), and outside of a propagation. The available frames are:
+(when setting up a :ref:`custom model <custom_models>`), and outside of a propagation. The available frames are:
 
   * :ref:`body_fixed_frames` Each ``Body`` in Tudat can have a fixed frame assigned to it (see `API documentation <https://py.api.tudat.space/en/latest/rotation_model.html#functions>`_ for a list of options for model types)
   * :ref:`gcrs_itrs_frames` The high-accuracy rotation from GCRS to ITRS is implemented in Tudat. The ITRS, TIRS, CIRS and ICRS frames are defined
@@ -383,11 +383,11 @@ As a result, the inclination (for example) will be measured w.r.t. the x-y plane
 .. note::
     A Keplerian state cannot be computed w.r.t. the Solar System Barycenter (SSB), as it does not possess a gravitational parameter/
 
-In the definition of the state elements, you will notice that element 5 is the *true* anomaly, not the *eccentric* or *mean* anomaly.
-Tudat also contains functions to convert to these alternative anomalies. The various available functions are found in our
-:ref:`API documentation <https://py.api.tudat.space/en/latest/element_conversion.html>`
+In the definition of the state elements, you will notice that element 5 is the *true* anomaly, not the *eccentric* or
+*mean* anomaly. Tudat also contains functions to convert to these alternative anomalies. The various available functions
+are found in our `API docs <https://py.api.tudat.space/en/latest/element_conversion.html>`
 
-As ann example, converting from true to eccentric anomaly is done as follows:
+As an example, converting from true to eccentric anomaly is done as follows:
 
 .. code-block:: python
 
@@ -420,7 +420,7 @@ initial guess of the foot-finding implemented see :func:`~tudatpy.astro.element_
 However, in some cases you may want to specify your own initial guess for the eccentric anomaly, and/or your own root finder.
 You can do this as follows:
 
-.. code_block:: python
+.. code-block:: python
 
         mean_anomaly = ...
         eccentricity = ...

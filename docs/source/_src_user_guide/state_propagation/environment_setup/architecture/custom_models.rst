@@ -67,6 +67,7 @@ Here, we show an example of an ephemeris model that will be both faster, and les
  
 In the above example, the user-define function ``neptune_state_function`` is provided when creating the custom ephemeris settings. The only requirement on this custom function is that it takes a single float as argument (representing time since J2000), and returns a 6-dimensional vector (representing the Cartesian state in the frame specified), as can be seen in the :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.custom` API entry.
 
+.. _single_custom_models:
 
 Custom model (single), class member
 ===================================

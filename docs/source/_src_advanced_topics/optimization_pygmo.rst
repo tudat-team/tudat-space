@@ -35,9 +35,10 @@ run the optimization process in parallel (hence its name) by using multithreadin
 
 Installing PyGMO
 ----------------
+
 PyGMO is not part of the standard tudatpy distribution, but it can easily be added to any tudatpy environment.
 Here we will assume that you already have a standard tudatpy environment (called ``tudat-space``) installed.
-If that is not the case, please follow the "Installing Tudat(Py)" instructions in :ref:`installation`.
+If that is not the case, please follow the "Installing Tudat(Py)" instructions in :ref:`getting_started_installation`.
 
 In order to make PyGMO available inside the ``tudat-space`` environment, the following steps need to be taken.
 First, activate the ``tudat-space`` environment:

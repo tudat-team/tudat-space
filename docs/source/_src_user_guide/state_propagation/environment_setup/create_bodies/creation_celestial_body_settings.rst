@@ -19,9 +19,10 @@ The usual workflow to create celestial body settings is composed of two subseque
 Creating body settings
 ======================
 
-In most cases, the starting point for the creation of body settings will be the extraction of *default settings*. This prevents a user from having to manually define a variety of 'typical' models for
-solar-system bodies. The full list of default body settings is given at :ref:`default_env_models`, and
- can be retrieved as follows, using the :func:`~tudatpy.numerical_simulation.environment_setup.get_default_body_settings` function:
+In most cases, the starting point for the creation of body settings will be the extraction of *default settings*. This
+prevents a user from having to manually define a variety of 'typical' models for solar-system bodies. The full list of
+default body settings is given at :ref:`default_env_models`, and can be retrieved as follows, using the
+:func:`~tudatpy.numerical_simulation.environment_setup.get_default_body_settings` function:
 
     .. tabs::
 

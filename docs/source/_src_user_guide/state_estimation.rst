@@ -2,7 +2,12 @@
 State Estimation
 ******************
 
-In this section, we discuss the functionality that is required for state estimation in Tudat. Before starting this section, make sure to go through our page on :ref:`state_propagation_intro`, since the state *estimation* function requires the full functionality from state *propagation*. At the moment, the estimation functitonality of Tudat is limited to the use of batch least-squares. A broad range of parameters (initial translational and rotational state; single-, multi- and hybrid-arc states; numerous physical properties of the environment) from a diverse set of available observations is supported.
+In this section, we discuss the functionality that is required for state estimation in Tudat. Before starting this
+section, make sure to go through our page on :ref:`propagation_setup`, since the state *estimation* function requires
+the full functionality from state *propagation*. At the moment, the estimation functitonality of Tudat is limited to the
+use of batch least-squares. A broad range of parameters (initial translational and rotational state; single-, multi- and
+hybrid-arc states; numerous physical properties of the environment) from a diverse set of available observations is
+supported.
 
 Estimation Inputs
 =================
