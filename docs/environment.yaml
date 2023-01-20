@@ -8,7 +8,7 @@ dependencies:
   - sphinx-panels
   - sphinx-tabs
   - sphinx-copybutton
-  - sphinx-gallery
+  - sphinx-gallery=0.10.1
   - ipython
   - ipykernel
   - ipympl
