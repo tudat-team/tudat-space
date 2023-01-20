@@ -24,20 +24,20 @@ For the supported dynamics types, the following formulations are defined to be t
 
 You will find and need to use *conventional* coordinates in these scenarios:
 
-- To describe the initial conditions of an object when creating propagator settings
-  (typically using the :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.translational` or
+- To describe the initial conditions of an object when creating propagator settings (typically using the
+  :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.translational` or
   :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.rotational` functions)
 - As an output from the numerical propagation, extracted from the
-:attr:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults.state_history` of the
-:class:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults` (see :ref:`propagation_results`)
+  :attr:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults.state_history` of the
+  :class:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults` (see :ref:`propagation_results`)
 
 
 - When extracting the current state from a :class:`~tudatpy.numerical_simulation.environment.Body` object during the propagation
 
 Internally, Tudat uses the *conventional* state in the following places:
 
-- To update the environment model of an object (this also means that the states extracted from the body are expressed
-  In the conventional coordinates);
+- To update the environment model of an object (this also means that the states extracted from the body are expressed In
+  the conventional coordinates);
 - To update the acceleration model of an object.
 
 
@@ -55,8 +55,8 @@ rotational motion is specified when calling the  :func:`~tudatpy.numerical_simul
 In Tudat, you will find the propagated elements in the following place:
 
 - As an output from the numerical propagation, extracted from the
-:attr:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults.unprocessed_state_history` of the
-:class:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults` (see :ref:`propagation_results`)
+  :attr:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults.unprocessed_state_history` of the
+  :class:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults` (see :ref:`propagation_results`)
 
 Internally, Tudat uses the *propagated* state in the following place:
 

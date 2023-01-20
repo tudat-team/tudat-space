@@ -38,7 +38,7 @@ Translational state
 Rotational state
 ----------------
     The rotational state of a body during the propagation is defined by the orientation of its body-fixed frame w.r.t. the global frame orientation,
-    which is *always* an inertial orientation (see :ref:`reference_frames_global_orientation`). This orientation is defined internally by a quaternion
+    which is *always* an inertial orientation (see :ref:`reference_frames`). This orientation is defined internally by a quaternion
     (see :ref:`quaternion_definition`), but during a simulation a user will interact with the rotation matrix if they wish to use any current rotation in
     their custom models. The rotation matrix :math:`\mathbf{R}^{B/I}` from the inertial :math:`I` to body-fixed frame :math:`B` is retrieved from a :class:`~tudatpy.numerical_simulation.environment.Body`
     object using the :attr:`~tudatpy.numerical_simulation.environment.Body.inertial_to_body_fixed_frame` function. The inverse rotation matrix :math:`\mathbf{R}^{I/B}` (body-fixed to

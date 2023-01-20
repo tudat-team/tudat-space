@@ -6,7 +6,8 @@ Link ends setup
 To define an observation model, the various bodies, spacecraft, ground stations, etc. involved in the observation, and their role in the observation, must be defined. For a one-way range model, for instance, a definition of a receiver and a transmitter is required. In Tudat, the transmitter and receiver are both referred to as 'link ends'. The full set of link ends in the observable, and their role in the observable, are stored in the :class:`~tudatpy.numerical_simulation.estimation.LinkDefinition`. Below, we describe the steps that are (or may be) required to set up this object. 
 
 .. note::
-A :class:`~tudatpy.numerical_simulation.estimation.LinkDefinition` object does *not* define the observation model itself, but only the various reference points (link ends) that are required for it. For instance, a one-way range, one-way Doppler and angular position observation may all use an identical ``LinkDefinition`` (containing a transmitter and a receiver). 
+
+    A :class:`~tudatpy.numerical_simulation.estimation.LinkDefinition` object does *not* define the observation model itself, but only the various reference points (link ends) that are required for it. For instance, a one-way range, one-way Doppler and angular position observation may all use an identical ``LinkDefinition`` (containing a transmitter and a receiver). 
 
 .. _groundStationCreation:
 

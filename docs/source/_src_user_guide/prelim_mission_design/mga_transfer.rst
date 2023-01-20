@@ -26,7 +26,7 @@ is particularly important.
     The MGA model also allows defining transfers with a single leg (without any gravity assist).
 
 General Model Description
-=================
+==========================
 
 Before evaluating any transfer, it is useful to introduce the concept of nodes and legs more. To assist in this, a
 schematic representation is given in the figure below. An MGA trajectory is given, with an arbitrary sequence. A number
@@ -118,6 +118,7 @@ an `example application <this example>`_, for an unpowered leg Cassini (EVVEJS) 
   and eccentricity) and other settings specific to each leg type. Selecting the semi-major axis of the departure/arrival
   orbit as :math:`a = \infty` corresponds to having the spacecraft depart/arrive from/to the edge of the initial/final
   body's sphere of influence (e.g. with zero hyperbolic excess velocity). 
+
 .. code-block:: python
 
     # Define central body
@@ -140,6 +141,7 @@ an `example application <this example>`_, for an unpowered leg Cassini (EVVEJS) 
         arrival_orbit=(arrival_semi_major_axis, arrival_eccentricity))
 
 - **Create the transfer trajectory object**: Through :func:`~tudatpy.trajectory_design.transfer_trajectory.create_transfer_trajectory`.
+
 .. code-block:: python
 
     # Create physical environment
@@ -157,6 +159,7 @@ an `example application <this example>`_, for an unpowered leg Cassini (EVVEJS) 
   transfer through :meth:`~tudatpy.trajectory_design.transfer_trajectory.TransferTrajectory.evaluate`. These parameters
   are described in the following sections. Note that, in the case of an optimization, this function is called repeatedly
   to evaluate the transfer trajectory with differeent properties.
+
 .. code-block:: python
 
     # Define free parameters
@@ -169,6 +172,7 @@ an `example application <this example>`_, for an unpowered leg Cassini (EVVEJS) 
 
 - **Retrieve the results**: Use :class:`~tudatpy.trajectory_design.transfer_trajectory.TransferTrajectory`'s
   properties or functions to retrieve the :math:`\Delta V`, time of flight, state history, acceleration history, etc.
+
 .. code-block:: python
 
     # Retrieve total Delta V
@@ -183,6 +187,7 @@ For applications see `this example`_ and `this PyGMO example`_.
 .. _`this PyGMO example`: /tudat-space/docs/build/_src_getting_started/_src_examples/notebooks/pygmo/gtop_cassini1_mga_optimization.html
 
 .. _manual_transfer_legs_nodes:
+
 Manually Creating the Transfer Settings
 ---------------------------------------
 
@@ -323,8 +328,9 @@ DSM leg receives as input its initial position, initial velocity, and final posi
 +----------------------+-----------------------+-----------------------+---------------------+---------------------+
 
 .. _transfer_nodes:
+
 Nodes and Their Parameters
---------------------------------------------------------------
+---------------------------
 
 As already mentioned, there are three main types of nodes: departure, swingby, and arrival nodes. These are the only
 types with which the user has direct contact. However, internally, these are further divided into subtypes. While a user does

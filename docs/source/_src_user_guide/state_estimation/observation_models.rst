@@ -7,7 +7,7 @@ Observation models
 
 On this page, we provide an overview of the categories of observation models that are available (with links to API documentation), as well as some general notes on their usages, typical pitfalls, hints, etc.
 
-.. _available_environment_models:
+.. _available_observation_models:
 
 Available Model Types
 =====================

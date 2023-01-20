@@ -96,7 +96,6 @@ Instead, we provide the functions
 which take nominal ephemeris settings, and add a user-defined variation (constant or time-varying; absolute or relative) to the
 inertial Cartesian state elements produced by the ephemeris.
 
-
 Gravity fields
 --------------
 

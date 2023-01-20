@@ -90,6 +90,7 @@ When define translational propagator settings (see :ref:`translational_dynamics`
 | **How a user defines the propagation origin:** through the definition of the central body in the translational propagation settings
 |
 | **When the propagation origin is relevant to a user:**
+
 * When defining the initial state of a body: this must be w.r.t. the propagation origin
 * When retrieving the numerical propagation results, these are always w.r.t. the propagation origin
 
@@ -100,9 +101,10 @@ The ephemeris origin - the states computed by an ephemeris
 
 Each body that is not numerically propagated is typically (but not necessarily) endowed with an ephemeris, which contains a pre-defined function of the body's translational state as a function of time. Unlike the global origin, the ephemeris origin of each body may be different. In the context of a numerical simulation, users do not often interrogate the ephemeris directly. However, it can be useful to do so outside of a numerical propagation, for instance to analyze the predefined trajectory of a body outside of the propagation framework
 
-| **How a user defines the ephemeris origin**: through the definition of ephemeris settings when creating the settings for the body objects (see :ref:`environment_ephemeris_model`). Often, the default settings will be used in the case of celestial bodies (see :ref:`default_env_models`).
+| **How a user defines the ephemeris origin**: through the definition of ephemeris settings when creating the settings for the body objects (see `Ephemeris models <https://py.api.tudat.space/en/latest/ephemeris.html>`_). Often, the default settings will be used in the case of celestial bodies (see :ref:`default_env_models`).
 |
 | **When the propagation origin is relevant to a user:**
+
 * When directly retrieving the state from an ephemeris object.
 
 .. _global_origin:
@@ -110,7 +112,7 @@ Each body that is not numerically propagated is typically (but not necessarily) 
 The global origin - the current states in the bodies
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-When :ref:`creating a set of body objects<creating_celestial_bodies>`, you define a global frame origin, and a global frame orientation.
+When :ref:`creating a set of body objects<creation_celestial_body_settings>`, you define a global frame origin, and a global frame orientation.
 When a body's state gets updated (see :ref:`propagation architecture page <single_propagator_time_step>`, regardless of whether it is retrieved
 from the propagated state vector, or an ephemeris, it is *always*
 converted to this global frame origin/orientation before being assigned to a body object.
@@ -126,6 +128,7 @@ If the global frame origin is Earth, we will have :math:`\mathbf{r}=\mathbf{0}`,
 | **How a user defines the global origin**: when creating the settings for the body objects (or the bodies themselves in case of manual body creation).
 |
 | **When the global frame origin is relevant to a user:**
+
 * Any time the state (or position or velocity) are retrieved directly from a body. This will, for instance, be done in custom guidance models.
 * When high numerical precision is relevant, the global frame origin should be set such that numerical error in evaluating the strongest acceleration(s) is minimized
 

@@ -258,7 +258,7 @@ This is available trough the :func:`~tudatpy.numerical_simulation.propagation_se
       .. tab:: C++
 
          .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/thrust_mass_rate.cpp
-            :language: cp
+            :language: cpp
 
 More details and options on mass propagation are provided on the :ref:`mass_dynamics` page.
 
@@ -298,7 +298,7 @@ This can be done as follows:
       .. tab:: C++
 
          .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/thrust_orientation_body_fixed.cpp
-            :language: cp
+            :language: cpp
 
 Thrust and aerodynamic guidance - Legacy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

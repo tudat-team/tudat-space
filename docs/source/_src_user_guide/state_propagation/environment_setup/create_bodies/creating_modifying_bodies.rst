@@ -38,7 +38,7 @@ The example below shows how to create a set of bodies, using the :func:`~tudatpy
 
 The :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` class (the type of the ``bodies`` variable in the above simulation) is at the heart of many Tudat simulations. It contains all
 properties of your celestial and manmade bodies, and is used to retieve properties of your accelerations, state derivative models, output
-variables, etc. A more detailed discussion of the architecture of the :class:`~tudatpy.numerical_simulation.environment.Body` and :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` classes, as well as their constituent environment models and possible interdependencies, are discussed :ref:`here <environmen_architecture>`
+variables, etc. A more detailed discussion of the architecture of the :class:`~tudatpy.numerical_simulation.environment.Body` and :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` classes, as well as their constituent environment models and possible interdependencies, are discussed :ref:`here <environment_architecture>`
 
 It is crucial to understand the distinction between ``body_settings`` (of type :class:`~tudatpy.numerical_simulation.environment_setup.BodyListSettings`) and ``bodies`` (of type :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies`). The former is merely a list of
 settings for the models in the environment and is the main *input* to the body creation. It does not provide any functionality to perform any specific

@@ -35,7 +35,7 @@ In addition to the settings described :ref:`here <propagation_inputs>`, the defi
 
     The initial state must be provided in Cartesian elements w.r.t. the central body(/bodies), **regardless of the propagator type**
 
-.. _example:
+.. _translational_example:
 
 Example
 =======

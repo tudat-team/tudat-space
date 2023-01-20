@@ -14,7 +14,7 @@ Having defined the :ref:`link ends <linkEndSetup>`, you can now define and creat
 
 .. _observationTypes:
 
-Defining observation settingss
+Defining observation settings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Tudat supports a diverse set of observation types, (see :ref:`observation_model_overview` for a comprehensive list). The creation of an observation model is done in a similar manner as models used for the numerical propagation: an object defining the settings of each observation model is created, which is then processed to create the actual observation model.

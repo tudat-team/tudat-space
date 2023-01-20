@@ -180,7 +180,7 @@ in the :class:`~tudatpy.numerical_simulation.propagation_setup.MultiArcPropagato
   This is typically used in cases where the settings for each arc are largely identical
 * For the hybrid-arc propagation, the constituent single- and multi-arc settings can be independently modified. These settings can 
   be extracted from the :attr:`~tudatpy.numerical_simulation.propagation_setup.HybridArcPropagatorProcessingSettings.single_arc_settings` and 
-  :attr:`~tudatpy.numerical_simulation.propagation_setup.HybridArcPropagatorProcessingSettings.multi_arc_settings attributes.
+  :attr:`~tudatpy.numerical_simulation.propagation_setup.HybridArcPropagatorProcessingSettings.multi_arc_settings` attributes.
 
 
 

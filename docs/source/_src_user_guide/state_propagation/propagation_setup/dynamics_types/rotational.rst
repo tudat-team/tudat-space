@@ -35,7 +35,7 @@ In addition to the settings described :ref:`here <propagation_inputs>`, the defi
 
     The initial state must be provided as conventional state formulation :math:`[\mathbf{q};\boldsymbol{\omega}]`, **regardless of the propagator type**
 
-.. _example:
+.. _rotational_example:
 
 Example
 ========

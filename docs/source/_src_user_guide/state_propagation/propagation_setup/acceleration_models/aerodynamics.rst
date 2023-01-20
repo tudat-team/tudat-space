@@ -87,7 +87,7 @@ A more complicated algorithm to compute the aerodynamic angles may be defined us
 The above example will apply the model :math:`\alpha=\dot{\alpha}(t-t_{0})` (and similar for :math:`\sigma`), so that the angles vary linearly over time.
 
 
-.. control_surfaces:
+.. _control_surfaces:
 
 Control surfaces
 ================

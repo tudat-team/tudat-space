@@ -6,7 +6,7 @@ Available Acceleration Models
 
 In this page, all the acceleration models available in TudatPy are explained. Regardless of the type of acceleration
 model, the procedure to link such acceleration model to the bodies exerting and undergoing the acceleration is
-explained in this page: :ref:`Acceleration Model Setup`. Therefore, this information will not be repeated in this
+explained in this page: :ref:`acceleration_models_setup`. Therefore, this information will not be repeated in this
 page. Instead, for each model, a reference to the related API documentation entry and the requirements are provided.
 
 
@@ -57,9 +57,9 @@ Point Mass Gravity
   factory function.
 
 | **Dependencies**
-| 1. Gravity field for body exerting acceleration (see :ref:`environment_gravity_field_model` for non-default models).
+| 1. Gravity field for body exerting acceleration (see `Gravity field models <https://py.api.tudat.space/en/latest/gravity_field.html>`_ for non-default models).
 | 2. Current state of body exerting acceleration, either from a pre-defined ephemeris model (see
-     :ref:`environment_ephemeris_model`) or from the numerical propagation of the translational dynamics of the body
+     `Ephemeris models <https://py.api.tudat.space/en/latest/ephemeris.html>`_) or from the numerical propagation of the translational dynamics of the body
      exerting the acceleration.
 
 
@@ -73,13 +73,13 @@ Spherical Harmonic Gravity
   factory function.
 
 | **Dependencies**
-| 1. Spherical harmonic gravity field for the body exerting acceleration. See :ref:`environment_gravity_field_model` for
+| 1. Spherical harmonic gravity field for the body exerting acceleration. See `Gravity field models <https://py.api.tudat.space/en/latest/gravity_field.html>`_ for
   options on how to define one (if the default gravity field model of the exerting body is not spherical harmonic).
 | 2. Rotation model from the inertial frame to the body-fixed frame, either from a pre-defined rotation model
-  (:ref:`environment_rotational_model`) or from the numerical propagation of the rotational dynamics of the body
+  (`Rotation models <https://py.api.tudat.space/en/latest/rotation_model.html>`_) or from the numerical propagation of the rotational dynamics of the body
   exerting the acceleration (Earth in the above example).
 | 3. Current state of body exerting acceleration, either from a pre-defined ephemeris model
-  (see :ref:`environment_ephemeris_model`) or from the numerical propagation of the translational dynamics of the body
+  (see `Ephemeris models <https://py.api.tudat.space/en/latest/ephemeris.html>`_) or from the numerical propagation of the translational dynamics of the body
   exerting the acceleration (Earth in the above example).
 
 .. note::
@@ -101,11 +101,11 @@ Mutual Spherical Harmonic Gravity
 
 | **Dependencies**
 | 1. Spherical harmonic gravity field for body exerting acceleration and body undergoing acceleration (see
-  :ref:`environment_gravity_field_model` for non-default models).
+  `Gravity field models <https://py.api.tudat.space/en/latest/gravity_field.html>`_ for non-default models).
 | 2. Rotation model from the inertial frame to the body-fixed frame and body undergoing acceleration (see
-  :ref:`environment_rotational_model` for non-default models).
+  `Rotation models <https://py.api.tudat.space/en/latest/rotation_model.html>`_ for non-default models).
 | 3. Current state of bodies undergoing and exerting acceleration, either from an Ephemeris model or from the numerical
-  propagation (see :ref:`environment_ephemeris_model`).
+  propagation (see `Ephemeris models <https://py.api.tudat.space/en/latest/ephemeris.html>`_).
 
 
 .. _third_body_gravity:
@@ -138,9 +138,9 @@ Aerodynamic
   factory function.
 
 | **Dependencies**
-| 1. Atmosphere model for body exerting acceleration (see :ref:`environment_atmosphere_model`).
+| 1. Atmosphere model for body exerting acceleration (see `Atmosphere models <https://py.api.tudat.space/en/latest/atmosphere.html>`_).
 | 2. Aerodynamic coefficient interface for body undergoing acceleration (see
-  :ref:`environment_aerodynamic_coefficient_interface`).
+  `Aerodynamic coefficients <https://py.api.tudat.space/en/latest/aerodynamic_coefficients.html>`_).
 | 3. Mass model for body undergoing acceleration.
 | 4. Current state of body undergoing acceleration and body with atmosphere.
 | 5. Shape model for the body exerting an acceleration (to allow for the calculation of vehicle altitude)
@@ -176,7 +176,7 @@ Cannonball Radiation Pressure
   factory function.
 
 | **Dependencies**
-| 1. Cannonball radiation pressure model for body undergoing acceleration (from source equal to body exerting acceleration), see :ref:`environment_radiation_pressure_interface`.
+| 1. Cannonball radiation pressure model for body undergoing acceleration (from source equal to body exerting acceleration), see `Radiation pressure <https://py.api.tudat.space/en/latest/radiation_pressure.html>`_.
 | 2. Current state of body undergoing and body emitting radiation.
 
 
@@ -191,7 +191,7 @@ Panelled Radiation Pressure
 
 
 | **Dependencies**
-| 1. Panelled radiation pressure model for body undergoing acceleration (from source equal to body exerting acceleration), see :ref:`environment_radiation_pressure_interface`.
+| 1. Panelled radiation pressure model for body undergoing acceleration (from source equal to body exerting acceleration), see `Radiation pressure <https://py.api.tudat.space/en/latest/radiation_pressure.html>`_.
 | 2. Current state of body undergoing and body emitting radiation.
 
 
@@ -243,6 +243,7 @@ Thrust
 | 1. One or more engine models for the body under thrust
 | 2. A rotation model for the body under thrust
 | 3. Mass of the body under thrust (if the thrust magnitude model for the engine defines a force, and not an acceleration)
+
 ##################################
 Tidal effect on natural satellites
 ##################################

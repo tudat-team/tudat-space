@@ -106,9 +106,9 @@ In Tudat, the body-fixed thrust direction for the vehicle is defined in the ``En
 Thrust and aerodynamics
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-This section elaborates on the use of thrust orientation in case aerodynamics are also taken into account in the simulation model. Even though, in principle, the thrust model is not affected by the presence of an aerodynamic acceleration, there are a number of considerations that may be useful to take into account when setting up such a simulation. In particular, this relates to the manner in which the body's orientation is typically defined in such cases, and how the body's orientation influences the accelerations.  For aerodynamics, the body's orientation is typically defined w.r.t. the trajectory frame (which is itself defined by the body's relative translational state w.r.t. a central body) by the angle of attack :math:`\alpha`, the sideslip angle :math:`\beta` and the bank angle :math:`\sigma` (see :ref:`TODO`). The thrust and aerodynamic accelerations are influenced by the body's  orientation as follows:
+This section elaborates on the use of thrust orientation in case aerodynamics are also taken into account in the simulation model. Even though, in principle, the thrust model is not affected by the presence of an aerodynamic acceleration, there are a number of considerations that may be useful to take into account when setting up such a simulation. In particular, this relates to the manner in which the body's orientation is typically defined in such cases, and how the body's orientation influences the accelerations.  For aerodynamics, the body's orientation is typically defined w.r.t. the trajectory frame (which is itself defined by the body's relative translational state w.r.t. a central body) by the angle of attack :math:`\alpha`, the sideslip angle :math:`\beta` and the bank angle :math:`\sigma` (see TODO). The thrust and aerodynamic accelerations are influenced by the body's orientation as follows:
 
-* For thrust, the body's orientation influences the inertial acceleration, as it influences the direction in which the engine is pointed (see :ref:`thrust_acceleration_setup:`)
+* For thrust, the body's orientation influences the inertial acceleration, as it influences the direction in which the engine is pointed (see :ref:`thrust_acceleration_setup`)
 * For aerodynamics, the body's orientation influences the inertial acceleration, as the aerodynamic force is typically computed in either aerodynamic frame, or body-fixed frame. In these cases the either :math:`\sigma`, or :math:`alpha`, :math:`beta` and :math:`sigma`, respectively. In addition, in many cases the aerodynamic coeficients *themselves* are a function of the :math:`alpha` (and :math:`beta`).
 
 A typical body rotation model for problems such as aerodynamics is the model defined using the :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.aerodynamic_angle_based` (or, related, the :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.zero_pitch_moment_aerodynamic_angle_based`) model. If these models are used in conjunction with thrust, the rotation matrix :math:`\mathbf{R}^{(I/B)}` defined by this model defines the inertial thrust direction.
@@ -132,7 +132,7 @@ A mass rate setting is available in Tudat(Py) to make the loss of mass of the ve
       .. tab:: C++
 
          .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/thrust_mass_rate.cpp
-            :language: cp
+            :language: cpp
 
 More details and options on mass propagation are provided on the :ref:`mass_dynamics` page.
 

@@ -43,7 +43,7 @@ Aerodynamic guidance
 In the older version of Tudat, the explicit definition of the aerodynamic angles of attack, sideslip angle, and bank angle (:math:`\alpha`, :math:`\beta` and :math:`\sigma`) had to be done through a user-defined class derived from the ``AerodynamicGuidance``-derived class. This class should then set ``currentAngleOfAttack_`` (and similar for other angles) values in the ``updateGuidance`` function, which was called at each time step.  
 
 Old code
-~~~~~~~~
+--------
 
 An example of the application of this is in the `example application (old version) <https://github.com/tudat-team/tudatpy-examples/blob/9c658213e661e8afc31738eba04f4973c38c90e2/propagation/reentry_trajectory.py>`_. Specifically, a class was created as follows:
 
@@ -71,7 +71,7 @@ Not only was the above structure specific for aerodynamic orientation, it also h
 Alternatively, the ``set_body_orientation_angles`` and ``set_body_orientation_angle_functions`` of the :class:`tudatpy.numerical_simulation.environment.AerodynamicAngleCalculator` could be called the directly to set either constant, or time-variable aerodynamic angles. This interface is no longer supported, as the :class:`tudatpy.numerical_simulation.environment.AerodynamicAngleCalculator` class is no longer responsible for calculating these angles, it only extracts them from where the *are* calculated: in the vehicle's rotation model.           
 
 New code
-~~~~~~~~
+--------
 
 
 In the new version of the code, the definition of a body's orientation through aerodynamic angles is allowed in one way: through the creation of a rotation model for the body. Details are discussed on a :ref:`dedicated page <aerodynamic_orientation>`. The above example can be 'translated' to the new setup as follows 
@@ -99,9 +99,9 @@ The function computing the aerodynamic angles in the guidance object (``aerodyna
 The above example is discussed in detail on the `entry example page <https://docs.tudat.space/en/stable/_src_getting_started/_src_examples/notebooks/propagation/reentry_trajectory.html>`_. Note that in the above code snippet, we have used a slightly more simplified guidance object than in the example application. They are functionally equivalent, but the code in the example application lends itself better to incorporation into more complex guidance classes. The type of guidance class used in the code snippet and the example application are of the type :ref:`single_custom_models` and :ref:`couple_custom_models`, respectively.
 
 Summary
-~~~~~~~
+-------
 
-You may continue to use a very similar guidance class as before, but the class now requires a function that provides [:math:`\alpha`,:math:`\beta`,:math:`\sigma`], with :math:`t` as a input. This function is now linked to the environment not through an aerodynamics-specific function, but through the definition of a rotation model. An example of Python code using the old and new setup is found on our examples repository `here <https://github.com/tudat-team/tudatpy-examples/blob/9c658213e661e8afc31738eba04f4973c38c90e2/propagation/reentry_trajectory.py>`_ and `here <https://github.com/tudat-team/tudatpy-examples/blob/master/propagation/reentry_trajectory.py>`_, respectively.
+You may continue to use a very similar guidance class as before, but the class now requires a function that provides [:math:`\alpha`,:math:`\beta`,:math:`\sigma`], with :math:`t` as a input. This function is now linked to the environment not through an aerodynamics-specific function, but through the definition of a rotation model. An example of Python code using the old and new setup is found on our examples repository `here <https://github.com/tudat-team/tudatpy-examples/blob/9c658213e661e8afc31738eba04f4973c38c90e2/propagation/reentry_trajectory.py>`_ and `here <https://github.com/tudat-team/tudatpy-examples/blob/master/propagation/reentry_trajectory.py>`__, respectively.
 
 
 Thrust acceleration
@@ -117,7 +117,7 @@ In the new version:
 * Thrust magnitude settings are stored in an ``EngineModel`` that is assigned to the vehicle. This same object also defines the body-fixed direction of the thrust
 * The thrust direction is obtained by rotating the body-fixed thrust direction (see above line) to the inertial frame using a rotation model assigned to the vehicle. Every option that was previously provided as a "thrust direction settings" has been refactored into a rotation model. Below, we provide a guide with a one-to-one correspondence between each of the old thrust direction settings, and the new rotation model settings.
 
-A detailed guide on using thrust in the new version can be found on a dedicated page on :ref:`thrust_models`. The thrust guide of the old version is also retained under a dedicated page on :ref:`thrust_models_legacy`. Below, we provide a brief on how to convert old code to new code. n example of Python code using the old and new setup is found on our examples repository `here <https://github.com/tudat-team/tudatpy-examples/blob/9c658213e661e8afc31738eba04f4973c38c90e2/propagation/thrust_between_Earth_Moon.py>`_ and `here <https://github.com/tudat-team/tudatpy-examples/blob/master/propagation/thrust_between_Earth_Moon.py>`_, respectively.     
+A detailed guide on using thrust in the new version can be found on a dedicated page on :ref:`thrust_models`. The thrust guide of the old version is also retained under a dedicated page on :ref:`thrust_models_legacy`. Below, we provide a brief on how to convert old code to new code. n example of Python code using the old and new setup is found on our examples repository `here <https://github.com/tudat-team/tudatpy-examples/blob/9c658213e661e8afc31738eba04f4973c38c90e2/propagation/thrust_between_Earth_Moon.py>`__ and `here <https://github.com/tudat-team/tudatpy-examples/blob/master/propagation/thrust_between_Earth_Moon.py>`__, respectively.     
 
 Converting thrust code
 ----------------------
