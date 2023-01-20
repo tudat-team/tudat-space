@@ -1,4 +1,4 @@
-name: environment
+name: tudat-docs
 channels:
   - conda-forge
 dependencies:
@@ -12,6 +12,7 @@ dependencies:
   - ipython
   - ipykernel
   - ipympl
+  - pandoc
   - pip
   - pip:
     - rtcat_sphinx_theme
