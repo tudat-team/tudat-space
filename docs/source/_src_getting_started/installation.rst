@@ -74,6 +74,7 @@ With the ``conda`` environment now installed, you can activate it to work in it 
 
     .. code:: bash
 
+        conda install -c tudat-team/label/dev tudat
         conda install -c tudat-team/label/dev tudatpy
 
 
