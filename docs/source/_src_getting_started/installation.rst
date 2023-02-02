@@ -56,13 +56,7 @@ Next ensure that ``conda`` is up-to-date.
 
     conda update conda
 
-Download this ``environment.yaml`` (:download:`yaml <_static/environment.yaml>`) or use ``curl`` or ``wget`` to do this for you; download it to the current directory:
-
-.. code:: bash
-
-    wget https://tudat-space.readthedocs.io/en/latest/_downloads/dfbbca18599275c2afb33b6393e89994/environment.yaml
-
-In your terminal, navigate to the directory containing this file and execute the following command (see below for tips on using the command line):
+Download this ``environment.yaml`` (:download:`yaml <_static/environment.yaml>`). Then, in your terminal navigate to the directory containing this file and execute the following command (see below for tips on using the command line):
 
 .. code:: bash
 
@@ -80,6 +74,7 @@ With the ``conda`` environment now installed, you can activate it to work in it 
 
     .. code:: bash
 
+        conda install -c tudat-team/label/dev tudat
         conda install -c tudat-team/label/dev tudatpy
 
 
@@ -133,3 +128,22 @@ Note that using this command may also update additional packages (such as ``tuda
        .. code:: bash
 
            conda install --update-deps -c tudat-team tudatpy
+           
+Building your own TudatPy kernel
+################################
+
+If you would prefer to not use a conda package, but instead build your own tudatpy kernel from the source code, clone the ``tudat-bundle`` repository from `here <https://github.com/tudat-team/tudat-bundle>`_ and follow the instructions in the README. To build the latest version of the kernel, switch both the tudat and tudatpy repositories to the ``master`` branch in step 3 of the README. To build the ``\dev`` version, use both repositories to the ``develop`` branch.
+
+.. note::
+
+    This workflow is not recommended for new users
+
+
+
+
+
+
+
+
+
+

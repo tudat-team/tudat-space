@@ -17,8 +17,8 @@ Translational Dynamics
 
 Settings to propagate the translational state of a body numerically can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.translational` factory function, described in detail in the `API documentation <https://py.api.tudat.space/en/latest/>`_. In the current page, only the Tudat-specific aspects of the input will be briefly described.
 
-The default (conventional) representation for solving the translational equations of motion is by using the Cowell propagator
-(using Cartesian elements as the propagated states), but other formulations can be used (see below and :ref:`conventional_propagated_states`).
+The default (processed) representation for solving the translational equations of motion is by using the Cowell propagator
+(using Cartesian elements as the propagated states), but other formulations can be used (see below and :ref:`processed_propagated_states`).
 
 Inputs
 ======

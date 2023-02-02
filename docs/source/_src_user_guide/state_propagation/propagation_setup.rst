@@ -15,7 +15,7 @@ Propagation Setup
    propagation_setup/dynamics_types/multi_type
    propagation_setup/dynamics_types/multi_body
    propagation_setup/dynamics_types/multi_hybrid_arc
-   propagation_setup/conventional_propagated_elements
+   propagation_setup/processed_propagated_elements
    propagation_setup/integration_setup
    propagation_setup/termination_settings
    propagation_setup/dependent_variables
@@ -100,7 +100,7 @@ Propagation using a :ref:`multi-arc setup <multi_arc_dynamics>` is also supporte
    dynamics, for instance, there are various options besides a simple Cartesian state representation. However, even
    when using a non-Cartesian state vector, the Cartesian representation still plays a role in calculating, *e.g.*,
    acceleration models, as well as in defining the initial state. For more information on the role of different state
-   representations, please visit the page :ref:`conventional_propagated_states`.
+   representations, please visit the page :ref:`processed_propagated_states`.
 
 
 

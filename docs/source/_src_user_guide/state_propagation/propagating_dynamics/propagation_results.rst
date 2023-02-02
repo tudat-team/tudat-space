@@ -20,8 +20,8 @@ Multi- and hybrid-arc results are discussed briefly :ref:`below <multi_hybrid_ar
 
 The three primary numerical results of the propagation are:
 
-- The numerical results of the propagation, in 'conventional' coordinates
-  (e.g. Cartesian elements for translational dynamics, see :ref:`conventional_states`), stored in the
+- The numerical results of the propagation, in 'processed' coordinates
+  (e.g. Cartesian elements for translational dynamics, see :ref:`processed_states`), stored in the
   :attr:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults.dependent_variable_history.state_history` attribute
 - The numerical results of the propagation, in the propagated coordinates, stored in the
   :attr:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults.dependent_variable_history.unprocessed_state_history` attribute
@@ -72,7 +72,7 @@ The :attr:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults.
 you with the history of the Keplerian elements, which were directly solved
 for by the integrator, while the  :attr:`~tudatpy.numerical_simulation.SingleArcSimulator.state_history` provides
 the Cartesian elements, obtained from the conversion of the propagated Keplerian elements (see
-:ref:`conventional_propagated_states` for more details).
+:ref:`processed_propagated_states` for more details).
 
 
 Checking the outcome of the propagation

@@ -5,10 +5,10 @@ Printing and processing the results
 ###################################
 
 The results of the numerical propagation are stored in the :ref:`propagation results <propagation_results>`, which can be used to perform further
-analysis of the simulation, and the details of the propagation process. In addition, there are a number of processing and
-output steps that Tudat can perform before, during and after the propagation. Although such settings can be provided directly
+analysis, and retrieve the details of the propagation process. In addition, there are a number of processing steps and terminal outputs that 
+Tudat can perform before, during and after the propagation. Although such settings can be provided directly
 when creating propagator settings (for instance, when calling the :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.translational`
-function), it is typically more convenient to modify these settings afterwards:
+function), it is adviced to modify these settings afterwards:
 
 .. code-block:: python
 
@@ -16,10 +16,10 @@ function), it is typically more convenient to modify these settings afterwards:
     console_print_settings = propagator_settings.print_settings
     post_processing_settings = propagator_settings.processing_settings
 
-where, the resulting settings object for console printing and post-processing are of type
-:class:`~tudatpy.numerical_simulation.propagation_setup.PropagationPrintSettings` and
-:class:`~tudatpy.numerical_simulation.propagation_setup.PropagatorProcessingSettings`
-(with derived class :class:`~tudatpy.numerical_simulation.propagation_setup.SingleArcsPropagatorProcessingSettings`
+Here, the resulting settings object for console printing and post-processing are of type
+:class:`~tudatpy.numerical_simulation.propagation_setup.propagator.PropagationPrintSettings` and
+:class:`~tudatpy.numerical_simulation.propagation_setup.propagator.PropagatorProcessingSettings`
+(with derived class :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.SingleArcPropagatorProcessingSettings`
 for single-arc propagation), respectively. Below, the options available in both these settings objects are described in more
 detail.
 
@@ -28,11 +28,19 @@ detail.
 Automatic processing
 ====================
 
-Retrieving the results of the numerical propagation is discussed in detail :ref:`here <propagation_results>`.
-In addition to returning data for further analysis by the user, Tudat can be set up to automatically use
+By default, Tudat will save the propagated states and dependent variables at each time step, and return these the user after the propagation is finished.
+Below, a number of additions/extensions to this behaviour are described, where the propagated states that are returned are
+used and/or processed before being returned to the user.
+
+.. _setting_results_post_propagation:
+
+Updating ephemerides (and other environment models)
+---------------------------------------------------
+
+Tudat can be set up to automatically use
 the results of the numerical propagation to reset properties in the environment upon the successful completion of the propagation.
-This option can be toggled using the boolean attribute :attr:`~tudatpy.numerical_simulation.propagation_setup.PropagatorProcessingSettings.set_integrated_result` of
-the :class:`~tudatpy.numerical_simulation.propagation_setup.PropagatorProcessingSettings` class:
+This option can be toggled using the boolean attribute :attr:`~tudatpy.numerical_simulation.propagation_setup.propagator.PropagatorProcessingSettings.set_integrated_result` of
+the :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.PropagatorProcessingSettings` class:
 
 .. code-block:: python
 
@@ -63,23 +71,71 @@ where the tabulated ephemeris is populated by states from the original (non-tabu
 For specific applications, most notably a state estimation, a user may want the numerical solution to *only* be used to reset the environment,
 while not needing access to the numerical results directly.
 To enable this behavior, the boolean attribute
-:attr:`~tudatpy.numerical_simulation.propagation_setup.PropagatorProcessingSettings.clear_solution` of
-the :class:`~tudatpy.numerical_simulation.propagation_setup.PropagatorProcessingSettings` class is provided.
+:attr:`~tudatpy.numerical_simulation.propagation_setup.propagator.PropagatorProcessingSettings.clear_solution` of
+the :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.PropagatorProcessingSettings` class is provided.
+
+.. code-block:: python
+
+    propagator_settings = propagator.translational( ... )
+    propagator_settings.processing_settings.set_integrated_result = True
+    propagator_settings.processing_settings.clear_solution = True
+        
 When set to true, the numerical results of the propagation are completely deleted after the propagation is performed.
 When this option is selected, the numerical results 'live on' *only* in the environment models that have been reset,
 but are no longer available from the :ref:`propagation results <propagation_results>`.
 This option may be attractive when memory usage of the application is a concern.
 
+.. _saving_cadence:
+
+Reduced saving cadence
+----------------------
+
+By definition, Tudat saves and returns the state and dependent variables at *every* full step of the numerical integration.
+For long numerical integrations, this can result in excessively long data structures being stored in memory, potentially
+leading to issues. Options are provided to modify the cadence at which data is saved, using the 
+:attr:`~tudatpy.numerical_simulation.propagation_setup.propagator.PropagatorProcessingSettings.results_save_frequency_in_steps` and
+:attr:`~tudatpy.numerical_simulation.propagation_setup.propagator.PropagatorProcessingSettings.results_save_frequency_in_seconds` attributes of 
+the :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.PropagatorProcessingSettings` class,
+which allow the results to be saved only every X steps, or every Y seconds (of time in the simulation). For instance, using:
+
+.. code-block:: python
+
+    propagator_settings = propagator.translational( ... )
+    propagator_settings.processing_settings.results_save_frequency_in_steps = 3
+    
+The results are only saved every third time step. By using 
+
+.. code-block:: python
+
+    propagator_settings = propagator.translational( ... )
+    propagator_settings.processing_settings.results_save_frequency_in_steps = 3
+    propagator_settings.processing_settings.results_save_frequency_in_seconds = 60.0
+    
+the results are saved every third time step *or* every 60 seconds of time in the simulation, whichever one occurs first since the previous
+saved data point.
+        
+
+
+
 Multi- and hybrid-arc considerations
 ------------------------------------
 
 For the multi- and hybrid arc propagation, the setting of the numerical results in the environment,
-and the clearing of the numerical solution, is *always* consistent between all the arcs.
-As a result, these settings in the constituent single-arc propagation settings is overridden
-by the settings in the multi- or hybrid-arc propagation settings.
+and the clearing of the numerical solution (as described :ref:`above <setting_results_post_propagation>`, is *always* consistent between all the arcs.
+As a result, these settings in the constituent single-arc propagation settings will be overridden
+by the settings in the multi- or hybrid-arc propagation settings. Objects of type
+:class:`~tudatpy.numerical_simulation.propagation_setup.propagator.MultiArcPropagatorProcessingSettings` or
+:class:`~tudatpy.numerical_simulation.propagation_setup.propagator.HybridArcPropagatorProcessingSettings` are automatically
+created and stored in the propagator settings when creating multi- or hybrid-arc propagator settings, and can be retrieved similarly as for the single-arc settings:
+
+
+.. code-block:: python
+
+    multiarc_propagator_settings = propagator.multi_arc( ... )
+    post_processing_settings = propagator_settings.processing_settings
 
 To reset the dynamics of a body with the results of a multi-arc propagation (e.g. if the
-:attr:`~tudatpy.numerical_simulation.propagation_setup.PropagatorProcessingSettings.set_integrated_result` option is set to true),
+:attr:`~tudatpy.numerical_simulation.propagation_setup.propagator.PropagatorProcessingSettings.set_integrated_result` option is set to true),
 the ephemeris of this body must be a multi-arc ephemeris. If the body has no ephemeris before propagation,
 one is created on the fly when :ref:`creating the dynamics simulator <propagating_dynamics>`.
 In cases where a user wants to use a
@@ -95,6 +151,16 @@ For example, to reset the ephemeris of the Earth from a multi-arc propagation re
    body_settings = environment_setup.get_default_body_settings( ... )
    body_settings.get("Earth").ephemeris_settings.make_multi_arc_ephemeris = True
 
+The cadence at which data is saved during the propagation (see :ref:`above <saving_cadence>`) may vary per arc. The list of single-arc settings
+can be retrieved from the results as follows:
+
+.. code-block:: python
+
+    multiarc_propagator_settings = propagator.multi_arc( ... )
+    single_arc_processing_settings = multiarc_propagator_settings.single_arc_settings
+  
+Settings to print data to the console (see :ref:`below <console_output>`) is also defined seperately per arc. Additional options
+for multi- and hybrid-arc propagation are provided :ref:`below <console_output_multi_arc>`
 
 
 .. _console_output:
@@ -103,8 +169,15 @@ Console Output
 ==============
 
 Tudat also provides a range of options on information to be printed to the console *during* the process of the propagation.
-These settings are specified through a :class:`~tudatpy.numerical_simulation.propagation_setup.PropagationPrintSettings` object.
-Typical examples of information that can be printed to the console are:
+These settings are specified through a :class:`~tudatpy.numerical_simulation.propagation_setup.PropagationPrintSettings` object,
+which can be retried from single-arc propagator settings through:
+
+.. code-block:: python
+
+    propagator_settings = propagator.translational( ... )
+    console_print_settings = propagator_settings.print_settings
+
+A full list of print options is provide in the API documentation. Typical examples of information that can be printed to the console are:
 
 * The indices in the full dependent variable vector
   (:attr:`~tudatpy.numerical_simulation.propagation_setup.PropagationPrintSettings.print_dependent_variable_indices`;
@@ -173,9 +246,7 @@ However, a number of additional options are available for printing output to the
 in the :class:`~tudatpy.numerical_simulation.propagation_setup.MultiArcPropagatorProcessingSettings` and
 :class:`~tudatpy.numerical_simulation.propagation_setup.HybridArcPropagatorProcessingSettings` classes:
 
-* For the multi-arc propagation, there is an option to ensure identical print settings for each arc (see :attr:`~tudatpy.numerical_simulation.propagation_setup.MultiArcPropagatorProcessingSettings.set_consistent_print_settings`)
-* For the multi-arc propagation, there is an option to automatically suppress all output for all arcs *except* the first arc (see :attr:`~tudatpy.numerical_simulation.propagation_setup.MultiArcPropagatorProcessingSettings.print_first_arc_only`)
-  This is typically used in cases where the settings for each arc are largely identical
+* For the multi- and hybrid arc propagation, there is an option to ensure identical print settings for each arc (see :attr:`~tudatpy.numerical_simulation.propagation_setup.MultiArcPropagatorProcessingSettings.set_consistent_print_settings`)
 * For the multi-arc propagation, there is an option to automatically suppress all output for all arcs *except* the first arc (see :attr:`~tudatpy.numerical_simulation.propagation_setup.MultiArcPropagatorProcessingSettings.print_first_arc_only`)
   This is typically used in cases where the settings for each arc are largely identical
 * For the hybrid-arc propagation, the constituent single- and multi-arc settings can be independently modified. These settings can 
