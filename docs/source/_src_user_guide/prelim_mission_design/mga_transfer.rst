@@ -111,7 +111,9 @@ node and leg settings is:
 Manually creating settings for single legs and nodes is described :ref:`below <manual_transfer_legs_nodes>`.
 
 The complete procedure for creating and analyzing an MGA transfer consists of the following. The associated code snippets are taken from 
-an `example application <this example>`_, for an unpowered leg Cassini (EVVEJS) transfer trajectory:
+an `this example application`_, for an unpowered leg Cassini (EVVEJS) transfer trajectory:
+
+.. _`this example application`: https://docs.tudat.space/en/latest/_src_getting_started/_src_examples/notebooks/pygmo/cassini1_mga_optimization.html 
 
 - **Define the transfer settings**: The transfer leg settings and node settings a are created. These are defined
   using the body order (bodies through which the spacecraft will pass), the departure and arrival orbit (semi-major axis
@@ -183,8 +185,8 @@ All available functions and classes are described in detail in the relevant entr
 For applications see `this example`_ and `this PyGMO example`_.
 
 .. _`API reference`: https://tudatpy.readthedocs.io/en/latest/transfer_trajectory.html#
-.. _`this example`: /tudat-space/docs/build/_src_getting_started/_src_examples/notebooks/propagation/mga_dsm_analysis.html
-.. _`this PyGMO example`: /tudat-space/docs/build/_src_getting_started/_src_examples/notebooks/pygmo/gtop_cassini1_mga_optimization.html
+.. _`this example`: https://docs.tudat.space/en/latest/_src_getting_started/_src_examples/notebooks/propagation/mga_trajectories.html
+.. _`this PyGMO example`: https://docs.tudat.space/en/latest/_src_getting_started/_src_examples/notebooks/pygmo/cassini1_mga_optimization.html
 
 .. _manual_transfer_legs_nodes:
 

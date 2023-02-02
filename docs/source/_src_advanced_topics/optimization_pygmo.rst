@@ -57,6 +57,25 @@ Next, use conda to install the PyGMO package *to this environment*:
 
     Please ensure to install PyGMO in your given tudatpy environment. Do not add the PyGMO package to your base environment.
 
+.. note::
+
+    If adding pygmo to an existing conda environment returns errors, create a new conda environment with pygmo added as a
+    dependency. 
+
+    .. code:: yaml
+
+        name: tudat-space
+        channels:
+          - conda-forge
+          - tudat-team
+        dependencies:
+          - tudatpy
+          - matplotlib
+          - scipy
+          - pandas
+          - jupyterlab
+          - pygmo # <-- Add this line to your environment.yaml
+
 
 Lastly, you should verify that the package is now available in your tudatpy environment.
 You can do so via your IDE or by using the following command in your terminal:
