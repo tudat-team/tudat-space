@@ -24,6 +24,7 @@ For more details on how to use ``conda``, please refer to our detailed guide (:r
 .. _`Anaconda`: https://docs.anaconda.com/navigator
 .. _`Anaconda or Miniconda?`: https://docs.conda.io/projects/conda/en/latest/user-guide/install/download.html#anaconda-or-miniconda
 
+
 Installing Anaconda
 ###################
 
@@ -43,6 +44,12 @@ Installing Tudat(Py)
   version 0.6.3.
 
 To install Tudat(Py), we recommend the use of a terminal (command line) interface. On Unix system (Linux and Mac), ``conda`` should already be available within the terminal; you can open your terminal directly. On Windows, you can find a program called ``Anaconda Prompt`` in the Windows search. Using ``conda`` in the ``Anaconda Prompt`` is equivalent to the terminal use of ``conda`` on Unix. Some Unix commands are made available in this prompt, although most usage is equivalent to the Windows shell (see below for some useful terminal commands).
+
+.. attention::
+
+	The availability and functionality of this ``Anaconda Prompt`` in the ``Miniconda`` installation for Windows is unstable. Therefore, the use of ``Miniconda`` is discouraged for Windows users and Anaconda is recommended istead, as suggested in `Getting Started with Conda`_.
+
+.. _`Getting Started with Conda`: https://docs.tudat.space/en/stable/_src_getting_started/_src_use_of_tools/conda.html
 
 Open a terminal. Then first verify that ``conda`` is installed by executing the following command:
 
