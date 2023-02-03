@@ -13,7 +13,7 @@ Git is included in the default packages of Anaconda (>python 3.7). Mac and Linux
 Getting existing Tudat code
 ---------------------------
 
-Below, we discuss how to retrieve an application from an existing Github repository, how to retrieve any updates that may come available after you’ve downloaded it, and how to send the code to your own Github account. As an example, we will use the ``NumericalAstrodynamicsAssignments_2020`` repository. Depending on whether your repository is to be public or private, follow Step 1a, or Step 1b.
+Below, we discuss how to retrieve an application from an existing Github repository, how to retrieve any updates that may come available after you’ve downloaded it, and how to send the code to your own Github account. As an example, we will use the ``NumericalAstrodynamicsAssignments_2023`` repository. Depending on whether your repository is to be public or private, follow Step 1a, or Step 1b.
 
 .. warning:: 
 
@@ -25,7 +25,7 @@ Below, we discuss how to retrieve an application from an existing Github reposit
 
    .. figure:: _static/forkingExample.png
 
-   After doing so, you will have created your own local version of the ``NumericalAstrodynamicsAssignments_2020`` repository.
+   After doing so, you will have created your own local version of the ``NumericalAstrodynamicsAssignments_2023`` repository.
 
 **Step 1b (for a private repository): Import the code on Github**
 
@@ -39,7 +39,7 @@ Below, we discuss how to retrieve an application from an existing Github reposit
 
    You may, but need not, write a repository description. Click ``Create repository``. 
 
-   On the bottom of page you are redirected to, click ``Import Code``. Fill in the name of the repository from which you want to retrieve code (for instance ``https://github.com/Tudat/NumericalAstrodynamicsAssignments_2020``), and click ``Begin Import``. Once the import is successfully completed, you will receive an e-mail, with a link to your new, private, repository.
+   On the bottom of page you are redirected to, click ``Import Code``. Fill in the name of the repository from which you want to retrieve code (for instance ``https://github.com/Tudat/NumericalAstrodynamicsAssignments_2023``), and click ``Begin Import``. Once the import is successfully completed, you will receive an e-mail, with a link to your new, private, repository.
 
    For a private repository, you can control who can view/modify your repository. To add other users to your repository, go to the ``Settings/Collaborators`` of the repository, and add other users that you want to invite.
 
@@ -51,7 +51,7 @@ Below, we discuss how to retrieve an application from an existing Github reposit
 
    Now, the next step is to create a version of the code on your computer, which is linked to your own Github page. Using the terminal (or the ``anaconda prompt`` program when using Windows), navigate to the directory where you want to have your assignment code. Then, use the following command in the terminal::
 
-      git clone https://github.com/YourName/NumericalAstrodynamicsAssignments_2020.git
+      git clone https://github.com/YourName/NumericalAstrodynamicsAssignments_2023.git
 
    where ``YourName`` should be replaced with your Github account name (so that it corresponds to the URL to where you've forked the repository).
 
@@ -67,10 +67,10 @@ Pulling and pushing Tudat code
 
 Now, we are ready to discuss two distinct but related aspects of developing your code:
 
-* Retrieving modifications from the original repository, called pulling (here: ``https://github.com/tudat/NumericalAstrodynamicsAssignments_2020.git``) 
-* Uploading your modifications to your own repository, called pushing (here: ``https://github.com/YourName/NumericalAstrodynamicsAssignments_2020.git``).
+* Retrieving modifications from the original repository, called pulling (here: ``https://github.com/tudat/NumericalAstrodynamicsAssignments_2023.git``) 
+* Uploading your modifications to your own repository, called pushing (here: ``https://github.com/YourName/NumericalAstrodynamicsAssignments_2023.git``).
 
-In your terminal, first navigate into the directory containing your git repository ``...../NumericalAstrodynamicsAssignments_2020/``)
+In your terminal, first navigate into the directory containing your git repository ``...../NumericalAstrodynamicsAssignments_2023/``)
 
 **Step 1: Setting up your remotes**
 
@@ -80,19 +80,19 @@ In your terminal, first navigate into the directory containing your git reposito
 
    command in your terminal. Running this command will likely result in the output (for now, forget about the distinction between pull and fetch)::
 
-      origin  https://github.com/YourName/NumericalAstrodynamicsAssignments_2020 (fetch)
-      origin  https://github.com/YourName/NumericalAstrodynamicsAssignments_2020 (push)
+      origin  https://github.com/YourName/NumericalAstrodynamicsAssignments_2023 (fetch)
+      origin  https://github.com/YourName/NumericalAstrodynamicsAssignments_2023 (push)
  
-   Typically, you will have two: an ``origin`` and an ``upstream``, which is also the convention we'll stick to here. The ``origin`` remote is the one from where you've cloned the repository, in this case your own Github version of the ``NumericalAstrodynamicsAssignments_2020`` repository. This remote will have been set automatically when cloning the code. With the way the repository is set up, you are ready to update your own Github version of ``NumericalAstrodynamicsAssignments_2020``. To also retrieve new code from the original tudat repository, we need to add an additional remote, the ``upstream``. To do so, use the following terminal command::
+   Typically, you will have two: an ``origin`` and an ``upstream``, which is also the convention we'll stick to here. The ``origin`` remote is the one from where you've cloned the repository, in this case your own Github version of the ``NumericalAstrodynamicsAssignments_2023`` repository. This remote will have been set automatically when cloning the code. With the way the repository is set up, you are ready to update your own Github version of ``NumericalAstrodynamicsAssignments_2023``. To also retrieve new code from the original tudat repository, we need to add an additional remote, the ``upstream``. To do so, use the following terminal command::
 
-      git remote add upstream https://github.com/tudat/NumericalAstrodynamicsAssignments_2020.git
+      git remote add upstream https://github.com/tudat/NumericalAstrodynamicsAssignments_2023.git
 
    Rerunning the ``git remote -v`` command should now result in::
 
-      origin  https://github.com/YourName/NumericalAstrodynamicsAssignments_2020 (fetch)
-      origin  https://github.com/YourName/NumericalAstrodynamicsAssignments_2020 (push)
-      upstream  https://github.com/tudat/NumericalAstrodynamicsAssignments_2020 (fetch)
-      upstream  https://github.com/tudat/NumericalAstrodynamicsAssignments_2020 (push)
+      origin  https://github.com/YourName/NumericalAstrodynamicsAssignments_2023 (fetch)
+      origin  https://github.com/YourName/NumericalAstrodynamicsAssignments_2023 (push)
+      upstream  https://github.com/tudat/NumericalAstrodynamicsAssignments_2023 (fetch)
+      upstream  https://github.com/tudat/NumericalAstrodynamicsAssignments_2023 (push)
 
    If it is the first time you use git on your computer, you are required to identify yourself. This can be done with the following commands::
 
@@ -166,15 +166,16 @@ In your terminal, first navigate into the directory containing your git reposito
    This will push your code to the ``origin`` remote. The ``master`` term denotes the current branch you are working on. Branch management is beyond the scope of this tutorial, and you may safely ignore these issues for now.
 
    If you have set up your repository to be private, you will be prompted to enter your Github username and password. After a push is succesfull, you should see your changes on the Github page for your applications, available for everyone (in case it is public) or a selected few (in case it is private).
-
-    
-
-
-
-
-
-
-
-
-
-
+   
+   .. note::
+   
+		Authentication with passwords is not supported by Github anymore. Although Github has not changed the prompt message and you will still be asked for your "password", it is the **token** that you must provide in that field. Thus, you will need a token. If you are new to tokens, follow `this documentation <https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token>`_ to generate your token. In order to push code to your private repository, it will be enough with a **classic** personal access token. Make sure to follow those steps in the Git documentation.
+   
+		Your token will need to have the following assigned scopes:
+		
+		* **gist**
+		* **read:org**
+		* **repo**
+		* **workflow**
+		
+		Make sure you select them all in the scope selection step. These scopes can be modified later, so do not panick if you read this too late.
