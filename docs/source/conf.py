@@ -38,7 +38,7 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.coverage',
               'sphinx.ext.mathjax',
               'sphinx.ext.viewcode',
-              'sphinx.ext.autosectionlabel',
+              # 'sphinx.ext.autosectionlabel',
               'sphinx_panels',  # for gridded panels
               'nbsphinx',  # to embed Jupyter notebooks
               'IPython.sphinxext.ipython_console_highlighting',  # to have pygments in rendered notebooks

@@ -9,16 +9,16 @@ Rotational Dynamics
    :hidden:
    :maxdepth: 1
 
-   ../torque_models/setup
-   ../torque_models/available
+   ../torque_models/torque_model_setup
+   ../torque_models/available_torque_models
 
 Settings to propagate the rotational state of a body numerically can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.rotational` factory function, described in detail in the `API documentation <https://py.api.tudat.space/en/latest/>`_. In the current page, only the Tudat-specific aspects of the input will be briefly described.
-The default (conventional) representation for solving the rotational equations of motion is by using a vector of 7 elements:
+The default (processed) representation for solving the rotational equations of motion is by using a vector of 7 elements:
 
   * The quaternion elements (vector :math:`\mathbf{q}` of size 4) of the rotation from body-fixed to inertial frame (see :ref:`quaternion_definition`)
   * The angular velocity (vector :math:`\boldsymbol{\omega}` of size 3) of the body w.r.t. the inertial frame, expressed in the body-fixed frame.
 
-Several other formulations can be used if wanted (see below and :ref:`conventional_propagated_states`).
+Several other formulations can be used if wanted (see below and :ref:`processed_propagated_states`).
 
 
 
@@ -29,13 +29,13 @@ In addition to the settings described :ref:`here <propagation_inputs>`, the defi
 
 - A set of torque models (see :ref:`torque_model_setup`);
 - The initial conditions for the propagation (rotational state as :math:`[\mathbf{q};\boldsymbol{\omega}]` and time)
-- A propagator type, since the rotational state can have different representations (listed in :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.RotationalPropagatorType`).
+- A propagator type, since the rotational state can have different representations (listed in :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.RotationalPropagatorType`; default is quaternions and angular velocity).
 
 .. warning::
 
-    The initial state must be provided as conventional state formulation :math:`[\mathbf{q};\boldsymbol{\omega}]`, **regardless of the propagator type**
+    The initial state must be provided as processed state formulation :math:`[\mathbf{q};\boldsymbol{\omega}]`, **regardless of the propagator type**
 
-.. _example:
+.. _rotational_example:
 
 Example
 ========

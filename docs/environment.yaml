@@ -1,17 +1,18 @@
-name: environment
+name: tudat-docs
 channels:
   - conda-forge
 dependencies:
-  - python=3.7
+  - python
   - sphinx
   - sphinx_rtd_theme
   - sphinx-panels
   - sphinx-tabs
   - sphinx-copybutton
-  - sphinx-gallery
+  - sphinx-gallery=0.10.1
   - ipython
   - ipykernel
   - ipympl
+  - pandoc
   - pip
   - pip:
     - rtcat_sphinx_theme

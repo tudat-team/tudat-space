@@ -1,5 +1,3 @@
-.. _state_propagation_intro:
-
 ******************
 State Propagation
 ******************
@@ -19,7 +17,6 @@ There are two distinct input types necessary to create a simulation:
 - :ref:`environment_setup`: physical modeling of environment properties (for both celestial and artificial bodies)
 - :ref:`propagation_setup`: formulation of the differential equations representing the problem, and the method to solve them
 
-
 .. toctree::
    :titlesonly:
    :hidden:
@@ -34,9 +31,9 @@ Simulation & Output
 
 Once all the settings are in place, the solution can be generated. All the details
 about this part, including the interpretation and availability of outputs, are explained in the page about
-:ref:`running_simulation`.
+:ref:`propagating_dynamics`.
 For simulations in which the dynamics and associated variational equations are propagated, see the page on
-:ref:`running_variational_simulation`.
+:ref:`propagating_variational_simulation`.
 
 
 .. toctree::
@@ -44,5 +41,5 @@ For simulations in which the dynamics and associated variational equations are p
    :hidden:
    :maxdepth: 1
 
-   state_propagation/running_simulation
-   state_propagation/running_variational_simulation
+   state_propagation/propagating_dynamics
+   state_propagation/propagating_variational_simulation

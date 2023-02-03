@@ -9,13 +9,13 @@ Environment Setup
    :hidden:
    :maxdepth: 1
 
-   environment_setup/create_bodies/create_body_settings
-   environment_setup/create_bodies/create_bodies_from_settings
-   environment_setup/create_bodies/available
-   environment_setup/create_bodies/default_settings
-   environment_setup/architecture/custom_settings
-   environment_setup/architecture/use_of_reference_frames
-   environment_setup/architecture/transformations
+   environment_setup/create_bodies/creating_modifying_bodies
+   environment_setup/create_bodies/creation_celestial_body_settings
+   environment_setup/create_bodies/environment_models
+   environment_setup/create_bodies/default_env_models
+   environment_setup/architecture/custom_models
+   environment_setup/architecture/frames_in_environment
+   environment_setup/architecture/available_state_definitions_conversions
    environment_setup/architecture/environment_architecture
    environment_setup/thrust_refactor/thrust_refactor
 
@@ -45,11 +45,11 @@ Body Creation - Procedure
 
 The typical procedure to create the environment is represented in the figure and explained below.
 
-1. **Create body settings**: create settings for bodies which have default settings (see :ref:`default_environment_models`),
-   customize these settings as desired, and/or manually add settings for bodies without defaults (see :ref:`create_celestial_body_settings`).
+1. **Create body settings**: create settings for bodies which have default settings (see :ref:`default_env_models`),
+   customize these settings as desired, and/or manually add settings for bodies without defaults (see :ref:`creation_celestial_body_settings`).
 
 2. **Create system of bodies**: use the settings above to create a set of :class:`~tudatpy.numerical_simulation.environment.Body` objects stored in a  :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` object, automatically resolving any
-   interdependencies  (see :ref:`create_bodies_from_settings`). If desired, add additional models and bodies afer this :class:`~tudatpy.numerical_simulation.environment.Body`/:class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` creation, with limitations on interdepenencies with existing bodies (see :ref:`create_empty_body`).
+   interdependencies  (see :ref:`create_modifying_bodies`). If desired, add additional models and bodies afer this :class:`~tudatpy.numerical_simulation.environment.Body`/:class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` creation, with limitations on interdepenencies with existing bodies (see :ref:`create_empty_body`).
 
 .. figure:: _static/tudatpy_environment.png
    :width: 600

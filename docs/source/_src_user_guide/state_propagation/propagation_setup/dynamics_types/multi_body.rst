@@ -19,7 +19,7 @@ The propagation framework in Tudat is implemented such that any number of bodies
          .. tab:: C++
 
           .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
-             :language: cp
+             :language: cpp
 
 Where the ``acceleration_models`` should contain a set of acceleration models acting upon each propagated body (if one or more of the bodies is omitted from the ``acceleration_models``, no accelerations are assumed to act on this body, without warning or error).
 
@@ -40,7 +40,7 @@ The use of a 'hierarchical' system is also supported by Tudat. For instance, one
          .. tab:: C++
 
           .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
-             :language: cp
+             :language: cpp
 
 In either case, any and all physical interactions are automatically formulated as required for the specific dynamical system under consideration. Specifically, the use of direct and third-body gravitational accelerations, and the definition of the correct effective gravitational parameter, are automatically handled when creating the acceleration models (see :ref:`available_acceleration_models`)
 

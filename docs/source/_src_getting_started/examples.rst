@@ -5,9 +5,9 @@
 
 .. _getting_started_examples:
 
-************************
+=========
 Examples
-************************
+=========
 
 There are several example applications disseminated in various forms.
 
@@ -61,6 +61,8 @@ There are several example applications disseminated in various forms.
         :classes: btn-outline-primary btn-block stretched-link
 
 
+Propagation
+-----------
 
 .. nbgallery::
    :caption: Numerical propagation of dynamics
@@ -68,18 +70,37 @@ There are several example applications disseminated in various forms.
 
    _src_examples/notebooks/propagation/*
 
+Estimation
+----------
+
 .. nbgallery::
    :caption: Estimation of dynamics and parameters
    :glob:
 
    _src_examples/notebooks/estimation/*
 
+PyGMO
+-----
+
+.. note::
+   If you have never used PyGMO before, please
+   consider reading our introductory guide: :ref:`optimization_pygmo`.
+
 .. nbgallery::
    :caption: Optimization with PyGMO
    :glob:
 
-   _src_examples/notebooks/pygmo/*
+   _src_examples/notebooks/pygmo/cassini1_mga_optimization.ipynb
+   _src_examples/notebooks/pygmo/himmelblau_minimization.ipynb
+   _src_examples/notebooks/pygmo/hodographic_shaping_mga_optimization.ipynb
 
-.. note::
-   If you have never used PyGMO before, please
-   consider reading our introductory guide: :ref:`Optimization with PyGMO`.
+Asteroid Orbit Optimization
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. nbgallery::
+   :caption: Asteroid Orbit Optimization
+   :glob:
+
+   _src_examples/notebooks/pygmo/asteroid_orbit_optimization/*
+
+
