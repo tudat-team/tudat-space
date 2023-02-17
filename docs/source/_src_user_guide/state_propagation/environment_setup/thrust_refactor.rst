@@ -13,7 +13,7 @@ Thrust and Aerodynamic Orientation - Code Refactor
    :hidden:
    :maxdepth: 1
 
-   thrust_old
+   thrust_refactor/thrust_old
    
 The framework in Tudat to calculate inertial thrust direction and aerodynamic guidance was overhauled in mid-2022. The reasons for this were:
 

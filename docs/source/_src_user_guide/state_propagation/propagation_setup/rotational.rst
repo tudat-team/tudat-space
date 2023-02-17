@@ -9,8 +9,8 @@ Rotational Dynamics
    :hidden:
    :maxdepth: 1
 
-   ../torque_models/torque_model_setup
-   ../torque_models/available_torque_models
+   rotational/torque_model_setup
+   rotational/available_torque_models
 
 Settings to propagate the rotational state of a body numerically can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.rotational` factory function, described in detail in the `API documentation <https://py.api.tudat.space/en/latest/>`_. In the current page, only the Tudat-specific aspects of the input will be briefly described.
 The default (processed) representation for solving the rotational equations of motion is by using a vector of 7 elements:

@@ -8,6 +8,6 @@ with TudatPy.
 .. toctree::
    :maxdepth: 1
 
-   _src_use_of_tools/conda
-   _src_use_of_tools/python
-   _src_use_of_tools/github
+   _src_primers_coding_tools/conda
+   _src_primers_coding_tools/python
+   _src_primers_coding_tools/github

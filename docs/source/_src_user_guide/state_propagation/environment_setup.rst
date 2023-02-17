@@ -9,15 +9,15 @@ Environment Setup
    :hidden:
    :maxdepth: 1
 
-   environment_setup/create_bodies/creating_modifying_bodies
-   environment_setup/create_bodies/creation_celestial_body_settings
-   environment_setup/create_bodies/environment_models
-   environment_setup/create_bodies/default_env_models
-   environment_setup/architecture/custom_models
-   environment_setup/architecture/frames_in_environment
-   environment_setup/architecture/available_state_definitions_conversions
-   environment_setup/architecture/environment_architecture
-   environment_setup/thrust_refactor/thrust_refactor
+   environment_setup/creating_modifying_bodies
+   environment_setup/creation_celestial_body_settings
+   environment_setup/environment_models
+   environment_setup/default_env_models
+   environment_setup/custom_models
+   environment_setup/frames_in_environment
+   environment_setup/available_state_definitions_conversions
+   environment_setup/environment_architecture
+   environment_setup/thrust_refactor
 
 
 
