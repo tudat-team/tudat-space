@@ -45,7 +45,7 @@ Below, we discuss how to retrieve an application from an existing Github reposit
 
 .. warning:: 
 
-  IMPORTANT! When setting up a repository for use in the AE4866 or AE4868 courses, invite :literal:`@dominicdirkx` and :literal:`@transferorbit`. For these courses, it is prohibited to invite your fellow students to a private repository for an individual assignment.
+  IMPORTANT! When setting up a repository for use in the AE4866 or AE4868 courses, invite :literal:`dominicdirkx` and :literal:`transferorbit`. For these courses, it is prohibited to invite your fellow students to a private repository for an individual assignment.
 
 **Step 2: Clone the application to your system**
 
