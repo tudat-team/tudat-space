@@ -145,7 +145,7 @@ have two methods:
 
 Once the UDP class is created, we must create a PyGMO problem object by passing
 an instance of our class to ``pygmo.problem``. Note that an instance of the UDP class
-must be passed as input to pygmo.problem() and NOT the class itself. It is also possible to use a PyGMO UDP, i.e.
+must be passed as input to ``pygmo.problem()`` and NOT the class itself. It is also possible to use a PyGMO UDP, i.e.
 a problem that is already defined in PyGMO, but it will not be shown in this tutorial. In this example,
 we will use only one generation. More information about the PyGMO problem class is available
 `on the PyGMO website <https://esa.github.io/pygmo2/tutorials/using_problem.html>`_.
@@ -253,202 +253,120 @@ despite using only 10% of the computational resources.
    Journal of Open Source Software, 5(53), 2338, https://doi.org/10.21105/joss.02338.
 
 
-Parallelization with Python and PyGMO
-#########################################
+Parallelization with PyGMO
+################################
 
 In this section, a short guide is given on the parallelization of tasks in Python, and specifically for application with
-PyGMO.
-
-
-General parallelization with Python
-------------------------------------
-
-In Python, you can parallelize data processing in various ways. One possible way is to use GPU's, but this is not
-discussed here. For Python CPU-based parallelization, there are generally two types: multi-processing and
-multi-threading. Multi-processing is a method that initializes multiple processes. This means that different processes
-are running on independent CPU's, with independent memory management. Multi-threading is a method that uses multiple
-threads for a single parent process with shared memory. Child processes can be run on separate threads. There are
-generally two threads per CPU, and each computer system has their own amount of CPU's with their own specs. The amount
-of parallellity is therefore determined by the system you want to run on.
-
-To start, parallelization does not have to be within PyGMO, it can be used for any simulation. Though, it should be
-noted that it does not always make sense to parallelize your simulations. The initialization takes longer, so there is a
-break even point beyond which it is worthwhile, which is discussed in :ref:`Multi-threading with Batch Fitness
-Evaluation`. Below is a code snippet that shows in pseudo code how one can implement parallelization without PyGMO. To
-enable this behavior with Python, the ``multiprocessing`` module is used. Other alternatives exist as well that are more
-modern, but they are not as widely spread or as thoroughly documented. Ray, for instance, is one of these packages, it
-is arguably more seemless, but it is also rather new and focused on AI applications.
-
-All parallel processing should be put under ``if __name__ == "__main__" :``. This line ensures that the code is only run
-if that file is the file being executed directly (so not imported, for example). This prevents an infinite loop when
-creating new child processes -- or starting calculations on other threads.  If this line is omitted, child processes
-import the python script, which then run the same script again, thereby spawning more child processes. This results in
-an infinite loop. Next, ``mp.get_context("spawn")`` is  a context object that has the attributes of the multiprocessing
-module. Here, the ``"spawn"`` argument refers to the method that creates a new Python process. ``"spawn"`` specifically
-starts a fresh Python interpreter process -- which is default on macOS and Windows. ``"fork"`` copies a Python process
-using ``os.fork()``-- which is the default on Linux. ``"forkserver"`` creates a server process; a new process is then
-requested and the server uses ``"fork"`` to create it. This method can generally be left at the default value.
-
-A ``Pool`` object is temporarily created, which is just a collection of available processes that can be allocated to
-computational tasks. The number of cores you would like to appoint to the ``Pool`` is given as an argument.
-Subsequently, the ``map()`` or ``starmap`` method allows for a function to be applied to an iterable, rather than a
-single argument. ``map()`` allows for a single argument to be passed to the function, ``starmap()`` allows for multiple
-arguments. The inputs are all the sets of input arguments in the form of a list of tuples, which constitutes the
-iterable mentioned previously. The outputs are formatted analogously, where the tuples are the various outputs rather
-than the input arguments. 
-
-.. note::
-
-    The memory will be freed only after all the outputs are collected. It may be wise to split the list of
-    inputs into smaller batches in case a high number of simulations are run, to avoid overflowing the memory.
-
-Other ways to specify the context or create a Pool object are also possible, more can be read on `the multiprocessing
-documentation page <https://docs.python.org/3/library/multiprocessing.html>`_.
-
-.. code:: python
-    
-    # Imports
-    import multiprocessing as mp
-    import numpy as np
-    
-    from tudatpy.kernel.numerical_simulation import environment_setup, propagation_setup
-    from tudatpy.kernel.interface import spice
-    
-    # Functions
-    def run_simulation(arg_1, arg_2):
-        # Do some tudat things...
-        return 1, arg_1 + arg_2
-    
-    # Main script
-    if __name__ == "__main__":
-        # Number of simulations to run
-        N = 500
-        arg_1_list = np.random.normal(-100, 50, size=N)
-        arg_2_list = np.random.normal(1e6, 2e5, size=N)
-    
-        # Combine list of inputs
-        inputs = []
-        for i in range(N):
-            inputs.append((arg_1_list[i], arg_2_list[i]))
-    
-        # Run simulations in parallel, using half the available cores
-        n_cores = mp.cpu_count()//2
-        with mp.get_context("spawn").Pool(n_cores) as pool:
-            outputs = pool.starmap(run_simulation, inputs)
-
-Parallelization with PyGMO User-Defined Problem (UDP)
------------------------------------------------------
-
-Parallelization is also very useful for optimization problems, because optimizations are generally quite resource
-intensive processes, and this can be curbed by applying some form of parallellity. There are two flavors of parallelity
-in PyGMO. One utilizing multi-processing, one multi-threading, presented in :ref:`Multi-threading with Batch Fitness
-Evaluation` and :ref:`Multi-processing with Archipelagos`, respectively.
+PyGMO. Parallelization is very useful for optimization problems, because optimizations are generally quite resource
+intensive processes, and this can be curbed by applying some form of parallelity. There are two flavors of parallelity
+in PyGMO: One utilizing multi-threading, presented in :ref:`Multi-threading with Batch Fitness Evaluation` and one
+utilizing multi-processing, presented in :ref:`Multi-processing with Islands`. For a more general guide on
+parallelization, and specifically so-called batch Fitness Evaluation (BFE), have a look at :ref:`parallelization`.
 
 
 Multi-threading with Batch Fitness Evaluation 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------------------------
 
-Multi-threading in PyGMO is used with so-called Batch Fitness Evaluation (BFE); simply evaluating some fitness function
-in a batch, similar to the examples explained before. For this, PyGMO has classes and methods to help setup a
-multi-threaded optimisation. For this section, code snippets are used from an adapted version of `the hodographic
-shaping MGA trajectory example
-<https://github.com/tudat-team/tudatpy-examples/blob/master/pygmo/hodographic_shaping_mga_optimization.py>`_, seen
-below. You can either define your own User-Defined Batch Fitness Evaluator (UDBFE), explained `here
-<https://esa.github.io/pygmo2/bfe.html>`_, but here the `batch_fitness()` method is explained, as this follows more
-naturally from :ref:`1. Creation of the UDP class` above. Furthermore, you have no control over exactly what happens
-with using UDBFE's implemented in PyGMO, though it can be easier in some cases.
+Multi-threading in PyGMO is used with BFE; simply evaluating some fitness function in a batch, similar to the example
+explained above. For this, PyGMO has classes and methods to help setup a multi-threaded optimization. For this section,
+code snippets are shown below from `the hodographic shaping MGA trajectory example
+<https://github.com/tudat-team/tudatpy-examples/blob/master/pygmo/hodographic_shaping_mga_optimization.py>`_ and adapted
+to showcase the parallel capabilities. You can either define your own User-Defined Batch Fitness Evaluator (UDBFE),
+explained on the `pygmo documentation <https://esa.github.io/pygmo2/bfe.html>`_, or use the ``batch_fitness()`` method.
+Here, the latter is explained and used as this follows more naturally from :ref:`1. Creation of the UDP class` above. A
+UDBFE can be applied to any UDP -- with some constraints, making it more general and easier to apply out-of-the-box.
+However, using UDBFE's does not give you any control to determine how the batch is evaluated. For this reason,
+``batch_fitness()`` is used for this example. 
 
-In a UDP, BFE can be enabled by adding a `batch_fitness()` method to the class, as seen below. This method receives as
+In a UDP, BFE can be enabled by adding a ``batch_fitness()`` method to the class, as seen below. This method receives as
 input a 1D flattened array of all the design parameter vectors -- the first vector ranges from index [0, n], the second
 from [n, 2n] and so on, with a design variable vector of length n. The output is constructed analogously, where the
-length n is equal to the number of objectives. The `batch_fitness` method is somewhat of a wrapper for the `fitness()`
-method, all it has to do is convert the input array into a list of lists, then create a pool of worker processes that
-can be used.
+length n is equal to the number of objectives. The ``batch_fitness()`` method is somewhat of a wrapper for the
+``fitness()`` method, all it has to do is convert the input array into a list of lists, then create a pool of worker
+processes that can be used.
 
-.. code:: python
+.. tabs::
 
-    def batch_fitness(self,
-                design_parameter_vectors: np.ndarray) -> List[float]:
-        """
-        Function to evaluate the fitness. A single-objective optimization is used, in which the objective is the deltaV
-        necessary to execute the transfer.
-        """
+     .. tab:: Python
 
-        # Compute the final index of each type of parameters
-        time_of_flight_index = 3 + self.no_of_legs
-        incoming_velocity_index = time_of_flight_index + self.no_of_swingbys
-        swingby_periapsis_index = incoming_velocity_index + self.no_of_swingbys
-        shaping_free_coefficient_index = swingby_periapsis_index + self.total_no_shaping_free_coefficients
-        revolution_index = shaping_free_coefficient_index + self.no_of_legs
+      .. toggle-header:: 
+         :header: Required **Show/Hide**
 
-        len_single_dpv = revolution_index
-        dpvs = design_parameter_vectors.reshape(len(design_parameter_vectors)//len_single_dpv, len_single_dpv)
+            .. code-block:: python
 
-        inputs, fitnesses = [], []
-        for dpv in dpvs:
-            inputs.append([list(dpv)])
+                from tudatpy.kernel.trajectory_design import shape_based_thrust, transfer_trajectory
+                import numpy as np
+                from typing import List, Tuple
+                import pygmo as pg
+                import matplotlib.pyplot as plt
+                import multiprocessing as mp
 
-        # cpu_count = len(os.sched_getaffinity(0))
-        cpu_count = mp.cpu_count()
-        with mp.get_context("spawn").Pool(processes=int(cpu_count-4)) as pool:
-            outputs = pool.map(self.fitness, inputs)
+                # Tudatpy imports
+                import tudatpy
+                from tudatpy.util import result2array
+                from tudatpy.kernel import constants
+                from tudatpy.kernel.numerical_simulation import environment_setup
 
-        for output in outputs:
-            fitnesses.append(output)
+      .. literalinclude:: /_src_snippets/simulation/parallelization/pygmo_batch_fitness.py
+         :language: python
 
-        return fitnesses
+     .. tab:: C++
 
-Next, a code snippet is shown that invokes the BFE capabilities. The `batch_fitness()` function is part of the UDP,
-which is called. There are two distinct things to do. 
+      .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
+         :language: cpp
 
-.. code:: python
+Now that we have the ``batch_fitness()`` method defined, it must be called during the optimisation, which leads us to the
+next code snippet. Here, we use the ``pygmo.set_bfe()`` method of a ``pygmo.algorithm()`` object to add the batch fitness
+evaluation to the optimisation. Then, by default, the UDBFE ``pygmo.default_bfe()`` is given, but if the ``batch_fitness()``
+method exists in the UDP, this will automatically be used instead of the ``pygmo.default_bfe()``. You can also use the
+``b`` keyword argument for ``pygmo.island`` and ``pygmo.population`` to add a UDBFE or an instance of ``pygmo.bfe``, but
+this is not considered here.
 
-    bfe = True
+.. tabs::
 
-    seed = 42
-    pop_size = 500
+     .. tab:: Python
 
-    # Create Pygmo problem
-    transfer_optimization_problem = MGAHodographicShapingTrajectoryOptimizationProblem(
-        central_body, transfer_body_order, bounds, departure_semi_major_axis, departure_eccentricity,
-        arrival_semi_major_axis, arrival_eccentricity)
-    prob= pg.problem(transfer_optimization_problem)
+      .. toggle-header:: 
+         :header: Required **Show/Hide**
 
-    # Create algorithm and define its seed
-    algo = pg.gaco()
-    if bfe:
-        algo.set_bfe(pg.bfe())
-    algo = pg.algorithm(algo)
+            .. code-block:: python
 
-    bfe_pop = pg.default_bfe() if bfe else None
-    pop = pg.population(prob=prob, size=pop_size, seed=seed, b=bfe_pop)
+                from tudatpy.kernel.trajectory_design import shape_based_thrust, transfer_trajectory
+                import numpy as np
+                from typing import List, Tuple
+                import pygmo as pg
+                import matplotlib.pyplot as plt
+                import multiprocessing as mp
 
-    num_gen = 150
+                # Tudatpy imports
+                import tudatpy
+                from tudatpy.util import result2array
+                from tudatpy.kernel import constants
+                from tudatpy.kernel.numerical_simulation import environment_setup
 
-    # Initialize lists with the best individual per generation
-    list_of_champion_f = [pop.champion_f]
-    list_of_champion_x = [pop.champion_x]
+      .. literalinclude:: /_src_snippets/simulation/parallelization/pg_bfe_evolve.py
+         :language: python
 
-    # mp.freeze_support() needs to be called when using multiprocessing on windows
-    # mp.freeze_support()
+     .. tab:: C++
 
-    for i in range(num_gen):
-        print(f'Evolution: {i+1} / {num_gen}', end='\r')
-        pop =algo.evolve(pop)
-
-        # Save current champion
-        list_of_champion_x.append(pop.champion_x)
-        list_of_champion_f.append(pop.champion_f)
-    print('Evolution finished')
+      .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
+         :language: cpp
 
 
-To show that this actually works well, a few tests are done with various complexities. Normally, the number of function
-evaluations would be a good indication of runtime complexity, however this parallellity does not change that number. CPU
-time can be and clock time to show that it makes a difference, though this should be taken with a grain of.
+To show that the batch fitness evaluation actually works well, a few tests are done with various complexities: a EJ and
+EMEJ transfer with two different generation counts and population sizes each. Normally, the number of function
+evaluations would be a good indication of runtime complexity, however using BFE does not change that number. CPU time
+and depending on the CPU usage indirectly also clock time can give an indication of the effectiveness. It should be
+noted that this is software and hardware dependent, so the results should be taken with a grain of salt. For the simple
+problem (EJ) with few generations, adding the BFE actually increases the CPU time by almost 200%. As for the test with
+more generations, the addition of BFE increased run-time with almost 90%. The complex problem (EMEJ) shows slightly
+different behaviour; the test with few generations does improves when adding BFE by about 50%. This gain increases
+significantly for the test with more generations; an 80% decrease in clock time.
 
 .. note::
 
-   These simulations are tested on macOS Ventura 13.1 with a 3.1 GHz Quad-Core Intel Core i7 processor.
+   These simulations are tested on macOS Ventura 13.1 with a 3.1 GHz Quad-Core Intel Core i7 processor only. Four cores
+   (CPU's) are used during the BFE.
 
 
 +--------------------+-------------------------+---------------------------+---------------+----------------+-----------------+
@@ -471,59 +389,55 @@ time can be and clock time to show that it makes a difference, though this shoul
 |                    |                         | yes                       | 5946          | 404%           | 1470            |
 +--------------------+-------------------------+---------------------------+---------------+----------------+-----------------+
 
+
 Multi-processing with Islands
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------
 
-This section presents multi-processing with PyGMO using the ``pg.island`` and/or ``pg.archipelago`` class. An island is
-an object that enables asynchronous optimization of its population. An archipelago is a network that connects multiple
-islands -- `pg.island` objects -- through a topology. Islands can exchange individuals with one another through a
-topology -- a `pg.topology` object. This topology can configure the exchange of individuals between islands in an
-archipelago. 
+This section presents multi-processing with PyGMO using the ``pygmo.island`` and/or ``pygmo.archipelago`` class. An
+island is an object that enables asynchronous optimization of its population. An archipelago is a network that connects
+multiple islands -- ``pygmo.island`` objects -- with a ``pygmo.topology`` object. Islands can exchange individuals with
+one another through this topology. This topology can configure the exchange of individuals between islands in an
+archipelago. By default, the topology is the ``pygmo.unconnected`` type, which has no effect, resulting in a simple
+parallel evolution.
 
-.. Finally, the optimization can be executed by successively evolving the island. To do so, the method
-.. `island.evolve()` is called the desired number of times inside a loop. After starting each evolution of the island,
-.. the method `island.wait_check()` is called, which makes the program wait for all the evolutions running in parallel
-.. to finish. After each evolution is finished, the best fitness and parameters vector are saved.
-
-.. code:: python
-
-    seed = 42
-    pop_size = 1000
-
-    # Create Pygmo problem
-    transfer_optimization_problem = MGAHodographicShapingTrajectoryOptimizationProblem(
-        central_body, transfer_body_order, bounds, departure_semi_major_axis, departure_eccentricity,
-        arrival_semi_major_axis, arrival_eccentricity)
-    problem = pg.problem(transfer_optimization_problem)
-
-    # Create algorithm and define its seed
-    algorithm = pg.algorithm(pg.sga(gen=1))
-    algorithm.set_seed(seed)
-
-    # Create island
-    island = pg.island(algo=algorithm, prob=problem, size=pop_size, seed=seed)
-
-    num_gen = 40
-
-    # Initialize lists with the best individual per generation
-    list_of_champion_f = [island.get_population().champion_f]
-    list_of_champion_x = [island.get_population().champion_x]
-
-    # mp.freeze_support() needs to be called when using multiprocessing on windows
-    # mp.freeze_support()
-
-    for i in range(num_gen):
-        print('Evolution: %i / %i' % (i+1, num_gen))
-
-        island.evolve() # Evolve island
-        island.wait_check() # Wait until all evolution tasks in the island finish
-
-        # Save current champion
-        list_of_champion_x.append(island.get_population().champion_x)
-        list_of_champion_f.append(island.get_population().champion_f)
-
-    print('Evolution finished')
+In the code snippet below, inspired by `the hodographic shaping MGA trajectory example
+<https://github.com/tudat-team/tudatpy-examples/blob/master/pygmo/hodographic_shaping_mga_optimization.py>`_ but
+parallelized with an archipelago, a group of islands evolve in parallel. Specifically, a ``pygmo.archipelago`` object is
+created that initializes a ``number_of_islands`` number of ``pygmo.island`` objects using the provided ``algo``,
+``prob``, and ``pop_size`` arguments. ``pygmo.archipelago`` then has an ``evolve()`` method that in turn calls the
+``evolve()`` method of all ``pygmo.island`` objects separately, and allocates a python process from a process pool to
+each island. The ``wait_check()`` method makes every island wait until all islands are done executing, which is needed
+for any topology to exchange individuals.
 
 
-TBC.
+.. tabs::
+
+     .. tab:: Python
+
+      .. toggle-header:: 
+         :header: Required **Show/Hide**
+
+            .. code-block:: python
+
+                from tudatpy.kernel.trajectory_design import shape_based_thrust, transfer_trajectory
+                import numpy as np
+                from typing import List, Tuple
+                import pygmo as pg
+                import matplotlib.pyplot as plt
+                import multiprocessing as mp
+
+                # Tudatpy imports
+                import tudatpy
+                from tudatpy.util import result2array
+                from tudatpy.kernel import constants
+                from tudatpy.kernel.numerical_simulation import environment_setup
+
+      .. literalinclude:: /_src_snippets/simulation/parallelization/pg_archi.py
+         :language: python
+
+     .. tab:: C++
+
+      .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
+         :language: cpp
+
 
