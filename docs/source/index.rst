@@ -233,7 +233,7 @@ to get started with them, have a look at our
 
 
     +++
-    .. link-button:: _src_user_guide/state_propagation/environment_setup/architecture/custom_models
+    .. link-button:: _src_user_guide/state_propagation/environment_setup/custom_models
             :type: ref
             :text: Find out more
             :classes: stretched-link btn-outline-primary

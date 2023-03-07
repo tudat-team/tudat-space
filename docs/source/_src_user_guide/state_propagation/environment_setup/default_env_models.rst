@@ -14,7 +14,7 @@ Default environment models
    :hidden:
    :maxdepth: 1
 
-   default_bodies_limited_time_range 
+   default_env_models/default_bodies_limited_time_range 
 
    
 To facilitate the creation of the celestial bodies in your simulation, Tudat provides the option of loading default

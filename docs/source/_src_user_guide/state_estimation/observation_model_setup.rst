@@ -8,7 +8,7 @@ Observation Model Setup
    :hidden:
    :maxdepth: 1
 
-   observation_models
+   observation_model_setup/observation_models
    
 Having defined the :ref:`link ends <linkEndSetup>`, you can now define and create the observation models. Below the general workflow for this is discussed.
 

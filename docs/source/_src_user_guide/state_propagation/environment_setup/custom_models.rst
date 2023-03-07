@@ -13,7 +13,7 @@ Custom models
    :hidden:
    :maxdepth: 1
 
-   environment_during_propagation
+   custom_models/environment_during_propagation
 
 When working with a very specific model or application, it often happens that the model you want to use is not implemented in Tudat. Two important examples are:
 
