@@ -9,6 +9,16 @@
 Examples
 =========
 
+.. toctree::
+   :maxdepth: 1
+
+     _src_examples/notebooks/propagation/*
+     _src_examples/notebooks/estimation/*
+     _src_examples/notebooks/pygmo/cassini1_mga_optimization.ipynb
+     _src_examples/notebooks/pygmo/himmelblau_minimization.ipynb
+     _src_examples/notebooks/pygmo/hodographic_shaping_mga_optimization.ipynb
+     _src_examples/notebooks/pygmo/asteroid_orbit_optimization/*
+
 There are several example applications disseminated in various forms.
 
 

@@ -243,14 +243,14 @@ to get started with them, have a look at our
 
 .. toctree::
    :titlesonly:
-   :maxdepth: 1
+   :maxdepth: 3
    :caption: Getting started
    :hidden:
 
    _src_getting_started/installation
    _src_getting_started/setup_dev_environment
    _src_getting_started/primers_coding_tools
-   _src_getting_started/examples
+   _src_getting_started/examples_test
    _src_getting_started/tudatpy_submodules
 
 .. toctree::
