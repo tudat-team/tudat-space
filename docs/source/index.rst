@@ -270,6 +270,7 @@ to get started with them, have a look at our
    :hidden:
 
    _src_advanced_topics/post_processing_python
+   _src_advanced_topics/parallelization
    _src_advanced_topics/optimization_pygmo
 
 .. toctree::

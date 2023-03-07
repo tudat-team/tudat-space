@@ -165,7 +165,7 @@ have two methods:
 
 Once the UDP class is created, we must create a PyGMO problem object by passing
 an instance of our class to ``pygmo.problem``. Note that an instance of the UDP class
-must be passed as input to pygmo.problem() and NOT the class itself. It is also possible to use a PyGMO UDP, i.e.
+must be passed as input to ``pygmo.problem()`` and NOT the class itself. It is also possible to use a PyGMO UDP, i.e.
 a problem that is already defined in PyGMO, but it will not be shown in this tutorial. In this example,
 we will use only one generation. More information about the PyGMO problem class is available
 `on the PyGMO website <https://esa.github.io/pygmo2/tutorials/using_problem.html>`_.
@@ -271,3 +271,193 @@ despite using only 10% of the computational resources.
 
 .. [Biscani2020] Biscani et al., (2020). A parallel global multiobjective framework for optimization: pagmo.
    Journal of Open Source Software, 5(53), 2338, https://doi.org/10.21105/joss.02338.
+
+
+Parallelization with PyGMO
+################################
+
+In this section, a short guide is given on the parallelization of tasks in Python, and specifically for application with
+PyGMO. Parallelization is very useful for optimization problems, because optimizations are generally quite resource
+intensive processes, and this can be curbed by applying some form of parallelity. There are two flavors of parallelity
+in PyGMO: One utilizing multi-threading, presented in :ref:`Multi-threading with Batch Fitness Evaluation` and one
+utilizing multi-processing, presented in :ref:`Multi-processing with Islands`. For a more general guide on
+parallelization, and specifically so-called batch Fitness Evaluation (BFE), have a look at :ref:`parallelization`.
+
+
+Multi-threading with Batch Fitness Evaluation 
+---------------------------------------------------
+
+Multi-threading in PyGMO is used with BFE; simply evaluating some fitness function in a batch, similar to the example
+explained above. For this, PyGMO has classes and methods to help setup a multi-threaded optimization. For this section,
+code snippets are shown below from `the hodographic shaping MGA trajectory example
+<https://github.com/tudat-team/tudatpy-examples/blob/master/pygmo/hodographic_shaping_mga_optimization.py>`_ and adapted
+to showcase the parallel capabilities. You can either define your own User-Defined Batch Fitness Evaluator (UDBFE),
+explained on the `pygmo documentation <https://esa.github.io/pygmo2/bfe.html>`_, or use the ``batch_fitness()`` method.
+Here, the latter is explained and used as this follows more naturally from :ref:`1. Creation of the UDP class` above. A
+UDBFE can be applied to any UDP -- with some constraints, making it more general and easier to apply out-of-the-box.
+However, using UDBFE's does not give you any control to determine how the batch is evaluated. For this reason,
+``batch_fitness()`` is used for this example. 
+
+In a UDP, BFE can be enabled by adding a ``batch_fitness()`` method to the class, as seen below. This method receives as
+input a 1D flattened array of all the design parameter vectors -- the first vector ranges from index [0, n], the second
+from [n, 2n] and so on, with a design variable vector of length n. The output is constructed analogously, where the
+length n is equal to the number of objectives. The ``batch_fitness()`` method is somewhat of a wrapper for the
+``fitness()`` method, all it has to do is convert the input array into a list of lists, then create a pool of worker
+processes that can be used.
+
+.. tabs::
+
+     .. tab:: Python
+
+      .. toggle-header:: 
+         :header: Required **Show/Hide**
+
+            .. code-block:: python
+
+                from tudatpy.kernel.trajectory_design import shape_based_thrust, transfer_trajectory
+                import numpy as np
+                from typing import List, Tuple
+                import pygmo as pg
+                import matplotlib.pyplot as plt
+                import multiprocessing as mp
+
+                # Tudatpy imports
+                import tudatpy
+                from tudatpy.util import result2array
+                from tudatpy.kernel import constants
+                from tudatpy.kernel.numerical_simulation import environment_setup
+
+      .. literalinclude:: /_src_snippets/simulation/parallelization/pygmo_batch_fitness.py
+         :language: python
+
+     .. tab:: C++
+
+      .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
+         :language: cpp
+
+Now that we have the ``batch_fitness()`` method defined, it must be called during the optimisation, which leads us to the
+next code snippet. Here, we use the ``pygmo.set_bfe()`` method of a ``pygmo.algorithm()`` object to add the batch fitness
+evaluation to the optimisation. Then, by default, the UDBFE ``pygmo.default_bfe()`` is given, but if the ``batch_fitness()``
+method exists in the UDP, this will automatically be used instead of the ``pygmo.default_bfe()``. You can also use the
+``b`` keyword argument for ``pygmo.island`` and ``pygmo.population`` to add a UDBFE or an instance of ``pygmo.bfe``, but
+this is not considered here.
+
+.. tabs::
+
+     .. tab:: Python
+
+      .. toggle-header:: 
+         :header: Required **Show/Hide**
+
+            .. code-block:: python
+
+                from tudatpy.kernel.trajectory_design import shape_based_thrust, transfer_trajectory
+                import numpy as np
+                from typing import List, Tuple
+                import pygmo as pg
+                import matplotlib.pyplot as plt
+                import multiprocessing as mp
+
+                # Tudatpy imports
+                import tudatpy
+                from tudatpy.util import result2array
+                from tudatpy.kernel import constants
+                from tudatpy.kernel.numerical_simulation import environment_setup
+
+      .. literalinclude:: /_src_snippets/simulation/parallelization/pg_bfe_evolve.py
+         :language: python
+
+     .. tab:: C++
+
+      .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
+         :language: cpp
+
+
+To show that the batch fitness evaluation actually works well, a few tests are done with various complexities: a EJ and
+EMEJ transfer with two different generation counts and population sizes each. Normally, the number of function
+evaluations would be a good indication of runtime complexity, however using BFE does not change that number. CPU time
+and depending on the CPU usage indirectly also clock time can give an indication of the effectiveness. It should be
+noted that this is software and hardware dependent, so the results should be taken with a grain of salt. For the simple
+problem (EJ) with few generations, adding the BFE actually increases the CPU time by almost 200%. As for the test with
+more generations, the addition of BFE increased run-time with almost 90%. The complex problem (EMEJ) shows slightly
+different behaviour; the test with few generations does improves when adding BFE by about 50%. This gain increases
+significantly for the test with more generations; an 80% decrease in clock time.
+
+.. note::
+
+   These simulations are tested on macOS Ventura 13.1 with a 3.1 GHz Quad-Core Intel Core i7 processor only. Four cores
+   (CPU's) are used during the BFE.
+
+
++--------------------+-------------------------+---------------------------+---------------+----------------+-----------------+
+| Transfer Sequence  | Gen count and Pop size  | Batch Fitness Evaluation  | CPU time [s]  | CPU usage [-]  | Clock time [s]  |
++====================+=========================+===========================+===============+================+=================+
+| EJ                 | gen30pop100             | no                        | 17.6          | 106%           | 16.7            |
+|                    |                         +---------------------------+---------------+----------------+-----------------+
+|                    |                         | yes                       | 130.7         | 443%           | 29.5            |
+|                    +-------------------------+---------------------------+---------------+----------------+-----------------+
+|                    | gen300pop1000           | no                        | 4500          | 78%            | 5770            |
+|                    |                         +---------------------------+---------------+----------------+-----------------+
+|                    |                         | yes                       | 3000          | 405%           | 735             |
++--------------------+-------------------------+---------------------------+---------------+----------------+-----------------+
+| EMEJ               | gen30pop100             | no                        | 70.1          | 97%            | 72.3            |
+|                    |                         +---------------------------+---------------+----------------+-----------------+
+|                    |                         | yes                       | 159.2         | 428%           | 37.2            |
+|                    +-------------------------+---------------------------+---------------+----------------+-----------------+
+|                    | gen300pop1000           | no                        | 4440          | 60%            | 7440            |
+|                    |                         +---------------------------+---------------+----------------+-----------------+
+|                    |                         | yes                       | 5946          | 404%           | 1470            |
++--------------------+-------------------------+---------------------------+---------------+----------------+-----------------+
+
+
+Multi-processing with Islands
+-----------------------------
+
+This section presents multi-processing with PyGMO using the ``pygmo.island`` and/or ``pygmo.archipelago`` class. An
+island is an object that enables asynchronous optimization of its population. An archipelago is a network that connects
+multiple islands -- ``pygmo.island`` objects -- with a ``pygmo.topology`` object. Islands can exchange individuals with
+one another through this topology. This topology can configure the exchange of individuals between islands in an
+archipelago. By default, the topology is the ``pygmo.unconnected`` type, which has no effect, resulting in a simple
+parallel evolution.
+
+In the code snippet below, inspired by `the hodographic shaping MGA trajectory example
+<https://github.com/tudat-team/tudatpy-examples/blob/master/pygmo/hodographic_shaping_mga_optimization.py>`_ but
+parallelized with an archipelago, a group of islands evolve in parallel. Specifically, a ``pygmo.archipelago`` object is
+created that initializes a ``number_of_islands`` number of ``pygmo.island`` objects using the provided ``algo``,
+``prob``, and ``pop_size`` arguments. ``pygmo.archipelago`` then has an ``evolve()`` method that in turn calls the
+``evolve()`` method of all ``pygmo.island`` objects separately, and allocates a python process from a process pool to
+each island. The ``wait_check()`` method makes every island wait until all islands are done executing, which is needed
+for any topology to exchange individuals.
+
+
+.. tabs::
+
+     .. tab:: Python
+
+      .. toggle-header:: 
+         :header: Required **Show/Hide**
+
+            .. code-block:: python
+
+                from tudatpy.kernel.trajectory_design import shape_based_thrust, transfer_trajectory
+                import numpy as np
+                from typing import List, Tuple
+                import pygmo as pg
+                import matplotlib.pyplot as plt
+                import multiprocessing as mp
+
+                # Tudatpy imports
+                import tudatpy
+                from tudatpy.util import result2array
+                from tudatpy.kernel import constants
+                from tudatpy.kernel.numerical_simulation import environment_setup
+
+      .. literalinclude:: /_src_snippets/simulation/parallelization/pg_archi.py
+         :language: python
+
+     .. tab:: C++
+
+      .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
+         :language: cpp
+
+
