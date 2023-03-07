@@ -52,6 +52,12 @@ extensions = ['sphinx.ext.autodoc',
 
 sphinx_tabs_valid_builders = ['linkcheck']
 
+# Specifying thumbnails according to images in _static folder
+nbsphinx_thumbnails = {
+    '_src_getting_started/_src_examples/notebooks/propagation': '_src_getting_started/_static/propagation_example_thumbnail.png',
+    '_src_getting_started/_src_examples/notebooks/pygmo': '_src_getting_started/_static/pygmo_example_thumbnail.png',
+}
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
