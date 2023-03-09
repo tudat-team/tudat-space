@@ -19,9 +19,12 @@ Defining observation settings
 
 Tudat supports a diverse set of observation types, (see :ref:`observation_model_overview` for a comprehensive list). The creation of an observation model is done in a similar manner as models used for the numerical propagation: an object defining the settings of each observation model is created, which is then processed to create the actual observation model.
 
-A basic observation is defined by a combination of its type, and a link definition. Most observation types may (or must) have additional settings, such as light-time corrections, biases, etc. 
+.. note::
 
-Below is a basic example of creating settings for two observation models.s
+    A basic observation is defined by a combination of its type, and a link definition. Most observation types may (or must) have additional settings, such as light-time corrections, biases, etc.
+
+Below is a basic example of creating settings for two observation models. Note that the below code snippet defines a one-way range and one-way Doppler (open-loop) observable, each with the New Norcia ESTRACK station/Mars Express as transmitter/receiver (see :ref:`linkEndSetup`). These settings are put into the ``observation_settings_list`` list. Note that this list of observation model settings can be extended with any number of entries, with any number of link ends. The only limitation is that you may not have duplicate entries of link ends *and* observable type (as this would essentially define an identical type of observation).
+
 
 .. code-block:: python
 
@@ -38,12 +41,11 @@ Below is a basic example of creating settings for two observation models.s
     observation_settings_list.append( observation_setup.one_way_open_loop_doppler( one_way_nno_mex_link_ends ) )
                 
                 
-This defines a one-way range and one-way Doppler (open-loop) observable, each with the New Norcia ESTRACK station/Mars Express as transmitter/receiver (see :ref:`linkEndSetup`). These settings are put into the ``observation_settings_list`` list. Note that this list of observation model settings can be extended with any number of entries, with any number of link ends. The only limitation is that you may not have duplicate entries of link ends *and* observable type (as this would essentially define an identical type of observation). 
 
 When defining observation models, you can for most types of models define settings for:
 
 * **Biases:** A bias in TudatPy is applied to the observable after its 'ideal' value computed from the environment is computed. You can find a list of settings for observation biases in our `API documentation <https://py.api.tudat.space/en/latest/observation.html>`_
-* **Light-time corrections:** When using an observable that involves the observation of one point/body in space by another (including any observable that involves the exchange of elecromagnetic signals), it is automatically assumed that the signal travels at the speed of light, and the associated light-time is determined when calcialting the observable. Deviations from the signal's ideal trajectory (straight line at speed of light) may be defind by adding light-time correction settings, as listed in our `API documentation <https://py.api.tudat.space/en/latest/observation.html>`_
+* **Light-time corrections:** When using an observable that involves the observation of one point/body in space by another (including any observable that involves the exchange of elecromagnetic signals), it is automatically assumed that the signal travels at the speed of light, and the associated light-time is determined when calculating the observable. Deviations from the signal's ideal trajectory (straight line at speed of light) may be defind by adding light-time correction settings, as listed in our `API documentation <https://py.api.tudat.space/en/latest/observation.html>`_
 * **Light-time convergence settings:** Calculating the light time between two link ends requires the iterative solution of the light-time equation. Default settings for convergence criteria for this solution are implemented, but a user may modify these settings if so desired. The associated settings object can be created using the :func:`~tudatpy.numerical_simulation.estimation_setup.observation.light_time_convergence_settings` function.
 
 
@@ -85,7 +87,7 @@ Depending on the type of simulation you are using, you can use one of two manner
 
     .. code-block:: python
 
-        # Create physical environment (as set of physical bodies)
+        # Create physical environment (a set of physical bodies)
         bodies = ...
 
         # Create settings for observation models
@@ -101,15 +103,17 @@ Depending on the type of simulation you are using, you can use one of two manner
 
        
         # Create physical environment (as set of physical bodies)
-        estimator = Estimator(...)
-        
-        # Exract observation simulators
+        estimator = Estimator(bodies,
+        parameters_to_estimate,
+        observation_settings_list,
+        propagator_settings)
+        # Extract observation simulators
         observation_simulators = estimator.observation_simulators
         
-In either case, the ``observation_simulators`` variable is a list of objects derived from :class:`~tudatpy.numerical_simulation.estimation.ObservationSimulator`, with a single object responsible for the simulation of a single *type* of observable (*e.g.* one-way range, one-way Doppler, *etc.*). The ``observation_simulators`` list of simulators can then be used for :ref:`observationSimulation`.
+In either case, the ``observation_simulators`` variable is a list of objects derived from :class:`~tudatpy.numerical_simulation.estimation.ObservationSimulator`, with a single object responsible for the simulation of a single *type* of observable (*e.g.* one-way range, one-way Doppler, *etc.*). The ``observation_simulators`` is then used for simulating the actual observations to be used in the analysis, as described in :ref:`observationSimulation`.
+Note that the ``ObservationSimulator`` is responsible for *all* observations of a given kind, the ``ObservationModel`` simulates observations of a single kind, for a single set of link ends (e.g. one-way range observations between a given ground station and a single spacecraft). Details on the associated options can be found in the API documentation.
 
 For 'manual' simulation of observations, you can extract an :class:`~tudatpy.ObservationModel` object from the ``ObservationSimulator`` (TODO example).
-Whereas the ``ObservationSimulator`` is responsible for *all* observations of a given kind, the ``ObservationModel`` simulates observations of a single kind, for a single set of link ends (e.g. one-way range observations between a given ground station and a single spacecraft). Details on the associated options can be found in the API documentation.
 
 
 

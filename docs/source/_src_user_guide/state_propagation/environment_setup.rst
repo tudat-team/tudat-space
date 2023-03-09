@@ -1,4 +1,4 @@
-.. _environment_setup:
+. _environment_setup:
 
 =================
 Environment Setup

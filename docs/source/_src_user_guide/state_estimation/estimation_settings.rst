@@ -3,13 +3,13 @@
 Estimation Settings
 ====================
 
-Having defined the link ends, observation models, and having loaded/simulated all the relevant observations, the settings for the observations can be created.
+Having defined the link ends, observation models, and having loaded/simulated all the relevant observations, the settings for the estimations can be created.
 
-The definition of the parameters that are to be fit to the (simulated) data are defined as described :ref:`parameter_settings`, and the dynamical model used to propagate initial states is defined identically as for the :ref:`propagation of dynamics <propagation_setup>`.
+The definition of the parameters that are to be fit to the (simulated) data are defined as described in :ref:`parameter_settings`, and the dynamical model used to propagate initial states is defined identically as for the :ref:`propagation of dynamics <propagation_setup>`.
 
-The remaining settings for the data analysis relate to how the (simulated) data are to be used in the further analysis. We distinguish between two different types of analyses:
+The remaining settings for the data analysis relate to how the (simulated) data is to be used in the further analysis. We distinguish between two different types of analyses:
 
-* **A covariance analysis**: no actual estimation is performed, but the data uncertainty is propagated onto the parameter uncertainty. In essence, it determines what the parameter uncertainty would be *if* we were to do an actual estimation. The validity of thee covariance analysis depends on a number of assumptions
+* **A covariance analysis**: no actual estimation is performed, but the data uncertainty is propagated onto the parameter uncertainty. In essence, it determines what the parameter uncertainty would be *if* we were to do an actual estimation. The validity of the covariance analysis depends on a number of assumptions
   * The weight matrix (see below) is a perfect representation of the noise properties of the observations
   * The ideal observation models (without random noise) are a perfect representation of reality
   * The dynamics model is a perfect representation of reality
@@ -45,9 +45,9 @@ The basic definition of settings for a covariance analysis only requires the obs
 
 Where the *inverse* a priori covariance matrix can be provided as an optional input argument (see :func:`~tudatpy.numerical_simulation.estimation.observation.covariance_analysis_input`). The resulting object ``covariance_analysis_settings`` (of type :class:`~tudatpy.numerical_simulation.estimation.observation.CovarianceAnalysisInput`) can be used to tune the exact behaviour of the covariance analysis process (see :func:`~tudatpy.numerical_simulation.estimation.observation.CovarianceAnalysisInput.define_covariance_settings` for details).
 
-The weight matrix is typically not provided as a full matrix, as the its size of :math:`N_{obs}\times N_{obs}` leads to prohibitive memory usage. Presently, we only support the definition of a diagonal weights matrix. Note that the weight matrix diagonal entry :math:`W_{i,i}` is related to the observation Gaussian noise as :math:`W_{i,i}=1/\sigma_{i}^{2}` Several options are provided to set the weights matrix diagonal (as :class:`~tudatpy.numerical_simulation.estimation.observation.CovarianceAnalysisInput` member functions):
+The weight matrix is typically not provided as a full matrix, as the its size of :math:`N_{obs}\times N_{obs}` leads to prohibitive memory usage. Presently, we only support the definition of a diagonal weights matrix. Note that the weight matrix diagonal entry :math:`W_{i,i}` is related to the observation's Gaussian noise as :math:`W_{i,i}=1/\sigma_{i}^{2}`. Several options are provided to set the weights matrix diagonal (as :class:`~tudatpy.numerical_simulation.estimation.observation.CovarianceAnalysisInput` member functions):
 
-* Constant weight for all observation .
+* Constant weight for all observation.
 * Constant weight for all observations of a given observation type
 * Constant weight for all observations of a given observation type, with a given set of link ends
 * Manual link end definition, per observation. See :ref:`here <accessing_observations>` for the meaning of entry :math:`i` in the observations vector.
