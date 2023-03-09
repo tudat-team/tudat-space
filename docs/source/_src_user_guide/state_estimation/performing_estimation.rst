@@ -13,7 +13,7 @@ Having created all the relevant settings for the physical environment (see :ref:
         observation_settings_list,
         propagator_settings)
         
-where the propagator settings may be single-, multi- or hybrid arc. Creating an ``Estimator`` object automatically propagates the dynamics and variational equations for the specifief propagator and parameter settings.
+where the propagator settings may be single-, multi- or hybrid arc. Creating an ``Estimator`` object automatically propagates the dynamics and variational equations for the specific propagator and parameter settings.
 
 Covariance analysis
 -------------------
@@ -32,7 +32,7 @@ where the ``covariance_analysis_settings`` is an object of type :class:`~tudatpy
 Normalization
 ^^^^^^^^^^^^^
 
-The partial derivative matrix :math:`\mathbf{H}=\frac{\partial\mathbf{h}}{\partial\mathbf{p}}` is computed automatically for all observations and parameters, from which the inverse covariance :math:`\mathbf{P}^{-1}` is then computed, as described :ref:`here <covarianceSettings>`. However, due to the potentially huge difference in order of magnitude of the estimated parameters (for instance, the Sun's gravitational parameter, at approximately 1.3267:math:`\cdot 10^{20}` m^3/s^2, and the bias of a VLBI observaion, at :math:`10^{-9}` radians), the inversion of the matrix :math:`\mathbf{P}^{-1}` can be extremely ill-posed. We partly correct for this problem by normalizing the parameters.
+The partial derivative matrix :math:`\mathbf{H}=\frac{\partial\mathbf{h}}{\partial\mathbf{p}}` is computed automatically for all observations and parameters, from which the inverse covariance :math:`\mathbf{P}^{-1}` is then computed, as described :ref:`here <covarianceSettings>`. However, due to the potentially huge difference in order of magnitude of the estimated parameters (for instance, the Sun's gravitational parameter, at approximately :math:` 1.3267 \cdot 10^{20}` m^3/s^2, and the bias of a VLBI observaion, at :math:`10^{-9}` radians), the inversion of the matrix :math:`\mathbf{P}^{-1}` can be extremely ill-posed. We partly correct for this problem by normalizing the parameters.
 
 The normalization is achieved by computing a vector :math:`\mathbf{N}` (of the same size as the parameter vector :math:`\mathbf{p}`, such that for each column of the matrix :math:`\mathbf{H}`, we have:
 

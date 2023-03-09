@@ -2,7 +2,7 @@
 .. _observation_model_overview:
 
 ==================
-Observation models
+Observation Models
 ==================
 
 On this page, we provide an overview of the categories of observation models that are available (with links to API documentation), as well as some general notes on their usages, typical pitfalls, hints, etc.
@@ -12,7 +12,7 @@ On this page, we provide an overview of the categories of observation models tha
 Available Model Types
 =====================
 
-Below is a list with the different observation models is given. It is important to realize that Tudat does *not* make an a priori distinction between different manners in which the same observation may be realized. For instance, a VLBI observation of a spacecraft, referenced to the geocenter, and an optical astrometric observation of Io by a spacecraft, are both modelled as an ``angular_position`` observable. The difference between the different realization lies in the different noise levels, link  ends, biases, etc., while using the same observation model.
+Below, a list of different observation models is presented. It is important to realize that Tudat does *not* make an a priori distinction between different manners in which the same observation may be realized. For instance, a VLBI observation of a spacecraft, referenced to the geocenter, and an optical astrometric observation of Io by a spacecraft, are both modelled as an ``angular_position`` observable. The difference between the different realization lies in the different noise levels, link  ends, biases, etc., while using the same observation model.
 
 * Range observations: 
 
@@ -52,9 +52,10 @@ Below is a list with the different observation models is given. It is important 
 Points of attention
 ===================
 
-Here, we give a brief overview of some specific aspects of the obserevation models that may be useful for a user to
-know, in order to properly select and understand their choice of obserevation models.
-This page is meant to supplement the API documentation, and is *not* a comprehensive overview of all obserevation models.
+Here, we give a brief overview of some specific aspects of the observation models that may be useful for a user to
+know, in order to properly select and understand their choice of observation models.
+This page is meant to supplement the API documentation, and is *not* a comprehensive overview of all observation models.
+
 
 
 .. _two_three_way_observables:
@@ -62,7 +63,7 @@ This page is meant to supplement the API documentation, and is *not* a comprehen
 Two- and three-way observables  
 ------------------------------
 
-In the typical terminology of (deep-)space tracking, an observable denoted as 'two-way', with an uplink and downlink to (typically) a space segment has the same transmitter for the uplink, and receiver for the downlink (e.g. only a single ground station involved in the observation). An observable that is denoted as 'three-way' on the other hand, is used for a two-way observable (e.g. a single uplink and a single downlink) where the transmitting and receiving ground station are *not* the same. In Tudat, both types of observations are defined using the 'two-way' functions (e.g. :func:`~tudatpy.numerical_simulation.estimation_setup.observation.two_way_range`), with the distinction between the typical naming convention of two- and three-way observations made in the ``link_ends`` that are provided as input (``transmitter`` and ``receiver`` sthe same entry, or not). The n-way observations in Tudat, such as :func:`~tudatpy.numerical_simulation.estimation_setup.observation.n_way_range`, define observations with :math:`n` links (e.g. ground station -> spacecraft 1 -> spacecraft 2 -> spacecraft 1  -> ground station would be an example for :math:`n=4`). 
+In the typical terminology of (deep-)space tracking, an observable denoted as 'two-way', with an uplink and downlink to (typically) a space segment has the same transmitter for the uplink, and receiver for the downlink (e.g. only a single ground station involved in the observation). An observable that is denoted as 'three-way' on the other hand, is used for a two-way observable (e.g. a single uplink and a single downlink) where the transmitting and receiving ground station are *not* the same. In Tudat, both types of observations are defined using the 'two-way' functions (e.g. :func:`~tudatpy.numerical_simulation.estimation_setup.observation.two_way_range`), with the distinction between the typical naming convention of two- and three-way observations made in the ``link_ends`` that are provided as input (``transmitter`` and ``receiver`` the same entry, or not). The n-way observations in Tudat, such as :func:`~tudatpy.numerical_simulation.estimation_setup.observation.n_way_range`, define observations with :math:`n` links (e.g. ground station -> spacecraft 1 -> spacecraft 2 -> spacecraft 1  -> ground station would be an example for :math:`n=4`).
 
 
 .. _doppler_types:
@@ -70,7 +71,8 @@ In the typical terminology of (deep-)space tracking, an observable denoted as 't
 Doppler types
 -------------
 
-A typical Doppler observable from e.g. the Deep Space Network does not provide the instantaneous observed range-rate. Instead, it provides an observable that is equivalent to the range-rate averaged over an integration time :math:`\Delta t`. At present, this is implemented in Tudat as the difference between two range observations, offset in time by :math:`\Delta t`. These observables are provided by the ``..._doppler_averaged`` obserevables. To compute the instantanous Doppler observable, such as those for instance generated by a tracking station in open-loop mode, use the ``..._doppler_instantaneous`` observable. 
+A typical Doppler observable from e.g. the Deep Space Network does not provide the instantaneous observed range-rate. Instead, it provides an observable that is equivalent to the range-rate averaged over an integration time :math:`\Delta t`. At present, this is implemented in Tudat as the difference between two range observations, offset in time by :math:`\Delta t`. These observables are provided by the ``..._doppler_averaged`` obserevables. To compute the instantanous Doppler observable, such as those for instance generated by a tracking station in open-loop mode, use the ``..._doppler_instantaneous`` observable, an example
+refers to :class:`~tudatpy.numerical_simulation.estimation_setup.observation.one_way_doppler_instantaneous` in the API documentation.
 
 
 Instantaneous Doppler Implementation
@@ -83,7 +85,7 @@ The instantaneous Doppler observables are all derived from the one-way observabl
 
 where the :math:`T` and :math:`R` subscripts denote the transmitter and receiver, :math:`\tau` denotes the proper time as experience by an observed, and :math:`t` denotes coordinate time. The multiplication by :math:`c` (speed of light) may be omitted by selecting a non-dimensionalized observable in the factory function. In the present context, :math:`t` is taken as dynamical barycentric time (TDB). Note that, unless otherwise specified, all times used in Tudat are in TDB. Even though TDB is not technically a coordinate time, in the above equation :math:`t` may be referred to TDB, as the constant scaling offset between TDB and TCB (barycentric coordinat time) drops out of the above equation.
 
-For basic simulations. The :math:`\frac{d\tau}{dt}` terms can be omitted (by not providing the proper time rate settings in the factory function), so that the observable becomes:
+For basic simulations, the :math:`\frac{d\tau}{dt}` terms can be omitted (by not providing the proper time rate settings in the factory function), so that the observable becomes:
 
 .. math::
     h=\left(\frac{dt_{T}}{dt_{R}} - 1\right)c
