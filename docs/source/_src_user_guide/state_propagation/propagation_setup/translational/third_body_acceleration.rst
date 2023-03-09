@@ -6,7 +6,7 @@ Third-body accelerations
 
 Settings for a third-body and central gravitational acceleration are defined identically to direct gravitational
 accelerations. During the creation and processing of the acceleration models, TudatPy distinguishes three different
-cases, for the body :math:`A` exerting the acceleration, the body :math:`B` undergoing the acceleration,
+cases, for the body :math:`A` undergoing the acceleration, the body :math:`B` exerting the acceleration,
 and the body :math:`C` as the center of propagation.
 
 
