@@ -22,4 +22,3 @@ Numerical propagation of dynamics
   ./propagation/reentry_trajectory.ipynb
   ./propagation/separation_satellites_diff_drag.ipynb
   ./propagation/solar_system_propagation.ipynb
-  ./propagation/two_stage_rocket_ascent.ipynb
