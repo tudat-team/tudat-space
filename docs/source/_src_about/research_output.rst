@@ -8,6 +8,7 @@ Tudat has also been used extensively in research projects. Many of those that re
 
 **Journal publications**
 
+- `Sensitivity analysis of polar orbiter motion to lunar viscoelastic tidal deformation <https://link.springer.com/article/10.1007/s10569-023-10131-w>`_ Hu, X., Stark, A., Dirkx, D., Hussmann, H., Fienga, A., Briaud, A., Memin, A., Melini, D., Fayolle, M., Rambaux, N., Baguet, D. and Oberst, J. (2023). Celestial Mechanics and Dynamical Astronomy, 135(16)
 - `Graveyard orbits for future Mars missions <https://www.sciencedirect.com/science/article/pii/S027311772200624X>`_ Aggarwal, K., & Noomen, R. (2022). Advances in Space Research (in press)
 - `Cold Atom Interferometry for Enhancing the Radio Science Gravity Experiment: A Phobos Case Study <https://www.mdpi.com/2072-4292/14/13/3030>`_ Plumaris, M., Dirkx, D., Siemes, C., & Carraz, O. (2022). Remote Sensing, 14(13), 3030.
 - `The Influence of Dynamic Solar Oblateness on Tracking Data Analysis from Past and Future Mercury Missions <https://www.mdpi.com/2072-4292/14/17/4139>`_ van der Zwaard, R., & Dirkx, D. (2022).  Remote Sensing, 14(17), 4139.
