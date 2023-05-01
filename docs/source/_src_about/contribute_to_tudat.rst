@@ -11,7 +11,7 @@ Any contribution you have to Tudat is very welcome! This can come in the form of
   * `Tudatpy code (C++) <https://github.com/tudat-team/tudatpy>`_ where the C++ functionality is exposed to Python using `pybind11 <https://pybind11.readthedocs.io/en/stable/index.html>`_
   * `Tudatpy examples code (Python/Jupyter) <https://github.com/tudat-team/tudatpy-examples>`_ where the :ref:`getting_started_examples` of our project are located
   * `Tudat space (sphinx) <https://github.com/tudat-team/tudat-space>`_ where the markup language that generates this website is located
-  * `Tudat API docs (docstings) <https://github.com/tudat-team/tudat-multidocs>`_ where the entries of our `API documentation <https://py.api.tudat.space/en/latest/>`_ are located
+  * `Tudat API docs (docstrings) <https://github.com/tudat-team/tudat-multidoc>`_ where the entries of our `API documentation <https://py.api.tudat.space/en/latest/>`_ are located
 
 * Join our Slack chat! This is where most of our coding discussion takes place. Send an `e-mail <https://www.tudelft.nl/staff/d.dirkx/>`_ to get an invite. 
 * Part of our development workflow is documented on our `developer docs <https://tudat-developer.readthedocs.io/en/latest/>`_. This site is still under construction, and any input is more than welcome!
