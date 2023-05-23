@@ -133,6 +133,13 @@ Two rotation models, which are typically used for vehicles under :ref:`thrust <t
 * The rotation model :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.aerodynamic_angle_based`, which calculates the body's rotation based on the angle of attack, sideslip angle and bank angle. Note that these angles are definend w.r.t. the relative wind. This model is typical when using, for instance, a re-entry simulation. It imposes these three angles, and calculates the body orientation by combination with the latitude, longitude, heading angle, flight path angles. There is a related model, :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.zero_pitch_moment_aerodynamic_angle_based`, that uses the same setup, but does not impose the angle of attack, but caculates by imposing aerodynamic pitch trim (zero pitch moment).
 * The rotation model :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.custom_inertial_direction_based`, which is typical when calculating dynamics of a vehicle under thrust. It is based on linking a body-fixed  direction (now limited to the body-fixed x-axis) to an arbitrary inertial direction. This allows the thrust (assuming that this is aligned with this same body-fixed direction) to be guided in an inertial direction determined by a user-defined model. 
 
+Note that when modifying the rotation model settings, the name of the body-fixed frame may also be changed (as is the case for, for instance, the :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.gcrs_to_itrs`, where the body-fixed frame has the name "ITRS").
+One consequence of this is that you may get an error from the spherical harmonic gravity field, which can no longer find the frame to which it is associated. This can be resolved by (for instance) associating the gravity field to the new frame. For the above example, this would be done by the following:
+
+.. code-block:: python
+                
+    body_settings.get( "Earth" ).gravity_field_settings.associated_reference_frame = "ITRS"
+    
 Wind models
 -----------
 
