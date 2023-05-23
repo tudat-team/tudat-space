@@ -92,7 +92,7 @@ Gravity field
 Atmosphere
 -----------
 
-- Earth: NRLMSISE-00 density model (see :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.nrlmsise00`; default input file is used)
+- Earth: US76 density model (using interpolation of tabulated data :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.us76`)
 - All other bodies: none
 
 .. _c:
