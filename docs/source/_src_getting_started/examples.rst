@@ -11,8 +11,6 @@ Examples
 
 There are several example applications disseminated in various forms.
 
-
-
 .. panels::
     :body: text-left
     :header: text-center
@@ -61,46 +59,11 @@ There are several example applications disseminated in various forms.
         :classes: btn-outline-primary btn-block stretched-link
 
 
-Propagation
------------
 
 .. nbgallery::
-   :caption: Numerical propagation of dynamics
+   :caption: Categories of example applications
    :glob:
 
-   _src_examples/notebooks/propagation/*
-
-Estimation
-----------
-
-.. nbgallery::
-   :caption: Estimation of dynamics and parameters
-   :glob:
-
-   _src_examples/notebooks/estimation/*
-
-PyGMO
------
-
-.. note::
-   If you have never used PyGMO before, please
-   consider reading our introductory guide: :ref:`optimization_pygmo`.
-
-.. nbgallery::
-   :caption: Optimization with PyGMO
-   :glob:
-
-   _src_examples/notebooks/pygmo/cassini1_mga_optimization.ipynb
-   _src_examples/notebooks/pygmo/himmelblau_minimization.ipynb
-   _src_examples/notebooks/pygmo/hodographic_shaping_mga_optimization.ipynb
-
-Asteroid Orbit Optimization
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. nbgallery::
-   :caption: Asteroid Orbit Optimization
-   :glob:
-
-   _src_examples/notebooks/pygmo/asteroid_orbit_optimization/*
-
-
+   _src_examples/notebooks/propagation.rst
+   _src_examples/notebooks/estimation.rst
+   _src_examples/notebooks/pygmo.rst

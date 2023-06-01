@@ -275,7 +275,7 @@ Some resources related to Tudatpy are located elsewhere. See below!
 
 .. toctree::
    :titlesonly:
-   :maxdepth: 1
+   :maxdepth: 3
    :caption: Getting started
    :hidden:
 
