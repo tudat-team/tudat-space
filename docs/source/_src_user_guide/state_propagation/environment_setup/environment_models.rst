@@ -76,8 +76,8 @@ Aerodynamic coefficients
 ------------------------
 
 See the section on :ref:`aerodynamic coefficients during the propagation <aerodynamics_during_propagation>`
-concerning a number of points of attention regarding the aerodynamic coefficients, concerning the frame in which
-they are defined.
+concerning a number of points of attention regarding the aerodynamic coefficients, such as the frame in which
+they are defined, definition of their independent variables, control surfaces, etc.
 
 
 Ephemeris models
@@ -110,6 +110,7 @@ Unlike most other environment model options in Tudat, there are multiple options
 * Point mass: defining the gravitational parameter manually (:func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.central`) or requiring the gravitational parameter to be extracted from Spice (:func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.central_spice`).
 * Spherical harmonics: defining all the settings manually (:func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.spherical_harmonic`), loading a pre-defined model for a soalr system body (:func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.from_file_spherical_harmonic`) or calculating the spherical harmonic coefficients (up to a given degree) based on an ellipsoidal homogeneous mass distribution (:func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.spherical_harmonic_triaxial_body`)
 
+.. _rotation_model_specifics:
 
 Rotation models
 ---------------
@@ -122,17 +123,19 @@ sometimes indirect, influences on the dynamics
 * A :ref:`thrust acceleration <thrust_models>` in Tudat is calculated from two models: (1) an engine model, which defined the body-fixed direction of the thrust, and the magnitude of the thrust (2) the orientation of the body in space, defined by its rotation model
 * For a non-spherical central body shape models, the current orientation of this central body has an indirect influence on the altitude at which a vehicle with a given *inertial* state is located
 
-Two rotation models, which are typically used for vehicles under :ref:`thrust <thrust_models>`, and/or vehicles undergoing :ref:`aerodynamic forces <aerodynamic_models>`, are the following:
+**Rotation and thrust** Two rotation models, which are typically used for vehicles under :ref:`thrust <thrust_models>`, and/or vehicles undergoing :ref:`aerodynamic forces <aerodynamic_models>`, are the following:
 
 * The rotation model :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.aerodynamic_angle_based`, which calculates the body's rotation based on the angle of attack, sideslip angle and bank angle. Note that these angles are definend w.r.t. the relative wind. This model is typical when using, for instance, a re-entry simulation. It imposes these three angles, and calculates the body orientation by combination with the latitude, longitude, heading angle, flight path angles. There is a related model, :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.zero_pitch_moment_aerodynamic_angle_based`, that uses the same setup, but does not impose the angle of attack, but caculates by imposing aerodynamic pitch trim (zero pitch moment).
 * The rotation model :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.custom_inertial_direction_based`, which is typical when calculating dynamics of a vehicle under thrust. It is based on linking a body-fixed  direction (now limited to the body-fixed x-axis) to an arbitrary inertial direction. This allows the thrust (assuming that this is aligned with this same body-fixed direction) to be guided in an inertial direction determined by a user-defined model. 
 
-Note that when modifying the rotation model settings, the name of the body-fixed frame may also be changed (as is the case for, for instance, the :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.gcrs_to_itrs`, where the body-fixed frame has the name "ITRS").
+**Relation to gravity field** When modifying the rotation model settings, the name of the body-fixed frame may also be changed (as is the case for, for instance, the :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.gcrs_to_itrs`, where the body-fixed frame has the name "ITRS").
 One consequence of this is that you may get an error from the spherical harmonic gravity field, which can no longer find the frame to which it is associated. This can be resolved by (for instance) associating the gravity field to the new frame. For the above example, this would be done by the following:
 
 .. code-block:: python
                 
     body_settings.get( "Earth" ).gravity_field_settings.associated_reference_frame = "ITRS"
+    
+**High-accuracy Earth rotation model** The :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.gcrs_to_itrs` creates a high accuracy rotation model, following the IERS 2010 Conventions. This includes small variations that are not predicted by models, but are instead measured by geodetic techniques and published as tabulated data by the IERS. If so desired, the exact files used for these corrections may be adapted by the user (see :func:`~tudatpy.astro.earth_orientation.EarthOrientationAnglesCalculator`), which includes specific settings for daily variations in earth rotation angle, which influences the UTC - UT1 time conversion. 
     
 .. _rigid_body_gravity_field:
     

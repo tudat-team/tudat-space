@@ -45,8 +45,10 @@ In simple simulations, a user may want to define a constant :math:`\alpha`, :mat
         # Define constant angles
         angle_of_attack = np.deg2rad( 40.0 )
         bank_angle = np.deg2rad( 20.0 )
+        
         # Define angle function (required for input to rotation settings)   
-		angle_function = lambda time : np.ndarray([angle_of_attack, 0.0, bank_angle])
+	angle_function = lambda time : np.ndarray([angle_of_attack, 0.0, bank_angle])
+        
         # Create settings for rotation model
         rotation_model_settings = environment_setup.rotation_model.aerodynamic_angle_based(
             central_body="Earth",
@@ -61,8 +63,10 @@ Alternatively, the angle of attack may be defined based on pitch trim, so that t
 
         # Define constant angles
         bank_angle = np.deg2rad( 20.0 ) 
+        
         # Define angle function (required for input to rotation settings)   
-		angle_function = lambda time : np.ndarray([0.0, bank_angle])
+	angle_function = lambda time : np.ndarray([0.0, bank_angle])
+        
         # Create settings for rotation model
         rotation_model_settings = environment_setup.rotation_model.zero_pitch_moment_aerodynamic_angle_based(
             central_body="Earth",

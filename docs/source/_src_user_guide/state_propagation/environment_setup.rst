@@ -15,6 +15,7 @@ Environment Setup
    environment_setup/default_env_models
    environment_setup/custom_models
    environment_setup/frames_in_environment
+   environment_setup/times_and_dates
    environment_setup/available_state_definitions_conversions
    environment_setup/environment_architecture
    environment_setup/thrust_refactor
