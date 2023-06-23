@@ -20,6 +20,11 @@ The default (processed) representation for solving the rotational equations of m
 
 Several other formulations can be used if wanted (see below and :ref:`processed_propagated_states`).
 
+To propagate rotational dynamics, an inertia tensor for the propagated body must be defined. The inertia tensor is handled by the `Rigid body properties <https://py.api.tudat.space/en/latest/rigid_body.html>`_ in Tudat. Note that, by endowing a body with a gravity field, such properties are automaticallyt created (although in the case of a spherical harmonic gravity field, additional information must be provided, see :ref:`rigid_body_gravity_field`,
+
+.. note::
+
+    At present, influence of the time-variability of the inertia tensor (and other effects related to time-variation of mass distribution such as jet damping) are not included in the evaluation of the rotational equations of motion, *even in the case where the inertia tensor is time variable'. 
 
 
 Inputs

@@ -50,6 +50,12 @@ The complete list of available environment model settings can be found on our AP
 
    * These models provide various ways in which to define the response of a body to incident radation pressure.
 
+
+* `Rigid body properties <https://py.api.tudat.space/en/latest/rigid_body.html>`_, to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.rigid_body_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`.   
+
+   * This property defines the mass, center of mass and inertia tensor of a body. If the body has a gravity field, corresponding rigid body properties are automatically created (but, defining rigid body properties does not define a gravity field!) Note: If defined manually, the inertia tensor must be provided in the body-fixed frame (the orientation of which is defined by the body's rotation model), and must *not* be normalized. 
+ 
+  
 * `Ground stations <https://py.api.tudat.space/en/latest/ground_station.html>`_, to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.ground_station_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`.  Note: this attribute is a list, and any number of stations may be added.  
 
    * These models define ground stations (which includes planetary landers) on a celestial body. Each ground station may have any number of station motion models assigned to it. 
@@ -70,8 +76,8 @@ Aerodynamic coefficients
 ------------------------
 
 See the section on :ref:`aerodynamic coefficients during the propagation <aerodynamics_during_propagation>`
-concerning a number of points of attention regarding the aerodynamic coefficients, concerning the frame in which
-they are defined.
+concerning a number of points of attention regarding the aerodynamic coefficients, such as the frame in which
+they are defined, definition of their independent variables, control surfaces, etc.
 
 
 Ephemeris models
@@ -104,18 +110,7 @@ Unlike most other environment model options in Tudat, there are multiple options
 * Point mass: defining the gravitational parameter manually (:func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.central`) or requiring the gravitational parameter to be extracted from Spice (:func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.central_spice`).
 * Spherical harmonics: defining all the settings manually (:func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.spherical_harmonic`), loading a pre-defined model for a soalr system body (:func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.from_file_spherical_harmonic`) or calculating the spherical harmonic coefficients (up to a given degree) based on an ellipsoidal homogeneous mass distribution (:func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.spherical_harmonic_triaxial_body`)
 
-Polyhedron models
------------------
-A polyhedron can be used to define both gravity (:func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.polyhedron_from_gravitational_parameter`)
-and shape (:func:`~tudatpy.numerical_simulation.shape.gravity_field.polyhedron`) models. Since both models tend to be computationally intensive (the gravity
-model more so), it is recommended to use polyhedra with the lowest number of facets that allows meeting the desired accuracy. The number of facets of a polyhedron
-model can be reduced using any mesh processing software, for example `PyMeshLab <https://pymeshlab.readthedocs.io/en/latest/>`_.
-Additionally, different functions to process a polyhedron are available in `Polyhedron utilities <https://py.api.tudat.space/en/latest/polyhedron_utilities.html>`_.
-
-Inertia tensor
---------------
-
-TODO: write documentation
+.. _rotation_model_specifics:
 
 Rotation models
 ---------------
@@ -128,17 +123,43 @@ sometimes indirect, influences on the dynamics
 * A :ref:`thrust acceleration <thrust_models>` in Tudat is calculated from two models: (1) an engine model, which defined the body-fixed direction of the thrust, and the magnitude of the thrust (2) the orientation of the body in space, defined by its rotation model
 * For a non-spherical central body shape models, the current orientation of this central body has an indirect influence on the altitude at which a vehicle with a given *inertial* state is located
 
-Two rotation models, which are typically used for vehicles under :ref:`thrust <thrust_models>`, and/or vehicles undergoing :ref:`aerodynamic forces <aerodynamic_models>`, are the following:
+**Rotation and thrust** Two rotation models, which are typically used for vehicles under :ref:`thrust <thrust_models>`, and/or vehicles undergoing :ref:`aerodynamic forces <aerodynamic_models>`, are the following:
 
 * The rotation model :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.aerodynamic_angle_based`, which calculates the body's rotation based on the angle of attack, sideslip angle and bank angle. Note that these angles are definend w.r.t. the relative wind. This model is typical when using, for instance, a re-entry simulation. It imposes these three angles, and calculates the body orientation by combination with the latitude, longitude, heading angle, flight path angles. There is a related model, :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.zero_pitch_moment_aerodynamic_angle_based`, that uses the same setup, but does not impose the angle of attack, but caculates by imposing aerodynamic pitch trim (zero pitch moment).
 * The rotation model :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.custom_inertial_direction_based`, which is typical when calculating dynamics of a vehicle under thrust. It is based on linking a body-fixed  direction (now limited to the body-fixed x-axis) to an arbitrary inertial direction. This allows the thrust (assuming that this is aligned with this same body-fixed direction) to be guided in an inertial direction determined by a user-defined model. 
 
-Note that when modifying the rotation model settings, the name of the body-fixed frame may also be changed (as is the case for, for instance, the :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.gcrs_to_itrs`, where the body-fixed frame has the name "ITRS").
+**Relation to gravity field** When modifying the rotation model settings, the name of the body-fixed frame may also be changed (as is the case for, for instance, the :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.gcrs_to_itrs`, where the body-fixed frame has the name "ITRS").
 One consequence of this is that you may get an error from the spherical harmonic gravity field, which can no longer find the frame to which it is associated. This can be resolved by (for instance) associating the gravity field to the new frame. For the above example, this would be done by the following:
 
 .. code-block:: python
                 
     body_settings.get( "Earth" ).gravity_field_settings.associated_reference_frame = "ITRS"
+    
+**High-accuracy Earth rotation model** The :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.gcrs_to_itrs` creates a high accuracy rotation model, following the IERS 2010 Conventions. This includes small variations that are not predicted by models, but are instead measured by geodetic techniques and published as tabulated data by the IERS. If so desired, the exact files used for these corrections may be adapted by the user (see :func:`~tudatpy.astro.earth_orientation.EarthOrientationAnglesCalculator`), which includes specific settings for daily variations in earth rotation angle, which influences the UTC - UT1 time conversion. 
+    
+.. _rigid_body_gravity_field:
+    
+Rigid body properties and gravity fields
+-----------------------------------------
+
+Rigid body properties will always be created automatically when a body is endowed with a gravity field, as described below:
+
+* Point-mass gravity field: mass computed from gravitational parameter; zero inertia tensor, and center of mass at origin of body-fixed frame
+* Spherical harmonic gravity field: mass computed from gravitational parameter, center of mass computed from degree 1 gravity field coefficients, inertia tensor as described below
+* Polyhedron gravity field: mass computed from gravitational parameter, center of mass and inertia tensor computed from homogeneous mas distribution inside body
+
+For the spherical harmonic gravity field, the normalized mean moment of inertia must be set by the user, to allow an inertia tensor to be computed. This is done using the :attr:`~tudatpy.numerical_simulation.environment_setup.gravity_field.SphericalHarmonicsGravityFieldSettings.scaled_mean_moment_of_inertia` attribute of the :class:`~tudatpy.numerical_simulation.environment_setup.gravity_field.SphericalHarmonicsGravityFieldSettings` class, as in the example below
+
+        .. tabs::
+
+         .. tab:: Python
+
+          .. literalinclude:: /_src_snippets/simulation/environment_setup/adding_inertia_tensor.py
+             :language: python
+             
+This code snippet will automatically create a rigid body properties for Mars, with the inertia tensor computed from this value of 0.365 and the degree 2 gravity field coefficients. Note that, if gravity field variations are used for the body, time-variability of the degree 1- and 2- coefficients will be reflected in time-variability of the body's center of mass and inertia tensor. 
+
+
     
 Wind models
 -----------
@@ -177,4 +198,13 @@ where a simple ground station is created (with only a name and a position), with
 * From a list of :class:`~tudatpy.numerical_simulation.environment_setup.ground_station.GroundStationMotionSettings` objects, which can be assigned to the ground station settings (see e.g. :func:`~tudatpy.numerical_simulation.environment_setup.ground_station.basic_station`). These models define time-variability of individual ground stations, in addition to the global shape deformation.
 
 To automatically create a list of settings for all DSN stations (which are then typically assigned to the ``ground_station_settings`` of Earth), the :func:`~tudatpy.numerical_simulation.environment_setup.ground_station.dsn_station_settings` can be used.
+
+
+Polyhedron models
+-----------------
+A polyhedron can be used to define both gravity (:func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.polyhedron_from_gravitational_parameter`)
+and shape (:func:`~tudatpy.numerical_simulation.shape.gravity_field.polyhedron`) models. Since both models tend to be computationally intensive (the gravity
+model more so), it is recommended to use polyhedra with the lowest number of facets that allows meeting the desired accuracy. The number of facets of a polyhedron
+model can be reduced using any mesh processing software, for example `PyMeshLab <https://pymeshlab.readthedocs.io/en/latest/>`_.
+Additionally, different functions to process a polyhedron are available in `Polyhedron utilities <https://py.api.tudat.space/en/latest/polyhedron_utilities.html>`_.
 

@@ -45,8 +45,10 @@ In simple simulations, a user may want to define a constant :math:`\alpha`, :mat
         # Define constant angles
         angle_of_attack = np.deg2rad( 40.0 )
         bank_angle = np.deg2rad( 20.0 )
+        
         # Define angle function (required for input to rotation settings)   
-		angle_function = lambda time : np.ndarray([angle_of_attack, 0.0, bank_angle])
+	angle_function = lambda time : np.ndarray([angle_of_attack, 0.0, bank_angle])
+        
         # Create settings for rotation model
         rotation_model_settings = environment_setup.rotation_model.aerodynamic_angle_based(
             central_body="Earth",
@@ -61,15 +63,16 @@ Alternatively, the angle of attack may be defined based on pitch trim, so that t
 
         # Define constant angles
         bank_angle = np.deg2rad( 20.0 ) 
+        
         # Define angle function (required for input to rotation settings)   
-		angle_function = lambda time : np.ndarray([0.0, bank_angle])
+	angle_function = lambda time : np.ndarray([0.0, bank_angle])
+        
         # Create settings for rotation model
         rotation_model_settings = environment_setup.rotation_model.zero_pitch_moment_aerodynamic_angle_based(
             central_body="Earth",
             target_frame = "VehicleFixed",
 
 Note that the ``angle_function`` now returns only two angles, instead of the three angles in the previous example, as the :math:`\alpha` is no longer user-specified.
-            
                 
 Time- and environment-dependent angles
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -86,6 +89,10 @@ A more complicated algorithm to compute the aerodynamic angles may be defined us
 
 The above example will apply the model :math:`\alpha=\dot{\alpha}(t-t_{0})` (and similar for :math:`\sigma`), so that the angles vary linearly over time.
 
+Aerodynamic moments
+===================
+
+In Tudat, aerodynamic moment coefficients can be provided and used in the same manner as aerodynamic force coefficients when (for instance) propagating rotational dynamics. Nominally, the aerodynamic force coefficients are *not* used to compute a correction to the aerodynamic moments, implicitly assuming that the aerodynamic moment reference point is equal to the vehicle's center of mass. However, in some cases, for instance where the center-of-mass is time-variable, the contribution of the force coefficients to the moment coefficients is to be taken into account. This is handled by the :attr:`~tudatpy.numerical_simulation.environment_setup.aerodynamic_coefficients.AerodynamicCoefficientSettings.add_force_contribution_to_moments` attribute of the :attr:`~tudatpy.numerical_simulation.environment_setup.aerodynamic_coefficients.AerodynamicCoefficientSettings` class. If a (non-NaN) moment reference point is provided to the aerodynamic coefficienr settings, this boolean is automatically set to True. To disable the addition of the force contribution to the moment coefficients, this attribute can be manually set to False after the creation of the aerodynamic coefficient settings. 
 
 .. _control_surfaces:
 
