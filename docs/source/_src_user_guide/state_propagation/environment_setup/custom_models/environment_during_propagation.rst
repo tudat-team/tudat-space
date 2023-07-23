@@ -87,23 +87,23 @@ Flight conditions
 
         .. code-block:: python
 
-                current_altitude = bodies.get( "Earth" ).flight_conditions.altitude
-                current_longitude = bodies.get( "Earth" ).flight_conditions.longiude
-                current_latitude = bodies.get( "Earth" ).flight_conditions.latitude
+                current_altitude = bodies.get( "Vehicle" ).flight_conditions.altitude
+                current_longitude = bodies.get( "Vehicle" ).flight_conditions.longiude
+                current_latitude = bodies.get( "Vehicle" ).flight_conditions.latitude
 
     as well as its derived class that also incorporates atmospheric properties
 
         .. code-block:: python
 
-            current_airspeed = bodies.get( "Earth" ).flight_conditions.airspeed
-            current_freestream_density = bodies.get( "Earth" ).flight_conditions.density
-            current_mach_number = bodies.get( "Earth" ).flight_conditions.mach_number
+            current_airspeed = bodies.get( "Vehicle" ).flight_conditions.airspeed
+            current_freestream_density = bodies.get( "Vehicle" ).flight_conditions.density
+            current_mach_number = bodies.get( "Vehicle" ).flight_conditions.mach_number
 
     The :class:`~tudatpy.numerical_simulation.environment.FlightConditions` class also contains an object of type :class:`~tudatpy.numerical_simulation.environment.AerodynamicAngleCalculator`, which handles the calculation of angles (latitude, longitude, flight path angle, heading angle, angle of attack, sidelip angle, bank angle) and transformations between reference frames (inertial, central-body-fixed, vertical, trajectory, aerodynamic and body-fixed frames; see `this reference <https://repository.tudelft.nl/islandora/object/uuid%3Ae5fce5a0-7bce-4d8e-8249-e23293edbb55>`_ for details) typically used in flight dynamics. The angles and frames are listed in the tudatpy enums :class:`~tudatpy.numerical_simulation.environment.AerodynamicsReferenceFrameAngles` and :class:`~tudatpy.numerical_simulation.environment.AerodynamicsReferenceFrames`, respectively. Each of the angles, and the rotation between each of the frames, can be retrieved as follows (for two representative examples):
 
     .. code-block:: python
 
-        angle_calculator = bodies.get( "Earth" ).flight_conditions.aerodynamic_angle_calculator
+        angle_calculator = bodies.get( "Vehicle" ).flight_conditions.aerodynamic_angle_calculator
         bank_angle = angle_calculator.get_angle( environment.bank_angle )
         rotation_matrix_vertical_to_body_fixed = angle_calculator.get_rotation_matrix_between_frames( environment.vertical_frame, environment.body_frame )
 
