@@ -15,3 +15,7 @@ Estimation of dynamics and parameters
 .. nbgallery::
 
   ./estimation/covariance_estimated_parameters.ipynb
+  ./estimation/full_estimation_example.ipynb
+  ./estimation/estimation_dynamical_models.ipynb
+  ./estimation/galilean_moons_state_estimation.ipynb
+  
