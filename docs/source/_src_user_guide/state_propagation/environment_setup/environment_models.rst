@@ -50,6 +50,9 @@ The complete list of available environment model settings can be found on our AP
 
    * These models provide various ways in which to define the response of a body to incident radation pressure.
 
+..
+   TODO-RP Change once tudatpy interface is known, link to _radiation_pressure_acceleration
+
 
 * `Rigid body properties <https://py.api.tudat.space/en/latest/rigid_body.html>`_, to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.rigid_body_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`.   
 

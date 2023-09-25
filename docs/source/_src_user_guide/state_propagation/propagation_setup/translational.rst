@@ -12,6 +12,7 @@ Translational Dynamics
    translational/acceleration_model_setup
    translational/available_acceleration_models
    translational/third_body_acceleration
+   translational/radiation_pressure_acceleration
    translational/thrust_models
    translational/aerodynamics
 
