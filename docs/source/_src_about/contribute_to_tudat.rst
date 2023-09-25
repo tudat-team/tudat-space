@@ -90,6 +90,7 @@ Below, there is a list of contributors to Tudat. Mostly, these have been staff a
 * `Tineke Roegiers <https://www.linkedin.com/in/roegiers/>`_
 * `Alexander Ronse <https://www.linkedin.com/in/alexander-ronse-1401a5b/>`_
 * `Mattia Topini <https://www.linkedin.com/in/mattia-topini-796448175/>`_
+* `Dominik Stiller <https://www.linkedin.com/in/dominikstiller/>`_
 
 
 ..
