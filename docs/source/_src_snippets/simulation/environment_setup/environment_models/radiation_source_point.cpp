@@ -1,5 +1,5 @@
 // Luminosity given directly
-// This line can be omitted in real code since this is the default source model for the Sun
+// These lines can be omitted in real code since this is the default source model for the Sun
 double luminosity = 3.828e26;  // W
 bodySettings.at("Sun")->radiationSourceModelSettings =
         isotropicPointRadiationSourceModelSettings(

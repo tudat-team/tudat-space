@@ -19,7 +19,7 @@ In most orbits, there are two sources of radiation: direct solar radiation, and 
 
 Isotropic point source
 ------------------------
-The radiation due to an isotropic point source depends only on the distance, not on the spherical position. If the source is far away, all rays are virtually parallel. This is, for example, the case for solar radiation at 1 AU. The default source model for the sun is such a point source with a luminosity of 3.828 × 10\ :sup:`26` W. The luminosity can also be given as irradiance at a given distance (e.g., as total solar irradiance/TSI).
+The radiation due to an isotropic point source depends only on the distance, not on the spherical position. If the source is far away, all rays are virtually parallel. This is, for example, the case for solar radiation at 1 AU. The default source model for the Sun is such a point source with a luminosity of 3.828 × 10\ :sup:`26` W. The luminosity can also be given as irradiance at a given distance (e.g., as total solar irradiance/TSI at 1 AU).
 
 .. tabs::
 
@@ -31,9 +31,11 @@ The radiation due to an isotropic point source depends only on the distance, not
 
 Extended source
 ------------------------
-Planetary radiation is generally not isotropic and the spacecraft is relatively close to the surface. Therefore, the central body is modeled as extended source, which is discretized into panels. Each panel emits radiation as defined by a radiosity model. Usually, these include albedo radiation (reflected solar radiation) and thermal radiation (due to surface heating). This model was described by Knocke et al. [Knocke1988]_.
+Planetary radiation is generally not isotropic and the spacecraft is relatively close to the surface. Therefore, the central body is modeled as an extended source, which is discretized into panels. This model was described by Knocke et al. [Knocke1988]_. Each panel emits radiation as defined by a radiosity model. Usually, these include albedo radiation (reflected solar radiation) and thermal radiation (due to surface heating).
 
-Albedo and thermal radiosity models require an original source, the radiation of which is reflected or re-radiated. Therefore, the Sun body needs to be added if Earth or Moon radiation is used.
+The fidelity increases with the number of panels, which are arranged into rings. Convergence tests are recommended to find a sufficient number of rings. Commonly used numbers of rings: LAGEOS: 2 rings for Earth; LRO: 5-6 rings for the Moon.
+
+Albedo and thermal radiosity models require an original source, the radiation of which is reflected or re-radiated. Therefore, the Sun body needs to be added if Earth or Moon radiation is used. Intrinsic sources (e.g., due to tidal heating or from flux observations) do not require an original source. However, the corresponding class (``CustomInherentSourcePanelRadiosityModel``) is not exposed yet.
 
 .. tabs::
 
@@ -44,7 +46,6 @@ Albedo and thermal radiosity models require an original source, the radiation of
 
 
 
-
 Radiation pressure target models
 =================================
 The spacecraft acceleration due to radiation pressure depends on the cross-section area, optical properties, and mass. The dependence on the area-to-mass ratio is similar to drag. Optical properties are relevant since reflected radiation imparts more momentum than absorbed radiation. There are two target models in Tudat.
@@ -52,7 +53,7 @@ The spacecraft acceleration due to radiation pressure depends on the cross-secti
 
 Cannonball target
 ------------------
-A cannonball models the spacecraft as isotropic sphere defined by the cross-section area and a radiation pressure coefficient. This model is useful for estimation, but cannot capture changing geometry and orientation, which can have large effects on accelerations.
+A cannonball models the spacecraft as isotropic sphere defined by the cross-section area and a radiation pressure coefficient. This model is useful for parameter estimation, but typically cannot capture changing geometry and orientation, which can have large effects on accelerations.
 
 .. tabs::
 
@@ -72,6 +73,34 @@ A paneled target can account for the spacecraft geometry. The cross-section and 
 
       .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/radiation_pressure_target_paneled.cpp
          :language: cpp
+
+
+
+Dependent variables
+=================================
+There is a number of dependent variables associated with radiation pressure acceleration:
+
+* ``singleAccelerationDependentVariable(radiation_pressure, "TargetBody", "SourceBody")``: Cartesian vector of acceleration in propagation frame
+* ``receivedIrradianceDependentVariable("TargetBody", "SourceBody")``: received irradiance by target due to source (in W/m²)
+
+For point source only:
+
+* ``receivedFractionDependentVariable("TargetBody", "SourceBody")``: received fraction of irradiance, given ny shadow function (between 0 and 1)
+
+For extended source only:
+
+* ``visibleAndEmittingSourcePanelCountDependentVariable("TargetBody", "SourceBody")``: number of source panels contributing to irradiance at target
+* ``visibleSourceAreaDependentVariable("TargetBody", "SourceBody")``: total area of source panels contributing to irradiance at target
+
+
+
+Assumptions
+============================
+Some assumptions are made for radiation pressure models:
+
+* The paneled target is much smaller than the extended source and far enough away. Therefore, all target panels receive the same irradiance, from the same direction. The source irradiance is evaluated at the target center.
+* The extended source far enough away from the original source (e.g., 1 AU for Earth and Sun). Therefore, the panels of the extended source receive the same irradiance, from the same direction. The original source irradiance is evaluated at the source center.
+* The extended source is a perfect sphere, and not an oblate spheroid. Panels are distributed on the perfect sphere.
 
 
 
