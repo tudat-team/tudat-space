@@ -1,6 +1,5 @@
 
 // Earth albedo and thermal radiation with two rings as introduced by Knocke (1988)
-// These line can be omitted in real code since this is the default source model for yEarth
 bodySettings.at("Earth")->radiationSourceModelSettings =
         extendedRadiationSourceModelSettings({
                 albedoPanelRadiosityModelSettings(SecondDegreeZonalPeriodicSurfacePropertyDistributionModel::albedo_knocke, "Sun"),
