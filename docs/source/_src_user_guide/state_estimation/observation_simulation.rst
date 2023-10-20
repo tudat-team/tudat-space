@@ -3,11 +3,17 @@
 Observation Simulation
 ======================
 
-Having defined the :ref:`available_observation_models`, you can now simulate actual observations to use in your analysis,
+Using the observation simulators described on the previous page , you can now simulate actual observations to use in your analysis,
 or load real data into your analysis. Below, we first describe :ref:`observationTypes2`, and how to analyze the
 resulting data structures. Finally, we provide a (preliminary) introduction to :ref:`loading_data`.
 
 .. _observationTypes2:
+
+.. note::
+
+    In Tudat, we distinguish between "Observation Model Settings" (described on the :ref:`previous page <observationModelSetup>`) and "Observation Simulation Settings", described on this page.
+    The Model Settings defines the observation model: the software block that computes the observations. The Simulation Settings define *how to use the observation model*, for instance at which time to
+    compute an observation, with which reference link end, which integration time (if applicable), etc.
 
 Defining observation simulation settings
 ----------------------------------------
@@ -222,10 +228,24 @@ Since the dependent variables that are saved in the ``ObservationCollection`` wi
 .. _loading_data:
 
 Loading external observations
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------------
 
-Tudat contains a number of functions for loading typical tracking data types (TODO) into a list of :class:`~tudatpy.numerical_simulation.estimation.observation.SingleObservationSet` objects. A user may also load any external data source into Tudat-compatible observations. This can be done using the :func:`~tudatpy.numerical_simulation.estimation.observation.create_single_observation_set` function, which allows a user to load all the required raw data for an observabtion. A list of these observation sets can then be put into an observation collection using the :class:`~tudatpy.numerical_simulation.estimation.observation.observation_collection` function. 
+Tudat contains a number of pre-defined functions for loading various tracking data types into a list of :class:`~tudatpy.numerical_simulation.estimation.observation.SingleObservationSet` objects.
+A user may also load any external data source into Tudat-compatible observation types. This can be done using the :func:`~tudatpy.numerical_simulation.estimation.observation.single_observation_set` function,
+which allows a user to load all the required raw data for an observation. A list of these observation sets can then be put into an :class:`~tudatpy.numerical_simulation.estimation.observation.ObservationCollection` object.
 
+Below is a list of options to generate/load external observations in Tudat
+
+Generating position pseudo-observations from external sources
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Using some external source (for instance: Spice kernels) to compute/extract position observables (e.g. using the 3-dimensional Cartesian position of a body at an epoch as an 'observable'), and then fitting these observations to a dynamical model in Tudat can be very useful.
+In particular, such a procedure allows you to quantify exactly how closely the dynamical model settings used in Tudat can recreate the published orbit. The source of the Cartesian positions is up to the user, but typical sources are:
+
+* Body positions from Spice kernels. NOTE: Spice kernels with spacecraft orbits for a large number of planetary missions can be found
+* Body positions from JPL Horizons
+* TLEs propagated in time using an SGP4 propagator, and rotated to an inertial frame
+* SP3c files containing tabulated state histories, typically for Earth-orbiting spacecraft
 
 
 
