@@ -158,6 +158,9 @@ Aerodynamic
 Radiation Pressure
 #############################
 
+..
+  TODO-RP change to single acceleration model, link to _radiation_pressure_acceleration
+
 There are two different radiation pressure models available in TudatPy:
 
 - :ref:`cannonball_radiation_pressure`

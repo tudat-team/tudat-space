@@ -95,6 +95,12 @@ Atmosphere
 - Earth: US76 density model (using interpolation of tabulated data :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.us76`)
 - All other bodies: none
 
+Radiation source
+----------------
+- Sun: Isotropic point source with a luminosity of 3.828 × 10\ :sup:`26` W
+- Earth: seasonally varying albedo and thermal model with two rings, described `here <https://doi.org/10.2514/6.1988-4292>`__
+- All other bodies: none
+
 .. _c:
 
 .. _spice_in_tudat:
