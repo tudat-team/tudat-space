@@ -13,12 +13,10 @@ in the same manner, using the :func:`~tudatpy.numerical_simulation.propagation_s
 which takes the source model of the body exerting the acceleration, and the target model of the body undergoing the
 acceleration, and links these models to set up the specific acceleration model.
 For extensive details on the mathematical
-models, see `this paper <http://resolver.tudelft.nl/uuid:8a82400a-2233-4a84-98be-ed37f7eeb620>`_.
+models, see Stiller [Stiller2023]_..
 
 .. contents:: Contents:
     :depth: 3
-
-
 
 
 Radiation source models
@@ -55,6 +53,8 @@ Planetary radiation is generally not isotropic and the spacecraft is relatively 
 Therefore, the central body is modeled as an extended source, which is discretized into panels.
 This model was described by Knocke et al. [Knocke1988]_. Each panel emits radiation as defined by a radiosity model.
 Typically, these include albedo radiation (reflected solar radiation) and/or thermal radiation (due to surface heating).
+Defining settings for an extended source model is done using the :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.panelled_extended_radiation_source`
+function, which requires surface radiosity models, and settings for the surface discretization.
 
 The following options are supported for defining surface radiosity models:
 
@@ -71,22 +71,40 @@ For a number of the above models, a surface distribution of a property has to be
   * Surface distribution defined by spherical harmonics: :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.spherical_harmonic_surface_property_distribution`, or :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.predefined_spherical_harmonic_surface_property_distribution`
   * Surface distribution as per Knocke et al. [Knocke1988]_ (degree-two zonal spherical harmonic definition, with time-variable degree-one coefficient): :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.knocke_type_surface_property_distribution`, or :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.predefined_knocke_type_surface_property_distribution`
 
-For each of the above options, the surface
-The fidelity increases with the number of panels, which are arranged into rings. Convergence tests are recommended to
-find a sufficient number of rings. Commonly used numbers of rings: LAGEOS: 2 rings for Earth; LRO: 5-6 rings for the Moon.
+When using any of the above models to calculate a radiation pressure acceleration on a target, the extended source is panelled and the per-panel contribution to the
+source's irradiance at the target is computed. This panelling is done dynamically, in the sense that the panel locations
+are re-evaluated at every step of the numerical integration such that the panelling is always symmetric about the nadir point.
+The panelling methods is based on Knocke et al. [Knocke1988]_ and described in more detail by Stiller [Stiller2023]_. Summarized,
+the main assumptions are:
 
-Albedo and thermal radiosity models require an original source, the radiation of which is reflected or re-radiated.
-Therefore, the Sun body needs to be added if Earth or Moon radiation is used. Intrinsic sources (e.g., due to tidal
-heating or from flux observations) do not require an original source. However, the corresponding class
-(``CustomInherentSourcePanelRadiosityModel``) is not exposed yet.
+  * The source body is assumed spherical
+  * Only the spherical cap of the body that is visible from the target is panelled
+  * A single spherical panel is put at nadir, with :math:`N` rings around it with :math:`M_{i}` panels in ring :math:`i`
+  * Each panel has equal projected, attenuated area (see Eq. 8 of Stiller)
 
-.. tabs::
+The fidelity of the results increases with the number of panels (which can be defined by the user).
+Convergence tests are recommended to find a sufficient number of rings.
+Commonly used numbers of rings: LAGEOS: 2-3 rings for Earth; LRO: 5-6 rings for the Moon.
 
-     .. tab:: C++
+Putting the above options together, the above creates a panelled source model for the Earth from both albedo and IR,
+using the pre-defined Knocke-style surface distribution of both. Three rings are used in the dynamic panelling with
+6, 12 and 18 panels in the first, second and third ring, respectively.
 
-      .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/radiation_source_extended.cpp
-         :language: cpp
+.. code-block:: python
 
+    earth_surface_radiosity_models = [
+        radiation_pressure.albedo_variable_surface_radiosity(
+            albedo_distribution_model = radiation_pressure.predefined_knocke_type_surface_property_distribution( radiation_pressure.albedo_knocke ),
+            original_source_name = "Sun" ),
+        radiation_pressure.thermal_emission_blackbody_variable_emissivity(
+            emissivity_distribution_model = radiation_pressure.predefined_knocke_type_surface_property_distribution( radiation_pressure.emissivity_knocke ),
+            original_source_name = "Sun" ) ]
+    body_settings.get( "Earth" ).radiation_source_settings = radiation_pressure.panelled_extended_radiation_source(
+        earth_surface_radiosity_models, [ 6, 12, 18 ] )
+
+Albedo and thermal radiosity models often require a so-called original source (typically the Sun), the radiation of which is reflected or re-radiated.
+Thermal radiation defined directly (without reference to
+the original source), for instance by specifying a global temperature, is not yet implemented and exposed to Python.
 
 
 Radiation pressure target models
@@ -94,36 +112,33 @@ Radiation pressure target models
 The spacecraft acceleration due to radiation pressure depends on the cross-section area, optical properties, and mass.
 The dependence on the area-to-mass ratio is similar to drag. Optical properties are relevant since reflected radiation
 imparts more momentum than absorbed radiation. There are two target models in Tudat.
+Settings for a body are defined in the ``radiation_pressure_target_settings`` attribute of the :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings` class.
 
 
 Cannonball target
 ------------------
-A cannonball models the spacecraft as isotropic sphere defined by the cross-section area and a radiation
-pressure coefficient. This model is useful for parameter estimation, but typically cannot capture changing
-geometry and orientation, which can have large effects on accelerations.
-
-.. tabs::
-
-     .. tab:: C++
-
-      .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/radiation_pressure_target_cannonball.cpp
-         :language: cpp
+A cannonball target models the spacecraft as isotropic sphere defined by the cross-section area and a radiation
+pressure coefficient. This model is useful for applications that do not require high-fidelity radiation pressure modelling,
+but cannot capture the finer details of the radiation pressure interaction and may therefore not be suited to high-fidelity analysis.
+Settings for the cannonball model are created using the :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.cannonball_radiation_target` function.
 
 
 Paneled target
 ------------------
-A paneled target can account for the spacecraft geometry. The cross-section and optical properties can vary with attitude.
-This is particularly important for asymmetric spacecraft or when a solar array tracks the Sun. Optical surface properties
-are given by the specular and diffuse reflectivity coefficients.
+A panelled radiation pressure target model provides a more realistic representation than the cannonball model. It builds
+up the spacecraft out of a series of panels, where the interaction of the radiation with each of the panels is computed
+separately. Each panel may have different optical properties, and may be defined as being either fixed to the spaceraft body
+(e.g. bus panels) or may be defined to move w.r.t. the spacecraft body-fixed frame (for instance Sun-pointing solar arrays, or
+Earth-pointing antennas). At the moment, Tudat does not include panel shadowing in the calculations.
 
-.. tabs::
+Details on defining a panelled spacecraft model are defined TODO. The interaction of each panel is defined by a so-called
+reflection law. At the moment, Tudat implements two panel reflection laws:
 
-     .. tab:: C++
+  * Specular-diffuse reflection: :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.specular_diffuse_body_panel_reflection`
+  * Pure Lambertian reflection: :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.lambertian_body_panel_reflection`
 
-      .. literalinclude:: /_src_snippets/simulation/environment_setup/environment_models/radiation_pressure_target_paneled.cpp
-         :language: cpp
-
-
+With the body panels defined, the radiation pressure target model settings are created using the
+:func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.panelled_radiation_target` function.
 
 Dependent variables
 =================================
@@ -144,15 +159,17 @@ For extended source only:
 
 
 Assumptions
-============================
+===========
 Some assumptions are made for radiation pressure models:
 
 * The paneled target is much smaller than the extended source and far enough away. Therefore, all target panels receive the same irradiance, from the same direction. The source irradiance is evaluated at the target center.
 * The extended source far enough away from the original source (e.g., 1 AU for Earth and Sun). Therefore, the panels of the extended source receive the same irradiance, from the same direction. The original source irradiance is evaluated at the source center.
 * The extended source is a perfect sphere, and not an oblate spheroid. Panels are distributed on the perfect sphere.
 
-
+=================
 
 .. [Knocke1988] Knocke et al., (1988). Earth radiation pressure effects on satellites.
    American Institute of Aeronautics and Astronautics, Astrodynamics Conference, https://doi.org/10.2514/6.1988-4292.
+.. [Stiller2023] Knocke et al., (1988). EShort-term orbital effects of radiation pressure on the Lunar Reconnaissance Orbiter.
+   TU Delft, Research paper for the Honours Programme Bachelor, http://resolver.tudelft.nl/uuid:8a82400a-2233-4a84-98be-ed37f7eeb620.
 
