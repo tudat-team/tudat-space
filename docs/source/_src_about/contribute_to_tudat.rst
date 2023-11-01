@@ -98,10 +98,9 @@ Below, there is a list of contributors to Tudat. Mostly, these have been staff a
 * `Bart Römgens <https://www.linkedin.com/in/bart-r%C3%B6mgens-b7a19314/>`_
 * `Tineke Roegiers <https://www.linkedin.com/in/roegiers/>`_
 * `Alexander Ronse <https://www.linkedin.com/in/alexander-ronse-1401a5b/>`_
-* Dominik Stiller
+* `Dominik Stiller <https://www.linkedin.com/in/dominikstiller/>`_
 * `Mattia Topini <https://www.linkedin.com/in/mattia-topini-796448175/>`_
 * Rens van der Zwaard
-
 
 ..
    * Elmar Puts

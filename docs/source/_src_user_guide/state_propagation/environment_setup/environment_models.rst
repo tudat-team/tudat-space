@@ -50,16 +50,18 @@ The complete list of available environment model settings can be found on our AP
 
    * These models provide various ways in which to define the response of a body to incident radation pressure.
 
-
 * `Rigid body properties <https://py.api.tudat.space/en/latest/rigid_body.html>`_, to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.rigid_body_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`.   
 
    * This property defines the mass, center of mass and inertia tensor of a body. If the body has a gravity field, corresponding rigid body properties are automatically created (but, defining rigid body properties does not define a gravity field!) Note: If defined manually, the inertia tensor must be provided in the body-fixed frame (the orientation of which is defined by the body's rotation model), and must *not* be normalized. 
- 
-  
+
 * `Ground stations <https://py.api.tudat.space/en/latest/ground_station.html>`_, to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.ground_station_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`.  Note: this attribute is a list, and any number of stations may be added.  
 
    * These models define ground stations (which includes planetary landers) on a celestial body. Each ground station may have any number of station motion models assigned to it. 
- 
+
+* `Vehicle systems <https://py.api.tudat.space/en/latest/vehicle_systems.html>`_, currently limited to the vehicle exterior shape, to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.vehicle_shape_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`.
+
+   * These models define physical characteristics and hardware systems of the vehicle. This functionality is currently in a preliminary state, and its use in the body settings is limited to the vehicle's exterior shape.
+
   
 .. _specific_environment_considerations:
 
@@ -199,6 +201,10 @@ where a simple ground station is created (with only a name and a position), with
 
 To automatically create a list of settings for all DSN stations (which are then typically assigned to the ``ground_station_settings`` of Earth), the :func:`~tudatpy.numerical_simulation.environment_setup.ground_station.dsn_station_settings` can be used.
 
+Radiation pressure models
+-------------------------
+
+Details on the radiation pressure source and target models in Tudat are discussed on a :ref:`dedicated page <radiation_pressure_acceleration>`
 
 Polyhedron models
 -----------------
