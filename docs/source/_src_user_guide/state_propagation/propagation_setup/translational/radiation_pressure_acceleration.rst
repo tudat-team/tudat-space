@@ -13,7 +13,7 @@ in the same manner, using the :func:`~tudatpy.numerical_simulation.propagation_s
 which takes the source model of the body exerting the acceleration, and the target model of the body undergoing the
 acceleration, and links these models to set up the specific acceleration model.
 For extensive details on the mathematical
-models, see Stiller [Stiller2023]_..
+models, see [Stiller2023]_
 
 .. contents:: Contents:
     :depth: 3
@@ -51,7 +51,7 @@ Extended source
 ------------------------
 Planetary radiation is generally not isotropic and the spacecraft is relatively close to the surface.
 Therefore, the central body is modeled as an extended source, which is discretized into panels.
-This model was described by Knocke et al. [Knocke1988]_. Each panel emits radiation as defined by a radiosity model.
+This model was described by [Knocke1988]_. Each panel emits radiation as defined by a radiosity model.
 Typically, these include albedo radiation (reflected solar radiation) and/or thermal radiation (due to surface heating).
 Defining settings for an extended source model is done using the :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.panelled_extended_radiation_source`
 function, which requires surface radiosity models, and settings for the surface discretization.
@@ -69,12 +69,12 @@ For a number of the above models, a surface distribution of a property has to be
 
   * Globally constant surface distribution: :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.constant_surface_property_distribution`
   * Surface distribution defined by spherical harmonics: :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.spherical_harmonic_surface_property_distribution`, or :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.predefined_spherical_harmonic_surface_property_distribution`
-  * Surface distribution as per Knocke et al. [Knocke1988]_ (degree-two zonal spherical harmonic definition, with time-variable degree-one coefficient): :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.knocke_type_surface_property_distribution`, or :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.predefined_knocke_type_surface_property_distribution`
+  * Surface distribution as per [Knocke1988]_ (degree-two zonal spherical harmonic definition, with time-variable degree-one coefficient): :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.knocke_type_surface_property_distribution`, or :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.predefined_knocke_type_surface_property_distribution`
 
 When using any of the above models to calculate a radiation pressure acceleration on a target, the extended source is panelled and the per-panel contribution to the
 source's irradiance at the target is computed. This panelling is done dynamically, in the sense that the panel locations
 are re-evaluated at every step of the numerical integration such that the panelling is always symmetric about the nadir point.
-The panelling methods is based on Knocke et al. [Knocke1988]_ and described in more detail by Stiller [Stiller2023]_. Summarized,
+The panelling methods is based on [Knocke1988]_ and described in more detail by [Stiller2023]_. Summarized,
 the main assumptions are:
 
   * The source body is assumed spherical
@@ -141,21 +141,21 @@ With the body panels defined, the radiation pressure target model settings are c
 :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.panelled_radiation_target` function.
 
 Dependent variables
-=================================
+===================
 There is a number of dependent variables associated with radiation pressure acceleration:
 
-* ``singleAccelerationDependentVariable(radiation_pressure, "TargetBody", "SourceBody")``: Cartesian vector of acceleration in propagation frame
-* ``receivedIrradianceDependentVariable("TargetBody", "SourceBody")``: received irradiance by target due to source (in W/m²)
+* Cartesian vector of acceleration, in inertial frame, :func:`~tudatpy.numerical_simulation.propagation_setup.dependent_variable.single_acceleration`, with ``acceleration_type=radiation_pressure``
+* Received irradiance by target due to source (in W/m²), :func:`~tudatpy.numerical_simulation.propagation_setup.dependent_variable.received_irradiance`,
+* Received radiation pressure by target due to source (in N/m²), :func:`~tudatpy.numerical_simulation.propagation_setup.dependent_variable.received_irradiance`,
 
 For point source only:
 
-* ``receivedFractionDependentVariable("TargetBody", "SourceBody")``: received fraction of irradiance, given ny shadow function (between 0 and 1)
+* Received fraction of 'ideal' irradiance, given by the shadow function (between 0 and 1) as a result of occulting bodies,  :func:`~tudatpy.numerical_simulation.propagation_setup.dependent_variable.received_irradiance_shadow_function`,
 
 For extended source only:
 
 * ``visibleAndEmittingSourcePanelCountDependentVariable("TargetBody", "SourceBody")``: number of source panels contributing to irradiance at target
 * ``visibleSourceAreaDependentVariable("TargetBody", "SourceBody")``: total area of source panels contributing to irradiance at target
-
 
 
 Assumptions
@@ -170,6 +170,59 @@ Some assumptions are made for radiation pressure models:
 
 .. [Knocke1988] Knocke et al., (1988). Earth radiation pressure effects on satellites.
    American Institute of Aeronautics and Astronautics, Astrodynamics Conference, https://doi.org/10.2514/6.1988-4292.
-.. [Stiller2023] Knocke et al., (1988). EShort-term orbital effects of radiation pressure on the Lunar Reconnaissance Orbiter.
+.. [Stiller2023] Knocke et al., (1988). Short-term orbital effects of radiation pressure on the Lunar Reconnaissance Orbiter.
    TU Delft, Research paper for the Honours Programme Bachelor, http://resolver.tudelft.nl/uuid:8a82400a-2233-4a84-98be-ed37f7eeb620.
 
+
+Backwards compatibility
+========================
+
+As of tudatpy version 0.8, the radiation pressure implementation has been completely refactored. The code for the old
+cannonball radiation pressure models will, however, still be supported for some time. You can easily modify your code
+to start using the new interfaces, and access all the powerful new functionality we provide for radiation pressure!
+
+**Source model** In version <0.8, only the Sun was supported as a source, with a hard-coded constant luminosity.
+The default settings for the Sun's radiation pressure source models are identical to the ones in version >= 0.8, and no action needs to be taken
+to modify the code.
+
+**Target model** In version <0.8, the cannonball radiation pressure properties were defined through a 'radiation pressure interface', which
+has been replaced with a more flexible and generic target model.
+
+Creation of radiation pressure settings as follows (in version <0.8):
+
+.. code-block:: python
+
+    reference_area_radiation = 4.0
+    radiation_pressure_coefficient = 1.2
+    occulting_bodies = ["Earth"]
+    radiation_pressure_settings = environment_setup.radiation_pressure.cannonball(
+        "Sun", reference_area_radiation, radiation_pressure_coefficient, occulting_bodies )
+
+Is to be replaced with the creation of radiation_pressure_target_settings (in version >=0.8):
+
+.. code-block:: python
+
+    reference_area_radiation = 4.0
+    radiation_pressure_coefficient = 1.2
+    occulting_bodies_dict = dict()
+    occulting_bodies_dict[ "Sun" ].append( "Earth" )
+    vehicle_target_settings = environment_setup.radiation_pressure.cannonball_radiation_target(
+        reference_area_radiation, radiation_pressure_coefficient, occulting_bodies_dict )
+
+In version <0.8, the ``radiation_pressure_settings`` were either assigned to the ``radiationPressureSettings`` of the body settings, or assigned to existing bodies
+using the ``add_radiation_pressure_interface`` function. In version >=0.8, the interfaces are similar, either assigning the
+``radiation_pressure_target_settings`` to the body settings as follows (for a target body named 'Vehicle'):
+
+.. code-block:: python
+
+    body_settings.get( "Vehicle" ).radiation_pressure_target_settings = vehicle_target_settings
+
+or creating the target settings and adding them to an existing body:
+
+.. code-block:: python
+
+    add_radiation_pressure_target_model( bodies, "Vehicle", vehicle_target_settings )
+
+**Acceleration model** Finally, defining the settings for the acceleration model using the :func:`~propagation_setup.acceleration.cannonball_radiation_pressure`,
+this is now replaced with the :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.radiation_pressure`, which
+automatically checks the type of the target and source model, and creates the resulting acceleration model accordingly
