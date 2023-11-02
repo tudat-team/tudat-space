@@ -131,7 +131,7 @@ separately. Each panel may have different optical properties, and may be defined
 (e.g. bus panels) or may be defined to move w.r.t. the spacecraft body-fixed frame (for instance Sun-pointing solar arrays, or
 Earth-pointing antennas). At the moment, Tudat does not include panel shadowing in the calculations.
 
-Details on defining a panelled spacecraft model are defined TODO. The interaction of each panel is defined by a so-called
+Details on defining a panelled spacecraft model are defined by :ref:`vehicle_shape_models`. The interaction of each panel is defined by a so-called
 reflection law. At the moment, Tudat implements two panel reflection laws:
 
   * Specular-diffuse reflection: :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.specular_diffuse_body_panel_reflection`
@@ -150,13 +150,11 @@ There is a number of dependent variables associated with radiation pressure acce
 
 For point source only:
 
-* Received fraction of 'ideal' irradiance, given by the shadow function (between 0 and 1) as a result of occulting bodies,  :func:`~tudatpy.numerical_simulation.propagation_setup.dependent_variable.received_irradiance_shadow_function`,
+* Received fraction of 'ideal' irradiance, given by the shadow function (between 0 and 1) as a result of occulting bodies,  :func:`~tudatpy.numerical_simulation.propagation_setup.dependent_variable.received_irradiance_shadow_function`
 
 For extended source only:
 
-* ``visibleAndEmittingSourcePanelCountDependentVariable("TargetBody", "SourceBody")``: number of source panels contributing to irradiance at target
-* ``visibleSourceAreaDependentVariable("TargetBody", "SourceBody")``: total area of source panels contributing to irradiance at target
-
+* Total area of source panels contributing to irradiance at target (e.g. area of spherical cap that is panelled for computing the radiation pressure), :func:`~tudatpy.numerical_simulation.propagation_setup.dependent_variable.visible_radiation_source_area`
 
 Assumptions
 ===========
