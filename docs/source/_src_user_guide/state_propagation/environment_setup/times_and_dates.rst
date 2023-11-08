@@ -36,10 +36,23 @@ Below is an example of defining the current date and time through the Python ``d
         julian_day = tudat_datetime.julian_day( )
         modified_julian_day = tudat_datetime.modified_julian_day( )
 
-note that the inverse operations, creating a ``DateTime`` can from epoch, julian day, modified julian day or an iso string, are also available
+note that the inverse operations, creating a ``DateTime`` object from an epoch (:func:`~tudatpy.astro.time_conversion.date_time_from_epoch`),
+an iso string (:func:`~tudatpy.astro.time_conversion.date_time_from_iso_string`), or directly from the year, month, day and time
+(:class:`~tudatpy.astro.time_conversion.DateTime`  constructor) are also available
 
-In the above, the ``epoch`` is a floating point value, that can be used as input to (for instance) a numerical propagation. Note that this epoch may need to be converted to a different time scale (see below)       
-    
+In the above, the ``epoch`` is a floating point value, that can be used as input to (for instance) a numerical propagation.
+Note that this epoch may need to be converted to a different time scale (see below)
+
+Julian days
+===========
+
+In astrodynamics, the use of a Julian day (full days since 12:00 on 01-01-4713BC of the Julian calendar) or modified Julian day (full days since 00:00 of 17-11-1858 of the Gregorian calendar)
+continues to be prevalent. Although these time representations are not used directly inside Tudat, we do offer a number of useful conversion functions
+to support (modified) Julian days as input or output. Both quantities can be extracted directly as attributes from the :class:`~tudatpy.astro.time_conversion.DateTime` class.
+The function :func:`~tudatpy.astro.time_conversion.seconds_since_epoch_to_julian_day` can be used to convert the 'typical Tudat time of seconds since J2000 epoch to a Julian day,
+and :func:`~tudatpy.astro.time_conversion.julian_day_to_seconds_since_epoch` the inverse operation.
+a Julian day
+
 Conversion between time scales
 ==============================
 

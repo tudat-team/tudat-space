@@ -1,8 +1,3 @@
-
-.. attention::
-  
-  As of Tudatpy version 0.7, a number of modifications have been made to how Tudatpy deals with vehicle orientations, in particular in the context of thrust and aerodynamic guidance. These changes are, in part, :ref:`not backwards compatible<backwards_incompatibility>`. The examples below dealing with thrust and aerodynamics are **not yet up-to-date**. This will be corrected by mid-October.
-
 .. _pygmo_examples:
 
 ==============
@@ -16,9 +11,9 @@ PyGMO Examples
 Optimization with PyGMO
 ***********************
 
+Below, a number of examples of Tudat applications used the Pygmo optimization toolbox are shown. Note that a number of additional related examples are given on the page for :ref:`trajectory_optimization_examples`
+
 .. nbgallery::
 
-  ./pygmo/cassini1_mga_optimization.ipynb
   ./pygmo/himmelblau_minimization.ipynb
-  ./pygmo/hodographic_shaping_mga_optimization.ipynb
   ./pygmo/asteroid_orbit_optimization.rst

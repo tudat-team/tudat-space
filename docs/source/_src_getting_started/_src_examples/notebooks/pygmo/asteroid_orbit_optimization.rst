@@ -1,10 +1,10 @@
+.. _asteroid_optimization_examples:
+
 ===========================
 Asteroid Orbit Optimization 
 ===========================
 
-.. note::
-
-   If you have never used PyGMO before, please consider reading our introductory guide: :ref:`optimization_pygmo`.
+On this page, several related examples on the optimization of an orbit around an asteroid are discussed. The first example deals with the setup of the physical environment, the second one concerns the exploration of the design space, while the third one performs the actual optimization.
 
 .. nbgallery::
 
