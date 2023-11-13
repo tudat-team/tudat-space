@@ -3,7 +3,13 @@
 Performing the estimation
 =========================
 
-Having created all the relevant settings for the physical environment (see :ref:`environment_setup`) dynamical model (see :ref:`propagation_setup`), the parameters that are to be estimatd (see :ref:`parameter_settings`), the settins for the observation models (see :ref:`observationModelSetup`) and the actual observations (simulated or real; see :ref:`observationSimulation`), the estimation can be performed. Both a full estimation and a covariance analysis are performed by using the :class:`~tudatpy.numerical_simulation.Estimator` object, which is created as follows:
+Having created all the relevant settings for the physical environment (see :ref:`environment_setup`)
+dynamical model (see :ref:`propagation_setup`), the parameters that are to be estimatd (see :ref:`parameter_settings`),
+the settings for the observation models (see :ref:`observationModelSetup`)
+and the actual observations (simulated or real; see :ref:`observationSimulation`), the estimation can be performed.
+
+Both a full estimation and a covariance analysis are performed by using the :class:`~tudatpy.numerical_simulation.Estimator` object,
+which is created as follows:
 
 .. code-block:: python
 
@@ -13,19 +19,30 @@ Having created all the relevant settings for the physical environment (see :ref:
         observation_settings_list,
         propagator_settings)
         
-where the propagator settings may be single-, multi- or hybrid arc. Creating an ``Estimator`` object automatically propagates the dynamics and variational equations for the specific propagator and parameter settings.
+where the propagator settings may be single-, multi- or hybrid arc. Creating an ``Estimator`` object automatically propagates
+the dynamics and variational equations for the specific propagator and parameter settings.
 
 Covariance analysis
 -------------------
 
-The settings for a covariance analysis described :ref:`here <covarianceSettings>` can be used to compute the covariance using the :func:`~tudatpy.numerical_simulation.Estimator.compute_covariance` function.
+The settings for a covariance analysis described :ref:`here <covarianceSettings>` can be used to compute the covariance
+using the :func:`~tudatpy.numerical_simulation.Estimator.compute_covariance` function.
 
 .. code-block:: python
 
     covariance_analysis_output = estimator.compute_covariance(
         covariance_analysis_settings)
         
-where the ``covariance_analysis_settings`` is an object of type :class:`~tudatpy.numerical_simulation.estimation.CovarianceAnalysisOutput` from which the design matrix, covariance, etc. can be retrieved. 
+where the ``covariance_analysis_output`` is an object of type :class:`~tudatpy.numerical_simulation.estimation.CovarianceAnalysisOutput`
+from which the design matrix, covariance, etc. can be retrieved. During the calculation of the covariance, the
+columns of the design matrix :math:`\mathbf{H}` are normalized (see :ref:`below <covariance_normalization>`), and
+both the regular and normalized quantities (design matrix :math:`\mathbf{H}`, covariance :math:`\mathbf{P}`, inverse covariance :math:`\mathbf{P}^{-1}`)
+can be retrieved. For most applications, the regular (unnormalized) quantities are the ones that are of interest.
+Use of the normalized quantities should be limited to those applications where a manual inversion is performed.
+
+In addition to the quantities listed above, formal errors and correlations (directly obtained from the unnormalized covariance) can
+be obtained from the :class:`~tudatpy.numerical_simulation.estimation.CovarianceAnalysisOutput` class.
+
 
 .. _covariance_normalization:
 
@@ -53,14 +70,42 @@ When inverting the normal equations, normalized quantities are always used. Both
 Full estimation
 ---------------
 
-Similarly, the settings for a full estimation described :ref:`here <fullEstimationSettings>` can be used to perform the full estimation using the :func:`~tudatpy.numerical_simulation.Estimator.perform_estimation` function.
+.. note::
+   To estimate the initial state of a body, its associated ephemeris must be tabulated. When specifying an ephemeris for
+   any of the estimated bodies, convert its type to tabulated using the
+   :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.tabulated_from_existing` setting (for estimated translational dynamics)
+
+Similarly, the settings for a full estimation described :ref:`here <fullEstimationSettings>` can be used to perform
+the full estimation using the :func:`~tudatpy.numerical_simulation.Estimator.perform_estimation` function.
 
 .. code-block:: python
 
     estimation_output = estimator.perform_estimation(
         estimation_settings)
         
-where the ``estimation_output`` is an object of type :class:`~tudatpy.numerical_simulation.estimation.EstimationOutput`, which (in addition to all information in :class:`~tudatpy.numerical_simulation.estimation.CovarianceAnalysisOutput`) contains information on the iteration process (depending on the specific output settings provided in ``estimation_settings``.
+where the ``estimation_output`` is an object of type :class:`~tudatpy.numerical_simulation.estimation.EstimationOutput`,
+which (in addition to all information in :class:`~tudatpy.numerical_simulation.estimation.CovarianceAnalysisOutput`)
+contains information on the estimation process. Note that the covariances *etc.* that are saved are those from the iteration
+where the residual was lowest.
+
+The specific additional information that is retained for the
+:class:`~tudatpy.numerical_simulation.estimation.EstimationOutput` is defined by the
+:func:`~tudatpy.numerical_simulation.estimation.EstimationInput.define_estimation_settings` function of the :class:`~tudatpy.numerical_simulation.estimation.EstimationInput`
+class. We note that saving all information from each iteration may not be recommended for larger applications, as the memory
+consumption that is required may be prohibitive.
+
+After the estimation is finished, the properties of both the environment (in the ``bodies``) and the estimated parameters
+(in the ``parameters_to_estimate``) are modified as follows:
+
+* The ephemerides of all propagated/estimated bodies will be set to the propagation results of the last iteration in the estimation. For instance, when estimating the state of body "Delfi-C3", the (tabulated) ephemeris of this body will be set to contain the numerical results of the last iteration of the estimatiomn
+* The values of the parameter values in the ``parameters_to_estimate`` object are those of the last iteration of the estimation. Note that, if the ``apply_final_parameter_correction`` parameter to the :class:`~tudatpy.numerical_simulation.estimation.EstimationInput` is set to ``True``, the parameter correction computed at the end of the last iteration (for which the peformance has *not* been computed) has been used to update the parameters vector
+
+The main results of the estimation are characterized by two quantities:
+
+* The residual vector of the iteration that had the lowest residual, from the :attr:`~tudatpy.numerical_simulation.estimation.EstimationOutput.final_residuals` attribute of the :class:`~tudatpy.numerical_simulation.estimation.EstimationOutput` class
+* The values of the parameters at the iteration that had the lowest residual, from the :attr:`~tudatpy.numerical_simulation.estimation.EstimationOutput.final_parameters` attribute of the :class:`~tudatpy.numerical_simulation.estimation.EstimationOutput` class
+
+
 
 
  

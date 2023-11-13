@@ -1,46 +1,46 @@
 
 .. _observation_model_overview:
 
-==================
-Observation Models
-==================
+==============================
+Avalailable Observation Models
+==============================
 
 On this page, we provide an overview of the categories of observation models that are available (with links to API documentation), as well as some general notes on their usages, typical pitfalls, hints, etc.
 
 .. _available_observation_models:
 
-Available Model Types
-=====================
+Model Types
+===========
 
 Below, a list of different observation models is presented. It is important to realize that Tudat does *not* make an a priori distinction between different manners in which the same observation may be realized. For instance, a VLBI observation of a spacecraft, referenced to the geocenter, and an optical astrometric observation of Io by a spacecraft, are both modelled as an ``angular_position`` observable. The difference between the different realization lies in the different noise levels, link  ends, biases, etc., while using the same observation model.
 
-* Range observations: 
+* **Range observations:**
 
   * **One-way range**, defined using :func:`~tudatpy.numerical_simulation.estimation_setup.observation.one_way_range`
   * **Two- (and three-)way range**, defined using :func:`~tudatpy.numerical_simulation.estimation_setup.observation.two_way_range`, or  :func:`~tudatpy.numerical_simulation.estimation_setup.observation.two_way_range_from_one_way_links`. The latter function provided more fine-grained control of the settings for the up- and downlink (e.g. using different light-time corrections for each). See :ref:`two_three_way_observables` for the manner in which Tudat distinguishes between two- and three-way observations. Note that the two-way functions is idenical to the n-way function, with a check on the number of link ends added.
   * **N-way range**, defined using :func:`~tudatpy.numerical_simulation.estimation_setup.observation.n_way_range` or :func:`~tudatpy.numerical_simulation.estimation_setup.observation.n_way_range_from_one_way_links`. This observable provides a generalization of the two-way range, and can have any number of constituent links.
 
 
-* Averaged Doppler observables (see :ref:`doppler_types` for the distinction with instantaneous Doppler)
+* **Averaged Doppler observables** (see :ref:`doppler_types` for the distinction with instantaneous Doppler)
 
   * **One-way averaged Doppler**, defined using :func:`~tudatpy.numerical_simulation.estimation_setup.observation.one_way_doppler_averaged`
   * **Two- (and three-)way averaged Doppler**, defined using :func:`~tudatpy.numerical_simulation.estimation_setup.observation.two_way_doppler_averaged`, or  :func:`~tudatpy.numerical_simulation.estimation_setup.observation.two_way_doppler_averaged_from_one_way_links`. The latter function provided more fine-grained control of the settings for the up- and downlink (e.g. using different light-time corrections for each). See :ref:`two_three_way_observables` for the manner in which Tudat distinguishes between two- and three-way observations. Note that the two-way functions is idenical to the n-way function, with a check on the number of link ends added.
   * **N-way averaged Doppler**, defined using :func:`~tudatpy.numerical_simulation.estimation_setup.observation.n_way_doppler_averaged` ( or  :func:`~tudatpy.numerical_simulation.estimation_setup.observation.n_way_doppler_averaged_from_one_way_links`). This observable provides a generalization of the two-way averaged Doppler, and can have any number of constituent links.
 
 
-* Instantenous doppler observables (see :ref:`doppler_types` for the distinction with averaged Doppler)
+* **Instantenous doppler observables** (see :ref:`doppler_types` for the distinction with averaged Doppler)
 
   * **One-way instantaneous Doppler**, defined using :func:`~tudatpy.numerical_simulation.estimation_setup.observation.one_way_doppler_instantaneous`
   * **Two-way (and three-way) instantaneous Doppler**, defined using :func:`~tudatpy.numerical_simulation.estimation_setup.observation.two_doppler_instantaneous`, or  :func:`~tudatpy.numerical_simulation.estimation_setup.observation.two_way_doppler_instantaneous_from_one_way_links`. The latter function provided more fine-grained control of the settings for the up- and downlink (e.g. using different light-time corrections for each). See :ref:`two_three_way_observables` for the manner in which Tudat distinguishes between two- and three-way observations.
 
 
-* Angular observables 
+* **Angular observables**
 
   * **Angular position** right ascension and declination in inertial frame of a body, as observed by another body, defined using :func:`~tudatpy.numerical_simulation.estimation_setup.observation.angular_position`
   * **Relative angular position** relative right ascension and declination of two bodies, as observed by another body, defined using :func:`~tudatpy.numerical_simulation.estimation_setup.observation.relatives_angular_position`
 
 
-* Direct state observables. These observations are typically not generated directly, but are used for idealized simulations, or to fit a model to an existing orbit.
+* **Direct state observables.** These observations are typically not generated directly, but are used for idealized simulations, or to fit a model to an existing orbit.
 
   * Three-dimensional **Cartesian position**, defined using :func:`~tudatpy.numerical_simulation.estimation_setup.observation.cartesian_position`
   * Three-dimensional **Cartesian velocity**, defined using :func:`~tudatpy.numerical_simulation.estimation_setup.observation.cartesian_velocity`

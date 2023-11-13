@@ -16,7 +16,8 @@ The following examples showcase the basic functionality of the Tudat numerical p
   ./propagation/linear_sensitivity_analysis.ipynb
   ./propagation/perturbed_satellite_orbit.ipynb
   ./propagation/solar_system_propagation.ipynb
-    
+  ./propagation/thrust_between_Earth_Moon.ipynb
+
 Advanced examples
 *********************
 
