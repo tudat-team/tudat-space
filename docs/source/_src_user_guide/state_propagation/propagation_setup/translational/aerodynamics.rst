@@ -4,10 +4,6 @@
 Use of aerodynamics
 ===================
 
-.. attention::
-
-  This page is only compatible for Tudatpy version >= 0.7. See :ref:`thrust and rotation refactor <backwards_incompatibility>` for more information on this page for older versions.
-  
 When including aerodynamics in the orbit propagation, it may often be desirable to have the aerodynamic properties of the vehicle depend on the vehicle's state, and its interaction with the environment. This is the case for ascent and entry for instance. Also, control surface deflections may be needed to modify the vehicle’s behaviour. Both options are included in Tudat, and the interfaces are described below.
 
 An aerodynamic acceleration combines various environment properties for its computation:

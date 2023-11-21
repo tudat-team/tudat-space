@@ -21,7 +21,7 @@ are implemented in Tudat, and do not use an external integrator library. For the
 Integrator types
 ----------------
 
-In TudatPy you can choose between different types of integrators.
+In Tudat you can choose between different types of integrators.
 For code examples and additional information on the interfaces, please follow the links to the API documentation given below.
 
 .. _integrator_rk:

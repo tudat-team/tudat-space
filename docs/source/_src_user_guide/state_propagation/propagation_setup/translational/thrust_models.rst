@@ -5,11 +5,6 @@
 Use of thrust models
 ====================
 
-.. attention::
-
-  This page is only compatible for Tudatpy version >= 0.7. See :ref:`thrust and rotation refactor <backwards_incompatibility>` for more information on this page for older versions.
-  
-  
 This page deals with the inclusion of a thrust force into the dynamical model. Note that, when using thrust models, it
 may often be desirable to propagate the mass of the vehicle at the same time (removing mass of the burnt propellant,
 for instance). Details on how to propagate the mass of a body are given in :ref:`mass_dynamics`. Details on combining translation and mass propagators is given in :ref:`multi_type_dynamics`.

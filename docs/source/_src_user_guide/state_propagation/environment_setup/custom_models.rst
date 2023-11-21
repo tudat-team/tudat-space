@@ -4,10 +4,6 @@
 Custom models
 =============
 
-.. attention::
-
-  This page is only compatible for Tudatpy version >= 0.7. See :ref:`thrust and rotation refactor <backwards_incompatibility>` for more information on this page for older versions.
-  
 .. toctree::
    :titlesonly:
    :hidden:

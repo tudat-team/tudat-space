@@ -65,12 +65,37 @@ The only limitation is that you may not have duplicate entries of link ends *and
 
 When defining observation models, you can for most types of models define settings for:
 
-* **Biases:** A bias in TudatPy is applied to the observable after its 'ideal' value computed from the environment is computed. You can find a list of settings for observation biases in our `API documentation <https://py.api.tudat.space/en/latest/observation.html>`_
+* **Biases:** A bias in Tudat is applied to the observable after its 'ideal' value computed from the environment is computed. You can find a list of settings for observation biases in our `API documentation <https://py.api.tudat.space/en/latest/observation.html>`_
 * **Light-time corrections:** When using an observable that involves the observation of one point/body in space by another (including any observable that involves the exchange of elecromagnetic signals), it is automatically assumed that the signal travels at the speed of light, and the associated light-time is determined when calculating the observable. Deviations from the signal's ideal trajectory (straight line at speed of light) may be defind by adding light-time correction settings, as listed in our `API documentation <https://py.api.tudat.space/en/latest/observation.html>`_
 * **Light-time convergence settings:** Calculating the light time between two link ends requires the iterative solution of the light-time equation. Default settings for convergence criteria for this solution are implemented, but a user may modify these settings if so desired. The associated settings object can be created using the :func:`~tudatpy.numerical_simulation.estimation_setup.observation.light_time_convergence_settings` function.
 
+Observation biases are used to add any systematic deviations from the 'physical' value of the computed obseravation
+(due to unmodelled electronic delays, or unmodelled propagation effects of the electromagnectic signals). A list of available biases
+can be found TODO. In short, for a bias :math:`\Delta h` (which may be a function of time, or properties of the environment),
+an 'ideal' computed observation :math:`\bar{h}`, the actual computed observation becomes:
 
-The above options are added to the calls of the observation model settings factory functions. Below is an example 
+.. math::
+
+  h(t)=\bar{h}(t)+\Delta h(t)
+
+Note that the *random* noise is not yet considered here, as this is typically not modelled as part of the observation itself during the estimation.
+
+The light-time correction and light-time convergence settings influence how the light time in one 'leg' (e.g. between two link ends, here with indices 0 and 1) is calculated.
+To compute the light time, the following implicit equation has to be solved:
+
+.. math::
+
+  \frac{||\mathbf{r}_{1}(t_{1}) - \mathbf{r}_{0}(t_{0})||}{c}=\left(t_{1}-t_{0}\right)+\Delta t(t_{0},t_{1};\mathbf{r}_{1}(t_{1}),\mathbf{r}_{0}(t_{0}))
+
+where, depending on the reference link end, the time :math:`t_{0}` at link end 0 is kept fixed, or the time :math:`t_{1}` at link end 1 is kept fixed.
+The :math:`\mathbf{r}_{0}` and :math:`\mathbf{r}_{1}` functions define the positions of link end 0 and 1 as a funtion of time. The function :math:`\Delta t`
+collects all effects that cause the propagation of the signal to deviate from propagation in a straight line at the speed of light.
+
+.. note::
+    The light time equation is *always* solved when using an observable that involved the transmission/reception of a signal. The "light time corrections"
+    only refer to deviations from the straight-line speed of light propagation of the signal.
+
+The above options are added to the calls of the observation model settings factory functions. Below is an example
 
 .. code-block:: python
 

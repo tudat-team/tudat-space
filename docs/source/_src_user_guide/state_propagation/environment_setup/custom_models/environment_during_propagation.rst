@@ -56,8 +56,6 @@ Rotational state
 Body inertial mass
 ------------------
 
-
-
     Retrieved directly from a :class:`~tudatpy.numerical_simulation.environment.Body` object with the :attr:`~tudatpy.numerical_simulation.environment.Body.mass` function. Note that this mass is *not* (at least, not by definition) the mass used for calculation of gravitional interactions (the gravitational mass :math:`m_{g}`, as you would find it in Newton's law of gravity (:math:`a=\frac{Gm_{g}}{r^{2}}`), but the mass used to convert forces to accelerations and vice versa (the inertial mass :math:`m_{i}`, as you would find it in Newton's law of motion :math:`F=m_{i}a`). To the best of our knowledge the two masses are equal for all bodies, but various formulations of general relativity predict a difference between the two. Moreover, we have found it useful to *not* automatically define a gravity field for any body which happens to have a mass assigned to it. For instance, a spacecraft will have an (inertial) mass which is needed for computing most non-gravitational accelerations. But, it does *not* require its own gravity field to compute gravitational accelerations.
 
 Spherical harmonic gravity field coefficients

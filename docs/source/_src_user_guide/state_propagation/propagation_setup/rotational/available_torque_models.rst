@@ -4,14 +4,14 @@
 Available Torque Models
 ====================================
 
-In this page, all the torque models available in TudatPy are explained. Regardless of the type of torque
+In this page, all the torque models available in Tudat are explained. Regardless of the type of torque
 model, the procedure to link such torque model to the bodies exerting and undergoing the torque is
 explained in this page: :ref:`torque_model_setup`. Therefore, this information will not be repeated in this
 page. Instead, for each model, a reference to the related API documentation entry and the requirements are provided.
 
 
 .. note::
-   In TudatPy, torque models are defined through factory functions, which define the properties required of
+   In Tudat, torque models are defined through factory functions, which define the properties required of
    the torques, but do not perform any calculations themselves. These properties are stored through instances
    of the :class:`~tudatpy.numerical_simulation.propagation_setup.torque.TorqueSettings` class or of its
    derived classes.

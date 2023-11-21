@@ -4,14 +4,14 @@
 Available Acceleration Models
 ===============================
 
-In this page, all the acceleration models available in TudatPy are explained. Regardless of the type of acceleration
+In this page, all the acceleration models available in Tudat are explained. Regardless of the type of acceleration
 model, the procedure to link such acceleration model to the bodies exerting and undergoing the acceleration is
 explained in this page: :ref:`acceleration_models_setup`. Therefore, this information will not be repeated in this
 page. Instead, for each model, a reference to the related API documentation entry and the requirements are provided.
 
 
 .. note::
-   In TudatPy, acceleration models are defined through factory functions, which define the properties required of
+   In Tudat, acceleration models are defined through factory functions, which define the properties required of
    the accelerations, but do not perform any calculations themselves. These properties are stored through instances
    of the :class:`~tudatpy.numerical_simulation.propagation_setup.acceleration.AccelerationSettings` class or of its 
    derived classes.
@@ -29,7 +29,7 @@ See the list of supported identifier types in the API documentation: :class:`~tu
 Gravitational
 ###########################
 
-TudatPy contains a number of different models for gravitational accelerations. In general, the gravitational
+Tudat contains a number of different models for gravitational accelerations. In general, the gravitational
 acceleration exerted by a body B, with associated potential :math:`U_{B}`, on a body A can be expressed as follows:
 
 .. math::
@@ -38,7 +38,7 @@ acceleration exerted by a body B, with associated potential :math:`U_{B}`, on a 
 with :math:`\mathbf{r}_{_{BA}}(=\mathbf{r}_{_{B}}-\mathbf{r}_{_{A}})` denoting the relative position vector of body A
 with respect to Body B.
 
-There are different gravitational models available in TudatPy:
+There are different gravitational models available in Tudat:
 
 - :ref:`point_mass_acceleration`
 - :ref:`spherical_harmonic_acceleration`
@@ -161,7 +161,7 @@ Radiation Pressure
 ..
   TODO-RP change to single acceleration model, link to _radiation_pressure_acceleration
 
-There are two different radiation pressure models available in TudatPy:
+There are two different radiation pressure models available in Tudat:
 
 - :ref:`cannonball_radiation_pressure`
 - :ref:`panelled_radiation_pressure`
