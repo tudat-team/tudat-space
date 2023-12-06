@@ -8,6 +8,7 @@ Tudat has also been used extensively in research projects. Many of those that re
 
 **Journal publications**
 
+- `Testing theories of gravitation with the Interstellar Probe Radio Experiment. <https://www.sciencedirect.com/science/article/abs/pii/S0273117723009547>`_ Plumaris, M., De Marchi, F., Cascioli, G. & Iess, L. (2023).  Advances in Space Research (in press)
 - `Combining astrometry and JUICE–Europa Clipper radio science to improve the ephemerides of the Galilean moons. <https://www.aanda.org/articles/aa/abs/2023/09/aa47065-23/aa47065-23.html>`_ Fayolle, M., Magnanini, A., Lainey, V., Dirkx, D., Zannoni, M., & Tortora, P. (2023).  Astronomy & Astrophysics, 677, A42.
 - `Spacecraft VLBI tracking to enhance stellar occultations astrometry of planetary satellites.  <https://www.aanda.org/articles/aa/abs/2023/08/aa47019-23/aa47019-23.html>`_ Fayolle, M., Lainey, V., Dirkx, D., Gurvits, L. I., Cimo, G., & Bolton, S. J. (2023). Astronomy & Astrophysics, 676, L6.
 - `Simulating arbitrary interactions between small-scale space debris and a space-based pulsed laser system. <https://www.sciencedirect.com/science/article/pii/S027311772200326X>`_ Pieters, L., & Noomen, R. (2023). Simulating arbitrary interactions between small-scale space debris and a space-based pulsed laser system. Advances in Space Research, 72(7), 2778-2785.Advances in Space Research, 72(7), 2778-2785.
