@@ -1,4 +1,4 @@
-======================================
+w======================================
 Tudat Space
 ======================================
 
@@ -284,6 +284,7 @@ Some resources related to Tudatpy are located elsewhere. See below!
    _src_getting_started/primers_coding_tools
    _src_getting_started/examples
    _src_getting_started/tudatpy_submodules
+   _src_getting_started/using_source
 
 .. toctree::
    :titlesonly:
