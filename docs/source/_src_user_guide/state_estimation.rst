@@ -17,10 +17,13 @@ Estimation Inputs
 In addition to the inputs required for state propagation, the following needs to be set up to perform an estimation.
 
 - **Parameter setup**: definition of the parameters that are to be estimated, as discussed :ref:`here <parameter_settings>` in the context of variational equation propagation
-- :ref:`linkEndSetup`: **Link end setup**: define the stations/spacecraft involved in an observation, and define their role for a particular observable (receiver, transmitter, *etc.*).
-- :ref:`observationModelSetup`: define the type and properties of a given (idealized) observation model, such as range, Doppler, *etc.*.
-- :ref:`observationSimulation` OR **Loading observations**: depending on whether you are considering estimation in a simulated environment (in which case you simulate the observables in TudatPy) or using real data (in which case you load them from files), you must create/load observations, and define properties such as times, noise, *etc.*.
-- :ref:`estimationSettings`: define the *a priori* knowledge, convergence criteria, *etc.*.
+- :ref:`linkEndSetup`: define the stations/spacecraft involved in an observation, and define their role for a particular observable (receiver, transmitter, *etc.*)
+- :ref:`observationModelSetup`: define the type and properties of a given observation model, such as range, Doppler, including biases, light time corrections *etc.*
+- **Providing the observations**, including the values of the observables, associated observation times and additional relevant data such as integration time (depending on the observable). This can be done in one of two ways:
+
+  - :ref:`observationSimulation` For a simulation study, the observations themselves may be simulated inside Tudat
+  - **Loading observations**: When analyzing real data, you must load these data from the relevant files/database, and convert them to Tudat-compatible data formats.
+- :ref:`estimationSettings`: define the *a priori* knowledge, convergence criteria, *etc.*. Tudat provides settings and options for either a full estimation, or a covariance analysis only.
 
 .. toctree::
    :titlesonly:

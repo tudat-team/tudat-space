@@ -9,12 +9,12 @@ Propagation Setup
    :hidden:
    :maxdepth: 1
 
-   propagation_setup/dynamics_types/translational
-   propagation_setup/dynamics_types/rotational
-   propagation_setup/dynamics_types/mass
-   propagation_setup/dynamics_types/multi_type
-   propagation_setup/dynamics_types/multi_body
-   propagation_setup/dynamics_types/multi_hybrid_arc
+   propagation_setup/translational
+   propagation_setup/rotational
+   propagation_setup/mass
+   propagation_setup/multi_type
+   propagation_setup/multi_body
+   propagation_setup/multi_hybrid_arc
    propagation_setup/processed_propagated_elements
    propagation_setup/integration_setup
    propagation_setup/termination_settings

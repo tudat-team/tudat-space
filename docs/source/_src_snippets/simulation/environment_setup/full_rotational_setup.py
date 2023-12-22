@@ -20,7 +20,7 @@ initial_rotation_matrix = np.eye(3)
 # Set initial orientation by converting a rotation matrix to a Tudat-compatible quaternion
 initial_state = element_conversion.rotation_matrix_to_quaternion_entries(initial_rotation_matrix)
 # Complete initial state by adding angular velocity vector (zero in this case)
-initial_state.append([0,0,0])
+initial_state = np.hstack((inital_state, [0,0,0]))
 
 # Define numerical integrator (RK4; step size 2 seconds)
 integrator_settings = propagation_setup.integrator.runge_kutta_4( 2.0 )
