@@ -11,9 +11,9 @@ If you have created a system of bodies of type `SystemOfBodies <https://py.api.t
 
 .. code-block::
 
-    bodies.get(“Earth”).gravitational_parameter
+    bodies.get(“Earth”).gravity_field_model.gravitational_parameter
 
-which would return the gravitational parameter of the Earth as used by tudat. A full list of all Body properties you can retrieve can be accessed `here <https://py.api.tudat.space/en/latest/environment.html#tudatpy.numerical_simulation.environment.Body>`_.
+which would return the gravitational parameter of the Earth as used by tudat. A full list of all Body properties you can retrieve can be accessed `here <https://py.api.tudat.space/en/latest/environment.html#tudatpy.numerical_simulation.environment.Body>`_. 
 
 How do I retrieve the orbital period of a Body object?
 ======================================================
