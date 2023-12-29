@@ -6,10 +6,10 @@ Environment Models
 ==================
 
    
-On this page, we provide an overview of the categories of environment models that are available, how to create them, how to access them, as well as some general notes on their usages, typical pitfalls, hints, etc. How to define the settings for an environment model is discussed :ref:`here <custom_body_settings>`. Summarizing, settings for an environment model are stored in a :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings` object, a list of which (one for each body) is stored in a :class:`~tudatpy.numerical_simulation.environment_setup.BodyListSettings` object. We reiterate that these objects themselves do not have any "functionality", except providing settings that define how to create the actual (potentially interconnected and interdependent environment models). After creating the environent, you can be access any relevant functionality of the environment models (ephemerides, rotation models, etc.) outside the context of a propagation.
+On this page, we provide an overview of the categories of environment models that are available, how to create them, how to access them, as well as some general notes on their usages, typical pitfalls, hints, etc. How to define the settings for an environment model is discussed :ref:`here <custom_body_settings>`. Summarizing, settings for an environment model are stored in a :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings` object, a list of which (one for each body) is stored in a :class:`~tudatpy.numerical_simulation.environment_setup.BodyListSettings` object. We reiterate that these objects themselves do not have any "functionality", except providing settings that define how to create the actual (potentially interconnected and interdependent environment models). After creating the environment, you can access any relevant functionality of the environment models (ephemerides, rotation models, etc.) outside the context of a propagation.
 
 .. note::
-    For details on how to access the environment *during a propagation (for custom models, typically), see :ref:`this page <environment_during_propagation>`
+    For details on how to access the environment *during a propagation* (for custom models, typically), see :ref:`this page <environment_during_propagation>`
 
 In Tudat, the full environment is stored in a :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` object, which in turn stores environment models inside :class:`~tudatpy.numerical_simulation.environment.Body` objects (one for each natural or artifical body in your model). From each object representing a body, you can extract each separate environment model (see list below). For instance, to retrieve the :class:`~tudatpy.numerical_simulation.environment.Ephemeris` object from the body named ``Earth``, you can use the following:
 
@@ -18,7 +18,7 @@ In Tudat, the full environment is stored in a :class:`~tudatpy.numerical_simulat
         bodies = .... // Create system of bodies
         earth_ephemeris = bodies.get('Earth').ephemeris
 
-On this page, we provide an overview of the different types of environment models for which you can defined settings, along with links to submodules of ``environment_setup`` in the `API documentation <https://py.api.tudat.space/en/latest/environment_setup.html>`_, where a comprehensive list of all environment model settings can be found. In addition, we list how to extract the resulting environment model from the ``Body`` objects
+Below, we provide an overview of the different types of environment models for which you can define settings, along with links to submodules of ``environment_setup`` in the `API documentation <https://py.api.tudat.space/en/latest/environment_setup.html>`_, where a comprehensive list of all environment model settings can be found. In addition, we list how to extract the resulting environment model from the ``Body`` objects
 
 .. _available_environment_models:
 
@@ -35,7 +35,7 @@ The complete list of available environment model settings can be found on our AP
 * `Atmosphere models <https://py.api.tudat.space/en/latest/atmosphere.html>`_, to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.atmosphere_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`.  
 
    * These models provide various ways in which to define atmospheric properties of a body. For state propagation, the density will typically be the most important one. However, many of the models here include outputs of temperature, density, etc. as well. Depending on the model, the atmospheric properties may be only altitude-dependent, or fully time- and position-dependent. Note that the atmosphere settings can include wind settings (default: none)
-   * The resulting model can be extracted from the :class:`~tudatpy.numerical_simulation.environment.Body` object using attr:`~tudatpy.numerical_simulation.environment.Body.atmosphere_model`, which provides a :class:`~tudatpy.numerical_simulation.environment.AtmosphereModel`
+   * The resulting model can be extracted from the :class:`~tudatpy.numerical_simulation.environment.Body` object using :attr:`~tudatpy.numerical_simulation.environment.Body.atmosphere_model`, which provides a :class:`~tudatpy.numerical_simulation.environment.AtmosphereModel`
 
 
 * `Ephemeris models <https://py.api.tudat.space/en/latest/ephemeris.html>`_, , to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.ephemeris_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`.  
@@ -50,7 +50,7 @@ The complete list of available environment model settings can be found on our AP
   
 * `Gravity field variation models <https://py.api.tudat.space/en/latest/gravity_field_variation.html>`_, to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.gravity_field_variation_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`. Note: this attribute is a list, and any number of variation models may be added.  
 
-   * These models provide various ways in which to define the time-variability of a body's (spherical harmonic) gravitaty field.
+   * These models provide various ways in which to define the time-variability of a body's (spherical harmonic) gravity field.
    * Unlike most environment models, the gravity field variations are stored inside the gravity field model, rather than directly in the body object.
   
 * `Rotation models <https://py.api.tudat.space/en/latest/rotation_model.html>`_, to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.rotation_model_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`. 
@@ -61,7 +61,7 @@ The complete list of available environment model settings can be found on our AP
 * `Shape models <https://py.api.tudat.space/en/latest/shape.html>`_, to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.shape_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`. 
 
    * These models provide various ways in which to define the exterior of a *natural* body and is typically used to calculate (for instance) altitude, ground station position, etc. Note: the exterior shape of an artificial body, from which aerodynamic and radiation pressure properties can be evaluated, uses a different interface, which is currently under development
-   * The resulting model can be extracted from the :class:`~tudatpy.numerical_simulation.environment.Body` object extracted using :attr:`~tudatpy.numerical_simulation.environment.Body.shape_model`, which provides a :class:`~tudatpy.numerical_simulation.environment.ShapeModel`
+   * The resulting model can be extracted from the :class:`~tudatpy.numerical_simulation.environment.Body` object using :attr:`~tudatpy.numerical_simulation.environment.Body.shape_model`, which provides a :class:`~tudatpy.numerical_simulation.environment.ShapeModel`
 
 * `Shape deformation models <https://py.api.tudat.space/en/latest/shape_deformation.html>`_, to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.shape_deformation_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`.  Note: this attribute is a list, and any number of deformation models may be added.  
 
@@ -81,7 +81,7 @@ The complete list of available environment model settings can be found on our AP
 * `Ground stations <https://py.api.tudat.space/en/latest/ground_station.html>`_, to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.ground_station_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`.  Note: this attribute is a list, and any number of stations may be added.  
 
    * These models define ground stations (which includes planetary landers) on a celestial body. Each ground station may have any number of station motion models assigned to it. 
-   * The dictionary of all ground stations is extracted from a :class:`~tudatpy.numerical_simulation.environment.Body` object using :attr:`~tudatpy.numerical_simulation.environment.Body.ground_station_list`, which has a :class:`~tudatpy.numerical_simulation.environment.GroundStation` objects a dictionary values
+   * The dictionary of all ground stations is extracted from a :class:`~tudatpy.numerical_simulation.environment.Body` object using :attr:`~tudatpy.numerical_simulation.environment.Body.ground_station_list`, which has :class:`~tudatpy.numerical_simulation.environment.GroundStation` objects as dictionary values
 
 * `Vehicle systems <https://py.api.tudat.space/en/latest/vehicle_systems.html>`_, currently limited to the vehicle exterior shape, to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.vehicle_shape_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`.
 
