@@ -95,7 +95,7 @@ The complete list of available environment model settings can be found on our AP
 Points of attention
 ===================
 
-On this page, we give an overview of some specifica aspects of the environment models that may be useful for a user to
+On this page, we give an overview of some specific aspects of the environment models that may be useful for a user to
 know, in order to properly select and understand their choice of environment models.
 This page is meant to supplement the API documentation, and is *not* a comprehensive overview of all environment models.
 
