@@ -3,129 +3,44 @@ Tudat Space
 ======================================
 
 
-Tudat Space is a platform and community for astrodynamics and space research.
+Tudat is a platform and community for astrodynamics and space research.
 Our mission is to provide educators, researchers, students, and
 enthusiasts access to a powerful toolkit, fuelling careers and
-passions in astrodynamics and space. It contains user guides and tutorials to use Tudat and it is organized as follows:
+passions in astrodynamics and space. 
 
-- *Getting Started:* all the information for new users, including how to install tudatpy and some examples
-  showcasing its functionalities.
-- *User Guide:* several guides explaining how different parts of tudatpy code are used together to create a simulation.
-- *Advanced topics*: guides for more advanced topics (e.g., optimization with Tudat).
-- *Resources from Tudat ecosystem:* links to other Tudat resources (API reference, developer documentation, etc...)
-  not hosted directly on tudat-space.
-- *About:* additional information about Tudat and its ecosystem.
+..
+	Just a number of the key features of Tudat are the following: 
 
-.. attention::
+	- **Modular propagation** of orbital dynamics 
 
-  As of Tudatpy version 0.7, a number of modifications have been made to how Tudatpy deals with vehicle orientations,
-  in particular in the context of thrust and aerodynamic guidance. These changes are, in part, not backwards compatible.
-  See :ref:`this page <backwards_incompatibility>` for more details. To continue to use the last older version of Tudat, install
-  version 0.6.3.
+	  - Simulation the ascent of a space plane, or all planets in the solar system, using the same interfaces
+	  - Swap out environment and acceleration models to smoothly go from preliminary design to high-fidelity models
+	  - Use custom models (implemented in Python or C++) for guidance systems, or models not (yet) in Tudat    
 
-Quickstart
-==========
+	- **Concurrent propagation** of the coupled dynamics of any number of bodies 
+	  
+	  - Propagate the orbit and attitude dynamics of a spacecraft, re-entry vehicle or space plane
+	  - Propagate the coupled dynamics of a natural satellite system, including the possibility for rotational dynamics
+	  - Propagate dynamics and variational equations for any type of dynamics
 
-.. panels::
-    :body: text-left
-    :header: text-center
+	- **Simulated state estimation** using a wide variety of tracking data and parameters
+	  
+	  - From high-accuracy Mars gravity field determination, to coupled spacecraft-natural-body dynamics estimation
+	  - Fuse radio tracking data, astrometric data, and other data types for either a covariance analysis or a full simulated estimation
+	  - Single-arc, multi-arc, or a combination of the tow
 
-    ---
-    :column: col-lg-4 p-3
+	- **Estimation from real data** under active development! Coming soon:
+	  
+	  - Spacecraft orbit determination from DSN radio tracking data
+	  - Processing of Minor Planet Center data for minor solar system body estimation  
+	  - Incorporation of Planetary Radio Interferometry and Doppler Experiment (PRIDE) data into an estimation       
 
-    **Installation**
-    ^^^
-
-    Learn how to install the tudatpy package via conda.
-
-    +++
-
-    .. link-button:: _src_getting_started/installation
-        :type: ref
-        :text: Read our guide
-        :classes: btn-outline-primary btn-block stretched-link
-
-    ---
-    :column: col-lg-4 p-3
-
-    **Online examples**
-    ^^^
-
-    Run the examples on mybinder and see how tudatpy works: you don't need to install any package or IDE.
-
-    +++
-
-    .. link-button:: https://mybinder.org/v2/gh/tudat-team/tudatpy-examples/master
-        :text: Try it out
-        :classes: btn-outline-primary btn-block stretched-link
-
-    ---
-    :column: col-lg-4 p-3
-
-    **Research output**
-    ^^^
-
-    Find out some state-of-the-art examples of what you can do with tudat(py) by having a look at our list of publications
-
-    +++
-
-    .. link-button:: _src_about/research_output
-        :type: ref
-        :text: Have a look
-        :classes: btn-outline-primary btn-block stretched-link
-
-
-External resources
-============================
-
-Some resources related to Tudatpy are located elsewhere. See below!
-
-.. panels::
-    :body: text-left
-    :header: text-center
-
-    ---
-    :column: col-lg-4 p-3
-
-    **TudatPy API reference**
-    ^^^
-
-    Documentation of the tudatpy Application Programming Interface.
-
-    +++
-
-    .. link-button:: https://tudatpy.readthedocs.io
-        :text: Go to the website
-        :classes: btn-outline-primary btn-block stretched-link
-
-    ---
-    :column: col-lg-4 p-3
-
-    **Developer Documentation**
-    ^^^
-
-    A separate website with guides and resources to develop Tudat and TudatPy code and documentation.
-
-    +++
-
-    .. link-button:: https://tudat-developer.readthedocs.io/en/latest/
-        :text: Go to the website
-        :classes: btn-outline-primary btn-block stretched-link
-
-    ---
-    :column: col-lg-4 p-3
-
-    **Mathematical model definition**
-    ^^^
-
-    A manual containing definitions of mathematical models implemented in Tudat.
-
-    +++
-
-    .. link-button:: https://github.com/tudat-team/tudat-space/raw/master/Tudat_mathematical_model_definition.pdf
-        :text: Download the manual
-        :classes: btn-outline-primary btn-block stretched-link
-
+	- Perform **preliminary interplanetary transfer** trajectory design with patched conic methods   
+	- All model **implementation in C++**, all **interfaces in Python**, using the pybind11 library
+	- Extensively verified by **more than 200 unit tests**
+	- Used as the core tool for **more than 20 peer-reviewed articles**, and more than 100 M.Sc. thesis projects
+	- An extensive `API desription <https://py.api.tudat.space/en/latest/>`_
+	- Everything **open-source**!
 
 
 
@@ -233,17 +148,134 @@ to get started with them, have a look at our
 
 
     +++
-    .. link-button:: _src_user_guide/state_propagation/environment_setup/architecture/custom_models
+    .. link-button:: _src_user_guide/state_propagation/environment_setup/custom_models
             :type: ref
             :text: Find out more
             :classes: stretched-link btn-outline-primary
+
+
+Quickstart
+==========
+
+.. panels::
+    :body: text-left
+    :header: text-center
+
+    ---
+    :column: col-lg-4 p-3
+
+    **Installation**
+    ^^^
+
+    Learn how to install the tudatpy package via conda.
+
+    +++
+
+    .. link-button:: _src_getting_started/installation
+        :type: ref
+        :text: Read our guide
+        :classes: btn-outline-primary btn-block stretched-link
+
+    ---
+    :column: col-lg-4 p-3
+
+    **Online examples**
+    ^^^
+
+    Run the examples on mybinder and see how tudatpy works: you don't need to install any package or IDE.
+
+    +++
+
+    .. link-button:: https://mybinder.org/v2/gh/tudat-team/tudatpy-examples/master
+        :text: Try it out
+        :classes: btn-outline-primary btn-block stretched-link
+
+    ---
+    :column: col-lg-4 p-3
+
+    **Research output**
+    ^^^
+
+    Find out some state-of-the-art examples of what you can do with tudat(py) by having a look at our list of publications
+
+    +++
+
+    .. link-button:: _src_about/research_output
+        :type: ref
+        :text: Have a look
+        :classes: btn-outline-primary btn-block stretched-link
+
+
+This website contains user guides and tutorials to use Tudat and it is organized as follows:
+
+- *Getting Started:* all the information for new users, including how to install tudatpy and some examples
+  showcasing its functionalities.
+- *User Guide:* several guides explaining how different parts of tudatpy code are used together to create a simulation.
+- *Advanced topics*: guides for more advanced topics (e.g., optimization with Tudat).
+- *Resources from Tudat ecosystem:* links to other Tudat resources (API reference, developer documentation, etc...)
+  not hosted directly on tudat-space.
+- *About:* additional information about Tudat and its ecosystem.
+
+
+Additional resources
+============================
+
+Some resources related to Tudatpy are located elsewhere. See below!
+
+.. panels::
+    :body: text-left
+    :header: text-center
+
+    ---
+    :column: col-lg-4 p-3
+
+    **TudatPy API reference**
+    ^^^
+
+    Documentation of the tudatpy Application Programming Interface.
+
+    +++
+
+    .. link-button:: https://tudatpy.readthedocs.io
+        :text: Go to the website
+        :classes: btn-outline-primary btn-block stretched-link
+
+    ---
+    :column: col-lg-4 p-3
+
+    **Developer Documentation**
+    ^^^
+
+    A separate website with guides and resources to develop Tudat and TudatPy code and documentation.
+
+    +++
+
+    .. link-button:: https://tudat-developer.readthedocs.io/en/latest/
+        :text: Go to the website
+        :classes: btn-outline-primary btn-block stretched-link
+
+    ---
+    :column: col-lg-4 p-3
+
+    **Mathematical model definition**
+    ^^^
+
+    A manual containing definitions of mathematical models implemented in Tudat.
+
+    +++
+
+    .. link-button:: https://github.com/tudat-team/tudat-space/raw/master/Tudat_mathematical_model_definition.pdf
+        :text: Download the manual
+        :classes: btn-outline-primary btn-block stretched-link
+
+
 
 
 
 
 .. toctree::
    :titlesonly:
-   :maxdepth: 1
+   :maxdepth: 3
    :caption: Getting started
    :hidden:
 
@@ -252,6 +284,8 @@ to get started with them, have a look at our
    _src_getting_started/primers_coding_tools
    _src_getting_started/examples
    _src_getting_started/tudatpy_submodules
+   _src_getting_started/faq
+   _src_getting_started/using_source
 
 .. toctree::
    :titlesonly:
@@ -270,6 +304,7 @@ to get started with them, have a look at our
    :hidden:
 
    _src_advanced_topics/post_processing_python
+   _src_advanced_topics/parallelization
    _src_advanced_topics/optimization_pygmo
 
 .. toctree::

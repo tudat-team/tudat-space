@@ -79,7 +79,7 @@ directly from PyCharm. You can follow this procedure to create a new project and
 .. figure:: _static/pycharm_set_environment.png
 
 The project interpreter can be viewed and/or modified at any time, even after the project is created, by
-navigating to ``File`` > ``Settings`` > ``Project`` > ``Python Interpreter`` (Windows/Linux) or ``PyCharm`` >
+navigating to ``Settings`` > ``Project`` > ``Python Interpreter`` (Windows/Linux) or ``PyCharm`` >
 ``Preferences`` > ``Project`` > ``Python Interpreter`` (macOS). The figure below shows the interpreter panel on
 Windows.
 
@@ -100,7 +100,7 @@ let PyCharm know about this, so it will retrieve all the dependencies present in
 parse the source code and complain about potential errors, especially while importing other modules: even if the code
 runs fine, PyCharm does not know where to look for them. This can be done as follows:
 
-1. Navigate to ``File`` > ``Settings`` > ``Project`` > ``Project Structure``.
+1. Navigate to ``Settings`` > ``Project`` > ``Project Structure``.
 
 2. Select the directory containing your source code and mark it as ``Sources`` (blue folder).
 
@@ -108,4 +108,24 @@ runs fine, PyCharm does not know where to look for them. This can be done as fol
 
     The students of AE4866 Propagation and Optimization in Astrodynamics are encouraged to follow all the steps
     presented above.
+
+It is possible that, when a plot is created in a default way using ``plt.show()``, it will show statically in the
+SciView window. As a result, zooming in will result in blurring and interactive plots will be non-interactive. You can
+solve this in two ways:
+
+1. Navigate to ``Settings`` > ``Tools`` > ``Python Scientific``, untick the 'Show plots in tool window' option. This may
+   do what you desired, otherwise continue to step 2.
+
+.. _`sourced here`: https://matplotlib.org/stable/users/explain/backends.html
+
+2. You can manually define the plotting backend that is used, besides the default one that is included in PyCharm as
+   shown below. A shortened list of recommended backends -- `sourced here`_ -- to try first are: QtAgg, TkAgg, macosx.
+
+.. code:: python
+
+  import matplotlib as mpl
+  import matplotlib.pyplot as plt
+  mpl.use('TkAgg')
+
+Other options are possible, such as Plotly, though it is up to you to decide.
 

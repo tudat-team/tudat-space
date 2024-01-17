@@ -38,5 +38,4 @@ mass_propagator_settings = propagation_setup.propagator.mass(
     simulation_start_epoch,
     integrator_settings,
     termination_settings,
-    output_variables=dependent_variables_to_save,
-    print_interval=86400.0)
+    output_variables=dependent_variables_to_save)
