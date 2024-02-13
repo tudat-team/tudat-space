@@ -203,7 +203,7 @@ Is to be replaced with the creation of radiation_pressure_target_settings (in ve
     reference_area_radiation = 4.0
     radiation_pressure_coefficient = 1.2
     occulting_bodies_dict = dict()
-    occulting_bodies_dict[ "Sun" ].append( "Earth" )
+    occulting_bodies_dict[ "Sun" ] = [ "Earth" ]
     vehicle_target_settings = environment_setup.radiation_pressure.cannonball_radiation_target(
         reference_area_radiation, radiation_pressure_coefficient, occulting_bodies_dict )
 
