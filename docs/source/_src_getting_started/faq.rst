@@ -66,7 +66,16 @@ The following error (or similar)::
 
    Aborted (core dumped)
    
-is caused by the ``tudat-resources`` conda package (which is a dependency of tudat and tudatpy) not being installed properly. You can manually download the missing data, and place them in the directory specified by the error. In the `tudat-resources releases <https://github.com/tudat-team/tudat-resources/releases>`_, select the latest release and under 'assets' download and unpack the ``resource.tar.gz`` in the specified directory. 
+or::
+
+   SPICE(NOSUCHFILE) --
+   The attempt to load
+   "./home/MYNAME/.tudat/resource/spice_kernels/codes_300ast_20100725.tf" by the
+   routine FURNSH failed. It could not be located.
+   A traceback follows.  The name of the highest level module is first.
+   furnsh_c --> FURNSH --> ZZLDKER
+   
+is caused by the ``tudat-resources`` conda package (which is a dependency of tudat and tudatpy) not being installed properly, or being outdated. You can manually download the missing data, and place them in the directory specified by the error. In the `tudat-resources releases <https://github.com/tudat-team/tudat-resources/releases>`_, select the latest release and under 'assets' download and unpack the ``resource.tar.gz`` in the specified directory. 
 
 
 Frequently Asked Questions - Installation
@@ -88,6 +97,13 @@ How can I compile tudat and the tudatpy kernel from source?
 ===========================================================
 
 Our recommended procedure is to use the `tudat-bundle repository <https://github.com/tudat-team/tudat-bundle/>`_. The README of this repository provides instructions on how to build tudat from source. Some more background can be found under :ref:`using_tudat_source`. 
+
+Tudat(py) is not updating to the latest version in my conda environment, how can I solve this?
+==============================================================================================
+
+This is a recurring issue that we do not yet know how to solve properly. To get the latest version, create a new conda environment using the steps in :ref:`getting_started_installation`. To do so, you must either first delete your current conda environment, or create one with a new name by change the name in the ``environment.yaml`` file to something other than ``tudat-space``
+
+
 
 
 
