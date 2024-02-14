@@ -1,8 +1,13 @@
-==========================
+##########################
 Frequently Asked Questions
-==========================
+##########################
 
 This page covers some frequently asked questions that have been (and are being) gathered over time.
+
+Frequently Asked Questions - Tudat functionality
+################################################
+
+Below you can find a number of frequently asked questions on the usage and functionality of Tudat.
 
 How do I retrieve the body properties of a Body object?
 =======================================================
@@ -43,4 +48,46 @@ How can I add Spice kernels myself?
 =================================== 
 
 A list of default Spice kernels loaded into tudat can be accessed `here <https://py.api.tudat.space/en/latest/spice.html#tudatpy.interface.spice.load_standard_kernels>`_. If you wish to add a Spice kernel that is not loaded into tudat by default, you can do so using the :func:`~tudatpy.interface.spice.load_kernel` function. This takes a file path to the Spice kernel file as input and will load the file into the pool, from which you can now use it as any other kernel. A list of available kernels can be accessed through the `Spice toolkit <https://naif.jpl.nasa.gov/pub/naif/generic_kernels/spk/satellites/>`_.
+
+
+Frequently Asked Questions - Tudat errors
+#########################################
+
+Below you can find a number of frequently asked questions on common errors that occur when running a Tudatpy script.
+
+Tudat cannot find data files that it needs
+==========================================
+
+The following error (or similar)::
+
+   terminate called after throwing an instance of 'std::runtime_error'
+
+   what(): Data file could not be opened./home/MYNAME/.tudat/resource/earth_orientation/eopc04_14_IAU2000.62-now.txt
+
+   Aborted (core dumped)
+   
+is caused by the ``tudat-resources`` conda package (which is a dependency of tudat and tudatpy) not being installed properly. You can manually download the missing data, and place them in the directory specified by the error. In the `tudat-resources releases <https://github.com/tudat-team/tudat-resources/releases>`_, select the latest release and under 'assets' download and unpack the ``resource.tar.gz`` in the specified directory. 
+
+
+Frequently Asked Questions - Installation
+#########################################
+
+Below you can find a number of frequently asked questions on the installation of Tudatpy:
+
+I am getting an error 'DLL not found' when importing tudatpy
+============================================================
+
+The following error (or similar)::
+
+   from tudatpy.kernel import \
+   ImportError: DLL load failed while importing kernel: A dynamic link library (DLL) initialization routine failed.
+   
+have been known to be caused by virus scanners being overzealous, and seeing tudatpy as unsafe. Check the settings of your virus scanner to ensure that this is not the case.
+
+How can I compile tudat and the tudatpy kernel from source?
+===========================================================
+
+Our recommended procedure is to use the `tudat-bundle repository <https://github.com/tudat-team/tudat-bundle/>`_. The README of this repository provides instructions on how to build tudat from source. Some more background can be found under :ref:`using_tudat_source`. 
+
+
 
