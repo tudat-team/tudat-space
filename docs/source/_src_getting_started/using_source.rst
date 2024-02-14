@@ -1,3 +1,6 @@
+
+.. _using_tudat_source:
+
 ===========================
 Using the Tudat source code
 ===========================
