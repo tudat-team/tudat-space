@@ -87,6 +87,7 @@ Below, there is a list of contributors to Tudat. Mostly, these have been staff a
 * Jonas Hener
 * `Frank Hogervorst <https://www.linkedin.com/in/frankhogervorst/>`_
 * `René Hoogendoorn <https://www.linkedin.com/in/rene-hoogendoorn-107/>`_
+* `Elisabetta Iorfida <https://www.linkedin.com/in/elisabettaiorfida>`_
 * `Kartik Kumar <https://www.linkedin.com/in/kumarkartik/>`_
 * `Jonatan Leloux <https://www.linkedin.com/in/jonatanleloux/>`_
 * `Francesco Lupi <https://www.linkedin.com/in/francesco-lupi-b23a658/>`_
