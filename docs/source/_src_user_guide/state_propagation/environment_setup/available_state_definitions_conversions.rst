@@ -372,8 +372,10 @@ of a state in the same **frame**. That is, if the ``cartesian_state`` in the fir
 with the Earth as frame origin, the ``keplerian_state`` will also be defined w.r.t. the axes of this frame.
 As a result, the inclination (for example) will be measured w.r.t. the x-y plane of the `ECLIPJ2000`  frame, **not** w.r.t. the Earth's equator.
 
-.. note::
-    A Keplerian state cannot be computed w.r.t. the Solar System Barycenter (SSB), as it does not possess a gravitational parameter.
+.. note:: 
+
+	A Keplerian state cannot be computed w.r.t. the Solar System Barycenter (SSB), as it does not possess a gravitational parameter.
+
 
 In the definition of the state elements, you will notice that element 5 is the *true* anomaly, not the *eccentric* or
 *mean* anomaly. Tudat also contains functions to convert to these alternative anomalies. The various available functions
@@ -383,16 +385,16 @@ As an example, converting from true to eccentric anomaly is done as follows:
 
 .. code-block:: python
 
-        true_anomaly = ...
-        eccentricity = ...
-        eccentric_anomaly = conversion.true_anomaly_to_eccentric_anomaly( true_anomaly, eccentricity )
+	true_anomaly = ...
+	eccentricity = ...
+	eccentric_anomaly = conversion.true_anomaly_to_eccentric_anomaly( true_anomaly, eccentricity )
 
 or directly from the orbital elements:
 
 .. code-block:: python
 
-        keplerian_state = ...
-        eccentric_anomaly = conversion.true_anomaly_to_eccentric_anomaly( keplerian_state( true_anomaly_index ), keplerian_state( eccentricity_index ) )
+	keplerian_state = ...
+	eccentric_anomaly = conversion.true_anomaly_to_eccentric_anomaly( keplerian_state( true_anomaly_index ), keplerian_state( eccentricity_index ) )
 
 
 Note that this function automatically identifies whether the orbit is elliptical or hyperbolic, and computes the associated eccentric anomaly.
@@ -400,11 +402,11 @@ Similarly, Tudat contains functions to convert from eccentric to mean anomaly (a
 
 .. code-block:: python
 
-        true_anomaly = ...
-        eccentricity = ...
+	true_anomaly = ...
+	eccentricity = ...
 
-        eccentric_anomaly = conversion.true_anomaly_to_eccentric_anomaly( true_anomaly, eccentricity )
-        mean_anomaly = conversion.eccentric_anomaly_to_mean_anomaly( eccentric_anomaly, eccentricity )
+	eccentric_anomaly = conversion.true_anomaly_to_eccentric_anomaly( true_anomaly, eccentricity )
+	mean_anomaly = conversion.eccentric_anomaly_to_mean_anomaly( eccentric_anomaly, eccentricity )
 
 The conversion from mean to eccentric anomaly involves the solution of an implicit algebraic equation (Kepler's equation), for which a root finder is used.
 Root finders are discussed in more detail here (TODO: insert link). Tudat has a default root finder, and default selection for
@@ -414,18 +416,18 @@ You can do this as follows:
 
 .. code-block:: python
 
-        mean_anomaly = ...
-        eccentricity = ...
-        initial_guess = ...
-        root_finder = ...
+	mean_anomaly = ...
+	eccentricity = ...
+	initial_guess = ...
+	root_finder = ...
 
-        eccentric_anomaly = conversion.mean_anomaly_to_eccentric_anomaly(
-            eccentricity = eccentricity,
-            mean_anomaly = mean_anomaly,
-            use_default_initial_guess = False, #Optional; set to False to use optional user-defined initial guess
-            non_default_initial_guess = initial_guess, #optional
-            root_finder = root_finder #optional
-            )
+	eccentric_anomaly = conversion.mean_anomaly_to_eccentric_anomaly(
+		eccentricity = eccentricity,
+		mean_anomaly = mean_anomaly,
+		use_default_initial_guess = False, #Optional; set to False to use optional user-defined initial guess
+		non_default_initial_guess = initial_guess, #optional
+		root_finder = root_finder #optional
+		)
 
 The above function can be used with only the eccentricity and mean anomaly inputs, in which case the defaults are used for the
 initial guess and root finders.
@@ -436,23 +438,23 @@ Spherical-orbital Elements
 The spherical elements are typically used to denote the conditions in atmospheric flight. In most applications, they will be used to denote the state in a body-fixed frame. The details of the physical meaning of the elements is discussed here. The element indices in Tudat are the following:
 
 .. list-table:: Spherical-orbital Elements Indices.
-		:widths: 50 50
-		:header-rows: 1
+	:widths: 50 50
+	:header-rows: 1
 
-		* - Column Indices
-		- Spherical-orbital Elements
-		* - 0
-		- Radius
-		* - 1
-		- Latitude
-		* - 2
-		- Longitude
-		* - 3
-		- Speed
-		* - 4
-		- Flight Path Angle
-		* - 5
-		- Heading Angle
+	* - Column Indices
+	  - Spherical-orbital Elements
+	* - 0
+	  - Radius
+	* - 1
+	  - Latitude
+	* - 2
+	  - Longitude
+	* - 3
+	  - Speed
+	* - 4
+	  - Flight Path Angle
+	* - 5
+	  - Heading Angle
 
 The spherical elements consist of 6 entries, with no additional information required for the conversion to/from Cartesian elements. The conversion from Cartesian to spherical elements is performed as:
 
@@ -477,23 +479,23 @@ Modified Equinoctial Elements
 The modified equinoctial elements are typically used for orbits with eccentricities near 0 or 1 and/or inclinations near 0 or :math:`\pi`. The element indices in Tudat are the following:
 
 .. list-table:: Modified Equinoctial Elements Indices.
-		:widths: 50 50
-		:header-rows: 1
+	:widths: 50 50
+	:header-rows: 1
 
-		* - Column Indices
-		- Modified Equinoctial Elements
-		* - 0
-		- Semi-parameter
-		* - 1
-		- f-element
-		* - 2
-		- g-element
-		* - 3
-		- h-element
-		* - 4
-		- k-element
-		* - 5
-		- True Longitude
+	* - Column Indices
+	  - Modified Equinoctial Elements
+	* - 0
+	  - Semi-parameter
+	* - 1
+	  - f-element
+	* - 2
+	  - g-element
+	* - 3
+	  - h-element
+	* - 4
+	  - k-element
+	* - 5
+	  - True Longitude
 
 The modified equinoctial elements consists of 6 elements. The conversion to/from Cartesian elements requires the gravitational parameter of the body w.r.t. which the Modified Equinoctial elements are defined. The conversion from Cartesian elements is done using the :func:`~tudatpy.astro.element_conversion.cartesian_to_mee` function:
 
@@ -524,41 +526,41 @@ Unified State Model Elements
 Three different versions of the Unified State Model are present in Tudat. They differ based on the coordinates chosen to represent the rotation from local orbital to inertial frame, which can be expressed in quaternions (USM7), modified Rodrigues parameters (USM6) or exponential map (USMEM). The element indices are the following:
 
 .. list-table:: Unified State Model indices with quaternions (USM7), modified Rodrigues parameters (USM6) or exponential map (USMEM).
-		:widths: 25 25 25 25
-		:header-rows: 1
+	:widths: 25 25 25 25
+	:header-rows: 1
 
-		* - Column Indices
-		- USM7
-		- USM6
-		- USMEM
-		* - 0
-		- C Hodograph
-		- C Hodograph
-		- C Hodograph
-		* - 1
-		- Rf1 Hodograph
-		- Rf1 Hodograph
-		- Rf1 Hodograph
-		* - 2
-		- Rf2 Hodograph
-		- Rf2 Hodograph
-		- Rf2 Hodograph
-		* - 3
-		- :math:`\eta`
-		- :math:`\sigma_1`
-		- e1
-		* - 4
-		- :math:`\epsilon_1`
-		- :math:`\sigma_2`
-		- e2
-		* - 5
-		- :math:`\epsilon_2`
-		- :math:`\sigma_3`
-		- e3
-		* - 6
-		- :math:`\epsilon_3`
-		- Shadow flag
-		- Shadow flag
+	* - Column Indices
+	  - USM7
+	  - USM6
+	  - USMEM
+	* - 0
+	  - C Hodograph
+	  - C Hodograph
+	  - C Hodograph
+	* - 1
+	  - Rf1 Hodograph
+	  - Rf1 Hodograph
+	  - Rf1 Hodograph
+	* - 2
+	  - Rf2 Hodograph
+	  - Rf2 Hodograph
+	  - Rf2 Hodograph
+	* - 3
+	  - :math:`\eta`
+	  - :math:`\sigma_1`
+	  - e1
+	* - 4
+	  - :math:`\epsilon_1`
+	  - :math:`\sigma_2`
+	  - e2
+	* - 5
+	  - :math:`\epsilon_2`
+	  - :math:`\sigma_3`
+	  - e3
+	* - 6
+	  - :math:`\epsilon_3`
+	  - Shadow flag
+	  - Shadow flag
 
 Regardless of the rotational coordinates chosen, the Unified State Model elements consists of 7 elements. For each Unified State Model representation, conversion to and from Keplerian and Cartesian coordinates is implemented. As an example, the conversion from Keplerian elements for the USM7 elements is shown here:
 
@@ -606,20 +608,20 @@ Modified Rodrigues Parameters
 
 One of the other two supported attitude representations is the modified Rodrigues parameters (MRPs). The indices for MRPs are defined as follows:
 
-	.. list-table:: Modified Rodrigues Parameters Indices.
-		:widths: 50 50
-		:header-rows: 1
+.. list-table:: Modified Rodrigues Parameters Indices.
+   :widths: 50 50
+   :header-rows: 1
 
-		* - Column Indices
-		- Modified Rodrigues Parameter
-		* - 0
-		- :math:`\sigma` 1
-		* - 1
-		- :math:`\sigma` 2
-		* - 2
-		- :math:`\sigma` 3
-		* - 3
-		- Shadow flag
+   * - Column Indices
+     - Modified Rodrigues Parameter
+   * - 0
+     - :math:`\sigma` 1
+   * - 1
+     - :math:`\sigma` 2
+   * - 2
+     - :math:`\sigma` 3
+   * - 3
+     - Shadow flag
 
 
 Transformation to and from quaternions is achieved with the functions ``conversion.modified_rodrigues_parameters_to_quaternions`` and ``conversion.quaterns_to_modified_rodrigues_parameter_elements``, respectively, where the only input is the attitude element (in vector format).
@@ -630,24 +632,24 @@ Transformation to and from quaternions is achieved with the functions ``conversi
 
 
 Exponential Map
-^^^^^^^^^^
+^^^^^^^^^^^^^^^
 
 The final attitude representations is the exponential map (EM). The indices for EM are defined as follows:
 
-	.. list-table:: Exponential Map Indices.
-		:widths: 50 50
-		:header-rows: 1
+.. list-table:: Exponential Map Indices.
+	:widths: 50 50
+	:header-rows: 1
 
-		* - Column Indices
-		- Exponential Map
-		* - 0
-		- e1
-		* - 1
-		- e2
-		* - 2
-		- e3
-		* - 3
-		- Shadow flag
+	* - Column Indices
+	  - Exponential Map
+	* - 0
+	  - e1
+	* - 1
+	  - e2
+	* - 2
+	  - e3
+	* - 3
+	  - Shadow flag
 
 and transformation to and from quaternions is achieved with the aid of the functions ``conversion.exponential_map_to_quaternions`` and ``conversions.quaternions_to_exponential_map``, respectively. Also for these equations the only input is the attitude element (in vector format).
 
