@@ -372,10 +372,8 @@ of a state in the same **frame**. That is, if the ``cartesian_state`` in the fir
 with the Earth as frame origin, the ``keplerian_state`` will also be defined w.r.t. the axes of this frame.
 As a result, the inclination (for example) will be measured w.r.t. the x-y plane of the `ECLIPJ2000`  frame, **not** w.r.t. the Earth's equator.
 
-.. note:: 
-
-	A Keplerian state cannot be computed w.r.t. the Solar System Barycenter (SSB), as it does not possess a gravitational parameter.
-
+.. note::
+   A Keplerian state cannot be computed w.r.t. the Solar System Barycenter (SSB), as it does not possess a gravitational parameter.
 
 In the definition of the state elements, you will notice that element 5 is the *true* anomaly, not the *eccentric* or
 *mean* anomaly. Tudat also contains functions to convert to these alternative anomalies. The various available functions
