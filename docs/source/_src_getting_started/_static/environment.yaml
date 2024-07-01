@@ -7,4 +7,9 @@ dependencies:
   - matplotlib
   - scipy
   - pandas
-  - astroquery
+  - astropy
+  - numpy<2.0.0
+  - pip
+  - pip:
+    - astroquery>=0.4.8.dev9306
+
