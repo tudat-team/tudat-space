@@ -20,7 +20,7 @@ the following pages:
 
 * **Observation Model Settings**, which are presented :ref:`below <observationTypes>` containing settings for the *types* of observations that are to be used. These objects do not perform any calculation, but defined the properties of the observation simulators that are created
 * **Observation Simulators**, which are discussed :ref:`below <observationSimulators>`. These objects compute the actual observations from the current properties of the environment. As input, these objects require observation times (and possibly additional metadata).
-* **Observation Simulation Settings**, which are discussed on the :ref:`following page<observationTypes2>`. These objects define *how to use the observationaccessing_observations simulators* by providing the required settings for observation times, etc.
+* **Observation Simulation Settings**, which are discussed on the :ref:`following page<observationTypes2>`. These objects define *how to use the observation simulators* by providing the required settings for observation times, etc.
 * **Observation Collection**, which are discussed on the :ref:`following page<accessing_observations>`. These objects store the full set of observations and associated data used in a single estimation/covariance analysis in Tudat
 
 .. _observationTypes:
@@ -66,11 +66,11 @@ The only limitation is that you may not have duplicate entries of link ends *and
 When defining observation models, you can for most types of models define settings for:
 
 * **Biases:** A bias in Tudat is applied to the observable after its 'ideal' value computed from the environment is computed. You can find a list of settings for observation biases in our `API documentation <https://py.api.tudat.space/en/latest/observation.html>`_
-* **Light-time corrections:** When using an observable that involves the observation of one point/body in space by another (including any observable that involves the exchange of elecromagnetic signals), it is automatically assumed that the signal travels at the speed of light, and the associated light-time is determined when calculating the observable. Deviations from the signal's ideal trajectory (straight line at speed of light) may be defind by adding light-time correction settings, as listed in our `API documentation <https://py.api.tudat.space/en/latest/observation.html>`_
+* **Light-time corrections:** When using an observable that involves the observation of one point/body in space by another (including any observable that involves the exchange of electromagnetic signals), it is automatically assumed that the signal travels at the speed of light, and the associated light-time is determined when calculating the observable. Deviations from the signal's ideal trajectory (straight line at speed of light) may be defined by adding light-time correction settings, as listed in our `API documentation <https://py.api.tudat.space/en/latest/observation.html>`_
 * **Light-time convergence settings:** Calculating the light time between two link ends requires the iterative solution of the light-time equation. Default settings for convergence criteria for this solution are implemented, but a user may modify these settings if so desired. The associated settings object can be created using the :func:`~tudatpy.numerical_simulation.estimation_setup.observation.light_time_convergence_settings` function.
 
-Observation biases are used to add any systematic deviations from the 'physical' value of the computed obseravation
-(due to unmodelled electronic delays, or unmodelled propagation effects of the electromagnectic signals). A list of available biases
+Observation biases are used to add any systematic deviations from the 'physical' value of the computed observation
+(due to unmodelled electronic delays, or unmodelled propagation effects of the electromagnetic signals). A list of available biases
 can be found TODO. In short, for a bias :math:`\Delta h` (which may be a function of time, or properties of the environment),
 an 'ideal' computed observation :math:`\bar{h}`, the actual computed observation becomes:
 
@@ -88,7 +88,7 @@ To compute the light time, the following implicit equation has to be solved:
   \frac{||\mathbf{r}_{1}(t_{1}) - \mathbf{r}_{0}(t_{0})||}{c}=\left(t_{1}-t_{0}\right)+\Delta t(t_{0},t_{1};\mathbf{r}_{1}(t_{1}),\mathbf{r}_{0}(t_{0}))
 
 where, depending on the reference link end, the time :math:`t_{0}` at link end 0 is kept fixed, or the time :math:`t_{1}` at link end 1 is kept fixed.
-The :math:`\mathbf{r}_{0}` and :math:`\mathbf{r}_{1}` functions define the positions of link end 0 and 1 as a funtion of time. The function :math:`\Delta t`
+The :math:`\mathbf{r}_{0}` and :math:`\mathbf{r}_{1}` functions define the positions of link end 0 and 1 as a function of time. The function :math:`\Delta t`
 collects all effects that cause the propagation of the signal to deviate from propagation in a straight line at the speed of light.
 
 .. note::
@@ -121,7 +121,7 @@ The above options are added to the calls of the observation model settings facto
         one_way_nno_mex_link_ends, 
         light_time_correction_settings = light_time_correction_settings ) )
                 
-where we have defined that, for both observation models for which settings are created, the light-time calculation will take into account the first-order relativistic correction of the Sun, by using the :func:`~tudatpy.numerical_simulation.estimation_setup.observation.first_order_relativistic_correction` function. For the range observable, we have defined an absolute bias of 1 cm (0.01 m) using the :func:`~tudatpy.numerical_simulation.estimation_setup.absolute_bias`, while leaving the Doppler observable unbiased.
+where we have defined that, for both observation models for which settings are created, the light-time calculation will take into account the first-order relativistic correction of the Sun, by using the :func:`~tudatpy.numerical_simulation.estimation_setup.observation.first_order_relativistic_light_time_correction` function. For the range observable, we have defined an absolute bias of 1 cm (0.01 m) using the :func:`~tudatpy.numerical_simulation.estimation_setup.observation.absolute_bias`, while leaving the Doppler observable unbiased.
 
 .. _observationSimulators:
 
@@ -132,8 +132,8 @@ The ``observation_settings_list`` in the above examples (a ``list[ObservationMod
 simulators, which compute the actual values of the observables in Tudat. Depending on the your use case, a user may or may not interact
 with the observation simulators directly:
 
-* **Simulated observations** In this case, the user must interact with the observation simulators created from the ``observation_settings_list`` (which can be done in several ways), as discussed in mroe detail below
-* **Real observations** In this case, the ``observation_settings_list`` is used inside the estimation to create the obsevation simulators and generated the 'computed observations' from which the residuals are computed
+* **Simulated observations** In this case, the user must interact with the observation simulators created from the ``observation_settings_list`` (which can be done in several ways), as discussed in more detail below
+* **Real observations** In this case, the ``observation_settings_list`` is used inside the estimation to create the observation simulators and generated the 'computed observations' from which the residuals are computed
 
 Therefore, the rest of this section is only relevant for the first part: using simulated observations in Tudat.
 
@@ -143,26 +143,26 @@ Therefore, the rest of this section is only relevant for the first part: using s
 In what follows, we distinguish two different kinds of observation models:
 
 * The **truth model**, which is the one used to simulate the observations which we use as input to the estimation. When using real observations, the 'truth model' is our physical reality
-* The **estimatiom model**, which is the model used inside the estimator to fit the real or simulated observations (which are generated from the truth model)
+* The **estimation model**, which is the model used inside the estimator to fit the real or simulated observations (which are generated from the truth model)
 
 In other words, when computing the residuals from 'observed minus computed' (or 'O-C') data, the truth model is the source of the 'observed* data, and the estimation model is the source of the *computed* data.
 
 When using simulated observations, one can therefore choose between two different approaches
 
 * The *truth model* and *estimation model* are identical to one another, so that the observation model(s) used to fit the observations is mathematically identical to the one used to generate them
-* The *truth model* and *estimation model* are different from one another, so that there are physical effects present in the mathematical model used to simulate the osbervations which are not present in the model used to do the estimation
+* The *truth model* and *estimation model* are different from one another, so that there are physical effects present in the mathematical model used to simulate the observations which are not present in the model used to do the estimation
 
 Same truth and estimation model
 """""""""""""""""""""""""""""""
 
 The first case (equal truth and estimation model) is obviously a simplification of reality: when processing real data there are *always* effects present in our physical reality that are not incorporated into our models
 However, the first case can be very useful for a number of cases. Firstly, when only performing a :ref:`covariance analysis<covarianceSettings>`, the estimation model *is never used*, so we can dispense with
-its definition altogether (greatlt simplifying the setup!) Secondly, doing a :ref:`full estimation<fullEstimationSettings>` with the truth and estimation model equal to one another allows one to study the influence that
-different data types, their noise levels, etc. have on the final estimation, with some more flexibility than what is the case in the covariance anlaysus. More specifically,
+its definition altogether (greatly simplifying the setup!) Secondly, doing a :ref:`full estimation<fullEstimationSettings>` with the truth and estimation model equal to one another allows one to study the influence that
+different data types, their noise levels, etc. have on the final estimation, with some more flexibility than what is the case in the covariance analysis. More specifically,
 in a covariance analysis one is limited to Gaussian uncorrelated noise, which in a full estimation you can add any noise you like to the observations.
 
-When taking this approach, one makes use of the fact that observation simulators for the estimation are created anyway when creating an :class:`~tudatpy.numerical_simulation.estimation_setup.Estimator` object (discussed further :ref:`here <perform_estimation>`).
-You can extract these ``observation_simulators`` as follows, and use them to :ref:`simulate observations <observationSimulation:>` as follows:
+When taking this approach, one makes use of the fact that observation simulators for the estimation are created anyway when creating an :class:`~tudatpy.numerical_simulation.Estimator` object (discussed further :ref:`here <perform_estimation>`).
+You can extract these ``observation_simulators`` as follows, and use them to :ref:`simulate observations <observationSimulation>` as follows:
 
     .. code-block:: python
 
@@ -197,7 +197,7 @@ wants to implement to study the case at hand. In this case, the observation simu
         # Create observation simulators
         observation_simulators = create_observation_simulators( observation_settings_list, bodies )       
 
-When subsequently creating the :class:`~tudatpy.numerical_simulation.estimation_setup.Estimator` object (discussed further :ref:`here <perform_estimation>`)
+When subsequently creating the :class:`~tudatpy.numerical_simulation.Estimator` object (discussed further :ref:`here <perform_estimation>`)
 to perform the estimation, one can then provide a different ``observation_settings_list`` to ensure a difference between the truth
 and estimation models. One can also choose to provide different ``bodies``, so that the physical environment from which
 the observations are simulated, and the one to which they are fit, are different. Finally, even when using the same ``bodies``,

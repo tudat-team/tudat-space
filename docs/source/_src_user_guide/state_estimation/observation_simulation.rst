@@ -95,10 +95,10 @@ In addition to defining the observable type, link ends, observation times and (o
 
 - **Ancilliary settings**: Some observables may or must get additional quantitative data that influences the ideal value of the observable. Examples are the integration time for averaged Doppler observables, and retransmission times for n-way observables. 
 - **Constraints**: You can define settings such that an observation is only simulated if certain conditions (elevation angle, no occultation, *etc.*) are (not) met
-- **Noise levels**: You can define a functions which adds (random) noise to the simulated observations. This noise is typically, but not necesarilly, Gaussian
-- **Additional output**: Similarly to the state propagation framework, you can define a wide range of *dependent variables* to be calculating during the simulation of observations. Note that the *type* of variables you can choose from is distinct from those available during state proagation.
+- **Noise levels**: You can define a functions which adds (random) noise to the simulated observations. This noise is typically, but not necessarily, Gaussian
+- **Additional output**: Similarly to the state propagation framework, you can define a wide range of *dependent variables* to be calculating during the simulation of observations. Note that the *type* of variables you can choose from is distinct from those available during state propagation.
 
-Typically (but not necesarilly), these settings are defined and added to the observation simulation settings *after* the nominal settings have been defined
+Typically (but not necessarily), these settings are defined and added to the observation simulation settings *after* the nominal settings have been defined
 (in the process outlined above). To efficiently achieve this, there are several functions available in Tudat, which take a list of
 ``ObservationSimulationSettings`` objects (such as those returned by the :func:`~tudatpy.tabulated_settings_list` function),
 and add settings for one of the above options to any number of observation simulation settings.
@@ -141,7 +141,7 @@ In many cases, whether an observation at a given time should be realized will de
 We have termed such constraints 'observation viability settings', and we have currently implemented the following types:
 
 - **Minimum_elevation_angle**: Minimum elevation angle at a ground station: target must be at least a certain elevation above the horizon (see :func:`~tudatpy.numerical_simulation.estimation_setup.observation.elevation_angle_viability`).
-- **Body avoidance angle**: the line-of-sight vector from a link end :math:`A` to a given third body must have an angle w.r.t. the line-of-sight between link end :math:`A` and any other link ends that it obsereved that is sufficiently large. This constraint is typically used to prevent the Sun from being too close to the field-of-view of the telescope(s),  (see :func:`~tudatpy.numerical_simulation.estimation_setup.observation.body_avoidance_viability`)
+- **Body avoidance angle**: the line-of-sight vector from a link end :math:`A` to a given third body must have an angle w.r.t. the line-of-sight between link end :math:`A` and any other link ends that it observed that is sufficiently large. This constraint is typically used to prevent the Sun from being too close to the field-of-view of the telescope(s),  (see :func:`~tudatpy.numerical_simulation.estimation_setup.observation.body_avoidance_viability`)
 - **Body occultation**: the link must not be obscured by a given third body. For instance: the Moon occulting a link between Earth and Mars (see :func:`~tudatpy.numerical_simulation.estimation_setup.observation.body_occultation_viability`)
 
 For example, the ``observation_simulation_settings_list`` list created in the example above can be modified such that only observations above a 15 degree elevation angle at New Norcia are accepted. In this case (the :func:`~tudatpy.numerical_simulation.estimation_setup.observation.add_viability_check_to_all` function), the list of settings in ``viability_settings_list`` is applied to *all* observation simulation settings in ``observation_simulation_settings_list``. To only add the viability settings to observation simulation settings of a given type of observable, or only to those of a given observable **and** a give link definition, use the :func:`~tudatpy.numerical_simulation.estimation_setup.observation.add_viability_check_to_observable` and :func:`~tudatpy.numerical_simulation.estimation_setup.observation.add_viability_check_to_observable_for_link_ends` functions, respectively.
@@ -158,17 +158,17 @@ For example, the ``observation_simulation_settings_list`` list created in the ex
       viability_settings_list )
 
 
-To add viability settings directy to a single ``ObservationSimulationSettings`` object, use the  :func:`~tudatpy.numerical_simulation.estimation_setup.observation.ObservationSimulationSettings.viability_settings_list` attribute.
+To add viability settings directly to a single ``ObservationSimulationSettings`` object, use the  :func:`~tudatpy.numerical_simulation.estimation_setup.observation.ObservationSimulationSettings.viability_settings_list` attribute.
 
 .. _noise_levels:
 
 Defining noise levels
 ^^^^^^^^^^^^^^^^^^^^^
 
-If no noise is defined, the observations are simulated according to the determininistic model that has been defined in the
+If no noise is defined, the observations are simulated according to the deterministic model that has been defined in the
 :ref:`observationModelSetup`. We stress that this 'noise-free' observation can contain a simulated bias,
 if such a bias has been included in the observation model settings (see :ref:`observationTypes`).
-By adding noise settings, a user can add (typically, but not necesarilly) random noise to the simulation of the observations.
+By adding noise settings, a user can add (typically, but not necessarily) random noise to the simulation of the observations.
 We currently have two types of interfaces for adding noise to an observation:
 
 - **Gaussian noise**: By specifying the standard deviation, you can add uncorrelated, zero-mean Gaussian noise to the observations
@@ -207,7 +207,7 @@ where it is important to realize that the noise function *must* have a single fl
 :func:`~tudatpy.numerical_simulation.estimation_setup.observation.add_noise_function_to_all`,
 :func:`~tudatpy.numerical_simulation.estimation_setup.observation.add_noise_function_to_observable` and :func:`~tudatpy.numerical_simulation.estimation_setup.observation.add_noise_function_to_observable_for_link_ends` functions can be used to add a noise function to a subset of all observation simulation settings.
 
-To add a generic noise function directy to a single ``ObservationSimulationSettings`` object, use the  :func:`~tudatpy.numerical_simulation.estimation_setup.observation.ObservationSimulationSettings.noise_function` attribute.
+To add a generic noise function directly to a single ``ObservationSimulationSettings`` object, use the  :func:`~tudatpy.numerical_simulation.estimation_setup.observation.ObservationSimulationSettings.noise_function` attribute.
 
 .. _observation_dependent_variables:
 
@@ -267,7 +267,7 @@ a user to keep track of which entry of :math:`\mathbf{h}` represent what.
 
 For observable that have a size :math:`>1` (for instance, angular position is size 2; Cartesian position is size 3),
 the associated entries in the vector of times
-(and link defintion, etc.) are copied. For instance, for an observable vector :math:`\mathbf{h}` consisting of three angular
+(and link definition, etc.) are copied. For instance, for an observable vector :math:`\mathbf{h}` consisting of three angular
 position observables, we will have :math:`\mathbf{h}=[\alpha(t_{1}); \delta(t_{1}); \alpha(t_{2}); \delta(t_{2}); \alpha(t_{3}); \delta(t_{3})]`,
 and the associated vector of times will be :math:`\mathbf{t}=[t_{1}; t_{1}; t_{2}; t_{2}; t_{3}; t_{3}]`.
 
@@ -286,7 +286,7 @@ We provide an overview of the implemented functionality on a :ref:`dedicated pag
 A user may also manually load any external data source into Tudat-compatible observation types.
 This can be done using the :func:`~tudatpy.numerical_simulation.estimation.single_observation_set` function,
 which allows a user to manually specify all the required raw data for an observation. A
-list of these observation sets can then be used to construt an :class:`~tudatpy.numerical_simulation.estimation.ObservationCollection` object.
+list of these observation sets can then be used to construct an :class:`~tudatpy.numerical_simulation.estimation.ObservationCollection` object.
 
 
 

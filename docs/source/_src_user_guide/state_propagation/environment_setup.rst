@@ -70,7 +70,7 @@ The typical procedure to create the environment is represented in the figure and
 
 3. **Modify bodies** If desired, additional models and bodies can be added afer this
    :class:`~tudatpy.numerical_simulation.environment.Body`/:class:`~tudatpy.numerical_simulation.environment.SystemOfBodies`
-   creation, with limitations on interdepenencies with existing bodies (see :ref:`create_empty_body`).
+   creation, with limitations on interdependencies with existing bodies (see :ref:`create_empty_body`).
 
 .. figure:: _static/tudatpy_environment.png
    :width: 600

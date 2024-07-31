@@ -57,6 +57,7 @@ nbsphinx_thumbnails = {
     '_src_getting_started/_src_examples/notebooks/propagation': './_static/propagation_example_thumbnail.png',
     '_src_getting_started/_src_examples/notebooks/pygmo': './_static/pygmo_example_thumbnail.png',
     '_src_getting_started/_src_examples/notebooks/estimation': './_static/estimation_example_thumbnail.png',
+    '_src_getting_started/_src_examples/notebooks/mission_design':'./_static/mission_design_example_thumbnail.png',
     '_src_getting_started/_src_examples/notebooks/pygmo/asteroid_orbit_optimization':
     './_static/asteroid_example_thumbnail.png',
 }

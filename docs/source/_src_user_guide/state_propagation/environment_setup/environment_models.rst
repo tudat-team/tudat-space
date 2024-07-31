@@ -11,7 +11,7 @@ On this page, we provide an overview of the categories of environment models tha
 .. note::
     For details on how to access the environment *during a propagation* (for custom models, typically), see :ref:`this page <environment_during_propagation>`
 
-In Tudat, the full environment is stored in a :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` object, which in turn stores environment models inside :class:`~tudatpy.numerical_simulation.environment.Body` objects (one for each natural or artifical body in your model). From each object representing a body, you can extract each separate environment model (see list below). For instance, to retrieve the :class:`~tudatpy.numerical_simulation.environment.Ephemeris` object from the body named ``Earth``, you can use the following:
+In Tudat, the full environment is stored in a :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` object, which in turn stores environment models inside :class:`~tudatpy.numerical_simulation.environment.Body` objects (one for each natural or artificial body in your model). From each object representing a body, you can extract each separate environment model (see list below). For instance, to retrieve the :class:`~tudatpy.numerical_simulation.environment.Ephemeris` object from the body named ``Earth``, you can use the following:
 
     .. code-block:: python
 
@@ -69,7 +69,7 @@ The complete list of available environment model settings can be found on our AP
  
 * `Radiation pressure source and target models <https://py.api.tudat.space/en/latest/radiation_pressure.html>`_, to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.radiation_source_settings` and :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.radiation_pressure_target_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`.
 
-   * These models provide various ways in which to define the radiation flux emitted by a body, and a response of a body to incident radation pressure. More details are provided on a :ref:`dedicated page <radiation_pressure_acceleration>`
+   * These models provide various ways in which to define the radiation flux emitted by a body, and a response of a body to incident radiation pressure. More details are provided on a :ref:`dedicated page <radiation_pressure_acceleration>`
    * The resulting model can be extracted from the :class:`~tudatpy.numerical_simulation.environment.Body` object extracted using :attr:`~tudatpy.numerical_simulation.environment.Body.radiation_pressure_source` and :attr:`~tudatpy.numerical_simulation.environment.Body.radiation_pressure_target`, which provides a :class:`~tudatpy.numerical_simulation.environment.RadiationSourceModel` and a :class:`~tudatpy.numerical_simulation.environment.RadiationPressureTargetModel`, respectively.
 
 

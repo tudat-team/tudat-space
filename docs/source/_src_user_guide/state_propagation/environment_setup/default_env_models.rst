@@ -38,14 +38,14 @@ Ephemeris
 ---------
 
 Directly from Spice (see :ref:`spice_in_tudat`). For our default settings, this includes all solar system
-planets, the Sun, Earth's moon, the main Martian, Jovian and Saturnian satellites. as well as 300 major solar sysrem asteroids. Users can append this list with additional ephemeris files, for
+planets, the Sun, Earth's moon, the main Martian, Jovian and Saturnian satellites. as well as 300 major solar system asteroids. Users can append this list with additional ephemeris files, for
 instance for small bodies or other satellite systems, through the use of the
 :func:`~tudatpy.interface.spice.load_kernel`.
 
 Ephemerides from Spice kernels are only valid for a somewhat limited time interval (on the order of one or several centuries, depending on the specific body), which is limited by the valid range of the Spice kernels provided in Tudat by default. You can load additional Spice kernels with a longer coverage by using the :func:`~tudatpy.interface.spice.load_kernel` function for any additional kernels you like (see, for instance, the `generic kernels <https://naif.jpl.nasa.gov/naif/data_generic.html>`_ listed on the Spice website. Note that the contents will override data in the default kernels (if applicable).
 
 .. note::
-   In some cases, the extraction of the state of bodies from Spice kernels can be a computational bottleneck. Tudat has an :ref:`alternative set of default options <default_bodies_limited_time_range>`, which make this process signicantly faster, at the expense of higher RAM usage, and an environment that is only valid over a very limited time interval.
+   In some cases, the extraction of the state of bodies from Spice kernels can be a computational bottleneck. Tudat has an :ref:`alternative set of default options <default_bodies_limited_time_range>`, which make this process significantly faster, at the expense of higher RAM usage, and an environment that is only valid over a very limited time interval.
 
 .. _default_rotation_models:
 
