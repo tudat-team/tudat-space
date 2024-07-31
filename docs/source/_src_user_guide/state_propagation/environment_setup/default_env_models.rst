@@ -6,8 +6,8 @@ Default environment models
 
 .. attention::
 
-  This page is only exact for Tudatpy version >= 0.7. Older versions use several slightly different Spice kernels and gravity fields.
-  To use default Spice kernels from older versions, use the :func:`~tudatpy.interface.spice.load_standard_deprecated_kernels` instead of :func:`~tudatpy.interface.spice.load_standard_kernels`
+  This page is only exact for Tudatpy version >= 0.7. Older versions use several slightly different SPICE kernels and gravity fields.
+  To use default SPICE kernels from older versions, use the :func:`~tudatpy.interface.spice.load_standard_deprecated_kernels` instead of :func:`~tudatpy.interface.spice.load_standard_kernels`.
 
 .. toctree::
    :titlesonly:
@@ -23,48 +23,48 @@ models for a broad range of solar system bodies.
 .. contents:: Content of this page
    :local:
 
-Many of these settings are derived from so-called Spice kernels. `Spice <https://naif.jpl.nasa.gov/naif/toolkit.html>`_
+Many of these settings are derived from so-called SPICE kernels. `SPICE <https://naif.jpl.nasa.gov/naif/toolkit.html>`_
 is a toolkit developed by NASA's Navigation and Ancillary Information Facility (NAIF) and is used throughout the space
-industry for the design and analysis of (planetary) missions. In Tudat, we primarily use the modules of spice that deal
-with pre-defined ephemerides and rotation models of solar system bodies (see section `Spice in Tudat` below for details on our usage of Spice).
+industry for the design and analysis of (planetary) missions [Acton1996]_. In Tudat, we primarily use the modules of SPICE that deal
+with pre-defined ephemerides and rotation models of solar system bodies (see section :ref:`spice_in_tudat` below for details on our usage of SPICE).
 
 Default settings
 =================
 
-Using the data from these Spice kernels into Tudat, the following default models
+Using the data from these SPICE kernels into Tudat, the following default models
 are used by Tudat when calling the :func:`~tudatpy.interface.spice.load_standard_kernels` function.
 
 Ephemeris
 ---------
 
-Directly from Spice (see :ref:`spice_in_tudat`). For our default settings, this includes all solar system
+Directly from SPICE (see :ref:`spice_in_tudat`). For our default settings, this includes all solar system
 planets, the Sun, Earth's moon, the main Martian, Jovian and Saturnian satellites. as well as 300 major solar system asteroids. Users can append this list with additional ephemeris files, for
 instance for small bodies or other satellite systems, through the use of the
 :func:`~tudatpy.interface.spice.load_kernel`.
 
-Ephemerides from Spice kernels are only valid for a somewhat limited time interval (on the order of one or several centuries, depending on the specific body), which is limited by the valid range of the Spice kernels provided in Tudat by default. You can load additional Spice kernels with a longer coverage by using the :func:`~tudatpy.interface.spice.load_kernel` function for any additional kernels you like (see, for instance, the `generic kernels <https://naif.jpl.nasa.gov/naif/data_generic.html>`_ listed on the Spice website. Note that the contents will override data in the default kernels (if applicable).
+Ephemerides from SPICE kernels are only valid for a somewhat limited time interval (on the order of one or several centuries, depending on the specific body), which is limited by the valid range of the SPICE kernels provided in Tudat by default. You can load additional SPICE kernels with a longer coverage by using the :func:`~tudatpy.interface.spice.load_kernel` function for any additional kernels you like (see, for instance, the `generic kernels <https://naif.jpl.nasa.gov/naif/data_generic.html>`_ listed on the SPICE website. Note that the contents will override data in the default kernels (if applicable).
 
 .. note::
-   In some cases, the extraction of the state of bodies from Spice kernels can be a computational bottleneck. Tudat has an :ref:`alternative set of default options <default_bodies_limited_time_range>`, which make this process significantly faster, at the expense of higher RAM usage, and an environment that is only valid over a very limited time interval.
+   In some cases, the extraction of the state of bodies from SPICE kernels can be a computational bottleneck. Tudat has an :ref:`alternative set of default options <default_bodies_limited_time_range>`, which make this process significantly faster, at the expense of higher RAM usage, and an environment that is only valid over a very limited time interval.
 
 .. _default_rotation_models:
 
 Rotation model
 --------------
 
-Directly from Spice (see :ref:`spice_in_tudat`). For body ``Foo``, Tudat uses the frame
-``IAU_Foo`` defined in Spice as the body-fixed frame. These rotation models are implementations of results published by
+Directly from SPICE (see :ref:`spice_in_tudat`). For body ``Foo``, Tudat uses the frame
+``IAU_Foo`` defined in SPICE as the body-fixed frame. These rotation models are implementations of results published by
 the IAU Working Group on Cartographic Coordinates and Rotational Elements.
 
 For the Earth, a high-accuracy rotation model is available, which is *not* loaded by default, but can be added to the default settings using the :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.gcrs_to_itrs` function.
 
 .. note::
-   In some cases, the extraction of the rotational state of bodies from Spice kernels can be a computational bottleneck. Tudat has an :ref:`alternative set of default options <default_bodies_limited_time_range>`, which make this process signicantly faster, at the expense of higher RAM usage, and an environment that is only valid over a very limited time interval.
+   In some cases, the extraction of the rotational state of bodies from SPICE kernels can be a computational bottleneck. Tudat has an :ref:`alternative set of default options <default_bodies_limited_time_range>`, which make this process significantly faster, at the expense of higher RAM usage, and an environment that is only valid over a very limited time interval.
 
 Shape model
 -----------
 
-Directly from Spice (any body available through Spice kernels). Tudat uses the average radius from Spice to define a
+Directly from SPICE (any body available through SPICE kernels). Tudat uses the average radius from SPICE to define a
 spherical shape model for all bodies.
 
 .. _default_gravity_fields:
@@ -82,8 +82,8 @@ Gravity field
    - **Jupiter**: Zonal coefficients up to degree 8 from, described `here <https://www.nature.com/articles/nature25776/>`__
    - **Galilean Moons** (Io, Europa, Ganymede, Callisto), :math:`\mu`, :math:`C_{20}` and :math:`C_{22}` from IMCCE ephemerides
 
-* For all the other bodies not mentioned above, point-mass gravity field with gravitational parameter loaded from Spice are used
-  (for any body available through Spice kernels).
+* For all the other bodies not mentioned above, point-mass gravity field with gravitational parameter loaded from SPICE are used
+  (for any body available through SPICE kernels).
 
 .. warning::
    Temporal variations of the gravity field are zero by default, but can be included for high-accuracy
@@ -108,11 +108,16 @@ Radiation source
 SPICE in Tudat
 ===============
 
-The ``cspice`` toolkit (version of spice written in the C language) is included in the conda environment when installing
-Tudat, and Tudat contains a number of functions to directly interact with spice, listed `here <https://py.api.tudat.space/en/latest/spice.html>`_.
+The ``cspice`` toolkit (version of SPICE written in the C language) is included in the conda environment when installing
+Tudat, and Tudat contains a number of functions to directly interact with SPICE, listed `here <https://py.api.tudat.space/en/latest/spice.html>`_.
 
-The Spice toolkit has extensive `lessons <https://naif.jpl.nasa.gov/naif/lessons.html>`_, `tutorials <https://naif.jpl.nasa.gov/naif/tutorials.html>`_ and  `detailed documentation <https://naif.jpl.nasa.gov/naif/documentation.html>`_.
+The SPICE toolkit has extensive `lessons <https://naif.jpl.nasa.gov/naif/lessons.html>`_, `tutorials <https://naif.jpl.nasa.gov/naif/tutorials.html>`_ and  `detailed documentation <https://naif.jpl.nasa.gov/naif/documentation.html>`_.
 
-Spice relies on a set of user-supplier input files (kernels) to perform its calculations. A number of these kernels are installed automatically with Tudat, and loaded when calling the :func:`~tudatpy.interface.spice.load_standard_kernels` function (see this API docs entry for list of kernels).
+SPICE relies on a set of user-supplied input files (kernels) to perform its calculations. A number of these kernels are installed automatically with Tudat, and loaded when calling the :func:`~tudatpy.interface.spice.load_standard_kernels` function (see this API docs entry for list of kernels).
 
-When using the default kernels/body settings, we have introduced one small difference for the sake of expediency. For the cases of Uranus, Neptune and Pluto, where we only have the ephemeris of the barycenter of the planetary system loaded, the planet is placed at the barycenter of the planetary system. This introduces a minor offset in the position of this planet (Mercury and Venus have no moons, and therefore their state coincides with their planetary system barycenter; dedicated planetary system ephemerides are loaded for teh Earth, Mars, Jupiter and Saturn system). For Uranus, for example, the default settings will place Uranus at the center of mass (barycenter) of the combined system of Uranus and its moons. To correct this behaviour, a user can load a kernel for this body's planetary system (see `here <https://naif.jpl.nasa.gov/pub/naif/generic_kernels/spk/satellites/>`__, for example), and modify the default settings.
+When using the default kernels/body settings, we have introduced one small difference for the sake of expediency. For the cases of Uranus, Neptune and Pluto, where we only have the ephemeris of the barycenter of the planetary system loaded, the planet is placed at the barycenter of the planetary system. This introduces a minor offset in the position of this planet (Mercury and Venus have no moons, and therefore their state coincides with their planetary system barycenter; dedicated planetary system ephemerides are loaded for the Earth, Mars, Jupiter and Saturn system). For Uranus, for example, the default settings will place Uranus at the center of mass (barycenter) of the combined system of Uranus and its moons. To correct this behaviour, a user can load a kernel for this body's planetary system (see `here <https://naif.jpl.nasa.gov/pub/naif/generic_kernels/spk/satellites/>`__, for example), and modify the default settings.
+
+=================
+
+.. [Acton1996] Acton, (1996). Ancillary data services of NASA's Navigation and Ancillary Information Facility.
+   Planetary and Space Science, Volume 44, Issue 1, https://doi.org/10.1016/0032-0633(95)00107-7.

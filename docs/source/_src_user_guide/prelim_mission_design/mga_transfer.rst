@@ -32,16 +32,15 @@ Before evaluating any transfer, it is useful to introduce the concept of nodes a
 schematic representation is given in the figure below. An MGA trajectory is given, with an arbitrary sequence. A number
 of nodes can be seen that represent the celestial body used as GA body, as well as a number of legs that connect the
 nodes together. A central body is given, as this is required for the heliocentric evaluation of the legs, but more on
-that later. A number of different nodes are used and annotated; these are explained below under 'Nodes and Their
-parameters'. 
+that later. A number of different nodes are used and annotated; these are explained below under :ref:`transfer_nodes`. 
 
 It is crucial to understand that both the nodes and legs have an incoming and outgoing velocity vector and that these
 are determined in different frames. The key difference being that the incoming/outgoing velocities of the legs are
-evaluated in a heliocentric frame -- assuming the Sun is the central body -- and the incoming/outoing velocities of the
+evaluated in a heliocentric frame -- assuming the Sun is the central body -- and the incoming/outgoing velocities of the
 nodes are evaluated in a planetocentric frame -- assuming a planet is the GA target. The velocity vectors are converted
 in to the respective frame to evaluate the unknown parameters. Which parameters are unknown depends on the type of leg
 and node, which is explained later. For more details on the difference in reference frame and the patching of these
-trajectories, see section 4.4.2/3 Musegaas (2012)`_.
+trajectories, see section 4.4.2/3 `Musegaas (2012)`_.
 
 .. figure:: _static/MGA_legs_and_nodes.jpg
    :width: 800
@@ -71,8 +70,8 @@ Supported models
 At present, the types of legs are supported (more details can be found below):
 
 - Unpowered legs: A purely ballistic (Keplerian) trajectory between nodes
-- Velocity-based deep-space maneuver (DSM)  legs: A ballistic trajectory betweene nodes, with the addition of a single impulsive maneuver during the leg (parameterized by its velocity)
-- Position-based DSM legs: A ballistic trajectory betweene nodes, with the addition of a single impulsive maneuver during the leg (parameterized by its position)
+- Velocity-based deep-space maneuver (DSM)  legs: A ballistic trajectory between nodes, with the addition of a single impulsive maneuver during the leg (parameterized by its velocity)
+- Position-based DSM legs: A ballistic trajectory between nodes, with the addition of a single impulsive maneuver during the leg (parameterized by its position)
 - Spherical-shaping legs: A shape-based low-thrust trajectory using the spherical shaping method
 - Hodographic-shaping legs: A shape-based low-thrust trajectory using the hodographic shaping method
 
@@ -111,9 +110,9 @@ node and leg settings is:
 Manually creating settings for single legs and nodes is described :ref:`below <manual_transfer_legs_nodes>`.
 
 The complete procedure for creating and analyzing an MGA transfer consists of the following. The associated code snippets are taken from 
-an `this example application`_, for an unpowered leg Cassini (EVVEJS) transfer trajectory:
+`this example application`_, for an unpowered leg Cassini (EVVEJS) transfer trajectory:
 
-.. _`this example application`: https://docs.tudat.space/en/latest/_src_getting_started/_src_examples/notebooks/pygmo/cassini1_mga_optimization.html 
+.. _`this example application`: ../../_src_getting_started/_src_examples/notebooks/mission_design/cassini1_mga_optimization.html
 
 - **Define the transfer settings**: The transfer leg settings and node settings a are created. These are defined
   using the body order (bodies through which the spacecraft will pass), the departure and arrival orbit (semi-major axis
@@ -160,7 +159,7 @@ an `this example application`_, for an unpowered leg Cassini (EVVEJS) transfer t
 - **Evaluate the transfer**: Select the node times, node parameters, and leg parameters, and use them to evaluate the
   transfer through :meth:`~tudatpy.trajectory_design.transfer_trajectory.TransferTrajectory.evaluate`. These parameters
   are described in the following sections. Note that, in the case of an optimization, this function is called repeatedly
-  to evaluate the transfer trajectory with differeent properties.
+  to evaluate the transfer trajectory with different properties.
 
 .. code-block:: python
 
@@ -193,7 +192,7 @@ For applications see `this example`_ and `this PyGMO example`_.
 Manually Creating the Transfer Settings
 ---------------------------------------
 
-While in many casses the transfer settings can be created using the factory functions listed in the previous section, there are some cases
+While in many cases the transfer settings can be created using the factory functions listed in the previous section, there are some cases
 where the manual creation of these should be preferred. These include transfers with mixed types of legs. The
 creation of the transfer settings can be divided into two steps: creation of the legs settings and creation of the nodes
 settings.

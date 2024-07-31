@@ -69,7 +69,7 @@ Deep Space Tracking Radio Data
 
 Radio tracking data from planetary spacecraft (Doppler, range, astrometry) collected by NASA's Deep Space Network (DSN) or
 ESA's ESTRACK network is disseminated through a number of channels, most notably the `PDS geosciences Node <https://pds-geosciences.wustl.edu/dataserv/radio_science.htm>`_, in a
-varity of data formats.
+variety of data formats.
 
 At the moment, Tudat is set up to read the Orbit Data File (ODF) files, documented `here <https://pds-geosciences.wustl.edu/radiosciencedocs/urn-nasa-pds-radiosci_documentation/dsn_trk-2-18/dsn_trk-2-18.2008-02-29.pdf>`_.
 These are binary files that Tudat can 'unpack' and put the contents into Tudat-compatible data structures. Since the contents of the
@@ -91,20 +91,20 @@ To further use the :class:`~tudatpy.numerical_simulation.estimation.ObservationC
 Pseudo-observations from External Ephemerides
 =============================================
 
-Using some external source (for instance: Spice kernels) to compute/extract position observables (e.g. using the 3-dimensional
+Using some external source (for instance: SPICE kernels) to compute/extract position observables (e.g. using the 3-dimensional
 Cartesian position of a body at an epoch as an 'observable'), and then fitting these observations to a dynamical model in Tudat can be very useful.
 In particular, such a procedure allows you to quantify exactly how closely the dynamical model settings used in Tudat can recreate the published orbit.
 Using such Cartesian positions from an external data source is sometimes termed using 'pseudo-observations'.
 
 The source of the Cartesian positions is up to the user, but typical sources are:
 
-* Body positions from Spice kernels. NOTE: Spice kernels with spacecraft orbits for a large number of planetary missions can be found
+* Body positions from SPICE kernels. NOTE: SPICE kernels with spacecraft orbits for a large number of planetary missions can be found
 * Body positions from JPL Horizons
 * TLEs propagated in time using an SGP4 propagator, and rotated to an inertial frame
 * SP3c files containing tabulated state histories, typically for Earth-orbiting spacecraft
 
-The Galilean moon state estimatione example on :ref:`this page <estimation_examples>` gives a good examples of the full procedure that can be used
-for this, where the states are (in this case) extracted from Spice kernels.
+The Galilean moon state estimation example on :ref:`this page <estimation_examples>` gives a good examples of the full procedure that can be used
+for this, where the states are (in this case) extracted from SPICE kernels.
 
 In Tudat Cartesian position (pseudo-)observations are processed using the :func:`~tudatpy.numerical_simulation.estimation_setup.observation.relative_cartesian_position`
 observation model. In addition to creating the :class:`~tudatpy.numerical_simulation.estimation.ObservationCollection`

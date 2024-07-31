@@ -44,10 +44,10 @@ How can I create a more detailed gravity field (i.e. higher degree and order sph
 
 If you wish to create a more detailed gravity field of a Body, this is possible using the :func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.from_file_spherical_harmonic` function. As one of the inputs it will take a file path which indicates where the spherical harmonic gravity field file is located. These should be stored in the resources directory. To return the full file path pointing to this gravity file, you can use the :func:`~tudatpy.io.get_gravity_models_path` function. Storing the output from :func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.from_file_spherical_harmonic` under ``file``, you can then update a Body’s gravity field settings by overwriting the default gravity field with ``file``. Make sure to do this *before* creating your environment.
 
-How can I add Spice kernels myself?
+How can I add SPICE kernels myself?
 =================================== 
 
-A list of default Spice kernels loaded into tudat can be accessed `here <https://py.api.tudat.space/en/latest/spice.html#tudatpy.interface.spice.load_standard_kernels>`_. If you wish to add a Spice kernel that is not loaded into tudat by default, you can do so using the :func:`~tudatpy.interface.spice.load_kernel` function. This takes a file path to the Spice kernel file as input and will load the file into the pool, from which you can now use it as any other kernel. A list of available kernels can be accessed through the `Spice toolkit <https://naif.jpl.nasa.gov/pub/naif/generic_kernels/spk/satellites/>`_.
+A list of default SPICE kernels loaded into tudat can be accessed `here <https://py.api.tudat.space/en/latest/spice.html#tudatpy.interface.spice.load_standard_kernels>`_. If you wish to add a SPICE kernel that is not loaded into tudat by default, you can do so using the :func:`~tudatpy.interface.spice.load_kernel` function. This takes a file path to the SPICE kernel file as input and will load the file into the pool, from which you can now use it as any other kernel. A list of available kernels can be accessed through the `SPICE toolkit <https://naif.jpl.nasa.gov/pub/naif/generic_kernels/spk/satellites/>`_.
 
 
 Frequently Asked Questions - Tudat errors
