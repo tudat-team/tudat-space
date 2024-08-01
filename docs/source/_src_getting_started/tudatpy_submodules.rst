@@ -1,3 +1,5 @@
+.. _tudatpy_submodules:
+
 ==================
 Tudatpy Submodules
 ==================

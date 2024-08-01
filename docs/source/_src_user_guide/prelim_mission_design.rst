@@ -1,3 +1,5 @@
+.. _prelim_mission_design:
+
 **************************
 Preliminary Mission Design
 **************************

@@ -1,3 +1,5 @@
+.. _state_estimation:
+
 ******************
 State Estimation
 ******************
