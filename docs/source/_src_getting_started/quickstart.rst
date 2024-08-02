@@ -4,7 +4,7 @@
 Quickstart: Tudat(Py) in 10 minutes
 ###################################
 
-This pages aims to get you started with Tudat(Py) and introduce you to some of the key concepts in Tudat. By the end of it, you will be able to use Tudat(Py) for simple tasks such as propagating a Keplerian orbit, as well as expose you to the ecosystem of Tudat(Py) so you can start building more complex simulations. For more in-depth information, references to the relevant sections of the documentation are provided.
+This pages aims to get you started with Tudat(Py) and introduce you to some of the key concepts in Tudat. By the end of it, you will be able to use Tudat(Py) for simple tasks such as propagating a spacecraft orbit, as well as expose you to the ecosystem of Tudat(Py) so you can start building more complex simulations. For more in-depth information, references to the relevant sections of the documentation are provided.
 
 .. contents:: Content of this page
    :local:
@@ -12,7 +12,7 @@ This pages aims to get you started with Tudat(Py) and introduce you to some of t
 
 What is Tudat(Py)?
 ******************
-The TU Delft Astrodynamics Toolbox (Tudat) is a powerful set of libraries that support astrodynamics and space research. It can be used for a wide range of purposes, including high-fidelity :ref:`state propagation <propagation_examples>`, :ref:`state estimation <estimation_examples>` and :ref:`preliminary mission design <mission_design_examples>`. Tudat is implemented in C++, following an object-oriented programming (OOP) style for efficient simulations. In recent years most of the Tudat functionality has been exposed via a Python interface, TudatPy, for convenient access. Originally developed at TU Delft, Tudat(Py) is completely open source and :ref:`open for contributions <contribute_to_tudat>`. It is used extensively in :ref:`research projects <research_output>` and teaching activities at TU Delft. 
+The TU Delft Astrodynamics Toolbox (Tudat) is a powerful set of libraries that support astrodynamics and space research and education. It can be used for a wide range of purposes, including high-fidelity :ref:`state propagation <propagation_examples>`, :ref:`state estimation <estimation_examples>` and :ref:`preliminary mission design <mission_design_examples>`. Tudat is implemented in C++, following an object-oriented programming (OOP) style for efficient and modular simulations. Since 2021, most of the Tudat functionality has been exposed via a Python interface -TudatPy- for convenient access. Originally developed at TU Delft, Tudat(Py) is completely open source and :ref:`open for contributions <contribute_to_tudat>`. It is used extensively in :ref:`research projects <research_output>` and teaching activities at TU Delft. 
 
 
 Installation
@@ -33,10 +33,12 @@ With the ``conda`` environment now installed, you can activate it to work in it 
 For more in-depth instructions on how to install TudatPy, see the :ref:`installation guide <getting_started_installation>`.
 If you are new to using ``conda`` or Python, have a look at :ref:`getting_started_with_conda` and :ref:`getting_started_with_python`.
 
+To develop Tudat(Py), or make use of the latest features not yet in a conda packes, you can compile TudatPy from the C++ source yourself, see the page on :ref:`using the source code <using_tudat_source>` for details.
+
 
 Propagating your first orbit
 ****************************
-The following example is based on the `Keplerian satellite orbit example <_src_examples/notebooks/propagation/keplerian_satellite_orbit.html>`_. The goal is to numerically propagate a (quasi-)massless body under the attraction of a central point-mass. Under this assumption, only the translational motion of a quasi-massless body is propagated, which follows a Keplerian orbit.
+The following example is based on the `Keplerian satellite orbit example <_src_examples/notebooks/propagation/keplerian_satellite_orbit.html>`_. The goal is to numerically propagate a (quasi-)massless body (spacecraft) under the attraction of a central point-mass. Under this assumption, only the translational motion of this body is propagated, which follows a Keplerian orbit.
 
 
 Setting up the simulation
@@ -51,10 +53,10 @@ The propagation setup defines the differential equations to be solved and the me
 For more information, see :ref:`environment_setup` and :ref:`propagation_setup`.
 
 A core principle of Tudat(Py) is the use of ``settings`` objects to define physical models.
-A user typically does not create models instances directly, but instead creates (or modifies) a ``settings`` object, which is then translated to a model instance using a factory function.
+A user typically does not create models instances directly, but instead creates (or modifies) a ``settings`` object, which is then translated to a model instance using a so-called 'factory function'.
 
 Knowing that, we can now start setting up our simulation.
-We will first import all necessary modules, including some standard Python modules, like ``numpy`` and ``matplotlib``.
+We will first import all necessary modules, including some standard Python modules, like ``numpy`` and ``matplotlib``. DOMINIC-NOTE: PERHAPS A BRIEF NOTE ON THE MODULES HERE (OR A LINK TO A PAGE WITH MORE EXPLANATION: https://docs.tudat.space/en/latest/_src_getting_started/tudatpy_submodules.html)?
 
 .. code-block:: python
 
@@ -75,12 +77,11 @@ We will first import all necessary modules, including some standard Python modul
 Setting up the environment
 --------------------------
 
-As mentioned before, in Tudat(Py) the environment is defined using a :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` object.
-This object contains all the bodies in the simulation, as well as the environment models that define the physical properties of these bodies.
-In this case, we will define a central body (Earth) and a satellite.
+As mentioned before, in Tudat(Py) the physical environment is defined using a :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` object.
+This object contains all the bodies in the simulation along with their physical properties of these bodies.
+In this case, we will define only a central body (Earth) and a satellite.
 
-Tudat(Py) relies heavily on the SPICE toolkit [Acton1996]_ to retrieve ephemeris data and other planetary information for a number of default bodies.
-Using the following command
+Tudat(Py) relies heavily on the `SPICE toolkit <https://naif.jpl.nasa.gov/naif/>`_ [Acton1996]_ to retrieve ephemeris data and other planetary information for a number of default bodies. Using the following command
 
 .. code-block:: python
 
@@ -90,7 +91,7 @@ we load the default SPICE kernels into TudatPy.
 
 With the standard kernels loaded, we can create our central body, the Earth.
 In this example, the :func:`~tudatpy.numerical_simulation.environment_setup.get_default_body_settings` function is used to create the Earth using a number of default settings, which are distributed with Tudat(Py).
-For more information on these default models, have a look at :ref:`default_env_models`.
+For more information on these default models (for ephemeris, rotation, shape, atmosphere, etc.), have a look at :ref:`default_env_models`.
 
 .. code-block:: python
 
@@ -112,8 +113,8 @@ These body settings are then used to create the system of bodies, using the fact
    bodies = environment_setup.create_system_of_bodies(body_settings)
 
 
-Because our satellite is an artificial body, it is not known to TudatPy by default.
-If we were to add it to ``bodies_to_create`` in the previous code block, TudatPy would throw an error.
+Because our satellite is an artificial body, it is not known to TudatPy by default. DOMINIC: THAT'S TRUE, BUT WE CAN STILL ADD IT TO THE BODY-SETTINGS AS A MANUAL EMPTY SETTINGS OBJECT (WITH ONLY A NAME). I KNOW THAT'S NOT HOW IT'S DONE IN THE EXAMPLE, BUT IT MAY BE EASIER TO EXPLAIN (AND ALSO IT MAY BE GOOD TO CHANGE THE EXAMPLES TO THIS SETUP)
+If we were to add it to ``bodies_to_create`` in the previous code block retrieving default settings, TudatPy would throw an error.
 Instead, we need to create an empty body for our satellite, using the following code:
 
 .. code-block:: python
@@ -210,7 +211,7 @@ Define the integrator and propagator
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 With the acceleration models and initial state defined, we can now define how to propagate the state, i.e. how the differential equations are solved.
 We will use a simple Runge-Kutta 4 integrator, with a fixed step size of 10 seconds.
-For the propagator, a Cowell propagator is used, which propagates the initial Cartesian state forward.
+For the propagator, a Cowell propagator is used, which uses Cartesian elements as the propagated states.
 Lastly, we define the termination conditions for the propagation, which in this case is a fixed end epoch.
 
 .. code-block:: python
@@ -225,11 +226,11 @@ Lastly, we define the termination conditions for the propagation, which in this 
    termination_settings = propagation_setup.propagator.time_termination(simulation_end_epoch)
 
 Depending on your performance and accuracy requirements, you might want to consider other propagator and integrator combinations.
-Tudat(Py) offers a variety of other integrators, such as higher-order multi-stage and multi-step integrators, as well as different propagators, such as the Encke, Keplerian, Modified-Equinoctial, and Unified State Model propagators.
+Tudat(Py) offers a variety of other integrators, such as higher-order multi-stage and extrapolation integrators, as well as different propagators, such as the Encke, Keplerian, Modified-Equinoctial, and Unified State Model propagators.
 For more information, have a look at :ref:`integrator_setup` and the `API documentation on propagators <https://py.api.tudat.space/en/latest/propagator.html>`_.
 
 We are not only interested in the final state of our satellite, but also the evolution of its ground track over time.
-To retrieve this information, Tudat(Py) uses so-called dependent variables, which store information about the state of the system during each step of the integration.
+To retrieve this information, Tudat(Py) uses so-called dependent variables, which store information about the conditions of the system during each step of the integration, in addition to the propagated state itself.
 We create a list of dependent variables to save, in this case the longitude and latitude of our satellite with respect to the Earth:
 
 .. code-block:: python
@@ -267,9 +268,9 @@ Putting all together, we can finally create the propagator settings:
 Perform the propagation
 ==========================
 
-Now that we have defined our :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.PropagatorSettings` instance and a :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` instance, we can finally perform the propagation.
+Now that we have defined our :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.PropagatorSettings` instance (the ``propagator_settings`` object) and a :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` instance (the ``bodies`` object), we can finally perform the propagation.
 As introduced earlier in `Setting up the simulation`_, the propagation is performed using the :func:`~tudatpy.numerical_simulation.propagation_setup.create_dynamics_simulator` function.
-Typically, calling this function performs the propagation, unless the optional input argument ``simulate_dynamics_on_creation`` is set to ``False``.
+Typically, calling this function performs the propagation (unless the optional input argument ``simulate_dynamics_on_creation`` is set to ``False``)
 
 .. code-block:: python
 
@@ -426,7 +427,7 @@ For more information on how to contribute to Tudat, have a look at the :ref:`con
 
 Good luck with your Tudat(Py) journey!
 We are excited to hear what you will create using Tudat(Py).
-If you have used Tudat(Py) for a project, research, or teaching, we would love to hear about it and appreciate a citation to the following paper:
+If you have used Tudat(Py) for a project, research, or teaching, we would love to hear about it and appreciate a citation to the following conference presentation (with a proper journal article coming soon!):
 
 Dirkx, D., Fayolle, M., Garrett, G., Avillez, M., Cowan, K., Cowan, S., Encarnacao, J., Fortuny Lombrana, C., Gaffarel, J., Hener, J., Hu, X., van Nistelrooij, M., Oggionni, F., and Plumaris, M.: The open-source astrodynamics Tudatpy software – overview for planetary mission design and science analysis, Europlanet Science Congress 2022, Granada, Spain, 18–23 Sep 2022, EPSC2022-253, https://doi.org/10.5194/epsc2022-253, 2022.
 
