@@ -4,9 +4,9 @@
 Times and dates
 ===============
 
-A proper definition of epochs, time intervals, time scales, dates, *etc.* is essential for setting up a proper numerical simulation, and for data analysis. In Tudat, the time defined inside the numerical propagation is always defined using J2000 epoch (01-01-2000, 12:00:00) as reference epoch, in TBD scale. This choice and definition is 'inherited' from SPICE, which is typically used in Tudat to determine the state and orientation of solar system bodies. When defining or providing a ``time`` to any function in Tudat, this is simply a ``float`` (or ``double`` in C++), which denotes the seconds since J2000 epoch (an alternative for a ``float`` is described below). Note that the difference between TDB (dynamical barycentric time) and TT (terrestrial time) is purely periodic and on the order of millisecond. For many applications, the two can be see as equivalent.
+A proper definition of epochs, time intervals, time scales, dates, *etc.* is essential for setting up a proper numerical simulation, and for data analysis. In Tudat, the time defined inside the numerical propagation is always defined using J2000 epoch (01-01-2000, 12:00:00) as reference epoch, in TDB scale. This choice and definition is 'inherited' from SPICE, which is typically used in Tudat to determine the state and orientation of solar system bodies. When defining or providing a ``time`` to any function in Tudat, this is simply a ``float`` (or ``double`` in C++), which denotes the seconds since J2000 epoch (an alternative for a ``float`` is described below). Note that the difference between TDB (dynamical barycentric time) and TT (terrestrial time) is purely periodic and on the order of millisecond. For many applications, the two can be see as equivalent.
 
-However, seconds since J2000 in TBD is not a very intuitive quantity to provide for a user. Therefore, functionality is provided to convert between different time scale and representations:
+However, seconds since J2000 in TDB is not a very intuitive quantity to provide for a user. Therefore, functionality is provided to convert between different time scale and representations:
 
 * Conversion between calendar dates and times and seconds since J2000
 * Conversion of time between different time scales (UTC, UT1, TAI, TDB, TT)
@@ -36,12 +36,12 @@ Below is an example of defining the current date and time through the Python ``d
         julian_day = tudat_datetime.julian_day( )
         modified_julian_day = tudat_datetime.modified_julian_day( )
 
-note that the inverse operations, creating a ``DateTime`` object from an epoch (:func:`~tudatpy.astro.time_conversion.date_time_from_epoch`),
+Note that the inverse operations, creating a ``DateTime`` object from an epoch (:func:`~tudatpy.astro.time_conversion.date_time_from_epoch`),
 an iso string (:func:`~tudatpy.astro.time_conversion.date_time_from_iso_string`), or directly from the year, month, day and time
-(:class:`~tudatpy.astro.time_conversion.DateTime`  constructor) are also available
+(:class:`~tudatpy.astro.time_conversion.DateTime`  constructor) are also available.
 
 In the above, the ``epoch`` is a floating point value, that can be used as input to (for instance) a numerical propagation.
-Note that this epoch may need to be converted to a different time scale (see below)
+Note that this epoch may need to be converted to a different time scale (see below).
 
 Julian days
 ===========
@@ -49,9 +49,8 @@ Julian days
 In astrodynamics, the use of a Julian day (full days since 12:00 on 01-01-4713BC of the Julian calendar) or modified Julian day (full days since 00:00 of 17-11-1858 of the Gregorian calendar)
 continues to be prevalent. Although these time representations are not used directly inside Tudat, we do offer a number of useful conversion functions
 to support (modified) Julian days as input or output. Both quantities can be extracted directly as attributes from the :class:`~tudatpy.astro.time_conversion.DateTime` class.
-The function :func:`~tudatpy.astro.time_conversion.seconds_since_epoch_to_julian_day` can be used to convert the 'typical Tudat time of seconds since J2000 epoch to a Julian day,
+The function :func:`~tudatpy.astro.time_conversion.seconds_since_epoch_to_julian_day` can be used to convert the typical Tudat time of seconds since J2000 epoch to a Julian day,
 and :func:`~tudatpy.astro.time_conversion.julian_day_to_seconds_since_epoch` the inverse operation.
-a Julian day
 
 Conversion between time scales
 ==============================
@@ -66,7 +65,7 @@ Tudat supports the automatic conversion between the following time scales:
 * Terrestrial Time TT, equivalent to TAI with an offset of 32.184 seconds
 * Barycentric Dynamical Time TDB, the time scale in which solar system ephemerides are often disseminated, related to TT through a four-dimensional relativistic conversion linear scaling
 * Geocentric coordinate time TCG, a coordinate time for 'geocentric' applications, related to TT by a linear scaling
-* Barycentric coordinate time TCB, a coordinate time for 'barycentric' applications, related to TBD by a linear scaling
+* Barycentric coordinate time TCB, a coordinate time for 'barycentric' applications, related to TDB by a linear scaling
 
 Conversion between each of these time scales can be done using the :class:`~tudatpy.astro.time_conversion.TimeScaleConverter`, which can convert an epoch from and to any one of the above time scales. Below is an example of how to convert an epoch from one time scale to another:
 
@@ -77,14 +76,14 @@ Conversion between each of these time scales can be done using the :class:`~tuda
     	# Create time scale converter object
     	time_scale_converter = time_conversion.default_time_scale_converter( )
     	
-    	# Set the epoch in UTC scale (for instance from the above example using DateTime
+    	# Set the epoch in UTC scale (for instance from the above example using DateTime)
     	epoch_utc = tudat_datetime.epoch( )
     	epoch_tdb = time_scale_converter.convert_time( 
     		input_scale = time_conversion.utc_scale, 
     		output_scale = time_conversion.tdb_scale,
     		input_value = epoch_utc )
 
-The conversion between UTC and UT1 (the latter of which is used directly to compute Earth rotation) is based on the detailed Earth rotation model as defined in the `IERS 2010 Conventions <https://www.iers.org/SharedDocs/Publikationen/EN/IERS/Publications/tn/TechnNote36/tn36.pdf>`_. The ``default_time_scale_converter`` is initialized using default settings for small variations to Earth rotation (see :ref:`the notes here <rotation_model_specifics>` on high-accuracy Earth rotation model).  The conversion between geocentric scales (TT/TCG) and barycentric scales (TDB/TCB) is performed using the model implemented in SOFA for TT-TDB, which is a series expansion with about 800n terms, based on a numerical solution to the governing equation of the transformation. This conversion is accurate to the level of several nanoseconds. For higher accuracy in this conversion, numerical computation of these time scales, consistent with a given solar system ephemeris, should be used. Data for such conversions is shipped with recent INPOP ephemerides (for instance).
+The conversion between UTC and UT1 (the latter of which is used directly to compute Earth rotation) is based on the detailed Earth rotation model as defined in the `IERS 2010 Conventions <https://www.iers.org/SharedDocs/Publikationen/EN/IERS/Publications/tn/TechnNote36/tn36.pdf>`_. The ``default_time_scale_converter`` is initialized using default settings for small variations to Earth rotation (see :ref:`the notes here <rotation_model_specifics>` on high-accuracy Earth rotation model).  The conversion between geocentric scales (TT/TCG) and barycentric scales (TDB/TCB) is performed using the model implemented in SOFA for TT-TDB, which is a series expansion with about 800 terms, based on a numerical solution to the governing equation of the transformation. This conversion is accurate to the level of several nanoseconds. For higher accuracy in this conversion, numerical computation of these time scales, consistent with a given solar system ephemeris, should be used. Data for such conversions is shipped with recent INPOP ephemerides (for instance).
 
 Formally, the conversion from TT to TDB (and therefore also UTC to TDB) depends on the geocentric position at which the time in TT/UTC is registered. This effect is very small, with the largest effect a daily periodic variation on the order of several microseconds.
 
