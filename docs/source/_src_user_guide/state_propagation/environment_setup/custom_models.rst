@@ -20,7 +20,7 @@ If this is the case, we have the option for users to define 'custom' models for 
 
 Custom environment models:
 
-* Custom aerodynamic coefficients (with suppported dependencies from :class:`~tudatpy.numerical_simulation.environment.AerodynamicCoefficientsIndependentVariables`) :func:`~tudatpy.numerical_simulation.environment_setup.aerodynamic_coefficients.custom_aerodynamic_force_coefficients` or :func:`~tudatpy.numerical_simulation.environment_setup.aerodynamic_coefficients.custom_aerodynamic_force_and_moment_coefficients` (only force, and force and moment coefficients, respectively)
+* Custom aerodynamic coefficients (with supported dependencies from :class:`~tudatpy.numerical_simulation.environment.AerodynamicCoefficientsIndependentVariables`) :func:`~tudatpy.numerical_simulation.environment_setup.aerodynamic_coefficients.custom_aerodynamic_force_coefficients` or :func:`~tudatpy.numerical_simulation.environment_setup.aerodynamic_coefficients.custom_aerodynamic_force_and_moment_coefficients` (only force, and force and moment coefficients, respectively)
 * Custom atmospheric density model (function of time only) :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.custom_constant_temperature`
 * Custom atmospheric density model (function of position and time) :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.custom_four_dimensional_constant_temperature` *Note:* this custom function has current time, altitude, latitude and longitude as input.
 * Custom wind model: :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.custom_wind_model`
@@ -78,7 +78,7 @@ Below, a skeleton is given for a custom class for the calculation of the thrust 
              :language: python
 
          
-This setup allows the guidance model to direcly access any of the properties of the bodies named 'Earth' and 'Vehicle', which were set as class attributes of the ``SimpleCustomGuidanceModel`` class (note: the inputs to the constructor, and the manner in which they are used is entirely up to the user, here we give just one example).
+This setup allows the guidance model to directly access any of the properties of the bodies named 'Earth' and 'Vehicle', which were set as class attributes of the ``SimpleCustomGuidanceModel`` class (note: the inputs to the constructor, and the manner in which they are used is entirely up to the user, here we give just one example).
        
 The custom thrust magnitude model can then be used as follows to define the thrust magnitude that is to be exerted by an engine:
 

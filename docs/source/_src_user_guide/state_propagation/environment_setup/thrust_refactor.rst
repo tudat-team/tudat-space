@@ -21,7 +21,7 @@ The framework in Tudat to calculate inertial thrust direction and aerodynamic gu
 * Inconsistent ways in which a vehicle's orientation is defined (implicitly by both aerodynamic guidance and thrust guidance)
 * Unclear interaction between thrust and aerodynamics: both can define a body's orientation, so what happens if you use both?
 
-The refactor has addressed these issues, as well as a number of related points. Most of the changes in functionality have been made 'under the hood', and are not visble to users. However, two important aspects of the interfaces have been modified in a manner which is *not* backwards compatible. If a user accesses the 'old' function, they will be redirected to this page. Below is an overview of what has changes, why, and how to convert your old code to new code.
+The refactor has addressed these issues, as well as a number of related points. Most of the changes in functionality have been made 'under the hood', and are not visible to users. However, two important aspects of the interfaces have been modified in a manner which is *not* backwards compatible. If a user accesses the 'old' function, they will be redirected to this page. Below is an overview of what has changes, why, and how to convert your old code to new code.
 
 Specifically, you are likely here because one of two pieces of code is no longer working: the definition of a thrust acceleration, or the definition of aerodynamic guidance. Below, we describe how to modify your old code to the new setup of Tudat, while retaining the identical functionality.
 
@@ -145,7 +145,7 @@ Here, we have chosen to define the rotation model settings, and create the rotat
 
 Details on the functioning of the two pieces of code can be found on the dedicated thrust pages of the new code, and the legacy code (see above). The steps to take:
 
-* Convert your thrust direction settings to rotation model settings. See below for a one-to-one correspondence betwee individual models
+* Convert your thrust direction settings to rotation model settings. See below for a one-to-one correspondence between individual models
 * Using the same ``thrust_magnitude_settings`` as before, create an engine model using the :func:`~tudatpy.numerical_simulation.environment_setup.add_engine_model` function. In addition to containing information on the thrust magnitude, the engine object holds information on:
 
   * The name of the engine (used to link it to the acceleration, see below)
@@ -159,11 +159,11 @@ Each of the old thrust direction settings (in the ``propagation_setup.thrust`` s
 
 **propagation_setup.thrust.thrust_from_existing_body_orientation** This option is now moot, *by definition* all thrust models now use the existing body orientation. If you were using this option, now additional action is needed.
 
-**propagation_setup.thrust.custom_thrust_orientation**  This option is now replaced with the equivalent :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.custom_rotation_model` option, with the addition of the frame identiers specified above. It defines the body-fixed orientation in a fully user-defined manner.
+**propagation_setup.thrust.custom_thrust_orientation**  This option is now replaced with the equivalent :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.custom_rotation_model` option, with the addition of the frame identifiers specified above. It defines the body-fixed orientation in a fully user-defined manner.
 
-**propagation_setup.thrust.custom_thrust_direction**  This option is now replaced with the equivalent :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.custom_inertial_direction_based` option, with the addition of the frame identiers specified above. This rotation model is very typical for the use of thrust: it imposes that a body-fixed axis (now limited to the body-fixed x-axis) is pointed along an arbitrary user-defined inertial direction. As an extension of the old code, this model now allows he *full* rotation to be defined, but defining the free rotation about the body-fixed x-axis (thrust) axis.
+**propagation_setup.thrust.custom_thrust_direction**  This option is now replaced with the equivalent :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.custom_inertial_direction_based` option, with the addition of the frame identifiers specified above. This rotation model is very typical for the use of thrust: it imposes that a body-fixed axis (now limited to the body-fixed x-axis) is pointed along an arbitrary user-defined inertial direction. As an extension of the old code, this model now allows he *full* rotation to be defined, but defining the free rotation about the body-fixed x-axis (thrust) axis.
 
-**propagation_setup.thrust.thrust_direction_from_state_guidance**  This option is replaced by the :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.orbital_state_direction_based`. The inputs are equivalent, with the addition of the frame identiers specified above. This rotation model is a typical example for a basic use of thrust: it imposes that a body-fixed axis (now limited to the body-fixed x-axis) is pointed along its inertial position or velocity vector.  As an extension of the old code, this model now allows he *full* rotation to be defined, but defining the free rotation about the body-fixed x-axis (thrust) axis.
+**propagation_setup.thrust.thrust_direction_from_state_guidance**  This option is replaced by the :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.orbital_state_direction_based`. The inputs are equivalent, with the addition of the frame identifiers specified above. This rotation model is a typical example for a basic use of thrust: it imposes that a body-fixed axis (now limited to the body-fixed x-axis) is pointed along its inertial position or velocity vector.  As an extension of the old code, this model now allows he *full* rotation to be defined, but defining the free rotation about the body-fixed x-axis (thrust) axis.
 
 
 

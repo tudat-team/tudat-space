@@ -12,7 +12,7 @@ In Tudat, we offer three general types of integrators:
 * :ref:`Multistep integrators <integrator_abm>`  (Adams-Bashforth-Moulton)
 
 These integrators are available in fixed- and variable-step varieties, as described in more detail below. The integrators
-are implemented in Tudat, and do not use an external integrator library. For the background of these methdods, we recommend people to refer to
+are implemented in Tudat, and do not use an external integrator library. For the background of these methods, we recommend people to refer to
 
 * Satellite Orbits: Models, Methods and Applications, by Montenbruck and Gill
 * Numerical Recipes in C++: The Art of Scientific Computing, by Press et al.  
@@ -99,7 +99,7 @@ and second to final, iteration.
 
 The main parameters driving the step-size control are the relative and absolute tolerances, :math:`\epsilon_{r}` and :math:`\epsilon_{a}`. These can be provided and used in several different ways:
 
-For **element-wise**, or **block-wise**, step size control. In the element-wise case, the step-size control algorithm is run separately for each of the state elements, with the state elelement resulting in the smallest required time step producing the recommended time step. Depending on the types of tolerances provided, the :func:`~tudatpy.numerical_simulation.propagation_setup.integrator.step_size_control_elementwise_scalar_tolerance` or :func:`~tudatpy.numerical_simulation.propagation_setup.integrator.step_size_control_elementwise_matrix_tolerance` is used. 
+For **element-wise**, or **block-wise**, step size control. In the element-wise case, the step-size control algorithm is run separately for each of the state elements, with the state element resulting in the smallest required time step producing the recommended time step. Depending on the types of tolerances provided, the :func:`~tudatpy.numerical_simulation.propagation_setup.integrator.step_size_control_elementwise_scalar_tolerance` or :func:`~tudatpy.numerical_simulation.propagation_setup.integrator.step_size_control_elementwise_matrix_tolerance` is used. 
   
 In the block-wise case, the algorithm is performed on the norm of user-defined blocks of the state. For instance, when considering Cartesian positions, the element-wise control computes the required step-size based on the estimate for :math:`\epsilon_{x}`, :math:`\epsilon_{y}` and :math:`\epsilon_{z}` (estimated errors for each separate component) separately. For the block-wise control, the required step-size can be computed based on :math:`||\boldsymbol{\epsilon}_{r}||`, the norm of the error of the position vector (note that, when propagating Cartesian states, the state vector consists of both position and velocity). We provide two ways in which to define the state blocks on which the step-size control is to be defined:
   

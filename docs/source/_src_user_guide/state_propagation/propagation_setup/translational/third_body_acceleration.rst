@@ -22,7 +22,7 @@ The central body is non-inertial (e.g. is not the SSB), and the acceleration *is
 
  \mathbf{a}=\nabla U_{B}(\mathbf{r}_{A})-\nabla U_{B}(\mathbf{r}_{C})
 
-This is the typical *third body* perturbation, for instance for the case where :math:`A` is a spacecraft orbiting the Moon, :math:`B` is the Earth and :math:`C` is the Moon
+This is the typical *third body* perturbation, for instance for the case where :math:`A` is a spacecraft orbiting the Moon, :math:`B` is the Earth and :math:`C` is the Moon.
 
 
 Central gravitational acceleration
@@ -74,7 +74,7 @@ acceleration of the Earth:
       .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/point_mass_gravity.cpp
          :language: cpp
 
-while the following will add the third-body spherical-harmonic acceleration of the Earth (zonal coefficients up to degree 4)
+while the following will add the third-body spherical-harmonic acceleration of the Earth (zonal coefficients up to degree 4):
 
 .. tabs::
 
@@ -89,5 +89,5 @@ while the following will add the third-body spherical-harmonic acceleration of t
 
 Note that above two code blocks are identical to those given as example in the API documentation
 entries of :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.point_mass_gravity` and
-:func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.spherical_harmonic_acceleration`. It is through the definition
+:func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.spherical_harmonic_gravity`. It is through the definition
 *of the central body* that a direct, central or third-body acceleration is created.

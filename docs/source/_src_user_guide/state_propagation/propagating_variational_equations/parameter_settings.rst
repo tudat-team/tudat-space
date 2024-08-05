@@ -36,7 +36,7 @@ which defines the initial state parameters to be fully consistent with the setti
 
 .. note:: Options exist to manually define initial state parameters. However, at present, the initial state parameters **must** be consistent with the propagator settings, and these additional options are not described here. 
 
-When wishing to propagate the sensitivity matrix :math:`S(t)` (or depending on your use case, estimate parameters in addtion to initial state parameters), the set of parameters can be extended using the following:
+When wishing to propagate the sensitivity matrix :math:`S(t)` (or depending on your use case, estimate parameters in addition to initial state parameters), the set of parameters can be extended using the following:
 
     .. tabs::
 
@@ -51,6 +51,6 @@ When wishing to propagate the sensitivity matrix :math:`S(t)` (or depending on y
          .. tab:: C++
 	
          
-In the snippet above, parameters are created to estimate the initial states in the `propagator_settings` (presumably Delfi C-3 initial translational states), the gravitational parameter of the Earth, the constant drag and the radiation pressure coefficient of Delfi-C3.
+In the snippet above, parameters are created to estimate the initial states in the `propagator_settings` (presumably Delfi-C3 initial translational states), the gravitational parameter of the Earth, the constant drag and the radiation pressure coefficient of Delfi-C3.
 
 For the full list of available parameters, see :ref:`parameterSettingCreation`.

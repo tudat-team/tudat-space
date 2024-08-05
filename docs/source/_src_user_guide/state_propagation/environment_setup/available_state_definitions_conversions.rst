@@ -181,7 +181,7 @@ This functionality is implemented as a rotation model, defined using the
 which will in most cases be created during the :ref:`setup of the environment <creation_celestial_body_settings>`
 (and, typically, assigned to the body object representing Earth).
 
-When this rotation model is assigned to Earth, it can be extraced as an object of type :func:`~tudatpy.numerical_simulation.environment.GcrsToItrsRotationModel`:
+When this rotation model is assigned to Earth, it can be extracted as an object of type :func:`~tudatpy.numerical_simulation.environment.GcrsToItrsRotationModel`:
 
 .. code-block:: python
 
@@ -256,7 +256,7 @@ TNW and RSW frame. As such a given TNW and RSW frame are considered to be inerti
 SPICE-defined frames
 --------------------
 
-The :ref:`default rotation models <default_rotation_models>` in Tudat make extensive use of the SPICE toolbox.
+The :ref:`default rotation models <default_rotation_models>` in Tudat make extensive use of the SPICE toolbox [Acton1996]_.
 A user may directly access the functionality of extracting rotations in SPICE. For any frame identifiers for which SPICE kernels are loaded, the function
 :func:`~tudatpy.interface.spice.compute_rotation_matrix_derivative_between_frames` may be used to determine the rotation matrix between them.
 The derivative of the rotation matrix may be determined from :func:`~tudatpy.interface.spice.compute_rotation_matrix_derivative_between_frames`.
@@ -290,7 +290,7 @@ Station topocentric frames
 --------------------------
 
 Each :class:`~tudatpy.numerical_simulation.environment.GroundStation` which is placed on a body automatically has a topocentric
-frame asigned to it. The rotation matrix from body-fixed to topocentric frame can be extracted as follows:
+frame assigned to it. The rotation matrix from body-fixed to topocentric frame can be extracted as follows:
 
 .. code-block:: python
 
@@ -622,7 +622,7 @@ One of the other two supported attitude representations is the modified Rodrigue
      - Shadow flag
 
 
-Transformation to and from quaternions is achieved with the functions ``conversion.modified_rodrigues_parameters_to_quaternions`` and ``conversion.quaterns_to_modified_rodrigues_parameter_elements``, respectively, where the only input is the attitude element (in vector format).
+Transformation to and from quaternions is achieved with the functions ``conversion.modified_rodrigues_parameters_to_quaternions`` and ``conversion.quaternions_to_modified_rodrigues_parameter_elements``, respectively, where the only input is the attitude element (in vector format).
 
 .. note::
 
@@ -655,3 +655,10 @@ and transformation to and from quaternions is achieved with the aid of the funct
 .. note:: 
 
 	Similarly to MRPs, the exponential map elements also make use of the shadow flag. In this case, this flag signals whether the shadow exponential map (SEM) is in use. This flag is also introduces to avoid the singularity at :math:`\pm 2 \pi` radians, but interestingly, there is no difference between the equations of motion and transformations in terms of EM or SEM. In fact, they are only introduced to make sure that when converting from EM to quaternions, the resulting quaternion sign history is continuous. The switch between EM and SEM occurs whenever the magnitude of the rotation represented by the EM vector is larger than :math:`\pi`.
+
+
+
+=================
+
+.. [Acton1996] Acton, (1996). Ancillary data services of NASA's Navigation and Ancillary Information Facility.
+   Planetary and Space Science, Volume 44, Issue 1, https://doi.org/10.1016/0032-0633(95)00107-7.

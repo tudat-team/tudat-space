@@ -1,4 +1,4 @@
-  .. _getting_started_with_conda:
+.. _getting_started_with_conda:
 
 **************************
 Getting Started with Conda
@@ -161,7 +161,7 @@ Delete an environment
 Managing Packages
 #################
 
-Installling a package
+Installing a package
 ---------------------
 
 1. Add the channel indexing the package (if required):
@@ -179,7 +179,7 @@ Installling a package
 .. note::
 
     Alternatively, if you do not want to add a channel and potentially cause package conflicts, if available
-    on multiple sources, you can isolate the channel for the package serach as follows:
+    on multiple sources, you can isolate the channel for the package search as follows:
 
 (1&2). Install a package from a specific channel:
 

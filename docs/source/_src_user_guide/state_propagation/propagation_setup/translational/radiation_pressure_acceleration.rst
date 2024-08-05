@@ -13,7 +13,7 @@ in the same manner, using the :func:`~tudatpy.numerical_simulation.propagation_s
 which takes the source model of the body exerting the acceleration, and the target model of the body undergoing the
 acceleration, and links these models to set up the specific acceleration model.
 For extensive details on the mathematical
-models, see [Stiller2023]_
+models, see [Stiller2023]_.
 
 .. contents:: Contents:
     :depth: 3
@@ -23,7 +23,7 @@ Radiation source models
 ========================
 In most orbits, there are two sources of radiation: direct solar radiation, and albedo + thermal radiation of the
 central body (particularly in low orbits). Both require different treatment. Therefore, there are two source models in Tudat.
-Settings for a body are defined in the ``radiation_source_settings`` attribute of the :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings` class
+Settings for a body are defined in the ``radiation_source_settings`` attribute of the :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings` class.
 
 
 Isotropic point source
@@ -39,7 +39,7 @@ function, which requires a luminosity model. These may be defined by one of the 
   * User-defined constant irradiance at a reference distance (e.g., as total solar irradiance at 1 AU).: :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.irradiance_based_constant_luminosity`
   * User-defined time-variable irradiance at a reference distance: :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.irradiance_based_time_variable_luminosity`
 
-Defining the second to last option, for a solar irradiance of 1367 W/m:sup:`2` at 1 AU, the settings for the body called 'Sun' would be modified as follows:
+Defining the second to last option, for a solar irradiance of 1367 W/m\ :sup:`2` at 1 AU, the settings for the body called 'Sun' would be modified as follows:
 
 .. code-block:: python
 
@@ -127,7 +127,7 @@ Paneled target
 ------------------
 A panelled radiation pressure target model provides a more realistic representation than the cannonball model. It builds
 up the spacecraft out of a series of panels, where the interaction of the radiation with each of the panels is computed
-separately. Each panel may have different optical properties, and may be defined as being either fixed to the spaceraft body
+separately. Each panel may have different optical properties, and may be defined as being either fixed to the spacecraft body
 (e.g. bus panels) or may be defined to move w.r.t. the spacecraft body-fixed frame (for instance Sun-pointing solar arrays, or
 Earth-pointing antennas). At the moment, Tudat does not include panel shadowing in the calculations.
 

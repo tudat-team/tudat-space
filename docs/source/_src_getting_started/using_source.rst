@@ -5,9 +5,9 @@
 Using the Tudat source code
 ===========================
 
-For normal/simple applicationss, a user will not need to view or interact directly with the underlying C++ source code, but will only use the conda package that has the Python exposure of the C++ code. But, for various reasons, it can be very advantageous to view, search or modify the source code, to for instance:
+For normal/simple applications, a user will not need to view or interact directly with the underlying C++ source code, but will only use the conda package that has the Python exposure of the C++ code. But, for various reasons, it can be very advantageous to view, search or modify the source code, to for instance:
 
-* Understand where/why an exception is thrown during a simulatioin
+* Understand where/why an exception is thrown during a simulation
 * Understand how exactly a model is implemented
 * Find functionality that is not (yet) exposed to Python, but which does exist
 * Find clarification for incomplete/incorrect documentation

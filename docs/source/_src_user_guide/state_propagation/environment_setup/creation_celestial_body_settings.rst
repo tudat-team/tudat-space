@@ -253,16 +253,16 @@ The example below shows how to create a set of bodies, using the :func:`~tudatpy
 
 
 The :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` class (the type of the ``bodies`` variable in the above simulation) is at the heart of many Tudat simulations. It contains all
-properties of your celestial and manmade bodies, and is used to retieve properties of your accelerations, state derivative models, output
+properties of your celestial and manmade bodies, and is used to retrieve properties of your accelerations, state derivative models, output
 variables, etc. A more detailed discussion of the architecture of the :class:`~tudatpy.numerical_simulation.environment.Body` and :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` classes, as well as their constituent environment models and possible interdependencies, are discussed :ref:`here <environment_architecture>`
 
 It is crucial to understand the distinction between ``body_settings`` (of type :class:`~tudatpy.numerical_simulation.environment_setup.BodyListSettings`) and ``bodies`` (of type :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies`). The former is merely a list of
 settings for the models in the environment and is the main *input* to the body creation. It does not provide any functionality to perform any specific
-calculations: it describes what the models *should* do when rhet are created. The latter (``bodies``) is the object which is actually used
+calculations: it describes what the models *should* do when they are created. The latter (``bodies``) is the object which is actually used
 during the propagation, and performs all required calculations (updating an ephemeris to the current time, calculating
 body orientations, determining atmospheric properties at a given location, *etc*). Since the creation of the ``bodies``
 requires many steps, links with other packages, links between bodies, links between environment objects, frame
-transformations, `etc.`, we have chose to not require a manual definition of its contents by the user, although such an apporoach is possible.
+transformations, *etc.*, we have chosen to not require a manual definition of its contents by the user, although such an approach is possible.
 
 
 

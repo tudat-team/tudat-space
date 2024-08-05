@@ -6,7 +6,7 @@ Parallelization with Python
 
 This file is an introduction to the realm of parallelization, and specifically for use with tudatpy. Tudatpy has many
 applications and many can be parallelized. For parallelization specifically in combination with PyGMO, further reading
-is available under :ref:`Parallelization with PyGMO`.
+is available under :ref:`parallelization_with_pygmo`.
 
 .. contents:: Content of this page
    :local:
@@ -24,10 +24,9 @@ generally two threads per CPU, and each computer system has their own amount of 
 of parallellity is therefore determined by the system you want to run on.
 
 It should be noted that it does not always make sense to parallelize your simulations. The initialization of parallel
-tasks takes longer, so there is a break even point beyond which it is worthwhile, shown in :ref:`Multi-threading
-with Batch Fitness Evaluation`. To enable parallel behavior with Python, the ``multiprocessing`` module is used. Other
+tasks takes longer, so there is a break even point beyond which it is worthwhile, shown in :ref:`multi_threading_with_batch_fitness_evaluation`. To enable parallel behavior with Python, the ``multiprocessing`` module is used. Other
 alternatives exist as well that are more modern, but they are not as widely spread or as thoroughly documented. Ray, for
-instance, is one of these packages, it is arguably more seemless, but it is also rather new and focused on AI
+instance, is one of these packages, it is arguably more seamless, but it is also rather new and focused on AI
 applications.
 
 All parallel processing should be put under ``if __name__ == "__main__" :``. This line ensures that the code is only run
@@ -86,14 +85,14 @@ Batch Fitness Evaluation for Monte-Carlo analysis
 
 In this section, the basic structure is presented that can allow for a simple, parallel Monte-Carlo analysis of any
 problem. An astrodynamics example is used for obvious reasons: the `Kepler satellite orbit
-<https://github.com/tudat-team/tudatpy-examples/blob/master/propagation/keplerian_satellite_orbit.py>`_. Using
+<../_src_getting_started/_src_examples/notebooks/propagation/keplerian_satellite_orbit.html>`_. Using
 this, we can change any parameter, let the Monte-Carlo simulations run in parallel, and enjoy the power.
 
 BFE Monte Carlo code structure
 ------------------------------
 
 In the snippet below, the implementation can be seen. It is straightforward, and looks surprisingly similar to
-:ref:`General parallelization with Python`. The ``run_simulation()`` function is shown below as ``run_dynamics()``. The
+`General parallelization with Python`_. The ``run_simulation()`` function is shown below as ``run_dynamics()``. The
 same concepts are applied, but rather than two integers being returned without further calculations, the inputs are the
 Semi-major Axis and Eccentricity elements of the initial state which has a profound influence on the final results of
 the orbit. 
@@ -132,7 +131,7 @@ the orbit.
 
 The basic BFE structure can be seen above. Below the ``run_dynamics()`` function is shown, which is almost identical to
 code from the `Kepler satellite orbit
-<https://github.com/tudat-team/tudatpy-examples/blob/master/propagation/keplerian_satellite_orbit.py>`_, with the small
+<../_src_getting_started/_src_examples/notebooks/propagation/keplerian_satellite_orbit.html>`_, with the small
 adjustment that the initial state definition is given by the input arguments to the function rather than defined
 manually.
 

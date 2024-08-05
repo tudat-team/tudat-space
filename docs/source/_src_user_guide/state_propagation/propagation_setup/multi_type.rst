@@ -28,7 +28,7 @@ To define multi-type propagator settings, you must first define the propagator s
           .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
              :language: cpp
 
-This example (note the collapsed combined code for the translational, rotational, and mass dynamics examples) shows the use of the translational, rotational and mass dynamics of a single body ``Spacecraft``. However, the framework is not limited to propagating the different types of dynamics for only one body. You may for instance propagate the translational state and mass of a spacecraft concurrently with the rotational state of the Earth. Also, you may propagate any number of any type of dynamics of any body, e.g. translational dynamics of 6 bodies, rotational dynamics of 4 bodies and mass of 2 bodies, where these three sets of bodies may but need not fully or partially overlap).
+This example (note the collapsed combined code for the translational, rotational, and mass dynamics examples) shows the use of the translational, rotational and mass dynamics of a single body ``Spacecraft``. However, the framework is not limited to propagating the different types of dynamics for only one body. You may for instance propagate the translational state and mass of a spacecraft concurrently with the rotational state of the Earth. Also, you may propagate any number of any type of dynamics of any body, e.g. translational dynamics of 6 bodies, rotational dynamics of 4 bodies and mass of 2 bodies, where these three sets of bodies may but need not fully or partially overlap.
 
 When using multi-type propagator settings, the following settings:
 
@@ -38,9 +38,9 @@ When using multi-type propagator settings, the following settings:
 - **Initial time**
 - **Console output and processing settings**
 
-that are passed tothe ``propagation_setup.propagator.multitype`` function are used. Settings of the same kind are also stored in the constituent single-type propagator settings (above, in the ``propagator_settings_list`` input), but these *are fully ignored when using multi-type settings*! Only the settings of these types explicitly added to the ``propagation_setup.propagator.multitype`` function are used.
+that are passed to the ``propagation_setup.propagator.multitype`` function are used. Settings of the same kind are also stored in the constituent single-type propagator settings (above, in the ``propagator_settings_list`` input), but these *are fully ignored when using multi-type settings*! Only the settings of these types explicitly added to the ``propagation_setup.propagator.multitype`` function are used.
 
-Conversely, the ``propagation_setup.propagator.multitype`` function does not take any initial states as inputs. The complete, multitype, initial state vector is set up from its contituent single-arc settings (with the order as noted below)
+Conversely, the ``propagation_setup.propagator.multitype`` function does not take any initial states as inputs. The complete, multitype, initial state vector is set up from its constituent single-arc settings (with the order as noted below)
 
  .. note::
     

@@ -11,7 +11,7 @@ The framework discussed in the previous section explains how the :literal:`param
 
 - :literal:`gravitational_parameter`
 	
-	Gravitational parameter of a body, linked to a :class:`GravityFieldModel` object, which may be a point-mass or (time-dependent) spherical harmonic field. Parameter size: 1. Secondary identifer: None.
+	Gravitational parameter of a body, linked to a :class:`GravityFieldModel` object, which may be a point-mass or (time-dependent) spherical harmonic field. Parameter size: 1. Secondary identifier: None.
 	
 	.. code-block:: python
 
@@ -19,7 +19,7 @@ The framework discussed in the previous section explains how the :literal:`param
 
 - :literal:`constant_drag_coefficient`
 
-	Drag coefficient of a body that is constant, linked to a :class:`CustomAerodynamicCoefficientInterface` object derived from :class:`AerodynamicCoefficientInterface`, which must have 0 independent variables for the coefficients. Parameter size: 1. Secondary identifer: None.
+	Drag coefficient of a body that is constant, linked to a :class:`CustomAerodynamicCoefficientInterface` object derived from :class:`AerodynamicCoefficientInterface`, which must have 0 independent variables for the coefficients. Parameter size: 1. Secondary identifier: None.
 	
 	.. code-block:: python
 
@@ -27,7 +27,7 @@ The framework discussed in the previous section explains how the :literal:`param
 	
 - :literal:`constant_rotation_rate`
 
-	Rotation rate of a body around a fixed axis, linked to a :class:`SimpleRotationalEphemeris` object derived from :class:`RotationalEphemeris`. Parameter size: 1. Secondary identifer: None.
+	Rotation rate of a body around a fixed axis, linked to a :class:`SimpleRotationalEphemeris` object derived from :class:`RotationalEphemeris`. Parameter size: 1. Secondary identifier: None.
 	
 	.. code-block:: python
 
@@ -35,7 +35,7 @@ The framework discussed in the previous section explains how the :literal:`param
 	
 - :literal:`radiation_pressure_coefficient`
 
-	Constant radiation pressure coefficient of a body, linked to a :class:`RadiationPressureInterface` object. Parameter size: 1. Secondary identifer: None.
+	Constant radiation pressure coefficient of a body, linked to a :class:`RadiationPressureInterface` object. Parameter size: 1. Secondary identifier: None.
 	
 	.. code-block:: python
 
@@ -43,7 +43,7 @@ The framework discussed in the previous section explains how the :literal:`param
 
 - :literal:`rotation_pole_position`
 
-	Fixed rotation axis about which a body rotates with a fixed rotation rate, linked to a :class:`SimpleRotationalEphemeris` object. Parameter size: 2 (denoting pole right ascension and declination). Secondary identifer: None.
+	Fixed rotation axis about which a body rotates with a fixed rotation rate, linked to a :class:`SimpleRotationalEphemeris` object. Parameter size: 2 (denoting pole right ascension and declination). Secondary identifier: None.
 	
 	.. code-block:: python
 
@@ -51,7 +51,7 @@ The framework discussed in the previous section explains how the :literal:`param
 
 - :literal:`ground_station_position`
 	
-	Fixed body-fixed position of a ground station on a body, linked to a :class:`GroundStationState` object (requires a :class:`GroundStationState` class). Parameter size: 3 (denoting body-fixed *x*, *y* and *z* Cartesian position). Secondary identifer: Ground station name.
+	Fixed body-fixed position of a ground station on a body, linked to a :class:`GroundStationState` object (requires a :class:`GroundStationState` class). Parameter size: 3 (denoting body-fixed *x*, *y* and *z* Cartesian position). Secondary identifier: Ground station name.
 	
 	.. code-block:: python
 
@@ -59,15 +59,15 @@ The framework discussed in the previous section explains how the :literal:`param
 
 - :literal:`ppn_parameter_gamma`
 	
-	Parameter :math:`\gamma` used in Parametric Post-Newtonian (PPN) framework, linked to a :class:`PPNParameterSet` object (nominally the global :literal:`relativity::ppnParameterSet` variable). Parameter size: 1. Note that the name of the associated body should be :literal:`"global_metric"`. Secondary identifer: None.
+	Parameter :math:`\gamma` used in Parametric Post-Newtonian (PPN) framework, linked to a :class:`PPNParameterSet` object (nominally the global :literal:`relativity::ppnParameterSet` variable). Parameter size: 1. Note that the name of the associated body should be :literal:`"global_metric"`. Secondary identifier: None.
 
 - :literal:`ppn_parameter_beta`
 	
-	Parameter :math:`\beta` used in Parametric Post-Newtonian (PPN) framework, linked to a :class:`PPNParameterSet` object (nominally the global :literal:`relativity::ppnParameterSet` variable). Parameter size: 1. Note that the name of the associated body should be :literal:`"global_metric"`. Secondary identifer: None.
+	Parameter :math:`\beta` used in Parametric Post-Newtonian (PPN) framework, linked to a :class:`PPNParameterSet` object (nominally the global :literal:`relativity::ppnParameterSet` variable). Parameter size: 1. Note that the name of the associated body should be :literal:`"global_metric"`. Secondary identifier: None.
 
 - :literal:`equivalence_principle_lpi_violation_parameter`
 
-	Parameter used to compute influence of a gravitational potential on proper time rate, equals 0 in general relativity, not linked to any object, but instead the :literal:`equivalencePrincipleLpiViolationParameter` global variable (in namespace :literal:`relativity`. Parameter size: 1. Note that the name of the associated body should be :literal:`"global_metric"`. Secondary identifer: None.
+	Parameter used to compute influence of a gravitational potential on proper time rate, equals 0 in general relativity, not linked to any object, but instead the :literal:`equivalencePrincipleLpiViolationParameter` global variable (in namespace :literal:`relativity`). Parameter size: 1. Note that the name of the associated body should be :literal:`"global_metric"`. Secondary identifier: None.
 
 
 .. class:: Initial State Parameters

@@ -40,12 +40,12 @@ Aerodynamic Torque
 | 3. Inertia tensor model for body undergoing acceleration.
 | 4. Current states of body undergoing acceleration and body with atmosphere.
 | 5. Shape model for the body exerting an acceleration (to allow for the calculation of vehicle altitude)
-| 6. Roation model for the body undergoing an acceleration (or numerical propagation of this body's rotational dynamics)
+| 6. Rotation model for the body undergoing an acceleration (or numerical propagation of this body's rotational dynamics)
 
 .. note::
    The aerodynamic acceleration is calculated in the vehicles body-fixed or aerodynamic frame. Expressing the
    acceleration in an inertial frame (as required by the propagation) requires the vehicle's orientation to be defined.
-   For a simple definition, in which the body’s angle of attack, sideslip angle, and bank angle are all set to 0, see
+   For a simple definition, in which the body's angle of attack, sideslip angle, and bank angle are all set to 0, see
    :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.aerodynamic_angle_based`.
 
    More details on aerodynamic guidance can be found on :ref:`this page <aerodynamic_models>`.

@@ -27,7 +27,7 @@ Mass-rate models
 The setup of a mass rate model in Tudat is substantially simpler than for the :ref:`accelerations <acceleration_models_setup>` and :ref:`torques <torque_model_setup>`.
 This is, in part, due to the very limited set of options for computing mass rates.
 
-Typically, a mass rate is directly related to a body's thrust (a user may use thrust without mass propagation, although this will neglect part of the physics of the problem(. 
+Typically, a mass rate is directly related to a body's thrust (a user may use thrust without mass propagation, although this will neglect part of the physics of the problem). 
 An example of this is shown below,
 where all thrust accelerations acting on a vehicle (which include a definition of specific impulse) are used to compute
 the mass rate. Note that the acceleration models, created as discussed :ref:`here <acceleration_models_setup>`, are

@@ -24,7 +24,7 @@ Translational states
 The translational state of a body is a critical piece of information for numerous calculations in the Tudat propagation framework.
 For instance, (almost) any acceleration acting on a body :math:`A` will require the Cartesian state of this body as input.
 
-In Tudat, we use the terms *frame* and *element* to describe the following disinct concepts:
+In Tudat, we use the terms *frame* and *element* to describe the following distinct concepts:
 
 - **Frame orientation**: Defines the orientation in inertial space of the set of unit vectors the :math:`x`, :math:`y` and :math:`z` axes.
   These orientations may be constant in time, in which case the frame is said to have an inertial orientation (for instance the J2000 frame orientation),
@@ -39,7 +39,7 @@ In Tudat, we use the terms *frame* and *element* to describe the following disin
 The frame itself does not define anything concerning the (state) vector, instead it defines how a specific set of elements represents
 a specific physical state. In Tudat, a state vector is represented as a vector (numpy in Python; Eigen in C++).
 The state vector itself cannot store the element set or frame orientation in which it is defined.
-This information is tracked by Tudat (for internal compuations) or should be tracked by a user (for any user-defined state vector).
+This information is tracked by Tudat (for internal computations) or should be tracked by a user (for any user-defined state vector).
 
 In the rest of this section, we will present how Tudat deals with the calculation and transformation of frame origins and orientations.
 Through out, we will assume that all translational state vectors are represented in Cartesian coordinates.
@@ -70,7 +70,7 @@ Frame origin
 Due to the above setup, three different definitions of states are used, where each may have its own distinct origin.
 
 * State vector - the variables for which the differential equations are solved numerically during the propagation
-* Ephemeris - a function of time that is fully defined before the state propagationm
+* Ephemeris - a function of time that is fully defined before the state propagation
 * Body - defined from propagated state vector and/or ephemeris at the start of each state derivative evaluation
 
 Tudat allows the flexibility to define a different origin for each one, with relevant translations automatically
@@ -123,7 +123,7 @@ The global frame is the same for each body in a simulation. All used for calcula
 Consequently, an (in)judicious choice of global frame origin may have an impact on the numerical noise in a simulation.
 For instance, when calculating the dynamics of a spacecraft w.r.t. the Earth, the relative position of the spacecraft w.r.t. the
 Earth is computed by extracting the position :math:`\mathbf{r}` from the body object representing Earth, and from the body representing the spacecraft.
-If the global frame origin is Earth, we will have :math:`\mathbf{r}=\mathbf{0}`, by definition. However, if the global frame origin set to ``SSB``, the relative position of spacecraft w.r.t. Earth will be calculated by subtracting the barycentric positions of the spacecraft and Earth (of order :math:`10^{11}` m) to compute the relative position (or order :math:`10^{7}` m for low-to-medium altitude orbits). As a result, 4 orders of magnitude of numerical precision may be lost in the calulcation of the spacecraft position that is used in the calculation of the accelerations.
+If the global frame origin is Earth, we will have :math:`\mathbf{r}=\mathbf{0}`, by definition. However, if the global frame origin set to ``SSB``, the relative position of spacecraft w.r.t. Earth will be calculated by subtracting the barycentric positions of the spacecraft and Earth (of order :math:`10^{11}` m) to compute the relative position (or order :math:`10^{7}` m for low-to-medium altitude orbits). As a result, 4 orders of magnitude of numerical precision may be lost in the calculation of the spacecraft position that is used in the calculation of the accelerations.
 
 | **How a user defines the global origin**: when creating the settings for the body objects (or the bodies themselves in case of manual body creation).
 |

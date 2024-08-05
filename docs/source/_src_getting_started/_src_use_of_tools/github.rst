@@ -165,7 +165,7 @@ In your terminal, first navigate into the directory containing your git reposito
 
    This will push your code to the ``origin`` remote. The ``main`` term denotes the current branch you are working on. Branch management is beyond the scope of this tutorial, and you may safely ignore these issues for now.
 
-   If you have set up your repository to be private, you will be prompted to enter your Github username and password. After a push is succesfull, you should see your changes on the Github page for your applications, available for everyone (in case it is public) or a selected few (in case it is private).
+   If you have set up your repository to be private, you will be prompted to enter your Github username and password. After a push is successful, you should see your changes on the Github page for your applications, available for everyone (in case it is public) or a selected few (in case it is private).
    
    .. note::
    
@@ -178,4 +178,4 @@ In your terminal, first navigate into the directory containing your git reposito
 		* **repo**
 		* **workflow**
 		
-		Make sure you select them all in the scope selection step. These scopes can be modified later, so do not panick if you read this too late.
+		Make sure you select them all in the scope selection step. These scopes can be modified later, so do not panic if you read this too late.

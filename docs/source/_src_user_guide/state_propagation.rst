@@ -15,7 +15,7 @@ Inputs
 There are two distinct input types necessary to create a simulation:
 
 - :ref:`environment_setup`: physical modeling of environment and system properties (for both celestial and artificial bodies)
-- :ref:`propagation_setup`: formulation of the differential eq  uations representing the problem, and the method to solve them
+- :ref:`propagation_setup`: formulation of the differential equations representing the problem, and the method to solve them
 
 .. toctree::
    :titlesonly:

@@ -42,7 +42,7 @@ An example, for the case of a linear interpolator, is shown below:
 
          .. tab:: C++
 
-In the above examplee, the linear scheme is used to interpolate the ``data_to_interpolate`` data set at  :math:`t=100`
+In the example above, the linear scheme is used to interpolate the ``data_to_interpolate`` data set at  :math:`t=100`
 (where typically, but not necessarily, the independent variable in interpolation will represent time, in the context of Tudat).
 
 The data that is to be interpolated must be provided as a ``dict`` (in Python) or a ``std::map`` (in C++):
