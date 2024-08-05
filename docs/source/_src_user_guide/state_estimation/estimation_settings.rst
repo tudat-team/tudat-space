@@ -16,7 +16,7 @@ We distinguish between two different types of analyses:
   * The weight matrix (see below) is a perfect representation of the noise properties of the observations
   * The ideal observation models (without random noise) are a perfect representation of reality
   * The dynamics model is a perfect representation of reality
-* **Batch least-squares estimation**: an iterative batch-least squares estimation is performed. The full estimation requires all settings that the coviariance analysis does. In addition, it requires a specification on when to terminate the iteration process.
+* **Batch least-squares estimation**: an iterative batch-least squares estimation is performed. The full estimation requires all settings that the covariance analysis does. In addition, it requires a specification on when to terminate the iteration process.
 
 .. _covarianceSettings:
 
@@ -112,7 +112,7 @@ estimate of the parameters (computed data).
 
 The above procedure is performed iteratively, until convergence has been reached.
 
-The settings for the full estimation are created in an essentially idential manner as those for a covariance analysis:
+The settings for the full estimation are created in an essentially identical manner as those for a covariance analysis:
 
 .. code-block:: python
 
@@ -129,10 +129,10 @@ The settings for the full estimation are created in an essentially idential mann
 
 where, in fact, the :class:`~tudatpy.numerical_simulation.estimation.EstimationInput` is derived from
 the :class:`~tudatpy.numerical_simulation.estimation.CovarianceAnalysisInput`. For the estimation settings,
-however, there are a number of additional options available, such as the definition for 'convergenve'
+however, there are a number of additional options available, such as the definition for 'convergence'
 (default: perform three iterations of the least squares).
 
 The :class:`~tudatpy.numerical_simulation.estimation.EstimationInput` class also has as function to
-tune the exact behaviour of the estimation procsess (see the
+tune the exact behaviour of the estimation process (see the
 :func:`~tudatpy.numerical_simulation.estimation.EstimationInput.define_estimation_settings` function of this class for details),
 such as whether to save all intermediate results for the user.

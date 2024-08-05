@@ -144,7 +144,7 @@ Aerodynamic
 | 3. Mass model for body undergoing acceleration.
 | 4. Current state of body undergoing acceleration and body with atmosphere.
 | 5. Shape model for the body exerting an acceleration (to allow for the calculation of vehicle altitude)
-| 6. Roation model for the body undergoing an acceleration (or numerical propagation of this body's rotational dynamics)
+| 6. Rotation model for the body undergoing an acceleration (or numerical propagation of this body's rotational dynamics)
 
 .. note::
    The aerodynamic acceleration is calculated in the vehicles body-fixed or aerodynamic frame. Expressing the

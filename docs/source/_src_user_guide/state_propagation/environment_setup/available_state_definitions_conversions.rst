@@ -181,7 +181,7 @@ This functionality is implemented as a rotation model, defined using the
 which will in most cases be created during the :ref:`setup of the environment <creation_celestial_body_settings>`
 (and, typically, assigned to the body object representing Earth).
 
-When this rotation model is assigned to Earth, it can be extraced as an object of type :func:`~tudatpy.numerical_simulation.environment.GcrsToItrsRotationModel`:
+When this rotation model is assigned to Earth, it can be extracted as an object of type :func:`~tudatpy.numerical_simulation.environment.GcrsToItrsRotationModel`:
 
 .. code-block:: python
 

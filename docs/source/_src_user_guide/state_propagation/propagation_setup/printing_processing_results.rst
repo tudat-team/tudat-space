@@ -8,7 +8,7 @@ The results of the numerical propagation are stored in the :ref:`propagation res
 analysis, and retrieve the details of the propagation process. In addition, there are a number of processing steps and terminal outputs that 
 Tudat can perform before, during and after the propagation. Although such settings can be provided directly
 when creating propagator settings (for instance, when calling the :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.translational`
-function), it is adviced to modify these settings afterwards:
+function), it is advised to modify these settings afterwards:
 
 .. code-block:: python
 
@@ -159,7 +159,7 @@ can be retrieved from the results as follows:
     multiarc_propagator_settings = propagator.multi_arc( ... )
     single_arc_processing_settings = multiarc_propagator_settings.single_arc_settings
   
-Settings to print data to the console (see :ref:`below <console_output>`) is also defined seperately per arc. Additional options
+Settings to print data to the console (see :ref:`below <console_output>`) is also defined separately per arc. Additional options
 for multi- and hybrid-arc propagation are provided :ref:`below <console_output_multi_arc>`
 
 

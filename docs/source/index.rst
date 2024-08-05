@@ -39,7 +39,7 @@ passions in astrodynamics and space.
 	- All model **implementation in C++**, all **interfaces in Python**, using the pybind11 library
 	- Extensively verified by **more than 200 unit tests**
 	- Used as the core tool for **more than 20 peer-reviewed articles**, and more than 100 M.Sc. thesis projects
-	- An extensive `API desription <https://py.api.tudat.space/en/latest/>`_
+	- An extensive `API description <https://py.api.tudat.space/en/latest/>`_
 	- Everything **open-source**!
 
 

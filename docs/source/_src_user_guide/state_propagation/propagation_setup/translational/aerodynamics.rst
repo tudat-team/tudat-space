@@ -4,7 +4,7 @@
 Use of aerodynamics
 ===================
 
-When including aerodynamics in the orbit propagation, it may often be desirable to have the aerodynamic properties of the vehicle depend on the vehicle's state, and its interaction with the environment. This is the case for ascent and entry for instance. Also, control surface deflections may be needed to modify the vehicle’s behaviour. Both options are included in Tudat, and the interfaces are described below.
+When including aerodynamics in the orbit propagation, it may often be desirable to have the aerodynamic properties of the vehicle depend on the vehicle's state, and its interaction with the environment. This is the case for ascent and entry for instance. Also, control surface deflections may be needed to modify the vehicle's behaviour. Both options are included in Tudat, and the interfaces are described below.
 
 An aerodynamic acceleration combines various environment properties for its computation:
 
@@ -49,9 +49,9 @@ In simple simulations, a user may want to define a constant :math:`\alpha`, :mat
         rotation_model_settings = environment_setup.rotation_model.aerodynamic_angle_based(
             central_body="Earth",
             target_frame = "VehicleFixed",
-            angle_funcion = angle_function ) 
+            angle_function = angle_function ) 
             
-This defines settings for the rotation model, which can then be assigned the body settings, see :ref:`override_body_settings`, or used directly to update the rotation model, see :ref:`decorate_empty_body`. The above will *not* result in a constant :math:`\mathbf{R}^{(I/B)}` rotation matrix, since the vehicle's translational state will still change over time, leading to a change in the orientation of the trajectory frame (see :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.aerodynamic_angle_based`). What the above will do is define the vehicle to have a constant orientation *w.r.t. the oncoming flow*. Note that if the above function is used without ``angle_funcion`` input, the three angles will be set to 0.
+This defines settings for the rotation model, which can then be assigned the body settings, see :ref:`override_body_settings`, or used directly to update the rotation model, see :ref:`decorate_empty_body`. The above will *not* result in a constant :math:`\mathbf{R}^{(I/B)}` rotation matrix, since the vehicle's translational state will still change over time, leading to a change in the orientation of the trajectory frame (see :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.aerodynamic_angle_based`). What the above will do is define the vehicle to have a constant orientation *w.r.t. the oncoming flow*. Note that if the above function is used without ``angle_function`` input, the three angles will be set to 0.
 
 Alternatively, the angle of attack may be defined based on pitch trim, so that the value of :math:`\alpha` is found for which :math:`C_{m}=0`. This requires :math:`\alpha`-dependent aerodynamic moment coefficients to be defined). When doing so, the sideslip and bank angle are left free and are 0 by default. However, a user may specify these angles as follows"
 
@@ -73,7 +73,7 @@ Note that the ``angle_function`` now returns only two angles, instead of the thr
 Time- and environment-dependent angles
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A more complicated algorithm to compute the aerodynamic angles may be defined using custom models. Below, a simple example (depending only on time) is provided for illustraive purposes. A discussion of the definition of more complex models (depending on state, environment, time, *etc.*) is describe on the dedicated :ref:`custom_models` page.
+A more complicated algorithm to compute the aerodynamic angles may be defined using custom models. Below, a simple example (depending only on time) is provided for illustrative purposes. A discussion of the definition of more complex models (depending on state, environment, time, *etc.*) is describe on the dedicated :ref:`custom_models` page.
 
 
     .. tabs::
@@ -88,7 +88,7 @@ The above example will apply the model :math:`\alpha=\dot{\alpha}(t-t_{0})` (and
 Aerodynamic moments
 ===================
 
-In Tudat, aerodynamic moment coefficients can be provided and used in the same manner as aerodynamic force coefficients when (for instance) propagating rotational dynamics. Nominally, the aerodynamic force coefficients are *not* used to compute a correction to the aerodynamic moments, implicitly assuming that the aerodynamic moment reference point is equal to the vehicle's center of mass. However, in some cases, for instance where the center-of-mass is time-variable, the contribution of the force coefficients to the moment coefficients is to be taken into account. This is handled by the :attr:`~tudatpy.numerical_simulation.environment_setup.aerodynamic_coefficients.AerodynamicCoefficientSettings.add_force_contribution_to_moments` attribute of the :attr:`~tudatpy.numerical_simulation.environment_setup.aerodynamic_coefficients.AerodynamicCoefficientSettings` class. If a (non-NaN) moment reference point is provided to the aerodynamic coefficienr settings, this boolean is automatically set to True. To disable the addition of the force contribution to the moment coefficients, this attribute can be manually set to False after the creation of the aerodynamic coefficient settings. 
+In Tudat, aerodynamic moment coefficients can be provided and used in the same manner as aerodynamic force coefficients when (for instance) propagating rotational dynamics. Nominally, the aerodynamic force coefficients are *not* used to compute a correction to the aerodynamic moments, implicitly assuming that the aerodynamic moment reference point is equal to the vehicle's center of mass. However, in some cases, for instance where the center-of-mass is time-variable, the contribution of the force coefficients to the moment coefficients is to be taken into account. This is handled by the :attr:`~tudatpy.numerical_simulation.environment_setup.aerodynamic_coefficients.AerodynamicCoefficientSettings.add_force_contribution_to_moments` attribute of the :attr:`~tudatpy.numerical_simulation.environment_setup.aerodynamic_coefficients.AerodynamicCoefficientSettings` class. If a (non-NaN) moment reference point is provided to the aerodynamic coefficient settings, this boolean is automatically set to True. To disable the addition of the force contribution to the moment coefficients, this attribute can be manually set to False after the creation of the aerodynamic coefficient settings. 
 
 .. _control_surfaces:
 
@@ -103,7 +103,7 @@ For a high-fidelity vehicle entry/ascent trajectory propagation, it will often b
 
 A control surface is created as follows: 
 
-If a body has :math:`N` control surfaces assigned to it, the coefficient increments will be added to the total coefficients during each time step, without any required user interaction. User interaction with the control surfaces is typically limited to definig an algorithm defining theit deflections as a function of time. 
+If a body has :math:`N` control surfaces assigned to it, the coefficient increments will be added to the total coefficients during each time step, without any required user interaction. User interaction with the control surfaces is typically limited to defining an algorithm defining the deflections as a function of time. 
 
 TODO: write documentation for implementation in Tudat
 

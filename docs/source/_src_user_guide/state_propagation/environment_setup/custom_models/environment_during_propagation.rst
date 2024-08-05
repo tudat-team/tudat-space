@@ -56,7 +56,7 @@ Rotational state
 Body inertial mass
 ------------------
 
-    Retrieved directly from a :class:`~tudatpy.numerical_simulation.environment.Body` object with the :attr:`~tudatpy.numerical_simulation.environment.Body.mass` function. Note that this mass is *not* (at least, not by definition) the mass used for calculation of gravitional interactions (the gravitational mass :math:`m_{g}`, as you would find it in Newton's law of gravity (:math:`a=\frac{Gm_{g}}{r^{2}}`), but the mass used to convert forces to accelerations and vice versa (the inertial mass :math:`m_{i}`, as you would find it in Newton's law of motion :math:`F=m_{i}a`). To the best of our knowledge the two masses are equal for all bodies, but various formulations of general relativity predict a difference between the two. Moreover, we have found it useful to *not* automatically define a gravity field for any body which happens to have a mass assigned to it. For instance, a spacecraft will have an (inertial) mass which is needed for computing most non-gravitational accelerations. But, it does *not* require its own gravity field to compute gravitational accelerations.
+    Retrieved directly from a :class:`~tudatpy.numerical_simulation.environment.Body` object with the :attr:`~tudatpy.numerical_simulation.environment.Body.mass` function. Note that this mass is *not* (at least, not by definition) the mass used for calculation of gravitational interactions (the gravitational mass :math:`m_{g}`, as you would find it in Newton's law of gravity (:math:`a=\frac{Gm_{g}}{r^{2}}`), but the mass used to convert forces to accelerations and vice versa (the inertial mass :math:`m_{i}`, as you would find it in Newton's law of motion :math:`F=m_{i}a`). To the best of our knowledge the two masses are equal for all bodies, but various formulations of general relativity predict a difference between the two. Moreover, we have found it useful to *not* automatically define a gravity field for any body which happens to have a mass assigned to it. For instance, a spacecraft will have an (inertial) mass which is needed for computing most non-gravitational accelerations. But, it does *not* require its own gravity field to compute gravitational accelerations.
 
 Spherical harmonic gravity field coefficients
 ---------------------------------------------
@@ -70,7 +70,7 @@ Spherical harmonic gravity field coefficients
                 sine_coefficients = earth_gravity_field.cosine_coefficients
 
 
-    Note the above will only work if the ``earth_gravity_field`` is of the type :func:`~tudatpy.numerical_simulation.environment.SphericalHarmonicGravityFieldModel`, which typically means that the body has default spherical harmonic gravity field settings (see :ref:`default_env_models`) or that spherical harmonic gravity field settings were defined using the :func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.spherical_harmonic` function). For safety, the above could be put inside the ``try`` block of a ``try/except`` construction,  wherethe ``except`` block will be entered in case the gravity field type of the Earth is not spherical harmonic.
+    Note the above will only work if the ``earth_gravity_field`` is of the type :func:`~tudatpy.numerical_simulation.environment.SphericalHarmonicGravityFieldModel`, which typically means that the body has default spherical harmonic gravity field settings (see :ref:`default_env_models`) or that spherical harmonic gravity field settings were defined using the :func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.spherical_harmonic` function). For safety, the above could be put inside the ``try`` block of a ``try/except`` construction,  where the ``except`` block will be entered in case the gravity field type of the Earth is not spherical harmonic.
 
 .. _flight_conditions_during_propagation:
 
@@ -86,7 +86,7 @@ Flight conditions
         .. code-block:: python
 
                 current_altitude = bodies.get( "Vehicle" ).flight_conditions.altitude
-                current_longitude = bodies.get( "Vehicle" ).flight_conditions.longiude
+                current_longitude = bodies.get( "Vehicle" ).flight_conditions.longitude
                 current_latitude = bodies.get( "Vehicle" ).flight_conditions.latitude
 
     as well as its derived class that also incorporates atmospheric properties
@@ -97,7 +97,7 @@ Flight conditions
             current_freestream_density = bodies.get( "Vehicle" ).flight_conditions.density
             current_mach_number = bodies.get( "Vehicle" ).flight_conditions.mach_number
 
-    The :class:`~tudatpy.numerical_simulation.environment.FlightConditions` class also contains an object of type :class:`~tudatpy.numerical_simulation.environment.AerodynamicAngleCalculator`, which handles the calculation of angles (latitude, longitude, flight path angle, heading angle, angle of attack, sidelip angle, bank angle) and transformations between reference frames (inertial, central-body-fixed, vertical, trajectory, aerodynamic and body-fixed frames; see `this reference <https://repository.tudelft.nl/islandora/object/uuid%3Ae5fce5a0-7bce-4d8e-8249-e23293edbb55>`_ for details) typically used in flight dynamics. The angles and frames are listed in the tudatpy enums :class:`~tudatpy.numerical_simulation.environment.AerodynamicsReferenceFrameAngles` and :class:`~tudatpy.numerical_simulation.environment.AerodynamicsReferenceFrames`, respectively. Each of the angles, and the rotation between each of the frames, can be retrieved as follows (for two representative examples):
+    The :class:`~tudatpy.numerical_simulation.environment.FlightConditions` class also contains an object of type :class:`~tudatpy.numerical_simulation.environment.AerodynamicAngleCalculator`, which handles the calculation of angles (latitude, longitude, flight path angle, heading angle, angle of attack, sideslip angle, bank angle) and transformations between reference frames (inertial, central-body-fixed, vertical, trajectory, aerodynamic and body-fixed frames; see `this reference <https://repository.tudelft.nl/islandora/object/uuid%3Ae5fce5a0-7bce-4d8e-8249-e23293edbb55>`_ for details) typically used in flight dynamics. The angles and frames are listed in the tudatpy enums :class:`~tudatpy.numerical_simulation.environment.AerodynamicsReferenceFrameAngles` and :class:`~tudatpy.numerical_simulation.environment.AerodynamicsReferenceFrames`, respectively. Each of the angles, and the rotation between each of the frames, can be retrieved as follows (for two representative examples):
 
     .. code-block:: python
 
@@ -118,7 +118,7 @@ Aerodynamic coefficients
     .. code-block:: python
 
 
-        # Extract Mach number from fliht conditions
+        # Extract Mach number from flight conditions
         mach_number = vehicle_flight_conditions.mach_number
         # Compute angle attach attack according to user-defined guidance law
         angle_of_attack = np.deg2rad(30 / (1 + np.exp(-2*(mach_number-9))) + 10)

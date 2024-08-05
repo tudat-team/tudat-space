@@ -18,14 +18,14 @@ Any contribution you have to Tudat is very welcome! This can come in the form of
 Ongoing and planned developments
 ================================
 
-Below is a (non enirely comprehensive) list of features and functionalities that are under active development, or or our near(ish)-term wishlist. For some of them, the required development would be Python-only. If you're interested in the status of these points, in contributing, or in proposing additional ones, please feel free to contact us!
+Below is a (not entirely comprehensive) list of features and functionalities that are under active development, or or our near(ish)-term wishlist. For some of them, the required development would be Python-only. If you're interested in the status of these points, in contributing, or in proposing additional ones, please feel free to contact us!
 
 * Extension of Tudat estimation functionality for real tracking data analysis, with a focus on planetary missions
 
   * Reading additional typical radio tracking data files (TNF, TDF) into Tudat-compatible data structures (in addition to ODF files, which are currently supported)
   * Adding high-accuracy models for media corrections for radio tracking (troposphere, ionosphere, corona)
-  * Adding more detailed albedo and surface temperature models for radiation pressire modelling
-  * Flexible and automated setup for high-fidelity propagation and estimation of planetart spacecraft
+  * Adding more detailed albedo and surface temperature models for radiation pressure modelling
+  * Flexible and automated setup for high-fidelity propagation and estimation of planetary spacecraft
   * Implement sparse matrices for partials matrices
   * ...
 

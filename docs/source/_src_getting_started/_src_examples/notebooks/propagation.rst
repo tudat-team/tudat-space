@@ -21,7 +21,7 @@ The following examples showcase the basic functionality of the Tudat numerical p
 Advanced examples
 *********************
 
-The following examples, some of the more advanced features of Tudat are showcased, using either custom functions for guidance, or a more complex defintition of the equations of motion.
+The following examples, some of the more advanced features of Tudat are showcased, using either custom functions for guidance, or a more complex definition of the equations of motion.
 Note that an additional related example (in particular on the setup of a custom environment) can be found on the page for :ref:`asteroid_optimization_examples`
 
 .. nbgallery::

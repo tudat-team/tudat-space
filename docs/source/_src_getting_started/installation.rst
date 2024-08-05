@@ -10,7 +10,7 @@ Installation
 
 This page will guide you through the installation of Tudat(Py). The installation is supported exclusively through the use of a ``conda``
 package manager, such as Miniconda or Anaconda. For new users, and Windows users in particular, we recommend the use of `Anaconda`_ . 
-For those with limited bandwidth or hard drive storage, we recommend the use of `Miniconda`_ (see also `Anaconda or Miniconda?`_). When refering to a ``conda`` package manager below,
+For those with limited bandwidth or hard drive storage, we recommend the use of `Miniconda`_ (see also `Anaconda or Miniconda?`_). When referring to a ``conda`` package manager below,
 the term "Anaconda" will be used. 
 
 For more details on how to use ``conda``, please refer to our detailed guide (:ref:`getting_started_with_conda`) and the references therein.

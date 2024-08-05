@@ -23,7 +23,7 @@ The propagation framework in Tudat is implemented such that any number of bodies
 
 Where the ``acceleration_models`` should contain a set of acceleration models acting upon each propagated body (if one or more of the bodies is omitted from the ``acceleration_models``, no accelerations are assumed to act on this body, without warning or error).
 
-When propagating multiple bodies, the initial states of the bodies need to be provided in a single vector through the ``initial_state`` input (in the example above) to the :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.translational` function. This initial state vector should, in order, contain the initial states of the propagated bodies, w.r.t. their respecive central bodies. For the example above, entry 0-5 of the ``initial_state`` should be the initial state of Earth w.r.t. SSB, entry 6-11 Mars w.r.t. SSB, entry 12-17 Sun w.r.t. SSB, and 18-23 Moon w.r.t. SSB. 
+When propagating multiple bodies, the initial states of the bodies need to be provided in a single vector through the ``initial_state`` input (in the example above) to the :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.translational` function. This initial state vector should, in order, contain the initial states of the propagated bodies, w.r.t. their respective central bodies. For the example above, entry 0-5 of the ``initial_state`` should be the initial state of Earth w.r.t. SSB, entry 6-11 Mars w.r.t. SSB, entry 12-17 Sun w.r.t. SSB, and 18-23 Moon w.r.t. SSB. 
 
 The use of a 'hierarchical' system is also supported by Tudat. For instance, one can propagate the Earth and Mars w.r.t. the Sun, the Sun w.r.t. the barycenter, the Moon w.r.t the Earth:
 
