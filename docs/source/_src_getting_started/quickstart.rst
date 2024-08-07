@@ -4,7 +4,12 @@
 Quickstart: Tudat(Py) in 10 minutes
 ###################################
 
-This pages aims to get you started with Tudat(Py) and introduce you to some of the key concepts in Tudat. By the end of it, you will be able to use Tudat(Py) for simple tasks such as propagating a spacecraft orbit, as well as expose you to the ecosystem of Tudat(Py) so you can start building more complex simulations. For more in-depth information, references to the relevant sections of the documentation are provided.
+This pages aims to get you started with Tudat(Py) and introduce you to some of the key concepts in Tudat. By the end of it, you will be able to use Tudat(Py) for simple tasks such as propagating a spacecraft orbit, as well as expose you to the ecosystem of Tudat(Py) so you can start building more complex simulations. References to the relevant sections of the documentation are provided for more in-depth information.
+
+.. tip:: 
+   For a comprehensive list of available functions and classes in TudatPy, have a look at the `TudatPy API documentation <https://py.api.tudat.space/en/latest/>`_.
+   This guide links to the API documentation in numerous places, indicated by a white box with black text, like the following: :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies`.
+
 
 .. contents:: Content of this page
    :local:
@@ -30,10 +35,12 @@ With the ``conda`` environment now installed, you can activate it to work in it 
 
    conda activate tudat-space
 
-For more in-depth instructions on how to install TudatPy, see the :ref:`installation guide <getting_started_installation>`.
-If you are new to using ``conda`` or Python, have a look at :ref:`getting_started_with_conda` and :ref:`getting_started_with_python`.
+.. seealso:: 
+   For more in-depth instructions on how to install TudatPy, see the :ref:`installation guide <getting_started_installation>`.
+   If you are new to using ``conda`` or Python, have a look at :ref:`getting_started_with_conda` and :ref:`getting_started_with_python`.
 
-To develop Tudat(Py), or make use of the latest features not yet in a conda packes, you can compile TudatPy from the C++ source yourself, see the page on :ref:`using the source code <using_tudat_source>` for details.
+.. tip:: 
+   To develop Tudat(Py), or make use of the latest features not yet in a conda packages, you can compile TudatPy from the C++ source yourself, see the page on :ref:`using the source code <using_tudat_source>` for details.
 
 
 Propagating your first orbit
@@ -50,13 +57,16 @@ The workflow of a typical propagation in Tudat(Py) is shown in the figure below.
 
 There are two inputs necessary to perform a simulation: a :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.PropagatorSettings` instance and a :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` instance.
 The propagation setup defines the differential equations to be solved and the method to solve them, while the environment setup defines the physical modeling of the environment and system properties, including both celestial and artificial objects.
-For more information, see :ref:`environment_setup` and :ref:`propagation_setup`.
+
+.. seealso::
+
+   For more information on how to setup your environment and propagation, see the user guide on :ref:`environment_setup` and :ref:`propagation_setup`.
 
 A core principle of Tudat(Py) is the use of ``settings`` objects to define physical models.
-A user typically does not create models instances directly, but instead creates (or modifies) a ``settings`` object, which is then translated to a model instance using a so-called 'factory function'.
+A user typically does not create model instances directly, but instead creates (or modifies) a ``settings`` object, which is then translated to a model instance using a so-called "factory function".
 
 Knowing that, we can now start setting up our simulation.
-We will first import all necessary modules, including some standard Python modules, like ``numpy`` and ``matplotlib``. DOMINIC-NOTE: PERHAPS A BRIEF NOTE ON THE MODULES HERE (OR A LINK TO A PAGE WITH MORE EXPLANATION: https://docs.tudat.space/en/latest/_src_getting_started/tudatpy_submodules.html)?
+We will first import all necessary modules, including some standard Python modules, like ``numpy`` and ``matplotlib``.
 
 .. code-block:: python
 
@@ -73,6 +83,9 @@ We will first import all necessary modules, including some standard Python modul
    from tudatpy.util import result2array
    from tudatpy.astro.time_conversion import DateTime
 
+.. seealso::
+
+   For more information about the submodules of Tudat(Py), take a look at :ref:`tudatpy_submodules`.
 
 Setting up the environment
 --------------------------
@@ -87,11 +100,16 @@ Tudat(Py) relies heavily on the `SPICE toolkit <https://naif.jpl.nasa.gov/naif/>
 
    spice.load_standard_kernels()
 
-we load the default SPICE kernels into TudatPy.
+we load a number of default SPICE kernels into TudatPy.
 
-With the standard kernels loaded, we can create our central body, the Earth.
+.. tip:: 
+   For a complete list and the order of the default SPICE kernels loaded by TudatPy, see the API documentation on :func:`~tudatpy.interface.spice.load_standard_kernels`.
+
+Define natural bodies
+^^^^^^^^^^^^^^^^^^^^^
+
+With the standard kernels loaded, we can define our central body, the Earth.
 In this example, the :func:`~tudatpy.numerical_simulation.environment_setup.get_default_body_settings` function is used to create the Earth using a number of default settings, which are distributed with Tudat(Py).
-For more information on these default models (for ephemeris, rotation, shape, atmosphere, etc.), have a look at :ref:`default_env_models`.
 
 .. code-block:: python
 
@@ -105,22 +123,36 @@ For more information on these default models (for ephemeris, rotation, shape, at
       bodies_to_create, global_frame_origin, global_frame_orientation)
 
 
-These body settings are then used to create the system of bodies, using the factory function :func:`~tudatpy.numerical_simulation.environment_setup.create_system_of_bodies`.
+.. seealso:: 
+   For more information on these default models (for ephemeris, rotation, shape, atmosphere, etc.), have a look at :ref:`default_env_models`.
 
-.. code-block:: python
+Define artificial bodies
+^^^^^^^^^^^^^^^^^^^^^^^^
 
-   # Create system of bodies (in this case only Earth)
-   bodies = environment_setup.create_system_of_bodies(body_settings)
-
-
-Because our satellite is an artificial body, it is not known to TudatPy by default. DOMINIC: THAT'S TRUE, BUT WE CAN STILL ADD IT TO THE BODY-SETTINGS AS A MANUAL EMPTY SETTINGS OBJECT (WITH ONLY A NAME). I KNOW THAT'S NOT HOW IT'S DONE IN THE EXAMPLE, BUT IT MAY BE EASIER TO EXPLAIN (AND ALSO IT MAY BE GOOD TO CHANGE THE EXAMPLES TO THIS SETUP)
-If we were to add it to ``bodies_to_create`` in the previous code block retrieving default settings, TudatPy would throw an error.
-Instead, we need to create an empty body for our satellite, using the following code:
+Because our satellite is an artificial body, it is not known to TudatPy by default.
+If we were to add it to ``bodies_to_create`` in the previous code block retrieving default settings, TudatPy would throw an error, as our satellite is not a default body.
+Instead, we need to create a set of empty body settings for our satellite, using the following code:
 
 .. code-block:: python
 
    # Create empty body settings for the satellite
-   bodies.create_empty_body("Delfi-C3")
+   body_settings.add_empty_settings("Delfi-C3")
+
+
+.. hint:: 
+   As we are propagating a satellite in a Keplerian orbit, we do not need to define any additional properties for the satellite.
+   For more information on how to define the mass, aerodynamic coefficients or radiation pressure properties of an artificial body, have a look at :ref:`how to create body settings with additional properties <create_new_body_settings>`.
+
+Create the system of bodies
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+These body settings are then used to create the system of bodies, using the factory function :func:`~tudatpy.numerical_simulation.environment_setup.create_system_of_bodies`.
+
+.. code-block:: python
+
+   # Create system of bodies
+   bodies = environment_setup.create_system_of_bodies(body_settings)
+
 
 We have now defined our environment in the :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` instance ``bodies`` and are ready to move on to setting up the propagation.
 
@@ -144,7 +176,7 @@ Define the acceleration models
 
 We then define the accelerations acting in our simulation.
 This is done by creating a dictionary (``acceleration_settings``), where the keys are the bodies that undergo an acceleration (in this case only on our satellite), and the values are the accelerations acting on these bodies.
-The accelerations acting on our satellite are again defined as a dictionary (``acceleration_settings_delfi_c3``), with the keys being the bodies, that exert an acceleration on our satellite, and the values being a list of acceleration(s) that each bodies exerts.
+The accelerations acting on our satellite are again defined as a dictionary (``acceleration_settings_delfi_c3``), with the keys being the bodies, that exert an acceleration on our satellite, and the values being a list of acceleration(s) that each body exerts.
 In this case, we only consider the gravitational point-mass acceleration of the Earth acting on the satellite, thus we get:
 
 .. code-block:: python
@@ -156,7 +188,7 @@ In this case, we only consider the gravitational point-mass acceleration of the 
 
    acceleration_settings = {"Delfi-C3": acceleration_settings_delfi_c3}
 
-Similar to before, we use a factory function to create the acceleration models from the settings:
+Similar to before, we use the factory function :func:`~tudatpy.numerical_simulation.propagation_setup.create_acceleration_models` to create the acceleration models from the settings:
 
 .. code-block:: python
 
@@ -164,9 +196,10 @@ Similar to before, we use a factory function to create the acceleration models f
    acceleration_models = propagation_setup.create_acceleration_models(
       bodies, acceleration_settings, bodies_to_propagate, central_bodies)
 
-In this case, we only considered the influence of a point-mass attraction.
-To setup a more complex simulation, have a look at :ref:`acceleration_models_setup`.
-To see the full list of available acceleration models, see :ref:`available_acceleration_models` or the `API documentation on accelerations <https://py.api.tudat.space/en/latest/acceleration.html>`_.
+.. seealso:: 
+   In this case, we only considered the influence of a gravitational point-mass attraction.
+   To setup a more complex simulation, have a look at :ref:`acceleration_models_setup`.
+   To see the full list of available acceleration models, see :ref:`available_acceleration_models` or the `API documentation on accelerations <https://py.api.tudat.space/en/latest/acceleration.html>`_.
 
 Define the initial state
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -193,12 +226,11 @@ In order to convert from Keplerian to Cartesian elements, we also need to know t
       true_anomaly = 3.07018490e+00, # radians
    )
 
-In Tudat(Py), all quantities are defined in SI units, with all angular measures defined in radians.
+.. hint:: 
+   In Tudat(Py), all quantities are defined in SI units, with all angular measures defined in radian. All epochs are defined as seconds since J2000 in the TDB scale.
 
-This only leaves the epoch of the initial state to be defined.
-In Tudat(Py), all epochs are defined as seconds since J2000 in the TDB scale.
+This only leaves the epoch of the initial state to be defined. 
 We will use Tudat's own :class:`~tudatpy.astro.time_conversion.DateTime` class to define the epoch of the initial state.
-For conversions from other time scales and formats, see :ref:`times_and_dates`.
 
 .. code-block:: python
 
@@ -206,6 +238,8 @@ For conversions from other time scales and formats, see :ref:`times_and_dates`.
    simulation_start_epoch = DateTime(2020, 1, 1).epoch()
    simulation_end_epoch   = DateTime(2020, 1, 2).epoch()
 
+.. seealso:: 
+   For conversions from other time scales and formats, see :ref:`times_and_dates`.
 
 Define the integrator and propagator
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -225,9 +259,10 @@ Lastly, we define the termination conditions for the propagation, which in this 
    # Create termination settings
    termination_settings = propagation_setup.propagator.time_termination(simulation_end_epoch)
 
-Depending on your performance and accuracy requirements, you might want to consider other propagator and integrator combinations.
-Tudat(Py) offers a variety of other integrators, such as higher-order multi-stage and extrapolation integrators, as well as different propagators, such as the Encke, Keplerian, Modified-Equinoctial, and Unified State Model propagators.
-For more information, have a look at :ref:`integrator_setup` and the `API documentation on propagators <https://py.api.tudat.space/en/latest/propagator.html>`_.
+.. note:: 
+   Depending on your performance and accuracy requirements, you might want to consider other propagator and integrator combinations.
+   Tudat(Py) offers a variety of other integrators, such as higher-order multi-stage and extrapolation integrators, as well as different propagators, such as the Encke, Keplerian, Modified-Equinoctial, and Unified State Model propagators.
+   For more information, have a look at :ref:`integrator_setup` and the `API documentation on propagators <https://py.api.tudat.space/en/latest/propagator.html>`_.
 
 We are not only interested in the final state of our satellite, but also the evolution of its ground track over time.
 To retrieve this information, Tudat(Py) uses so-called dependent variables, which store information about the conditions of the system during each step of the integration, in addition to the propagated state itself.
@@ -241,7 +276,8 @@ We create a list of dependent variables to save, in this case the longitude and 
       propagation_setup.dependent_variable.longitude("Delfi-C3", "Earth"),
    ]
 
-For a list of available dependent variables, have a look at the `API documentation on dependent variables <https://py.api.tudat.space/en/latest/dependent_variable.html>`_.
+.. seealso:: 
+   For a list of available dependent variables, have a look at the `API documentation on dependent variables <https://py.api.tudat.space/en/latest/dependent_variable.html>`_.
 
 
 Create the propagator settings
@@ -269,7 +305,7 @@ Perform the propagation
 ==========================
 
 Now that we have defined our :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.PropagatorSettings` instance (the ``propagator_settings`` object) and a :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` instance (the ``bodies`` object), we can finally perform the propagation.
-As introduced earlier in `Setting up the simulation`_, the propagation is performed using the :func:`~tudatpy.numerical_simulation.propagation_setup.create_dynamics_simulator` function.
+As introduced earlier in `Setting up the simulation`_, the propagation is performed using the :func:`~tudatpy.numerical_simulation.create_dynamics_simulator` function.
 Typically, calling this function performs the propagation (unless the optional input argument ``simulate_dynamics_on_creation`` is set to ``False``)
 
 .. code-block:: python
@@ -282,20 +318,24 @@ Typically, calling this function performs the propagation (unless the optional i
 
 Post-processing the results
 ---------------------------
-The :func:`~tudatpy.numerical_simulation.propagation_setup.create_dynamics_simulator` function returns the results in the form of a :class:`~tudatpy.numerical_simulation.SingleArcSimulator` instance, which has the attributes ``state_history`` and ``dependent_variable_history``.
-The former contains the state of the system at each step of the integration, while the latter contains the dependent variables.
-Both are stored in the form of dictionaries, which contain the epochs of each single integration step as keys and the corresponding quantities as values.
+The :func:`~tudatpy.numerical_simulation.create_dynamics_simulator` function returns an instance of a :class:`~tudatpy.numerical_simulation.SingleArcSimulator`, which has the attribute ``propagation_results`` of type :class:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults`.
+The ``propagation_results`` object contains, among other information, the ``state_history`` and ``dependent_variable_history``.
+The former stores the state of the system at each step of the integration, while the latter holds the dependent variables.
 
-To post-process the results, we will first convert the state and dependent variable history to a NumPy array, which can be easily manipulated and plotted:
+.. hint:: 
+   Both the ``state_history`` and ``dependent_variable_history`` are stored in the form of dictionaries, which contain the epochs of each single integration step as keys and the corresponding quantities as values.
+
+To post-process the results, we will first convert the state and dependent variable history dictionaries to a NumPy array, which can be easily manipulated and plotted.
+TudatPy offers a utility function, :func:`~tudatpy.util.result2array`, to convert the dictionaries to NumPy arrays:
 
 .. code-block:: python
 
    # Extract the resulting state history and convert it to an ndarray
-   states = dynamics_simulator.state_history
+   states = dynamics_simulator.propagation_results.state_history
    states_array = result2array(states)
 
    # Extract the resulting dependent variable history and convert it to an ndarray
-   dependent_variables = dynamics_simulator.dependent_variable_history
+   dependent_variables = dynamics_simulator.propagation_results.dependent_variable_history
    dependent_variables_array = result2array(dependent_variables)
 
 
@@ -337,8 +377,8 @@ Visualize the trajectory
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 Finally, let's visualize the trajectory of our satellite in 3D around Earth.
-For this, we use the array we previously created with the :func:`~tudatpy.util.result2array` function.
-The resulting array has the epochs as the first column, followed by the Cartesian states (position and velocity, with respect to Earth) in SI units.
+For this, we use the ``states_array`` we previously created with the :func:`~tudatpy.util.result2array` function.
+The array contains the epochs as the first column, followed by the Cartesian states (position and velocity, with respect to Earth) in SI units.
 
 .. code-block:: python
 
@@ -405,10 +445,14 @@ This should give you a plot similar to the following:
 Congratulations!
 You have now successfully propagated a satellite in a Keplerian orbit around the Earth using Tudat(Py) and used the results to visualize its trajectory.
 
-For more information on how to set up more complex simulations, have a look at the :ref:`examples <getting_started_examples>`.
-They include examples on more complex propagations, such as `including additional perturbation models <_src_examples/notebooks/propagation/perturbed_satellite_orbit.html>`_ or `the effect of a thruster <_src_examples/notebooks/propagation/thrust_between_Earth_Moon.html>`_.
-If you are interested in using TudatPy for state estimation, have a look at the example of using TudatPy for `parameter estimation of Delfi-C3 <_src_examples/notebooks/estimation/full_estimation_example.html>`_.
-Last but not least, if you would like to find the optimal Earth-Mars launch window, you might be interested in using TudatPy to `create Porkchop plots <_src_examples/notebooks/mission_design/earth_mars_transfer_window.html>`_.
+
+.. seealso:: 
+   For more information on how to set up more complex simulations, have a look at the :ref:`examples <getting_started_examples>`.
+   They include examples on more complex propagations, such as `including additional perturbation models <_src_examples/notebooks/propagation/perturbed_satellite_orbit.html>`_ or `the effect of a thruster <_src_examples/notebooks/propagation/thrust_between_Earth_Moon.html>`_.
+
+   If you are interested in using TudatPy for state estimation, have a look at the example of using TudatPy for `parameter estimation of Delfi-C3 <_src_examples/notebooks/estimation/full_estimation_example.html>`_.
+
+   Last but not least, if you would like to find the optimal Earth-Mars launch window, you might be interested in using TudatPy to `create Porkchop plots <_src_examples/notebooks/mission_design/earth_mars_transfer_window.html>`_.
 
 Navigating the Tudat(Py) ecosystem
 **********************************
@@ -416,7 +460,7 @@ Navigating the Tudat(Py) ecosystem
 The Tudat(Py) ecosystem includes a variety of resources to make the functionality of Tudat more accessible.
 On this website, you can find a comprehensive user guide that explains the core concepts of Tudat(Py).
 The user guide includes sections on :ref:`state propagation <state_propagation>`, :ref:`state estimation <state_estimation>`, :ref:`mathematics <mathematics>`, and :ref:`preliminary mission design <prelim_mission_design>`.
-You can also find a :ref:`list of examples <_getting_started_examples>` that demonstrate how to use TudatPy for a variety of tasks.
+You can also find a :ref:`list of examples <getting_started_examples>` that demonstrate how to use TudatPy for a variety of tasks.
 For more information on the different submodules of TudatPy, the :ref:`tudatpy_submodules` page provides an overview of the available modules and their functionality.
 
 This website is complemented by the `API documentation <https://py.api.tudat.space/en/latest/>`_, which provides a comprehensive overview of all available functions and classes exposed in TudatPy.

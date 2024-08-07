@@ -171,6 +171,8 @@ Below is a slightly more involved example, which does not use a property of the 
            
 Here, we extracted, modified, and then reset the :attr:`~tudatpy.numerical_simulation.environment_setup.gravity_field.SphericalHarmonicsGravityFieldSettings.normalized_cosine_coefficients` property of the :class:`~tudatpy.numerical_simulation.environment_setup.gravity_field.SphericalHarmonicsGravityFieldSettings`.
 
+.. _create_new_body_settings:
+
 Creating a new settings object
 ------------------------------
 
