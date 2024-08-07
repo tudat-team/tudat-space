@@ -279,6 +279,7 @@ Some resources related to Tudatpy are located elsewhere. See below!
    :caption: Getting started
    :hidden:
 
+   _src_getting_started/quickstart
    _src_getting_started/installation
    _src_getting_started/setup_dev_environment
    _src_getting_started/primers_coding_tools
