@@ -281,10 +281,8 @@ Some resources related to Tudatpy are located elsewhere. See below!
 
    _src_getting_started/quickstart
    _src_getting_started/installation
-   _src_getting_started/setup_dev_environment
    _src_getting_started/primers_coding_tools
    _src_getting_started/examples
-   _src_getting_started/tudatpy_submodules
    _src_getting_started/faq
    _src_getting_started/using_source
 
@@ -294,6 +292,7 @@ Some resources related to Tudatpy are located elsewhere. See below!
    :caption: User guide
    :hidden:
 
+   _src_user_guide/tudatpy_submodules
    _src_user_guide/state_propagation
    _src_user_guide/state_estimation
    _src_user_guide/prelim_mission_design
