@@ -46,8 +46,7 @@ it is also used to define properties of celestial bodies in, for instance, (semi
 (see :ref:`transfer_trajectory`).
 
 There are many different types of environment models in Tudat. See :ref:`available_environment_models` for
-a comprehensive list, and :ref:`specific_environment_considerations` for a number of overall considerations on
-specific types of environment models. The overall architecture of the environment in Tudat is described in more
+a comprehensive list. The overall architecture of the environment in Tudat is described in more
 detail on a dedicated page on :ref:`environment_architecture`.
 
 Body Creation - Procedure
