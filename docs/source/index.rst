@@ -313,8 +313,8 @@ Some resources related to Tudatpy are located elsewhere. See below!
 
    _src_getting_started/quickstart
    _src_getting_started/installation
-   _src_getting_started/primers_coding_tools
    _src_getting_started/examples
+   _src_getting_started/primers_coding_tools
    _src_getting_started/faq
    _src_getting_started/using_source
 
