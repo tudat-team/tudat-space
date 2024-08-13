@@ -6,23 +6,21 @@ Default bodies with a limited valid time range
 
 The regular default body settings use the SPICE toolbox to determine the ephemerides of solar system bodies. Consequently, when using these defaults, each time the state of a solar system body is required, the corresponding SPICE function is called, and a celestial body state is computed. The downside of this is that the process of extracting a state from SPICE is fairly slow, and may present a computational bottleneck in certain cases. This is especially true when the dynamics you are using is fairly simple (no high-order spherical harmonics, no complex guidance model, no detailed atmosphere model), in which you require the states of numerous solar system bodies, for instance for the computation of third-body perturbations. To mitigate this, we offer an alternative method of defining default body settings: 
 
-    .. tabs::
 
-         .. tab:: Python
+.. tab-set::
+   :sync-group: coding-language
 
-          .. toggle-header:: 
-             :header: Required **Show/Hide**
+   .. tab-item:: Python
+      :sync: python
 
-             .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.py
-                :language: python
+      .. dropdown:: Required
+         :color: muted
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/default_bodies_time_interval.py
-             :language: python
+         .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.py
+            :language: python
 
-         .. tab:: C++
-
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
-             :language: cpp
+      .. literalinclude:: /_src_snippets/simulation/environment_setup/default_bodies_time_interval.py
+         :language: python
 
 The difference w.r.t. the `regular creation<creation_celestial_body_settings>` of default body settings being the use of the :func:`~tudatpy.numerical_simulation.environment_setup.get_default_body_settings_time_limited` function (instead of :func:`~tudatpy.numerical_simulation.environment_setup.get_default_body_settings`). What is done when using this alternative setup:
 

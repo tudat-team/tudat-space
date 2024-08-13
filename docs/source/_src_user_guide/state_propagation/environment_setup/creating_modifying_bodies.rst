@@ -34,25 +34,24 @@ The first step is to add an empty :class:`~tudatpy.numerical_simulation.environm
 :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` object through its
 :meth:`~tudatpy.numerical_simulation.environment.SystemOfBodies.create_empty_body` method:
 
-    .. tabs::
+.. use manually synchronized tabs instead of tabbed code to allow dropdowns
+.. tab-set::
+   :sync-group: coding-language
 
-         .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-          .. toggle-header:: 
-             :header: Required **Show/Hide**
+      .. dropdown:: Required
+         :color: muted
 
-             .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.py
-             .. literalinclude:: /_src_snippets/simulation/environment_setup/default_bodies.py
-             .. literalinclude:: /_src_snippets/simulation/environment_setup/create_system_of_bodies.py
-                :language: python
+         .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.py
+         .. literalinclude:: /_src_snippets/simulation/environment_setup/default_bodies.py
+         .. literalinclude:: /_src_snippets/simulation/environment_setup/create_system_of_bodies.py
+            :language: python
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/add_body.py
-             :language: python
+      .. literalinclude:: /_src_snippets/simulation/environment_setup/add_body.py
+         :language: python
 
-         .. tab:: C++
-
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
-             :language: cpp
 
 which adds a body with no properties to the system.
 
@@ -70,26 +69,24 @@ Properties can be added to an existing body after the body's creation (with the 
 * Engine model, using the :func:`~tudatpy.numerical_simulation.environment_setup.add_engine_model` or :func:`~tudatpy.numerical_simulation.environment_setup.add_variable_direction_engine_model` function
 * Rotation model, using the :func:`~tudatpy.numerical_simulation.environment_setup.add_rotation_model` function
 
-    .. tabs::
+.. use manually synchronized tabs instead of tabbed code to allow dropdowns
+.. tab-set::
+   :sync-group: coding-language
 
-         .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-          .. toggle-header:: 
-             :header: Required **Show/Hide**
+      .. dropdown:: Required
+         :color: muted
 
-             .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.py
-             .. literalinclude:: /_src_snippets/simulation/environment_setup/default_bodies.py
-             .. literalinclude:: /_src_snippets/simulation/environment_setup/create_system_of_bodies.py
-             .. literalinclude:: /_src_snippets/simulation/environment_setup/add_body.py
-                :language: python
+         .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.py
+         .. literalinclude:: /_src_snippets/simulation/environment_setup/default_bodies.py
+         .. literalinclude:: /_src_snippets/simulation/environment_setup/create_system_of_bodies.py
+         .. literalinclude:: /_src_snippets/simulation/environment_setup/add_body.py
+            :language: python
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/add_body_properties.py
-             :language: python
-
-         .. tab:: C++
-
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
-             :language: cpp
+      .. literalinclude:: /_src_snippets/simulation/environment_setup/add_body_properties.py
+         :language: python
 
 .. note::
 

@@ -117,17 +117,19 @@ If thrust is added to the model, the vehicle will physically lose mass (its prop
 
 A mass rate setting is available in Tudat(Py) to make the loss of mass of the vehicle consistent with the magnitude of the thrust and its specific impulse over time, by propagating the mass of the body as a state entry. This is available trough the :func:`~tudatpy.numerical_simulation.propagation_setup.mass_rate.from_thrust` function, which has to be setup after the acceleration models are defined, as follows:
 
-   .. tabs::
+.. tab-set::
+   :sync-group: coding-language
 
-      .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-         .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/thrust_mass_rate.py
-            :language: python
+      .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/thrust_mass_rate.py
+         :language: python
 
-      .. tab:: C++
+   .. tab-item:: C++
 
-         .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/thrust_mass_rate.cpp
-            :language: cpp
+      .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/thrust_mass_rate.cpp
+         :language: cpp
 
 More details and options on mass propagation are provided on the :ref:`mass_dynamics` page.
 

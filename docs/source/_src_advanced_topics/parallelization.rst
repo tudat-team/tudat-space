@@ -47,26 +47,30 @@ arguments. The inputs are all the sets of input arguments in the form of a list 
 iterable mentioned previously. The outputs are formatted analogously, where the tuples are the various outputs rather
 than the input arguments. 
 
-.. tabs::
+.. use manually synchronized tabs instead of tabbed code to allow dropdowns
+.. tab-set::
+   :sync-group: coding-language
 
-     .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-      .. toggle-header:: 
-         :header: Required **Show/Hide**
+      .. dropdown:: Required
+         :color: muted
 
-            .. code-block:: python
+         .. code-block:: python
 
-                import multiprocessing as mp
-                import numpy as np
-                
-                from tudatpy.kernel.numerical_simulation import environment_setup, propagation_setup
-                from tudatpy.kernel.interface import spice
+            import multiprocessing as mp
+            import numpy as np
+
+            from tudatpy.kernel.numerical_simulation import environment_setup, propagation_setup
+            from tudatpy.kernel.interface import spice
 
       .. literalinclude:: /_src_snippets/simulation/parallelization/general_bfe_example.py
          :language: python
 
-     .. tab:: C++
-
+   .. tab-item:: C++
+      :sync: cpp
+         
       .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
          :language: cpp
 
@@ -97,35 +101,39 @@ same concepts are applied, but rather than two integers being returned without f
 Semi-major Axis and Eccentricity elements of the initial state which has a profound influence on the final results of
 the orbit. 
 
-.. tabs::
+.. use manually synchronized tabs instead of tabbed code to allow dropdowns
+.. tab-set::
+   :sync-group: coding-language
 
-     .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-      .. toggle-header:: 
-         :header: Required **Show/Hide**
+      .. dropdown:: Required
+         :color: muted
 
-            .. code-block:: python
+         .. code-block:: python
 
-                # Load bfe modules
-                import multiprocessing as mp
+            # Load bfe modules
+            import multiprocessing as mp
 
-                # Load standard modules
-                import numpy as np
-                from matplotlib import pyplot as plt
+            # Load standard modules
+            import numpy as np
+            from matplotlib import pyplot as plt
 
-                # Load tudatpy modules
-                from tudatpy.kernel.interface import spice
-                from tudatpy.kernel import numerical_simulation
-                from tudatpy.kernel.numerical_simulation import environment_setup, propagation_setup
-                from tudatpy.kernel.astro import element_conversion
-                from tudatpy.kernel import constants
-                from tudatpy.util import result2array
+            # Load tudatpy modules
+            from tudatpy.kernel.interface import spice
+            from tudatpy.kernel import numerical_simulation
+            from tudatpy.kernel.numerical_simulation import environment_setup, propagation_setup
+            from tudatpy.kernel.astro import element_conversion
+            from tudatpy.kernel import constants
+            from tudatpy.util import result2array
 
       .. literalinclude:: /_src_snippets/simulation/parallelization/mc_bfe_run.py
          :language: python
 
-     .. tab:: C++
-
+   .. tab-item:: C++
+      :sync: cpp
+         
       .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
          :language: cpp
 
@@ -135,35 +143,39 @@ code from the `Kepler satellite orbit
 adjustment that the initial state definition is given by the input arguments to the function rather than defined
 manually.
 
-.. tabs::
+.. use manually synchronized tabs instead of tabbed code to allow dropdowns
+.. tab-set::
+   :sync-group: coding-language
 
-     .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-      .. toggle-header:: 
-         :header: Required **Show/Hide**
+      .. dropdown:: Required
+         :color: muted
 
-            .. code-block:: python
+         .. code-block:: python
 
-                # Load bfe modules
-                import multiprocessing as mp
+            # Load bfe modules
+            import multiprocessing as mp
 
-                # Load standard modules
-                import numpy as np
-                from matplotlib import pyplot as plt
+            # Load standard modules
+            import numpy as np
+            from matplotlib import pyplot as plt
 
-                # Load tudatpy modules
-                from tudatpy.kernel.interface import spice
-                from tudatpy.kernel import numerical_simulation
-                from tudatpy.kernel.numerical_simulation import environment_setup, propagation_setup
-                from tudatpy.kernel.astro import element_conversion
-                from tudatpy.kernel import constants
-                from tudatpy.util import result2array
+            # Load tudatpy modules
+            from tudatpy.kernel.interface import spice
+            from tudatpy.kernel import numerical_simulation
+            from tudatpy.kernel.numerical_simulation import environment_setup, propagation_setup
+            from tudatpy.kernel.astro import element_conversion
+            from tudatpy.kernel import constants
+            from tudatpy.util import result2array
 
       .. literalinclude:: /_src_snippets/simulation/parallelization/mc_bfe_dynamics.py
          :language: python
 
-     .. tab:: C++
-
+   .. tab-item:: C++
+      :sync: cpp
+         
       .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
          :language: cpp
 

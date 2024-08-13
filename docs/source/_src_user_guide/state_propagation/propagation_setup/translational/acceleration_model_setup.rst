@@ -61,68 +61,59 @@ models that compute the accelerations during the propagation.
 
 
 
-    .. tabs::
+.. tab-set::
+   :sync-group: coding-language
 
-         .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-          .. toggle-header:: 
-             :header: Required **Show/Hide**
+      .. dropdown:: Required
+        :color: muted
 
-                .. code-block:: python
+        .. code-block:: python
 
-                    from tudatpy.kernel.numerical_simulation import propagation_setup
+            from tudatpy.kernel.numerical_simulation import propagation_setup
 
-          .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/acceleration_example.py
-             :language: python
-
-         .. tab:: C++
-
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
-             :language: cpp
+      .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/acceleration_example.py
+          :language: python
 
 When propagating multiple bodies, the same list of settings may be re-used for multiple bodies. Below,
 an example is given for the definition of ``acceleration_settings`` for multiple bodies (``Vehicle1`` and
 ``Vehicle2``) which are undergoing identical accelerations:
 
-    .. tabs::
+.. tab-set::
+   :sync-group: coding-language
 
-         .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-          .. toggle-header:: 
-             :header: Required **Show/Hide**
+      .. dropdown:: Required
+        :color: muted
 
-                .. code-block:: python
+        .. code-block:: python
 
-                    from tudatpy.kernel.numerical_simulation import propagation_setup
+            from tudatpy.kernel.numerical_simulation import propagation_setup
 
-          .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/acceleration_example_multi_vehicle.py
-             :language: python
-
-         .. tab:: C++
-
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
-             :language: cpp
+      .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/acceleration_example_multi_vehicle.py
+          :language: python
 
 Alternatively, separate acceleration settings may be defined for separate bodies and then combined into an
 ``acceleration_settings`` variable. Below, an example for such a case is given when propagating the Earth and Moon:
 
-    .. tabs::
+.. tab-set::
+   :sync-group: coding-language
 
-         .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-          .. toggle-header:: 
-             :header: Required **Show/Hide**
+      .. dropdown:: Required
+        :color: muted
 
-                .. code-block:: python
+        .. code-block:: python
 
-                    from tudatpy.kernel.numerical_simulation import propagation_setup
+            from tudatpy.kernel.numerical_simulation import propagation_setup
 
-          .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/acceleration_example_multi.py
-             :language: python
-
-         .. tab:: C++
-
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
-             :language: cpp
+      .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/acceleration_example_multi.py
+          :language: python
 
 

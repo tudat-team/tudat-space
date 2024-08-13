@@ -53,24 +53,21 @@ reached. A rotational propagator that uses quaternions is defined. Next to that,
 asked to save the total torque norm as dependent variable. The time and rotational state will be
 printed on the terminal once every 24 hours (simulation time).
 
-    .. tabs::
+.. tab-set::
+   :sync-group: coding-language
 
-         .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-          .. toggle-header:: 
-             :header: Required **Show/Hide**
+      .. dropdown:: Required
+        :color: muted
 
-                .. code-block:: python
+        .. code-block:: python
 
-                    from tudatpy.kernel.numerical_simulation import propagation_setup
-                    from tudatpy.kernel.astro import element_conversion
-                    import numpy as np
+            from tudatpy.kernel.numerical_simulation import propagation_setup
+            from tudatpy.kernel.astro import element_conversion
+            import numpy as np
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/full_rotational_setup.py
-             :language: python
-
-         .. tab:: C++
-
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
-             :language: cpp
+      .. literalinclude:: /_src_snippets/simulation/environment_setup/full_rotational_setup.py
+          :language: python
 

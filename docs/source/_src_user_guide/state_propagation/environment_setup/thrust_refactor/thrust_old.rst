@@ -31,19 +31,17 @@ In Tudat, the acceleration that a body undergoes due to the addition of thrust c
 A typical representative example on how the thrust acceleration can be set up, using the available :func:`~tudatpy
 .numerical_simulation.propagation_setup.acceleration.thrust_from_direction_and_magnitude` function, is provided below:
 
-   .. tabs::
+.. tab-set::
+   :sync-group: coding-language
 
-      .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-         The Tudat(Py) API docs give more details on the :class:`~tudatpy.numerical_simulation.propagation_setup.thrust.ThrustDirectionSettings` and :class:`~tudatpy.numerical_simulation.propagation_setup.thrust.ThrustMagnitudeSettings` classes.
+      The Tudat(Py) API docs give more details on the :class:`~tudatpy.numerical_simulation.propagation_setup.thrust.ThrustDirectionSettings` and :class:`~tudatpy.numerical_simulation.propagation_setup.thrust.ThrustMagnitudeSettings` classes.
 
-         .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/thrust_accelerations_basic_syntax.py
-            :language: python
+      .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/thrust_accelerations_basic_syntax.py
+         :language: python
 
-      .. tab:: C++
-
-         .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/thrust_accelerations_basic_syntax.cpp
-            :language: cp
 
 In the above code snippet, note that we define the thrust acceleration as one that the vehicle exerts on itself.
 
@@ -248,17 +246,20 @@ If thrust is added to the model, the vehicle is most likely going to loose mass 
 A mass rate setting is available in Tudat(Py) to make the loss of mass of the vehicle consistent with the magnitude of the thrust and its specific impulse over time.
 This is available trough the :func:`~tudatpy.numerical_simulation.propagation_setup.mass_rate.from_thrust` function, which has to be setup after the acceleration models are defined, as follows:
 
-   .. tabs::
+.. tab-set::
+   :sync-group: coding-language
 
-      .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-         .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/thrust_mass_rate.py
-            :language: python
+      .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/thrust_mass_rate.py
+         :language: python
 
-      .. tab:: C++
+   .. tab-item:: C++
+      :sync: cpp
 
-         .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/thrust_mass_rate.cpp
-            :language: cpp
+      .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/thrust_mass_rate.cpp
+         :language: cpp
 
 More details and options on mass propagation are provided on the :ref:`mass_dynamics` page.
 
@@ -288,17 +289,20 @@ body-fixed thrust direction can be defined as a function of time, allowing TVC t
 
 This can be done as follows:
 
-   .. tabs::
+.. tab-set::
+   :sync-group: coding-language
 
-      .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-         .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/thrust_orientation_body_fixed.py
-            :language: python
+      .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/thrust_orientation_body_fixed.py
+         :language: python
 
-      .. tab:: C++
+   .. tab-item:: C++
+      :sync: cpp
 
-         .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/thrust_orientation_body_fixed.cpp
-            :language: cpp
+      .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/thrust_orientation_body_fixed.cpp
+         :language: cpp
 
 Thrust and aerodynamic guidance - Legacy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -59,64 +59,56 @@ torque.
 The function :func:`~tudatpy.numerical_simulation.propagation_setup.create_torque_models` creates the list of
 models that compute the torques during the propagation.
 
-    .. tabs::
+.. tab-set::
+   :sync-group: coding-language
 
-         .. tab:: Python
+   .. tab-item:: Python
+    :sync: python
 
-          .. toggle-header::
-             :header: Required **Show/Hide**
+    .. dropdown:: Required
+      :color: muted
 
-                .. code-block:: python
+      .. code-block:: python
 
-                    from tudatpy.kernel.numerical_simulation import propagation_setup
+        from tudatpy.kernel.numerical_simulation import propagation_setup
 
-          .. literalinclude:: /_src_snippets/simulation/propagation_setup/torque_models/torque_setup.py
-             :language: python
-
-         .. tab:: C++
-
-             :language: cpp
-
+    .. literalinclude:: /_src_snippets/simulation/propagation_setup/torque_models/torque_setup.py
+        :language: python
 
 When propagating multiple bodies (see :ref:`multi_body_dynamics`), the same list of settings may be re-used for
 multiple bodies. Below, an example is given for the definition of ``torque_settings`` for multiple bodies
 (``Vehicle1`` and ``Vehicle2``) which are undergoing identical torques:
 
-    .. tabs::
+.. tab-set::
+   :sync-group: coding-language
 
-         .. tab:: Python
+   .. tab-item:: Python
+    :sync: python
 
-          .. toggle-header::
-             :header: Required **Show/Hide**
+    .. dropdown:: Required
+      :color: muted
 
-                .. code-block:: python
+      .. code-block:: python
 
-                    from tudatpy.kernel.numerical_simulation import propagation_setup
+        from tudatpy.kernel.numerical_simulation import propagation_setup
 
-          .. literalinclude:: /_src_snippets/simulation/propagation_setup/torque_models/torque_setup_multi_vehicle.py
-             :language: python
+    .. literalinclude:: /_src_snippets/simulation/propagation_setup/torque_models/torque_setup_multi_vehicle.py
+        :language: python
 
-         .. tab:: C++
-
-             :language: cpp
-
-Or separate torque settings may be defined for separate bodies, and then combined into a ``torque_settings`` variable.
 Below, an example for such a case is given when propagating the Earth and Moon:
 
-    .. tabs::
+.. tab-set::
+   :sync-group: coding-language
 
-         .. tab:: Python
+   .. tab-item:: Python
+    :sync: python
 
-          .. toggle-header::
-             :header: Required **Show/Hide**
+    .. dropdown:: Required
+      :color: muted
 
-                .. code-block:: python
+      .. code-block:: python
 
-                    from tudatpy.kernel.numerical_simulation import propagation_setup
+        from tudatpy.kernel.numerical_simulation import propagation_setup
 
-          .. literalinclude:: /_src_snippets/simulation/propagation_setup/torque_models/torque_setup_multi.py
-             :language: python
-
-         .. tab:: C++
-
-             :language: cpp
+    .. literalinclude:: /_src_snippets/simulation/propagation_setup/torque_models/torque_setup_multi.py
+        :language: python

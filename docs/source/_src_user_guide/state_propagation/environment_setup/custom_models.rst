@@ -53,12 +53,14 @@ Custom model, free function
 
 Here, we show an example of an ephemeris model that will be both faster, and less accurate, than the models implemented in Tudat. This may be advantageous for preliminary simulation. The model is very simple: a perfectly circular orbit in the :math:`xy-`plane of the ``ECLIPJ2000`` frame.
 
-    .. tabs::
+.. tab-set::
+   :sync-group: coding-language
 
-         .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/custom_ephemeris_example.py
-             :language: python
+      .. literalinclude:: /_src_snippets/simulation/environment_setup/custom_ephemeris_example.py
+         :language: python
 
  
 In the above example, the user-define function ``neptune_state_function`` is provided when creating the custom ephemeris settings. The only requirement on this custom function is that it takes a single float as argument (representing time since J2000), and returns a 6-dimensional vector (representing the Cartesian state in the frame specified), as can be seen in the :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.custom` API entry.
@@ -70,24 +72,28 @@ Custom model (single), class member
 
 Below, a skeleton is given for a custom class for the calculation of the thrust magnitude.
 
-    .. tabs::
+.. tab-set::
+   :sync-group: coding-language
 
-         .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/custom_class_single.py
-             :language: python
+      .. literalinclude:: /_src_snippets/simulation/environment_setup/custom_class_single.py
+         :language: python
 
          
 This setup allows the guidance model to directly access any of the properties of the bodies named 'Earth' and 'Vehicle', which were set as class attributes of the ``SimpleCustomGuidanceModel`` class (note: the inputs to the constructor, and the manner in which they are used is entirely up to the user, here we give just one example).
        
 The custom thrust magnitude model can then be used as follows to define the thrust magnitude that is to be exerted by an engine:
 
-    .. tabs::
+.. tab-set::
+   :sync-group: coding-language
 
-         .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/custom_thrust_magnitude_example.py
-             :language: python
+      .. literalinclude:: /_src_snippets/simulation/environment_setup/custom_thrust_magnitude_example.py
+         :language: python
 
 .. _couple_custom_models:
 
@@ -96,22 +102,26 @@ Custom model (multiple), class member
 
 Below, a skeleton is given for a custom class for the calculation of both thrust magnitude and aerodynamic angles.
 
-    .. tabs::
+.. tab-set::
+   :sync-group: coding-language
 
-         .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/custom_class_multiple.py
-             :language: python
+      .. literalinclude:: /_src_snippets/simulation/environment_setup/custom_class_multiple.py
+         :language: python
 
          
 Here, we see a different setup compared to the previous case. There is a single function, named ``update_guidance`` that calculates both the thrust magnitude and the aerodynamic angles. This allows the calculation of the two models to be coupled, which is required for many more advanced applications. The two functions ``getAerodynamicAngles`` and ``getThrustMagnitude`` are then linked to the environment as follows:
 
-    .. tabs::
+.. tab-set::
+   :sync-group: coding-language
 
-         .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
          
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/coupled_thrust_aerodynamics_example.py
-             :language: python
+      .. literalinclude:: /_src_snippets/simulation/environment_setup/coupled_thrust_aerodynamics_example.py
+         :language: python
 
 
 In setting up the custom guidance class, we now need to take care of one crucial point: even though data is retrieved from the object *twice* per function evaluation of the state derivative, the calculation should only be done *once*. Since it is often difficult to predict which of the custom functions will be called first, we use a different setup: defining a ``current_time`` member variable, and letting the code check whether an update needs to be done. This is achieved as follows:

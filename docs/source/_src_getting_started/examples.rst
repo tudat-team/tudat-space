@@ -6,12 +6,11 @@ Examples
 
 There are several example applications disseminated in various forms.
 
-.. panels::
-    :body: text-left
-    :header: text-center
+.. grid:: 1 1 3 3
+  :gutter: 2
 
-    ---
-    :column: col-lg-4 p-3
+  .. grid-item-card::
+    :text-align: center
 
     **Mybinder**
     ^^^
@@ -20,26 +19,34 @@ There are several example applications disseminated in various forms.
 
     +++
 
-    .. link-button:: https://mybinder.org/v2/gh/tudat-team/tudatpy-examples/master
-        :text: Try it out
-        :classes: btn-outline-primary btn-block stretched-link
+    .. button-link:: https://mybinder.org/v2/gh/tudat-team/tudatpy-examples/master
+       :expand:
+       :color: primary
+       :click-parent:
+       :outline:
 
-    ---
-    :column: col-lg-4 p-3
+       Try it out
 
-    **Github repo**
+  .. grid-item-card::
+    :text-align: center
+
+    **Github Repository**
     ^^^
 
-    The same examples are available on Github, both as Jupyter notebooks and regular *.py* files.
+    The same examples are available on Github, both as Jupyter notebooks and regular *.py* files, in the ``tudatpy-examples`` repository.
 
     +++
 
-    .. link-button:: https://github.com/tudat-team/tudatpy-examples
-        :text: Go to the repo
-        :classes: btn-outline-primary btn-block stretched-link
+    .. button-link:: https://mybinder.org/v2/gh/tudat-team/tudatpy-examples/master
+       :expand:
+       :color: primary
+       :click-parent:
+       :outline:
 
-    ---
-    :column: col-lg-4 p-3
+       Go to the repository
+
+  .. grid-item-card::
+    :text-align: center
 
     **Online documentation**
     ^^^
@@ -48,15 +55,18 @@ There are several example applications disseminated in various forms.
 
     +++
 
-    .. link-button:: examples
-        :type: ref
-        :text: See below
-        :classes: btn-outline-primary btn-block stretched-link
+    .. button-ref:: example-categories
+       :expand:
+       :color: primary
+       :click-parent:
+       :outline:
 
+       See below
 
 
 .. nbgallery::
    :caption: Categories of example applications
+   :name: example-categories
    :glob:
 
    _src_examples/notebooks/propagation.rst
