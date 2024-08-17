@@ -85,7 +85,7 @@ performed. Below, we summarize each one:
 The propagation origin - the propagated state
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-When define translational propagator settings (see :ref:`translational_dynamics`), the propagation origin defines the origin w.r.t. which the state vector is defined. For instance if the propagated body is 'spacecraft' and the propagation origin (or synonymously, the central body) is 'Earth', the state vector will be relative position/velocity of spacecraft w.r.t. Earth.
+When defining translational propagator settings (see :ref:`translational_dynamics`), the propagation origin defines the origin w.r.t. which the state vector is defined. For instance if the propagated body is 'spacecraft' and the propagation origin (or synonymously, the central body) is 'Earth', the state vector will be relative position/velocity of spacecraft w.r.t. Earth.
 
 | **How a user defines the propagation origin:** through the definition of the central body in the translational propagation settings
 |
@@ -103,7 +103,7 @@ Each body that is not numerically propagated is typically (but not necessarily) 
 
 | **How a user defines the ephemeris origin**: through the definition of ephemeris settings when creating the settings for the body objects (see `Ephemeris models <https://py.api.tudat.space/en/latest/ephemeris.html>`_). Often, the default settings will be used in the case of celestial bodies (see :ref:`default_env_models`).
 |
-| **When the propagation origin is relevant to a user:**
+| **When the ephemeris origin is relevant to a user:**
 
 * When directly retrieving the state from an ephemeris object.
 

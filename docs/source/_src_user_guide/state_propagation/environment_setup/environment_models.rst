@@ -25,7 +25,7 @@ Below, we provide an overview of the different types of environment models for w
 Available Model Types
 =====================
 
-The complete list of available environment model settings can be found on our API documentation. Below is a list with the different categories of models, and a link to the corresponding Tudatpy module
+The complete list of available environment model settings can be found on our API documentation. Below is a list with the different categories of models, and a link to the corresponding Tudatpy module:
 
 * `Aerodynamic coefficients <https://py.api.tudat.space/en/latest/aerodynamic_coefficients.html>`_, to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.aerodynamic_coefficient_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`. 
 
@@ -38,7 +38,7 @@ The complete list of available environment model settings can be found on our AP
    * The resulting model can be extracted from the :class:`~tudatpy.numerical_simulation.environment.Body` object using :attr:`~tudatpy.numerical_simulation.environment.Body.atmosphere_model`, which provides a :class:`~tudatpy.numerical_simulation.environment.AtmosphereModel`
 
 
-* `Ephemeris models <https://py.api.tudat.space/en/latest/ephemeris.html>`_, , to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.ephemeris_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`.  
+* `Ephemeris models <https://py.api.tudat.space/en/latest/ephemeris.html>`_, to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.ephemeris_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`.  
   
    * These models provide various ways in which to define predetermined (e.g. not coming from a Tudat propagation) translational states of bodies in the solar system
    * The resulting model can be extracted from the :class:`~tudatpy.numerical_simulation.environment.Body` object using :attr:`~tudatpy.numerical_simulation.environment.Body.ephemeris`, which provides a :class:`~tudatpy.numerical_simulation.environment.Ephemeris`
