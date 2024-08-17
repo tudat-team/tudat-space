@@ -4,7 +4,7 @@
 Creating the bodies
 ===================
 
-The usual workflow to create bodies in Tudat (both natural and manmade bodies!) is composed of three subsequent steps, described separately:
+The usual workflow to create bodies in Tudat (both natural and artificial bodies!) is composed of three subsequent steps, described separately:
 
 1. :ref:`default_body_settings`
 2. :ref:`custom_body_settings`
@@ -241,7 +241,7 @@ The example below shows how to create a set of bodies, using the :func:`~tudatpy
          :language: python
 
 The :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` class (the type of the ``bodies`` variable in the above simulation) is at the heart of many Tudat simulations. It contains all
-properties of your celestial and manmade bodies, and is used to retrieve properties of your accelerations, state derivative models, output
+properties of your celestial and artificial bodies, and is used to retrieve properties of your accelerations, state derivative models, output
 variables, etc. A more detailed discussion of the architecture of the :class:`~tudatpy.numerical_simulation.environment.Body` and :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` classes, as well as their constituent environment models and possible interdependencies, are discussed :ref:`here <environment_architecture>`
 
 It is crucial to understand the distinction between ``body_settings`` (of type :class:`~tudatpy.numerical_simulation.environment_setup.BodyListSettings`) and ``bodies`` (of type :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies`). The former is merely a list of

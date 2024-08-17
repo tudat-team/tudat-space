@@ -30,8 +30,8 @@ In Tudat, the physical environment is defined by a set of bodies, each encapsula
 (gravity field, ephemeris, *etc.*), which may be interdependent.
 
 .. note::
-   The :class:`~tudatpy.numerical_simulation.environment.Body` object may represent a celestial body or a
-   manmade vehicle. Tudat makes *no* a priori distinction between the two: the distinction is made by the user when
+   The :class:`~tudatpy.numerical_simulation.environment.Body` object may represent a celestial body or an
+   artificial vehicle. Tudat makes *no* a priori distinction between the two: the distinction is made by the user when
    creating the bodies.
 
 The combination of all Body objects is stored in a

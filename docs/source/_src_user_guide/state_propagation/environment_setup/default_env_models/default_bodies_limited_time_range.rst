@@ -22,7 +22,7 @@ The regular default body settings use the SPICE toolbox to determine the ephemer
       .. literalinclude:: /_src_snippets/simulation/environment_setup/default_bodies_time_interval.py
          :language: python
 
-The difference w.r.t. the `regular creation<creation_celestial_body_settings>` of default body settings being the use of the :func:`~tudatpy.numerical_simulation.environment_setup.get_default_body_settings_time_limited` function (instead of :func:`~tudatpy.numerical_simulation.environment_setup.get_default_body_settings`). What is done when using this alternative setup:
+The difference w.r.t. the :ref:`regular creation <creation_celestial_body_settings>` of default body settings being the use of the :func:`~tudatpy.numerical_simulation.environment_setup.get_default_body_settings_time_limited` function (instead of :func:`~tudatpy.numerical_simulation.environment_setup.get_default_body_settings`). What is done when using this alternative setup:
 
  * When *creating* the bodies, SPICE is queried at a linearly spaced set of times (defined by the ``initial_time``, ``final_time`` and ``time_step``, the latter of which has a default of 300 s), resulting in a table of states for each body that is to be created
  * A 6-point :func:`~tudatpy.math.interpolators.lagrange_interpolation` is created for each body using these tables of states, and is used to define the ephemeris of the body
