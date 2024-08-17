@@ -127,6 +127,10 @@ Note that using this command may also update additional packages (such as ``tuda
        .. code:: bash
 
            conda install --update-deps -c tudat-team tudatpy
+
+.. seealso::
+
+    During the installation process, you may encounter an error where Tudat cannot find the data files it needs. For information on how to solve this and other common issues see the :ref:`FAQ page <faq>`.
            
 Building your own TudatPy kernel
 ################################
