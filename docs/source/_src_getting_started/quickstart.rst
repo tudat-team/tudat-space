@@ -252,8 +252,9 @@ Lastly, we define the termination conditions for the propagation, which in this 
 .. code-block:: python
 
    # Create numerical integrator settings
-   fixed_step_size = 10.0
-   integrator_settings = propagation_setup.integrator.runge_kutta_4(fixed_step_size)
+   integrator_settings = propagation_setup.integrator.runge_kutta_fixed_step(
+      time_step=10.0, coefficient_set=propagation_setup.integrator.rk_4
+   )
 
    propagator_type = propagation_setup.propagator.cowell
 
