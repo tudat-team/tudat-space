@@ -232,28 +232,26 @@ performed over the number of legs that add the recommended shaping functions as 
 Finally, a node for each planet in the transfer body order must be given: A departure node,
 swingby nodes equal to the number of GA's, and a capture node. 
 
-.. tabs::
+.. use manually synchronized tabs instead of tabbed code to allow dropdowns
+.. tab-set::
+   :sync-group: coding-language
 
-     .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-      .. toggle-header::
-         :header: Required **Show/Hide**
+      .. dropdown:: Required
+         :color: muted
 
-            .. code-block:: python
+          .. code-block:: python
 
-                from tudatpy.kernel.numerical_simulation import propagation_setup
-                from tudatpy.kernel.numerical_simulation import environment_setup
-                from tudatpy.kernel.trajectory_design import shape_based_thrust
-                from tudatpy.kernel.trajectory_design import transfer_trajectory
-                import numpy as np
+              from tudatpy.kernel.numerical_simulation import propagation_setup
+              from tudatpy.kernel.numerical_simulation import environment_setup
+              from tudatpy.kernel.trajectory_design import shape_based_thrust
+              from tudatpy.kernel.trajectory_design import transfer_trajectory
+              import numpy as np
 
       .. literalinclude:: /_src_snippets/astrodynamics/manual_node_leg_settings.py
          :language: python
-
-     .. tab:: C++
-
-      .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
-         :language: cpp
 
 Having created the legs and nodes settings, the same procedure described above for creating the transfer trajectory
 object, evaluating it, and retrieving the computed data can be followed.

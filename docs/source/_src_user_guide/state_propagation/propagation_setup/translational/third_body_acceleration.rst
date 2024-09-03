@@ -62,30 +62,31 @@ Examples
 When propagating the dynamics of a spacecraft w.r.t. the Moon, the following will add the third-body point-mass
 acceleration of the Earth:
 
-.. tabs::
+.. tab-set::
+   :sync-group: coding-language
 
-     .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
       .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/point_mass_gravity.py
          :language: python
 
-     .. tab:: C++
+   .. tab-item:: C++
 
       .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/point_mass_gravity.cpp
          :language: cpp
 
 while the following will add the third-body spherical-harmonic acceleration of the Earth (zonal coefficients up to degree 4):
 
-.. tabs::
+.. tab-set::
+   :sync-group: coding-language
 
-   .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-    .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/spherical_harmonic_gravity_zonal.py
-       :language: python
+      .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/spherical_harmonic_gravity_zonal.py
+         :language: python
 
-   .. tab:: C++
-
-       :language: cpp
 
 Note that above two code blocks are identical to those given as example in the API documentation
 entries of :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.point_mass_gravity` and

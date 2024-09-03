@@ -48,21 +48,25 @@ Old code
 An example of the application of this is in the `example application (old version) <https://github.com/tudat-team/tudatpy-examples/blob/9c658213e661e8afc31738eba04f4973c38c90e2/propagation/reentry_trajectory.py>`_. Specifically, a class was created as follows:
 
 
-    .. tabs::
+.. tab-set::
+   :sync-group: coding-language
 
-         .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/thrust_refactor/guidance_class_old.py
-             :language: python
+      .. literalinclude:: /_src_snippets/simulation/environment_setup/thrust_refactor/guidance_class_old.py
+         :language: python
 
 this class had a number of specific requirements in terms of variable/function naming, inheritance. It was linked to the environment as follows (here, linked to the body named "STS"):
 
-    .. tabs::
+.. tab-set::
+   :sync-group: coding-language
 
-         .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/thrust_refactor/guidance_class_old_linking.py          
-             :language: python
+      .. literalinclude:: /_src_snippets/simulation/environment_setup/thrust_refactor/guidance_class_old_linking.py          
+         :language: python
 
 which could only be done *after* the creation of ``FlightConditions`` of the body "STS" (typically after an aerodynamic acceleration acting on it was created). 
 
@@ -76,23 +80,27 @@ New code
 
 In the new version of the code, the definition of a body's orientation through aerodynamic angles is allowed in one way: through the creation of a rotation model for the body. Details are discussed on a :ref:`dedicated page <aerodynamic_orientation>`. The above example can be 'translated' to the new setup as follows 
 
-    .. tabs::
+.. tab-set::
+   :sync-group: coding-language
 
-         .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/thrust_refactor/guidance_class_new.py
-             :language: python
+      .. literalinclude:: /_src_snippets/simulation/environment_setup/thrust_refactor/guidance_class_new.py
+         :language: python
 
 The main requirement on this new guidance class is the following: it should have a function that takes time as input, and returns a vector containing [:math:`\alpha`, :math:`\beta`, :math:`\sigma`]
 
 It is then linked to the environment as follows:
 
-    .. tabs::
+.. tab-set::
+   :sync-group: coding-language
 
-         .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/thrust_refactor/guidance_class_new_linking.py          
-             :language: python
+      .. literalinclude:: /_src_snippets/simulation/environment_setup/thrust_refactor/guidance_class_new_linking.py          
+         :language: python
 
 The function computing the aerodynamic angles in the guidance object (``aerodynamic_guidance_object.getAerodynamicAngles``) is linked to the specific rotation model settings :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.aerodynamic_angle_based`` which defines the rotation model we want.
 
@@ -124,22 +132,26 @@ Converting thrust code
 
 In the old code, you typically defined a thrust acceleration through:
 
-    .. tabs::
+.. tab-set::
+   :sync-group: coding-language
 
-         .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/thrust_refactor/thrust_acceleration_old.py          
-             :language: python
+      .. literalinclude:: /_src_snippets/simulation/environment_setup/thrust_refactor/thrust_acceleration_old.py          
+         :language: python
 
 
 In the new code, the equivalent functionality is provided through:
 
-    .. tabs::
+.. tab-set::
+   :sync-group: coding-language
 
-         .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/thrust_refactor/thrust_acceleration_new.py          
-             :language: python
+      .. literalinclude:: /_src_snippets/simulation/environment_setup/thrust_refactor/thrust_acceleration_new.py          
+         :language: python
 
 Here, we have chosen to define the rotation model settings, and create the rotation model, after creating the ``SystemOfBodies``, as discussed  :ref:`here <decorate_empty_body>`.
 

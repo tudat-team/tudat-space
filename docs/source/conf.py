@@ -31,6 +31,9 @@
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
+from datetime import datetime
+
+
 extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.doctest',
               'sphinx.ext.intersphinx',
@@ -39,18 +42,13 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.mathjax',
               'sphinx.ext.viewcode',
               # 'sphinx.ext.autosectionlabel',
-              'sphinx_panels',  # for gridded panels
+              'sphinx_design',  # for gridded panels, tabs, dropdowns
               'nbsphinx',  # to embed Jupyter notebooks
               'IPython.sphinxext.ipython_console_highlighting',  # to have pygments in rendered notebooks
               'sphinx_gallery.load_style',  # to show notebooks as galleries
-              # theme
-              'sphinx_rtd_theme',
-              'sphinx_tabs.tabs',
-              'sphinx_copybutton',
-              'sphinxcontrib.contentui'
+              'sphinx_rtd_theme', # theme
+              'sphinx_copybutton', # copy button in code blocks
               ]
-
-sphinx_tabs_valid_builders = ['linkcheck']
 
 # Specifying thumbnails according to images in _static folder
 nbsphinx_thumbnails = {
@@ -79,17 +77,15 @@ nbsphinx_prolog = """
 # This option prevents from re-executing the notebooks. The content stored from the latest execution will be displayed.
 nbsphinx_execute = 'never'
 # The suffix(es) of source filenames.
-# You can specify multiple suffix as a list of string:
-#
-# source_suffix = ['.rst', '.md']
-source_suffix = '.rst'
+source_suffix = {'.rst': 'restructuredtext'}
 
 # The master toctree document.
 master_doc = 'index'
 
 # General information about the project.
 project = 'tudat.space'
-copyright = '2022, Tudat Space'
+year = datetime.now().year
+copyright = f'{year}, Tudat Space'
 author = 'Tudat Space'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -106,7 +102,7 @@ release = '0.3.1'
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language = "en"
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -127,11 +123,6 @@ todo_include_todos = True
 import sphinx_rtd_theme
 
 html_theme = 'sphinx_rtd_theme'
-
-# import rtcat_sphinx_theme
-
-# html_theme = 'rtcat_sphinx_theme'
-# html_theme_path = [rtcat_sphinx_theme.get_html_theme_path()]
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -226,5 +217,5 @@ texinfo_documents = [
 
 # Example configuration for intersphinx: refer to the Python standard library.
 # test / view content of inventory file at url via $ python -msphinx.ext.intersphinx <url>
-intersphinx_mapping = {'tudatpy': ('https://tudatpy.readthedocs.io/en/latest/', None),
+intersphinx_mapping = {'tudatpy': ('https://py.api.tudat.space/en/latest/', None),
                        'python': ('https://docs.python.org/', None)}

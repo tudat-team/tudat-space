@@ -33,23 +33,22 @@ where all thrust accelerations acting on a vehicle (which include a definition o
 the mass rate. Note that the acceleration models, created as discussed :ref:`here <acceleration_models_setup>`, are
 required as input, to link the thrust acceleration to the mass rate.
 
-    .. tabs::
 
-         .. tab:: Python
+.. tab-set::
+   :sync-group: coding-language
 
-          .. toggle-header::
-             :header: Required **Show/Hide**
+   .. tab-item:: Python
+      :sync: python
 
-                .. code-block:: python
+      .. dropdown:: Required
+        :color: muted
 
-                    from tudatpy.kernel.numerical_simulation import propagation_setup
+        .. code-block:: python
 
-          .. literalinclude:: /_src_snippets/simulation/propagation_setup/mass_models/from_thrust_mass_rate.py
-             :language: python
+            from tudatpy.kernel.numerical_simulation import propagation_setup
 
-         .. tab:: C++
-
-             :language: cpp
+      .. literalinclude:: /_src_snippets/simulation/propagation_setup/mass_models/from_thrust_mass_rate.py
+         :language: python
 
 For a full description of available functions, see associated pages of `mass-rate models <https://tudatpy.readthedocs.io/en/latest/mass_rate.html>`_ and `thrust models <https://tudatpy.readthedocs.io/en/latest/thrust.html>`_ in the API documentation. For mass rate models that are not internally associated with thrust (for whatever reason), the user is recommended to use the :func:`~tudatpy.numerical_simulation.propagation_setup.mass_rate.custom_mass_rate` function.
 
@@ -65,22 +64,18 @@ reached. Next to that, the propagator is asked to save the Keplerian state of th
 dependent variable. The time and rotational state will be printed on the terminal once every 24
 hours (simulation time).
 
-    .. tabs::
+.. tab-set::
+   :sync-group: coding-language
 
-         .. tab:: Python
+   .. tab-item:: Python
+    :sync: python
 
-          .. toggle-header:: 
-             :header: Required **Show/Hide**
+    .. dropdown:: Required
+      :color: muted
 
-                .. code-block:: python
+      .. code-block:: python
 
-                    from tudatpy.kernel.numerical_simulation import propagation_setup
+          from tudatpy.kernel.numerical_simulation import propagation_setup
 
-
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/full_mass_setup.py
-             :language: python
-
-         .. tab:: C++
-
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
-             :language: cpp
+    .. literalinclude:: /_src_snippets/simulation/environment_setup/full_mass_setup.py
+        :language: python

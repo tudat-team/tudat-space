@@ -54,115 +54,127 @@ through which the core simulation functionality can be accessed. Tudat and Tudat
 to get started with them, have a look at our
 :ref:`installation guide<getting_started_installation>`.
 
-.. panels::
-    :body: text-left
-    :header: text-center
-    :footer: text-center
-    :container: container-lg pb-3
 
+.. grid:: 1 1 3 3
+  :gutter: 2
 
-    ---
-    :column: col-lg-4 p-3
+  .. grid-item-card::
+    :text-align: center
 
     **Different dynamics types**
     ^^^
 
-    Numerical propagation of different state types (translational state, rotational
-    state, and mass) and their associated variational equations through built-in or user-defined acceleration and
-    torque models.
+    Numerical propagation of different state types (translational state, rotational state, and mass) and their associated variational equations through built-in or user-defined acceleration and torque models.
 
     +++
-    .. link-button:: _src_user_guide/state_propagation/propagation_setup
-            :type: ref
-            :text: Find out more
-            :classes: stretched-link btn-outline-primary
 
-    ---
-    :column: col-lg-4 p-3
+    .. button-ref:: propagation_setup
+       :expand:
+       :color: primary
+       :click-parent:
+       :outline:
+
+       Find out more
+
+  .. grid-item-card::
+    :text-align: center
 
     **Flexible modeling of simulated bodies**
     ^^^
 
-    Numerous built-in, extendable solar-system body models, together with user-friendly interfaces to create
-    and customize new bodies, such as vehicles.
-
+    Numerous built-in, extendable solar-system body models, together with user-friendly interfaces to create and customize new bodies, such as vehicles.
 
     +++
-    .. link-button:: _src_user_guide/state_propagation/environment_setup
-            :type: ref
-            :text: Find out more
-            :classes: stretched-link btn-outline-primary
 
-    ---
-    :column: col-lg-4 p-3
+    .. button-ref:: environment_setup
+       :expand:
+       :color: primary
+       :click-parent:
+       :outline:
+
+       Find out more
+
+  .. grid-item-card::
+    :text-align: center
 
     **State estimation capabilities**
     ^^^
 
-    A powerful framework where state propagation and observations can be combined to simulate the trajectory
-    determination process.
+    A powerful framework where state propagation and observations can be combined to simulate the trajectory determination process.
 
     +++
-    .. link-button:: _src_user_guide/state_estimation
-            :type: ref
-            :text: Find out more
-            :classes: stretched-link btn-outline-primary
 
-    ---
-    :column: col-lg-4 p-3
+    .. button-ref:: state_estimation
+       :expand:
+       :color: primary
+       :click-parent:
+       :outline:
+
+       Find out more
+
+  .. grid-item-card::
+    :text-align: center
 
     **Large choice of numerical integrators**
     ^^^
 
-    Various fixed and variable step-size built-in integrators, including Runge-Kutta 4, Runge-Kutta variable step-size
-    (various orders), Bulirsch-Stoer, and Adams-Bashfort-Moulton.
+    Various fixed and variable step-size built-in integrators, including Runge-Kutta 4, Runge-Kutta variable step-size (various orders), Bulirsch-Stoer, and Adams-Bashfort-Moulton.
 
     +++
-    .. link-button:: _src_user_guide/state_propagation/propagation_setup/integration_setup
-            :type: ref
-            :text: Find out more
-            :classes: stretched-link btn-outline-primary
 
-    ---
-    :column: col-lg-4 p-3
+    .. button-ref:: integrator_setup
+       :expand:
+       :color: primary
+       :click-parent:
+       :outline:
+
+       Find out more
+
+  .. grid-item-card::
+    :text-align: center
 
     **Preliminary mission design tools**
     ^^^
 
-    Several tools for preliminary mission design, including Lambert targeters, patched conic multiple-gravity
-    assists, and shape-based low-thrust models. Extended documentation
+    Several tools for preliminary mission design, including Lambert targeters, patched conic multiple-gravity assists, and shape-based low-thrust models. Extended documentation
 
     +++
-    .. link-button:: _src_user_guide/prelim_mission_design/mga_transfer
-            :type: ref
-            :text: Find out more
-            :classes: stretched-link btn-outline-primary
 
-    ---
-    :column: col-lg-4 p-3
+    .. button-ref:: transfer_trajectory
+       :expand:
+       :color: primary
+       :click-parent:
+       :outline:
+
+       Find out more
+
+  .. grid-item-card::
+    :text-align: center
 
     **Guidance models**
     ^^^
 
     Possibility to embed built-in or user-defined aerodynamic, thrust, and other guidance models in the simulation.
 
-
     +++
-    .. link-button:: _src_user_guide/state_propagation/environment_setup/custom_models
-            :type: ref
-            :text: Find out more
-            :classes: stretched-link btn-outline-primary
+
+    .. button-ref:: custom_models
+       :expand:
+       :color: primary
+       :click-parent:
+       :outline:
+
+       Find out more
 
 
 Quickstart
 ==========
 
-.. panels::
-    :body: text-left
-    :header: text-center
+.. grid:: 1 1 3 3
+  :gutter: 2
 
-    ---
-    :column: col-lg-4 p-3
+  .. grid-item-card::
+    :text-align: center
 
     **Installation**
     ^^^
@@ -171,13 +183,17 @@ Quickstart
 
     +++
 
-    .. link-button:: _src_getting_started/installation
-        :type: ref
-        :text: Read our guide
-        :classes: btn-outline-primary btn-block stretched-link
+    .. button-ref:: getting_started_installation
+       :expand:
+       :color: primary
+       :click-parent:
+       :outline:
 
-    ---
-    :column: col-lg-4 p-3
+       Read our guide
+
+
+  .. grid-item-card::
+    :text-align: center
 
     **Online examples**
     ^^^
@@ -186,24 +202,32 @@ Quickstart
 
     +++
 
-    .. link-button:: https://mybinder.org/v2/gh/tudat-team/tudatpy-examples/master
-        :text: Try it out
-        :classes: btn-outline-primary btn-block stretched-link
+    .. button-link:: <https://mybinder.org/v2/gh/tudat-team/tudatpy-examples/master>
+       :expand:
+       :color: primary
+       :click-parent:
+       :outline:
 
-    ---
-    :column: col-lg-4 p-3
+       Try it out
+
+
+  .. grid-item-card::
+    :text-align: center
 
     **Research output**
     ^^^
 
-    Find out some state-of-the-art examples of what you can do with tudat(py) by having a look at our list of publications
+    Find out some state-of-the-art examples of what you can do with tudat(py) by having a look at our list of publications.
 
     +++
 
-    .. link-button:: _src_about/research_output
-        :type: ref
-        :text: Have a look
-        :classes: btn-outline-primary btn-block stretched-link
+    .. button-ref:: research_output
+       :expand:
+       :color: primary
+       :click-parent:
+       :outline:
+
+       Have a look
 
 
 This website contains user guides and tutorials to use Tudat and it is organized as follows:
@@ -222,12 +246,11 @@ Additional resources
 
 Some resources related to Tudatpy are located elsewhere. See below!
 
-.. panels::
-    :body: text-left
-    :header: text-center
+.. grid:: 1 1 3 3
+  :gutter: 2
 
-    ---
-    :column: col-lg-4 p-3
+  .. grid-item-card::
+    :text-align: center
 
     **TudatPy API reference**
     ^^^
@@ -236,12 +259,16 @@ Some resources related to Tudatpy are located elsewhere. See below!
 
     +++
 
-    .. link-button:: https://tudatpy.readthedocs.io
-        :text: Go to the website
-        :classes: btn-outline-primary btn-block stretched-link
+    .. button-link:: https://py.api.tudat.space
+       :expand:
+       :color: primary
+       :click-parent:
+       :outline:
 
-    ---
-    :column: col-lg-4 p-3
+       Go to the website
+
+  .. grid-item-card::
+    :text-align: center
 
     **Developer Documentation**
     ^^^
@@ -250,12 +277,17 @@ Some resources related to Tudatpy are located elsewhere. See below!
 
     +++
 
-    .. link-button:: https://tudat-developer.readthedocs.io/en/latest/
-        :text: Go to the website
-        :classes: btn-outline-primary btn-block stretched-link
+    .. button-link:: https://tudat-developer.readthedocs.io/en/latest/
+       :expand:
+       :color: primary
+       :click-parent:
+       :outline:
 
-    ---
-    :column: col-lg-4 p-3
+       Go to the website
+
+
+  .. grid-item-card::
+    :text-align: center
 
     **Mathematical model definition**
     ^^^
@@ -264,13 +296,13 @@ Some resources related to Tudatpy are located elsewhere. See below!
 
     +++
 
-    .. link-button:: https://github.com/tudat-team/tudat-space/raw/master/Tudat_mathematical_model_definition.pdf
-        :text: Download the manual
-        :classes: btn-outline-primary btn-block stretched-link
+    .. button-link:: https://github.com/tudat-team/tudat-space/raw/master/Tudat_mathematical_model_definition.pdf
+       :expand:
+       :color: primary
+       :click-parent:
+       :outline:
 
-
-
-
+       Download the manual
 
 
 .. toctree::

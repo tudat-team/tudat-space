@@ -36,6 +36,12 @@ Constant angles
 
 In simple simulations, a user may want to define a constant :math:`\alpha`, :math:`\beta` and/or :math:`\sigma`. The code block below gives an example on how to do this (:math:`\alpha=40^{\circ}`, :math:`\beta=0^{\circ}` and :math:`\sigma=20^{\circ}`):
 
+.. tab-set::
+   :sync-group: coding-language
+
+   .. tab-item:: Python
+    :sync: python
+
     .. code-block:: python
 
         # Define constant angles
@@ -55,6 +61,12 @@ This defines settings for the rotation model, which can then be assigned the bod
 
 Alternatively, the angle of attack may be defined based on pitch trim, so that the value of :math:`\alpha` is found for which :math:`C_{m}=0`. This requires :math:`\alpha`-dependent aerodynamic moment coefficients to be defined). When doing so, the sideslip and bank angle are left free and are 0 by default. However, a user may specify these angles as follows"
 
+.. tab-set::
+   :sync-group: coding-language
+
+   .. tab-item:: Python
+    :sync: python
+    
     .. code-block:: python
 
         # Define constant angles
@@ -76,12 +88,14 @@ Time- and environment-dependent angles
 A more complicated algorithm to compute the aerodynamic angles may be defined using custom models. Below, a simple example (depending only on time) is provided for illustrative purposes. A discussion of the definition of more complex models (depending on state, environment, time, *etc.*) is describe on the dedicated :ref:`custom_models` page.
 
 
-    .. tabs::
+.. tab-set::
+   :sync-group: coding-language
 
-         .. tab:: Python
+   .. tab-item:: Python
+    :sync: python
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/custom_class_simple_aero_angles.py
-             :language: python
+    .. literalinclude:: /_src_snippets/simulation/environment_setup/custom_class_simple_aero_angles.py
+        :language: python
 
 The above example will apply the model :math:`\alpha=\dot{\alpha}(t-t_{0})` (and similar for :math:`\sigma`), so that the angles vary linearly over time.
 

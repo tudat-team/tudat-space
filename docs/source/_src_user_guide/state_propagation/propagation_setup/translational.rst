@@ -49,26 +49,21 @@ once the ``simulation_end_epoch`` termination condition is reached. The state wi
 through the Encke formulation. Next to that, the propagator is asked to save the total acceleration.
 The time and state will be printed on the terminal once every 24 hours. 
 
-    .. tabs::
+.. tab-set::
+   :sync-group: coding-language
 
-         .. tab:: Python
+   .. tab-item:: Python
+     :sync: python
 
-          .. toggle-header::
-             :header: Required **Show/Hide**
+     .. dropdown:: Required
+        :color: muted
 
-                .. code-block:: python
+        .. code-block:: python
 
-                    from tudatpy.kernel.numerical_simulation import propagation_setup
-                    from tudatpy.kernel.astro import element_conversion
-                    import numpy as np
+           from tudatpy.kernel.numerical_simulation import propagation_setup
+           from tudatpy.kernel.astro import element_conversion
+           import numpy as np
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/full_translational_setup.py
-             :language: python
-
-         .. tab:: C++
-
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
-             :language: cpp
-
-
+     .. literalinclude:: /_src_snippets/simulation/environment_setup/full_translational_setup.py
+        :language: python
 

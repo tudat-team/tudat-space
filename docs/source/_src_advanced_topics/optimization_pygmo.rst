@@ -309,33 +309,37 @@ length n is equal to the number of objectives. The ``batch_fitness()`` method is
 ``fitness()`` method, all it has to do is convert the input array into a list of lists, then create a pool of worker
 processes that can be used.
 
-.. tabs::
+.. use manually synchronized tabs instead of tabbed code to allow dropdowns
+.. tab-set::
+   :sync-group: coding-language
 
-     .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-      .. toggle-header:: 
-         :header: Required **Show/Hide**
+      .. dropdown:: Required
+         :color: muted
 
-            .. code-block:: python
+         .. code-block:: python
 
-                from tudatpy.kernel.trajectory_design import shape_based_thrust, transfer_trajectory
-                import numpy as np
-                from typing import List, Tuple
-                import pygmo as pg
-                import matplotlib.pyplot as plt
-                import multiprocessing as mp
+            from tudatpy.kernel.trajectory_design import shape_based_thrust, transfer_trajectory
+            import numpy as np
+            from typing import List, Tuple
+            import pygmo as pg
+            import matplotlib.pyplot as plt
+            import multiprocessing as mp
 
-                # Tudatpy imports
-                import tudatpy
-                from tudatpy.util import result2array
-                from tudatpy.kernel import constants
-                from tudatpy.kernel.numerical_simulation import environment_setup
+            # Tudatpy imports
+            import tudatpy
+            from tudatpy.util import result2array
+            from tudatpy.kernel import constants
+            from tudatpy.kernel.numerical_simulation import environment_setup
 
       .. literalinclude:: /_src_snippets/simulation/parallelization/pygmo_batch_fitness.py
          :language: python
 
-     .. tab:: C++
-
+   .. tab-item:: C++
+      :sync: cpp
+         
       .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
          :language: cpp
 
@@ -346,14 +350,17 @@ method exists in the UDP, this will automatically be used instead of the ``pygmo
 ``b`` keyword argument for ``pygmo.island`` and ``pygmo.population`` to add a UDBFE or an instance of ``pygmo.bfe``, but
 this is not considered here.
 
-.. tabs::
+.. use manually synchronized tabs instead of tabbed code to allow dropdowns
+.. tab-set::
+   :sync-group: coding-language
 
-     .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-      .. toggle-header:: 
-         :header: Required **Show/Hide**
+      .. dropdown:: Required
+         :color: muted
 
-            .. code-block:: python
+         .. code-block:: python
 
                 from tudatpy.kernel.trajectory_design import shape_based_thrust, transfer_trajectory
                 import numpy as np
@@ -371,8 +378,9 @@ this is not considered here.
       .. literalinclude:: /_src_snippets/simulation/parallelization/pg_bfe_evolve.py
          :language: python
 
-     .. tab:: C++
-
+   .. tab-item:: C++
+      :sync: cpp
+         
       .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
          :language: cpp
 
@@ -434,35 +442,36 @@ created that initializes a ``number_of_islands`` number of ``pygmo.island`` obje
 each island. The ``wait_check()`` method makes every island wait until all islands are done executing, which is needed
 for any topology to exchange individuals.
 
+.. use manually synchronized tabs instead of tabbed code to allow dropdowns
+.. tab-set::
+   :sync-group: coding-language
 
-.. tabs::
+   .. tab-item:: Python
+      :sync: python
 
-     .. tab:: Python
+      .. dropdown:: Required
+         :color: muted
 
-      .. toggle-header:: 
-         :header: Required **Show/Hide**
+         .. code-block:: python
 
-            .. code-block:: python
+            from tudatpy.kernel.trajectory_design import shape_based_thrust, transfer_trajectory
+            import numpy as np
+            from typing import List, Tuple
+            import pygmo as pg
+            import matplotlib.pyplot as plt
+            import multiprocessing as mp
 
-                from tudatpy.kernel.trajectory_design import shape_based_thrust, transfer_trajectory
-                import numpy as np
-                from typing import List, Tuple
-                import pygmo as pg
-                import matplotlib.pyplot as plt
-                import multiprocessing as mp
-
-                # Tudatpy imports
-                import tudatpy
-                from tudatpy.util import result2array
-                from tudatpy.kernel import constants
-                from tudatpy.kernel.numerical_simulation import environment_setup
+            # Tudatpy imports
+            import tudatpy
+            from tudatpy.util import result2array
+            from tudatpy.kernel import constants
+            from tudatpy.kernel.numerical_simulation import environment_setup
 
       .. literalinclude:: /_src_snippets/simulation/parallelization/pg_archi.py
          :language: python
 
-     .. tab:: C++
-
+   .. tab-item:: C++
+      :sync: cpp
+         
       .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
          :language: cpp
-
-
