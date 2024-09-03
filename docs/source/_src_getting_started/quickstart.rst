@@ -37,6 +37,7 @@ With the ``conda`` environment now installed, you can activate it to work in it 
 
 .. seealso:: 
    For more in-depth instructions on how to install TudatPy, see the :ref:`installation guide <getting_started_installation>`.
+   For common issues during the installation and how to solve them, have a look at the :ref:`FAQ <faq>`.
    If you are new to using ``conda`` or Python, have a look at :ref:`getting_started_with_conda` and :ref:`getting_started_with_python`.
 
 .. tip:: 
