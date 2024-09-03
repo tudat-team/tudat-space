@@ -23,7 +23,7 @@ The TU Delft Astrodynamics Toolbox (Tudat) is a powerful set of libraries that s
 Installation
 ************
 
-TudatPy is distributed as a ``conda`` package. To install it, download this ``environment.yaml`` (:download:`yaml <_static/environment.yaml>`). Then, in your terminal navigate to the directory containing this file and execute the following command:
+TudatPy is distributed as a ``conda`` package. To install it, download this ``environment.yaml`` file (:download:`yaml <_static/environment.yaml>`). Then, in your terminal navigate to the directory containing this file and execute the following command:
 
 .. code:: bash
 
@@ -252,10 +252,11 @@ Lastly, we define the termination conditions for the propagation, which in this 
 .. code-block:: python
 
    # Create numerical integrator settings
-   fixed_step_size = 10.0
-   integrator_settings = propagation_setup.integrator.runge_kutta_4(fixed_step_size)
+   integrator_settings = propagation_setup.integrator.runge_kutta_fixed_step(
+      time_step=10.0, coefficient_set=propagation_setup.integrator.rk_4
+   )
 
-   propagator_type = propagation_setup.propagator.
+   propagator_type = propagation_setup.propagator.cowell
 
    # Create termination settings
    termination_settings = propagation_setup.propagator.time_termination(simulation_end_epoch)
@@ -412,12 +413,16 @@ We use the epochs to extract a subset of 3 hours of data, for which we plot the 
 
    fig, ax = plt.subplots(tight_layout=True)
 
-   # Extract 3 hours data subset
-   time_hours = dependent_variables_array[:, 0] / 3600
    latitude = dependent_variables_array[:, 1]
    longitude = dependent_variables_array[:, 2]
-   hours = 3
-   subset = int(len(time_hours) / 24 * hours)
+
+   # Extract 3 hours data subset
+   relative_time_hours = (dependent_variables_array[:, 0] - simulation_start_epoch) / 3600
+   hours_to_extract = 3
+   propagation_span_hours = (simulation_end_epoch - simulation_start_epoch) / 3600
+
+   subset = int(len(relative_time_hours) / propagation_span_hours * hours_to_extract)
+
    latitude = np.rad2deg(latitude[:subset])
    longitude = np.rad2deg(longitude[:subset])
 

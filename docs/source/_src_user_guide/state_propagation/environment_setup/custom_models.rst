@@ -46,12 +46,12 @@ In each case, the user is required to define their own function, with a predefin
 
 The latter choice permits complex guidance algorithms to be implemented, in which (for instance) the algorithm for the control surface deflection, thrust magnitude and body-fixed thrust direction (thrust vector control) are calculated in a coupled manner.
 
-For most environment models, the custom model can be fully defined by a standalone function , and can be fully defined by a free function (which may of course call other functions from tudat, other packages or your own code. A custom function will, in numerous cases, have to depend on properties of bodies (states, altitude, density, etc.). How to access such properties of the environment *during* the propagation is described on the page on :ref:`environment_during_propagation`.
+For most environment models, the custom model can be fully defined by a standalone function , and can be fully defined by a free function (which may of course call other functions from tudat, other packages or your own code). A custom function will, in numerous cases, have to depend on properties of bodies (states, altitude, density, etc.). How to access such properties of the environment *during* the propagation is described on the page on :ref:`environment_during_propagation`.
 
 Custom model, free function
 ===========================
 
-Here, we show an example of an ephemeris model that will be both faster, and less accurate, than the models implemented in Tudat. This may be advantageous for preliminary simulation. The model is very simple: a perfectly circular orbit in the :math:`xy-`plane of the ``ECLIPJ2000`` frame.
+Here, we show an example of an ephemeris model that will be both faster, and less accurate, than the models implemented in Tudat. This may be advantageous for preliminary simulation. The model is very simple: a perfectly circular orbit in the :math:`xy-` plane of the ``ECLIPJ2000`` frame.
 
     .. tabs::
 
@@ -61,7 +61,7 @@ Here, we show an example of an ephemeris model that will be both faster, and les
              :language: python
 
  
-In the above example, the user-define function ``neptune_state_function`` is provided when creating the custom ephemeris settings. The only requirement on this custom function is that it takes a single float as argument (representing time since J2000), and returns a 6-dimensional vector (representing the Cartesian state in the frame specified), as can be seen in the :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.custom` API entry.
+In the above example, the user-defined function ``neptune_state_function`` is provided when creating the custom ephemeris settings. The only requirement on this custom function is that it takes a single float as argument (representing time since J2000), and returns a 6-dimensional vector (representing the Cartesian state in the frame specified), as can be seen in the :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.custom_ephemeris` API entry.
 
 .. _single_custom_models:
 
