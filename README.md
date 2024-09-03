@@ -15,23 +15,36 @@ The `tudat-space` repository contains the `docs` directory, which hosts all info
 
 ## How to build the `tudat-space` website locally 
 
+1. Clone the repository and enter directory
+
+```bash
+git clone https://github.com/tudat-team/tudat-space
+cd tudat-space
+```
+
+2. Clone the `tudatpy-examples` submodule
+
+```bash
+git submodule update --init --recursive
+```
+
 The Sphinx build process is documented in the [tudat-developer-docs](https://tudat-developer.readthedocs.io/en/latest/primer/docs/sphinx.html).
 
 In short, the `tudat-space` website can be built as follows:
 
-1. Install the `tudat-docs` conda environment:
+3. Install the `tudat-docs` conda environment:
 
 ```bash
 conda env create -f docs/environment.yaml
 ```
 
-2. Activate the `tudat-docs` environment:
+4. Activate the `tudat-docs` environment:
 
 ```bash
 conda activate tudat-docs
 ```
 
-3. Build the website:
+5. Build the website:
 
 The local build can be triggered from the command-line or using an IDE. For IDE-specific instructions, see the [tudat-developer-docs](https://tudat-developer.readthedocs.io/en/latest/primer/docs/sphinx.html#compiling-documentation-in-pycharm).
 
@@ -51,7 +64,7 @@ sphinx-build -b html docs/source docs/build -E
 
 For additional troubleshooting see the [Troubleshooting section](https://tudat-developer.readthedocs.io/en/latest/primer/docs/sphinx.html#troubleshooting) in the `tudat-developer-docs`.
 
-4. View the local build:
+6. View the local build:
 
 You can check your local build by opening the newly created `docs/build/index.html` with your preferred browser and navigating as desired.
 
