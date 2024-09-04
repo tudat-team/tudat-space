@@ -69,7 +69,7 @@ There are several example applications disseminated in various forms.
    :name: example-categories
    :glob:
 
-   _src_examples/notebooks/propagation.rst
-   _src_examples/notebooks/estimation.rst
-   _src_examples/notebooks/mission_design.rst
-   _src_examples/notebooks/pygmo.rst
+   _src_examples/propagation.rst
+   _src_examples/estimation.rst
+   _src_examples/mission_design.rst
+   _src_examples/pygmo.rst
