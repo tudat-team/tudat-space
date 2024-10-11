@@ -13,8 +13,8 @@ The following examples showcase the basic functionality of the Tudat numerical p
 
 
   ./tudatpy-examples/propagation/keplerian_satellite_orbit.ipynb
-  ./tudatpy-examples/propagation/linear_sensitivity_analysis.ipynb
   ./tudatpy-examples/propagation/perturbed_satellite_orbit.ipynb
+  ./tudatpy-examples/propagation/linear_sensitivity_analysis.ipynb
   ./tudatpy-examples/propagation/solar_system_propagation.ipynb
   ./tudatpy-examples/propagation/thrust_between_Earth_Moon.ipynb
 
@@ -27,6 +27,7 @@ Note that an additional related example (in particular on the setup of a custom 
 .. nbgallery::
 
   ./tudatpy-examples/propagation/reentry_trajectory.ipynb
+  ./tudatpy-examples/propagation/two_stage_rocket_ascent.ipynb
   ./tudatpy-examples/propagation/separation_satellites_diff_drag.ipynb
   ./tudatpy-examples/propagation/coupled_translational_rotational_dynamics.ipynb
   ./tudatpy-examples/propagation/impact_manifolds_lpo_cr3bp.ipynb

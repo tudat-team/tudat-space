@@ -12,6 +12,7 @@ In the following examples, observations are simulated and then used as input for
 .. nbgallery::
 
   ./tudatpy-examples/estimation/covariance_estimated_parameters.ipynb
+  ./tudatpy-examples/estimation/covariance_propagation_example.ipynb
   ./tudatpy-examples/estimation/full_estimation_example.ipynb
   ./tudatpy-examples/estimation/estimation_dynamical_models.ipynb
   
