@@ -12,7 +12,7 @@ The following examples compute the performance (e.g. Delta V, time of flight, et
 
 .. nbgallery::
 
-  ./tudatpy-examples/propagation/mga_trajectories.ipynb
+  ./tudatpy-examples/mission_design/mga_trajectories.ipynb
   ./tudatpy-examples/mission_design/earth_mars_transfer_window.ipynb
   
 .. _trajectory_optimization_examples:
