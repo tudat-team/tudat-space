@@ -24,7 +24,7 @@ models for a broad range of solar system bodies.
 
 .. seealso::
 
-   For more information on how to create bodies in Tudat and modify their settings, see :ref:`creation_celestial_body_settings`. For a full example of how to setup a simulation environment with default settings, see the `perturbed satellite orbit example <../../../_src_getting_started/_src_examples/notebooks/propagation/perturbed_satellite_orbit.html>`_.
+   For more information on how to create bodies in Tudat and modify their settings, see :ref:`creation_celestial_body_settings`. For a full example of how to setup a simulation environment with default settings, see the :ref:`perturbed satellite orbit example </_src_getting_started/_src_examples/tudatpy-examples/propagation/perturbed_satellite_orbit.ipynb>`.
 
 Many of these settings are derived from so-called SPICE kernels. `SPICE <https://naif.jpl.nasa.gov/naif/toolkit.html>`_
 is a toolkit developed by NASA's Navigation and Ancillary Information Facility (NAIF) and is used throughout the space

@@ -46,7 +46,7 @@ With the ``conda`` environment now installed, you can activate it to work in it 
 
 Propagating your first orbit
 ****************************
-The following example is based on the `Keplerian satellite orbit example <_src_examples/notebooks/propagation/keplerian_satellite_orbit.html>`_. The goal is to numerically propagate a (quasi-)massless body (spacecraft) under the attraction of a central point-mass. Under this assumption, only the translational motion of this body is propagated, which follows a Keplerian orbit.
+The following example is based on the :ref:`Keplerian satellite orbit example </_src_getting_started/_src_examples/tudatpy-examples/propagation/keplerian_satellite_orbit.ipynb>`. The goal is to numerically propagate a (quasi-)massless body (spacecraft) under the attraction of a central point-mass. Under this assumption, only the translational motion of this body is propagated, which follows a Keplerian orbit.
 
 
 Setting up the simulation
@@ -454,11 +454,11 @@ You have now successfully propagated a satellite in a Keplerian orbit around the
 
 .. seealso:: 
    For more information on how to set up more complex simulations, have a look at the :ref:`examples <getting_started_examples>`.
-   They include examples on more complex propagations, such as `including additional perturbation models <_src_examples/notebooks/propagation/perturbed_satellite_orbit.html>`_ or `the effect of a thruster <_src_examples/notebooks/propagation/thrust_between_Earth_Moon.html>`_.
+   They include examples on more complex propagations, such as :ref:`including additional perturbation models </_src_getting_started/_src_examples/tudatpy-examples/propagation/perturbed_satellite_orbit.ipynb>` or :ref:`the effect of a thruster </_src_getting_started/_src_examples/tudatpy-examples/propagation/thrust_between_Earth_Moon.ipynb>`.
 
-   If you are interested in using TudatPy for state estimation, have a look at the example of using TudatPy for `parameter estimation of Delfi-C3 <_src_examples/notebooks/estimation/full_estimation_example.html>`_.
+   If you are interested in using TudatPy for state estimation, have a look at the example of using TudatPy for :ref:`parameter estimation of Delfi-C3 </_src_getting_started/_src_examples/tudatpy-examples/estimation/full_estimation_example.ipynb>`.
 
-   Last but not least, if you would like to find the optimal Earth-Mars launch window, you might be interested in using TudatPy to `create Porkchop plots <_src_examples/notebooks/mission_design/earth_mars_transfer_window.html>`_.
+   Last but not least, if you would like to find the optimal Earth-Mars launch window, you might be interested in using TudatPy to :ref:`create Porkchop plots </_src_getting_started/_src_examples/tudatpy-examples/mission_design/earth_mars_transfer_window.ipynb>`.
 
 Navigating the Tudat(Py) ecosystem
 **********************************
