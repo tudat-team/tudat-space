@@ -57,6 +57,15 @@ Link to attribute:
 
     :attr:`~tudatpy.numerical_simulation.propagation_setup.propagator.TranslationalStatePropagatorSettings.acceleration_settings`
 
+Link to property:
+:attr:`~tudatpy.numerical_simulation.propagation_setup.propagator.MultiTypePropagatorSettings.propagator_settings_per_type`
+
+.. code:: rst
+
+    :attr:`~tudatpy.numerical_simulation.propagation_setup.propagator.MultiTypePropagatorSettings.propagator_settings_per_type`
+
+Not sure what the difference between attributes and properties is? Maybe related to how the class is exposed?
+
 Link to method:
 :meth:`~tudatpy.numerical_simulation.propagation_setup.propagator.TranslationalStatePropagatorSettings.get_propagated_state_size()`
 
