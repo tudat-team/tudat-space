@@ -219,3 +219,5 @@ texinfo_documents = [
 # test / view content of inventory file at url via $ python -msphinx.ext.intersphinx <url>
 intersphinx_mapping = {'tudatpy': ('https://py.api.tudat.space/en/latest/', None),
                        'python': ('https://docs.python.org/', None)}
+
+intersphinx_disabled_reftypes = []
