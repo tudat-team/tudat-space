@@ -7,8 +7,7 @@ Multiple Gravity Assists Transfer
 In this section, the preliminary design of multiple-leg interplanetary transfer trajectories is discussed. This module
 provides the functionalities for creating transfer trajectories consisting of multiple transfer legs or various types
 with powered and unpowered gravity assists. This allows high-thrust or low-thrust transfer trajectories with multiple
-flybys to be designed, as well as a hybrid of low- and high-thrust. For per-function details see the `API documentation
-<https://py.api.tudat.space/en/latest/transfer_trajectory.html>`_. 
+flybys to be designed, as well as a hybrid of low- and high-thrust. For per-function details see the :doc:`API documentation <transfer_trajectory>`. 
 
 A multiple gravity-assist transfer (MGA) is constituted by a series of nodes and legs. The nodes correspond to the
 departure, gravity assist, and arrival planets (bodies), and the legs correspond to the trajectories between the nodes.

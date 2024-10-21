@@ -4,30 +4,30 @@
 Tudatpy Submodules
 ==================
 
-Tudatpy has its functionality divided into a number of submodules. A brief description of each submodule, as well as a detailed listing of all functions/class in each submodule, can be found on our `API documentation <https://tudatpy.readthedocs.io>`_ website. On this page, we give a brief top-level overview of which type of functionality is in which (group of) submodules, and why.
+Tudatpy has its functionality divided into a number of submodules. A brief description of each submodule, as well as a detailed listing of all functions/class in each submodule, can be found on our :doc:`index` website. On this page, we give a brief top-level overview of which type of functionality is in which (group of) submodules, and why.
 
 Top-level submodules
 ====================
 
 The top-level submodules of tudatpy are:
 
-* `tudatpy.numerical_simulation <https://py.api.tudat.space/en/latest/astro.html>`_ This submodule contains the interfaces for the primary application of Tudatpy: numerical state propagation and estimation. The functionality in this submodule consists of a large number of interconnected elements that work together as a whole. The usability of separate functions/classes in this submodule *outside* of the Tudatpy framework is very limited, and this functionality is typically only used within a Tudatpy numerical simulation. Its further subdivision into submodules is discussed in more detail below.
-* `tudatpy.astro <https://py.api.tudat.space/en/latest/astro.html>`_ This submodule contains various (semi-)standalone functions for astrodynamics applications, which can be used very well outside of a Tudat application/propagation. Submodules contain lists of frame conversions, element conversion, elementary orbit calculations, *etc.*.
-* `tudatpy.trajectory_design <https://py.api.tudat.space/en/latest/trajectory_design.html>`_ This submodule contains functionality for the preliminary design of a full (transfer) orbit, using for instance a Multiple Gravity Assist (MGA) or a low-thrust system. It relies on functionality in the ``astro`` submodule. It is largely independent of the ``numerical_simulation`` submodule, but does contain interface functions to allow the preliminary design to be used as an initial guess for a full numerical propagation.
-* `tudatpy.math <https://py.api.tudat.space/en/latest/math.html>`_  This submodule contains various functions and classes for purely mathematical operations, such as numerical interpolation, *etc.*.
-* `tudatpy.interface <https://py.api.tudat.space/en/latest/interface.html>`_ This submodule contains functionality to interface with various external packages which Tudat uses, such as `SPICE <https://naif.jpl.nasa.gov/naif/toolkit.html>`_
-* `tudatpy.plotting <https://py.api.tudat.space/en/latest/plotting.html>`_ This submodule contains various pieces of functionality to support the easy plotting of results generated with Tudatpy. Unlike most of the main Tudatpy submodules (which are written in C++, and exposed to Python), this submodule is written in Python
-* `tudatpy.util <https://py.api.tudat.space/en/latest/util.html>`_ This submodule contains various small pieces of functionality to support the easy post-processing of results generated with Tudatpy. Unlike most of the main Tudatpy submodules (which are written in C++, and exposed to Python), this submodule is written in Python
-* `tudatpy.io <https://py.api.tudat.space/en/latest/io.html>`_ This submodule contains various pieces of functionality for file input-output in Tudatpy. Unlike most of the main Tudatpy submodules (which are written in C++, and exposed to Python), this submodule is written partially in Python
+* :doc:`tudatpy.numerical_simulation <numerical_simulation>`: This submodule contains the interfaces for the primary application of Tudatpy: numerical state propagation and estimation. The functionality in this submodule consists of a large number of interconnected elements that work together as a whole. The usability of separate functions/classes in this submodule *outside* of the Tudatpy framework is very limited, and this functionality is typically only used within a Tudatpy numerical simulation. Its further subdivision into submodules is discussed in more detail below.
+* :doc:`tudatpy.astro <astro>`: This submodule contains various (semi-)standalone functions for astrodynamics applications, which can be used very well outside of a Tudat application/propagation. Submodules contain lists of frame conversions, element conversion, elementary orbit calculations, *etc.*.
+* :doc:`tudatpy.trajectory_design <trajectory_design>`: This submodule contains functionality for the preliminary design of a full (transfer) orbit, using for instance a Multiple Gravity Assist (MGA) or a low-thrust system. It relies on functionality in the ``astro`` submodule. It is largely independent of the ``numerical_simulation`` submodule, but does contain interface functions to allow the preliminary design to be used as an initial guess for a full numerical propagation.
+* :doc:`tudatpy.math <math>`:  This submodule contains various functions and classes for purely mathematical operations, such as numerical interpolation, *etc.*.
+* :doc:`tudatpy.interface <interface>`: This submodule contains functionality to interface with various external packages which Tudat uses, such as `SPICE <https://naif.jpl.nasa.gov/naif/toolkit.html>`_
+* :doc:`tudatpy.plotting <plotting>`: This submodule contains various pieces of functionality to support the easy plotting of results generated with Tudatpy. Unlike most of the main Tudatpy submodules (which are written in C++, and exposed to Python), this submodule is written in Python
+* :doc:`tudatpy.util <util>`: This submodule contains various small pieces of functionality to support the easy post-processing of results generated with Tudatpy. Unlike most of the main Tudatpy submodules (which are written in C++, and exposed to Python), this submodule is written in Python
+* :doc:`tudatpy.io <io>`: This submodule contains various pieces of functionality for file input-output in Tudatpy. Unlike most of the main Tudatpy submodules (which are written in C++, and exposed to Python), this submodule is written partially in Python
 
 The numerical_simulation submodules
 ===================================
 
 This submodule contains the bulk of the functionality in Tudat, and is subdivided into six submodules, two for functionality related to the environment, propagation and estimation:
 
-* `tudatpy.numerical_simulation.environment_setup <https://py.api.tudat.space/en/latest/environment_setup.html>`_/`tudatpy.numerical_simulation.environment <https://py.api.tudat.space/en/latest/environment.html>`_ Functionality related to the physical environment (properties of natural and celestial bodies)
-* `tudatpy.numerical_simulation.propagation_setup <https://py.api.tudat.space/en/latest/propagation_setup.html>`_/`tudatpy.numerical_simulation.propagation <https://py.api.tudat.space/en/latest/propagation.html>`_ Functionality related to numerical propagation of states (state types, acceleration models, output variables, *etc.*)
-* `tudatpy.numerical_simulation.estimation_setup <https://py.api.tudat.space/en/latest/estimation_setup.html>`_/`tudatpy.numerical_simulation.estimation <https://py.api.tudat.space/en/latest/estimation.html>`_ Functionality related to state estimation (estimated parameters, observation models, *etc.*)
+* :doc:`tudatpy.numerical_simulation.environment_setup <environment_setup>`/ :doc:`tudatpy.numerical_simulation.environment <environment>`: Functionality related to the physical environment (properties of natural and celestial bodies)
+* :doc:`tudatpy.numerical_simulation.propagation_setup <propagation_setup>`/ :doc:`tudatpy.numerical_simulation.propagation <propagation>`: Functionality related to numerical propagation of states (state types, acceleration models, output variables, *etc.*)
+* :doc:`tudatpy.numerical_simulation.estimation_setup <estimation_setup>`/ :doc:`tudatpy.numerical_simulation.estimation <estimation>`: Functionality related to state estimation (estimated parameters, observation models, *etc.*)
 
 The distinction between the ``foo`` and ``foo_setup`` libraries is the following:
 

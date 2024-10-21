@@ -25,4 +25,4 @@ Each dependent variable is created via a dedicated factory function. See the exa
 
 this list is then added to one of the propagator setting functions listed above.
 
-You can find a full list of dependent variables that can be saved `in our API documentation <https://tudatpy.readthedocs.io/en/latest/dependent_variable.html#functions>`_. Note that **all** dependent variables are provided in SI units (meters, radians, kilograms, seconds since J2000).
+You can find a full list of dependent variables that can be saved :doc:`in our API documentation <dependent_variable>`. Note that **all** dependent variables are provided in SI units (meters, radians, kilograms, seconds since J2000).

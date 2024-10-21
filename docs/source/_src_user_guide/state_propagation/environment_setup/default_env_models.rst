@@ -93,7 +93,7 @@ Gravity field
 
 .. seealso::
    Temporal variations of the gravity field are zero by default, but can be included for high-accuracy
-   applications. See `API reference <https://py.api.tudat.space/en/latest/gravity_field_variation.html#functions>`_
+   applications. See the :doc:`API reference on gravity field variation <gravity_field_variation>`.
 
 Atmosphere
 -----------
@@ -117,7 +117,7 @@ SPICE in Tudat
 The ``cspice`` toolkit (version of SPICE written in the C language) is included in the conda environment when installing
 Tudat.
 The SPICE toolkit itself has extensive `lessons <https://naif.jpl.nasa.gov/naif/lessons.html>`_, `tutorials <https://naif.jpl.nasa.gov/naif/tutorials.html>`_ and  `detailed documentation <https://naif.jpl.nasa.gov/naif/documentation.html>`_.
-Tudat contains a number of functions to directly interact with SPICE, listed `here <https://py.api.tudat.space/en/latest/spice.html>`_.
+Tudat contains a number of functions to directly interact with SPICE, listed :doc:`here <spice>`.
 
 SPICE relies on a set of user-supplied input files (kernels) to perform its calculations. A number of these kernels are installed automatically with Tudat, and loaded when calling the :func:`~tudatpy.interface.spice.load_standard_kernels` function (see this API docs entry for list of kernels).
 To extend the standard kernels, a user can download additional kernels from other sources such as `NAIF directly <https://naif.jpl.nasa.gov/naif/data_generic.html>`_ or the `JPL Horizons System <https://ssd.jpl.nasa.gov/horizons/app.html#/>`_ for small-body objects, and then load them using the :func:`~tudatpy.interface.spice.load_kernel` function.

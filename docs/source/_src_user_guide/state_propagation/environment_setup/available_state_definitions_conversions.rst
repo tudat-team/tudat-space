@@ -377,7 +377,7 @@ As a result, the inclination (for example) will be measured w.r.t. the x-y plane
 
 In the definition of the state elements, you will notice that element 5 is the *true* anomaly, not the *eccentric* or
 *mean* anomaly. Tudat also contains functions to convert to these alternative anomalies. The various available functions
-are found in our `API docs <https://py.api.tudat.space/en/latest/element_conversion.html>`_.
+are found in our :doc:`API docs <element_conversion>`.
 
 As an example, converting from true to eccentric anomaly is done as follows:
 

@@ -7,7 +7,7 @@ Quickstart: Tudat(Py) in 10 minutes
 This pages aims to get you started with Tudat(Py) and introduce you to some of the key concepts in Tudat. By the end of it, you will be able to use Tudat(Py) for simple tasks such as propagating a spacecraft orbit, as well as expose you to the ecosystem of Tudat(Py) so you can start building more complex simulations. References to the relevant sections of the documentation are provided for more in-depth information.
 
 .. tip:: 
-   For a comprehensive list of available functions and classes in TudatPy, have a look at the `TudatPy API documentation <https://py.api.tudat.space/en/latest/>`_.
+   For a comprehensive list of available functions and classes in TudatPy, have a look at the :doc:`index`.
    This guide links to the API documentation in numerous places, indicated by a white box with black text, like the following: :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies`.
 
 
@@ -200,14 +200,14 @@ Similar to before, we use the factory function :func:`~tudatpy.numerical_simulat
 .. seealso:: 
    In this case, we only considered the influence of a gravitational point-mass attraction.
    To setup a more complex simulation, have a look at :ref:`acceleration_models_setup`.
-   To see the full list of available acceleration models, see :ref:`available_acceleration_models` or the `API documentation on accelerations <https://py.api.tudat.space/en/latest/acceleration.html>`_.
+   To see the full list of available acceleration models, see :ref:`available_acceleration_models` or the :doc:`API documentation on accelerations <acceleration>`.
 
 Define the initial state
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 We would like to simulate our satellite in an elliptical orbit around the Earth.
 For the numerical propagation of the translational motion, we need to define the initial state of our satellite in Cartesian elements.
-Conveniently, TudatPy has an `element_conversion <https://py.api.tudat.space/en/latest/element_conversion.html>`_ module, which provides a function to convert Keplerian elements to Cartesian elements, :func:`~tudatpy.astro.element_conversion.keplerian_to_cartesian_elementwise`.
+Conveniently, TudatPy has an :doc:`element_conversion` module, which provides a function to convert Keplerian elements to Cartesian elements, :func:`~tudatpy.astro.element_conversion.keplerian_to_cartesian_elementwise`.
 In order to convert from Keplerian to Cartesian elements, we also need to know the gravitational parameter of the Earth, which we can simply extract from the environment we created previously:
 
 .. code-block:: python
@@ -264,7 +264,7 @@ Lastly, we define the termination conditions for the propagation, which in this 
 .. note:: 
    Depending on your performance and accuracy requirements, you might want to consider other propagator and integrator combinations.
    Tudat(Py) offers a variety of other integrators, such as higher-order multi-stage and extrapolation integrators, as well as different propagators, such as the Encke, Keplerian, Modified-Equinoctial, and Unified State Model propagators.
-   For more information, have a look at :ref:`integrator_setup` and the `API documentation on propagators <https://py.api.tudat.space/en/latest/propagator.html>`_.
+   For more information, have a look at :ref:`integrator_setup` and the :doc:`API documentation on propagators <propagator>`.
 
 We are not only interested in the final state of our satellite, but also the evolution of its ground track over time.
 To retrieve this information, Tudat(Py) uses so-called dependent variables, which store information about the conditions of the system during each step of the integration, in addition to the propagated state itself.
@@ -279,7 +279,7 @@ We create a list of dependent variables to save, in this case the longitude and 
    ]
 
 .. seealso:: 
-   For a list of available dependent variables, have a look at the `API documentation on dependent variables <https://py.api.tudat.space/en/latest/dependent_variable.html>`_.
+   For a list of available dependent variables, have a look at the :doc:`API documentation on dependent variables <dependent_variable>`.
 
 
 Create the propagator settings

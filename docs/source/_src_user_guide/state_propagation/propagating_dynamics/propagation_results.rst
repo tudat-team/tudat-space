@@ -107,7 +107,7 @@ When performing a multi- or hybrid-arc propagation, the results are stored in a
 The main contents of these objects are a set of :class:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults`
 objects, which contain the results of the constituent single arcs, as described above.
 In addition, the multi- and hybrid arc results objects contain a number of pieces of information that are specific to the
-full propagation, as opposed to its separate arcs. The reader is referred to the `API documentation <https://py.api.tudat.space/en/latest/>`_ for more details. A small example is shown below:
+full propagation, as opposed to its separate arcs. The reader is referred to the :doc:`API documentation <index>` for more details. A small example is shown below:
 
 .. code-block:: python
 
