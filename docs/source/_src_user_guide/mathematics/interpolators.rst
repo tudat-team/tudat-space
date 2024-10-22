@@ -13,7 +13,7 @@ take a set of combinations :math:`[t_{i},\mathbf{x}_{i}]` and turn this into a c
 
 .. seealso::
    The full API documentation for interpolators
-   can be found here `here <https://tudatpy.readthedocs.io/en/latest/interpolators.html>`_.
+   can be found :doc:`here <interpolators>`.
 
 General procedure
 -----------------

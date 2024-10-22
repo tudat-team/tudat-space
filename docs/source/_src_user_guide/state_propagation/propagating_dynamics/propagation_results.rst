@@ -94,7 +94,7 @@ of the :class:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResu
 
 .. seealso::
    For a complete example of a perturbed single-arc propagation, please see the tutorial
-   `Perturbed satellite orbit <https://docs.tudat.space/en/latest/_src_getting_started/_src_examples/notebooks/propagation/perturbed_satellite_orbit.html>`_.
+   :ref:`Perturbed satellite orbit </_src_getting_started/_src_examples/tudatpy-examples/propagation/perturbed_satellite_orbit.ipynb>`.
 
 .. _multi_hybrid_arc_results:
 
@@ -107,7 +107,7 @@ When performing a multi- or hybrid-arc propagation, the results are stored in a
 The main contents of these objects are a set of :class:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults`
 objects, which contain the results of the constituent single arcs, as described above.
 In addition, the multi- and hybrid arc results objects contain a number of pieces of information that are specific to the
-full propagation, as opposed to its separate arcs. The reader is referred to the `API documentation <https://py.api.tudat.space/en/latest/>`_ for more details. A small example is shown below:
+full propagation, as opposed to its separate arcs. The reader is referred to the :doc:`API documentation <index>` for more details. A small example is shown below:
 
 .. code-block:: python
 

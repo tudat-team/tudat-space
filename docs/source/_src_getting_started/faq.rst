@@ -23,14 +23,14 @@ If you have created a system of bodies of type :class:`~tudatpy.numerical_simula
 
    bodies.get("Earth").gravity_field_model.gravitational_parameter
 
-which would return the gravitational parameter of the Earth as used by tudat. A full list of all Body properties you can retrieve can be accessed `here <https://py.api.tudat.space/en/latest/environment.html#tudatpy.numerical_simulation.environment.Body>`_. Note that first the ``gravity_field_model`` environment model is entered before the gravitational parameter is retrieved. A full list of environment models available can be accessed on the `Environment Models page <https://docs.tudat.space/en/latest/_src_user_guide/state_propagation/environment_setup/environment_models.html>`_.
+which would return the gravitational parameter of the Earth as used by tudat. A full list of all Body properties you can retrieve can be accessed from the :class:`~tudatpy.numerical_simulation.environment.Body` class. Note that first the ``gravity_field_model`` environment model is entered before the gravitational parameter is retrieved. A full list of environment models available can be accessed on the :ref:`Environment Models page <environment_model_overview>`.
 
 How do I retrieve the orbital period of a Body object?
 ======================================================
 
-While it is not possible (right now) to directly retrieve the orbital period of a Body object, it is possible to calculate it. This can be done by storing the Keplerian state of a numerically propagated Body as a `dependent variable <https://py.api.tudat.space/en/latest/dependent_variable.html>`_, from which the orbital period can directly be calculated.
+While it is not possible (right now) to directly retrieve the orbital period of a Body object, it is possible to calculate it. This can be done by storing the Keplerian state of a numerically propagated Body as a :doc:`dependent_variable`, from which the orbital period can directly be calculated.
 
-Alternatively, if the Body is not numerically propagated, or you prefer not to store the Keplerian state as a dependent variable, this can also be done by accessing the `state <https://py.api.tudat.space/en/latest/environment.html#tudatpy.numerical_simulation.environment.Body.state>`_ property of a Body, which returns its translational state at the current time step in Cartesian elements w.r.t. the global frame origin, with axes along the global frame orientation. Note that if the Body is numerically propagated, this information is retrieved from the propagated state vector. If it is not numerically propagated, it is retrieved from the body's ephemeris. This state can then be converted to Keplerian elements using the :func:`~tudatpy.astro.element_conversion.cartesian_to_keplerian` function, from which the orbital period can be calculated.
+Alternatively, if the Body is not numerically propagated, or you prefer not to store the Keplerian state as a dependent variable, this can also be done by accessing the :attr:`~tudatpy.numerical_simulation.environment.Body.state` property of a Body, which returns its translational state at the current time step in Cartesian elements w.r.t. the global frame origin, with axes along the global frame orientation. Note that if the Body is numerically propagated, this information is retrieved from the propagated state vector. If it is not numerically propagated, it is retrieved from the body's ephemeris. This state can then be converted to Keplerian elements using the :func:`~tudatpy.astro.element_conversion.cartesian_to_keplerian` function, from which the orbital period can be calculated.
 
 Why are the number of function evaluations the same for fixed-timestep multi-stage integrators?
 ===============================================================================================
@@ -52,7 +52,7 @@ If you wish to create a more detailed gravity field of a Body, this is possible 
 How can I add SPICE kernels myself?
 =================================== 
 
-A list of default SPICE kernels loaded into tudat can be accessed `here <https://py.api.tudat.space/en/latest/spice.html#tudatpy.interface.spice.load_standard_kernels>`_. If you wish to add a SPICE kernel that is not loaded into tudat by default, you can do so using the :func:`~tudatpy.interface.spice.load_kernel` function. This takes a file path to the SPICE kernel file as input and will load the file into the pool, from which you can now use it as any other kernel. A list of available kernels can be accessed through the `SPICE toolkit <https://naif.jpl.nasa.gov/pub/naif/generic_kernels/spk/satellites/>`_.
+A list of SPICE kernels can be loaded using the :func:`~tudatpy.interface.spice.load_standard_kernels` function. If you wish to add a SPICE kernel that is not loaded into tudat by default, you can do so using the :func:`~tudatpy.interface.spice.load_kernel` function. This takes a file path to the SPICE kernel file as input and will load the file into the pool, from which you can now use it as any other kernel. A list of available kernels can be accessed through the `SPICE toolkit <https://naif.jpl.nasa.gov/pub/naif/generic_kernels/spk/satellites/>`_.
 
 
 Tudat errors
