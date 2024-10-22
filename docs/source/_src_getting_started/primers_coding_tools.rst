@@ -12,3 +12,4 @@ with TudatPy.
    _src_use_of_tools/python
    _src_use_of_tools/github
    _src_use_of_tools/setup_dev_environment
+   _src_use_of_tools/windows_subsystem_for_linux
