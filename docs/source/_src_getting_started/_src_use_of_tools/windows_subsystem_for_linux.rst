@@ -112,8 +112,88 @@ Setting up PyCharm
 .. warning::
     At the time of writing, only the PyCharm Professional version but not the Community version supports WSL natively. As a student you can get a free license for the Professional version. If you do not have access to the Professional version, Visual Studio Code is a good alternative.
 
+In the following, it is assumed that you have installed PyCharm Professional and have a Conda environment set up in WSL.
+See also the `PyCharm documentation <https://www.jetbrains.com/help/pycharm/using-wsl-as-a-remote-interpreter.html>`_.
+
+To connect PyCharm to your WSL environment and set it up for TudatPy, follow these steps:
+
+1. Open PyCharm and create a new project inside WSL. Choose your WSL instance following dialog (Ubuntu by default).
+
+    .. figure:: _static/wsl_create_project.png
+
+2. If you haven't done so already, create a new project directory. Make sure that the project path starts with ``\\wsl$\``, indicating that your project is stored in the WSL environment.
+
+    .. figure:: _static/wsl_select_project.png
+
+   Click ``OK`` and ``Start IDE and Connect`` to open your project. This might take some time, as the JetBrains client is downloaded.
+
+3. Finally, we can set up the Conda environment in PyCharm. Click on the Python version and add a new interpreter on WSL:
+   
+   .. figure:: _static/wsl_pycharm_interpreter.png
+
+   After the introspection was successful, click next and select the Conda environment you want to use.
+   For TudatPy, you should select the Conda environment you created in the WSL environment.
+
+   .. figure:: _static/wsl_pycharm_conda.png
+
+You are now ready to use PyCharm with your WSL environment.
+Make sure to follow the last step to :ref:`setup Git <wsl_setup_git>` in the WSL environment.
+
 Setting up Visual Studio Code
 -----------------------------
 
+Visual Studio Code (VS Code) is freely available and supports WSL using official extensions.
+If you haven't done so already, install VS Code from the `official website <https://code.visualstudio.com/Download>`_.
+
+To connect VS Code to your WSL environment and set it up for TudatPy, follow these steps:
+
+1. Open VS Code and install the following extensions:
+    
+   - `Remote - WSL <https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl>`_
+
+   Make sure to install the official extension by Microsoft.
+   You can also search for these extensions in the extensions tab in VS Code.
+
+   - Remote - WSL: Identifier ``ms-vscode-remote.remote-wsl``
+  
+   .. figure:: _static/wsl_vscode_install_extension.png
+
+2. Open the command palette by pressing ``Ctrl+Shift+P`` and type ``WSL: Connect to WSL``.
+   You should now see being connected to your WSL environment.
+
+   .. figure:: _static/wsl_vscode_connected.png
+
+   Alternatively, you can also navigate from the command line to your project directory and type ``code .``. This will open VS Code directly in the WSL environment. In this case, you can skip the next step.
+
+3. Open your project folder in VS Code.
+   
+   .. figure:: _static/wsl_vscode_open_project.png
+
+4. Install the `Python extension <https://marketplace.visualstudio.com/items?itemName=ms-python.python>`_ by Microsoft. You can also use the identifier ``ms-python.python`` in the extensions tab.
+
+5. Create a new Python file and select the Python interpreter. You should now see the Conda environment you set up in WSL.
+
+   .. figure:: _static/wsl_vscode_python_file.png
+
+   .. figure:: _static/wsl_vscode_conda_environment.png
+
+You are now ready to use VS Code with your WSL environment.
+Make sure to follow the last step to :ref:`setup Git <wsl_setup_git>` in the WSL environment.
+For more information on how to use VS Code with WSL, see the `official documentation <https://code.visualstudio.com/docs/remote/wsl>`_.
+
+.. _wsl_setup_git:
+
 Setting up Git
 ==============
+
+Lastly, you will likely want to use source control for your projects.
+In order to use Git in WSL, you will have to install it inside your Linux environment, even if you have installed it previously in your Windows environment.
+Follow the `setup instructions by Microsoft <https://learn.microsoft.com/en-us/windows/wsl/tutorials/wsl-git>`_, in particular the setup instructions of the `Git Credential Manager <https://learn.microsoft.com/en-us/windows/wsl/tutorials/wsl-git#git-credential-manager-setup>`_.
+
+Next steps
+##########
+
+Congratulations!
+You are now all set to use WSL with Tudat(Py).
+If you would like to learn more about how to use the Tudat source code, which is written in C++, have a look at the :ref:`using_tudat_source` page.
+You can also make use of your new environment to contribute to the Tudat project on GitHub, see :ref:`this page <contribute_to_tudat>` for more information.
