@@ -68,7 +68,7 @@ This should return something like the following::
 Using WSL with Windows
 ######################
 
-- To access your Windows files from the Linux environment, you can navigate to ``/mnt/c/`` in the terminal. This is where your Windows files are mounted.
+- To access your Windows files from the Linux environment, you can navigate to ``/mnt/c/`` in the terminal. This is where your Windows files are mounted and accessible from inside Linux.
 - To access the Linux files from Windows, you can navigate to ``\\wsl$\`` in the file explorer.
 - You can also access the Linux environment from the Windows terminal by running ``wsl``.
 - To access the Linux environment from the Windows file explorer, you can run ``explorer.exe .`` in the Linux terminal.
@@ -80,7 +80,7 @@ Using WSL with Windows
 
 Preparing WSL to use Tudat(Py)
 #################################
-In principle, you are now ready to use WSL with Tudat(Py).
+In principle, you are now ready to use WSL.
 However, you might want to install some additional packages to make your life easier.
 
 Install Conda
@@ -96,6 +96,31 @@ Follow the `installation instructions <https://docs.anaconda.com/miniconda/#quic
 
 This should return the installed Conda version.
 From there on, you can follow the instructions in the :ref:`Conda primer <getting_started_with_conda>` to set up your Conda environment and :ref:`install Tudat(Py) <getting_started_installation>`.
+
+.. dropdown:: Quick TudatPy installation
+    :color: secondary
+
+    In case you want to install TudatPy quickly, you can run the following commands from inside your WSL environment:
+
+    Download ``environment.yaml`` file inside your WSL environment:
+
+    .. code-block:: bash
+
+        wget https://raw.githubusercontent.com/tudat-team/tudat-space/refs/heads/develop/docs/source/_src_getting_started/_static/environment.yaml
+    
+    Create a new Conda environment from the ``environment.yaml`` file:
+
+    .. code-block:: bash
+
+        conda env create -f environment.yaml
+
+    Activate the new Conda environment:
+
+    .. code-block:: bash
+
+        conda activate tudat-space
+
+    For more information on the installation and issues you might encounter, see the :ref:`installation page <getting_started_installation>`.
 
 Setting up an IDE
 =================
@@ -117,13 +142,15 @@ See also the `PyCharm documentation <https://www.jetbrains.com/help/pycharm/usin
 
 To connect PyCharm to your WSL environment and set it up for TudatPy, follow these steps:
 
-1. Open PyCharm and create a new project inside WSL. Choose your WSL instance following dialog (Ubuntu by default).
+1. Open PyCharm and create a new project inside WSL.
 
-    .. figure:: _static/wsl_create_project.png
+   .. figure:: _static/wsl_create_project.png
+
+   Choose your WSL instance in the following dialog (Ubuntu by default).
 
 2. If you haven't done so already, create a new project directory. Make sure that the project path starts with ``\\wsl$\``, indicating that your project is stored in the WSL environment.
 
-    .. figure:: _static/wsl_select_project.png
+   .. figure:: _static/wsl_select_project.png
 
    Click ``OK`` and ``Start IDE and Connect`` to open your project. This might take some time, as the JetBrains client is downloaded.
 
@@ -143,35 +170,30 @@ Setting up Visual Studio Code
 -----------------------------
 
 Visual Studio Code (VS Code) is freely available and supports WSL using official extensions.
-If you haven't done so already, install VS Code from the `official website <https://code.visualstudio.com/Download>`_.
 
 To connect VS Code to your WSL environment and set it up for TudatPy, follow these steps:
 
-1. Open VS Code and install the following extensions:
-    
-   - `Remote - WSL <https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl>`_
-
-   Make sure to install the official extension by Microsoft.
-   You can also search for these extensions in the extensions tab in VS Code.
+1. If you haven't done so already, install VS Code from the `official website <https://code.visualstudio.com/Download>`_.
+2. Open VS Code and install the `Remote - WSL <https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl>`_ extension by Microsoft. You can also search for the extension in the Extensions tab in VS Code.
 
    - Remote - WSL: Identifier ``ms-vscode-remote.remote-wsl``
   
    .. figure:: _static/wsl_vscode_install_extension.png
 
-2. Open the command palette by pressing ``Ctrl+Shift+P`` and type ``WSL: Connect to WSL``.
+3. Open the command palette by pressing ``Ctrl+Shift+P`` and type ``WSL: Connect to WSL``.
    You should now see being connected to your WSL environment.
 
    .. figure:: _static/wsl_vscode_connected.png
 
    Alternatively, you can also navigate from the command line to your project directory and type ``code .``. This will open VS Code directly in the WSL environment. In this case, you can skip the next step.
 
-3. Open your project folder in VS Code.
+4. Open your project folder in VS Code.
    
    .. figure:: _static/wsl_vscode_open_project.png
 
-4. Install the `Python extension <https://marketplace.visualstudio.com/items?itemName=ms-python.python>`_ by Microsoft. You can also use the identifier ``ms-python.python`` in the extensions tab.
+5. Install the `Python extension <https://marketplace.visualstudio.com/items?itemName=ms-python.python>`_ by Microsoft. You can also use the identifier ``ms-python.python`` in the Extensions tab.
 
-5. Create a new Python file and select the Python interpreter. You should now see the Conda environment you set up in WSL.
+6. Create a new Python file and select the Python interpreter. You should now see the Conda environment you set up in WSL.
 
    .. figure:: _static/wsl_vscode_python_file.png
 
