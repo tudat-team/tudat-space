@@ -13,7 +13,7 @@ package manager, such as Miniconda or Anaconda.
 
 .. attention::
 
-    Windows users are recommended to install the Windows Subsystem for Linux (WSL) and install Tudat(Py) in a ``conda`` environment inside WSL.
+    Windows users must install the Windows Subsystem for Linux (WSL) and install Tudat(Py) in a ``conda`` environment inside WSL.
     For a guide on how to setup WSL and configure it to work with an IDE, see the :ref:`getting_started_with_wsl` guide. 
 
 For more details on how to use ``conda``, please refer to our detailed guide (:ref:`getting_started_with_conda`) and the references therein.
