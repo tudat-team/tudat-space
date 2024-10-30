@@ -12,3 +12,4 @@ dependencies:
   - ipython
   - ipykernel
   - pandoc
+  - sphinx-codeautolink

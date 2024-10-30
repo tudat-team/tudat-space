@@ -48,6 +48,7 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx_gallery.load_style',  # to show notebooks as galleries
               'sphinx_rtd_theme', # theme
               'sphinx_copybutton', # copy button in code blocks
+              "sphinx_codeautolink",
               ]
 
 # Specifying thumbnails according to images in _static folder
