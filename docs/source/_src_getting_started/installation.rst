@@ -9,9 +9,12 @@ Installation
    :local:
 
 This page will guide you through the installation of Tudat(Py). The installation is supported exclusively through the use of a ``conda``
-package manager, such as Miniconda or Anaconda. For new users, and Windows users in particular, we recommend the use of `Anaconda`_ . 
-For those with limited bandwidth or hard drive storage, we recommend the use of `Miniconda`_ (see also `Anaconda or Miniconda?`_). When referring to a ``conda`` package manager below,
-the term "Anaconda" will be used. 
+package manager, such as Miniconda or Anaconda.
+
+.. attention::
+
+    Windows users must install the Windows Subsystem for Linux (WSL) and install Tudat(Py) in a ``conda`` environment inside WSL.
+    For a guide on how to setup WSL and configure it to work with an IDE, see the :ref:`getting_started_with_wsl` guide. 
 
 For more details on how to use ``conda``, please refer to our detailed guide (:ref:`getting_started_with_conda`) and the references therein.
 
