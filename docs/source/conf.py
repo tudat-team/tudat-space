@@ -222,3 +222,6 @@ intersphinx_mapping = {'tudatpy': ('https://py.api.tudat.space/en/latest/', None
                        'python': ('https://docs.python.org/3/', None)}
 
 intersphinx_disabled_reftypes = []
+
+# -- Options for sphinx_codeautolink -------------------------------------------
+codeautolink_concat_default = True
