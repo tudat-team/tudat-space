@@ -49,7 +49,7 @@ In simple simulations, a user may want to define a constant :math:`\alpha`, :mat
         bank_angle = np.deg2rad( 20.0 )
         
         # Define angle function (required for input to rotation settings)   
-	    angle_function = lambda time : np.ndarray([angle_of_attack, 0.0, bank_angle])
+        angle_function = lambda time : np.array([angle_of_attack, 0.0, bank_angle])
         
         # Create settings for rotation model
         rotation_model_settings = environment_setup.rotation_model.aerodynamic_angle_based(
@@ -73,12 +73,13 @@ Alternatively, the angle of attack may be defined based on pitch trim, so that t
         bank_angle = np.deg2rad( 20.0 ) 
         
         # Define angle function (required for input to rotation settings)   
-	    angle_function = lambda time : np.ndarray([0.0, bank_angle])
+        angle_function = lambda time : np.ndarray([0.0, bank_angle])
         
         # Create settings for rotation model
         rotation_model_settings = environment_setup.rotation_model.zero_pitch_moment_aerodynamic_angle_based(
             central_body="Earth",
             target_frame = "VehicleFixed",
+        )
 
 Note that the ``angle_function`` now returns only two angles, instead of the three angles in the previous example, as the :math:`\alpha` is no longer user-specified.
                 

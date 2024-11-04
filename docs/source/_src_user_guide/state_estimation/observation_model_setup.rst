@@ -100,9 +100,9 @@ The above options are added to the calls of the observation model settings facto
 .. code-block:: python
 
     # Define link ends
-    one_way_nno_mex_link_ends = dict( );
-    one_way_nno_mex_link_ends[ transmitter ] = estimation_setup.observation.body_reference_point_link_end_id( "Earth", "NNO" );
-    one_way_nno_mex_link_ends[ receiver ] = estimation_setup.observation.body_origin_link_end_id( "MeX" );
+    one_way_nno_mex_link_ends = dict( )
+    one_way_nno_mex_link_ends[ transmitter ] = estimation_setup.observation.body_reference_point_link_end_id( "Earth", "NNO" )
+    one_way_nno_mex_link_ends[ receiver ] = estimation_setup.observation.body_origin_link_end_id( "MeX" )
     one_way_nno_mex_link_definition = estimation_setup.link_definition( one_way_nno_mex_link_ends )
     
     # Define settings for light-time calculations
@@ -114,7 +114,7 @@ The above options are added to the calls of the observation model settings facto
     # Create list of observation settings
     observation_settings_list = list()
     observation_settings_list.append( observation_setup.one_way_range( 
-        one_way_nno_mex_link_ends
+        one_way_nno_mex_link_ends,
         light_time_correction_settings = light_time_correction_settings,
         bias_settings = range_bias_settings ) )
     observation_settings_list.append( observation_setup.one_way_open_loop_doppler( 

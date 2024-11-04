@@ -4,13 +4,13 @@ class LinearTimeAerodynamicGuidance:
 	
 	# Define members
         self.angle_of_attack_rate = angle_of_attack_rate
-	self.sideslip_angle_rate = sideslip_angle_rate
-	self.bank_angle_rate = bank_angle_rate
-	self.reference_time = reference_time
+        self.sideslip_angle_rate = sideslip_angle_rate
+        self.bank_angle_rate = bank_angle_rate
+        self.reference_time = reference_time
 
     def get_current_aerodynamic_angles(self, current_time: float):
 
-	if( current_time == current_time ):
+        if( current_time == current_time ):
 
             # Update the class to the current time
             angle_of_attack = self.angle_of_attack_rate * ( current_time - self.reference_time )

@@ -15,7 +15,7 @@ In Tudat, the full environment is stored in a :class:`~tudatpy.numerical_simulat
 
     .. code-block:: python
 
-        bodies = .... # Create system of bodies
+        bodies = ... # Create system of bodies
         earth_ephemeris = bodies.get('Earth').ephemeris
 
 Below, we provide an overview of the different types of environment models for which you can define settings, along with links to submodules of ``environment_setup`` in the :doc:`API documentation <environment_setup>`, where a comprehensive list of all environment model settings can be found. In addition, we list how to extract the resulting environment model from the ``Body`` objects.

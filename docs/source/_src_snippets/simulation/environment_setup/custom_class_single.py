@@ -9,11 +9,11 @@ class SimpleCustomGuidanceModel:
 
     def getThrustMagnitude(self, current_time: float):
 
-	if( current_time == current_time ):
+        if( current_time == current_time ):
 
-            # Update the class to the current time
-            self.thrust_magnitude = ...
-        
-            # Return angles calculated by update function
-            return self.thrust_magnitude
+                # Update the class to the current time
+                self.thrust_magnitude = ...
+            
+                # Return angles calculated by update function
+                return self.thrust_magnitude
 
