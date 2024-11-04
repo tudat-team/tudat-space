@@ -480,8 +480,3 @@ We are excited to hear what you will create using Tudat(Py).
 If you have used Tudat(Py) for a project, research, or teaching, we would love to hear about it and appreciate a citation to the following conference presentation (with a proper journal article coming soon!):
 
 Dirkx, D., Fayolle, M., Garrett, G., Avillez, M., Cowan, K., Cowan, S., Encarnacao, J., Fortuny Lombrana, C., Gaffarel, J., Hener, J., Hu, X., van Nistelrooij, M., Oggionni, F., and Plumaris, M.: The open-source astrodynamics Tudatpy software – overview for planetary mission design and science analysis, Europlanet Science Congress 2022, Granada, Spain, 18–23 Sep 2022, EPSC2022-253, https://doi.org/10.5194/epsc2022-253, 2022.
-
-=================
-
-.. [Acton1996] Acton, (1996). Ancillary data services of NASA's Navigation and Ancillary Information Facility.
-   Planetary and Space Science, Volume 44, Issue 1, https://doi.org/10.1016/0032-0633(95)00107-7.
