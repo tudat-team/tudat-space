@@ -62,8 +62,8 @@ than the input arguments.
             import multiprocessing as mp
             import numpy as np
 
-            from tudatpy.kernel.numerical_simulation import environment_setup, propagation_setup
-            from tudatpy.kernel.interface import spice
+            from tudatpy.numerical_simulation import environment_setup, propagation_setup
+            from tudatpy.interface import spice
 
       .. literalinclude:: /_src_snippets/simulation/parallelization/general_bfe_example.py
          :language: python
@@ -121,11 +121,11 @@ the orbit.
             from matplotlib import pyplot as plt
 
             # Load tudatpy modules
-            from tudatpy.kernel.interface import spice
+            from tudatpy.interface import spice
             from tudatpy.kernel import numerical_simulation
-            from tudatpy.kernel.numerical_simulation import environment_setup, propagation_setup
-            from tudatpy.kernel.astro import element_conversion
-            from tudatpy.kernel import constants
+            from tudatpy.numerical_simulation import environment_setup, propagation_setup
+            from tudatpy.astro import element_conversion
+            from tudatpy import constants
             from tudatpy.util import result2array
 
       .. literalinclude:: /_src_snippets/simulation/parallelization/mc_bfe_run.py
@@ -163,11 +163,11 @@ manually.
             from matplotlib import pyplot as plt
 
             # Load tudatpy modules
-            from tudatpy.kernel.interface import spice
+            from tudatpy.interface import spice
             from tudatpy.kernel import numerical_simulation
-            from tudatpy.kernel.numerical_simulation import environment_setup, propagation_setup
-            from tudatpy.kernel.astro import element_conversion
-            from tudatpy.kernel import constants
+            from tudatpy.numerical_simulation import environment_setup, propagation_setup
+            from tudatpy.astro import element_conversion
+            from tudatpy import constants
             from tudatpy.util import result2array
 
       .. literalinclude:: /_src_snippets/simulation/parallelization/mc_bfe_dynamics.py

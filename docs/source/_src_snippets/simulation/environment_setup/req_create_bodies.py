@@ -1,6 +1,6 @@
 # import statements required
-from tudatpy.kernel.numerical_simulation import environment_setup
-from tudatpy.kernel.interface import spice
+from tudatpy.numerical_simulation import environment_setup
+from tudatpy.interface import spice
 
 # load spice kernels
-spice_interface.load_standard_kernels()
+spice.load_standard_kernels()

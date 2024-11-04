@@ -1,2 +1,2 @@
 # import statements required
-from tudatpy.kernel.numerical_simulation import propagation_setup
+from tudatpy.numerical_simulation import propagation_setup

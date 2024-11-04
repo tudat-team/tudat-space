@@ -5,7 +5,7 @@ import os
 
 # required internal imports
 from tudatpy.kernel import io
-from tudatpy.kernel.astro import two_body_dynamics
+from tudatpy.astro import two_body_dynamics
 
 # current implementation
 tudat_spice_kernels = [

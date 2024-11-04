@@ -1,1 +1,1 @@
-from tudatpy.kernel.math import interpolators
+from tudatpy.math import interpolators

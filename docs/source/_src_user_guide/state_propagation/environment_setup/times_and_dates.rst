@@ -23,7 +23,7 @@ Below is an example of defining the current date and time through the Python ``d
     .. code-block:: python
 
 	from datetime import datetime
-	from tudatpy.kernel.astro import time_conversion
+	from tudatpy.astro import time_conversion
 
 	# Create Python datetime object
     	python_datetime = datetime.fromisoformat('2023-06-20T00:05:23.281765')
@@ -71,7 +71,7 @@ Conversion between each of these time scales can be done using the :class:`~tuda
 
     .. code-block:: python
 
-	from tudatpy.kernel.astro import time_conversion
+	from tudatpy.astro import time_conversion
 
     	# Create time scale converter object
     	time_scale_converter = time_conversion.default_time_scale_converter( )
