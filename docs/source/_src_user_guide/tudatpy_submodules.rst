@@ -18,7 +18,7 @@ The top-level submodules of tudatpy are:
 * :doc:`tudatpy.interface <interface>`: This submodule contains functionality to interface with various external packages which Tudat uses, such as `SPICE <https://naif.jpl.nasa.gov/naif/toolkit.html>`_
 * :doc:`tudatpy.plotting <plotting>`: This submodule contains various pieces of functionality to support the easy plotting of results generated with Tudatpy. Unlike most of the main Tudatpy submodules (which are written in C++, and exposed to Python), this submodule is written in Python
 * :doc:`tudatpy.util <util>`: This submodule contains various small pieces of functionality to support the easy post-processing of results generated with Tudatpy. Unlike most of the main Tudatpy submodules (which are written in C++, and exposed to Python), this submodule is written in Python
-* :doc:`tudatpy.io <io>`: This submodule contains various pieces of functionality for file input-output in Tudatpy. Unlike most of the main Tudatpy submodules (which are written in C++, and exposed to Python), this submodule is written partially in Python
+* :doc:`tudatpy.data <data>`: This submodule contains various pieces of functionality for file input-output in Tudatpy. Unlike most of the main Tudatpy submodules (which are written in C++, and exposed to Python), this submodule is written partially in Python
 
 The numerical_simulation submodules
 ===================================
