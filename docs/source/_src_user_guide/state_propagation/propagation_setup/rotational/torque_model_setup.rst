@@ -70,7 +70,7 @@ models that compute the torques during the propagation.
 
       .. code-block:: python
 
-        from tudatpy.kernel.numerical_simulation import propagation_setup
+        from tudatpy.numerical_simulation import propagation_setup
 
     .. literalinclude:: /_src_snippets/simulation/propagation_setup/torque_models/torque_setup.py
         :language: python
@@ -90,7 +90,7 @@ multiple bodies. Below, an example is given for the definition of ``torque_setti
 
       .. code-block:: python
 
-        from tudatpy.kernel.numerical_simulation import propagation_setup
+        from tudatpy.numerical_simulation import propagation_setup
 
     .. literalinclude:: /_src_snippets/simulation/propagation_setup/torque_models/torque_setup_multi_vehicle.py
         :language: python
@@ -108,7 +108,7 @@ Below, an example for such a case is given when propagating the Earth and Moon:
 
       .. code-block:: python
 
-        from tudatpy.kernel.numerical_simulation import propagation_setup
+        from tudatpy.numerical_simulation import propagation_setup
 
     .. literalinclude:: /_src_snippets/simulation/propagation_setup/torque_models/torque_setup_multi.py
         :language: python

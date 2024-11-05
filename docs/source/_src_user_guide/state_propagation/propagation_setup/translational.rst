@@ -60,8 +60,8 @@ The time and state will be printed on the terminal once every 24 hours.
 
         .. code-block:: python
 
-           from tudatpy.kernel.numerical_simulation import propagation_setup
-           from tudatpy.kernel.astro import element_conversion
+           from tudatpy.numerical_simulation import propagation_setup
+           from tudatpy.astro import element_conversion
            import numpy as np
 
      .. literalinclude:: /_src_snippets/simulation/environment_setup/full_translational_setup.py

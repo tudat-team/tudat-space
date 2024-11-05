@@ -92,7 +92,7 @@ First, the transfer trajectory module can be imported with:
 
 .. code-block:: python
 
-    from tudatpy.kernel.trajectory_design import transfer_trajectory
+    from tudatpy.trajectory_design import transfer_trajectory
 
 The most commonly-used for procedure for creating an settings of the trajectory is to use factory functions to get the transfer
 leg has the same type (e.g. all unpowered, all spherical-shaping, etc.). The factory functions to create a set of
@@ -237,10 +237,10 @@ swingby nodes equal to the number of GA's, and a capture node.
 
           .. code-block:: python
 
-              from tudatpy.kernel.numerical_simulation import propagation_setup
-              from tudatpy.kernel.numerical_simulation import environment_setup
-              from tudatpy.kernel.trajectory_design import shape_based_thrust
-              from tudatpy.kernel.trajectory_design import transfer_trajectory
+              from tudatpy.numerical_simulation import propagation_setup
+              from tudatpy.numerical_simulation import environment_setup
+              from tudatpy.trajectory_design import shape_based_thrust
+              from tudatpy.trajectory_design import transfer_trajectory
               import numpy as np
 
       .. literalinclude:: /_src_snippets/astrodynamics/manual_node_leg_settings.py

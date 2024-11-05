@@ -72,7 +72,7 @@ models that compute the accelerations during the propagation.
 
         .. code-block:: python
 
-            from tudatpy.kernel.numerical_simulation import propagation_setup
+            from tudatpy.numerical_simulation import propagation_setup
 
       .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/acceleration_example.py
           :language: python
@@ -92,7 +92,7 @@ an example is given for the definition of ``acceleration_settings`` for multiple
 
         .. code-block:: python
 
-            from tudatpy.kernel.numerical_simulation import propagation_setup
+            from tudatpy.numerical_simulation import propagation_setup
 
       .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/acceleration_example_multi_vehicle.py
           :language: python
@@ -111,7 +111,7 @@ Alternatively, separate acceleration settings may be defined for separate bodies
 
         .. code-block:: python
 
-            from tudatpy.kernel.numerical_simulation import propagation_setup
+            from tudatpy.numerical_simulation import propagation_setup
 
       .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/acceleration_example_multi.py
           :language: python

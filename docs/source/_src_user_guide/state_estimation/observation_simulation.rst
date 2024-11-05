@@ -39,16 +39,16 @@ The basic manner in which to define an observation simulation settings object us
 
 .. code-block:: python
                 
-    one_way_nno_mex_link_ends = dict( );
-    one_way_nno_mex_link_ends[ transmitter ] = estimation_setup.observation.body_reference_point_link_end_id( "Earth", "NNO" );
-    one_way_nno_mex_link_ends[ receiver ] = estimation_setup.observation.body_origin_link_end_id( "MeX" );
+    one_way_nno_mex_link_ends = dict( )
+    one_way_nno_mex_link_ends[ transmitter ] = estimation_setup.observation.body_reference_point_link_end_id( "Earth", "NNO" )
+    one_way_nno_mex_link_ends[ receiver ] = estimation_setup.observation.body_origin_link_end_id( "MeX" )
     one_way_nno_mex_link_definition = estimation_setup.observation.link_definition( one_way_nno_mex_link_ends )
     
     observation_times = list( )
     observation_times = [10.0, 20.0, 30.0]
     
     observation_simulation_settings = observation_setup.tabulated_settings( 
-       one_way_range_type
+       one_way_range_type,
        one_way_nno_mex_link_definition,
        observation_times )
        
@@ -63,7 +63,7 @@ To override this behaviour, we can specify a reference link end manually, which 
 .. code-block:: python
     
     observation_simulation_settings = observation_setup.tabulated_settings( 
-       one_way_range_type
+       one_way_range_type,
        one_way_nno_mex_link_ends,
        observation_times,
        reference_link_end = observation_setup.transmitter )

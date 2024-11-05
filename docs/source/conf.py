@@ -48,6 +48,7 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx_gallery.load_style',  # to show notebooks as galleries
               'sphinx_rtd_theme', # theme
               'sphinx_copybutton', # copy button in code blocks
+              "sphinx_codeautolink",
               ]
 
 # Specifying thumbnails according to images in _static folder
@@ -221,3 +222,6 @@ intersphinx_mapping = {'tudatpy': ('https://py.api.tudat.space/en/latest/', None
                        'python': ('https://docs.python.org/3/', None)}
 
 intersphinx_disabled_reftypes = []
+
+# -- Options for sphinx_codeautolink -------------------------------------------
+codeautolink_concat_default = True

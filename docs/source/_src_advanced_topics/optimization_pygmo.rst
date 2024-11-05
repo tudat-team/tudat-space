@@ -321,7 +321,7 @@ processes that can be used.
 
          .. code-block:: python
 
-            from tudatpy.kernel.trajectory_design import shape_based_thrust, transfer_trajectory
+            from tudatpy.trajectory_design import shape_based_thrust, transfer_trajectory
             import numpy as np
             from typing import List, Tuple
             import pygmo as pg
@@ -331,8 +331,8 @@ processes that can be used.
             # Tudatpy imports
             import tudatpy
             from tudatpy.util import result2array
-            from tudatpy.kernel import constants
-            from tudatpy.kernel.numerical_simulation import environment_setup
+            from tudatpy import constants
+            from tudatpy.numerical_simulation import environment_setup
 
       .. literalinclude:: /_src_snippets/simulation/parallelization/pygmo_batch_fitness.py
          :language: python
@@ -362,7 +362,7 @@ this is not considered here.
 
          .. code-block:: python
 
-                from tudatpy.kernel.trajectory_design import shape_based_thrust, transfer_trajectory
+                from tudatpy.trajectory_design import shape_based_thrust, transfer_trajectory
                 import numpy as np
                 from typing import List, Tuple
                 import pygmo as pg
@@ -372,8 +372,8 @@ this is not considered here.
                 # Tudatpy imports
                 import tudatpy
                 from tudatpy.util import result2array
-                from tudatpy.kernel import constants
-                from tudatpy.kernel.numerical_simulation import environment_setup
+                from tudatpy import constants
+                from tudatpy.numerical_simulation import environment_setup
 
       .. literalinclude:: /_src_snippets/simulation/parallelization/pg_bfe_evolve.py
          :language: python
@@ -454,7 +454,7 @@ for any topology to exchange individuals.
 
          .. code-block:: python
 
-            from tudatpy.kernel.trajectory_design import shape_based_thrust, transfer_trajectory
+            from tudatpy.trajectory_design import shape_based_thrust, transfer_trajectory
             import numpy as np
             from typing import List, Tuple
             import pygmo as pg
@@ -464,8 +464,8 @@ for any topology to exchange individuals.
             # Tudatpy imports
             import tudatpy
             from tudatpy.util import result2array
-            from tudatpy.kernel import constants
-            from tudatpy.kernel.numerical_simulation import environment_setup
+            from tudatpy import constants
+            from tudatpy.numerical_simulation import environment_setup
 
       .. literalinclude:: /_src_snippets/simulation/parallelization/pg_archi.py
          :language: python

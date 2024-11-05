@@ -33,18 +33,18 @@ For instance, the following example will retrieve all data from asteroids 433 (E
 
 .. code-block:: python
 
-     # Create MPC data container
-     mpc_container = BatchMPC()
+  # Create MPC data container
+  mpc_container = BatchMPC()
 
-     # Load all data from given asteroids
-     asteroid_MPC_codes = [433, 238, 329]
-     mpc_container.get_observations(asteroid_MPC_codes)
+  # Load all data from given asteroids
+  asteroid_MPC_codes = [433, 238, 329]
+  mpc_container.get_observations(asteroid_MPC_codes)
 
-     # Filter data based on time
-     mpc_container.filter(epoch_start=datetime.datetime(2010, 1, 1), epoch_end=datetime.datetime(2020, 1, 1)
+  # Filter data based on time
+  mpc_container.filter(epoch_start=datetime.datetime(2010, 1, 1), epoch_end=datetime.datetime(2020, 1, 1))
 
-     # Convert data to Tudat-compatible object
-     observation_collection = mpc_container.to_tudat(bodies, included_satellites=None)
+  # Convert data to Tudat-compatible object
+  observation_collection = mpc_container.to_tudat(bodies, included_satellites=None)
 
 
 

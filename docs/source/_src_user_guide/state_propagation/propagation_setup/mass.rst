@@ -45,7 +45,7 @@ required as input, to link the thrust acceleration to the mass rate.
 
         .. code-block:: python
 
-            from tudatpy.kernel.numerical_simulation import propagation_setup
+            from tudatpy.numerical_simulation import propagation_setup
 
       .. literalinclude:: /_src_snippets/simulation/propagation_setup/mass_models/from_thrust_mass_rate.py
          :language: python
@@ -75,7 +75,7 @@ hours (simulation time).
 
       .. code-block:: python
 
-          from tudatpy.kernel.numerical_simulation import propagation_setup
+          from tudatpy.numerical_simulation import propagation_setup
 
     .. literalinclude:: /_src_snippets/simulation/environment_setup/full_mass_setup.py
         :language: python

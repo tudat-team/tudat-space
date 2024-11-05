@@ -212,27 +212,25 @@ An example of defining console output is:
     console_print_settings.print_termination_reason = True
     console_print_settings.print_number_of_function_evaluations = True
     
-which will result in the following terminal output (for a specific script propagating dynamics of Delfi C-3 w.r.t. Earth):
+which will result in the following terminal output (for a specific script propagating dynamics of Delfi C-3 w.r.t. Earth)::
 
-.. code-block:: python
+    ===============  STARTING SINGLE-ARC PROPAGATION  ===============
 
-   ===============  STARTING SINGLE-ARC PROPAGATION  ===============
+    PROCESSED STATE VECTOR CONTENTS:
+    [Vector entries], content description
+    [0:5], Translational state of body Delfi-C3 w.r.t. Earth
 
-   PROCESSED STATE VECTOR CONTENTS:
-   [Vector entries], content description
-   [0:5], Translational state of body Delfi-C3 w.r.t. Earth
+    DEPENDENT VARIABLE VECTOR CONTENTS:
+    [Vector entries], content description
+    [0:2], Total acceleration in inertial frame of Delfi-C3
+    [3:8], Kepler elements of Delfi-C3 w.r.t. Earth
 
-   DEPENDENT VARIABLE VECTOR CONTENTS:
-   [Vector entries], content description
-   [0:2], Total acceleration in inertial frame of Delfi-C3
-   [3:8], Kepler elements of Delfi-C3 w.r.t. Earth
+    PROPAGATION FINISHED.
+    Total Number of Function Evaluations: 43201
+    Total propagation clock time: 2.94223 seconds
+    Termination reason: Propagation successful; termination condition exceeded
 
-   PROPAGATION FINISHED.
-   Total Number of Function Evaluations: 43201
-   Total propagation clock time: 2.94223 seconds
-   Termination reason: Propagation successful; termination condition exceeded
-
-   =================================================================
+    =================================================================
 
 
 .. _console_output_multi_arc:

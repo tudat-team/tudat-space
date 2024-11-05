@@ -14,7 +14,8 @@ environment_setup.add_engine_model(
 
 # Create acceleration model settings
 acceleration_on_vehicle = dict(
+    ...,
     Vehicle=[
         propagation_setup.acceleration.thrust_from_engine( 'MainEngine')
     ],
-
+)

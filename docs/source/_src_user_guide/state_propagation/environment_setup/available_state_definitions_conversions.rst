@@ -36,12 +36,18 @@ You can also bypass body and ephemeris objects altogether, and use ``spice`` to 
 Note, however, that this will use whichever ``spice`` kernels you have loaded, and **may not be consistent with the states
 you are using the bodies in your simulations.**
 
+.. dropdown:: Required
+	:color: muted
+
+	.. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.py
+		:language: python
+
 .. code-block:: python
 
         current_time = ...
 
-        mars_state_wrt_earth = spice_interface.get_body_cartesian_state_at_epoch(
-                target_body_name="Moon"
+        mars_state_wrt_earth = spice.get_body_cartesian_state_at_epoch(
+                target_body_name="Moon",
                 observer_body_name="Earth",
                 reference_frame_name="J2000",
                 ephemeris_time=current_time )
@@ -128,7 +134,7 @@ for the Earth outside of a propagation (assuming a ``SystemOfBodies`` object, na
         earth_rotation_model = bodies.get( "Earth" ).rotation_model
 
         # Define time at which to determine rotation quantities
-        current_time = ....
+        current_time = ...
 
         # Determine R^{(I/B)} rotation matrix
         rotation_matrix_to_inertial_frame = earth_rotation_model.body_fixed_to_inertial_rotation( current_time )
@@ -140,15 +146,22 @@ To automatically rotate a vector from the body-fixed frame to the inertial frame
 :class:`~tudatpy.numerical_simulation.environment.transform_to_inertial_orientation` function, which automatically
 performs the rotation with the rotation matrix and its derivative:
 
+.. dropdown:: Required
+	:color: muted
+
+	.. code-block:: python
+		
+		from tudatpy.numerical_simulation import environment
+
 .. code-block:: python
 
         earth_rotation_model = bodies.get( "Earth" ).rotation_model
 
         # Define time at which to determine rotation quantities
-        current_time = ....
+        current_time = ...
 
         # Set the body-fixed state
-        body_fixed_state = ....
+        body_fixed_state = ...
 
         # Transform state to inertial frame, using Earth rotation model
         inertial_state = environment.transform_to_inertial_orientation(
@@ -186,7 +199,7 @@ When this rotation model is assigned to Earth, it can be extracted as an object 
 .. code-block:: python
 
         # Create body settings (typically from defaults), and modify the Earth's rotation settings
-        body_settings = ..
+        body_settings = ...
         body_settings.get("Earth").rotation_model_settings = environment_setup.rotation_model.gcrs_to_itrs( )
 
         # Create bodies
@@ -359,6 +372,13 @@ w.r.t. which the Keplerian elements are defined, in addition to the state itself
 Often, these functions will be used in conjunction with numerical propagation, where the properties of bodies are stored in an
 object of type :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies`
 
+.. dropdown:: Required
+	:color: muted
+
+	.. code-block:: python
+
+		import tudatpy.astro.element_conversion as conversion
+
 .. code-block:: python
 
    cartesian_state = ...
@@ -385,14 +405,14 @@ As an example, converting from true to eccentric anomaly is done as follows:
 
 	true_anomaly = ...
 	eccentricity = ...
-	eccentric_anomaly = conversion.true_anomaly_to_eccentric_anomaly( true_anomaly, eccentricity )
+	eccentric_anomaly = conversion.true_to_eccentric_anomaly( true_anomaly, eccentricity )
 
 or directly from the orbital elements:
 
 .. code-block:: python
 
 	keplerian_state = ...
-	eccentric_anomaly = conversion.true_anomaly_to_eccentric_anomaly( keplerian_state( true_anomaly_index ), keplerian_state( eccentricity_index ) )
+	eccentric_anomaly = conversion.true_to_eccentric_anomaly( keplerian_state( true_anomaly_index ), keplerian_state( eccentricity_index ) )
 
 
 Note that this function automatically identifies whether the orbit is elliptical or hyperbolic, and computes the associated eccentric anomaly.
@@ -403,8 +423,8 @@ Similarly, Tudat contains functions to convert from eccentric to mean anomaly (a
 	true_anomaly = ...
 	eccentricity = ...
 
-	eccentric_anomaly = conversion.true_anomaly_to_eccentric_anomaly( true_anomaly, eccentricity )
-	mean_anomaly = conversion.eccentric_anomaly_to_mean_anomaly( eccentric_anomaly, eccentricity )
+	eccentric_anomaly = conversion.true_to_eccentric_anomaly( true_anomaly, eccentricity )
+	mean_anomaly = conversion.eccentric_to_mean_anomaly( eccentric_anomaly, eccentricity )
 
 The conversion from mean to eccentric anomaly involves the solution of an implicit algebraic equation (Kepler's equation), for which a root finder is used.
 Root finders are discussed in more detail here (TODO: insert link). Tudat has a default root finder, and default selection for
@@ -419,7 +439,7 @@ You can do this as follows:
 	initial_guess = ...
 	root_finder = ...
 
-	eccentric_anomaly = conversion.mean_anomaly_to_eccentric_anomaly(
+	eccentric_anomaly = conversion.mean_to_eccentric_anomaly(
 		eccentricity = eccentricity,
 		mean_anomaly = mean_anomaly,
 		use_default_initial_guess = False, #Optional; set to False to use optional user-defined initial guess
@@ -622,7 +642,7 @@ One of the other two supported attitude representations is the modified Rodrigue
      - Shadow flag
 
 
-Transformation to and from quaternions is achieved with the functions ``conversion.modified_rodrigues_parameters_to_quaternions`` and ``conversion.quaternions_to_modified_rodrigues_parameter_elements``, respectively, where the only input is the attitude element (in vector format).
+Transformation to and from quaternions is achieved with the functions :func:`~tudatpy.astro.element_conversion.modified_rodrigues_parameters_to_quaternions` and :func:`~tudatpy.astro.element_conversion.quaternions_to_modified_rodrigues_parameters`, respectively, where the only input is the attitude element (in vector format).
 
 .. note::
 
@@ -649,16 +669,10 @@ The final attitude representations is the exponential map (EM). The indices for 
 	* - 3
 	  - Shadow flag
 
-and transformation to and from quaternions is achieved with the aid of the functions ``conversion.exponential_map_to_quaternions`` and ``conversions.quaternions_to_exponential_map``, respectively. Also for these equations the only input is the attitude element (in vector format).
+and transformation to and from quaternions is achieved with the aid of the functions :func:`~tudatpy.astro.element_conversion.exponential_map_to_quaternions` and :func:`~tudatpy.astro.element_conversion..quaternions_to_exponential_map`, respectively. Also for these equations the only input is the attitude element (in vector format).
 
 
 .. note:: 
 
 	Similarly to MRPs, the exponential map elements also make use of the shadow flag. In this case, this flag signals whether the shadow exponential map (SEM) is in use. This flag is also introduces to avoid the singularity at :math:`\pm 2 \pi` radians, but interestingly, there is no difference between the equations of motion and transformations in terms of EM or SEM. In fact, they are only introduced to make sure that when converting from EM to quaternions, the resulting quaternion sign history is continuous. The switch between EM and SEM occurs whenever the magnitude of the rotation represented by the EM vector is larger than :math:`\pi`.
 
-
-
-=================
-
-.. [Acton1996] Acton, (1996). Ancillary data services of NASA's Navigation and Ancillary Information Facility.
-   Planetary and Space Science, Volume 44, Issue 1, https://doi.org/10.1016/0032-0633(95)00107-7.

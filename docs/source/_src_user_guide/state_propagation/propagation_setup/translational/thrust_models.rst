@@ -47,8 +47,9 @@ Once one (or more) engine models, and a rotation model, for the vehicle are defi
     .. code-block:: python
 
         acceleration_on_vehicle = dict( 
+            ...,
             Vehicle=[  propagation_setup.acceleration.thrust_from_engine( 'MainEngine') ],
-            ...
+        )
 
 Where the thrust acceleration due to the single engine model named 'MainEngine' will be used
 
