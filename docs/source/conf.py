@@ -46,7 +46,6 @@ extensions = ['sphinx.ext.autodoc',
               'nbsphinx',  # to embed Jupyter notebooks
               'IPython.sphinxext.ipython_console_highlighting',  # to have pygments in rendered notebooks
               'sphinx_gallery.load_style',  # to show notebooks as galleries
-              'sphinx_rtd_theme', # theme
               'sphinx_copybutton', # copy button in code blocks
               "sphinx_codeautolink",
               ]
@@ -86,8 +85,8 @@ master_doc = 'index'
 # General information about the project.
 project = 'tudat.space'
 year = datetime.now().year
-copyright = f'{year}, Tudat Space'
-author = 'Tudat Space'
+copyright = f'{year}, Tudat Team'
+author = 'Tudat Team'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -110,9 +109,6 @@ language = "en"
 # This patterns also effect to html_static_path and html_extra_path
 exclude_patterns = []
 
-# The name of the Pygments (syntax highlighting) style to use.
-pygments_style = 'sphinx'
-
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
 
@@ -121,46 +117,40 @@ todo_include_todos = True
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-import sphinx_rtd_theme
-
-html_theme = 'sphinx_rtd_theme'
+html_theme = "pydata_sphinx_theme"
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-html_theme_options = {'collapse_navigation': False,
-                      'sticky_navigation': True,
+html_theme_options = {
                       'navigation_depth': 6,
-                      'includehidden': True,
-                      'titles_only': True}
+                        "use_edit_page_button": True,
+                        "pygments_dark_style" : "github-dark-high-contrast",
+                        "pygments_light_style" : "github-light-high-contrast",
+                      }
+
+html_context = {
+    "github_user": "tudat-team",
+    "github_repo": "tudat-space",
+    "github_version": "develop",
+    "doc_path": "docs/source",
+}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "custom.css" will overwrite the builtin "custom.css".
 html_static_path = ['_static']
 
-#
-
 # Load stylesheet to set maximum width in html pages
 html_css_files = [
     'custom.css',
 ]
-#
-# def setup(app):
-#     app.add_css_file('custom.css')
 
-# Custom sidebar templates, must be a dictionary that maps document names
-# to template names.
-#
-# This is required for the alabaster theme
-# refs: http://alabaster.readthedocs.io/en/latest/installation.html#sidebars
 html_sidebars = {
-    '**': [
-        'relations.html',  # needs 'show_related': True theme option to display
-        'searchbox.html',
-    ]
+    "**": ["sidebar-nav-bs", "sidebar-ethical-ads"]
 }
+
 html_logo = "_static/cover.png"
 
 # -- Options for HTMLHelp output ------------------------------------------
