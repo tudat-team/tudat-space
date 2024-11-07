@@ -308,43 +308,9 @@ Some resources related to Tudatpy are located elsewhere. See below!
 .. toctree::
    :titlesonly:
    :maxdepth: 3
-   :caption: Getting started
    :hidden:
 
-   _src_getting_started/quickstart
-   _src_getting_started/installation
-   _src_getting_started/examples
-   _src_getting_started/primers_coding_tools
-   _src_getting_started/faq
-   _src_getting_started/using_source
-
-.. toctree::
-   :titlesonly:
-   :maxdepth: 1
-   :caption: User guide
-   :hidden:
-
-   _src_user_guide/tudatpy_submodules
-   _src_user_guide/state_propagation
-   _src_user_guide/state_estimation
-   _src_user_guide/prelim_mission_design
-   _src_user_guide/mathematics
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Advanced topics
-   :hidden:
-
-   _src_advanced_topics/post_processing_python
-   _src_advanced_topics/parallelization
-   _src_advanced_topics/optimization_pygmo
-
-.. toctree::
-   :maxdepth: 2
-   :caption: About
-   :hidden:
-
-   _src_about/contribute_to_tudat
-   _src_about/research_output
-   _src_about/history
-
+   _src_getting_started/index
+   _src_user_guide/index
+   _src_advanced_topics/index
+   _src_about/index
