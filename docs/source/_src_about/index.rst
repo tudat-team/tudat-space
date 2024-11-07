@@ -6,6 +6,7 @@ This section provides information on the history of Tudat(Py), how to contribute
 
 .. toctree::
 
-   /_src_about/contribute_to_tudat
-   /_src_about/research_output
    /_src_about/history
+   /_src_about/research_output
+   /_src_about/contribute_to_tudat
+   Developer documentation <https://tudat-developer.readthedocs.io/en/latest/>
