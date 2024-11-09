@@ -152,6 +152,8 @@ html_css_files = [
     'custom.css',
 ]
 
+html_favicon = "_static/cover_crop.png"
+
 html_sidebars = {
     "**": ["sidebar-nav-bs", "sidebar-ethical-ads"]
 }
