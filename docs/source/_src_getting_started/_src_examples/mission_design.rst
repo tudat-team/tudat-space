@@ -2,7 +2,7 @@
 .. _mission_design_examples:
 
 =======================
-Mission Design Examples
+Mission Design
 =======================
 
 Performance evaluation
