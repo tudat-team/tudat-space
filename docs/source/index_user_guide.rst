@@ -1,10 +1,17 @@
+.. _user_guide:
+
+******************************
+User Guide
+******************************
+This section provides a detailed guide on how to use the functionalities of Tudat(Py).
+
 .. _tudatpy_submodules:
 
 ==================
 Tudatpy Submodules
 ==================
 
-Tudatpy has its functionality divided into a number of submodules. A brief description of each submodule, as well as a detailed listing of all functions/class in each submodule, can be found on our :doc:`index` website. On this page, we give a brief top-level overview of which type of functionality is in which (group of) submodules, and why.
+Tudatpy has its functionality divided into a number of submodules. A brief description of each submodule, as well as a detailed listing of all functions/class in each submodule, can be found on our `API reference <https://py.api.tudat.space/en/latest/>`_. On this page, we give a brief top-level overview of which type of functionality is in which (group of) submodules, and why.
 
 Top-level submodules
 ====================
@@ -35,6 +42,20 @@ The distinction between the ``foo`` and ``foo_setup`` libraries is the following
 * The ``numerical_simulation.foo`` submodule contains the functionality to perform the actual calculations. Typically, the objects in this submodule are created from one or more ``Settings`` objects created in the ``foo_setup`` library. These objects may have various interdependencies which are difficult to manually implement, but straightforward to conceptually define with a string, boolean, etc. For instance: it is easy to state that a set of aerodynamic coefficients dependent on angle of attack (this is defined in the ``environment_setup`` submodule), while it is rather cumbersome to manually extract the angle of attack, and input it to the aerodynamic coefficient during every time step. The objects that do this automatically come from the ``environment`` submodule. In addition, the ``numerical_simulation.foo`` libraries also contain a number of functions that can be used to process propagation results, or extract information from one or more objects in the ``numerical_simulation.foo`` library.
 
 
+.. toctree::
+   :caption: Tudat(Py) user guide
+   :hidden:
 
+   /_src_user_guide/state_propagation
+   /_src_user_guide/state_estimation
+   /_src_user_guide/prelim_mission_design
+   /_src_user_guide/mathematics
+   Mathematical model definition <https://raw.githubusercontent.com/tudat-team/tudat-space/master/Tudat_mathematical_model_definition.pdf>
 
+.. toctree::
+   :caption: Interface with other libraries
+   :hidden:
 
+   /_src_advanced_topics/post_processing_python
+   /_src_advanced_topics/parallelization
+   /_src_advanced_topics/optimization_pygmo

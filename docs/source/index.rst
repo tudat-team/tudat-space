@@ -11,7 +11,7 @@ Tudat and Tudat(Py) are entirely open-source and disseminated using conda packag
     :gutter: 2 3 4 4
 
     .. grid-item-card::
-        :img-top: _static/rocket-solid.svg
+        :img-top: _static/icons/rocket-solid.svg
         :text-align: center
 
         Getting started
@@ -30,7 +30,28 @@ Tudat and Tudat(Py) are entirely open-source and disseminated using conda packag
             To the quickstart guide
 
     .. grid-item-card::
-        :img-top: _static/user-astronaut-solid.svg
+        :img-top: _static/icons/laptop-code-solid.svg
+        :text-align: center
+
+        Examples
+        ^^^
+
+        Have a look at our examples to see TudatPy in action.
+        The examples showcase the propagation, estimation, mission design and optimization capabilities of TudatPy.
+        They are available in various forms.
+
+        +++
+
+        .. button-ref:: getting_started_examples
+            :expand:
+            :color: secondary
+            :click-parent:
+
+            To the examples
+
+
+    .. grid-item-card::
+        :img-top: _static/icons/user-astronaut-solid.svg
         :text-align: center
 
         User guide
@@ -41,7 +62,7 @@ Tudat and Tudat(Py) are entirely open-source and disseminated using conda packag
 
         +++
 
-        .. button-ref:: _src_user_guide/index
+        .. button-ref:: index_user_guide
             :expand:
             :color: secondary
             :click-parent:
@@ -49,7 +70,7 @@ Tudat and Tudat(Py) are entirely open-source and disseminated using conda packag
             To the user guide
 
     .. grid-item-card::
-        :img-top: _static/laptop-code-solid.svg
+        :img-top: _static/icons/code-solid.svg
         :text-align: center
 
         API reference
@@ -66,47 +87,23 @@ Tudat and Tudat(Py) are entirely open-source and disseminated using conda packag
 
             To the API reference
 
-    .. grid-item-card::
-        :img-top: _static/code-solid.svg
-        :text-align: center
-
-        Contributor's guide
-        ^^^
-
-        Learn more about where you can find the source code of Tudat(Py), upcoming developments and how you can contribute.
-
-        +++
-
-        .. button-ref:: contribute_to_tudat
-            :expand:
-            :color: secondary
-            :click-parent:
-
-            To the contributor's guide
-
-
 
 .. toctree::
    :hidden:
 
-   _src_getting_started/index
-   _src_user_guide/index
-   _src_advanced_topics/index
-
-.. toctree::
-   :hidden:
-
+   /index_getting_started
+   /index_examples
+   /index_user_guide
    API Reference <https://py.api.tudat.space/en/latest/>
+   /index_contribute
+   /index_about
 
-.. toctree::
-   :hidden:
+---------------------
+Want to contribute?
+---------------------
+Tudat(Py) is an open-source project and open to contributions from anyone! If you would like to contribute to Tudat, have a look at the :ref:`contributer guide <contribute_to_tudat>`.
 
-   _src_about/index
-
-.. nblinkgallery::
-   :caption: Take a look at some examples!
-
-   /_src_getting_started/_src_examples/propagation.rst
-   /_src_getting_started/_src_examples/estimation.rst
-   /_src_getting_started/_src_examples/mission_design.rst
-   /_src_getting_started/_src_examples/pygmo.rst
+---------------------
+Contact us!
+---------------------
+If you have any questions or need help, feel free to reach out on our `Github discussion forum <https://github.com/orgs/tudat-team/discussions>`_.

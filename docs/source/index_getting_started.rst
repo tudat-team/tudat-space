@@ -4,9 +4,10 @@
 Getting Started
 ******************************
 
-This section contains all the information for new users, including how to install tudatpy and some examples.
+This section contains all the information for new users, including a quickstart guide, how to install tudatpy and primers on some coding tools.
 
 .. toctree::
+   :hidden:
 
    /_src_getting_started/quickstart
    /_src_getting_started/installation
@@ -14,15 +15,8 @@ This section contains all the information for new users, including how to instal
    /_src_getting_started/using_source
 
 .. toctree::
-   :caption: Examples
-
-   /_src_getting_started/_src_examples/propagation
-   /_src_getting_started/_src_examples/estimation
-   /_src_getting_started/_src_examples/mission_design
-   /_src_getting_started/_src_examples/pygmo
-
-.. toctree::
    :caption: Primer for coding tools
+   :hidden:
 
    /_src_getting_started/_src_use_of_tools/conda
    /_src_getting_started/_src_use_of_tools/python
