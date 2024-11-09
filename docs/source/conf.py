@@ -131,7 +131,8 @@ html_theme_options = {
                         "logo": {
                             "image_light": "_static/cover.png",
                             "image_dark": "_static/cover_dark.png",
-                        }
+                        },
+                        "announcement": "Have thoughts or feedback on the new layout? Let us know in our <a href='https://github.com/orgs/tudat-team/discussions'>Github Discussion forum!</a>",
                       }
 
 html_context = {
