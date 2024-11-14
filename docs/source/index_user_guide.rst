@@ -60,7 +60,7 @@ This section provides a detailed guide on how to use the functionalities of Tuda
             :color: secondary
             :click-parent:
 
-            To the preliminary mission design section
+            To the mission design section
 
     .. grid-item-card::
         :text-align: center
@@ -72,7 +72,7 @@ This section provides a detailed guide on how to use the functionalities of Tuda
 
         +++
 
-        .. button-link:: mathematics
+        .. button-ref:: mathematics
             :expand:
             :color: secondary
             :click-parent:
