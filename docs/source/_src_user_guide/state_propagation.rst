@@ -8,8 +8,8 @@ In this section, the different stages and options of a typical simulation setup 
 Tudat is organized as shown in the figure below.
 
 
- .. figure:: _static/tudatpy_high_level.png
-    :width: 600
+.. figure:: _static/tudatpy_high_level.png
+   :width: 600
 
 Inputs
 =======

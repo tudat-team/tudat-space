@@ -98,13 +98,13 @@ The most commonly-used for procedure for creating an settings of the trajectory 
 leg has the same type (e.g. all unpowered, all spherical-shaping, etc.). The factory functions to create a set of
 node and leg settings is:
 
-  - Unpowered legs: :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_settings_unpowered_unperturbed_legs`.
-  - Velocity-based DSM legs: :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_settings_dsm_velocity_based_legs`.
-  - Position-based DSM legs: :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_settings_dsm_position_based_legs`.
-  - Spherical-shaping legs: :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_settings_spherical_shaping_legs`.
-  - Hodographic-shaping legs: :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_settings_hodographic_shaping_legs` or
-    :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_settings_hodographic_shaping_legs_with_recommended_functions` 
-    (for manual definition or recommended automatic definition of shaping functions, respectively).
+- Unpowered legs: :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_settings_unpowered_unperturbed_legs`.
+- Velocity-based DSM legs: :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_settings_dsm_velocity_based_legs`.
+- Position-based DSM legs: :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_settings_dsm_position_based_legs`.
+- Spherical-shaping legs: :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_settings_spherical_shaping_legs`.
+- Hodographic-shaping legs: :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_settings_hodographic_shaping_legs` or
+  :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_settings_hodographic_shaping_legs_with_recommended_functions` 
+  (for manual definition or recommended automatic definition of shaping functions, respectively).
 
 Manually creating settings for single legs and nodes is described :ref:`below <manual_transfer_legs_nodes>`.
 
@@ -272,29 +272,29 @@ to the literature listed in the API reference for the factory function of each l
 
 - **Velocity-based DSM legs**: 1 leg parameter:
 
-      - Fraction of the leg's time-of-flight at which DSM is applied (:math:`\in [0,1]`).
+  - Fraction of the leg's time-of-flight at which DSM is applied (:math:`\in [0,1]`).
 
 - **Position-based DSM legs**: 4 leg parameters:
 
-      - Fraction of the leg's time-of-flight at which DSM is applied (:math:`\in [0,1]`).
-      - Position of the DSM in spherical coordinates, with respect to a frame with the x-axis aligned with the position
-        of the departure body, z-axis aligned with the angular momentum of the departure body, y-axis selected to form a
-        right-handed frame. The spherical position is specified as: dimensionless radial position (using as unit of length
-        the radial position of the departure body), in-plane angle, out-of-plane angle.
+  - Fraction of the leg's time-of-flight at which DSM is applied (:math:`\in [0,1]`).
+  - Position of the DSM in spherical coordinates, with respect to a frame with the x-axis aligned with the position
+    of the departure body, z-axis aligned with the angular momentum of the departure body, y-axis selected to form a
+    right-handed frame. The spherical position is specified as: dimensionless radial position (using as unit of length
+    the radial position of the departure body), in-plane angle, out-of-plane angle.
 
-        .. note::
+  .. note::
 
-            A leg with position-based DSMs requires more leg parameters than one with velocity-based DSMs. However, a transfer
-            constituted by the former will require less node parameters than one constituted by the latter.
+      A leg with position-based DSMs requires more leg parameters than one with velocity-based DSMs. However, a transfer
+      constituted by the former will require less node parameters than one constituted by the latter.
 
 - **Spherical-shaping legs**: 1 leg parameter:
 
-      - Integer number of revolution (:math:`\geq 0`).
+  - Integer number of revolution (:math:`\geq 0`).
 
 - **Hodographic-shaping legs**: at least 1 leg parameter:
 
-      - Integer number of revolution (:math:`\geq 0`).
-      - Free coefficients of shaping functions (number of coefficients is greater or equal to zero).
+  - Integer number of revolution (:math:`\geq 0`).
+  - Free coefficients of shaping functions (number of coefficients is greater or equal to zero).
 
 Finally, and before moving on to the description of the node parameters, it is important to analyze the boundary conditions used
 for the evaluation of each leg of the transfer. These conditions are dealt with internally by the model; hence, the user never
@@ -344,12 +344,12 @@ following leg.
   needs to be applied at the periapsis of the departure elliptic orbit to enter a hyperbolic orbit with the target excess
   velocity, according to section 4.6 of `Musegaas (2012)`_. This node is subdivided into the following types:
 
-    - **Node with leg-defined outgoing velocity**: Does not require node parameters.
-    - **Node with user-defined outgoing velocity**: Node parameters:
+  - **Node with leg-defined outgoing velocity**: Does not require node parameters.
+  - **Node with user-defined outgoing velocity**: Node parameters:
 
-      - Outgoing velocity vector relative to the node, specified with respect to a TNW reference frame defined using the node's
-        inertial state. The outgoing relative velocity is specified in spherical coordinates: norm of the velocity,
-        in-plane angle (:math:`\in [0, 2\pi]`), out-of-plane angle (:math:`\in [-\pi/2, \pi/2]`).
+    - Outgoing velocity vector relative to the node, specified with respect to a TNW reference frame defined using the node's
+      inertial state. The outgoing relative velocity is specified in spherical coordinates: norm of the velocity,
+      in-plane angle (:math:`\in [0, 2\pi]`), out-of-plane angle (:math:`\in [-\pi/2, \pi/2]`).
 
 - **Arrival node**: Usually, this is the final node of the
   transfer. The incoming relative velocity at the node (i.e. the excess velocity) is either
@@ -357,54 +357,54 @@ following leg.
   needs to be applied at the periapsis of the hyperbolic orbit with the specified excess velocity to enter the
   arrival elliptical orbit, according to section 4.6 of `Musegaas (2012)`_. This node is subdivided into the following types:
 
-      - **Node with leg-defined incoming velocity**: Does not require node parameters.
-      - **Node with user-defined incoming velocity**: Node parameters:
+    - **Node with leg-defined incoming velocity**: Does not require node parameters.
+    - **Node with user-defined incoming velocity**: Node parameters:
 
-        - Incoming velocity vector relative to the node, specified with respect to a TNW reference frame defined using the node's
-          inertial state. The incoming relative velocity is specified in spherical coordinates: norm  of the velocity,
-          in-plane angle (:math:`\in [0, 2\pi]`), out-of-plane angle (:math:`\in [-\pi/2, \pi/2]`).
+      - Incoming velocity vector relative to the node, specified with respect to a TNW reference frame defined using the node's
+        inertial state. The incoming relative velocity is specified in spherical coordinates: norm  of the velocity,
+        in-plane angle (:math:`\in [0, 2\pi]`), out-of-plane angle (:math:`\in [-\pi/2, \pi/2]`).
 
 
 - **Swingby node**: Usually, these are the intermediate nodes of the transfer.
   The swingby node is subdivided into the following types:
 
-      - **Node with legs-defined incoming and outgoing velocity**: Does not require node parameters. Computes the
-        :math:`\Delta V \geq 0` that needs to be applied during the swingby to patch the incoming and outgoing
-        velocities, according to section 4.5.2 of `Musegaas (2012)`_.
+  - **Node with legs-defined incoming and outgoing velocity**: Does not require node parameters. Computes the
+    :math:`\Delta V \geq 0` that needs to be applied during the swingby to patch the incoming and outgoing
+    velocities, according to section 4.5.2 of `Musegaas (2012)`_.
 
-      - **Node with leg-defined incoming velocity, user-defined swingby**: Given the known incoming velocity,
-        the node forward propagates the swingby using the user-specified parameters, according to sections 4.4.2/3
-        of `Musegaas (2012)`_. Node parameters:
+  - **Node with leg-defined incoming velocity, user-defined swingby**: Given the known incoming velocity,
+    the node forward propagates the swingby using the user-specified parameters, according to sections 4.4.2/3
+    of `Musegaas (2012)`_. Node parameters:
 
-            - Swingby periapsis radius
-            - Swingby :math:`\Delta V` (applied at the periapsis)
-            - Outgoing-velocity rotation angle. Defined according to Appendix 7a of "Spacecraft Trajectory Optimization",
-              `Conway (2010)`_. This angle defines the plane in which the swingby occurs (different from the bending angle,
-              which is defined inside that plane). This angle takes values in :math:`[0, 2\pi]`.
+    - Swingby periapsis radius
+    - Swingby :math:`\Delta V` (applied at the periapsis)
+    - Outgoing-velocity rotation angle. Defined according to Appendix 7a of "Spacecraft Trajectory Optimization",
+      `Conway (2010)`_. This angle defines the plane in which the swingby occurs (different from the bending angle,
+      which is defined inside that plane). This angle takes values in :math:`[0, 2\pi]`.
 
-      - **Node with user-defined swingby, leg-defined outgoing velocity**: Given the known outgoing velocity,
-        the node backward propagates the swingby using the user-specified parameters. Analogous to sections 4.4.2/3
-        of `Musegaas (2012)`_. Node parameters:
+  - **Node with user-defined swingby, leg-defined outgoing velocity**: Given the known outgoing velocity,
+    the node backward propagates the swingby using the user-specified parameters. Analogous to sections 4.4.2/3
+    of `Musegaas (2012)`_. Node parameters:
 
-            - Swingby periapsis radius
-            - Swingby :math:`\Delta V` (applied at the periapsis)
-            - Incoming-velocity rotation angle. Defined analogously to the outgoing-velocity rotation angle, which in turn is
-              defined according to Appendix 7a of "Spacecraft Trajectory Optimization",
-              `Conway (2010)`_. This angle defines the plane in which the swingby occurs (different from the bending angle,
-              which is defined inside that plane). This angle takes values in :math:`[0, 2\pi]`.
+    - Swingby periapsis radius
+    - Swingby :math:`\Delta V` (applied at the periapsis)
+    - Incoming-velocity rotation angle. Defined analogously to the outgoing-velocity rotation angle, which in turn is
+      defined according to Appendix 7a of "Spacecraft Trajectory Optimization",
+      `Conway (2010)`_. This angle defines the plane in which the swingby occurs (different from the bending angle,
+      which is defined inside that plane). This angle takes values in :math:`[0, 2\pi]`.
 
-      - **Node with user-defined incoming, user-defined swingby**: Given the known incoming velocity,
-        the node forward propagates the swingby using the user-specified parameters, according to sections 4.4.2/3
-        of `Musegaas (2012)`_. Node parameters:
+  - **Node with user-defined incoming, user-defined swingby**: Given the known incoming velocity,
+    the node forward propagates the swingby using the user-specified parameters, according to sections 4.4.2/3
+    of `Musegaas (2012)`_. Node parameters:
 
-            - Incoming velocity vector relative to the node, specified with respect to a TNW reference frame defined using the node's
-              inertial state. The incoming relative velocity is specified in spherical coordinates: norm of the velocity,
-              in-plane angle (:math:`\in [0, 2\pi]`), out-of-plane angle (:math:`\in [-\pi/2, \pi/2]`).
-            - Swingby periapsis radius
-            - Swingby :math:`\Delta V` (applied at the periapsis)
-            - Outgoing-velocity rotation angle. Defined according to Appendix 7a of "Spacecraft Trajectory Optimization",
-              `Conway (2010)`_. This angle defines the plane in which the swingby occurs (different from the bending angle,
-              which is defined inside that plane). This angle takes values in :math:`[0, 2\pi]`.
+    - Incoming velocity vector relative to the node, specified with respect to a TNW reference frame defined using the node's
+      inertial state. The incoming relative velocity is specified in spherical coordinates: norm of the velocity,
+      in-plane angle (:math:`\in [0, 2\pi]`), out-of-plane angle (:math:`\in [-\pi/2, \pi/2]`).
+    - Swingby periapsis radius
+    - Swingby :math:`\Delta V` (applied at the periapsis)
+    - Outgoing-velocity rotation angle. Defined according to Appendix 7a of "Spacecraft Trajectory Optimization",
+      `Conway (2010)`_. This angle defines the plane in which the swingby occurs (different from the bending angle,
+      which is defined inside that plane). This angle takes values in :math:`[0, 2\pi]`.
 
 .. _`Musegaas (2012)`:  http://resolver.tudelft.nl/uuid:02468c77-5c64-4df8-9a24-1ed7ad9d1408
 .. _`Conway (2010)`:  https://doi.org/10.1017/CBO9780511778025

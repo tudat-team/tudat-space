@@ -50,9 +50,9 @@ The only limitation is that you may not have duplicate entries of link ends *and
 .. code-block:: python
 
     # Define link ends
-    one_way_nno_mex_link_ends = dict( );
-    one_way_nno_mex_link_ends[ transmitter ] = estimation_setup.observation.body_reference_point_link_end_id( "Earth", "NNO" );
-    one_way_nno_mex_link_ends[ receiver ] = estimation_setup.observation.body_origin_link_end_id( "MeX" );
+    one_way_nno_mex_link_ends = dict( )
+    one_way_nno_mex_link_ends[ transmitter ] = estimation_setup.observation.body_reference_point_link_end_id( "Earth", "NNO" )
+    one_way_nno_mex_link_ends[ receiver ] = estimation_setup.observation.body_origin_link_end_id( "MeX" )
     one_way_nno_mex_link_definition = estimation_setup.link_definition( one_way_nno_mex_link_ends )
 
     
@@ -164,18 +164,17 @@ in a covariance analysis one is limited to Gaussian uncorrelated noise, which in
 When taking this approach, one makes use of the fact that observation simulators for the estimation are created anyway when creating an :class:`~tudatpy.numerical_simulation.Estimator` object (discussed further :ref:`here <perform_estimation>`).
 You can extract these ``observation_simulators`` as follows, and use them to :ref:`simulate observations <observationSimulation>` as follows:
 
-    .. code-block:: python
+.. code-block:: python
 
+  # Create physical environment (as set of physical bodies)
+  estimator = Estimator(
+      bodies,
+      parameters_to_estimate,
+      observation_settings_list,
+      propagator_settings)
 
-        # Create physical environment (as set of physical bodies)
-        estimator = Estimator(
-            bodies,
-            parameters_to_estimate,
-            observation_settings_list,
-            propagator_settings)
-
-        # Extract observation simulators
-        observation_simulators = estimator.observation_simulators
+  # Extract observation simulators
+  observation_simulators = estimator.observation_simulators
 
 
 Different truth and estimation model
@@ -185,17 +184,17 @@ The second case above, where the truth and estimation model are different from o
 of the bodies, the propagation model, and the observation models can be made different between the two. A challenge is often in choosing the difference that one
 wants to implement to study the case at hand. In this case, the observation simulators are created directly, using the :func:`~tudatpy.numerical_simulation.estimation_setup.create_observation_simulators` function:
 
-    .. code-block:: python
+.. code-block:: python
 
-        # Create physical environment (a set of physical bodies)
-        bodies = ...
+  # Create physical environment (a set of physical bodies)
+  bodies = ...
 
-        # Create settings for observation models
-        observation_settings_list = list( )
-        ...
-        
-        # Create observation simulators
-        observation_simulators = create_observation_simulators( observation_settings_list, bodies )       
+  # Create settings for observation models
+  observation_settings_list = list( )
+  ...
+
+  # Create observation simulators
+  observation_simulators = create_observation_simulators( observation_settings_list, bodies )       
 
 When subsequently creating the :class:`~tudatpy.numerical_simulation.Estimator` object (discussed further :ref:`here <perform_estimation>`)
 to perform the estimation, one can then provide a different ``observation_settings_list`` to ensure a difference between the truth
@@ -216,13 +215,3 @@ the ``ObservationModel`` simulates observations of a single kind, for a single s
 Details on the associated options can be found in the API documentation.
 
 For 'manual' simulation of observations, you can extract an :class:`~tudatpy.ObservationModel` object from the ``ObservationSimulator`` (TODO example).
-
-
-
-
-
-
-
- 
-
-

@@ -235,12 +235,12 @@ Thrust
 | **Description**
 | The thrust acceleration model can be created through one of the factory functions:
 
-  * :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.thrust_from_engine` (use single specific engine)
-  * :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.thrust_from_engines` (use multiple specific engines)
-  * :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.thrust_from_all_engines` (use all engines)
+* :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.thrust_from_engine` (use single specific engine)
+* :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.thrust_from_engines` (use multiple specific engines)
+* :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.thrust_from_all_engines` (use all engines)
 
-  Which differ only in the manner in which the user selects the engine model(s) this is(are) to be used for calculating the thrust.
-  The details of the model used for the thrust is given on a :ref:`dedicated page <thrust_acceleration_setup>`
+Which differ only in the manner in which the user selects the engine model(s) this is(are) to be used for calculating the thrust.
+The details of the model used for the thrust is given on a :ref:`dedicated page <thrust_acceleration_setup>`
 
 | **Dependencies**
 | 1. One or more engine models for the body under thrust

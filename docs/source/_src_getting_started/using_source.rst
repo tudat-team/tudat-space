@@ -24,8 +24,8 @@ If you only want to view and navigate through the source code, but not compile i
 
 The tudat-bundle itself is rarely modified, but instead includes the repositories that hold the actual Tudat code (as submodules). The following two repositories (which are inside tudat-bundle) is where the source code is housed, and can be modified:
 
-  * The tudat repository, which contains the code for the functionality in C++, and the (~250) unit tests: `https://github.com/tudat-team/tudat <https://github.com/tudat-team/tudat>`_
-  * The tudatpy repository, which contains the code for creating the Python exposures from the C++ code, and a number of small tests: `https://github.com/tudat-team/tudatpy <https://github.com/tudat-team/tudatpy>`_
+* The tudat repository, which contains the code for the functionality in C++, and the (~250) unit tests: `https://github.com/tudat-team/tudat <https://github.com/tudat-team/tudat>`_
+* The tudatpy repository, which contains the code for creating the Python exposures from the C++ code, and a number of small tests: `https://github.com/tudat-team/tudatpy <https://github.com/tudat-team/tudatpy>`_
   
 To assist new users/developers in understanding the link between the Python code and the C++ code, we have taken a number of the example applications, and have translated them into C++, as an example of how the interfaces in the two languages compare to one another (TODO EXAMPLES).
 
