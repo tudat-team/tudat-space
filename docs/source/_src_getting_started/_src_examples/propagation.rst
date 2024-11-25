@@ -17,6 +17,7 @@ The following examples showcase the basic functionality of the Tudat numerical p
   ./tudatpy-examples/propagation/linear_sensitivity_analysis.ipynb
   ./tudatpy-examples/propagation/solar_system_propagation.ipynb
   ./tudatpy-examples/propagation/thrust_between_Earth_Moon.ipynb
+  ./tudatpy-examples/propagation/juice_flybys.ipynb
 
 Advanced examples
 *********************
@@ -29,6 +30,7 @@ Note that an additional related example (in particular on the setup of a custom 
   ./tudatpy-examples/propagation/reentry_trajectory.ipynb
   ./tudatpy-examples/propagation/two_stage_rocket_ascent.ipynb
   ./tudatpy-examples/propagation/separation_satellites_diff_drag.ipynb
+  ./tudatpy-examples/propagation/thrust_satellite_engine.ipynb
   ./tudatpy-examples/propagation/coupled_translational_rotational_dynamics.ipynb
   ./tudatpy-examples/propagation/impact_manifolds_lpo_cr3bp.ipynb
     

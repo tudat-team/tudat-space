@@ -28,11 +28,19 @@ In the following examples, Cartesian positions of bodies are taken from an exter
 Estimation using real observations
 **********************************
 
-In the following examples, real observations are used to fit the dynamics of spacecraft and/or natural bodies.
+In the following examples, real observations are used to fit compute residuals and/or compute dynamics of spacecraft and/or natural bodies.
 
 .. nbgallery::
 
   ./tudatpy-examples/estimation/retrieving_mpc_observation_data.ipynb
   ./tudatpy-examples/estimation/estimation_with_mpc.ipynb
+  ./tudatpy-examples/estimation/improved_estimation_with_mpc.ipynb
+  ./tudatpy-examples/estimation/mro_range_estimation.ipynb
+
+Estimation using real observations - Python only
+************************************************
+
+We also have the following examples that showcase the reading of, and estimation from radio tracking data from DSN/ESTRACK. Using these examples requires tudatpy to have been compiled by high-precision time representation (which is not currently available through these conda packages) The examples provide instructions on how to compile your own tudatpy kernel with the required settings.
+
 
   

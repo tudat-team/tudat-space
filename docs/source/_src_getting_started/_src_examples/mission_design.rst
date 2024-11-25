@@ -14,6 +14,7 @@ The following examples compute the performance (e.g. Delta V, time of flight, et
 
   ./tudatpy-examples/mission_design/mga_trajectories.ipynb
   ./tudatpy-examples/mission_design/earth_mars_transfer_window.ipynb
+  ./tudatpy-examples/mission_design/low_thrust_earth_mars_transfer_window
   
 .. _trajectory_optimization_examples:
   
