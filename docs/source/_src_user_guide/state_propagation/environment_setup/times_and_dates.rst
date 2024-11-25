@@ -20,21 +20,21 @@ The specifics are described in the :class:`~tudatpy.astro.time_conversion.DateTi
 
 Below is an example of defining the current date and time through the Python ``datetime`` class, or through Tudat's ``DateTime`` class.
 
-    .. code-block:: python
+.. code-block:: python
 
-	from datetime import datetime
-	from tudatpy.astro import time_conversion
+  from datetime import datetime
+  from tudatpy.astro import time_conversion
 
-	# Create Python datetime object
-    	python_datetime = datetime.fromisoformat('2023-06-20T00:05:23.281765')
-    	
-    	# Convert to Tudat DateTime object
-    	tudat_datetime = time_conversion.datetime_to_tudat( python_datetime )
-    	
-    	# Extract single-valued epoch in different scales from Tudat object
-    	seconds_since_j2000 = tudat_datetime.epoch( )
-        julian_day = tudat_datetime.julian_day( )
-        modified_julian_day = tudat_datetime.modified_julian_day( )
+  # Create Python datetime object
+  python_datetime = datetime.fromisoformat('2023-06-20T00:05:23.281765')
+
+  # Convert to Tudat DateTime object
+  tudat_datetime = time_conversion.datetime_to_tudat( python_datetime )
+
+  # Extract single-valued epoch in different scales from Tudat object
+  seconds_since_j2000 = tudat_datetime.epoch( )
+  julian_day = tudat_datetime.julian_day( )
+  modified_julian_day = tudat_datetime.modified_julian_day( )
 
 Note that the inverse operations, creating a ``DateTime`` object from an epoch (:func:`~tudatpy.astro.time_conversion.date_time_from_epoch`),
 an iso string (:func:`~tudatpy.astro.time_conversion.date_time_from_iso_string`), or directly from the year, month, day and time
@@ -69,19 +69,19 @@ Tudat supports the automatic conversion between the following time scales:
 
 Conversion between each of these time scales can be done using the :class:`~tudatpy.astro.time_conversion.TimeScaleConverter`, which can convert an epoch from and to any one of the above time scales. Below is an example of how to convert an epoch from one time scale to another:
 
-    .. code-block:: python
+.. code-block:: python
 
-	from tudatpy.astro import time_conversion
+  from tudatpy.astro import time_conversion
 
-    	# Create time scale converter object
-    	time_scale_converter = time_conversion.default_time_scale_converter( )
-    	
-    	# Set the epoch in UTC scale (for instance from the above example using DateTime)
-    	epoch_utc = tudat_datetime.epoch( )
-    	epoch_tdb = time_scale_converter.convert_time( 
-    		input_scale = time_conversion.utc_scale, 
-    		output_scale = time_conversion.tdb_scale,
-    		input_value = epoch_utc )
+  # Create time scale converter object
+  time_scale_converter = time_conversion.default_time_scale_converter( )
+
+  # Set the epoch in UTC scale (for instance from the above example using DateTime)
+  epoch_utc = tudat_datetime.epoch( )
+  epoch_tdb = time_scale_converter.convert_time( 
+    input_scale = time_conversion.utc_scale, 
+    output_scale = time_conversion.tdb_scale,
+    input_value = epoch_utc )
 
 The conversion between UTC and UT1 (the latter of which is used directly to compute Earth rotation) is based on the detailed Earth rotation model as defined in the `IERS 2010 Conventions <https://www.iers.org/SharedDocs/Publikationen/EN/IERS/Publications/tn/TechnNote36/tn36.pdf>`_. The ``default_time_scale_converter`` is initialized using default settings for small variations to Earth rotation (see :doc:`the notes here <rotation_model>` on high-accuracy Earth rotation model and the function :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.gcrs_to_itrs`). The conversion between geocentric scales (TT/TCG) and barycentric scales (TDB/TCB) is performed using the model implemented in SOFA for TT-TDB, which is a series expansion with about 800 terms, based on a numerical solution to the governing equation of the transformation. This conversion is accurate to the level of several nanoseconds. For higher accuracy in this conversion, numerical computation of these time scales, consistent with a given solar system ephemeris, should be used. Data for such conversions is shipped with recent INPOP ephemerides (for instance).
 

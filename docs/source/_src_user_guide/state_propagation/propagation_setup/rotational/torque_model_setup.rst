@@ -42,16 +42,16 @@ In this example, the following torques are exerted on the vehicle:
 
 - by the Earth:
 
-    - spherical-harmonic gravitational torque (up to order 4 and degree 4)
-    - aerodynamic torque
+  - spherical-harmonic gravitational torque (up to order 4 and degree 4)
+  - aerodynamic torque
 
 - by the Sun:
 
-    - second-degree gravitational torque
+  - second-degree gravitational torque
 
 - by the Moon:
 
-    - second-degree gravitational torque
+  - second-degree gravitational torque
 
 The variable ``torques_settings_vehicle`` denotes the list of bodies exerting torques and the types of
 torques, while the variable ``torque_settings`` associates this list with the body undergoing the

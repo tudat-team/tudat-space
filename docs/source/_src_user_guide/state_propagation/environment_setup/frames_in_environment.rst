@@ -60,8 +60,8 @@ for full list of options), the translational state of a body is *always* set as 
 with any relevant element conversions performed automatically. The Cartesian state may extracted from one
 of two places when the body is updated:
 
-  *  **State vector**: if the translational state of body :math:`A` is among the states that is numerically propagated, these elements will be extracted from the full state, and any relevant frame and elements conversions performed to define the current state of the body :math:`A`
-  *  **Ephemeris of a body**: if the translational state of a body is required for a simulation, and this body is *not* numerically propagated, its state is retrieved from this body's ephemeris (see :class:`~tudatpy.numerical_simulation.environment.Ephemeris`).
+*  **State vector**: if the translational state of body :math:`A` is among the states that is numerically propagated, these elements will be extracted from the full state, and any relevant frame and elements conversions performed to define the current state of the body :math:`A`
+*  **Ephemeris of a body**: if the translational state of a body is required for a simulation, and this body is *not* numerically propagated, its state is retrieved from this body's ephemeris (see :class:`~tudatpy.numerical_simulation.environment.Ephemeris`).
 
 .. _translational_frame_origins:
 

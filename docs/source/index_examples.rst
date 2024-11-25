@@ -37,7 +37,7 @@ There are several example applications disseminated in various forms.
 
     +++
 
-    .. button-link:: https://mybinder.org/v2/gh/tudat-team/tudatpy-examples/master
+    .. button-link:: https://github.com/tudat-team/tudatpy-examples
        :expand:
        :color: primary
        :click-parent:
@@ -65,11 +65,10 @@ There are several example applications disseminated in various forms.
 
 
 .. nbgallery::
-   :caption: Categories of example applications
+   :caption: Example application categories
    :name: example-categories
-   :glob:
 
-   _src_examples/propagation.rst
-   _src_examples/estimation.rst
-   _src_examples/mission_design.rst
-   _src_examples/pygmo.rst
+   /_src_getting_started/_src_examples/propagation
+   /_src_getting_started/_src_examples/estimation
+   /_src_getting_started/_src_examples/mission_design
+   /_src_getting_started/_src_examples/pygmo

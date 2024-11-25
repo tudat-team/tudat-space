@@ -26,11 +26,11 @@ between states from the environment is simply done as:
 
 .. code-block:: python
 
-        bodies = ...
-        mars_state_wrt_global_origin = bodies.get( "Mars" ).state
-        earth_state_wrt_global_origin = bodies.get( "Mars" ).state
+	bodies = ...
+	mars_state_wrt_global_origin = bodies.get( "Mars" ).state
+	earth_state_wrt_global_origin = bodies.get( "Mars" ).state
 
-        mars_state_wrt_earth = mars_state_wrt_global_origin - earth_state_wrt_global_origin
+	mars_state_wrt_earth = mars_state_wrt_global_origin - earth_state_wrt_global_origin
 
 You can also bypass body and ephemeris objects altogether, and use ``spice`` to obtain the relative state.
 Note, however, that this will use whichever ``spice`` kernels you have loaded, and **may not be consistent with the states
@@ -44,13 +44,13 @@ you are using the bodies in your simulations.**
 
 .. code-block:: python
 
-        current_time = ...
+	current_time = ...
 
-        mars_state_wrt_earth = spice.get_body_cartesian_state_at_epoch(
-                target_body_name="Moon",
-                observer_body_name="Earth",
-                reference_frame_name="J2000",
-                ephemeris_time=current_time )
+	mars_state_wrt_earth = spice.get_body_cartesian_state_at_epoch(
+			target_body_name="Moon",
+			observer_body_name="Earth",
+			reference_frame_name="J2000",
+			ephemeris_time=current_time )
 
 
 .. _frame_orientations:
@@ -92,13 +92,13 @@ Manually, the above transformations would be done simply as:
 
 .. code-block:: python
 
-        rotation_to_frame = ... # 3D Matrix
-        time_derivative_of_rotation_to_frame  = ... # 3D Matrix
-        original_state = ... # 6D Vector
+	rotation_to_frame = ... # 3D Matrix
+	time_derivative_of_rotation_to_frame  = ... # 3D Matrix
+	original_state = ... # 6D Vector
 
-        rotated_state = np.zeros(6, dtype=float)
-        rotated_state[ :3] = rotation_to_frame @ original_state[ :3 ]
-        rotated_state[3: ] = rotation_to_frame @ original_state[ 3: ] + time_derivative_of_rotation_to_frame @ original_state[ :3 ]
+	rotated_state = np.zeros(6, dtype=float)
+	rotated_state[ :3] = rotation_to_frame @ original_state[ :3 ]
+	rotated_state[3: ] = rotation_to_frame @ original_state[ 3: ] + time_derivative_of_rotation_to_frame @ original_state[ :3 ]
 
 Where the rotation matrix and its derivative (for body-fixed to inertial frames) can be obtained from the ``Body`` object during propagation, or a ``RotationalEphemeris``
 object outside of the propagation, see :ref:`below <body_fixed_frames>` for more details.
@@ -106,14 +106,14 @@ object outside of the propagation, see :ref:`below <body_fixed_frames>` for more
 Below, we give an overview of the available frames, and frame transformations in Tudat, and discuss how they can be accessed both during
 (when setting up a :ref:`custom model <custom_models>`), and outside of a propagation. The available frames are:
 
-  * :ref:`body_fixed_frames`: Each ``Body`` in Tudat can have a fixed frame assigned to it (see `API documentation <https://py.api.tudat.space/en/latest/rotation_model.html#functions>`_ for a list of options for model types).
-  * :ref:`gcrs_itrs_frames`: The high-accuracy rotation from GCRS to ITRS is implemented in Tudat. The ITRS, TIRS, CIRS and ICRS frames are defined.
-  * :ref:`aero_frames`: A number of frames typically used in entry and ascent trajectories: the Vertical, Trajectory and Aerodynamic frames.
-  * :ref:`orbital_frames`: The TNW and RSW frames (defined by the current relative translational state).
-  * :ref:`spice_frames`: Any frame defined by the currently loaded SPICE kernels can be accessed.
-  * :ref:`predefined_orientations`: The J2000 and ECLIPJ2000 frame orientations (at present, the only two supported options for the global frame orientation).
-  * :ref:`topocentric_frames`: Each ground station/lander on a body has a frame (East-North-Up) automatically associated with it.
-  * :ref:`additional_frames`: The TEME frame, which is typically used for the definition of two-line elements (TLE).
+* :ref:`body_fixed_frames`: Each ``Body`` in Tudat can have a fixed frame assigned to it (see `API documentation <https://py.api.tudat.space/en/latest/rotation_model.html#functions>`_ for a list of options for model types).
+* :ref:`gcrs_itrs_frames`: The high-accuracy rotation from GCRS to ITRS is implemented in Tudat. The ITRS, TIRS, CIRS and ICRS frames are defined.
+* :ref:`aero_frames`: A number of frames typically used in entry and ascent trajectories: the Vertical, Trajectory and Aerodynamic frames.
+* :ref:`orbital_frames`: The TNW and RSW frames (defined by the current relative translational state).
+* :ref:`spice_frames`: Any frame defined by the currently loaded SPICE kernels can be accessed.
+* :ref:`predefined_orientations`: The J2000 and ECLIPJ2000 frame orientations (at present, the only two supported options for the global frame orientation).
+* :ref:`topocentric_frames`: Each ground station/lander on a body has a frame (East-North-Up) automatically associated with it.
+* :ref:`additional_frames`: The TEME frame, which is typically used for the definition of two-line elements (TLE).
 
 .. _body_fixed_frames:
 
@@ -131,16 +131,16 @@ for the Earth outside of a propagation (assuming a ``SystemOfBodies`` object, na
 
 .. code-block:: python
 
-        earth_rotation_model = bodies.get( "Earth" ).rotation_model
+	earth_rotation_model = bodies.get( "Earth" ).rotation_model
 
-        # Define time at which to determine rotation quantities
-        current_time = ...
+	# Define time at which to determine rotation quantities
+	current_time = ...
 
-        # Determine R^{(I/B)} rotation matrix
-        rotation_matrix_to_inertial_frame = earth_rotation_model.body_fixed_to_inertial_rotation( current_time )
+	# Determine R^{(I/B)} rotation matrix
+	rotation_matrix_to_inertial_frame = earth_rotation_model.body_fixed_to_inertial_rotation( current_time )
 
-        # Determine first derivative of R^{(I/B)} rotation matrix
-        rotation_matrix_to_inertial_frame = earth_rotation_model.time_derivative_body_fixed_to_inertial_rotation( current_time )
+	# Determine first derivative of R^{(I/B)} rotation matrix
+	rotation_matrix_to_inertial_frame = earth_rotation_model.time_derivative_body_fixed_to_inertial_rotation( current_time )
 
 To automatically rotate a vector from the body-fixed frame to the inertial frame using the ``RotationalEphemeris``, we provide the
 :class:`~tudatpy.numerical_simulation.environment.transform_to_inertial_orientation` function, which automatically
@@ -155,17 +155,17 @@ performs the rotation with the rotation matrix and its derivative:
 
 .. code-block:: python
 
-        earth_rotation_model = bodies.get( "Earth" ).rotation_model
+	earth_rotation_model = bodies.get( "Earth" ).rotation_model
 
-        # Define time at which to determine rotation quantities
-        current_time = ...
+	# Define time at which to determine rotation quantities
+	current_time = ...
 
-        # Set the body-fixed state
-        body_fixed_state = ...
+	# Set the body-fixed state
+	body_fixed_state = ...
 
-        # Transform state to inertial frame, using Earth rotation model
-        inertial_state = environment.transform_to_inertial_orientation(
-            body_fixed_state, current_time, earth_rotation_model )
+	# Transform state to inertial frame, using Earth rotation model
+	inertial_state = environment.transform_to_inertial_orientation(
+		body_fixed_state, current_time, earth_rotation_model )
 
 
 The full list of functions to extract rotational quantities from a rotational model can be found under
@@ -198,15 +198,15 @@ When this rotation model is assigned to Earth, it can be extracted as an object 
 
 .. code-block:: python
 
-        # Create body settings (typically from defaults), and modify the Earth's rotation settings
-        body_settings = ...
-        body_settings.get("Earth").rotation_model_settings = environment_setup.rotation_model.gcrs_to_itrs( )
+	# Create body settings (typically from defaults), and modify the Earth's rotation settings
+	body_settings = ...
+	body_settings.get("Earth").rotation_model_settings = environment_setup.rotation_model.gcrs_to_itrs( )
 
-        # Create bodies
-        bodies = environment_setup.create_system_of_bodies(body_settings)
+	# Create bodies
+	bodies = environment_setup.create_system_of_bodies(body_settings)
 
-        # Extract GcrsToItrsRotationModel object
-        high_fidelity_earth_rotation_model = bodies.get( "Earth" ).rotation_model
+	# Extract GcrsToItrsRotationModel object
+	high_fidelity_earth_rotation_model = bodies.get( "Earth" ).rotation_model
 
 The rotation matrices produced by the ``high_fidelity_earth_rotation_model`` will not have the GCRS as their base frame,
 but rather the global frame orientation of the environment (typically J2000 or ECLIPJ2000), as defined in the ``body_settings``.
@@ -307,12 +307,12 @@ frame assigned to it. The rotation matrix from body-fixed to topocentric frame c
 
 .. code-block:: python
 
-        # Extract station, and object storing its state
-        delft_station = bodies.get( "Earth" ).get_ground_station( "DopTrack" )
-        delft_station_state = station.station_state
+	# Extract station, and object storing its state
+	delft_station = bodies.get( "Earth" ).get_ground_station( "DopTrack" )
+	delft_station_state = station.station_state
 
-        # Extract rotation from Earth-fixed to station topocentric frame.
-        rotation_earth_fixed_to_delft_topocentric = delft_station_state.rotation_matrix_body_fixed_to_topocentric
+	# Extract rotation from Earth-fixed to station topocentric frame.
+	rotation_earth_fixed_to_delft_topocentric = delft_station_state.rotation_matrix_body_fixed_to_topocentric
 
 The rotation matrix is stored in a :class:`~tudatpy.numerical_simulation.environment.GroundStationState` object (which is obtained
 in the second code line above for the specific station), and the :attr:`~tudatpy.numerical_simulation.environment.GroundStationState.rotation_matrix_body_fixed_to_topocentric`

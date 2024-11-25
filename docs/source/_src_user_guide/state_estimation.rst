@@ -11,7 +11,7 @@ use of batch least-squares. A broad range of parameters (initial translational a
 hybrid-arc states; numerous physical properties of the environment) from a diverse set of available observations is
 supported. Estimation in Tudat is organized as shown in the figure below.
 
- .. figure:: _static/estimation_diagram.png
+.. figure:: _static/estimation_diagram.png
 
 Estimation Inputs
 =================

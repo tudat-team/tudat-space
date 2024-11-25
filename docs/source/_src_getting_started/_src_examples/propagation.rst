@@ -1,7 +1,7 @@
 .. _propagation_examples:
 
 ====================
-Propagation Examples
+Propagation
 ====================
 
 Introductory examples

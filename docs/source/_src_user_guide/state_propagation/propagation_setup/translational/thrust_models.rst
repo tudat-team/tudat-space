@@ -44,12 +44,12 @@ where :math:`\mathbf{T}_{B,i}` is the body-fixed thrust direction of body :math:
 Once one (or more) engine models, and a rotation model, for the vehicle are defined, the thrust acceleration can simply be added to the acceleration settings as any other acceleration model.
 
 
-    .. code-block:: python
+.. code-block:: python
 
-        acceleration_on_vehicle = dict( 
-            ...,
-            Vehicle=[  propagation_setup.acceleration.thrust_from_engine( 'MainEngine') ],
-        )
+   acceleration_on_vehicle = dict( 
+      ...,
+      Vehicle=[  propagation_setup.acceleration.thrust_from_engine( 'MainEngine') ],
+   )
 
 Where the thrust acceleration due to the single engine model named 'MainEngine' will be used
 

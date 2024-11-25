@@ -110,15 +110,15 @@ Updating Tudat(Py)
 
 To update an existing installation of ``tudatpy``, activate your ``tudat-space`` environment:
 
-    .. code:: bash
+.. code:: bash
 
-        conda activate tudat-space
+    conda activate tudat-space
 
 Then execute the following command to install the latest version of ``tudatpy``:
 
-    .. code:: bash
+.. code:: bash
 
-        conda install -c tudat-team tudatpy
+    conda install -c tudat-team tudatpy
 
 Note that using this command may also update additional packages (such as ``tudat``) that are needed to run the latest version of ``tudatpy``.
 
@@ -127,9 +127,9 @@ Note that using this command may also update additional packages (such as ``tuda
 
     It can happen that running the install command above does not update ``tudatpy`` to the latest version (which can be checked on the `Anaconda website <https://anaconda.org/tudat-team/tudatpy>`_). In that case it is recommended to execute the following command (while still in the ``tudat-space`` environment):
 
-       .. code:: bash
+    .. code:: bash
 
-           conda install --update-deps -c tudat-team tudatpy
+        conda install --update-deps -c tudat-team tudatpy
 
 .. seealso::
 

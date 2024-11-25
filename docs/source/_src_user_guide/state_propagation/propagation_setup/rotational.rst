@@ -15,8 +15,8 @@ Rotational Dynamics
 Settings to propagate the rotational state of a body numerically can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.rotational` factory function, described in detail in the :doc:`API documentation <propagator>`. In the current page, only the Tudat-specific aspects of the input will be briefly described.
 The default (processed) representation for solving the rotational equations of motion is by using a vector of 7 elements:
 
-  * The quaternion elements (vector :math:`\mathbf{q}` of size 4) of the rotation from body-fixed to inertial frame (see :ref:`quaternion_definition`)
-  * The angular velocity (vector :math:`\boldsymbol{\omega}` of size 3) of the body w.r.t. the inertial frame, expressed in the body-fixed frame.
+* The quaternion elements (vector :math:`\mathbf{q}` of size 4) of the rotation from body-fixed to inertial frame (see :ref:`quaternion_definition`)
+* The angular velocity (vector :math:`\boldsymbol{\omega}` of size 3) of the body w.r.t. the inertial frame, expressed in the body-fixed frame.
 
 Several other formulations can be used if wanted (see below and :ref:`processed_propagated_states`).
 
@@ -24,7 +24,7 @@ To propagate rotational dynamics, an inertia tensor for the propagated body must
 
 .. note::
 
-    At present, influence of the time-variability of the inertia tensor (and other effects related to time-variation of mass distribution such as jet damping) are not included in the evaluation of the rotational equations of motion, *even in the case where the inertia tensor is time variable*. 
+  At present, influence of the time-variability of the inertia tensor (and other effects related to time-variation of mass distribution such as jet damping) are not included in the evaluation of the rotational equations of motion, *even in the case where the inertia tensor is time variable*. 
 
 
 Inputs
@@ -38,7 +38,7 @@ In addition to the settings described :ref:`here <propagation_inputs>`, the defi
 
 .. warning::
 
-    The initial state must be provided as processed state formulation :math:`[\mathbf{q};\boldsymbol{\omega}]`, **regardless of the propagator type**
+  The initial state must be provided as processed state formulation :math:`[\mathbf{q};\boldsymbol{\omega}]`, **regardless of the propagator type**.
 
 .. _rotational_example:
 

@@ -41,16 +41,16 @@ In this example, the following accelerations are exerted on the vehicle:
 
 - by the Earth:
 
-    - spherical harmonic gravitational acceleration (degree and order 5)
-    - aerodynamic acceleration
+  - spherical harmonic gravitational acceleration (degree and order 5)
+  - aerodynamic acceleration
 
 - by the Sun:
 
-    - point-mass gravity
+  - point-mass gravity
 
 - by the Moon:
 
-    - point-mass gravity
+  - point-mass gravity
 
 The variable ``accelerations_settings_vehicle`` denotes the list of bodies exerting accelerations and the types of
 accelerations, while the variable ``acceleration_settings`` associates this list with the body undergoing the

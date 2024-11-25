@@ -39,13 +39,13 @@ that are passed to the ``propagation_setup.propagator.multitype`` function are u
 
 Conversely, the ``propagation_setup.propagator.multitype`` function does not take any initial states as inputs. The complete, multitype, initial state vector is set up from its constituent single-arc settings (with the order as noted below)
 
- .. note::
-    
-    The order of the state entries in the multi-type state vector will, in general, be different from the order provided in the `propagator_settings_list` When different state types are propagated, the state output contains the states in following order:
+.. note::
+   
+  The order of the state entries in the multi-type state vector will, in general, be different from the order provided in the `propagator_settings_list` When different state types are propagated, the state output contains the states in following order:
 
-    - Translational state ( **T** )
-    - Rotational state ( **R** )
-    - Body mass state ( **M** )
-    - Custom state ( **C** )
+  - Translational state ( **T** )
+  - Rotational state ( **R** )
+  - Body mass state ( **M** )
+  - Custom state ( **C** )
 
-    To retrieve the definition of the multitype state vector, see :ref:`console_output`.
+  To retrieve the definition of the multitype state vector, see :ref:`console_output`.

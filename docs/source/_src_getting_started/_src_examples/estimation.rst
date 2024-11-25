@@ -1,7 +1,7 @@
 .. _estimation_examples:
 
 ====================
-Estimation Examples
+Estimation
 ====================
 
 Estimation using simulated observations

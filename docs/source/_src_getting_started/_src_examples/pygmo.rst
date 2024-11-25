@@ -1,8 +1,8 @@
 .. _pygmo_examples:
 
-==============
-PyGMO Examples
-==============
+========================
+Optimization using PyGMO
+========================
 
 .. note::
 

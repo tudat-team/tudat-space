@@ -53,8 +53,8 @@ Setting up the simulation
 ==========================
 The workflow of a typical propagation in Tudat(Py) is shown in the figure below.
 
- .. figure:: ../_src_user_guide/_static/tudatpy_high_level.png
-    :width: 600
+.. figure:: /_src_user_guide/_static/tudatpy_high_level.png
+   :width: 600
 
 There are two inputs necessary to perform a simulation: a :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.PropagatorSettings` instance and a :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` instance.
 The propagation setup defines the differential equations to be solved and the method to solve them, while the environment setup defines the physical modeling of the environment and system properties, including both celestial and artificial objects.
