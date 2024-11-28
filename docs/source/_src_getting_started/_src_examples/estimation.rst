@@ -42,5 +42,12 @@ Estimation using real observations - Python only
 
 We also have the following examples that showcase the reading of, and estimation from radio tracking data from DSN/ESTRACK. Using these examples requires tudatpy to have been compiled by high-precision time representation (which is not currently available through these conda packages) The examples provide instructions on how to compile your own tudatpy kernel with the required settings.
 
+.. workaround until the .py files are available as .ipynb files
 
-  
+.. toctree::
+
+  doppler-data-analysis/mro_residuals_analysis
+  doppler-data-analysis/grail_odf_estimation
+  doppler-data-analysis/grail_residuals
+  doppler-data-analysis/grail_spice_fit
+ 
