@@ -14,7 +14,38 @@ To define an observation model, the various bodies, spacecraft, ground stations,
 Ground Station Creation
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Often, you will need to define the positions of ground stations on celestial bodies to/from which observations are made. Note that in Tudat, a planetary lander is treated identically to a terrestrial ground station. The creation of a ground station is described in the :ref:`environment setup <ground_stations>`.
+Often, you will need to define the positions of ground stations on celestial bodies to/from which observations are made. Note that in Tudat, a planetary lander is treated identically to a terrestrial ground station. The creation of a ground station is done when creating the environment, as one of the properties of a body. See the entry on ground stations in :ref:`available_environment_models`.
+
+For reference, we give example code to create settings for a ground station name ``Graz`` to the settings of body ``Earth``:
+
+
+.. code-block:: python
+                
+    graz_station_cartesian_position = [ 4194426.1, 1162694.5, 4647246.9 ]
+    graz_station_settings = environment_setup.ground_station.basic_station( "Graz", graz_station_position )
+
+    earth_ground_station_settings_list = list()
+    earth_ground_station_settings_list.append( graz_station_settings )
+
+    body_settings.get("Earth").ground_station_settings = earth_ground_station_settings_list
+
+You can also define the station position in geodetic or spherical position elements. For instance:
+
+.. code-block:: python
+
+    graz_station_geodetic_position = [ 539.4, 0.821475864, 0.270409097 ]
+    graz_station_settings = environment_setup.ground_station.basic_station( "Graz", graz_station_position, element_conversion.geodetic_position_type )
+
+    earth_ground_station_settings_list = list()
+    earth_ground_station_settings_list.append( graz_station_settings )
+
+    body_settings.get("Earth").ground_station_settings = earth_ground_station_settings_list
+
+We also offer default settings for DSN stations:
+
+.. code-block:: python
+
+    body_settings.get("Earth").ground_station_settings = environment_setup.ground_station.dsn_stations
 
 Creating a Set of Link Ends
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
