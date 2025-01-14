@@ -1,4 +1,4 @@
-# ``tudat-space``
+# tudat-space
 
 This repository contains the source code for the `tudat-space` website, found under [docs.tudat.space](https://docs.tudat.space/). The website contains a getting-started section for new users, a comprehensive user-guide along with some background information on the Tudat project. It is built using Sphinx.
 
