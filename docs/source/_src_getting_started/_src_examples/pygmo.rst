@@ -11,7 +11,7 @@ Optimization using PyGMO
 Optimization with PyGMO
 ***********************
 
-Below, a number of examples of Tudat applications used the Pygmo optimization toolbox are shown. Note that a number of additional related examples are given on the page for :ref:`trajectory_optimization_examples`
+Below, a number of examples of Tudat applications used the Pygmo optimization toolbox are shown. Note that a number of additional related examples are given on the page for :ref:`trajectory_optimization_examples`.
 
 .. nbgallery::
 
