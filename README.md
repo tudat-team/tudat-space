@@ -16,6 +16,6 @@ The [examples on the website](https://docs.tudat.space/en/latest/_src_getting_st
 If you would like to add examples or make changes, please contribute in the `tudatpy-examples` repository.
 This repository will be automatically updated from the [Sync tudat-space submodule](https://github.com/tudat-team/tudatpy-examples/actions/workflows/sync-tudat-space.yml) action.
 
-## Developing and building the website
+## Contributing to the website
 
-Instruction for developing and building the website (locally or online) are provide on our [wiki](https://github.com/tudat-team/tudat-space/wiki)
+If you see anything on the website you would like to improve, you can leave your thoughts on our [discussion board](https://github.com/orgs/tudat-team/discussions/categories/ideas-and-suggestions) or make the modifications yourself and open a pull request. Detailed instruction for developing and building the website (locally or online) are provide on our [wiki](https://github.com/tudat-team/tudat-space/wiki)
