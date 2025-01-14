@@ -13,7 +13,7 @@ This allows you to run a Linux distribution in parallel to your regular Windows 
 Compared to a dual-boot setup or virtual machine, WSL is more lightweight and integrates well with a number of IDEs.
 It is primarily based on the command-line, although you can also run graphical applications.
 
-In the context of Tudat(Py), having a Linux environment is recommended for the development and testing of new features in the Tudat and Tudat(Py) libraries.
+In the context of Tudat(Py), having a Linux environment is required as of v0.9, as no more Windows conda packages are provided.
 
 
 Installing WSL

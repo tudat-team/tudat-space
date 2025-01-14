@@ -1,0 +1,21 @@
+name: tudat-space-dev
+channels:
+  - conda-forge
+  - tudat-team/label/dev
+  - tudat-team
+dependencies:
+  - tudatpy
+  - matplotlib
+  - notebook
+  - scipy
+  - pandas
+  - astropy
+  - tqdm
+  - astropy-healpix
+  - spiceypy # for automatic data downloader and kernel converter
+  - tabulate
+  - colorama
+  - numpy<2.0.0
+  - pip
+  - pip:
+      - astroquery>=0.4.8.dev9306
