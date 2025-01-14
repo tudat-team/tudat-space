@@ -4,28 +4,20 @@
 Examples
 =========
 
-There are several example applications disseminated in various forms.
+The examples below will help you get started in exploring the diverse capabilities of Tudat!
 
-.. grid:: 1 1 3 3
+.. nbgallery::
+   :caption: Tudatpy example categories
+   :name: example-categories
+
+   /_src_getting_started/_src_examples/propagation
+   /_src_getting_started/_src_examples/estimation
+   /_src_getting_started/_src_examples/mission_design
+   /_src_getting_started/_src_examples/pygmo
+
+
+.. grid:: 2
   :gutter: 2
-
-  .. grid-item-card::
-    :text-align: center
-
-    **Mybinder**
-    ^^^
-
-    Here examples written as Jupyter notebooks can be run online, without the need of installing tudatpy and/or an IDE.
-
-    +++
-
-    .. button-link:: https://mybinder.org/v2/gh/tudat-team/tudatpy-examples/master
-       :expand:
-       :color: primary
-       :click-parent:
-       :outline:
-
-       Try it out
 
   .. grid-item-card::
     :text-align: center
@@ -33,7 +25,7 @@ There are several example applications disseminated in various forms.
     **Github Repository**
     ^^^
 
-    The same examples are available on Github, both as Jupyter notebooks and regular *.py* files, in the ``tudatpy-examples`` repository.
+    The same examples shown above available on Github, both as Jupyter notebooks and regular *.py* files, in the ``tudatpy-examples`` repository.
 
     +++
 
@@ -44,31 +36,3 @@ There are several example applications disseminated in various forms.
        :outline:
 
        Go to the repository
-
-  .. grid-item-card::
-    :text-align: center
-
-    **Online documentation**
-    ^^^
-
-    Alternatively, you can go through the examples directly from this website.
-
-    +++
-
-    .. button-ref:: example-categories
-       :expand:
-       :color: primary
-       :click-parent:
-       :outline:
-
-       See below
-
-
-.. nbgallery::
-   :caption: Example application categories
-   :name: example-categories
-
-   /_src_getting_started/_src_examples/propagation
-   /_src_getting_started/_src_examples/estimation
-   /_src_getting_started/_src_examples/mission_design
-   /_src_getting_started/_src_examples/pygmo
