@@ -9,6 +9,11 @@ dependencies:
   - scipy
   - pandas
   - astropy
+  - tqdm      
+  - astropy-healpix  
+  - spiceypy # for automatic data downloader and kernel converter
+  - tabulate
+  - colorama
   - numpy<2.0.0
   - pip
   - pip:
