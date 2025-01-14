@@ -16,7 +16,7 @@ package manager, such as Miniconda or Anaconda.
     **Windows users** must install the Windows Subsystem for Linux (WSL) and install Tudat(Py) in a ``conda`` environment inside WSL.
     For a guide on how to setup WSL and configure it to work with an IDE, see the :ref:`getting_started_with_wsl` guide. 
 
-To install Anaconda or Miniconda on your system, see the `Anaconda Installation`_  of `Miniconda Installation`_ guide provided in their documentation
+To install Anaconda or Miniconda on your system, see the `Anaconda Installation`_  of `Miniconda Installation`_ guide provided in their documentation.
 
 .. _`Anaconda Installation`: https://docs.anaconda.com/anaconda/install/
 .. _`Miniconda Installation`: https://docs.conda.io/en/latest/miniconda.html
@@ -31,40 +31,41 @@ Installing Tudat(Py)
 ####################
 
 To install Tudat(Py), we recommend the use of a terminal (command line) interface. On Unix system (Linux and Mac), ``conda`` should already be available within the terminal; you can open your terminal directly. Open a terminal. Then first verify that ``conda`` is installed by executing the following command:
+
 .. On Windows, you can find a program called ``Anaconda Prompt`` in the Windows search. Using ``conda`` in the ``Anaconda Prompt`` is equivalent to the terminal use of ``conda`` on Unix. Some Unix commands are made available in this prompt, although most usage is equivalent to the Windows shell (see below for some useful terminal commands).
 
-.. code-block::
+.. code-block:: bash
 
     conda --version
 
 Next ensure that ``conda`` is up-to-date.
 
-.. code:: bash
+.. code-block:: bash
 
     conda update conda
 
 Download this ``environment.yaml`` (:download:`yaml <_static/environment.yaml>`). Then, in your terminal navigate to the directory containing this file and execute the following command (see below for tips on using the command line):
 
-.. code:: bash
+.. code-block:: bash
 
     conda env create -f environment.yaml
 
 With the ``conda`` environment now installed, you can activate it to work in it using:
 
-.. code:: bash
+.. code-block:: bash
 
-        conda activate tudat-space
+    conda activate tudat-space
 
 .. note::
     At this point, you may choose to install the **development version of TudatPy**, which is a conda package that is updated as soon as changes are merged to the development branch of the code on GitHub. 
     To do so, you can download the ``environment-dev.yaml`` (:download:`yaml <_static/environment-dev.yaml>`), and use:
 
-    .. code:: bash
+    .. code-block:: bash
 
         conda env create -f environment-dev.yaml
         conda activate tudat-space-dev
 
-    to install and activate the tudat-space-dev environment.
+    to install and activate the ``tudat-space-dev environment``.
 
 
 For more help on getting started with the command-line interface (CLI), you could start with a `tutorial`_.
@@ -73,7 +74,7 @@ For more help on getting started with the command-line interface (CLI), you coul
 
 Congratulations! You have now installed Tudat and TudatPy and are ready to start running your simulations and analyses! We recommend you get started by having a look at our :ref:`getting_started_examples`.
 
-If there are any issues with the installation, the examples, or if you have any question or comments on Tudat, please use our `Github discussion forum <https://github.com/orgs/tudat-team/discussions>`_
+If there are any issues with the installation, the examples, or if you have any question or comments on Tudat, please use our `Github discussion forum <https://github.com/orgs/tudat-team/discussions>`_.
 
 .. _`tudatpy-feedstock`: https://github.com/tudat-team/tudatpy-feedstock
 .. _`tudatpy`: https://github.com/tudat-team/tudatpy
@@ -86,7 +87,7 @@ If you would prefer to not use a conda package, but instead build your own tudat
 
 .. note::
 
-    This workflow is not recommended for new users
+    This workflow is not recommended for new users.
 
 
 
