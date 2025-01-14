@@ -5,6 +5,7 @@ channels:
 dependencies:
   - tudatpy
   - matplotlib
+  - notebook
   - scipy
   - pandas
   - astropy
