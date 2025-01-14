@@ -16,63 +16,6 @@ The [examples on the website](https://docs.tudat.space/en/latest/_src_getting_st
 If you would like to add examples or make changes, please contribute in the `tudatpy-examples` repository.
 This repository will be automatically updated from the [Sync tudat-space submodule](https://github.com/tudat-team/tudatpy-examples/actions/workflows/sync-tudat-space.yml) action.
 
-## How to build the `tudat-space` website locally 
+## Developing and building the website
 
-1. Clone the repository and enter directory
-
-```bash
-git clone https://github.com/tudat-team/tudat-space
-cd tudat-space
-```
-
-2. Clone the `tudatpy-examples` submodule
-
-```bash
-git submodule update --init --recursive
-```
-
-The Sphinx build process is documented in the [tudat-developer-docs](https://tudat-developer.readthedocs.io/en/latest/primer/docs/sphinx.html).
-
-In short, the `tudat-space` website can be built as follows:
-
-3. Install the `tudat-docs` conda environment:
-
-```bash
-conda env create -f docs/environment.yaml
-```
-
-4. Activate the `tudat-docs` environment:
-
-```bash
-conda activate tudat-docs
-```
-
-5. Build the website:
-
-The local build can be triggered from the command-line or using an IDE. For IDE-specific instructions, see the [tudat-developer-docs](https://tudat-developer.readthedocs.io/en/latest/primer/docs/sphinx.html#compiling-documentation-in-pycharm).
-
-The website is built using the `sphinx-build` command, specifying `html` as desired output.
-
-```bash
-sphinx-build -b html docs/source docs/build
-```
-
-By default, this will only trigger a partial rebuild of the files with changes.
-This might lead to issues when changing file names or after switching branches.
-In that case, a full rebuild can be triggered by adding a `-E` flag:
-
-```bash
-sphinx-build -b html docs/source docs/build -E
-```
-
-For additional troubleshooting see the [Troubleshooting section](https://tudat-developer.readthedocs.io/en/latest/primer/docs/sphinx.html#troubleshooting) in the `tudat-developer-docs`.
-
-6. View the local build:
-
-You can check your local build by opening the newly created `docs/build/index.html` with your preferred browser and navigating as desired.
-
-## How to trigger a build of the online `tudat-space` website
-
-The `tudat-space` website resides at [docs.tudat.space](https://docs.tudat.space/), where the ``stable`` version (see menu at lower left of this page) contains the docs of the `tudat-space` master branch, and the ``latest`` version of the `tudat-space` develop branch.
-The website is rebuilt every time a new commit is pushed on one of the branches.
-The progress and log of the online docs build can be found [here](https://readthedocs.org/projects/tudat-space/).
+Instruction for developing and building the website (locally or online) are provide on our [wiki](https://github.com/tudat-team/tudat-space/wiki)
