@@ -65,7 +65,7 @@ With the ``conda`` environment now installed, you can activate it to work in it 
         conda env create -f environment-dev.yaml
         conda activate tudat-space-dev
 
-    to install and activate the ``tudat-space-dev environment``.
+    to install and activate the ``tudat-space-dev`` environment.
 
 
 For more help on getting started with the command-line interface (CLI), you could start with a `tutorial`_.
