@@ -580,15 +580,15 @@ Three different versions of the Unified State Model are present in Tudat. They d
 	  - Shadow flag
 	  - Shadow flag
 
-Regardless of the rotational coordinates chosen, the Unified State Model elements consists of 7 elements. For each Unified State Model representation, conversion to and from Keplerian and Cartesian coordinates is implemented. As an example, the conversion from Keplerian elements for the USM7 elements is shown here:
+Regardless of the rotational coordinates chosen, the Unified State Model elements consists of 7 elements. For each Unified State Model representation, conversion to and from Cartesian coordinates is implemented. As an example, the conversion from Cartesian elements for the USM7 elements is shown here:
 
 .. code-block:: python
 
-	keplerian_elements = ...
+	cartesian_elements = ...
 	central_body = ...
 	central_body_gravitational_parameter = bodies.get( central_body ).gravitational_parameter
 
-	unified_state_model_elements = conversion.keplerian_to_unified_state_model( keplerian_elements, central_body_gravitational_parameter )
+	unified_state_model_elements = conversion.cartesian_to_unified_state_model( cartesian_elements, central_body_gravitational_parameter )
 
 Similarly, the inverse operation is done as:
 
@@ -598,7 +598,7 @@ Similarly, the inverse operation is done as:
 	central_body = ...
 	central_body_gravitational_parameter = bodies.get( central_body ).gravitational_parameter
 
-	keplerian_elements = conversion.unified_state_model_to_keplerian( keplerian_elements, central_body_gravitational_parameter )
+	cartesian_elements = conversion.unified_state_model_to_cartesian( cartesian_elements, central_body_gravitational_parameter )
 
 
 
