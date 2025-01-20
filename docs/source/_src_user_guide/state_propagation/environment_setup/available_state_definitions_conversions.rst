@@ -296,6 +296,8 @@ Through SPICE, the following two inertial reference frame orientations are defin
   perpendicular to the ecliptic, at the J2000 epoch.
 
 The J2000 and ECLIPJ2000 frame names can be used for the base or target frames in any of the :ref:`SPICE rotation functions<spice_frames>`.
+We provide functions for the rotation matrix between the frames as :func:`~tudatpy.astro.element_conversion.j2000_to_eclipj2000` and
+:func:`~tudatpy.astro.element_conversion.eclipj2000_to_j2000`
 
 .. _topocentric_frames:
 
@@ -316,9 +318,7 @@ frame assigned to it. The rotation matrix from body-fixed to topocentric frame c
 
 The rotation matrix is stored in a :class:`~tudatpy.numerical_simulation.environment.GroundStationState` object (which is obtained
 in the second code line above for the specific station), and the :attr:`~tudatpy.numerical_simulation.environment.GroundStationState.rotation_matrix_body_fixed_to_topocentric`
-returns the required rotation matrix. The axes of the topocentric frame are defined such that the x-axis is in East direction, the z-direction is upwards, perpendicular to
-the body's surface sphere (typically: sphere or flattened sphere). The y-axis completes the frame, and is in northern direction.
-For more details see the API docs entries for this function.
+returns the required rotation matrix (see function link for definition of topocentric frame).
 
 .. _additional_frames:
 
@@ -329,6 +329,10 @@ A number of other frames are defined in Tudat, which can be used either during o
 
 **TEME frame**
 
+The TEME (true equator, mean equinox) frame is used specifically in conjunction with two-line elements (TLEs) and the SGP4 propagator, which
+provides the state of an Earth-orbiting object in this TEME frame. We provide functionality to rotate from the TEME frame to the J2000 frame.
+For details on our implementation, see :func:`~tudatpy.astro.element_conversion.teme_to_j2000`. Note that, when using an SGP4 ephemeris model
+based on a TLE (see :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.sgp4`), this transformation is typically already applied (assuming the base ephemeris' frame to be inertial).
 
 
 Element Types
