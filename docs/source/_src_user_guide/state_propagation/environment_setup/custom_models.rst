@@ -26,7 +26,7 @@ Custom environment models:
 * Custom wind model: :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.custom_wind_model`
 * Custom ephemeris: :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.custom_ephemeris`
 * Custom body orientation :func:`~tudatpy.numerical_simulation.propagation_setup.rotation.custom_rotation_model`
-* Custom inertial direction (typical for basic thrust guidance) :func:`~tudatpy.numerical_simulation.propagation_setup.rotation.custom_inertial_direction_based`
+* Custom inertial direction (typical for basic thrust guidance) :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.custom_inertial_direction_based`
 
 Custom propagation models:
 
