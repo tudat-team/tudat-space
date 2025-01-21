@@ -27,22 +27,86 @@ Available Model Types
 
 The complete list of available environment model settings can be found on our API documentation. Below is a list with the different categories of models, and a link to the corresponding Tudatpy module:
 
-* :doc:`Aerodynamic coefficients <aerodynamic_coefficients>`, to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.aerodynamic_coefficient_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`. 
+* :doc:`Aerodynamic coefficients <aerodynamic_coefficients>`, which contains functions to create settings objects of type :class:`~tudatpy.numerical_simulation.environment_setup.aerodynamic_coefficients.AerodynamicCoefficientSettings`  to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.aerodynamic_coefficient_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings` (which is of type.
 
   * These models provide various ways in which to define aerodynamics force (and if required, moment) coefficients of a body. See the section on :ref:`aerodynamic coefficients during the propagation <aerodynamics_during_propagation>` concerning a number of points of attention regarding the aerodynamic coefficients, such as the frame in which they are defined, definition of their independent variables, control surfaces, etc.
   * The resulting model can be extracted from the :class:`~tudatpy.numerical_simulation.environment.Body` object using :attr:`~tudatpy.numerical_simulation.environment.Body.aerodynamic_coefficient_interface`, which provides a :class:`~tudatpy.numerical_simulation.environment.AerodynamicCoefficientInterface`
+  * The following code block gives an overview of the steps to define, create, and extract an aerodynamic coefficient model, for the specific example of constant
+    drag (:math:`C_{D}=1.5`, :math:`S_{ref}=2` m\ :sup:`2`)
 
-* :doc:`Atmosphere models <atmosphere>`, to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.atmosphere_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`.  
+    .. code-block:: python
+
+        from tudatpy.numerical_simulation import environment_setup
+
+        # Create body settings
+        body_settings =  environment_setup.get_default_body_settings( ... ) # Typical way to instantiate body settings
+
+        # Add empty settings for Vehicle, since no default is defined
+        body_settings.add_empty_settings( 'Vehicle' )
+
+        # Add aerodynamic model settings (base class type AerodynamicCoefficientSettings)
+        body_settings( 'Vehicle' ).aerodynamic_coefficient_settings = environment_setup.aerodynamic_coefficients.constant(
+            reference_area = 2.0,
+            constant_force_coefficient = [1.5, 0.0, 0.0])
+
+        # Create bodies
+        bodies = environment_setup.create_system_of_bodies(body_settings)
+
+        # Extract aerodynamic coefficient model (base class type AerodynamicCoefficientInterface) from Vehicle
+        vehicle_aerodynamic_coefficient_model = bodies.get( 'Vehicle' ).aerodynamic_coefficient_interface
+
+
+
+* :doc:`Atmosphere models <atmosphere>`, which contains functions to create settings objects of type :attr:`~tudatpy.numerical_simulation.environment_setup.atmosphere.AtmosphereSettings` to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.atmosphere_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`.
 
   * These models provide various ways in which to define atmospheric properties of a body. For state propagation, the density will typically be the most important one. However, many of the models here include outputs of temperature, density, etc. as well. Depending on the model, the atmospheric properties may be only altitude-dependent, or fully time- and position-dependent. Note that the atmosphere settings can include wind settings (default: none)
   * The resulting model can be extracted from the :class:`~tudatpy.numerical_simulation.environment.Body` object using :attr:`~tudatpy.numerical_simulation.environment.Body.atmosphere_model`, which provides a :class:`~tudatpy.numerical_simulation.environment.AtmosphereModel`
+  * The following code block gives an overview of the steps to define, create, and extract an atmosphere model, for the specific example of exponential atmosphere
+    drag (:math:`\rho_{0}=1.225` kg/m\ :sup:`3`, :math:`H`=7200 m)
+
+    .. code-block:: python
+
+        from tudatpy.numerical_simulation import environment_setup
+
+        # Create body settings
+        body_settings =  environment_setup.get_default_body_settings( ... ) # Typical way to instantiate body settings
+
+        # Add atmosphere model settings (base class type AtmosphereSettings)
+        body_settings( 'Earth' ).atmosphere_settings = environment_setup.atmosphere.exponential(
+            scale_height = 7200.0,
+            surface_density = 1.225 )
+
+        # Create bodies
+        bodies = environment_setup.create_system_of_bodies(body_settings)
+
+        # Extract atmosphere model (base class type AtmosphereModel) from Vehicle
+        earth_atmosphere_model = bodies.get( 'Earth' ).atmosphere_model
 
 
-* :doc:`Ephemeris models <ephemeris>`, to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.ephemeris_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`.  
+* :doc:`Ephemeris models <ephemeris>`, which contains functions to create settings objects of type :attr:`~tudatpy.numerical_simulation.environment_setup.ephemeris.EphemerisSettings` to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.ephemeris_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`.
   
   * These models provide various ways in which to define predetermined (e.g. not coming from a Tudat propagation) translational states of bodies in the solar system
   * The resulting model can be extracted from the :class:`~tudatpy.numerical_simulation.environment.Body` object using :attr:`~tudatpy.numerical_simulation.environment.Body.ephemeris`, which provides a :class:`~tudatpy.numerical_simulation.environment.Ephemeris`
-  
+  * The following code block gives an overview of the steps to define, create, and extract an ephemeris model, for the specific example of ephemeris of the Earth from Spice, with the Sun as ephemeris origin (and J2000 frame orientation).
+
+    .. code-block:: python
+
+        from tudatpy.numerical_simulation import environment_setup
+
+        # Create body settings
+        body_settings =  environment_setup.get_default_body_settings( ... ) # Typical way to instantiate body settings
+
+        # Add atmosphere model settings (base class type EphemerisSettings)
+        body_settings( 'Earth' ).ephemeris_settings = environment_setup.ephemeris.direct_spice(
+            frame_origin = 'Sun',
+            frame_orientation = 'J2000' )
+
+        # Create bodies
+        bodies = environment_setup.create_system_of_bodies(body_settings)
+
+        # Extract ephemeris model (base class type Ephemeris) from Vehicle
+        earth_ephemeris_model = bodies.get( 'Earth' ).ephemeris
+
 * :doc:`Gravity field models <gravity_field>`, to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.gravity_field_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`.  
 
   * These models provide various ways in which to define the gravitational field of solar system bodies. Note: the mass associated with these gravitational field is the gravitational mass, which does *not* need to be equal to its inertial mass.
