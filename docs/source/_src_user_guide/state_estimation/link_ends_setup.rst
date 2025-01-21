@@ -14,7 +14,7 @@ To define an observation model, the various bodies, spacecraft, ground stations,
 Ground Station Creation
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Often, you will need to define the positions of ground stations on celestial bodies to/from which observations are made. Note that in Tudat, a planetary lander is treated identically to a terrestrial ground station. The creation of a ground station is done when creating the environment, as one of the properties of a body. See the entry on ground stations in :ref:`available_environment_models`.
+Often, you will need to define the positions of ground stations on celestial bodies to/from which observations are made. Note that in Tudat, a planetary lander is treated identically to a terrestrial ground station. The creation of a ground station is done when creating the environment, as one of the properties of a body. See the entry on ground stations in :ref:`ground_station_models`.
 
 For reference, we give example code to create settings for a ground station name ``Graz`` to the settings of body ``Earth``:
 
