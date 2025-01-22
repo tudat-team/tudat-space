@@ -3,6 +3,7 @@ channels:
   - conda-forge
   - tudat-team
 dependencies:
+  - python=3.11
   - tudatpy
   - matplotlib
   - notebook
