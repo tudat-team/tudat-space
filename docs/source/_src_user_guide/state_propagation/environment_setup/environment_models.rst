@@ -211,7 +211,7 @@ Shape models
 The :doc:`Shape models <shape>` module contains functions to create settings objects of type :class:`~tudatpy.numerical_simulation.environment_setup.shape.BodyShapeSettings`  to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.shape_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`.
 
 * These models provide various ways in which to define the exterior of a *natural* body and is typically used to calculate (for instance) altitude, ground station position, etc. Note: the exterior shape of an artificial body, from which aerodynamic and radiation pressure properties can be evaluated, uses a different interface, which is currently under development
-* The resulting model can be extracted from the :class:`~tudatpy.numerical_simulation.environment.Body` object using :attr:`~tudatpy.numerical_simulation.environment.Body.shape_model`, which provides a :class:`~tudatpy.numerical_simulation.environment.ShapeModel`
+* The resulting model can be extracted from the :class:`~tudatpy.numerical_simulation.environment.Body` object using :attr:`~tudatpy.numerical_simulation.environment.Body.shape_model`, which provides a :class:`~tudatpy.numerical_simulation.environment.BodyShapeModel`
 * The following code block gives an overview of the steps to define, create, and extract a shape model, for the specific example of an oblate spheroid shape model
   with :math:`R_{e}=3396.2` km equatorial radius, and flattening :math:`f=0.00589`
 
