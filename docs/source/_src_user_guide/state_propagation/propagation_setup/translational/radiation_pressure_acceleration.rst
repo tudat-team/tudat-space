@@ -146,7 +146,7 @@ There is a number of dependent variables associated with radiation pressure acce
 
 * Cartesian vector of acceleration, in inertial frame, :func:`~tudatpy.numerical_simulation.propagation_setup.dependent_variable.single_acceleration`, with ``acceleration_type=radiation_pressure``
 * Received irradiance by target due to source (in W/m²), :func:`~tudatpy.numerical_simulation.propagation_setup.dependent_variable.received_irradiance`,
-* Received radiation pressure by target due to source (in N/m²), :func:`~tudatpy.numerical_simulation.propagation_setup.dependent_variable.received_irradiance`,
+* Received radiation pressure by target due to source (in N/m²), :func:`~tudatpy.numerical_simulation.propagation_setup.dependent_variable.radiation_pressure`,
 
 For point source only:
 
