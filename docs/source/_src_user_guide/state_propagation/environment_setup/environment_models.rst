@@ -241,3 +241,4 @@ The complete list of available environment model settings can be found on our AP
 
   * These models define physical characteristics and hardware systems of the vehicle. This functionality is currently in a preliminary state, and its use in the body settings is limited to the vehicle's exterior shape.
   * The resulting model can be extracted from the :class:`~tudatpy.numerical_simulation.environment.Body` object extracted using :attr:`~tudatpy.numerical_simulation.environment.Body.system_models`, which provides a :class:`~tudatpy.numerical_simulation.environment.VehicleSystems`
+
