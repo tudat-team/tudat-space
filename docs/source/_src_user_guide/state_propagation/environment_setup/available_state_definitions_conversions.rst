@@ -211,7 +211,7 @@ When this rotation model is assigned to Earth, it can be extracted as an object 
 The rotation matrices produced by the ``high_fidelity_earth_rotation_model`` will not have the GCRS as their base frame,
 but rather the global frame orientation of the environment (typically J2000 or ECLIPJ2000), as defined in the ``body_settings``.
 
-The ``GcrsToItrsRotationModel`` class possesses all properties of a :ref:`regular body rotation model <body_fixed_frames>`.
+The ``GcrsToItrsRotationModel`` class is derived class of (and possesses all properties of) a :ref:`regular body rotation model <body_fixed_frames>`.
 In addition, it provides a number of functions to extract intermediate angles/rotations. These angles are defined in detail in the IERS
 conventions (chapter 5 of 2010 conventions), and can be extracted from the :class:`~tudatpy.numerical_simulation.environment.GcrsToItrsRotationModel`,
 and the :class:`~tudatpy.numerical_simulation.environment.EarthOrientationAnglesCalculator` (where the latter can be obtained from the
