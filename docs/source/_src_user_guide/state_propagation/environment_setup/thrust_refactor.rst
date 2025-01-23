@@ -13,8 +13,6 @@ Thrust and Aerodynamic Orientation - Code Refactor
    :hidden:
    :maxdepth: 1
 
-   thrust_refactor/thrust_old
-   
 The framework in Tudat to calculate inertial thrust direction and aerodynamic guidance was overhauled in mid-2022. The reasons for this were:
 
 * Uninformative error warnings for certain models (primarily: custom thrust directions)
@@ -153,7 +151,7 @@ In the new code, the equivalent functionality is provided through:
       .. literalinclude:: /_src_snippets/simulation/environment_setup/thrust_refactor/thrust_acceleration_new.py          
          :language: python
 
-Here, we have chosen to define the rotation model settings, and create the rotation model, after creating the ``SystemOfBodies``, as discussed  :ref:`here <decorate_empty_body>`.
+Here, we have chosen to define the rotation model settings, and create the rotation model, after creating the :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies`, as discussed  :ref:`here <decorate_empty_body>`.
 
 Details on the functioning of the two pieces of code can be found on the dedicated thrust pages of the new code, and the legacy code (see above). The steps to take:
 

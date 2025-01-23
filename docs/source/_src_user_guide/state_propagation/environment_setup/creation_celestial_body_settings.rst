@@ -141,11 +141,13 @@ Default settings may be overridden as follows:
 
 Where the value of the gravitational parameter in the Sun's gravity field is changed to 1.32712440042 :math:`\cdot` 10 :superscript:`20` m :superscript:`3` / s :superscript:`2`. Functionally, this example is identical to the previous one, but it permits different kinds of modifications to be made. It allows only a *single* property of the environment model to be modified, while in the previous example, it is required that *all* properties are redefined by the user (for the point-mass gravity field, which has only one property in the settings, this point is moot). The present example therefor allows for more 'fine-grained' control of the settings, but limits the user to a modifying the properties of the settings, without providing the flexibility to modify the *type* of settings (which is allowed in the previous example).
 
-To understand how to know the syntax of the above example, but for different types of environment models:
+To the steps and syntax of the above example, we've broken it down below:
 
 * The type of the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.gravity_field_settings` attribute of the :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings` is  :class:`tudatpy.numerical_simulation.environment_setup.gravity_field.GravityFieldSettings`, as shown in the API documentation.
 * The :attr:`~tudatpy.numerical_simulation.environment_setup.gravity_field.CentralGravityFieldSettings.gravitational_parameter` attribute of the :class:`~tudatpy.numerical_simulation.environment_setup.gravity_field.GravityFieldSettings` is a ``float``, and can be modified by a user, as shown in the API documentation.
 * So: provided that the body settings for the Sun has *any* gravity field settings, the above will work. If it does not, you should first create such settings (see :ref:`override_body_settings`)
+
+For an overview of the relevant attributes, functions and classes for other environment models, see :ref:`environment_model_overview`.
 
 Below is a slightly more involved example, which does not use a property of the :class:`~tudatpy.numerical_simulation.environment_setup.gravity_field.GravityFieldSettings` base class, but rather the :class:`~tudatpy.numerical_simulation.environment_setup.gravity_field.SphericalHarmonicsGravityFieldSettings` derived class. Therefore, the example below will only work if the current gravity field settings for the Earth already define a spherical harmonic gravity field:
 

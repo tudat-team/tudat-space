@@ -18,7 +18,6 @@ Environment Setup
    environment_setup/times_and_dates
    environment_setup/available_state_definitions_conversions
    environment_setup/environment_architecture
-   environment_setup/thrust_refactor
 
 
 
@@ -34,20 +33,20 @@ In Tudat, the physical environment is defined by a set of bodies, each encapsula
    artificial vehicle. Tudat makes *no* a priori distinction between the two: the distinction is made by the user when
    creating the bodies.
 
-The combination of all Body objects is stored in a
+The combination of all :class:`~tudatpy.numerical_simulation.environment.Body` objects is stored in a
 :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` object (typically named
 simple ``bodies`` in the code). This object constitutes "the environment" in Tudat.
 During the propagation, all the required properties of bodies are extracted from here and combined
 to evaluate accelerations/torques/guidance/..., and compute the state derivative of the system
-(see :ref:`propagation_setup` for setting up a numerical propagation).
+(see :ref:`propagation_setup` for details on how to do this).
 
 Even though the primary role of the environment is in numerical state propagation,
 it is also used to define properties of celestial bodies in, for instance, (semi-)analytical trajectory design
 (see :ref:`transfer_trajectory`).
 
-There are many different types of environment models in Tudat. See :ref:`environment_model_overview` for
+There are many different types of environment models in Tudat (e.g. ephemerides, rotation models, atmosphere models, *etc.*). See :ref:`environment_model_overview` for
 a comprehensive list. The overall architecture of the environment in Tudat is described in more
-detail on a dedicated page on :ref:`environment_architecture`.
+detail on a dedicated page on :ref:`environment_architecture` (for advanced users and developers).
 
 Body Creation - Procedure
 -------------------------
@@ -56,7 +55,7 @@ The :class:`~tudatpy.numerical_simulation.environment.Body` objects, and the :cl
 that holds them, are not directly created by the user. Instead, settings for each body
 are created by a user and stored in a :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings` object.
 A set of such objects (one for each body) is in turn stored in a :class:`~tudatpy.numerical_simulation.environment_setup.BodyListSettings` object,
-from which the environment is created.
+from which the environment is created using the :func:`~tudatpy.numerical_simulation.environment_setup.create_system_of_bodies` function.
 
 The typical procedure to create the environment is represented in the figure and explained below.
 

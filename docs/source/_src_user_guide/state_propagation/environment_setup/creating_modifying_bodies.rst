@@ -10,7 +10,7 @@ created and linked together, so that all required interdependencies are automati
 
 .. _create_empty_body:
 
-Adding bodies to an existing ``SystemOfBodies``
+Adding bodies to an existing :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies`
 ===============================================
 
 After creating a :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` from body settings, any number of additional
@@ -19,10 +19,8 @@ custom bodies may be added to the simulation. Such an approach can be useful whe
 * Wanting to create a body that has a custom environment model that depends on the other bodies (such as aerodynamic guidance, thrust guidance, etc.), see :ref:`custom_models` for a detailed set of options.
 * Wanting to add bodies to an existing system of bodies in a simulation loop
 
-One crucial downside of adding bodies to an existing ``SystemOfBodies`` is that the dependencies between the bodies can only go in 'one direction':
-the newly added body may depend on the existing bodies, but the existing bodies can typically not be updated to depend on the newly added body.
-Therefore, manually adding bodies to an existing system of bodies is typically limited to spacecraft, for which their properties will (usually)
-not influence other bodies.
+One crucial downside of adding bodies to an existing :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` is that the dependencies between the bodies can only go in 'one direction':
+the newly added body may depend on the existing bodies, but the existing bodies can not always be (easily) updated to depend on the newly added body.
 
 .. warning::
    The (semi-)manual creation of bodies, or the modification of environment models of existing bodies, is *not* the recommended approach to take.
@@ -108,9 +106,6 @@ The above approach uses the settings for environment models, just as the :ref:`c
 (which is the preferred and recommended approach in most cases). However, instead of storing these environment settings
 in a larger object defining the settings for the full bodies, and for all bodies together,
 here we use the environment model settings *one at a time*. For each supported environment model, an ``add....``
-function is provided in the :mod:`~tudatpy.numerical_simulation.environment_setup` module.
+function is provided in the :doc:`~tudatpy.numerical_simulation.environment_setup` module.
 
 Note that a similar approach is typically taken to add ground stations to a body (see :ref:`groundStationCreation`)
-
-.. seealso::
-   An overview of model types, as well as some special considerations to keep in mind when using them, can be found in :ref:`environment_model_overview`.

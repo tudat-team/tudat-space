@@ -238,7 +238,7 @@ Having fully defined the list of observation simulation settings ``observation_s
         estimator.observation_simulators,
         bodies)
         
-where ``bodies`` is the usual ``SystemOfBodies`` object that defines the physical environment
+where ``bodies`` is the usual :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` object that defines the physical environment
 (see :ref:`environment_setup` for details on creation and usage).
 The :func:`~tudatpy.numerical_simulation.estimation.simulate_observations` function returns an object of the
 :class:`~tudatpy.numerical_simulation.estimation.ObservationCollection` (see below).

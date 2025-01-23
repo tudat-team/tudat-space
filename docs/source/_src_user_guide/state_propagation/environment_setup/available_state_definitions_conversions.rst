@@ -127,7 +127,7 @@ during the propagation is described** :ref:`here <rotation_during_propagation>`.
 Outside of the propagation, these quantities can be obtained
 directly from the :class:`~tudatpy.numerical_simulation.environment.RotationalEphemeris` class, which is retrieved from a ``Body`` object using the
 :attr:`~tudatpy.numerical_simulation.environment.Body.rotation_model`. Below, an example is shown on how to extract rotational properties
-for the Earth outside of a propagation (assuming a ``SystemOfBodies`` object, named ``bodies`` has been created):
+for the Earth outside of a propagation (assuming a :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` object, named ``bodies`` has been created):
 
 .. code-block:: python
 
@@ -646,7 +646,7 @@ One of the other two supported attitude representations is the modified Rodrigue
      - Shadow flag
 
 
-Transformation to and from quaternions is achieved with the functions :func:`~tudatpy.astro.element_conversion.modified_rodrigues_parameters_to_quaternions` and :func:`~tudatpy.astro.element_conversion.quaternions_to_modified_rodrigues_parameters`, respectively, where the only input is the attitude element (in vector format).
+Transformation to and from quaternions is achieved with the functions :func:`~tudatpy.astro.element_conversion.modified_rodrigues_parameters_to_quaternion` and :func:`~tudatpy.astro.element_conversion.quaternion_to_modified_rodrigues_parameters`, respectively, where the only input is the attitude element (in vector format).
 
 .. note::
 

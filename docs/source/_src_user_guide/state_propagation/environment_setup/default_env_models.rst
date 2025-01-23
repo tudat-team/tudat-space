@@ -4,10 +4,6 @@
 Default environment models
 ==========================
 
-.. attention::
-
-  This page is only exact for Tudatpy version >= 0.7. Older versions use several slightly different SPICE kernels and gravity fields.
-  To use default SPICE kernels from older versions, use the :func:`~tudatpy.interface.spice.load_standard_deprecated_kernels` instead of :func:`~tudatpy.interface.spice.load_standard_kernels`.
 
 .. toctree::
    :titlesonly:
@@ -40,34 +36,27 @@ The following settings are then used for the default celestial bodies by Tudat.
 Ephemeris
 ---------
 
-Directly from SPICE (see :ref:`spice_in_tudat`). For our default settings, this includes all solar system
+Directly from SPICE (see :ref:`spice_in_tudat`) using the :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.direct_spice` option. For our default settings, this includes all solar system
 planets, the Sun, Earth's moon, the main Martian, Jovian and Saturnian satellites, as well as 300 major solar system asteroids. Users can append this list with additional ephemeris files, for
 instance for small bodies or other satellite systems, through the use of the
 :func:`~tudatpy.interface.spice.load_kernel`.
 
 Ephemerides from SPICE kernels are only valid for a somewhat limited time interval (on the order of one or several centuries, depending on the specific body), which is limited by the valid range of the SPICE kernels provided in Tudat by default. You can load additional SPICE kernels with a longer coverage by using the :func:`~tudatpy.interface.spice.load_kernel` function for any additional kernels you like (see, for instance, the `generic kernels <https://naif.jpl.nasa.gov/naif/data_generic.html>`_ listed on the SPICE website or the `JPL Horizons System <https://ssd.jpl.nasa.gov/horizons/app.html#/>`_ for small-body objects). Note that the contents will override data in the default kernels (if applicable).
-
-.. note::
-   In some cases, the extraction of the state of bodies from SPICE kernels can be a computational bottleneck. Tudat has an :ref:`alternative set of default options <default_bodies_limited_time_range>`, which make this process significantly faster, at the expense of higher RAM usage, and an environment that is only valid over a very limited time interval.
-
 .. _default_rotation_models:
 
 Rotation model
 --------------
 
-Directly from SPICE (see :ref:`spice_in_tudat`). For body ``Foo``, Tudat uses the frame
+Directly from SPICE (see :ref:`spice_in_tudat`) using the :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.spice` option. For body ``Foo``, Tudat uses the frame
 ``IAU_Foo`` defined in SPICE as the body-fixed frame. These rotation models are implementations of results published by
 the IAU Working Group on Cartographic Coordinates and Rotational Elements.
 
-For the Earth, a high-accuracy rotation model is available, which is *not* loaded by default, but can be added to the default settings using the :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.gcrs_to_itrs` function.
-
-.. note::
-   In some cases, the extraction of the rotational state of bodies from SPICE kernels can be a computational bottleneck. Tudat has an :ref:`alternative set of default options <default_bodies_limited_time_range>`, which make this process significantly faster, at the expense of higher RAM usage, and an environment that is only valid over a very limited time interval.
+For the Earth, a high-accuracy rotation model is available, which is *not* loaded by default, but can be defined using the :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.gcrs_to_itrs` function.
 
 Shape model
 -----------
 
-Directly from SPICE (any body available through SPICE kernels). Tudat uses the average radius from SPICE to define a
+Directly from SPICE (see :ref:`spice_in_tudat`) using the :func:`~tudatpy.numerical_simulation.environment_setup.shape.spherical_spice` option. Tudat uses the average radius from SPICE to define a
 spherical shape model for all bodies.
 
 .. _default_gravity_fields:
@@ -75,7 +64,7 @@ spherical shape model for all bodies.
 Gravity field
 -------------
 
-* Spherical harmonic gravity field for the following bodies:
+* Spherical harmonic gravity field for the following bodies, using the :func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.predefined_spherical_harmonic` option:
 
   - **Earth**: Full gravity field up to degree and order 200, described `here <https://link.springer.com/article/10.1007/s10712-016-9406-y>`__ (GOCO05c, data obtained from `GFZ <https://dataservices.gfz-potsdam.de/icgem/showshort.php?id=escidoc:1504398>`__; coefficient are available up to degree/order 720, but are not all loaded by default for efficiency purposes)
   - **Moon**: Full gravity field up to degree and order 200, described `here <https://pgda.gsfc.nasa.gov/products/50>`__ (gggrx1200, data obtained from `PDS <https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/shadr/>`__; coefficient are available up to degree/order 1199, but are not all loaded by default for efficiency purposes)
@@ -86,7 +75,7 @@ Gravity field
   - **Galilean Moons**: (Io, Europa, Ganymede, Callisto), :math:`\mu`, :math:`C_{20}` and :math:`C_{22}` from IMCCE ephemerides
 
 * For all the other bodies not mentioned above, point-mass gravity field with gravitational parameter loaded from SPICE are used
-  (for any body available through SPICE kernels).
+  (see :ref:`spice_in_tudat`) using the :func:`tudatpy.numerical_simulation.environment_setup.gravity_field.central_spice` option.
 
 .. warning::
    For the bodies with default spherical harmonic gravity fields, the gravitational parameter is not loaded from SPICE, but is set to the value used in the construction of the gravity field model. This value may be different from the value used in the SPICE kernels, which you can retrieve using the :func:`~tudatpy.interface.spice.get_body_gravitational_parameter` function.
@@ -103,9 +92,9 @@ Atmosphere
 
 Radiation source
 ----------------
-- Sun: Isotropic point source with a luminosity of 3.828 × 10\ :sup:`26` W
-- Earth: seasonally varying albedo and thermal model with two rings, described `here <https://doi.org/10.2514/6.1988-4292>`__
-- All other bodies: none
+- Sun: Isotropic point source with a luminosity of 3.828 × 10\ :sup:`26` W, using the :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.constant_luminosity` function, with tudatpy.numerical_simulation.environment_setup.radiation_pressure.predefined_knocke_type_surface_property_distribution
+- All other bodies: none (see :ref:`radiation_pressure_acceleration` for details on specifying models).
+
 
 .. _c:
 
@@ -118,6 +107,9 @@ The ``cspice`` toolkit (version of SPICE written in the C language) is included 
 Tudat.
 The SPICE toolkit itself has extensive `lessons <https://naif.jpl.nasa.gov/naif/lessons.html>`_, `tutorials <https://naif.jpl.nasa.gov/naif/tutorials.html>`_ and  `detailed documentation <https://naif.jpl.nasa.gov/naif/documentation.html>`_.
 Tudat contains a number of functions to directly interact with SPICE, listed :doc:`here <spice>`.
+
+.. note::
+   In some cases, the extraction of the state of bodies from SPICE kernels can be a computational bottleneck. Tudat has an :ref:`alternative set of default options <default_bodies_limited_time_range>`, which make this process significantly faster, at the expense of higher RAM usage, and an environment that is only valid over a very limited time interval.
 
 SPICE relies on a set of user-supplied input files (kernels) to perform its calculations. A number of these kernels are installed automatically with Tudat, and loaded when calling the :func:`~tudatpy.interface.spice.load_standard_kernels` function (see this API docs entry for list of kernels).
 To extend the standard kernels, a user can download additional kernels from other sources such as `NAIF directly <https://naif.jpl.nasa.gov/naif/data_generic.html>`_ or the `JPL Horizons System <https://ssd.jpl.nasa.gov/horizons/app.html#/>`_ for small-body objects, and then load them using the :func:`~tudatpy.interface.spice.load_kernel` function.
