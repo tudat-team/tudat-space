@@ -6,7 +6,7 @@ Available Acceleration Models
 
 In this page, all the acceleration models available in Tudat are explained. Regardless of the type of acceleration
 model, the procedure to link such acceleration model to the bodies exerting and undergoing the acceleration is
-explained in this page: :ref:`acceleration_models_setup`. Therefore, this information will not be repeated in this
+explained on the :ref:`acceleration model setup <acceleration_models_setup>` page. Therefore, this information will not be repeated in this
 page. Instead, for each model, a reference to the related API documentation entry and the requirements are provided.
 
 
@@ -158,44 +158,18 @@ Aerodynamic
 Radiation Pressure
 #############################
 
-..
-  TODO-RP change to single acceleration model, link to _radiation_pressure_acceleration
-
-There are two different radiation pressure models available in Tudat:
-
-- :ref:`cannonball_radiation_pressure`
-- :ref:`panelled_radiation_pressure`
-
-The distinction between them lies in the type of radiation pressure interface that is used for the body undergoing
-acceleration (see below).
-
-.. _cannonball_radiation_pressure:
-
-Cannonball Radiation Pressure
-#############################
+The radiation pressure exerted on a body depends on the radiation source model of the emitting body and the radiation target model of the body that the radiation is exerted on.
+These models are described in detail on the :ref:`radiation pressure acceleration <radiation_pressure_acceleration>` page. 
 
 | **Description**
-| The cannonball radiation pressure model can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.cannonball_radiation_pressure`
-  factory function.
-
-| **Dependencies**
-| 1. Cannonball radiation pressure model for body undergoing acceleration (from source equal to body exerting acceleration), see :doc:`Radiation pressure <radiation_pressure>`.
-| 2. Current state of body undergoing and body emitting radiation.
-
-
-.. _panelled_radiation_pressure:
-
-Panelled Radiation Pressure
-###########################
-
-| **Description**
-| The panelled radiation pressure model can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.panelled_radiation_pressure`
+| The radiation pressure model can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.radiation_pressure`
   factory function.
 
 
 | **Dependencies**
-| 1. Panelled radiation pressure model for body undergoing acceleration (from source equal to body exerting acceleration), see :doc:`Radiation pressure <radiation_pressure>`.
-| 2. Current state of body undergoing and body emitting radiation.
+| 1. Radiation source model for body emitting radiation (see :doc:`Radiation pressure models <radiation_pressure>`).
+| 2. Radiation pressure target model for body undergoing acceleration (see :doc:`Radiation pressure models <radiation_pressure>`).
+| 3. Current state of body undergoing and body emitting radiation.
 
 
 ####################################
@@ -204,7 +178,7 @@ Relativistic Correction
 
 | **Description**
 | The relativistic correction acceleration model can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.relativistic_correction`
-  factory function. This is a first-order (in 1/c^2) correction to the acceleration due to the influence of relativity
+  factory function. This is a first-order (in :math:`1/c^2`) correction to the acceleration due to the influence of relativity
   for a massless body (e.g. spacecraft) orbiting a massive body (e.g. Earth), which in turn orbits a third body (e.g.
   Sun), consisting of three distinct effects: the Schwarzschild, Lense-Thirring and de Sitter accelerations.
 

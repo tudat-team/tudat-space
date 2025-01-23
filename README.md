@@ -18,4 +18,9 @@ This repository will be automatically updated from the [Sync tudat-space submodu
 
 ## Contributing to the website
 
-If you see anything on the website you would like to improve, you can leave your thoughts on our [discussion board](https://github.com/orgs/tudat-team/discussions/categories/ideas-and-suggestions) or make the modifications yourself and open a pull request. Detailed instruction for developing and building the website (locally or online) are provide on our [wiki](https://github.com/tudat-team/tudat-space/wiki)
+If you see anything on the website you would like to improve, you can leave your thoughts on our [discussion board](https://github.com/orgs/tudat-team/discussions/categories/ideas-and-suggestions) or make the modifications yourself and open a pull request. Detailed instruction for developing and building the website (locally or online) are provide on our [wiki](https://github.com/tudat-team/tudat-space/wiki).
+In short, run the following command with the provided `tudat-docs` conda environment:
+```bash
+sphinx-build -b html docs/source docs/build
+```
+You can then open the `docs/build/index.html` file with your preferred browser.

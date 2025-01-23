@@ -95,7 +95,6 @@ Tudat and Tudat(Py) are entirely open-source and disseminated using conda packag
    /index_examples
    /index_user_guide
    API Reference <https://py.api.tudat.space/en/latest/>
-   /index_contribute
    /index_about
 
 ---------------------

@@ -60,7 +60,7 @@ Specifically, this will result in:
 
 To be able to perform the reset of the ephemeris (or other environment model), the existing ephemeris must be of the suitable type.
 This means that it must either be a tabulated ephemeris already (in which case the tabulation is reset) or the body must contain no ephemeris
-(in which case one is created on the fly when :ref:`creating the dynamics simulator <propagating_dynamics>`.
+(in which case one is created on the fly when :ref:`creating the dynamics simulator <propagating_dynamics>`).
 
 In cases where a user wants to use a
 non-tabulated ephemeris for a body, but still use the functionality described here to reset the ephemeris later on, the ephemeris type of the
@@ -121,7 +121,7 @@ Multi- and hybrid-arc considerations
 ------------------------------------
 
 For the multi- and hybrid arc propagation, the setting of the numerical results in the environment,
-and the clearing of the numerical solution (as described :ref:`above <setting_results_post_propagation>`, is *always* consistent between all the arcs.
+and the clearing of the numerical solution (as described :ref:`above <setting_results_post_propagation>`), is *always* consistent between all the arcs.
 As a result, these settings in the constituent single-arc propagation settings will be overridden
 by the settings in the multi- or hybrid-arc propagation settings. Objects of type
 :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.MultiArcPropagatorProcessingSettings` or
@@ -141,8 +141,8 @@ one is created on the fly when :ref:`creating the dynamics simulator <propagatin
 In cases where a user wants to use a
 single-arc ephemeris for a body, but still use the functionality described here to reset the ephemeris from multi-arc results later on,
 the ephemeris type can be forced to multi-arc by using the
-:attr:`~tudatpy.numerical_simulation.propagation_setup.ephemeris.EphemerisSettings.make_multi_arc_ephemeris` attribute of the
-:class:`~tudatpy.numerical_simulation.propagation_setup.ephemeris.EphemerisSettings` when :ref:`defining the body settings <override_body_settings>`.
+:attr:`~tudatpy.numerical_simulation.environment_setup.ephemeris.EphemerisSettings.make_multi_arc_ephemeris` attribute of the
+:class:`~tudatpy.numerical_simulation.environment_setup.ephemeris.EphemerisSettings` when :ref:`defining the body settings <override_body_settings>`.
 For example, to reset the ephemeris of the Earth from a multi-arc propagation result, the following can be used to permit this:
 
 .. code-block:: python
@@ -160,7 +160,7 @@ can be retrieved from the results as follows:
     single_arc_processing_settings = multiarc_propagator_settings.single_arc_settings
   
 Settings to print data to the console (see :ref:`below <console_output>`) is also defined separately per arc. Additional options
-for multi- and hybrid-arc propagation are provided :ref:`below <console_output_multi_arc>`
+for multi- and hybrid-arc propagation are provided :ref:`below <console_output_multi_arc>`.
 
 
 .. _console_output:
@@ -180,7 +180,7 @@ which can be retried from single-arc propagator settings through:
 A full list of print options is provide in the API documentation. Typical examples of information that can be printed to the console are:
 
 * The indices in the full dependent variable vector
-  (:attr:`~tudatpy.numerical_simulation.propagation_setup.PropagationPrintSettings.print_dependent_variable_indices`;
+  (:attr:`~tudatpy.numerical_simulation.propagation_setup.propagator.PropagationPrintSettings.print_dependent_variable_indices`;
   see :ref:`dependent_variables`) where each separate dependent variable is stored,
   with a brief text description of the associated dependent variable (printed before the propagation starts)
 * The current time and state can be printed *during* the propagation
@@ -188,16 +188,16 @@ A full list of print options is provide in the API documentation. Typical exampl
   at a simulation time interval specified by the user
 * Total runtime, number of function evaluations of the state derivative, and the reason for the termination of the propagation
   (printed after the propagation is finished; see
-  :attr:`~tudatpy.numerical_simulation.propagation_setup.PropagationPrintSettings.print_propagation_clock_time`,
-  :attr:`~tudatpy.numerical_simulation.propagation_setup.PropagationPrintSettings.print_number_of_function_evaluations` and
-  :attr:`~tudatpy.numerical_simulation.propagation_setup.PropagationPrintSettings.print_termination_reason`)
+  :attr:`~tudatpy.numerical_simulation.propagation_setup.propagator.PropagationPrintSettings.print_propagation_clock_time`,
+  :attr:`~tudatpy.numerical_simulation.propagation_setup.propagator.PropagationPrintSettings.print_number_of_function_evaluations` and
+  :attr:`~tudatpy.numerical_simulation.propagation_setup.propagator.PropagationPrintSettings.print_termination_reason`)
 
-In most cases, the separate print settings (as attributes of the :class:`~tudatpy.numerical_simulation.propagation_setup.PropagationPrintSettings` class)
+In most cases, the separate print settings (as attributes of the :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.PropagationPrintSettings` class)
 are defined by a boolean (print this information: yes or no).
 For specific cases, such as the interval at which information should be printed to the console during a propagation,
 are to be provided as a floating point value. To enable all console printing that can be defined by a boolean, the
-:func:`~tudatpy.numerical_simulation.propagation_setup.PropagationPrintSettings.enable_all_printing` function can be used.
-To disable *all* console printing, us the :func:`~tudatpy.numerical_simulation.propagation_setup.PropagationPrintSettings.disable_all_printing`
+:meth:`~tudatpy.numerical_simulation.propagation_setup.propagator.PropagationPrintSettings.enable_all_printing` function can be used.
+To disable *all* console printing, us the :meth:`~tudatpy.numerical_simulation.propagation_setup.propagator.PropagationPrintSettings.disable_all_printing`
 function.
 
 An example of defining console output is:
@@ -241,15 +241,15 @@ Multi- and hybrid-arc console output
 For the multi- and hybrid arc simulations, the console output is specified in its constituent single-arc propagation settings where,
 in principle, these settings can be different for each arc, and are processed independently.
 However, a number of additional options are available for printing output to the console for multi- and hybrid-arc propagation,
-in the :class:`~tudatpy.numerical_simulation.propagation_setup.MultiArcPropagatorProcessingSettings` and
-:class:`~tudatpy.numerical_simulation.propagation_setup.HybridArcPropagatorProcessingSettings` classes:
+in the :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.MultiArcPropagatorProcessingSettings` and
+:class:`~tudatpy.numerical_simulation.propagation_setup.propagator.HybridArcPropagatorProcessingSettings` classes:
 
-* For the multi- and hybrid arc propagation, there is an option to ensure identical print settings for each arc (see :attr:`~tudatpy.numerical_simulation.propagation_setup.MultiArcPropagatorProcessingSettings.set_consistent_print_settings`)
-* For the multi-arc propagation, there is an option to automatically suppress all output for all arcs *except* the first arc (see :attr:`~tudatpy.numerical_simulation.propagation_setup.MultiArcPropagatorProcessingSettings.print_first_arc_only`)
+* For the multi- and hybrid arc propagation, there is an option to ensure identical print settings for each arc (see :attr:`~tudatpy.numerical_simulation.propagation_setup.propagator.MultiArcPropagatorProcessingSettings.set_print_settings_for_all_arcs`)
+* For the multi-arc propagation, there is an option to automatically suppress all output for all arcs *except* the first arc (see :attr:`~tudatpy.numerical_simulation.propagation_setup.propagator.MultiArcPropagatorProcessingSettings.print_output_on_first_arc_only`)
   This is typically used in cases where the settings for each arc are largely identical
 * For the hybrid-arc propagation, the constituent single- and multi-arc settings can be independently modified. These settings can 
-  be extracted from the :attr:`~tudatpy.numerical_simulation.propagation_setup.HybridArcPropagatorProcessingSettings.single_arc_settings` and 
-  :attr:`~tudatpy.numerical_simulation.propagation_setup.HybridArcPropagatorProcessingSettings.multi_arc_settings` attributes.
+  be extracted from the :attr:`~tudatpy.numerical_simulation.propagation_setup.propagator.HybridArcPropagatorProcessingSettings.single_arc_settings` and 
+  :attr:`~tudatpy.numerical_simulation.propagation_setup.propagator.HybridArcPropagatorProcessingSettings.multi_arc_settings` attributes.
 
 
 

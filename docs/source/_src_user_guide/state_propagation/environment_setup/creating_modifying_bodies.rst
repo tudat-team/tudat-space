@@ -110,7 +110,7 @@ in a larger object defining the settings for the full bodies, and for all bodies
 here we use the environment model settings *one at a time*. For each supported environment model, an ``add....``
 function is provided in the :mod:`~tudatpy.numerical_simulation.environment_setup` module.
 
-Note that a similar approach is typically taken to add ground stations to a body (see :ref:`ground_stations`)
+Note that a similar approach is typically taken to add ground stations to a body (see :ref:`groundStationCreation`)
 
 .. seealso::
-   An overview of model types, as well as some special considerations to keep in mind when using them, can be found in :ref:`available_environment_models`.
+   An overview of model types, as well as some special considerations to keep in mind when using them, can be found in :ref:`environment_model_overview`.

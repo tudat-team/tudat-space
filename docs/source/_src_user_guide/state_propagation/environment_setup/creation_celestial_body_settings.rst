@@ -86,7 +86,7 @@ Below we show each manner to modify the settings with a representative example.
 
 .. seealso::
    A comprehensive list of *all* environment models, and how their settings can be defined and overridden as above, is
-   given in the page about :ref:`available_environment_models`.
+   given in the page about :ref:`environment_model_overview`.
 
 .. _override_body_settings:
 
