@@ -22,6 +22,7 @@ The TU Delft Astrodynamics Toolbox (Tudat) is a powerful set of libraries that s
 
 Installation
 ************
+For in-depth instructions on how to install TudatPy, see the :ref:`installation guide <getting_started_installation>`. Here, we give a basic summary.
 
 TudatPy is distributed as a ``conda`` package. To install it, download this ``environment.yaml`` file (:download:`yaml <_static/environment.yaml>`). Then, in your terminal navigate to the directory containing this file and execute the following command:
 

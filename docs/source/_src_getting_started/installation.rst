@@ -82,7 +82,7 @@ With the ``conda`` environment now installed, you can activate it to work in it 
 
 Congratulations! You have now installed Tudat and TudatPy and are ready to start running your simulations and analyses! We recommend you get started by having a look at our :ref:`getting_started_examples`.
 
-If there are any issues with the installation, the examples, or if you have any question or comments on Tudat, please use our `Github discussion forum <https://github.com/orgs/tudat-team/discussions>`_
+If there are any issues with the installation, the examples, or if you have any question or comments on Tudat, please use our `Github discussion forum <https://github.com/orgs/tudat-team/discussions>`_, or have a look at the :ref:`FAQ <faq>`.
 
            
 Building your own TudatPy kernel
