@@ -110,7 +110,7 @@ In Tudat Cartesian position (pseudo-)observations are processed using the :func:
 observation model. In addition to creating the :class:`~tudatpy.numerical_simulation.estimation.ObservationCollection`
 manually from external data, we provide a function of convenience to generate such pseudo-observations, using the following procedure:
 
-* Create the body for which the pseudo-observations are to be generated in your environment, using the :doc:`numerical_simulation.environment_setup.ephemeris` tudatpy module. Note that the :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.tabulated_from_existing` option can be used to turn any ephemeris settings into tabulated ephemeris settings (which is required if using the same bodies in the estimation).
+* Create the body for which the pseudo-observations are to be generated in your environment, using the :doc:`ephemeris` tudatpy module. Note that the :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.tabulated_from_existing` option can be used to turn any ephemeris settings into tabulated ephemeris settings (which is required if using the same bodies in the estimation).
 * Generate relative position observations (and associated observation model settings) using the :func:`~tudatpy.numerical_simulation.estimation.create_pseudo_observations_and_models`
 
 The latter function provides both the observations (as an :class:`~tudatpy.numerical_simulation.estimation.ObservationCollection`),
