@@ -93,7 +93,7 @@ Properties can be added to an existing body after the body's creation (with the 
 
 .. note::
 
-  For the addition of the mass, we use the shorthand ``mass`` attribute of the :class:`~tudatpy.numerical_simulation.environment.Body` class.
+  For the addition of the mass, we use the shorthand :attr:`~tudatpy.numerical_simulation.environment.Body.mass` attribute of the :class:`~tudatpy.numerical_simulation.environment.Body` class.
   Modifying this attribute is equivalent to the second (commented) method to add a mass to a vehicle using the
   :func:`~tudatpy.numerical_simulation.environment_setup.add_rigid_body_properties` function.  The mass
   is an atypical property, for which we support the direct setting through the Body class, without

@@ -11,14 +11,13 @@ aero_coefficient_settings = environment_setup.aerodynamic_coefficients.constant(
     constant_force_coefficient = [drag_coefficient,0,0]
 )
 environment_setup.add_aerodynamic_coefficient_interface(
-            bodies, "Vehicle", aero_coefficient_settings );
+            bodies, "Vehicle", aero_coefficient_settings )
 
 # Create radiation pressure settings, and add to vehicle
-radiation_pressure_settings = environment_setup.radiation_pressure.cannonball(
-    source_body = "Sun", 
+radiation_pressure_settings = environment_setup.radiation_pressure.cannonball_radiation_target(
     reference_area = 50.0, 
     radiation_pressure_coefficient = 1.5, 
-    occulting_bodies = ["Earth"]
+    per_source_occulting_bodies = {"Sun": ["Earth"]},
 )
 environment_setup.add_radiation_pressure_target_model(
-            bodies, "Vehicle", radiation_pressure_settings );
+            bodies, "Vehicle", radiation_pressure_settings )
