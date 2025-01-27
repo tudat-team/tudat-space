@@ -48,11 +48,18 @@ The figure below gives an overview of the inputs that are required to define so-
 On the left is a list of arguments (some optional) that can be provided
 to the propagator settings, regardless of their type:
 
-- **List of propagated bodies**: the names of the bodies for which the dynamics is to be propagated.
-- **Dependent variables**: which quantities to save as output, in addition to the states, described :ref:`here <dependent_variables>`. These settings are optional (none by default).
+- **Initial conditions** The initial time and state for the numerical propagation
 - **Numerical integrator**: the solver used to create an approximate solution, described :ref:`here <integrator_setup>`. This setting is mandatory
+- **List of propagated bodies**: the names of the bodies for which the dynamics is to be propagated.
 - **Termination conditions**: when to terminate the propagation, described :ref:`here <termination_settings>`. This setting is mandatory
+- **Dependent variables**: which quantities to save as output, in addition to the states, described :ref:`here <dependent_variables>`. These settings are optional (none by default).
 - **Processing/output settings**: what to print to the terminal before, during and after propagation, and what to do with the numerical results after propagation, both described :ref:`here <auto_processing>`. This setting is optional (no terminal output or resetting of environment by default)
+
+.. note::
+
+   The initial state should always be provided in the 'typical' formulation (also called 'processed' formulation, for instance the Cartesian state for translational dynamics),
+   regardless of propagator type (for translational dynamics, for instance, even wen using an Encke propagator)
+   For more information, see :ref:`processed_propagated_states`.
 
 .. _dynamics_types_intro:
 
@@ -75,15 +82,6 @@ in Tudat we also have:
 
 The above list defines different types of dynamics that are propagated over a single continuous arc.
 Propagation using a :ref:`multi-arc setup <multi_arc_dynamics>` is also supported in Tudat.
-
-.. note::
-
-   For a given type of dynamics, the propagated state can be formulated through a number of different
-   state representations. For the case of translational
-   dynamics, for instance, there are various options besides a simple Cartesian state representation. However, even
-   when using a non-Cartesian state vector, the Cartesian representation still plays a role in calculating, *e.g.*,
-   acceleration models, as well as in defining the initial state. For more information on the role of different state
-   representations, please visit the page :ref:`processed_propagated_states`.
 
 
 
