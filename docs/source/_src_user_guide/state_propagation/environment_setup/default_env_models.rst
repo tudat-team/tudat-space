@@ -42,6 +42,7 @@ instance for small bodies or other satellite systems, through the use of the
 :func:`~tudatpy.interface.spice.load_kernel`.
 
 Ephemerides from SPICE kernels are only valid for a somewhat limited time interval (on the order of one or several centuries, depending on the specific body), which is limited by the valid range of the SPICE kernels provided in Tudat by default. You can load additional SPICE kernels with a longer coverage by using the :func:`~tudatpy.interface.spice.load_kernel` function for any additional kernels you like (see, for instance, the `generic kernels <https://naif.jpl.nasa.gov/naif/data_generic.html>`_ listed on the SPICE website or the `JPL Horizons System <https://ssd.jpl.nasa.gov/horizons/app.html#/>`_ for small-body objects). Note that the contents will override data in the default kernels (if applicable).
+
 .. _default_rotation_models:
 
 Rotation model

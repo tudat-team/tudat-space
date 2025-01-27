@@ -11,7 +11,7 @@ created and linked together, so that all required interdependencies are automati
 .. _create_empty_body:
 
 Adding bodies to an existing :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies`
-===============================================
+==============================================================================================
 
 After creating a :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` from body settings, any number of additional
 custom bodies may be added to the simulation. Such an approach can be useful when:
@@ -93,7 +93,7 @@ Properties can be added to an existing body after the body's creation (with the 
 
 .. note::
 
-  For the addition of the mass, we use the shorthand ``mass`` attribute of the :class:`~tudatpy.numerical_simulation.environment.Body` class.
+  For the addition of the mass, we use the shorthand :attr:`~tudatpy.numerical_simulation.environment.Body.mass` attribute of the :class:`~tudatpy.numerical_simulation.environment.Body` class.
   Modifying this attribute is equivalent to the second (commented) method to add a mass to a vehicle using the
   :func:`~tudatpy.numerical_simulation.environment_setup.add_rigid_body_properties` function.  The mass
   is an atypical property, for which we support the direct setting through the Body class, without
@@ -106,6 +106,6 @@ The above approach uses the settings for environment models, just as the :ref:`c
 (which is the preferred and recommended approach in most cases). However, instead of storing these environment settings
 in a larger object defining the settings for the full bodies, and for all bodies together,
 here we use the environment model settings *one at a time*. For each supported environment model, an ``add....``
-function is provided in the :doc:`~tudatpy.numerical_simulation.environment_setup` module.
+function is provided in the :doc:`environment_setup` module.
 
 Note that a similar approach is typically taken to add ground stations to a body (see :ref:`groundStationCreation`)

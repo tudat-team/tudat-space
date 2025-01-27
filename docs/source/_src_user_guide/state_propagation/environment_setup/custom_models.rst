@@ -25,7 +25,7 @@ Custom environment models:
 * Custom atmospheric density model (function of position and time) :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.custom_four_dimensional_constant_temperature` *Note:* this custom function has current time, altitude, latitude and longitude as input.
 * Custom wind model: :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.custom_wind_model`
 * Custom ephemeris: :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.custom_ephemeris`
-* Custom body orientation :func:`~tudatpy.numerical_simulation.propagation_setup.rotation.custom_rotation_model`
+* Custom body orientation :func:`~tudatpy.numerical_simulation.environment_setup.rotation.custom_rotation_model`
 * Custom inertial direction (typical for basic thrust guidance) :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.custom_inertial_direction_based`
 
 Custom propagation models:
@@ -34,7 +34,7 @@ Custom propagation models:
 * Custom torque :func:`~tudatpy.numerical_simulation.propagation_setup.torque.custom_torque`
 * Custom acceleration :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.custom_acceleration`
 * Custom mass rate :func:`~tudatpy.numerical_simulation.propagation_setup.mass_rate.custom_mass_rate`
-* Custom state :func:`~tudatpy.numerical_simulation.propagation_setup.propagation.custom_state` *Note:* this custom function has current time, and the current custom state, as input
+* Custom state :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.custom_state` *Note:* this custom function has current time, and the current custom state, as input
 * Custom termination setting :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.custom_termination`  *Note:* this custom function takes no inputs, if the current time is needed, it can be retrieved from the :attr:`~tudatpy.numerical_simulation.environment.SystemOfBodies.current_time` attribute of the :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies`
 * Custom dependent variable :func:`~tudatpy.numerical_simulation.propagation_setup.dependent_variable.custom_dependent_variable` *Note:* this custom function takes no inputs, if the current time is needed, it can be retrieved from the :attr:`~tudatpy.numerical_simulation.environment.SystemOfBodies.current_time` attribute of the :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies`
 
