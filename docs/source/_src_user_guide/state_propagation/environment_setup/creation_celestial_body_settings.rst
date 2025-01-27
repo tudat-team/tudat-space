@@ -6,7 +6,7 @@ Creating the bodies
 
 The usual workflow to create bodies in Tudat (both natural and artificial bodies!) is composed of three subsequent steps, described separately:
 
-1. :ref:`default_body_settings`
+1. :ref:`creating_body_settings`
 2. :ref:`custom_body_settings`
 3. :ref:`create_bodies_from_settings_first`
 
@@ -15,10 +15,22 @@ The usual workflow to create bodies in Tudat (both natural and artificial bodies
    described in the separate page :ref:`create_modifying_bodies`.
 
 
-.. _default_body_settings:
+.. _creating_body_settings:
 
 Creating body settings
 ======================
+
+In Tudat, the settings of a single body are stored as a :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings` object. Together, these objects are stored in a :class:`~tudatpy.numerical_simulation.environment_setup.BodyListSettings` object.
+Typically, the settings for a body are created by retrieving the default settings, and then modifying these as needed. In some cases, the default settings are not available, and the settings have to be created from scratch ("empty" settings).
+
+.. note::
+
+   In order to create empty settings for a body, the user must first create a :class:`~tudatpy.numerical_simulation.environment_setup.BodyListSettings` object as described in the :ref:`default settings <default_body_settings>` section.
+
+.. _default_body_settings:
+
+From default settings
+----------------------
 
 In most cases, the starting point for the creation of body settings will be the retrieval of *default settings*. This
 prevents a user from having to manually define a variety of 'typical' models for solar-system bodies. The full list of
@@ -43,7 +55,7 @@ default body settings is given at :ref:`default_env_models`, and can be retrieve
 
 
 where the ``global_frame_origin`` and ``global_frame_orientation`` define the reference frame in which state vectors
-stored in the environment `during` propagation are represented. In general, it is recommended to choose this as the most 'intuitive' frame origin for your propagation
+stored in the environment `during` the propagation are represented. In general, it is recommended to choose this as the most 'intuitive' frame origin for your propagation
 (e.g. SSB or Sun for solar system scale propagations, Earth for an Earth orbiter, Mars for a Martian mission, etc.). The above function creates an object of type :class:`~tudatpy.numerical_simulation.environment_setup.BodyListSettings`, which stores the settings for all bodies.
 
 .. note::
@@ -71,6 +83,53 @@ Finally, in case you want to initialize body settings without *any* default sett
          :language: python
 
 where the frame origin and orientation have been defined manually as "Earth" and "J2000", respectively.
+
+.. _create_new_body_settings:
+
+From empty settings
+------------------------------
+
+Some bodies do not have any default settings, and in some cases all default settings may be different from what a user desired. In such cases, manually creating the settings can also be done.
+
+.. tab-set::
+   :sync-group: coding-language
+
+   .. tab-item:: Python
+      :sync: python
+
+      .. dropdown:: Required
+         :color: muted
+
+         .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.py
+            :language: python
+         .. literalinclude:: /_src_snippets/simulation/environment_setup/default_bodies.py
+            :language: python
+
+      .. literalinclude:: /_src_snippets/simulation/environment_setup/add_new_body_settings.py
+         :language: python
+
+In this example, empty body settings for a body 'Oumuamua' are first added to the ``body_settings`` created previously. When adding such settings, no properties whatsoever are assigned to the body, the body is only given a name. Each environment model setting has to be manually added.
+
+The above setup is also one that is typically used for artificial bodies, for which no default settings are currently implemented. Even though the type and settings of a vehicle's constituent environment (and system) models are typically very different from a natural body, the manner in which such a body is set up is not fundamentally different in Tudat. See below for a representative example:
+
+.. tab-set::
+   :sync-group: coding-language
+
+   .. tab-item:: Python
+      :sync: python
+
+      .. dropdown:: Required
+         :color: muted
+
+         .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.py
+            :language: python
+         .. literalinclude:: /_src_snippets/simulation/environment_setup/default_bodies.py
+            :language: python
+
+      .. literalinclude:: /_src_snippets/simulation/environment_setup/add_new_vehicle_settings.py
+         :language: python
+
+In the above code snippet, you may notice that the body mass is set directly as a value (here 500 kg) in the :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`. This is used as a 'shortcut' for the use of the :func:`~tudatpy.numerical_simulation.environment_setup.rigid_body.constant_rigid_body_properties` and assigning this to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.rigid_body_settings`.
 
 
 .. _custom_body_settings:
@@ -165,53 +224,6 @@ Here, we extracted, modified, and then reset the :attr:`~tudatpy.numerical_simul
 
 Provided that the body settings of the Sun and Earth have *any* gravity field settings, the above will work. If it does not, you should first create such settings (see :ref:`override_body_settings`).
 For an overview of the relevant attributes, functions and classes for other environment models, see :ref:`environment_model_overview`.
-
-.. _create_new_body_settings:
-
-Creating a new settings object
-------------------------------
-
-Some bodies do not have any default settings, and in some cases all default settings may be different from what a user desired. In such cases, manually creating the settings can also be done.
-
-.. tab-set::
-   :sync-group: coding-language
-
-   .. tab-item:: Python
-      :sync: python
-
-      .. dropdown:: Required
-         :color: muted
-
-         .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.py
-            :language: python
-         .. literalinclude:: /_src_snippets/simulation/environment_setup/default_bodies.py
-            :language: python
-
-      .. literalinclude:: /_src_snippets/simulation/environment_setup/add_new_body_settings.py
-         :language: python
-
-In this example, empty body settings for a body 'Oumuamua' are first added to the ``body_settings`` created previously. When adding such settings, no properties whatsoever are assigned to the body, the body is only given a name. Each environment model setting has to be manually added.
-
-The above setup is also one that is typically used for artificial bodies, for which no default settings are currently implemented. Even though the type and settings of a vehicle's constituent environment (and system) models are typically very different from a natural body, the manner in which such a body is set up is not fundamentally different in Tudat. See below for a representative example:
-
-.. tab-set::
-   :sync-group: coding-language
-
-   .. tab-item:: Python
-      :sync: python
-
-      .. dropdown:: Required
-         :color: muted
-
-         .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.py
-            :language: python
-         .. literalinclude:: /_src_snippets/simulation/environment_setup/default_bodies.py
-            :language: python
-
-      .. literalinclude:: /_src_snippets/simulation/environment_setup/add_new_vehicle_settings.py
-         :language: python
-
-In the above code snippet, you may notice that the body mass is set directly as a value (here 500 kg) in the :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`. This is used as a 'shortcut' for the use of the :func:`~tudatpy.numerical_simulation.environment_setup.rigid_body.constant_rigid_body_properties` and assigning this to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.rigid_body_settings`.
 
 .. _create_bodies_from_settings_first:
 
