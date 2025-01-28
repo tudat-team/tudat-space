@@ -2,20 +2,13 @@ name: tudat-docs
 channels:
   - conda-forge
 dependencies:
-  - python
-  - sphinx
-  - sphinx_rtd_theme
-  - sphinx-panels
-  - sphinx-tabs
-  - sphinx-copybutton
-  - sphinx-gallery=0.10.1
+  - python=3.12
+  - sphinx=7.4
+  - pydata-sphinx-theme
+  - sphinx-design=0.6
+  - sphinx-copybutton=0.5
+  - nbsphinx=0.9
   - ipython
   - ipykernel
-  - ipympl
   - pandoc
-  - pip
-  - pip:
-    - rtcat_sphinx_theme
-    - sphinxcontrib-contentui
-    - nbsphinx
-
+  - sphinx-codeautolink

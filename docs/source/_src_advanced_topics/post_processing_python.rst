@@ -18,7 +18,7 @@ state and dependent variable histories. In Python, this is returned as a ``dict[
         propagator_settings )
     state_history = dynamics_simulator.propagation_results.state_history
 
-The returned data type from the simulator is returned as (for a single translational popagation):
+The returned data type from the simulator is returned as (for a single translational propagation):
 
 .. code-block::
 
@@ -98,7 +98,7 @@ Using pandas DataFrames
 =======================
 
 .. tip::
-    Download the ``pandas`` cheatsheet!
+    Download the ``pandas`` cheat-sheet!
     :download:`pdf <https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf>`
 
 Converting simulator results to ``pandas.DataFrame``

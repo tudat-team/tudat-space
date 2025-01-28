@@ -4,7 +4,7 @@ Performing the estimation
 =========================
 
 Having created all the relevant settings for the physical environment (see :ref:`environment_setup`)
-dynamical model (see :ref:`propagation_setup`), the parameters that are to be estimatd (see :ref:`parameter_settings`),
+dynamical model (see :ref:`propagation_setup`), the parameters that are to be estimated (see :ref:`parameter_settings`),
 the settings for the observation models (see :ref:`observationModelSetup`)
 and the actual observations (simulated or real; see :ref:`observationSimulation`), the estimation can be performed.
 
@@ -49,7 +49,7 @@ be obtained from the :class:`~tudatpy.numerical_simulation.estimation.Covariance
 Normalization
 ^^^^^^^^^^^^^
 
-The partial derivative matrix :math:`\mathbf{H}=\frac{\partial\mathbf{h}}{\partial\mathbf{p}}` is computed automatically for all observations and parameters, from which the inverse covariance :math:`\mathbf{P}^{-1}` is then computed, as described :ref:`here <covarianceSettings>`. However, due to the potentially huge difference in order of magnitude of the estimated parameters (for instance, the Sun's gravitational parameter, at approximately :math:` 1.3267 \cdot 10^{20}` m^3/s^2, and the bias of a VLBI observaion, at :math:`10^{-9}` radians), the inversion of the matrix :math:`\mathbf{P}^{-1}` can be extremely ill-posed. We partly correct for this problem by normalizing the parameters.
+The partial derivative matrix :math:`\mathbf{H}=\frac{\partial\mathbf{h}}{\partial\mathbf{p}}` is computed automatically for all observations and parameters, from which the inverse covariance :math:`\mathbf{P}^{-1}` is then computed, as described :ref:`here <covarianceSettings>`. However, due to the potentially huge difference in order of magnitude of the estimated parameters (for instance, the Sun's gravitational parameter, at approximately :math:` 1.3267 \cdot 10^{20}` m^3/s^2, and the bias of a VLBI observation, at :math:`10^{-9}` radians), the inversion of the matrix :math:`\mathbf{P}^{-1}` can be extremely ill-posed. We partly correct for this problem by normalizing the parameters.
 
 The normalization is achieved by computing a vector :math:`\mathbf{N}` (of the same size as the parameter vector :math:`\mathbf{p}`, such that for each column of the matrix :math:`\mathbf{H}`, we have:
 
@@ -97,8 +97,8 @@ consumption that is required may be prohibitive.
 After the estimation is finished, the properties of both the environment (in the ``bodies``) and the estimated parameters
 (in the ``parameters_to_estimate``) are modified as follows:
 
-* The ephemerides of all propagated/estimated bodies will be set to the propagation results of the last iteration in the estimation. For instance, when estimating the state of body "Delfi-C3", the (tabulated) ephemeris of this body will be set to contain the numerical results of the last iteration of the estimatiomn
-* The values of the parameter values in the ``parameters_to_estimate`` object are those of the last iteration of the estimation. Note that, if the ``apply_final_parameter_correction`` parameter to the :class:`~tudatpy.numerical_simulation.estimation.EstimationInput` is set to ``True``, the parameter correction computed at the end of the last iteration (for which the peformance has *not* been computed) has been used to update the parameters vector
+* The ephemerides of all propagated/estimated bodies will be set to the propagation results of the last iteration in the estimation. For instance, when estimating the state of body "Delfi-C3", the (tabulated) ephemeris of this body will be set to contain the numerical results of the last iteration of the estimation
+* The values of the parameter values in the ``parameters_to_estimate`` object are those of the last iteration of the estimation. Note that, if the ``apply_final_parameter_correction`` parameter to the :class:`~tudatpy.numerical_simulation.estimation.EstimationInput` is set to ``True``, the parameter correction computed at the end of the last iteration (for which the performance has *not* been computed) has been used to update the parameters vector
 
 The main results of the estimation are characterized by two quantities:
 

@@ -273,27 +273,31 @@ despite using only 10% of the computational resources.
    Journal of Open Source Software, 5(53), 2338, https://doi.org/10.21105/joss.02338.
 
 
+.. _`parallelization_with_pygmo`:
+
 Parallelization with PyGMO
 ################################
 
 In this section, a short guide is given on the parallelization of tasks in Python, and specifically for application with
 PyGMO. Parallelization is very useful for optimization problems, because optimizations are generally quite resource
 intensive processes, and this can be curbed by applying some form of parallelity. There are two flavors of parallelity
-in PyGMO: One utilizing multi-threading, presented in :ref:`Multi-threading with Batch Fitness Evaluation` and one
-utilizing multi-processing, presented in :ref:`Multi-processing with Islands`. For a more general guide on
+in PyGMO: One utilizing multi-threading, presented in :ref:`multi_threading_with_batch_fitness_evaluation` and one
+utilizing multi-processing, presented in :ref:`multi_processing_with_islands`. For a more general guide on
 parallelization, and specifically so-called batch Fitness Evaluation (BFE), have a look at :ref:`parallelization`.
 
+
+.. _`multi_threading_with_batch_fitness_evaluation`:
 
 Multi-threading with Batch Fitness Evaluation 
 ---------------------------------------------------
 
 Multi-threading in PyGMO is used with BFE; simply evaluating some fitness function in a batch, similar to the example
 explained above. For this, PyGMO has classes and methods to help setup a multi-threaded optimization. For this section,
-code snippets are shown below from `the hodographic shaping MGA trajectory example
-<https://github.com/tudat-team/tudatpy-examples/blob/master/pygmo/hodographic_shaping_mga_optimization.py>`_ and adapted
+code snippets are shown below from :ref:`the hodographic shaping MGA trajectory example
+</_src_getting_started/_src_examples/tudatpy-examples/mission_design/hodographic_shaping_mga_optimization.ipynb>` and adapted
 to showcase the parallel capabilities. You can either define your own User-Defined Batch Fitness Evaluator (UDBFE),
 explained on the `pygmo documentation <https://esa.github.io/pygmo2/bfe.html>`_, or use the ``batch_fitness()`` method.
-Here, the latter is explained and used as this follows more naturally from :ref:`1. Creation of the UDP class` above. A
+Here, the latter is explained and used as this follows more naturally from `1. Creation of the UDP class`_ above. A
 UDBFE can be applied to any UDP -- with some constraints, making it more general and easier to apply out-of-the-box.
 However, using UDBFE's does not give you any control to determine how the batch is evaluated. For this reason,
 ``batch_fitness()`` is used for this example. 
@@ -305,33 +309,37 @@ length n is equal to the number of objectives. The ``batch_fitness()`` method is
 ``fitness()`` method, all it has to do is convert the input array into a list of lists, then create a pool of worker
 processes that can be used.
 
-.. tabs::
+.. use manually synchronized tabs instead of tabbed code to allow dropdowns
+.. tab-set::
+   :sync-group: coding-language
 
-     .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-      .. toggle-header:: 
-         :header: Required **Show/Hide**
+      .. dropdown:: Required
+         :color: muted
 
-            .. code-block:: python
+         .. code-block:: python
 
-                from tudatpy.kernel.trajectory_design import shape_based_thrust, transfer_trajectory
-                import numpy as np
-                from typing import List, Tuple
-                import pygmo as pg
-                import matplotlib.pyplot as plt
-                import multiprocessing as mp
+            from tudatpy.trajectory_design import shape_based_thrust, transfer_trajectory
+            import numpy as np
+            from typing import List, Tuple
+            import pygmo as pg
+            import matplotlib.pyplot as plt
+            import multiprocessing as mp
 
-                # Tudatpy imports
-                import tudatpy
-                from tudatpy.util import result2array
-                from tudatpy.kernel import constants
-                from tudatpy.kernel.numerical_simulation import environment_setup
+            # Tudatpy imports
+            import tudatpy
+            from tudatpy.util import result2array
+            from tudatpy import constants
+            from tudatpy.numerical_simulation import environment_setup
 
       .. literalinclude:: /_src_snippets/simulation/parallelization/pygmo_batch_fitness.py
          :language: python
 
-     .. tab:: C++
-
+   .. tab-item:: C++
+      :sync: cpp
+         
       .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
          :language: cpp
 
@@ -342,16 +350,19 @@ method exists in the UDP, this will automatically be used instead of the ``pygmo
 ``b`` keyword argument for ``pygmo.island`` and ``pygmo.population`` to add a UDBFE or an instance of ``pygmo.bfe``, but
 this is not considered here.
 
-.. tabs::
+.. use manually synchronized tabs instead of tabbed code to allow dropdowns
+.. tab-set::
+   :sync-group: coding-language
 
-     .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-      .. toggle-header:: 
-         :header: Required **Show/Hide**
+      .. dropdown:: Required
+         :color: muted
 
-            .. code-block:: python
+         .. code-block:: python
 
-                from tudatpy.kernel.trajectory_design import shape_based_thrust, transfer_trajectory
+                from tudatpy.trajectory_design import shape_based_thrust, transfer_trajectory
                 import numpy as np
                 from typing import List, Tuple
                 import pygmo as pg
@@ -361,14 +372,15 @@ this is not considered here.
                 # Tudatpy imports
                 import tudatpy
                 from tudatpy.util import result2array
-                from tudatpy.kernel import constants
-                from tudatpy.kernel.numerical_simulation import environment_setup
+                from tudatpy import constants
+                from tudatpy.numerical_simulation import environment_setup
 
       .. literalinclude:: /_src_snippets/simulation/parallelization/pg_bfe_evolve.py
          :language: python
 
-     .. tab:: C++
-
+   .. tab-item:: C++
+      :sync: cpp
+         
       .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
          :language: cpp
 
@@ -409,6 +421,7 @@ significantly for the test with more generations; an 80% decrease in clock time.
 |                    |                         | yes                       | 5946          | 404%           | 1470            |
 +--------------------+-------------------------+---------------------------+---------------+----------------+-----------------+
 
+.. _`multi_processing_with_islands`:
 
 Multi-processing with Islands
 -----------------------------
@@ -420,8 +433,8 @@ one another through this topology. This topology can configure the exchange of i
 archipelago. By default, the topology is the ``pygmo.unconnected`` type, which has no effect, resulting in a simple
 parallel evolution.
 
-In the code snippet below, inspired by `the hodographic shaping MGA trajectory example
-<https://github.com/tudat-team/tudatpy-examples/blob/master/pygmo/hodographic_shaping_mga_optimization.py>`_ but
+In the code snippet below, inspired by :ref:`the hodographic shaping MGA trajectory example
+</_src_getting_started/_src_examples/tudatpy-examples/mission_design/hodographic_shaping_mga_optimization.ipynb>` but
 parallelized with an archipelago, a group of islands evolve in parallel. Specifically, a ``pygmo.archipelago`` object is
 created that initializes a ``number_of_islands`` number of ``pygmo.island`` objects using the provided ``algo``,
 ``prob``, and ``pop_size`` arguments. ``pygmo.archipelago`` then has an ``evolve()`` method that in turn calls the
@@ -429,35 +442,36 @@ created that initializes a ``number_of_islands`` number of ``pygmo.island`` obje
 each island. The ``wait_check()`` method makes every island wait until all islands are done executing, which is needed
 for any topology to exchange individuals.
 
+.. use manually synchronized tabs instead of tabbed code to allow dropdowns
+.. tab-set::
+   :sync-group: coding-language
 
-.. tabs::
+   .. tab-item:: Python
+      :sync: python
 
-     .. tab:: Python
+      .. dropdown:: Required
+         :color: muted
 
-      .. toggle-header:: 
-         :header: Required **Show/Hide**
+         .. code-block:: python
 
-            .. code-block:: python
+            from tudatpy.trajectory_design import shape_based_thrust, transfer_trajectory
+            import numpy as np
+            from typing import List, Tuple
+            import pygmo as pg
+            import matplotlib.pyplot as plt
+            import multiprocessing as mp
 
-                from tudatpy.kernel.trajectory_design import shape_based_thrust, transfer_trajectory
-                import numpy as np
-                from typing import List, Tuple
-                import pygmo as pg
-                import matplotlib.pyplot as plt
-                import multiprocessing as mp
-
-                # Tudatpy imports
-                import tudatpy
-                from tudatpy.util import result2array
-                from tudatpy.kernel import constants
-                from tudatpy.kernel.numerical_simulation import environment_setup
+            # Tudatpy imports
+            import tudatpy
+            from tudatpy.util import result2array
+            from tudatpy import constants
+            from tudatpy.numerical_simulation import environment_setup
 
       .. literalinclude:: /_src_snippets/simulation/parallelization/pg_archi.py
          :language: python
 
-     .. tab:: C++
-
+   .. tab-item:: C++
+      :sync: cpp
+         
       .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
          :language: cpp
-
-

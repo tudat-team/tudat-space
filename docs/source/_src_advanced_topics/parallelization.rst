@@ -6,7 +6,7 @@ Parallelization with Python
 
 This file is an introduction to the realm of parallelization, and specifically for use with tudatpy. Tudatpy has many
 applications and many can be parallelized. For parallelization specifically in combination with PyGMO, further reading
-is available under :ref:`Parallelization with PyGMO`.
+is available under :ref:`parallelization_with_pygmo`.
 
 .. contents:: Content of this page
    :local:
@@ -24,10 +24,9 @@ generally two threads per CPU, and each computer system has their own amount of 
 of parallellity is therefore determined by the system you want to run on.
 
 It should be noted that it does not always make sense to parallelize your simulations. The initialization of parallel
-tasks takes longer, so there is a break even point beyond which it is worthwhile, shown in :ref:`Multi-threading
-with Batch Fitness Evaluation`. To enable parallel behavior with Python, the ``multiprocessing`` module is used. Other
+tasks takes longer, so there is a break even point beyond which it is worthwhile, shown in :ref:`multi_threading_with_batch_fitness_evaluation`. To enable parallel behavior with Python, the ``multiprocessing`` module is used. Other
 alternatives exist as well that are more modern, but they are not as widely spread or as thoroughly documented. Ray, for
-instance, is one of these packages, it is arguably more seemless, but it is also rather new and focused on AI
+instance, is one of these packages, it is arguably more seamless, but it is also rather new and focused on AI
 applications.
 
 All parallel processing should be put under ``if __name__ == "__main__" :``. This line ensures that the code is only run
@@ -48,26 +47,30 @@ arguments. The inputs are all the sets of input arguments in the form of a list 
 iterable mentioned previously. The outputs are formatted analogously, where the tuples are the various outputs rather
 than the input arguments. 
 
-.. tabs::
+.. use manually synchronized tabs instead of tabbed code to allow dropdowns
+.. tab-set::
+   :sync-group: coding-language
 
-     .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-      .. toggle-header:: 
-         :header: Required **Show/Hide**
+      .. dropdown:: Required
+         :color: muted
 
-            .. code-block:: python
+         .. code-block:: python
 
-                import multiprocessing as mp
-                import numpy as np
-                
-                from tudatpy.kernel.numerical_simulation import environment_setup, propagation_setup
-                from tudatpy.kernel.interface import spice
+            import multiprocessing as mp
+            import numpy as np
+
+            from tudatpy.numerical_simulation import environment_setup, propagation_setup
+            from tudatpy.interface import spice
 
       .. literalinclude:: /_src_snippets/simulation/parallelization/general_bfe_example.py
          :language: python
 
-     .. tab:: C++
-
+   .. tab-item:: C++
+      :sync: cpp
+         
       .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
          :language: cpp
 
@@ -85,86 +88,94 @@ Batch Fitness Evaluation for Monte-Carlo analysis
 #################################################
 
 In this section, the basic structure is presented that can allow for a simple, parallel Monte-Carlo analysis of any
-problem. An astrodynamics example is used for obvious reasons: the `Kepler satellite orbit
-<https://github.com/tudat-team/tudatpy-examples/blob/master/propagation/keplerian_satellite_orbit.py>`_. Using
+problem. An astrodynamics example is used for obvious reasons: the :ref:`Kepler satellite orbit
+</_src_getting_started/_src_examples/tudatpy-examples/propagation/keplerian_satellite_orbit.ipynb>`. Using
 this, we can change any parameter, let the Monte-Carlo simulations run in parallel, and enjoy the power.
 
 BFE Monte Carlo code structure
 ------------------------------
 
 In the snippet below, the implementation can be seen. It is straightforward, and looks surprisingly similar to
-:ref:`General parallelization with Python`. The ``run_simulation()`` function is shown below as ``run_dynamics()``. The
+`General parallelization with Python`_. The ``run_simulation()`` function is shown below as ``run_dynamics()``. The
 same concepts are applied, but rather than two integers being returned without further calculations, the inputs are the
 Semi-major Axis and Eccentricity elements of the initial state which has a profound influence on the final results of
 the orbit. 
 
-.. tabs::
+.. use manually synchronized tabs instead of tabbed code to allow dropdowns
+.. tab-set::
+   :sync-group: coding-language
 
-     .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-      .. toggle-header:: 
-         :header: Required **Show/Hide**
+      .. dropdown:: Required
+         :color: muted
 
-            .. code-block:: python
+         .. code-block:: python
 
-                # Load bfe modules
-                import multiprocessing as mp
+            # Load bfe modules
+            import multiprocessing as mp
 
-                # Load standard modules
-                import numpy as np
-                from matplotlib import pyplot as plt
+            # Load standard modules
+            import numpy as np
+            from matplotlib import pyplot as plt
 
-                # Load tudatpy modules
-                from tudatpy.kernel.interface import spice
-                from tudatpy.kernel import numerical_simulation
-                from tudatpy.kernel.numerical_simulation import environment_setup, propagation_setup
-                from tudatpy.kernel.astro import element_conversion
-                from tudatpy.kernel import constants
-                from tudatpy.util import result2array
+            # Load tudatpy modules
+            from tudatpy.interface import spice
+            from tudatpy.kernel import numerical_simulation
+            from tudatpy.numerical_simulation import environment_setup, propagation_setup
+            from tudatpy.astro import element_conversion
+            from tudatpy import constants
+            from tudatpy.util import result2array
 
       .. literalinclude:: /_src_snippets/simulation/parallelization/mc_bfe_run.py
          :language: python
 
-     .. tab:: C++
-
+   .. tab-item:: C++
+      :sync: cpp
+         
       .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
          :language: cpp
 
 The basic BFE structure can be seen above. Below the ``run_dynamics()`` function is shown, which is almost identical to
-code from the `Kepler satellite orbit
-<https://github.com/tudat-team/tudatpy-examples/blob/master/propagation/keplerian_satellite_orbit.py>`_, with the small
+code from the :ref:`Kepler satellite orbit
+</_src_getting_started/_src_examples/tudatpy-examples/propagation/keplerian_satellite_orbit.ipynb>`, with the small
 adjustment that the initial state definition is given by the input arguments to the function rather than defined
 manually.
 
-.. tabs::
+.. use manually synchronized tabs instead of tabbed code to allow dropdowns
+.. tab-set::
+   :sync-group: coding-language
 
-     .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-      .. toggle-header:: 
-         :header: Required **Show/Hide**
+      .. dropdown:: Required
+         :color: muted
 
-            .. code-block:: python
+         .. code-block:: python
 
-                # Load bfe modules
-                import multiprocessing as mp
+            # Load bfe modules
+            import multiprocessing as mp
 
-                # Load standard modules
-                import numpy as np
-                from matplotlib import pyplot as plt
+            # Load standard modules
+            import numpy as np
+            from matplotlib import pyplot as plt
 
-                # Load tudatpy modules
-                from tudatpy.kernel.interface import spice
-                from tudatpy.kernel import numerical_simulation
-                from tudatpy.kernel.numerical_simulation import environment_setup, propagation_setup
-                from tudatpy.kernel.astro import element_conversion
-                from tudatpy.kernel import constants
-                from tudatpy.util import result2array
+            # Load tudatpy modules
+            from tudatpy.interface import spice
+            from tudatpy.kernel import numerical_simulation
+            from tudatpy.numerical_simulation import environment_setup, propagation_setup
+            from tudatpy.astro import element_conversion
+            from tudatpy import constants
+            from tudatpy.util import result2array
 
       .. literalinclude:: /_src_snippets/simulation/parallelization/mc_bfe_dynamics.py
          :language: python
 
-     .. tab:: C++
-
+   .. tab-item:: C++
+      :sync: cpp
+         
       .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
          :language: cpp
 

@@ -3,6 +3,7 @@
 
 .idea
 .DS_Store
+.vscode/
 
 # Jupyter notebook checkpoints
 .ipynb_checkpoints/*

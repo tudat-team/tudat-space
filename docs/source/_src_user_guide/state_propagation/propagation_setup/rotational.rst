@@ -12,19 +12,19 @@ Rotational Dynamics
    rotational/torque_model_setup
    rotational/available_torque_models
 
-Settings to propagate the rotational state of a body numerically can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.rotational` factory function, described in detail in the `API documentation <https://py.api.tudat.space/en/latest/>`_. In the current page, only the Tudat-specific aspects of the input will be briefly described.
+Settings to propagate the rotational state of a body numerically can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.rotational` factory function, described in detail in the :doc:`API documentation <propagator>`. In the current page, only the Tudat-specific aspects of the input will be briefly described.
 The default (processed) representation for solving the rotational equations of motion is by using a vector of 7 elements:
 
-  * The quaternion elements (vector :math:`\mathbf{q}` of size 4) of the rotation from body-fixed to inertial frame (see :ref:`quaternion_definition`)
-  * The angular velocity (vector :math:`\boldsymbol{\omega}` of size 3) of the body w.r.t. the inertial frame, expressed in the body-fixed frame.
+* The quaternion elements (vector :math:`\mathbf{q}` of size 4) of the rotation from body-fixed to inertial frame (see :ref:`quaternion_definition`)
+* The angular velocity (vector :math:`\boldsymbol{\omega}` of size 3) of the body w.r.t. the inertial frame, expressed in the body-fixed frame.
 
 Several other formulations can be used if wanted (see below and :ref:`processed_propagated_states`).
 
-To propagate rotational dynamics, an inertia tensor for the propagated body must be defined. The inertia tensor is handled by the `Rigid body properties <https://py.api.tudat.space/en/latest/rigid_body.html>`_ in Tudat. Note that, by endowing a body with a gravity field, such properties are automaticallyt created (although in the case of a spherical harmonic gravity field, additional information must be provided, see :ref:`rigid_body_gravity_field`,
+To propagate rotational dynamics, an inertia tensor for the propagated body must be defined. The inertia tensor is handled by the :doc:`Rigid body properties <rigid_body>` in Tudat. Note that, by endowing a body with a gravity field, such properties are automatically created (although in the case of a spherical harmonic gravity field, additional information must be provided, see :doc:`the API documentation <rigid_body>`).
 
 .. note::
 
-    At present, influence of the time-variability of the inertia tensor (and other effects related to time-variation of mass distribution such as jet damping) are not included in the evaluation of the rotational equations of motion, *even in the case where the inertia tensor is time variable'. 
+  At present, influence of the time-variability of the inertia tensor (and other effects related to time-variation of mass distribution such as jet damping) are not included in the evaluation of the rotational equations of motion, *even in the case where the inertia tensor is time variable*. 
 
 
 Inputs
@@ -38,7 +38,7 @@ In addition to the settings described :ref:`here <propagation_inputs>`, the defi
 
 .. warning::
 
-    The initial state must be provided as processed state formulation :math:`[\mathbf{q};\boldsymbol{\omega}]`, **regardless of the propagator type**
+  The initial state must be provided as processed state formulation :math:`[\mathbf{q};\boldsymbol{\omega}]`, **regardless of the propagator type**.
 
 .. _rotational_example:
 
@@ -53,24 +53,21 @@ reached. A rotational propagator that uses quaternions is defined. Next to that,
 asked to save the total torque norm as dependent variable. The time and rotational state will be
 printed on the terminal once every 24 hours (simulation time).
 
-    .. tabs::
+.. tab-set::
+   :sync-group: coding-language
 
-         .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-          .. toggle-header:: 
-             :header: Required **Show/Hide**
+      .. dropdown:: Required
+        :color: muted
 
-                .. code-block:: python
+        .. code-block:: python
 
-                    from tudatpy.kernel.numerical_simulation import propagation_setup
-                    from tudatpy.kernel.astro import element_conversion
-                    import numpy as np
+            from tudatpy.numerical_simulation import propagation_setup
+            from tudatpy.astro import element_conversion
+            import numpy as np
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/full_rotational_setup.py
-             :language: python
-
-         .. tab:: C++
-
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
-             :language: cpp
+      .. literalinclude:: /_src_snippets/simulation/environment_setup/full_rotational_setup.py
+          :language: python
 

@@ -10,8 +10,8 @@ created and linked together, so that all required interdependencies are automati
 
 .. _create_empty_body:
 
-Adding bodies to an existing ``SystemOfBodies``
-===============================================
+Adding bodies to an existing :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies`
+==============================================================================================
 
 After creating a :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` from body settings, any number of additional
 custom bodies may be added to the simulation. Such an approach can be useful when:
@@ -19,10 +19,8 @@ custom bodies may be added to the simulation. Such an approach can be useful whe
 * Wanting to create a body that has a custom environment model that depends on the other bodies (such as aerodynamic guidance, thrust guidance, etc.), see :ref:`custom_models` for a detailed set of options.
 * Wanting to add bodies to an existing system of bodies in a simulation loop
 
-One crucial downside of adding bodies to an existing ``SystemOfBodies`` is that the dependencies between the bodies can only go in 'one direction':
-the newly added body may depend on the existing bodies, but the existing bodies can typically not be updated to depend on the newly added body.
-Therefore, manually adding bodies to an existing system of bodies is typically limited to spacecraft, for which their properties will (usually)
-not influence other bodies.
+One crucial downside of adding bodies to an existing :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` is that the dependencies between the bodies can only go in 'one direction':
+the newly added body may depend on the existing bodies, but the existing bodies can not always be (easily) updated to depend on the newly added body.
 
 .. warning::
    The (semi-)manual creation of bodies, or the modification of environment models of existing bodies, is *not* the recommended approach to take.
@@ -34,25 +32,26 @@ The first step is to add an empty :class:`~tudatpy.numerical_simulation.environm
 :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` object through its
 :meth:`~tudatpy.numerical_simulation.environment.SystemOfBodies.create_empty_body` method:
 
-    .. tabs::
+.. use manually synchronized tabs instead of tabbed code to allow dropdowns
+.. tab-set::
+   :sync-group: coding-language
 
-         .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-          .. toggle-header:: 
-             :header: Required **Show/Hide**
+      .. dropdown:: Required
+         :color: muted
 
-             .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.py
-             .. literalinclude:: /_src_snippets/simulation/environment_setup/default_bodies.py
-             .. literalinclude:: /_src_snippets/simulation/environment_setup/create_system_of_bodies.py
-                :language: python
+         .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.py
+            :language: python
+         .. literalinclude:: /_src_snippets/simulation/environment_setup/default_bodies.py
+            :language: python
+         .. literalinclude:: /_src_snippets/simulation/environment_setup/create_system_of_bodies.py
+            :language: python
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/add_body.py
-             :language: python
+      .. literalinclude:: /_src_snippets/simulation/environment_setup/add_body.py
+         :language: python
 
-         .. tab:: C++
-
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
-             :language: cpp
 
 which adds a body with no properties to the system.
 
@@ -70,30 +69,31 @@ Properties can be added to an existing body after the body's creation (with the 
 * Engine model, using the :func:`~tudatpy.numerical_simulation.environment_setup.add_engine_model` or :func:`~tudatpy.numerical_simulation.environment_setup.add_variable_direction_engine_model` function
 * Rotation model, using the :func:`~tudatpy.numerical_simulation.environment_setup.add_rotation_model` function
 
-    .. tabs::
+.. use manually synchronized tabs instead of tabbed code to allow dropdowns
+.. tab-set::
+   :sync-group: coding-language
 
-         .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-          .. toggle-header:: 
-             :header: Required **Show/Hide**
+      .. dropdown:: Required
+         :color: muted
 
-             .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.py
-             .. literalinclude:: /_src_snippets/simulation/environment_setup/default_bodies.py
-             .. literalinclude:: /_src_snippets/simulation/environment_setup/create_system_of_bodies.py
-             .. literalinclude:: /_src_snippets/simulation/environment_setup/add_body.py
-                :language: python
+         .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.py
+            :language: python
+         .. literalinclude:: /_src_snippets/simulation/environment_setup/default_bodies.py
+            :language: python
+         .. literalinclude:: /_src_snippets/simulation/environment_setup/create_system_of_bodies.py
+            :language: python
+         .. literalinclude:: /_src_snippets/simulation/environment_setup/add_body.py
+            :language: python
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/add_body_properties.py
-             :language: python
-
-         .. tab:: C++
-
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
-             :language: cpp
+      .. literalinclude:: /_src_snippets/simulation/environment_setup/add_body_properties.py
+         :language: python
 
 .. note::
 
-  For the addition of the mass, we use the shorthand ``mass`` attribute of the :class:`~tudatpy.numerical_simulation.environment.Body` class.
+  For the addition of the mass, we use the shorthand :attr:`~tudatpy.numerical_simulation.environment.Body.mass` attribute of the :class:`~tudatpy.numerical_simulation.environment.Body` class.
   Modifying this attribute is equivalent to the second (commented) method to add a mass to a vehicle using the
   :func:`~tudatpy.numerical_simulation.environment_setup.add_rigid_body_properties` function.  The mass
   is an atypical property, for which we support the direct setting through the Body class, without
@@ -106,9 +106,6 @@ The above approach uses the settings for environment models, just as the :ref:`c
 (which is the preferred and recommended approach in most cases). However, instead of storing these environment settings
 in a larger object defining the settings for the full bodies, and for all bodies together,
 here we use the environment model settings *one at a time*. For each supported environment model, an ``add....``
-function is provided in the :mod:`~tudatpy.numerical_simulation.environment_setup` module.
+function is provided in the :doc:`environment_setup` module.
 
-Note that a similar approach is typically taken to add ground stations to a body (see :ref:`ground_stations`)
-
-.. seealso::
-   An overview of model types, as well as some special considerations to keep in mind when using them, can be found in :ref:`available_environment_models`.
+Note that a similar approach is typically taken to add ground stations to a body (see :ref:`groundStationCreation`)

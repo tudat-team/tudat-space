@@ -7,8 +7,7 @@ Multiple Gravity Assists Transfer
 In this section, the preliminary design of multiple-leg interplanetary transfer trajectories is discussed. This module
 provides the functionalities for creating transfer trajectories consisting of multiple transfer legs or various types
 with powered and unpowered gravity assists. This allows high-thrust or low-thrust transfer trajectories with multiple
-flybys to be designed, as well as a hybrid of low- and high-thrust. For per-function details see the `API documentation
-<https://py.api.tudat.space/en/latest/transfer_trajectory.html>`_. 
+flybys to be designed, as well as a hybrid of low- and high-thrust. For per-function details see the :doc:`API documentation <transfer_trajectory>`. 
 
 A multiple gravity-assist transfer (MGA) is constituted by a series of nodes and legs. The nodes correspond to the
 departure, gravity assist, and arrival planets (bodies), and the legs correspond to the trajectories between the nodes.
@@ -32,16 +31,15 @@ Before evaluating any transfer, it is useful to introduce the concept of nodes a
 schematic representation is given in the figure below. An MGA trajectory is given, with an arbitrary sequence. A number
 of nodes can be seen that represent the celestial body used as GA body, as well as a number of legs that connect the
 nodes together. A central body is given, as this is required for the heliocentric evaluation of the legs, but more on
-that later. A number of different nodes are used and annotated; these are explained below under 'Nodes and Their
-parameters'. 
+that later. A number of different nodes are used and annotated; these are explained below under :ref:`transfer_nodes`. 
 
 It is crucial to understand that both the nodes and legs have an incoming and outgoing velocity vector and that these
 are determined in different frames. The key difference being that the incoming/outgoing velocities of the legs are
-evaluated in a heliocentric frame -- assuming the Sun is the central body -- and the incoming/outoing velocities of the
+evaluated in a heliocentric frame -- assuming the Sun is the central body -- and the incoming/outgoing velocities of the
 nodes are evaluated in a planetocentric frame -- assuming a planet is the GA target. The velocity vectors are converted
 in to the respective frame to evaluate the unknown parameters. Which parameters are unknown depends on the type of leg
 and node, which is explained later. For more details on the difference in reference frame and the patching of these
-trajectories, see section 4.4.2/3 Musegaas (2012)`_.
+trajectories, see section 4.4.2/3 `Musegaas (2012)`_.
 
 .. figure:: _static/MGA_legs_and_nodes.jpg
    :width: 800
@@ -71,8 +69,8 @@ Supported models
 At present, the types of legs are supported (more details can be found below):
 
 - Unpowered legs: A purely ballistic (Keplerian) trajectory between nodes
-- Velocity-based deep-space maneuver (DSM)  legs: A ballistic trajectory betweene nodes, with the addition of a single impulsive maneuver during the leg (parameterized by its velocity)
-- Position-based DSM legs: A ballistic trajectory betweene nodes, with the addition of a single impulsive maneuver during the leg (parameterized by its position)
+- Velocity-based deep-space maneuver (DSM)  legs: A ballistic trajectory between nodes, with the addition of a single impulsive maneuver during the leg (parameterized by its velocity)
+- Position-based DSM legs: A ballistic trajectory between nodes, with the addition of a single impulsive maneuver during the leg (parameterized by its position)
 - Spherical-shaping legs: A shape-based low-thrust trajectory using the spherical shaping method
 - Hodographic-shaping legs: A shape-based low-thrust trajectory using the hodographic shaping method
 
@@ -94,26 +92,24 @@ First, the transfer trajectory module can be imported with:
 
 .. code-block:: python
 
-    from tudatpy.kernel.trajectory_design import transfer_trajectory
+    from tudatpy.trajectory_design import transfer_trajectory
 
 The most commonly-used for procedure for creating an settings of the trajectory is to use factory functions to get the transfer
 leg has the same type (e.g. all unpowered, all spherical-shaping, etc.). The factory functions to create a set of
 node and leg settings is:
 
-  - Unpowered legs: :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_settings_unpowered_unperturbed_legs`.
-  - Velocity-based DSM legs: :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_settings_dsm_velocity_based_legs`.
-  - Position-based DSM legs: :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_settings_dsm_position_based_legs`.
-  - Spherical-shaping legs: :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_settings_spherical_shaping_legs`.
-  - Hodographic-shaping legs: :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_settings_hodographic_shaping_legs` or
-    :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_settings_hodographic_shaping_legs_with_recommended_functions` 
-    (for manual definition or recommended automatic definition of shaping functions, respectively).
+- Unpowered legs: :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_settings_unpowered_unperturbed_legs`.
+- Velocity-based DSM legs: :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_settings_dsm_velocity_based_legs`.
+- Position-based DSM legs: :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_settings_dsm_position_based_legs`.
+- Spherical-shaping legs: :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_settings_spherical_shaping_legs`.
+- Hodographic-shaping legs: :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_settings_hodographic_shaping_legs` or
+  :func:`~tudatpy.trajectory_design.transfer_trajectory.mga_settings_hodographic_shaping_legs_with_recommended_functions` 
+  (for manual definition or recommended automatic definition of shaping functions, respectively).
 
 Manually creating settings for single legs and nodes is described :ref:`below <manual_transfer_legs_nodes>`.
 
 The complete procedure for creating and analyzing an MGA transfer consists of the following. The associated code snippets are taken from 
-an `this example application`_, for an unpowered leg Cassini (EVVEJS) transfer trajectory:
-
-.. _`this example application`: https://docs.tudat.space/en/latest/_src_getting_started/_src_examples/notebooks/pygmo/cassini1_mga_optimization.html 
+:ref:`this example application </_src_getting_started/_src_examples/tudatpy-examples/mission_design/cassini1_mga_optimization.ipynb>`, for an unpowered leg Cassini (EVVEJS) transfer trajectory:
 
 - **Define the transfer settings**: The transfer leg settings and node settings a are created. These are defined
   using the body order (bodies through which the spacecraft will pass), the departure and arrival orbit (semi-major axis
@@ -160,7 +156,7 @@ an `this example application`_, for an unpowered leg Cassini (EVVEJS) transfer t
 - **Evaluate the transfer**: Select the node times, node parameters, and leg parameters, and use them to evaluate the
   transfer through :meth:`~tudatpy.trajectory_design.transfer_trajectory.TransferTrajectory.evaluate`. These parameters
   are described in the following sections. Note that, in the case of an optimization, this function is called repeatedly
-  to evaluate the transfer trajectory with differeent properties.
+  to evaluate the transfer trajectory with different properties.
 
 .. code-block:: python
 
@@ -181,19 +177,15 @@ an `this example application`_, for an unpowered leg Cassini (EVVEJS) transfer t
     total_delta_v = transfer_trajectory_object.delta_v
 
 
-All available functions and classes are described in detail in the relevant entry of the `API reference`_.
-For applications see `this example`_ and `this PyGMO example`_.
-
-.. _`API reference`: https://tudatpy.readthedocs.io/en/latest/transfer_trajectory.html#
-.. _`this example`: https://docs.tudat.space/en/latest/_src_getting_started/_src_examples/notebooks/propagation/mga_trajectories.html
-.. _`this PyGMO example`: https://docs.tudat.space/en/latest/_src_getting_started/_src_examples/notebooks/pygmo/cassini1_mga_optimization.html
+All available functions and classes are described in detail in the relevant entry of the :doc:`API reference <transfer_trajectory>`.
+For applications see the :ref:`MGA trajectories example </_src_getting_started/_src_examples/tudatpy-examples/mission_design/mga_trajectories.ipynb>` for setting up high- and low-thrust transfers and :ref:`this Cassini 1 example </_src_getting_started/_src_examples/tudatpy-examples/mission_design/cassini1_mga_optimization.ipynb>` for an optimization using PyGMO.
 
 .. _manual_transfer_legs_nodes:
 
 Manually Creating the Transfer Settings
 ---------------------------------------
 
-While in many casses the transfer settings can be created using the factory functions listed in the previous section, there are some cases
+While in many cases the transfer settings can be created using the factory functions listed in the previous section, there are some cases
 where the manual creation of these should be preferred. These include transfers with mixed types of legs. The
 creation of the transfer settings can be divided into two steps: creation of the legs settings and creation of the nodes
 settings.
@@ -233,28 +225,26 @@ performed over the number of legs that add the recommended shaping functions as 
 Finally, a node for each planet in the transfer body order must be given: A departure node,
 swingby nodes equal to the number of GA's, and a capture node. 
 
-.. tabs::
+.. use manually synchronized tabs instead of tabbed code to allow dropdowns
+.. tab-set::
+   :sync-group: coding-language
 
-     .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-      .. toggle-header::
-         :header: Required **Show/Hide**
+      .. dropdown:: Required
+         :color: muted
 
-            .. code-block:: python
+          .. code-block:: python
 
-                from tudatpy.kernel.numerical_simulation import propagation_setup
-                from tudatpy.kernel.numerical_simulation import environment_setup
-                from tudatpy.kernel.trajectory_design import shape_based_thrust
-                from tudatpy.kernel.trajectory_design import transfer_trajectory
-                import numpy as np
+              from tudatpy.numerical_simulation import propagation_setup
+              from tudatpy.numerical_simulation import environment_setup
+              from tudatpy.trajectory_design import shape_based_thrust
+              from tudatpy.trajectory_design import transfer_trajectory
+              import numpy as np
 
       .. literalinclude:: /_src_snippets/astrodynamics/manual_node_leg_settings.py
          :language: python
-
-     .. tab:: C++
-
-      .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
-         :language: cpp
 
 Having created the legs and nodes settings, the same procedure described above for creating the transfer trajectory
 object, evaluating it, and retrieving the computed data can be followed.
@@ -282,29 +272,29 @@ to the literature listed in the API reference for the factory function of each l
 
 - **Velocity-based DSM legs**: 1 leg parameter:
 
-      - Fraction of the leg's time-of-flight at which DSM is applied (:math:`\in [0,1]`).
+  - Fraction of the leg's time-of-flight at which DSM is applied (:math:`\in [0,1]`).
 
 - **Position-based DSM legs**: 4 leg parameters:
 
-      - Fraction of the leg's time-of-flight at which DSM is applied (:math:`\in [0,1]`).
-      - Position of the DSM in spherical coordinates, with respect to a frame with the x-axis aligned with the position
-        of the departure body, z-axis aligned with the angular momentum of the departure body, y-axis selected to form a
-        right-handed frame. The spherical position is specified as: dimensionless radial position (using as unit of length
-        the radial position of the departure body), in-plane angle, out-of-plane angle.
+  - Fraction of the leg's time-of-flight at which DSM is applied (:math:`\in [0,1]`).
+  - Position of the DSM in spherical coordinates, with respect to a frame with the x-axis aligned with the position
+    of the departure body, z-axis aligned with the angular momentum of the departure body, y-axis selected to form a
+    right-handed frame. The spherical position is specified as: dimensionless radial position (using as unit of length
+    the radial position of the departure body), in-plane angle, out-of-plane angle.
 
-        .. note::
+  .. note::
 
-            A leg with position-based DSMs requires more leg parameters than one with velocity-based DSMs. However, a transfer
-            constituted by the former will require less node parameters than one constituted by the latter.
+      A leg with position-based DSMs requires more leg parameters than one with velocity-based DSMs. However, a transfer
+      constituted by the former will require less node parameters than one constituted by the latter.
 
 - **Spherical-shaping legs**: 1 leg parameter:
 
-      - Integer number of revolution (:math:`\geq 0`).
+  - Integer number of revolution (:math:`\geq 0`).
 
 - **Hodographic-shaping legs**: at least 1 leg parameter:
 
-      - Integer number of revolution (:math:`\geq 0`).
-      - Free coefficients of shaping functions (number of coefficients is greater or equal to zero).
+  - Integer number of revolution (:math:`\geq 0`).
+  - Free coefficients of shaping functions (number of coefficients is greater or equal to zero).
 
 Finally, and before moving on to the description of the node parameters, it is important to analyze the boundary conditions used
 for the evaluation of each leg of the transfer. These conditions are dealt with internally by the model; hence, the user never
@@ -354,12 +344,12 @@ following leg.
   needs to be applied at the periapsis of the departure elliptic orbit to enter a hyperbolic orbit with the target excess
   velocity, according to section 4.6 of `Musegaas (2012)`_. This node is subdivided into the following types:
 
-    - **Node with leg-defined outgoing velocity**: Does not require node parameters.
-    - **Node with user-defined outgoing velocity**: Node parameters:
+  - **Node with leg-defined outgoing velocity**: Does not require node parameters.
+  - **Node with user-defined outgoing velocity**: Node parameters:
 
-      - Outgoing velocity vector relative to the node, specified with respect to a TNW reference frame defined using the node's
-        inertial state. The outgoing relative velocity is specified in spherical coordinates: norm of the velocity,
-        in-plane angle (:math:`\in [0, 2\pi]`), out-of-plane angle (:math:`\in [-\pi/2, \pi/2]`).
+    - Outgoing velocity vector relative to the node, specified with respect to a TNW reference frame defined using the node's
+      inertial state. The outgoing relative velocity is specified in spherical coordinates: norm of the velocity,
+      in-plane angle (:math:`\in [0, 2\pi]`), out-of-plane angle (:math:`\in [-\pi/2, \pi/2]`).
 
 - **Arrival node**: Usually, this is the final node of the
   transfer. The incoming relative velocity at the node (i.e. the excess velocity) is either
@@ -367,54 +357,54 @@ following leg.
   needs to be applied at the periapsis of the hyperbolic orbit with the specified excess velocity to enter the
   arrival elliptical orbit, according to section 4.6 of `Musegaas (2012)`_. This node is subdivided into the following types:
 
-      - **Node with leg-defined incoming velocity**: Does not require node parameters.
-      - **Node with user-defined incoming velocity**: Node parameters:
+    - **Node with leg-defined incoming velocity**: Does not require node parameters.
+    - **Node with user-defined incoming velocity**: Node parameters:
 
-        - Incoming velocity vector relative to the node, specified with respect to a TNW reference frame defined using the node's
-          inertial state. The incoming relative velocity is specified in spherical coordinates: norm  of the velocity,
-          in-plane angle (:math:`\in [0, 2\pi]`), out-of-plane angle (:math:`\in [-\pi/2, \pi/2]`).
+      - Incoming velocity vector relative to the node, specified with respect to a TNW reference frame defined using the node's
+        inertial state. The incoming relative velocity is specified in spherical coordinates: norm  of the velocity,
+        in-plane angle (:math:`\in [0, 2\pi]`), out-of-plane angle (:math:`\in [-\pi/2, \pi/2]`).
 
 
 - **Swingby node**: Usually, these are the intermediate nodes of the transfer.
   The swingby node is subdivided into the following types:
 
-      - **Node with legs-defined incoming and outgoing velocity**: Does not require node parameters. Computes the
-        :math:`\Delta V \geq 0` that needs to be applied during the swingby to patch the incoming and outgoing
-        velocities, according to section 4.5.2 of `Musegaas (2012)`_.
+  - **Node with legs-defined incoming and outgoing velocity**: Does not require node parameters. Computes the
+    :math:`\Delta V \geq 0` that needs to be applied during the swingby to patch the incoming and outgoing
+    velocities, according to section 4.5.2 of `Musegaas (2012)`_.
 
-      - **Node with leg-defined incoming velocity, user-defined swingby**: Given the known incoming velocity,
-        the node forward propagates the swingby using the user-specified parameters, according to sections 4.4.2/3
-        of `Musegaas (2012)`_. Node parameters:
+  - **Node with leg-defined incoming velocity, user-defined swingby**: Given the known incoming velocity,
+    the node forward propagates the swingby using the user-specified parameters, according to sections 4.4.2/3
+    of `Musegaas (2012)`_. Node parameters:
 
-            - Swingby periapsis radius
-            - Swingby :math:`\Delta V` (applied at the periapsis)
-            - Outgoing-velocity rotation angle. Defined according to Appendix 7a of "Spacecraft Trajectory Optimization",
-              `Conway (2010)`_. This angle defines the plane in which the swingby occurs (different from the bending angle,
-              which is defined inside that plane). This angle takes values in :math:`[0, 2\pi]`.
+    - Swingby periapsis radius
+    - Swingby :math:`\Delta V` (applied at the periapsis)
+    - Outgoing-velocity rotation angle. Defined according to Appendix 7a of "Spacecraft Trajectory Optimization",
+      `Conway (2010)`_. This angle defines the plane in which the swingby occurs (different from the bending angle,
+      which is defined inside that plane). This angle takes values in :math:`[0, 2\pi]`.
 
-      - **Node with user-defined swingby, leg-defined outgoing velocity**: Given the known outgoing velocity,
-        the node backward propagates the swingby using the user-specified parameters. Analogous to sections 4.4.2/3
-        of `Musegaas (2012)`_. Node parameters:
+  - **Node with user-defined swingby, leg-defined outgoing velocity**: Given the known outgoing velocity,
+    the node backward propagates the swingby using the user-specified parameters. Analogous to sections 4.4.2/3
+    of `Musegaas (2012)`_. Node parameters:
 
-            - Swingby periapsis radius
-            - Swingby :math:`\Delta V` (applied at the periapsis)
-            - Incoming-velocity rotation angle. Defined analogously to the outgoing-velocity rotation angle, which in turn is
-              defined according to Appendix 7a of "Spacecraft Trajectory Optimization",
-              `Conway (2010)`_. This angle defines the plane in which the swingby occurs (different from the bending angle,
-              which is defined inside that plane). This angle takes values in :math:`[0, 2\pi]`.
+    - Swingby periapsis radius
+    - Swingby :math:`\Delta V` (applied at the periapsis)
+    - Incoming-velocity rotation angle. Defined analogously to the outgoing-velocity rotation angle, which in turn is
+      defined according to Appendix 7a of "Spacecraft Trajectory Optimization",
+      `Conway (2010)`_. This angle defines the plane in which the swingby occurs (different from the bending angle,
+      which is defined inside that plane). This angle takes values in :math:`[0, 2\pi]`.
 
-      - **Node with user-defined incoming, user-defined swingby**: Given the known incoming velocity,
-        the node forward propagates the swingby using the user-specified parameters, according to sections 4.4.2/3
-        of `Musegaas (2012)`_. Node parameters:
+  - **Node with user-defined incoming, user-defined swingby**: Given the known incoming velocity,
+    the node forward propagates the swingby using the user-specified parameters, according to sections 4.4.2/3
+    of `Musegaas (2012)`_. Node parameters:
 
-            - Incoming velocity vector relative to the node, specified with respect to a TNW reference frame defined using the node's
-              inertial state. The incoming relative velocity is specified in spherical coordinates: norm of the velocity,
-              in-plane angle (:math:`\in [0, 2\pi]`), out-of-plane angle (:math:`\in [-\pi/2, \pi/2]`).
-            - Swingby periapsis radius
-            - Swingby :math:`\Delta V` (applied at the periapsis)
-            - Outgoing-velocity rotation angle. Defined according to Appendix 7a of "Spacecraft Trajectory Optimization",
-              `Conway (2010)`_. This angle defines the plane in which the swingby occurs (different from the bending angle,
-              which is defined inside that plane). This angle takes values in :math:`[0, 2\pi]`.
+    - Incoming velocity vector relative to the node, specified with respect to a TNW reference frame defined using the node's
+      inertial state. The incoming relative velocity is specified in spherical coordinates: norm of the velocity,
+      in-plane angle (:math:`\in [0, 2\pi]`), out-of-plane angle (:math:`\in [-\pi/2, \pi/2]`).
+    - Swingby periapsis radius
+    - Swingby :math:`\Delta V` (applied at the periapsis)
+    - Outgoing-velocity rotation angle. Defined according to Appendix 7a of "Spacecraft Trajectory Optimization",
+      `Conway (2010)`_. This angle defines the plane in which the swingby occurs (different from the bending angle,
+      which is defined inside that plane). This angle takes values in :math:`[0, 2\pi]`.
 
 .. _`Musegaas (2012)`:  http://resolver.tudelft.nl/uuid:02468c77-5c64-4df8-9a24-1ed7ad9d1408
 .. _`Conway (2010)`:  https://doi.org/10.1017/CBO9780511778025

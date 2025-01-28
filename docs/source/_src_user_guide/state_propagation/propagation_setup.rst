@@ -39,44 +39,34 @@ categories of numerical propagation.
 Inputs and setup
 ================
 
-To perform any numerical propagation, propagation settings need to be defined first. To define the
-propagation settings, you must have :ref:`created your physical environment first <environment_setup>`. 
-As the figure shows, there are some input arguments common to all types of single-arc
-dynamics, while some others are specific to the type of dynamics. On the left there are generic
-arguments, which is a list of both necessary and optional arguments that must (or can) be provided
-to the Propagation Settings. On the right, there are dynamics specific arguments. Moreover, for mass
-dynamics, no additional input is required, whereas for rotational dynamics a propagator must be
-defined, and for translational dynamics -- in addition to the propagator -- central bodies need to
-be defined. More in-depth information about inputs are explained in the dynamic-specific pages
-linked below.
-
-There are various options in the propagator settings that must (or can) be provided by a user to
-modify the behaviour before, during and after the propagation. The ones that are common to all dynamics types
-are described in more detail in the following pages:
-
-- **List of propagated bodies**: the names of the bodies for which the dynamics is to be propagated.
-- **Dependent variables**: which quantities to save as output, in addition to the states, described :ref:`here <dependent_variables>`. These settings are optional (none by default).
-- **Numerical integrator**: the solver used to create an approximate solution, described :ref:`here <integrator_setup>`. This setting is mandatory
-- **Termination conditions**: when to terminate the propagation, described :ref:`here <termination_settings>`. This setting is mandatory
-- **Processing/output settings**: what to print to the terminal before, during and after propagation, and what to do with the numerical results after propagation, both described :ref:`here <auto_processing>`. This setting is optional (no terminal output or resetting of environment by default)
+Using Tudat, you can propagate different kinds of equations of motion, including those for translation and/or rotational dynamics.
+These equations can be propagated for one or more bodies, and over a single arc or multiple arcs.
+The figure below gives an overview of the inputs that are required to define so-called propagator settings in Tudat
 
 .. figure:: propagation_setup/_static/tudatpy_propagation_settings.png
 
-The propagation of a given type of dynamics is defined by calling the `associated factory function
-<https://py.api.tudat.space/en/latest/propagator.html#functions>`_. For the different types of
-single-arc dynamics, these factory functions return an object (derived from the
-:class:`~tudatpy.numerical_simulation.propagation_setup.propagator.SingleArcPropagatorSettings`
-class) defining the settings of the propagation. The specifics of how to change the settings for the
-different types of dynamics, some of which are specific to the dynamics type (e.g. accelerations for
-translational dynamics), and some of which are common to all, are discussed on the specific
-pages linked to in the next section
+On the left is a list of arguments (some optional) that can be provided
+to the propagator settings, regardless of their type:
+
+- **Initial conditions** The initial time and state for the numerical propagation
+- **Numerical integrator**: the solver used to create an approximate solution, described :ref:`here <integrator_setup>`. This setting is mandatory
+- **List of propagated bodies**: the names of the bodies for which the dynamics is to be propagated.
+- **Termination conditions**: when to terminate the propagation, described :ref:`here <termination_settings>`. This setting is mandatory
+- **Dependent variables**: which quantities to save as output, in addition to the states, described :ref:`here <dependent_variables>`. These settings are optional (none by default).
+- **Processing/output settings**: what to print to the terminal before, during and after propagation, and what to do with the numerical results after propagation, both described :ref:`here <auto_processing>`. This setting is optional (no terminal output or resetting of environment by default)
+
+.. note::
+
+   The initial state should always be provided in the 'typical' formulation (also called 'processed' formulation, for instance the Cartesian state for translational dynamics),
+   regardless of propagator type (for translational dynamics, for instance, even wen using an Encke propagator)
+   For more information, see :ref:`processed_propagated_states`.
 
 .. _dynamics_types_intro:
 
 Dynamics types
 ==============
 
-As previously mentioned, there are a few different types of dynamics that Tudat can numerically propagate:
+There are a number different types of dynamics that Tudat can numerically propagate, settings for which are created by calling the associated functions in the `propagator module <https://py.api.tudat.space/en/latest/propagator.html#functions>`_. Below, we provide links for pages discussing each type in more detail
 
 - :ref:`translational_dynamics`: the translational state of a body is propagated;
 - :ref:`rotational_dynamics`: the rotational state of a body is propagated;
@@ -92,15 +82,6 @@ in Tudat we also have:
 
 The above list defines different types of dynamics that are propagated over a single continuous arc.
 Propagation using a :ref:`multi-arc setup <multi_arc_dynamics>` is also supported in Tudat.
-
-.. note::
-
-   For a given type of dynamics, the propagated state can be formulated through a number of different
-   state representations. For the case of translational
-   dynamics, for instance, there are various options besides a simple Cartesian state representation. However, even
-   when using a non-Cartesian state vector, the Cartesian representation still plays a role in calculating, *e.g.*,
-   acceleration models, as well as in defining the initial state. For more information on the role of different state
-   representations, please visit the page :ref:`processed_propagated_states`.
 
 
 

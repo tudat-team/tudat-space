@@ -1,6 +1,6 @@
 # required internal imports
-from tudatpy.kernel.astro import two_body_dynamics
-from tudatpy.kernel import constants
+from tudatpy.astro import two_body_dynamics
+from tudatpy import constants
 
 INITIAL_EPOCH = 0.0
 FINAL_EPOCH = 600.0 * constants.JULIAN_DAY

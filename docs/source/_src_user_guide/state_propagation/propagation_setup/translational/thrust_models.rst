@@ -41,14 +41,15 @@ which differ only in the manner that the engine models are selected. For a thrus
  \mathbf{a}_{T}=\mathbf{R}^{(I/B)}\sum_{i=1}^{N}\hat{\mathbf{T}}_{B,i}a_{T,i}
 
 where :math:`\mathbf{T}_{B,i}` is the body-fixed thrust direction of body :math:`i`, and :math:`a_{T,i}` is the thrust acceleration norm exerted by engine :math:`i`. In the (typical) case that the engine thrust force :math:`F_{T,i}` is defined directly (instead of the acceleration, see :ref:`below <thrust_acceleration_magnitude>`), we have :math:`a_{T,i}=F_{T,i}/m`, with :math:`m` the mass of the body.
-Once one (or more) engine models, and a rotation model, for the vehicle are defined, the thrust acceleration can simply be adde to the acceleration settings as any other acceleration model.
+Once one (or more) engine models, and a rotation model, for the vehicle are defined, the thrust acceleration can simply be added to the acceleration settings as any other acceleration model.
 
 
-    .. code-block:: python
+.. code-block:: python
 
-        acceleration_on_vehicle = dict( 
-            Vehicle=[  propagation_setup.acceleration.thrust_from_engine( 'MainEngine') ],
-            ...
+   acceleration_on_vehicle = dict( 
+      ...,
+      Vehicle=[  propagation_setup.acceleration.thrust_from_engine( 'MainEngine') ],
+   )
 
 Where the thrust acceleration due to the single engine model named 'MainEngine' will be used
 
@@ -70,7 +71,7 @@ A typical thrust acceleration application will include some sort of guidance for
 Thrust magnitude
 ~~~~~~~~~~~~~~~~
 
-The engine model(s) used for the vehicle is each assigned an object that computes the magnitude of thrust as a function of time. These objects are created using setings from the factory functions discussed below, each of which returns a :class:`~tudatpy.numerical_simulation.propagation_setup.thrust.ThrustMagnitudeSettings` object.
+The engine model(s) used for the vehicle is each assigned an object that computes the magnitude of thrust as a function of time. These objects are created using settings from the factory functions discussed below, each of which returns a :class:`~tudatpy.numerical_simulation.propagation_setup.thrust.ThrustMagnitudeSettings` object.
 
 Typically, thrust magnitude setting types define a thrust *force* :math:`\mathbf{T}`, and the thrust acceleration :math:`\mathbf{a}_{T}` is computed from this by :math:`\mathbf{a}_{T}=\mathbf{T}/m`. It is also possible to define a thrust magnitude law by directly imposing the thrust acceleration :math:`\mathbf{a}_{T}`. This allows more direct control of the resulting trajectory, as it does not depend on the vehicle's current mass. However, it is slightly less realistic, as it assumes a perfectly knowledge of the current vehicle's mass when commanding the engine.
 
@@ -83,7 +84,7 @@ An example of how to use this constant thrust magnitude setting is shown on the 
 
 **Custom thrust magnitude**
 
-Thrust magnitude settings can also be created trough a custom function that returns the magnitude in Newton as a function of time. More details, and an example on how to use these thrust magnitude settings, are given on the API docs page :func:`~tudatpy.numerical_simulation.propagation_setup.thrust.custom_thrust_magnitude`. Even though the interface for the thrust magnitude permits only a function as input, the user may let the thrust mangitude depend on any and all other properties of the environment. See :ref:`custom_models` for more information of how to define custom models in Tudat, and how to achieve such dependencies. If a custom thrust *magnitude*, but a constant *specific impulse* are to be used, the function :func:`~tudatpy.numerical_simulation.propagation_setup.thrust.custom_thrust_magnitude_fixed_isp` can be used (using this last interface allows derivatives of thrust properties w.r.t. the constant specific impulse :math:`I_{sp}` to be calculated when propagating the associated variational equations).
+Thrust magnitude settings can also be created trough a custom function that returns the magnitude in Newton as a function of time. More details, and an example on how to use these thrust magnitude settings, are given on the API docs page :func:`~tudatpy.numerical_simulation.propagation_setup.thrust.custom_thrust_magnitude`. Even though the interface for the thrust magnitude permits only a function as input, the user may let the thrust magnitude depend on any and all other properties of the environment. See :ref:`custom_models` for more information of how to define custom models in Tudat, and how to achieve such dependencies. If a custom thrust *magnitude*, but a constant *specific impulse* are to be used, the function :func:`~tudatpy.numerical_simulation.propagation_setup.thrust.custom_thrust_magnitude_fixed_isp` can be used (using this last interface allows derivatives of thrust properties w.r.t. the constant specific impulse :math:`I_{sp}` to be calculated when propagating the associated variational equations).
 
 
 **Custom thrust acceleration magnitude**
@@ -104,30 +105,32 @@ Thrust and aerodynamics
 This section elaborates on the use of thrust orientation in case aerodynamics are also taken into account in the simulation model. Even though, in principle, the thrust model is not affected by the presence of an aerodynamic acceleration, there are a number of considerations that may be useful to take into account when setting up such a simulation. In particular, this relates to the manner in which the body's orientation is typically defined in such cases, and how the body's orientation influences the accelerations.  For aerodynamics, the body's orientation is typically defined w.r.t. the trajectory frame (which is itself defined by the body's relative translational state w.r.t. a central body) by the angle of attack :math:`\alpha`, the sideslip angle :math:`\beta` and the bank angle :math:`\sigma` (see TODO). The thrust and aerodynamic accelerations are influenced by the body's orientation as follows:
 
 * For thrust, the body's orientation influences the inertial acceleration, as it influences the direction in which the engine is pointed (see :ref:`thrust_acceleration_setup`)
-* For aerodynamics, the body's orientation influences the inertial acceleration, as the aerodynamic force is typically computed in either aerodynamic frame, or body-fixed frame. In these cases the either :math:`\sigma`, or :math:`alpha`, :math:`beta` and :math:`sigma`, respectively. In addition, in many cases the aerodynamic coeficients *themselves* are a function of the :math:`alpha` (and :math:`beta`).
+* For aerodynamics, the body's orientation influences the inertial acceleration, as the aerodynamic force is typically computed in either aerodynamic frame, or body-fixed frame. In these cases the either :math:`\sigma`, or :math:`\alpha`, :math:`\beta` and :math:`\sigma`, respectively. In addition, in many cases the aerodynamic coefficients *themselves* are a function of the :math:`\alpha` (and :math:`\beta`).
 
 A typical body rotation model for problems such as aerodynamics is the model defined using the :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.aerodynamic_angle_based` (or, related, the :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.zero_pitch_moment_aerodynamic_angle_based`) model. If these models are used in conjunction with thrust, the rotation matrix :math:`\mathbf{R}^{(I/B)}` defined by this model defines the inertial thrust direction.
 
-A typical body rotation model for problems involving thrust is the model defined by :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.custom_inertial_direction_based`. When using such a model, the body-fixed axis along which the thrust force acts is automatically aligned with a user-specified (time-dependent) inertial direction. However, this does *not* fully specify the rotation matrix :math:`\mathbf{R}^{(I/B)}`, as it leaves the rotation about the thrust vector :math:`\hat{\mathbf{T}}` (to which the thrust force itself is insensitive) undefined. The :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.custom_inertial_direction_based` function has an optional input to define a ``free_rotation_angle_function`` to define this free angle (by definition this angle is 0; see API entry documentation for details on how this angle is defined). This free rotation angle can be used to exert partial control over the aerodynamic force. When this rotation model (or any rotation model not based on aerodynamic angles) is used, the :math:`\mathbf{R}^{(I/B)}` matrix (and latitude, longitude, flight path and heading angles) are used to computed the angles :math:`alpha`, :math:`beta` and :math:`sigma`. By specifying the rotation angle about :math:`\hat{\mathbf{T}}`, the matrix :math:`\mathbf{R}^{(I/B)}` is modified, leading to a change in :math:`alpha`, :math:`beta` and :math:`sigma`.
+A typical body rotation model for problems involving thrust is the model defined by :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.custom_inertial_direction_based`. When using such a model, the body-fixed axis along which the thrust force acts is automatically aligned with a user-specified (time-dependent) inertial direction. However, this does *not* fully specify the rotation matrix :math:`\mathbf{R}^{(I/B)}`, as it leaves the rotation about the thrust vector :math:`\hat{\mathbf{T}}` (to which the thrust force itself is insensitive) undefined. The :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.custom_inertial_direction_based` function has an optional input to define a ``free_rotation_angle_function`` to define this free angle (by definition this angle is 0; see API entry documentation for details on how this angle is defined). This free rotation angle can be used to exert partial control over the aerodynamic force. When this rotation model (or any rotation model not based on aerodynamic angles) is used, the :math:`\mathbf{R}^{(I/B)}` matrix (and latitude, longitude, flight path and heading angles) are used to computed the angles :math:`\alpha`, :math:`\beta` and :math:`\sigma`. By specifying the rotation angle about :math:`\hat{\mathbf{T}}`, the matrix :math:`\mathbf{R}^{(I/B)}` is modified, leading to a change in :math:`\alpha`, :math:`\beta` and :math:`\sigma`.
 
 Mass rate from thrust
 =====================
 
-If thrust is added to the model, the vehicle will physicall lose mass (its propellant) over time.
+If thrust is added to the model, the vehicle will physically lose mass (its propellant) over time.
 
 A mass rate setting is available in Tudat(Py) to make the loss of mass of the vehicle consistent with the magnitude of the thrust and its specific impulse over time, by propagating the mass of the body as a state entry. This is available trough the :func:`~tudatpy.numerical_simulation.propagation_setup.mass_rate.from_thrust` function, which has to be setup after the acceleration models are defined, as follows:
 
-   .. tabs::
+.. tab-set::
+   :sync-group: coding-language
 
-      .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-         .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/thrust_mass_rate.py
-            :language: python
+      .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/thrust_mass_rate.py
+         :language: python
 
-      .. tab:: C++
+   .. tab-item:: C++
 
-         .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/thrust_mass_rate.cpp
-            :language: cpp
+      .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/thrust_mass_rate.cpp
+         :language: cpp
 
 More details and options on mass propagation are provided on the :ref:`mass_dynamics` page.
 

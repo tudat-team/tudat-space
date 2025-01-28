@@ -20,13 +20,13 @@ If this is the case, we have the option for users to define 'custom' models for 
 
 Custom environment models:
 
-* Custom aerodynamic coefficients (with suppported dependencies from :class:`~tudatpy.numerical_simulation.environment.AerodynamicCoefficientsIndependentVariables`) :func:`~tudatpy.numerical_simulation.environment_setup.aerodynamic_coefficients.custom_aerodynamic_force_coefficients` or :func:`~tudatpy.numerical_simulation.environment_setup.aerodynamic_coefficients.custom_aerodynamic_force_and_moment_coefficients` (only force, and force and moment coefficients, respectively)
+* Custom aerodynamic coefficients (with supported dependencies from :class:`~tudatpy.numerical_simulation.environment.AerodynamicCoefficientsIndependentVariables`) :func:`~tudatpy.numerical_simulation.environment_setup.aerodynamic_coefficients.custom_aerodynamic_force_coefficients` or :func:`~tudatpy.numerical_simulation.environment_setup.aerodynamic_coefficients.custom_aerodynamic_force_and_moment_coefficients` (only force, and force and moment coefficients, respectively)
 * Custom atmospheric density model (function of time only) :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.custom_constant_temperature`
 * Custom atmospheric density model (function of position and time) :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.custom_four_dimensional_constant_temperature` *Note:* this custom function has current time, altitude, latitude and longitude as input.
 * Custom wind model: :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.custom_wind_model`
 * Custom ephemeris: :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.custom_ephemeris`
-* Custom body orientation :func:`~tudatpy.numerical_simulation.propagation_setup.rotation.custom_rotation_model`
-* Custom inertial direction (typical for basic thrust guidance) :func:`~tudatpy.numerical_simulation.propagation_setup.rotation.custom_inertial_direction_based`
+* Custom body orientation :func:`~tudatpy.numerical_simulation.environment_setup.rotation.custom_rotation_model`
+* Custom inertial direction (typical for basic thrust guidance) :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.custom_inertial_direction_based`
 
 Custom propagation models:
 
@@ -34,7 +34,7 @@ Custom propagation models:
 * Custom torque :func:`~tudatpy.numerical_simulation.propagation_setup.torque.custom_torque`
 * Custom acceleration :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.custom_acceleration`
 * Custom mass rate :func:`~tudatpy.numerical_simulation.propagation_setup.mass_rate.custom_mass_rate`
-* Custom state :func:`~tudatpy.numerical_simulation.propagation_setup.propagation.custom_state` *Note:* this custom function has current time, and the current custom state, as input
+* Custom state :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.custom_state` *Note:* this custom function has current time, and the current custom state, as input
 * Custom termination setting :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.custom_termination`  *Note:* this custom function takes no inputs, if the current time is needed, it can be retrieved from the :attr:`~tudatpy.numerical_simulation.environment.SystemOfBodies.current_time` attribute of the :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies`
 * Custom dependent variable :func:`~tudatpy.numerical_simulation.propagation_setup.dependent_variable.custom_dependent_variable` *Note:* this custom function takes no inputs, if the current time is needed, it can be retrieved from the :attr:`~tudatpy.numerical_simulation.environment.SystemOfBodies.current_time` attribute of the :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies`
 
@@ -46,22 +46,24 @@ In each case, the user is required to define their own function, with a predefin
 
 The latter choice permits complex guidance algorithms to be implemented, in which (for instance) the algorithm for the control surface deflection, thrust magnitude and body-fixed thrust direction (thrust vector control) are calculated in a coupled manner.
 
-For most environment models, the custom model can be fully defined by a standalone function , and can be fully defined by a free function (which may of course call other functions from tudat, other packages or your own code. A custom function will, in numerous cases, have to depend on properties of bodies (states, altitude, density, etc.). How to access such properties of the environment *during* the propagation is described on the page on :ref:`environment_during_propagation`.
+For most environment models, the custom model can be fully defined by a standalone function , and can be fully defined by a free function (which may of course call other functions from tudat, other packages or your own code). A custom function will, in numerous cases, have to depend on properties of bodies (states, altitude, density, etc.). How to access such properties of the environment *during* the propagation is described on the page on :ref:`environment_during_propagation`.
 
 Custom model, free function
 ===========================
 
-Here, we show an example of an ephemeris model that will be both faster, and less accurate, than the models implemented in Tudat. This may be advantageous for preliminary simulation. The model is very simple: a perfectly circular orbit in the :math:`xy-`plane of the ``ECLIPJ2000`` frame.
+Here, we show an example of an ephemeris model that will be both faster, and less accurate, than the models implemented in Tudat. This may be advantageous for preliminary simulation. The model is very simple: a perfectly circular orbit in the :math:`xy-` plane of the ``ECLIPJ2000`` frame.
 
-    .. tabs::
+.. tab-set::
+   :sync-group: coding-language
 
-         .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/custom_ephemeris_example.py
-             :language: python
+      .. literalinclude:: /_src_snippets/simulation/environment_setup/custom_ephemeris_example.py
+         :language: python
 
  
-In the above example, the user-define function ``neptune_state_function`` is provided when creating the custom ephemeris settings. The only requirement on this custom function is that it takes a single float as argument (representing time since J2000), and returns a 6-dimensional vector (representing the Cartesian state in the frame specified), as can be seen in the :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.custom` API entry.
+In the above example, the user-defined function ``neptune_state_function`` is provided when creating the custom ephemeris settings. The only requirement on this custom function is that it takes a single float as argument (representing time since J2000), and returns a 6-dimensional vector (representing the Cartesian state in the frame specified), as can be seen in the :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.custom_ephemeris` API entry.
 
 .. _single_custom_models:
 
@@ -70,24 +72,28 @@ Custom model (single), class member
 
 Below, a skeleton is given for a custom class for the calculation of the thrust magnitude.
 
-    .. tabs::
+.. tab-set::
+   :sync-group: coding-language
 
-         .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/custom_class_single.py
-             :language: python
+      .. literalinclude:: /_src_snippets/simulation/environment_setup/custom_class_single.py
+         :language: python
 
          
-This setup allows the guidance model to direcly access any of the properties of the bodies named 'Earth' and 'Vehicle', which were set as class attributes of the ``SimpleCustomGuidanceModel`` class (note: the inputs to the constructor, and the manner in which they are used is entirely up to the user, here we give just one example).
+This setup allows the guidance model to directly access any of the properties of the bodies named 'Earth' and 'Vehicle', which were set as class attributes of the ``SimpleCustomGuidanceModel`` class (note: the inputs to the constructor, and the manner in which they are used is entirely up to the user, here we give just one example).
        
 The custom thrust magnitude model can then be used as follows to define the thrust magnitude that is to be exerted by an engine:
 
-    .. tabs::
+.. tab-set::
+   :sync-group: coding-language
 
-         .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/custom_thrust_magnitude_example.py
-             :language: python
+      .. literalinclude:: /_src_snippets/simulation/environment_setup/custom_thrust_magnitude_example.py
+         :language: python
 
 .. _couple_custom_models:
 
@@ -96,22 +102,26 @@ Custom model (multiple), class member
 
 Below, a skeleton is given for a custom class for the calculation of both thrust magnitude and aerodynamic angles.
 
-    .. tabs::
+.. tab-set::
+   :sync-group: coding-language
 
-         .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/custom_class_multiple.py
-             :language: python
+      .. literalinclude:: /_src_snippets/simulation/environment_setup/custom_class_multiple.py
+         :language: python
 
          
 Here, we see a different setup compared to the previous case. There is a single function, named ``update_guidance`` that calculates both the thrust magnitude and the aerodynamic angles. This allows the calculation of the two models to be coupled, which is required for many more advanced applications. The two functions ``getAerodynamicAngles`` and ``getThrustMagnitude`` are then linked to the environment as follows:
 
-    .. tabs::
+.. tab-set::
+   :sync-group: coding-language
 
-         .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
          
-          .. literalinclude:: /_src_snippets/simulation/environment_setup/coupled_thrust_aerodynamics_example.py
-             :language: python
+      .. literalinclude:: /_src_snippets/simulation/environment_setup/coupled_thrust_aerodynamics_example.py
+         :language: python
 
 
 In setting up the custom guidance class, we now need to take care of one crucial point: even though data is retrieved from the object *twice* per function evaluation of the state derivative, the calculation should only be done *once*. Since it is often difficult to predict which of the custom functions will be called first, we use a different setup: defining a ``current_time`` member variable, and letting the code check whether an update needs to be done. This is achieved as follows:

@@ -13,7 +13,7 @@ take a set of combinations :math:`[t_{i},\mathbf{x}_{i}]` and turn this into a c
 
 .. seealso::
    The full API documentation for interpolators
-   can be found here `here <https://tudatpy.readthedocs.io/en/latest/interpolators.html>`_.
+   can be found :doc:`here <interpolators>`.
 
 General procedure
 -----------------
@@ -26,23 +26,24 @@ The manner in which to use the tudat interpolators is similar to that of the var
 
 An example, for the case of a linear interpolator, is shown below:
 
-    .. tabs::
+.. use manually synchronized tabs instead of tabbed code to allow dropdowns
+.. tab-set::
+   :sync-group: coding-language
 
-         .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-          .. toggle-header:: 
-             :header: Required **Show/Hide**
+      .. dropdown:: Required
+         :color: muted
 
-             .. literalinclude:: /_src_snippets/math/interpolators/interpolator_import.py
-                :language: python
+         .. literalinclude:: /_src_snippets/math/interpolators/interpolator_import.py
+            :language: python
 
-          .. literalinclude:: /_src_snippets/math/interpolators/basic_interpolation.py
-             :language: python
+      .. literalinclude:: /_src_snippets/math/interpolators/basic_interpolation.py
+         :language: python
 
 
-         .. tab:: C++
-
-In the above examplee, the linear scheme is used to interpolate the ``data_to_interpolate`` data set at  :math:`t=100`
+In the example above, the linear scheme is used to interpolate the ``data_to_interpolate`` data set at  :math:`t=100`
 (where typically, but not necessarily, the independent variable in interpolation will represent time, in the context of Tudat).
 
 The data that is to be interpolated must be provided as a ``dict`` (in Python) or a ``std::map`` (in C++):
@@ -76,21 +77,21 @@ Tudat includes the following interpolators for a data set with a single independ
 To use the Hermite spline interpolator, the user must provide not only the states :math:`\mathbf{x}_{i}` *and*
 the state derivatives :math:`d\mathbf{x}_{i}/dt` at the independent variable values :math:`t_{i}`:
 
-    .. tabs::
+.. use manually synchronized tabs instead of tabbed code to allow dropdowns
+.. tab-set::
+   :sync-group: coding-language
 
-         .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-          .. toggle-header:: 
-             :header: Required **Show/Hide**
+      .. dropdown:: Required
+         :color: muted
 
-             .. literalinclude:: /_src_snippets/math/interpolators/interpolator_import.py
-                :language: python
+         .. literalinclude:: /_src_snippets/math/interpolators/interpolator_import.py
+            :language: python
 
-          .. literalinclude:: /_src_snippets/math/interpolators/hermite_interpolation.py
-             :language: python
-
-
-         .. tab:: C++
+      .. literalinclude:: /_src_snippets/math/interpolators/hermite_interpolation.py
+         :language: python
 
 Additional settings
 --------------------
@@ -102,4 +103,3 @@ To create interpolator settings, there are a number of additional settings that 
 * the behaviour beyond the boundaries of the domain, through the enum :class:`~tudatpy.math.interpolators.BoundaryInterpolationType`;
 * the behaviour close to the boundaries of the domain, through the enum :class:`~tudatpy.math.interpolators.LagrangeInterpolatorBoundaryHandling`
   (for the :func:`~tudatpy.math.interpolators.lagrange_interpolation` only).
-

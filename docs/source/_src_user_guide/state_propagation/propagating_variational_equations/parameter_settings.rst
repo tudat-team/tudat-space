@@ -18,39 +18,31 @@ In Tudat, these parameters influence the simulation in a variety of manners, and
 
 When only wishing to propagate the state transition matrix :math:`\Phi(t,t_{0})` (or depending on your use case, only estimate initial state parameters), the following line the relevant settings:
 
-    .. tabs::
+.. tab-set::
+   :sync-group: coding-language
 
-         .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-          .. toggle-header:: 
-             :header: Required **Show/Hide**
+      .. literalinclude:: /_src_snippets/simulation/sensitivity_analysis/state_only_parameters.py
+         :language: python
 
-          .. literalinclude:: /_src_snippets/simulation/sensitivity_analysis/state_only_parameters.py
-             :language: python
-
-         .. tab:: C++
-
-             :language: cpp
-             
 which defines the initial state parameters to be fully consistent with the settings in the `propagator_settings`. 
 
 .. note:: Options exist to manually define initial state parameters. However, at present, the initial state parameters **must** be consistent with the propagator settings, and these additional options are not described here. 
 
-When wishing to propagate the sensitivity matrix :math:`S(t)` (or depending on your use case, estimate parameters in addtion to initial state parameters), the set of parameters can be extended using the following:
+When wishing to propagate the sensitivity matrix :math:`S(t)` (or depending on your use case, estimate parameters in addition to initial state parameters), the set of parameters can be extended using the following:
 
-    .. tabs::
+.. tab-set::
+   :sync-group: coding-language
 
-         .. tab:: Python
+   .. tab-item:: Python
+      :sync: python
 
-          .. toggle-header:: 
-             :header: Required **Show/Hide**
-
-          .. literalinclude:: /_src_snippets/simulation/sensitivity_analysis/full_parameter_settings.py
-             :language: python
-
-         .. tab:: C++
+      .. literalinclude:: /_src_snippets/simulation/sensitivity_analysis/full_parameter_settings.py
+         :language: python
 	
          
-In the snippet above, parameters are created to estimate the initial states in the `propagator_settings` (presumably Delfi C-3 initial translational states), the gravitational parameter of the Earth, the constant drag and the radiation pressure coefficient of Delfi-C3.
+In the snippet above, parameters are created to estimate the initial states in the `propagator_settings` (presumably Delfi-C3 initial translational states), the gravitational parameter of the Earth, the constant drag and the radiation pressure coefficient of Delfi-C3.
 
 For the full list of available parameters, see :ref:`parameterSettingCreation`.

@@ -34,18 +34,18 @@ Aerodynamic Torque
 | The aerodynamic torque model can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.torque.aerodynamic` factory function.
 
 | **Dependencies**
-| 1. Atmosphere model for body exerting acceleration (see `Atmosphere models <https://py.api.tudat.space/en/latest/atmosphere.html>`_).
+| 1. Atmosphere model for body exerting acceleration (see :doc:`Atmosphere models <atmosphere>`).
 | 2. Aerodynamic coefficient interface for body undergoing acceleration (see
-  `Aerodynamic coefficients <https://py.api.tudat.space/en/latest/aerodynamic_coefficients.html>`_).
+  :doc:`Aerodynamic coefficients <aerodynamic_coefficients>`).
 | 3. Inertia tensor model for body undergoing acceleration.
 | 4. Current states of body undergoing acceleration and body with atmosphere.
 | 5. Shape model for the body exerting an acceleration (to allow for the calculation of vehicle altitude)
-| 6. Roation model for the body undergoing an acceleration (or numerical propagation of this body's rotational dynamics)
+| 6. Rotation model for the body undergoing an acceleration (or numerical propagation of this body's rotational dynamics)
 
 .. note::
    The aerodynamic acceleration is calculated in the vehicles body-fixed or aerodynamic frame. Expressing the
    acceleration in an inertial frame (as required by the propagation) requires the vehicle's orientation to be defined.
-   For a simple definition, in which the body’s angle of attack, sideslip angle, and bank angle are all set to 0, see
+   For a simple definition, in which the body's angle of attack, sideslip angle, and bank angle are all set to 0, see
    :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.aerodynamic_angle_based`.
 
    More details on aerodynamic guidance can be found on :ref:`this page <aerodynamic_models>`.
@@ -57,7 +57,7 @@ Second Degree Gravitational Torque
 | The second degree gravitational torque model can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.torque.second_degree_gravitational` factory function.
 
 | **Dependencies**
-| 1. Gravity field model for body exerting acceleration (see `Atmosphere models <https://py.api.tudat.space/en/latest/atmosphere.html>`_).
+| 1. Gravity field model for body exerting acceleration (see :doc:`Atmosphere models <atmosphere>`).
 | 2. Inertia tensor model for body undergoing acceleration.
 | 3. Current states of body undergoing acceleration and body with atmosphere.
 
@@ -74,8 +74,8 @@ Spherical Harmonics Gravitational Torque
 | The second degree gravitational torque model can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.torque.spherical_harmonic_gravitational` factory function.
 
 | **Dependencies**
-| 1. Gravity field model for body exerting acceleration (see `Atmosphere models <https://py.api.tudat.space/en/latest/atmosphere.html>`_).
-| 2. Spherical harmonic gravity field for body undergoing torque (see `Gravity field models <https://py.api.tudat.space/en/latest/gravity_field.html>`_).
+| 1. Gravity field model for body exerting acceleration (see :doc:`Atmosphere models <atmosphere>`).
+| 2. Spherical harmonic gravity field for body undergoing torque (see :doc:`Gravity field models <gravity_field>`).
 | 3. Current states of body undergoing acceleration and body with atmosphere.
 
 .. tip::

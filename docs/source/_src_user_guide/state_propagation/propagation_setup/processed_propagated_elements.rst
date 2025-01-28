@@ -72,8 +72,8 @@ can have a significant influence on the quality of your numerical results.
     Since the processed coordinates are used to update the environment and accelerations of the bodies, but the
     propagated coordinates are the ones used in propagation, you can see that whenever the processed and propagated
     coordinates differ, there is a need to convert between the two at every time step (or even multiple times, if the time
-    step is divided in multiple steps for integration). Therefore, this leads to a set of extra operations to be perfomed
-    during propagation, which may in turn lead to a longer computation time for a single evaluatuon of the state derivative
+    step is divided in multiple steps for integration). Therefore, this leads to a set of extra operations to be performed
+    during propagation, which may in turn lead to a longer computation time for a single evaluation of the state derivative
     and/or increased numerical error. However, these aspects are rarely influential.
 
 .. note::

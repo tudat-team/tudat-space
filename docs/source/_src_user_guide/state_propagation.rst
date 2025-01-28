@@ -1,3 +1,5 @@
+.. _state_propagation:
+
 ******************
 State Propagation
 ******************
@@ -6,8 +8,8 @@ In this section, the different stages and options of a typical simulation setup 
 Tudat is organized as shown in the figure below.
 
 
- .. figure:: _static/tudatpy_high_level.png
-    :width: 600
+.. figure:: _static/tudatpy_high_level.png
+   :width: 600
 
 Inputs
 =======
@@ -15,7 +17,7 @@ Inputs
 There are two distinct input types necessary to create a simulation:
 
 - :ref:`environment_setup`: physical modeling of environment and system properties (for both celestial and artificial bodies)
-- :ref:`propagation_setup`: formulation of the differential eq  uations representing the problem, and the method to solve them
+- :ref:`propagation_setup`: formulation of the differential equations representing the problem, and the method to solve them
 
 .. toctree::
    :titlesonly:

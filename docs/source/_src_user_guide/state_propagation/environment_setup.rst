@@ -18,7 +18,6 @@ Environment Setup
    environment_setup/times_and_dates
    environment_setup/available_state_definitions_conversions
    environment_setup/environment_architecture
-   environment_setup/thrust_refactor
 
 
 
@@ -30,25 +29,24 @@ In Tudat, the physical environment is defined by a set of bodies, each encapsula
 (gravity field, ephemeris, *etc.*), which may be interdependent.
 
 .. note::
-   The :class:`~tudatpy.numerical_simulation.environment.Body` object may represent a celestial body or a
-   manmade vehicle. Tudat makes *no* a priori distinction between the two: the distinction is made by the user when
+   The :class:`~tudatpy.numerical_simulation.environment.Body` object may represent a celestial body or an
+   artificial vehicle. Tudat makes *no* a priori distinction between the two: the distinction is made by the user when
    creating the bodies.
 
-The combination of all Body objects is stored in a
+The combination of all :class:`~tudatpy.numerical_simulation.environment.Body` objects is stored in a
 :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` object (typically named
 simple ``bodies`` in the code). This object constitutes "the environment" in Tudat.
 During the propagation, all the required properties of bodies are extracted from here and combined
 to evaluate accelerations/torques/guidance/..., and compute the state derivative of the system
-(see :ref:`propagation_setup` for setting up a numerical propagation).
+(see :ref:`propagation_setup` for details on how to do this).
 
 Even though the primary role of the environment is in numerical state propagation,
 it is also used to define properties of celestial bodies in, for instance, (semi-)analytical trajectory design
 (see :ref:`transfer_trajectory`).
 
-There are many different types of environment models in Tudat. See :ref:`available_environment_models` for
-a comprehensive list, and :ref:`specific_environment_considerations` for a number of overall considerations on
-specific types of environment models. The overall architecture of the environment in Tudat is described in more
-detail on a dedicated page on :ref:`environment_architecture`.
+There are many different types of environment models in Tudat (e.g. ephemerides, rotation models, atmosphere models, *etc.*). See :ref:`environment_model_overview` for
+a comprehensive list. The overall architecture of the environment in Tudat is described in more
+detail on a dedicated page on :ref:`environment_architecture` (for advanced users and developers).
 
 Body Creation - Procedure
 -------------------------
@@ -57,7 +55,7 @@ The :class:`~tudatpy.numerical_simulation.environment.Body` objects, and the :cl
 that holds them, are not directly created by the user. Instead, settings for each body
 are created by a user and stored in a :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings` object.
 A set of such objects (one for each body) is in turn stored in a :class:`~tudatpy.numerical_simulation.environment_setup.BodyListSettings` object,
-from which the environment is created.
+from which the environment is created using the :func:`~tudatpy.numerical_simulation.environment_setup.create_system_of_bodies` function.
 
 The typical procedure to create the environment is represented in the figure and explained below.
 
@@ -68,9 +66,9 @@ The typical procedure to create the environment is represented in the figure and
    objects stored in a  :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` object, automatically resolving any
    interdependencies  (see :ref:`create_bodies_from_settings_first`).
 
-3. **Modify bodies** If desired, additional models and bodies can be added afer this
+3. **Modify bodies** If desired, additional models and bodies can be added after this
    :class:`~tudatpy.numerical_simulation.environment.Body`/:class:`~tudatpy.numerical_simulation.environment.SystemOfBodies`
-   creation, with limitations on interdepenencies with existing bodies (see :ref:`create_empty_body`).
+   creation, with limitations on interdependencies with existing bodies (see :ref:`create_empty_body`).
 
 .. figure:: _static/tudatpy_environment.png
    :width: 600

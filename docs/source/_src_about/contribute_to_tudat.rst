@@ -1,3 +1,5 @@
+.. _contribute_to_tudat:
+
 ===================
 Contribute to Tudat
 ===================
@@ -11,21 +13,21 @@ Any contribution you have to Tudat is very welcome! This can come in the form of
   * `Tudatpy code (C++) <https://github.com/tudat-team/tudatpy>`_ where the C++ functionality is exposed to Python using `pybind11 <https://pybind11.readthedocs.io/en/stable/index.html>`_
   * `Tudatpy examples code (Python/Jupyter) <https://github.com/tudat-team/tudatpy-examples>`_ where the :ref:`getting_started_examples` of our project are located
   * `Tudat space (sphinx) <https://github.com/tudat-team/tudat-space>`_ where the markup language that generates this website is located
-  * `Tudat API docs (docstrings) <https://github.com/tudat-team/tudat-multidoc>`_ where the entries of our `API documentation <https://py.api.tudat.space/en/latest/>`_ are located
+  * `Tudat API docs (docstrings) <https://github.com/tudat-team/tudat-multidoc>`_ where the entries of our :doc:`API documentation <index>` are located
 
 * Part of our development workflow is documented on our `developer docs <https://tudat-developer.readthedocs.io/en/latest/>`_. This site is still under construction, and any input is more than welcome!
 
 Ongoing and planned developments
 ================================
 
-Below is a (non enirely comprehensive) list of features and functionalities that are under active development, or or our near(ish)-term wishlist. For some of them, the required development would be Python-only. If you're interested in the status of these points, in contributing, or in proposing additional ones, please feel free to contact us!
+Below is a (not entirely comprehensive) list of features and functionalities that are under active development, or or our near(ish)-term wishlist. For some of them, the required development would be Python-only. If you're interested in the status of these points, in contributing, or in proposing additional ones, please feel free to contact us!
 
 * Extension of Tudat estimation functionality for real tracking data analysis, with a focus on planetary missions
 
   * Reading additional typical radio tracking data files (TNF, TDF) into Tudat-compatible data structures (in addition to ODF files, which are currently supported)
   * Adding high-accuracy models for media corrections for radio tracking (troposphere, ionosphere, corona)
-  * Adding more detailed albedo and surface temperature models for radiation pressire modelling
-  * Flexible and automated setup for high-fidelity propagation and estimation of planetart spacecraft
+  * Adding more detailed albedo and surface temperature models for radiation pressure modelling
+  * Flexible and automated setup for high-fidelity propagation and estimation of planetary spacecraft
   * Implement sparse matrices for partials matrices
   * ...
 
@@ -87,6 +89,7 @@ Below, there is a list of contributors to Tudat. Mostly, these have been staff a
 * Jonas Hener
 * `Frank Hogervorst <https://www.linkedin.com/in/frankhogervorst/>`_
 * `René Hoogendoorn <https://www.linkedin.com/in/rene-hoogendoorn-107/>`_
+* `Elisabetta Iorfida <https://www.linkedin.com/in/elisabettaiorfida>`_
 * `Kartik Kumar <https://www.linkedin.com/in/kumarkartik/>`_
 * `Jonatan Leloux <https://www.linkedin.com/in/jonatanleloux/>`_
 * `Francesco Lupi <https://www.linkedin.com/in/francesco-lupi-b23a658/>`_

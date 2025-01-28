@@ -20,5 +20,5 @@ def neptune_state_function( current_time ):
 
 # Retrieve custom state function, and set as ephemeris function w.r.t. Sun, with axes along J2000
 custom_state_function = neptune_state_function
-body_settings.get( "Neptune" ).ephemeris_settings = environment_setup.ephemeris.custom( 
+body_settings.get( "Neptune" ).ephemeris_settings = environment_setup.ephemeris.custom_ephemeris( 
 	custom_state_function, 'Sun', 'ECLIPJ2000' )
