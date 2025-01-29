@@ -23,15 +23,12 @@ These settings are defined via factory functions for each torque in the simulati
    A comprehensive list of all available torque models in Tudat and the manner in which to define
    them is given in :ref:`available_torque_models`.
 
-These settings are organized in nested key-value containers (``std::map<>`` in C++, ``dict`` in Python). In general:
+For a single body, the user-specified settings are organized in nested dictionaries ``dict[str,dict[str,list[TorqueSettings]]]``,
+with the first ``str`` denoting the body undergoing acceleration, the second ``str`` denoting the body exerting the acceleration, and the
+list of :class:`~tudatpy.numerical_simulation.propagation_setup.torque.TorqueSettings` objects is created using the functions in the
+:doc:`torque` module.
 
-- ``key``: body undergoing torque
-- ``value``: dictionary with:
-
-  - ``key``: body exerting the torque
-  - ``value``: :class:`~tudatpy.numerical_simulation.propagation_setup.torque.TorqueSettings` object.
-
-This container will be supplied to the
+This nested dictionary will be supplied to the
 :func:`~tudatpy.numerical_simulation.propagation_setup.create_torque_models` function to create the
 torque models. This is illustrated in the example below.
 

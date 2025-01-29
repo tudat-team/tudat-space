@@ -23,7 +23,8 @@ initial_state = element_conversion.rotation_matrix_to_quaternion_entries(initial
 initial_state = np.hstack((inital_state, [0,0,0]))
 
 # Define numerical integrator (RK4; step size 2 seconds)
-integrator_settings = propagation_setup.integrator.runge_kutta_4( 2.0 )
+integrator_settings = propagation_setup.integrator.integrator.runge_kutta_fixed_step(
+    2.0, integrator.rk_4 )
 
 # Start of simulation
 simulation_start_epoch = 9120.0 * constants.JULIAN_DAY 
@@ -49,3 +50,6 @@ rotational_propagator_settings = propagation_setup.propagator.rotational(
     termination_settings,
     propagator=propagator_type,
     output_variables=dependent_variables_to_save)
+
+# Set print frequency (to terminal) at once per day
+rotational_propagator_settings.print_settings.results_print_frequency_in_seconds = 86400.0

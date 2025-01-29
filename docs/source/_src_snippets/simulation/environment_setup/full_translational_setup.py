@@ -19,7 +19,8 @@ acceleration_models = propagation_setup.create_acceleration_models(
 initial_state = [5.89960424e+06, 2.30545977e+06, 1.74910449e+06, -1.53482795e+03, -1.71707683e+03, 7.44010957e+03]
 
 # Define numerical integrator (RK4; step size 2 seconds)
-integrator_settings = propagation_setup.integrator.runge_kutta_4( 2.0 )
+integrator_settings = propagation_setup.integrator.runge_kutta_fixed_step(
+    2.0, integrator.rk_4 )
 
 # Start of simulation
 simulation_start_epoch = 9120.0 * constants.JULIAN_DAY
@@ -46,3 +47,6 @@ translational_propagator_settings = propagation_setup.propagator.translational(
     termination_settings,
     propagator=propagator_type,
     output_variables= dependent_variables_to_save)
+
+# Set print frequency (to terminal) at once per day
+translational_propagator_settings.print_settings.results_print_frequency_in_seconds = 86400.0

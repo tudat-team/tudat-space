@@ -251,6 +251,7 @@ The :doc:`Radiation pressure source and target models <radiation_pressure>` are 
 * These models provide various ways in which to define the radiation flux emitted by a body, and a response of a body to incident radiation pressure. More details are provided on a :ref:`dedicated page <radiation_pressure_acceleration>`
 * The resulting model can be extracted from the :class:`~tudatpy.numerical_simulation.environment.Body` object extracted using :attr:`~tudatpy.numerical_simulation.environment.Body.radiation_pressure_source` and :attr:`~tudatpy.numerical_simulation.environment.Body.radiation_pressure_target`, which provides a :class:`~tudatpy.numerical_simulation.environment.RadiationSourceModel` and a :class:`~tudatpy.numerical_simulation.environment.RadiationPressureTargetModel`, respectively.
 
+.. _rigid_body_properties:
 
 Rigid body properties
 ======================
@@ -259,6 +260,7 @@ The :doc:`Rigid body properties <rigid_body>` are to be assigned to the :attr:`~
 
 * This property defines the mass, center of mass and inertia tensor of a body. If the body has a gravity field, corresponding rigid body properties are automatically created (but, defining rigid body properties does not define a gravity field!) Note: If defined manually, the inertia tensor must be provided in the body-fixed frame (the orientation of which is defined by the body's rotation model), and must *not* be normalized. 
 * The resulting model can be extracted from the :class:`~tudatpy.numerical_simulation.environment.Body` object extracted using :attr:`~tudatpy.numerical_simulation.environment.Body.rigid_body_properties`, which provides a :class:`~tudatpy.numerical_simulation.environment.RigidBodyProperties`
+* When creating a :func:`~tudatpy.numerical_simulation.environment_setup.gravity.spherical_harmonic` gravity field, and specifying a ``scaled_mean_moment_of_inertia`` in the resulting model, rigid body properties consisent with these are automatically created.
 
 .. _ground_station_models:
 

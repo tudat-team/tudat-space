@@ -20,6 +20,12 @@ In addition to the general propagation settings described :ref:`here <propagatio
 - A set of mass models (created via the :func:`~tudatpy.numerical_simulation.propagation_setup.create_mass_rate_models` factory function; see below)
 - The initial conditions for the propagation (initial mass and time)
 
+The governing equation that is solved numerically for the mass dynamics is a first-order differential equation. It takes the simple form:
+
+.. math::
+    \frac{dm}{dt} = \sum_{i} \left(\frac{dm}{dt}\right)_{i}
+
+where the summation runs over all mass rate models specified by the user. When propagating multiple bodies, the state vectors of the various bodies and their derivatives are concatenated, see :ref:`multi_body_dynamics` for more details.
 
 Mass-rate models
 ================

@@ -22,15 +22,12 @@ These settings are defined via factory functions for each acceleration in the si
    A comprehensive list of all available acceleration models in Tudat and the manner in which to define
    them is given in :ref:`available_acceleration_models`.
 
-These settings are organized in nested key-value containers (``std::map<>`` in C++, ``dict`` in Python). In general:
+For a single body, the user-specified settings are organized in nested dictionaries ``dict[str,dict[str,list[AccelerationSettings]]]``,
+with the first ``str`` denoting the body undergoing acceleration, the second ``str`` denoting the body exerting the acceleration, and the
+list of :class:`~tudatpy.numerical_simulation.propagation_setup.acceleration.AccelerationSettings` objects is created using the functions in the
+:doc:`acceleration` module.
 
-- ``key``: body undergoing acceleration
-- ``value``: dictionary with:
-
-  - ``key``: body exerting the acceleration
-  - ``value``: :class:`~tudatpy.numerical_simulation.propagation_setup.acceleration.AccelerationSettings` object.
-
-This container will be supplied to the
+This nested dictionary will be supplied to the
 :func:`~tudatpy.numerical_simulation.propagation_setup.create_acceleration_models` function to create the
 acceleration models. This is illustrated in the example below.
 

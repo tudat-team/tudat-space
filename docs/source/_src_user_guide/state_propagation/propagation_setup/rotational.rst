@@ -22,10 +22,18 @@ Several other formulations can be used if wanted (see below and :ref:`processed_
 
 To propagate rotational dynamics, an inertia tensor for the propagated body must be defined. The inertia tensor is handled by the :doc:`Rigid body properties <rigid_body>` in Tudat. Note that, by endowing a body with a gravity field, such properties are automatically created (although in the case of a spherical harmonic gravity field, additional information must be provided, see :doc:`the API documentation <rigid_body>`).
 
+The governing equation that is solved numerically for the rotational dynamics is a first-order differential equation. For the default propagator using :math:`\mathbf{x}=[\mathbf{q};\boldsymbol{\omega}]`, with quaternion vector :math:`\mathbf{q}` and body-fixed angular velocity vector :math:`\boldsymbol{\omega}`, it takes the form:
+
+.. math::
+    \frac{d\mathbf{x}}{dt} = \begin{pmatrix} \mathbf{Q}(\mathbf{q})\boldsymbol{\omega} \\ \mathbf{I}\left(-\dot{\mathbf{I}}+(\mathbf{I}\boldsymbol{\omega})\times\boldsymbol{\omega}+\sum_{i}\mathbf{M}_{i}(\mathbf{r},\mathbf{v},t) \right)  \end{pmatrix}
+
+where the summation runs over all torques :math:`\mathbf{M}` specified by the user, :math:`\mathbf{I}` denotes the body's inertia tensor. The inertia tensor of a body is defined through its :ref:`rigid_body_properties`
+
 .. note::
 
-  At present, influence of the time-variability of the inertia tensor (and other effects related to time-variation of mass distribution such as jet damping) are not included in the evaluation of the rotational equations of motion, *even in the case where the inertia tensor is time variable*. 
+  At present, influence of the time-variability of the inertia tensor (and other effects related to time-variation of mass distribution such as jet damping) are not included in the evaluation of the rotational equations of motion, *even in the case where the inertia tensor is time variable*.
 
+When propagating multiple bodies, the state vectors of the various bodies and their derivatives are concatenated, see :ref:`multi_body_dynamics` for more details.
 
 Inputs
 =======
