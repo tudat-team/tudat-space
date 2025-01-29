@@ -23,7 +23,7 @@ The TU Delft Astrodynamics Toolbox (Tudat) is a powerful set of libraries that s
 Installation
 ************
 
-TudatPy is distributed as a ``conda`` package. To install it, download this ``environment.yaml`` file (:download:`yaml <_static/environment.yaml>`). Then, in your terminal navigate to the directory containing this file and execute the following command:
+TudatPy is distributed as a ``conda`` package. For more in-depth instructions on how to install TudatPy, see the :ref:`installation guide <getting_started_installation>`. If you're familiar with ``conda``, since download this ``environment.yaml`` file (:download:`yaml <_static/environment.yaml>`). Then, in your terminal navigate to the directory containing this file and execute the following command:
 
 .. code:: bash
 
@@ -35,8 +35,7 @@ With the ``conda`` environment now installed, you can activate it to work in it 
 
    conda activate tudat-space
 
-.. seealso:: 
-   For more in-depth instructions on how to install TudatPy, see the :ref:`installation guide <getting_started_installation>`.
+.. seealso::
    For common issues during the installation and how to solve them, have a look at the :ref:`FAQ <faq>`.
    If you are new to using ``conda`` or Python, have a look at :ref:`getting_started_with_conda` and :ref:`getting_started_with_python`.
 
@@ -46,7 +45,9 @@ With the ``conda`` environment now installed, you can activate it to work in it 
 
 Propagating your first orbit
 ****************************
-The following example is based on the :ref:`Keplerian satellite orbit example </_src_getting_started/_src_examples/tudatpy-examples/propagation/keplerian_satellite_orbit.ipynb>`. The goal is to numerically propagate a (quasi-)massless body (spacecraft) under the attraction of a central point-mass. Under this assumption, only the translational motion of this body is propagated, which follows a Keplerian orbit.
+The core of Tudat is the numerical propagation of orbits. Here, we give a basic introduction to setting up such an orbit simulation by means of an example.
+
+The example is based on the :ref:`Keplerian satellite orbit example </_src_getting_started/_src_examples/tudatpy-examples/propagation/keplerian_satellite_orbit.ipynb>` (available as a Python script in our `examples repo <https://github.com/tudat-team/tudatpy-examples/blob/master/propagation/keplerian_satellite_orbit.py>`_ . The goal is to numerically propagate a (quasi-)massless body (spacecraft) under the attraction of a central point-mass. Under this assumption, only the translational motion of this body is propagated, which follows a Keplerian orbit.
 
 
 Setting up the simulation
@@ -57,14 +58,14 @@ The workflow of a typical propagation in Tudat(Py) is shown in the figure below.
    :width: 600
 
 There are two inputs necessary to perform a simulation: a :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.PropagatorSettings` instance and a :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` instance.
-The propagation setup defines the differential equations to be solved and the method to solve them, while the environment setup defines the physical modeling of the environment and system properties, including both celestial and artificial objects.
+The propagation setup defines the differential equations to be solved and the method to solve them, while the environment setup defines the physical modeling of the environment and system properties, including those of both natural and artificial objects.
 
 .. seealso::
 
    For more information on how to setup your environment and propagation, see the user guide on :ref:`environment_setup` and :ref:`propagation_setup`.
 
 A core principle of Tudat(Py) is the use of ``settings`` objects to define physical models.
-A user typically does not create model instances directly, but instead creates (or modifies) a ``settings`` object, which is then translated to a model instance using a so-called "factory function".
+A user typically does not create model instances directly, but instead creates (or modifies) a ``settings`` object, which is then translated to a model.
 
 Knowing that, we can now start setting up our simulation.
 We will first import all necessary modules, including some standard Python modules, like ``numpy`` and ``matplotlib``.
@@ -147,7 +148,7 @@ Instead, we need to create a set of empty body settings for our satellite, using
 Create the system of bodies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-These body settings are then used to create the system of bodies, using the factory function :func:`~tudatpy.numerical_simulation.environment_setup.create_system_of_bodies`.
+These body settings are then used to create the system of bodies, using the function :func:`~tudatpy.numerical_simulation.environment_setup.create_system_of_bodies`.
 
 .. code-block:: python
 
@@ -189,7 +190,7 @@ In this case, we only consider the gravitational point-mass acceleration of the 
 
    acceleration_settings = {"Delfi-C3": acceleration_settings_delfi_c3}
 
-Similar to before, we use the factory function :func:`~tudatpy.numerical_simulation.propagation_setup.create_acceleration_models` to create the acceleration models from the settings:
+Similar to before, we use the function :func:`~tudatpy.numerical_simulation.propagation_setup.create_acceleration_models` to create the acceleration models from the settings:
 
 .. code-block:: python
 
