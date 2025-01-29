@@ -4,7 +4,7 @@
 Propagating Dynamics
 ====================
 
-With all the necessary simulation settings in place, it is time to run the simulation.
+With all the necessary simulation settings in place (:ref:`environment_setup` and :ref:`propagation_setup`), it is time to run the simulation.
 In Tudat(Py), this is done by means of a simulator object,
 which handles the setup and execution of the simulation, by tieing all the settings and models defined on the above pages together,
 defining and solving the state derivative equation:
@@ -12,17 +12,19 @@ defining and solving the state derivative equation:
 
 .. math::
 
-      &\dot{\mathbf{x}}=\mathbf{f}(\mathbf{x},t;\mathbf{p})\\
-      &\mathbf{x}(t_{0})=\mathbf{x}_{0}
+      \dot{\mathbf{x}}&=\mathbf{f}(\mathbf{x},t;\mathbf{p})\\
+      \mathbf{x}(t_{0})&=\mathbf{x}_{0}
 
-where :math:`\mathbf{x}` defines the state vector that is to be propagated (defined by the your choice of dynamics type and propagator),
+where :math:`\mathbf{x}` defines the state vector that is to be propagated, :math:`\mathbf{f}` the state derivative function (see :ref:`translational_dynamics` for one example)
 :math:`t_{0}` and :math:`\mathbf{x}_{0}` define the initial time and state. The parameter vector :math:`\mathbf{p}` is
-included explicitly in the state derivative function to denote its dependence on various environmental and system
-parameters, as defined through the :ref:`environment_setup`. Finally, the state derivative function :math:`\mathbf{f}`
-is created through the definition of the state :math:`\mathbf{x}` and associated state derivative models (such as accelerations and torques)
+included explicitly in the state derivative function above to denote its dependence on various environmental and system
+parameters.
 
-The above differential equations are solved using the specific :ref:`choice of integrator <integrator_setup>`, and are
-terminated by user-specified :ref:`termination settings <termination_settings>`. The output of
+The above differential equations are solved:
+
+* Using the specific :ref:`choice of integrator <integrator_setup>`
+* Are terminated by user-specified :ref:`termination settings <termination_settings>`.
+* The output of
 the propagation consists of the state that is propagated, as well as any number of :ref:`output (dependent) variables <printing_processing_results>`.
 
 Simulations in which only the system state is propagated are handled by simulator objects derived from the ``Simulator`` base class. 

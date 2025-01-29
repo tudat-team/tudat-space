@@ -22,11 +22,11 @@ The three primary numerical results of the propagation are:
 
 - The numerical results of the propagation, in 'processed' coordinates
   (e.g. Cartesian elements for translational dynamics, see :ref:`processed_states`), stored in the
-  :attr:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults.dependent_variable_history.state_history` attribute
+  :attr:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults.state_history` attribute
 - The numerical results of the propagation, in the propagated coordinates, stored in the
-  :attr:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults.dependent_variable_history.unprocessed_state_history` attribute
+  :attr:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults.unprocessed_state_history` attribute
 - The dependent variables of the propagation (if any, see :ref:`dependent_variables`), stored in the
-  :attr:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults.dependent_variable_history.dependent_variable_history` attribute
+  :attr:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults.dependent_variable_history` attribute
 
 Each of these is returned as a dictionary, with the numerical integration epochs as key, and the current state/dependent variable
 as value. For example:
@@ -47,8 +47,8 @@ as value. For example:
 
 The order of the entries of the state/dependent variable vector at every epoch can be printed to the consol before propagation as
 described :ref:`here <console_output>`. This information can also be retrieved as dictionaries from the
-:attr:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults.state_ids`
-:attr:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults.unprocessed_state_ids` and
+:attr:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults.processed_state_ids`
+:attr:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults.propagated_state_ids` and
 :attr:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults.dependent_variable_ids`
 attributes.
 
@@ -62,7 +62,7 @@ Understanding the state output
 
 It is important to realize that, *regardless* of the propagator that is used (for translational
 dynamics: Cowell, Gauss-Kepler, etc., see :ref:`translational_dynamics`)
-the :attr:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults.dependent_variable_history.state_history` attribute
+the :attr:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults.state_history` attribute
 will always provide the results of the propagation in Cartesian elements (for the case of translational dynamics).
 In the case where a different formulation than the Cowell formulation is used, the states that were actually used
 during the numerical integration can be accessed through the
@@ -89,7 +89,7 @@ issues, the :attr:`~tudatpy.numerical_simulation.propagation.SingleArcSimulation
 boolean of the :class:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults` class can be queried
 
 More details on the specifics of the reason for termination can be extracted from the
-:attr:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults.propagation_termination_details` attribute
+:attr:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults.termination_details` attribute
 of the :class:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults` class.
 
 .. seealso::
