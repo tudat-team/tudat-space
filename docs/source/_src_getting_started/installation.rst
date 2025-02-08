@@ -13,8 +13,7 @@ package manager, such as Miniconda or Anaconda.
 
 .. attention::
 
-    **Windows users** must install the Windows Subsystem for Linux (WSL) and install Tudat(Py) in a ``conda`` environment inside WSL.
-    For a guide on how to setup WSL and configure it to work with an IDE, see the :ref:`getting_started_with_wsl` guide. 
+    **Windows users** must install Anaconda; for new users in general we recommend Anaconda
 
 To install Anaconda or Miniconda on your system, see the `Anaconda Installation`_  of `Miniconda Installation`_ guide provided in their documentation.
 
@@ -30,9 +29,9 @@ For more details on how to use ``conda``, please refer to our detailed guide (:r
 Installing Tudat(Py)
 ####################
 
-To install Tudat(Py), we recommend the use of a terminal (command line) interface. On Unix system (Linux and Mac), ``conda`` should already be available within the terminal; you can open your terminal directly. Open a terminal. Then first verify that ``conda`` is installed by executing the following command:
+To install Tudat(Py), we recommend the use of a terminal (command line) interface. On Unix system (Linux and Mac), ``conda`` should already be available within the terminal; you can open your terminal directly.  On Windows, you can find a program called ``Anaconda Prompt`` in the Windows search. Using ``conda`` in the ``Anaconda Prompt`` is equivalent to the terminal use of ``conda`` in a Unix terminal.
 
-.. On Windows, you can find a program called ``Anaconda Prompt`` in the Windows search. Using ``conda`` in the ``Anaconda Prompt`` is equivalent to the terminal use of ``conda`` on Unix. Some Unix commands are made available in this prompt, although most usage is equivalent to the Windows shell (see below for some useful terminal commands).
+Open a terminal. Then first verify that ``conda`` is installed by executing the following command:
 
 .. code-block:: bash
 
@@ -79,6 +78,21 @@ If there are any issues with the installation, the examples, or if you have any 
 .. _`tudatpy-feedstock`: https://github.com/tudat-team/tudatpy-feedstock
 .. _`tudatpy`: https://github.com/tudat-team/tudatpy
 
+.. note::
+
+    **New to the command-line?** The following commands may be useful to you:
+
+    +-------------------------------------------------------+--------------------------+-----------------------+
+    | **Command effect**                                    | **Unix (Linux & macOS)** | **Windows**           |
+    +-------------------------------------------------------+--------------------------+-----------------------+
+    | Enter a directory using a path (relative or absolute) | ``cd <abs/rel path>``    | ``cd <abs/rel path>`` |
+    +-------------------------------------------------------+--------------------------+-----------------------+
+    | Go back to the parent directory                       | ``cd ..``                | ``cd ..``             |
+    +-------------------------------------------------------+--------------------------+-----------------------+
+    | List the contents of the current working directory    | ``ls``                   | ``dir``               |
+    +-------------------------------------------------------+--------------------------+-----------------------+
+
+    For more help on getting started with the command-line interface (CLI), you could start with a `tutorial`_.
            
 Building your own TudatPy kernel
 ################################
