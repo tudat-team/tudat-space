@@ -373,7 +373,7 @@ The expected output is::
    After 86400.0 seconds the position vector of Delfi-C3 is [km]: 
    [-6341.67824913 -2259.72932298 -1943.73703997]
    And the velocity vector of Delfi-C3 is [km/s]: 
-   [ 6.47108513  2.97329684 -2.41447086]
+   [ 1.55732231  1.71542799 -7.16926862]
 
 
 Visualize the trajectory
