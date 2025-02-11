@@ -358,7 +358,7 @@ Print the initial and final states
    After {simulation_end_epoch - simulation_start_epoch} seconds the position vector of Delfi-C3 is [km]: \n
    {states[simulation_end_epoch][:3] / 1E3}
    And the velocity vector of Delfi-C3 is [km/s]: \n
-   {states[simulation_start_epoch][3:] / 1E3}
+   {states[simulation_end_epoch][3:] / 1E3}
    """
    )
 
