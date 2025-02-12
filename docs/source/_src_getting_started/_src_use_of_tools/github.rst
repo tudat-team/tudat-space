@@ -29,17 +29,15 @@ Below, we discuss how to retrieve an application from an existing Github reposit
 
 **Step 1b (for a private repository): Import the code on Github**
 
-   The first step in the workflow of retrieving a private application is create an empty new Repository, by going to ``https://github.com/YourName`` (fill in your own name), and clicking ``New`` under ``Repositories`` (see screenshot below):
+   The first step in the workflow of creating a private application is importing a repository, by going to ``https://github.com/new/import`` , and filling in the URL of the repository you want to import under ``The URL for your source repository`` (see screenshot below):
 
-   .. figure:: _static/newRepository.png
+   .. figure:: _static/urlRepositoryImport.png
 
-   Type a name for your repository (make sure it is descriptive, so not ``NumAstroAssignment``, but, for instance, ``numerical-astrodynamics-2025-INSERT-NAME``), and set the repository to **private** (see screenshot below). 
+   Below, type a name for your repository (make sure it is descriptive, so not ``NumAstroAssignment``, but, for instance, ``numerical-astrodynamics-2025-INSERT-NAME``), and set the repository to **private** (see screenshot below).
 
    .. figure:: _static/newRepositoryPrivate.png
 
-   You may, but need not, write a repository description. Click ``Create repository``. 
-
-   On the bottom of page you are redirected to, click ``Import Code``. Fill in the name of the repository from which you want to retrieve code (for instance ``https://github.com/Tudat/numerical-astrodynamics-2025``), and click ``Begin Import``. Once the import is successfully completed, you will receive an e-mail, with a link to your new, private, repository.
+   Click ``Begin import``.
 
    For a private repository, you can control who can view/modify your repository. To add other users to your repository, go to the ``Settings/Collaborators`` of the repository, and add other users that you want to invite.
 
