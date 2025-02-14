@@ -1,3 +1,7 @@
+.. meta::
+    :description lang=en:
+        A list of examples using the open-source TU Delft Astrodynamics toolbox (Tudat), ranging from preliminary orbit optimization to high-fidelity orbit determination
+
 .. _getting_started_examples:
 
 =========

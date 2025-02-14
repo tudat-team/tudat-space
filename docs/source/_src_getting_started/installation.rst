@@ -1,3 +1,6 @@
+.. meta::
+    :description lang=en:
+        Installation instructions for the open-source TU Delft Astrodynamics toolbox (Tudat), disseminated as a conda package that provides a Python interface wrapping C++ functionality.
 
 .. _getting_started_installation:
 

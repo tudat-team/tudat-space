@@ -1,3 +1,7 @@
+.. meta::
+    :description lang=en:
+        Learn how to use and install the open-source TU Delft Astrodynamics toolbox (Tudat), a powerful set of libraries that support astrodynamics and space research and education.
+
 ======================================
 Welcome to Tudat Space!
 ======================================

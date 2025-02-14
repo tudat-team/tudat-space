@@ -1,3 +1,8 @@
+.. meta::
+    :description lang=en:
+        An in-depth look at the various functionality in the open-source TU Delft Astrodynamics toolbox (Tudat)
+
+
 .. _user_guide:
 
 ******************************

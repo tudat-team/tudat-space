@@ -1,3 +1,7 @@
+.. meta::
+    :description lang=en:
+        A quick first overview of the open-source TU Delft Astrodynamics toolbox (Tudat), with installation summary and a walkthrough of a simple orbit propagation
+
 .. _getting_started_quickstart:
 
 ###################################

@@ -1,3 +1,7 @@
+.. meta::
+    :description lang=en:
+        An overview of how to get started with the open-source TU Delft Astrodynamics toolbox (Tudat)
+
 .. _getting_started:
 
 ******************************
