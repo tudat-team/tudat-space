@@ -19,8 +19,16 @@ In the context of Tudat(Py), having a Linux environment is required as of v0.9, 
 Installing WSL
 ##############
 
+.. important::
+    Before you start, make sure that the Windows Subsystem for Linux (WSL) feature is enabled on your Windows machine.
+    
+    To check this, open the Control Panel -> Programs -> Programs and Features -> "Turn Windows features on or off" and make sure that the Windows Subsystem for Linux feature is enabled.
+
 - Follow the installation guide on the `Microsoft website <https://learn.microsoft.com/en-us/windows/wsl/install>`_ to install WSL.
 - By default, this will install Ubuntu as a Linux distribution. This is a common choice and recommended for beginners as you will find plenty of support, but you can also `install other distributions <https://learn.microsoft.com/en-us/windows/wsl/install#change-the-default-linux-distribution-installed>`_.
+
+.. note::
+    If you run into any issues during the installation, you can find help in the `WSL troubleshooting guide <https://learn.microsoft.com/en-us/windows/wsl/troubleshooting>`_.
 
 Setting up WSL
 ##############
@@ -88,13 +96,44 @@ Install Conda
 Tudat(Py) uses Conda to manage its dependencies.
 If you have used Conda before in your Windows environment, you will still have to install it in your WSL environment.
 As we will mainly use the command-line in WSL, Miniconda is recommended.
-Follow the `installation instructions <https://docs.anaconda.com/miniconda/#quick-command-line-install>`_ and make sure conda is installed in your WSL environment:
+The instructions in the following are based on the `official Anaconda documentation <https://docs.anaconda.com/miniconda/install//>`_.
 
-.. code-block:: bash
+1. Open the terminal in WSL and download the latest Miniconda installer by running:
 
-    conda --version
+   .. code-block:: bash
 
-This should return the installed Conda version.
+       wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+
+2. Install Miniconda by running the following command in the same directory:
+
+   .. code-block:: bash
+
+       bash Miniconda3-latest-Linux-x86_64.sh
+
+3. Read through the Terms of Service and accept them.
+
+4. In the next step, it is recommended to install Miniconda in the default location.
+
+5. In the final step, you can configure the initialization of conda.
+   It is recommended to add conda to your PATH, but not activate the base environment automatically upon opening a new terminal, to avoid accidentally installing packages in the base environment.
+
+   You can configure this by typing ``yes`` when prompted for the initialization option.
+   Then, restart your terminal and run the following command:
+
+   .. code-block:: bash
+
+       conda config --set auto_activate_base false
+
+   Next time you open a terminal, the ``base`` environment will not be activated.
+   You can activate any environment by running ``conda activate <ENVIRONMENT_NAME>``.
+
+6. Lastly, make sure that conda is installed correctly by running:
+
+   .. code-block:: bash
+
+       conda --version
+
+   This should return the installed Conda version.
 From there on, you can follow the instructions in the :ref:`Conda primer <getting_started_with_conda>` to set up your Conda environment and :ref:`install Tudat(Py) <getting_started_installation>`.
 
 .. dropdown:: Quick TudatPy installation
