@@ -41,7 +41,7 @@ The :doc:`Aerodynamic coefficients <aerodynamic_coefficients>` module contains f
       body_settings.add_empty_settings( 'Vehicle' )
 
       # Add aerodynamic model settings (base class type AerodynamicCoefficientSettings)
-      body_settings( 'Vehicle' ).aerodynamic_coefficient_settings = environment_setup.aerodynamic_coefficients.constant(
+      body_settings.get( 'Vehicle' ).aerodynamic_coefficient_settings = environment_setup.aerodynamic_coefficients.constant(
           reference_area = 2.0,
           constant_force_coefficient = [1.5, 0.0, 0.0])
 
@@ -70,7 +70,7 @@ The :doc:`Atmosphere models <atmosphere>` module contains functions to create se
       body_settings =  environment_setup.get_default_body_settings( ... ) # Typical way to instantiate body settings
 
       # Modify atmosphere model settings (base class type AtmosphereSettings)
-      body_settings( 'Earth' ).atmosphere_settings = environment_setup.atmosphere.exponential(
+      body_settings.get( 'Earth' ).atmosphere_settings = environment_setup.atmosphere.exponential(
           scale_height = 7200.0,
           surface_density = 1.225 )
 
@@ -98,7 +98,7 @@ The :doc:`Ephemeris models <ephemeris>` module contains functions to create sett
       body_settings =  environment_setup.get_default_body_settings( ... ) # Typical way to instantiate body settings
 
       # Modify ephemeris model settings (base class type EphemerisSettings)
-      body_settings( 'Earth' ).ephemeris_settings = environment_setup.ephemeris.direct_spice(
+      body_settings.get( 'Earth' ).ephemeris_settings = environment_setup.ephemeris.direct_spice(
           frame_origin = 'Sun',
           frame_orientation = 'J2000' )
 
@@ -126,7 +126,7 @@ The :doc:`Gravity field models <gravity_field>` module contains functions to cre
       body_settings =  environment_setup.get_default_body_settings( ... ) # Typical way to instantiate body settings
 
       # Modify gravity field model settings (base class type GravityFieldSettings)
-      body_settings( 'Earth' ).gravity_field_settings = environment_setup.gravity_field.central(
+      body_settings.get( 'Earth' ).gravity_field_settings = environment_setup.gravity_field.central(
           gravitational_parameter = 3.986004418E14 )
 
       # Create bodies
@@ -155,8 +155,8 @@ The :doc:`Gravity field variation models <gravity_field_variation>` module conta
       body_settings =  environment_setup.get_default_body_settings( ... ) # Typical way to instantiate body settings
 
       # Modify gravity field variation settings (base class type GravityFieldVariationSettings)
-      # NOTE, this requires the body_settings( 'Earth' ).gravity_field_settings to define a spherical harmonic gravity field
-      body_settings( 'Earth' ).gravity_field_variation_settings = [
+      # NOTE, this requires the body_settings.get( 'Earth' ).gravity_field_settings to define a spherical harmonic gravity field
+      body_settings.get( 'Earth' ).gravity_field_variation_settings = [
           environment_setup.gravity_field_variation.solid_body_tide(
              tide_raising_body = 'Sun',
              love_number = 0.301,
@@ -192,7 +192,7 @@ The :doc:`Rotation models <rotation_model>` module contains functions to create 
       body_settings =  environment_setup.get_default_body_settings( ... ) # Typical way to instantiate body settings
 
       # Modify rotation model settings (base class type RotationModelSettings)
-      body_settings( 'Earth' ).rotation_model_settings = environment_setup.rotation_model.simple_from_spice(
+      body_settings.get( 'Earth' ).rotation_model_settings = environment_setup.rotation_model.simple_from_spice(
           base_frame = 'J2000',
           target_frame = 'IAU_Earth',
           target_frame_spice = 'IAU_Earth_simplified',
@@ -224,7 +224,7 @@ The :doc:`Shape models <shape>` module contains functions to create settings obj
       body_settings =  environment_setup.get_default_body_settings( ... ) # Typical way to instantiate body settings
 
       # Modify shape model settings (base class type BodyShapeSettings)
-      body_settings( 'Mars' ).shape_settings = environment_setup.shape.oblate_spherical(
+      body_settings.get( 'Mars' ).shape_settings = environment_setup.shape.oblate_spherical(
           equatorial_radius = 3396.2E3,
           flattening = 0.00589 )
 
