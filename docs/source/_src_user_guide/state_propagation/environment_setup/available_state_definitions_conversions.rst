@@ -20,7 +20,7 @@ center of mass of the body for natural bodies. However, in case (for instance) t
 with non-zero degree 1 coefficients, the gravity field (which determines the internal mass distribution) can define an offset between
 the origin of the body-centered frame, and its center-of-mass.
 
-When retrieving the state from a ``Body`` :ref:`during the propagation <translational_state_during_propagation>`, this state is
+When retrieving the state from a :class:`~tudatpy.numerical_simulation.environment.Body` :ref:`during the propagation <translational_state_during_propagation>`, this state is
 *always* w.r.t. the :ref:`global frame origin <global_origin>`. Therefore, performing origin translations *during* the propagation
 between states from the environment is simply done as:
 
@@ -100,13 +100,13 @@ Manually, the above transformations would be done simply as:
 	rotated_state[ :3] = rotation_to_frame @ original_state[ :3 ]
 	rotated_state[3: ] = rotation_to_frame @ original_state[ 3: ] + time_derivative_of_rotation_to_frame @ original_state[ :3 ]
 
-Where the rotation matrix and its derivative (for body-fixed to inertial frames) can be obtained from the ``Body`` object during propagation, or a ``RotationalEphemeris``
+Where the rotation matrix and its derivative (for body-fixed to inertial frames) can be obtained from the :class:`~tudatpy.numerical_simulation.environment.Body` object during propagation, or a :class:`~tudatpy.numerical_simulation.environment.RotationalEphemeris`
 object outside of the propagation, see :ref:`below <body_fixed_frames>` for more details.
 
 Below, we give an overview of the available frames, and frame transformations in Tudat, and discuss how they can be accessed both during
 (when setting up a :ref:`custom model <custom_models>`), and outside of a propagation. The available frames are:
 
-* :ref:`body_fixed_frames`: Each ``Body`` in Tudat can have a fixed frame assigned to it (see `API documentation <https://py.api.tudat.space/en/latest/rotation_model.html#functions>`_ for a list of options for model types).
+* :ref:`body_fixed_frames`: Each :class:`~tudatpy.numerical_simulation.environment.Body` in Tudat can have a fixed frame assigned to it (see `API documentation <https://py.api.tudat.space/en/latest/rotation_model.html#functions>`_ for a list of options for model types).
 * :ref:`gcrs_itrs_frames`: The high-accuracy rotation from GCRS to ITRS is implemented in Tudat. The ITRS, TIRS, CIRS and ICRS frames are defined.
 * :ref:`aero_frames`: A number of frames typically used in entry and ascent trajectories: the Vertical, Trajectory and Aerodynamic frames.
 * :ref:`orbital_frames`: The TNW and RSW frames (defined by the current relative translational state).
@@ -125,7 +125,7 @@ stored in a :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` ob
 during the propagation is described** :ref:`here <rotation_during_propagation>`.
 
 Outside of the propagation, these quantities can be obtained
-directly from the :class:`~tudatpy.numerical_simulation.environment.RotationalEphemeris` class, which is retrieved from a ``Body`` object using the
+directly from the :class:`~tudatpy.numerical_simulation.environment.RotationalEphemeris` class, which is retrieved from a :class:`~tudatpy.numerical_simulation.environment.Body` object using the
 :attr:`~tudatpy.numerical_simulation.environment.Body.rotation_model`. Below, an example is shown on how to extract rotational properties
 for the Earth outside of a propagation (assuming a :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` object, named ``bodies`` has been created):
 
@@ -142,8 +142,8 @@ for the Earth outside of a propagation (assuming a :class:`~tudatpy.numerical_si
 	# Determine first derivative of R^{(I/B)} rotation matrix
 	rotation_matrix_to_inertial_frame = earth_rotation_model.time_derivative_body_fixed_to_inertial_rotation( current_time )
 
-To automatically rotate a vector from the body-fixed frame to the inertial frame using the ``RotationalEphemeris``, we provide the
-:class:`~tudatpy.numerical_simulation.environment.transform_to_inertial_orientation` function, which automatically
+To automatically rotate a vector from the body-fixed frame to the inertial frame using the :class:`~tudatpy.numerical_simulation.environment.RotationalEphemeris`, we provide the
+:func:`~tudatpy.numerical_simulation.environment.transform_to_inertial_orientation` function, which automatically
 performs the rotation with the rotation matrix and its derivative:
 
 .. dropdown:: Required
@@ -194,7 +194,7 @@ This functionality is implemented as a rotation model, defined using the
 which will in most cases be created during the :ref:`setup of the environment <creation_celestial_body_settings>`
 (and, typically, assigned to the body object representing Earth).
 
-When this rotation model is assigned to Earth, it can be extracted as an object of type :func:`~tudatpy.numerical_simulation.environment.GcrsToItrsRotationModel`:
+When this rotation model is assigned to Earth, it can be extracted as an object of type :class:`~tudatpy.numerical_simulation.environment.GcrsToItrsRotationModel`:
 
 .. code-block:: python
 
@@ -211,7 +211,7 @@ When this rotation model is assigned to Earth, it can be extracted as an object 
 The rotation matrices produced by the ``high_fidelity_earth_rotation_model`` will not have the GCRS as their base frame,
 but rather the global frame orientation of the environment (typically J2000 or ECLIPJ2000), as defined in the ``body_settings``.
 
-The ``GcrsToItrsRotationModel`` class is derived class of (and possesses all properties of) a :ref:`regular body rotation model <body_fixed_frames>`.
+The :class:`~tudatpy.numerical_simulation.environment.GcrsToItrsRotationModel` class is derived class of (and possesses all properties of) a :ref:`regular body rotation model <body_fixed_frames>`.
 In addition, it provides a number of functions to extract intermediate angles/rotations. These angles are defined in detail in the IERS
 conventions (chapter 5 of 2010 conventions), and can be extracted from the :class:`~tudatpy.numerical_simulation.environment.GcrsToItrsRotationModel`,
 and the :class:`~tudatpy.numerical_simulation.environment.EarthOrientationAnglesCalculator` (where the latter can be obtained from the
@@ -271,7 +271,7 @@ SPICE-defined frames
 
 The :ref:`default rotation models <default_rotation_models>` in Tudat make extensive use of the SPICE toolbox [Acton1996]_.
 A user may directly access the functionality of extracting rotations in SPICE. For any frame identifiers for which SPICE kernels are loaded, the function
-:func:`~tudatpy.interface.spice.compute_rotation_matrix_derivative_between_frames` may be used to determine the rotation matrix between them.
+:func:`~tudatpy.interface.spice.compute_rotation_matrix_between_frames` may be used to determine the rotation matrix between them.
 The derivative of the rotation matrix may be determined from :func:`~tudatpy.interface.spice.compute_rotation_matrix_derivative_between_frames`.
 
 Similarly, a rotation model may be created and assigned to a body that automatically extracts the rotation from SPICE, using the
@@ -592,7 +592,7 @@ Regardless of the rotational coordinates chosen, the Unified State Model element
 	central_body = ...
 	central_body_gravitational_parameter = bodies.get( central_body ).gravitational_parameter
 
-	unified_state_model_elements = conversion.cartesian_to_unified_state_model( cartesian_elements, central_body_gravitational_parameter )
+	unified_state_model_elements = conversion.cartesian_to_usm_7( cartesian_elements, central_body_gravitational_parameter )
 
 Similarly, the inverse operation is done as:
 
@@ -602,7 +602,7 @@ Similarly, the inverse operation is done as:
 	central_body = ...
 	central_body_gravitational_parameter = bodies.get( central_body ).gravitational_parameter
 
-	cartesian_elements = conversion.unified_state_model_to_cartesian( cartesian_elements, central_body_gravitational_parameter )
+	cartesian_elements = conversion.usm_7_to_cartesian( cartesian_elements, central_body_gravitational_parameter )
 
 
 
@@ -637,11 +637,11 @@ One of the other two supported attitude representations is the modified Rodrigue
    * - Column Indices
      - Modified Rodrigues Parameter
    * - 0
-     - :math:`\sigma` 1
+     - :math:`\sigma_1`
    * - 1
-     - :math:`\sigma` 2
+     - :math:`\sigma_2`
    * - 2
-     - :math:`\sigma` 3
+     - :math:`\sigma_3`
    * - 3
      - Shadow flag
 
@@ -673,7 +673,7 @@ The final attitude representations is the exponential map (EM). The indices for 
 	* - 3
 	  - Shadow flag
 
-and transformation to and from quaternions is achieved with the aid of the functions :func:`~tudatpy.astro.element_conversion.exponential_map_to_quaternions` and :func:`~tudatpy.astro.element_conversion..quaternions_to_exponential_map`, respectively. Also for these equations the only input is the attitude element (in vector format).
+and transformation to and from quaternions is achieved with the aid of the functions :func:`~tudatpy.astro.element_conversion.exponential_map_to_quaternion` and :func:`~tudatpy.astro.element_conversion.quaternion_to_exponential_map`, respectively. Also for these equations the only input is the attitude element (in vector format).
 
 
 .. note:: 

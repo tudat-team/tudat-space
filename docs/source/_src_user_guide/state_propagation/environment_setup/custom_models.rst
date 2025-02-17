@@ -25,7 +25,7 @@ Custom environment models:
 * Custom atmospheric density model (function of position and time) :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.custom_four_dimensional_constant_temperature` *Note:* this custom function has current time, altitude, latitude and longitude as input.
 * Custom wind model: :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.custom_wind_model`
 * Custom ephemeris: :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.custom_ephemeris`
-* Custom body orientation :func:`~tudatpy.numerical_simulation.environment_setup.rotation.custom_rotation_model`
+* Custom body orientation :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.custom_rotation_model`
 * Custom inertial direction (typical for basic thrust guidance) :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.custom_inertial_direction_based`
 
 Custom propagation models:

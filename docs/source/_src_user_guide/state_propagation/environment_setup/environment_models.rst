@@ -18,7 +18,7 @@ In Tudat, the full environment is stored in a :class:`~tudatpy.numerical_simulat
    bodies = ... # Create system of bodies
    earth_ephemeris = bodies.get('Earth').ephemeris
 
-Below, we provide an overview of the different types of environment models for which you can define settings, along with links to submodules of ``environment_setup`` in the :doc:`API documentation <environment_setup>`, where a comprehensive list of all environment model settings can be found. In addition, we list how to extract the resulting environment model from the ``Body`` objects.
+Below, we provide an overview of the different types of environment models for which you can define settings, along with links to submodules of :doc:`environment_setup` in the :doc:`API documentation <environment_setup>`, where a comprehensive list of all environment model settings can be found. In addition, we list how to extract the resulting environment model from the :class:`~tudatpy.numerical_simulation.environment.Body` objects.
 
 Aerodynamic coefficients
 ========================
@@ -142,10 +142,8 @@ Gravity field variation models
 The :doc:`Gravity field variation models <gravity_field_variation>` module contains functions to create settings objects of type :class:`~tudatpy.numerical_simulation.environment_setup.gravity_field_variation.GravityFieldVariationSettings` to be assigned to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.gravity_field_variation_settings` attribute of :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`. Note: this attribute is a list, and any number of variation models may be added.
 
 * These models provide various ways in which to define the time-variability of a body's (spherical harmonic) gravity field.
-* Unlike most environment models, the gravity field variations are stored inside the gravity field model, rather than directly in the body object
-  The gravity field variations can be extracted from the :class:`~tudatpy.numerical_simulation.environment.TimeDependentSphericalHarmonicsGravityField` object (a derived class of :class:`~tudatpy.numerical_simulation.environment.GravityFieldModel`) using :attr:`~tudatpy.numerical_simulation.environment.TimeDependentSphericalHarmonicsGravityField.gravity_field_variation_models`, which provides a list of :class:`~tudatpy.numerical_simulation.environment.GravityFieldVariationModel` objects
-* The following code block gives an overview of the steps to define, create, and extract a gravity field variation model, for the specific example of a
-  constant :math:`k_{2}=0.301` Love number, and both the Sun and Moon as tide-raising bodies.
+* Unlike most environment models, the gravity field variations are stored inside the gravity field model, rather than directly in the body object. The gravity field variations can be extracted from the :class:`~tudatpy.numerical_simulation.environment.TimeDependentSphericalHarmonicsGravityField` object (a derived class of :class:`~tudatpy.numerical_simulation.environment.GravityFieldModel`) using :attr:`~tudatpy.numerical_simulation.environment.TimeDependentSphericalHarmonicsGravityField.gravity_field_variation_models`, which provides a list of :class:`~tudatpy.numerical_simulation.environment.GravityFieldVariationModel` objects
+* The following code block gives an overview of the steps to define, create, and extract a gravity field variation model, for the specific example of a constant :math:`k_{2}=0.301` Love number, and both the Sun and Moon as tide-raising bodies.
 
   .. code-block:: python
 
@@ -260,7 +258,7 @@ The :doc:`Rigid body properties <rigid_body>` are to be assigned to the :attr:`~
 
 * This property defines the mass, center of mass and inertia tensor of a body. If the body has a gravity field, corresponding rigid body properties are automatically created (but, defining rigid body properties does not define a gravity field!) Note: If defined manually, the inertia tensor must be provided in the body-fixed frame (the orientation of which is defined by the body's rotation model), and must *not* be normalized. 
 * The resulting model can be extracted from the :class:`~tudatpy.numerical_simulation.environment.Body` object extracted using :attr:`~tudatpy.numerical_simulation.environment.Body.rigid_body_properties`, which provides a :class:`~tudatpy.numerical_simulation.environment.RigidBodyProperties`
-* When creating a :func:`~tudatpy.numerical_simulation.environment_setup.gravity.spherical_harmonic` gravity field, and specifying a ``scaled_mean_moment_of_inertia`` in the resulting model, rigid body properties consisent with these are automatically created.
+* When creating a :func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.spherical_harmonic` gravity field, and specifying a :attr:`~tudatpy.numerical_simulation.environment_setup.gravity_field.SphericalHarmonicsGravityFieldSettings.scaled_mean_moment_of_inertia` in the resulting model, rigid body properties consistent with these are automatically created.
 
 .. _ground_station_models:
 

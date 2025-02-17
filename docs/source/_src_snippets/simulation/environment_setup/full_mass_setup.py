@@ -18,7 +18,7 @@ initial_mass = 3400.0  # kg
 
 # Define numerical integrator (RK4; step size 2 seconds)
 integrator_settings = propagation_setup.integrator.runge_kutta_fixed_step(
-    2.0, integrator.rk_4 )
+    2.0, integrator.CoefficientSets.rk_4 )
 
 # Start of simulation
 simulation_start_epoch = 9120.0 * constants.JULIAN_DAY
