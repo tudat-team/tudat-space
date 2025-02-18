@@ -51,7 +51,7 @@ def run_dynamics(arg_1, arg_2, spice=spice.load_standard_kernels()):
     # Create numerical integrator settings
     fixed_step_size = 10.0
     integrator_settings = propagation_setup.integrator.runge_kutta_fixed_step(
-        2.0, integrator.rk_4 )
+        2.0, integrator.CoefficientSets.rk_4 )
 
     # Create propagation settings
     propagator_settings = propagation_setup.propagator.translational(

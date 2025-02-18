@@ -11,7 +11,7 @@ The usual workflow to create bodies in Tudat (both natural and artificial bodies
 3. :ref:`create_bodies_from_settings_first`
 
 .. warning::
-   Body settings are not used in the propagation: they are only used to define the *settings* of the body objects, and are used to create ``Body`` objects, which are used during the propagation and contain the actual objects/functions performing the relevant calculations. This procedure is
+   Body settings are not used in the propagation: they are only used to define the *settings* of the body objects, and are used to create :class:`~tudatpy.numerical_simulation.environment.Body` objects, which are used during the propagation and contain the actual objects/functions performing the relevant calculations. This procedure is
    described in the separate page :ref:`create_modifying_bodies`.
 
 

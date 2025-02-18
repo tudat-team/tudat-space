@@ -16,9 +16,9 @@ Calendar dates and times
 ========================
 
 Tudat comes with its own class to represent an epoch as a calendar date and time, which is driven by the need for extremely accurate representations of time that occur in some astrodynamics applications, in particular with regards to tracking data (10 picoseconds of light-time error corresponds to 3 mm of range error).
-The specifics are described in the :class:`~tudatpy.astro.time_conversion.DateTime` documentation. In summary, this class allows the definition of epochs with approximately femtosecond resolution. For compatibility, a conversion between the ``datetime`` class from Python's ``datetime`` library is provided in Tudat, with the note that this class can represent time to microsecond resolution. The ``DateTime`` class in Tudat contains member functions that allow it to be converted to seconds since J2000, Julian day, modified Julian day, or an ISO string representing time. An overview is given on the API documentation. 
+The specifics are described in the :class:`~tudatpy.astro.time_conversion.DateTime` documentation. In summary, this class allows the definition of epochs with approximately femtosecond resolution. For compatibility, a conversion between the ``datetime`` class from Python's ``datetime`` library is provided in Tudat, with the note that this class can represent time to microsecond resolution. The :class:`~tudatpy.astro.time_conversion.DateTime` class in Tudat contains member functions that allow it to be converted to seconds since J2000, Julian day, modified Julian day, or an ISO string representing time. An overview is given on the API documentation. 
 
-Below is an example of defining the current date and time through the Python ``datetime`` class, or through Tudat's ``DateTime`` class.
+Below is an example of defining the current date and time through the Python ``datetime`` class, or through Tudat's :class:`~tudatpy.astro.time_conversion.DateTime` class.
 
 .. code-block:: python
 
@@ -36,7 +36,7 @@ Below is an example of defining the current date and time through the Python ``d
   julian_day = tudat_datetime.julian_day( )
   modified_julian_day = tudat_datetime.modified_julian_day( )
 
-Note that the inverse operations, creating a ``DateTime`` object from an epoch (:func:`~tudatpy.astro.time_conversion.date_time_from_epoch`),
+Note that the inverse operations, creating a :class:`~tudatpy.astro.time_conversion.DateTime` object from an epoch (:func:`~tudatpy.astro.time_conversion.date_time_from_epoch`),
 an iso string (:func:`~tudatpy.astro.time_conversion.date_time_from_iso_string`), or directly from the year, month, day and time
 (:class:`~tudatpy.astro.time_conversion.DateTime`  constructor) are also available.
 
@@ -83,7 +83,7 @@ Conversion between each of these time scales can be done using the :class:`~tuda
     output_scale = time_conversion.tdb_scale,
     input_value = epoch_utc )
 
-The conversion between UTC and UT1 (the latter of which is used directly to compute Earth rotation) is based on the detailed Earth rotation model as defined in the `IERS 2010 Conventions <https://www.iers.org/SharedDocs/Publikationen/EN/IERS/Publications/tn/TechnNote36/tn36.pdf>`_. The ``default_time_scale_converter`` is initialized using default settings for small variations to Earth rotation (see :doc:`the notes here <rotation_model>` on high-accuracy Earth rotation model and the function :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.gcrs_to_itrs`). The conversion between geocentric scales (TT/TCG) and barycentric scales (TDB/TCB) is performed using the model implemented in SOFA for TT-TDB, which is a series expansion with about 800 terms, based on a numerical solution to the governing equation of the transformation. This conversion is accurate to the level of several nanoseconds. For higher accuracy in this conversion, numerical computation of these time scales, consistent with a given solar system ephemeris, should be used. Data for such conversions is shipped with recent INPOP ephemerides (for instance).
+The conversion between UTC and UT1 (the latter of which is used directly to compute Earth rotation) is based on the detailed Earth rotation model as defined in the `IERS 2010 Conventions <https://www.iers.org/SharedDocs/Publikationen/EN/IERS/Publications/tn/TechnNote36/tn36.pdf>`_. The :func:`~tudatpy.astro.time_conversion.default_time_scale_converter` is initialized using default settings for small variations to Earth rotation (see :doc:`the notes here <rotation_model>` on high-accuracy Earth rotation model and the function :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.gcrs_to_itrs`). The conversion between geocentric scales (TT/TCG) and barycentric scales (TDB/TCB) is performed using the model implemented in SOFA for TT-TDB, which is a series expansion with about 800 terms, based on a numerical solution to the governing equation of the transformation. This conversion is accurate to the level of several nanoseconds. For higher accuracy in this conversion, numerical computation of these time scales, consistent with a given solar system ephemeris, should be used. Data for such conversions is shipped with recent INPOP ephemerides (for instance).
 
 Formally, the conversion from TT to TDB (and therefore also UTC to TDB) depends on the geocentric position at which the time in TT/UTC is registered. This effect is very small, with the largest effect a daily periodic variation on the order of several microseconds.
 
@@ -92,7 +92,7 @@ Formally, the conversion from TT to TDB (and therefore also UTC to TDB) depends 
 High-resolution Time representation
 ===================================
 
-In addition to the ``DateTime`` class described above, Tudat has a ``Time`` class that allows time representation to be provided to about femtoseconds (``long double`` resolution for seconds in the current hour; which for most C++ compilers translates into a resolution of :math:`10^{-19}/3600`) resolution. Unlike the ``DateTime`` class, the ``Time`` class supports arithmetic operations, so that it can be used to represent an epoch (with the 0 value defined as J2000) or a time interval. Tudat can be compiled such that it uses this ``Time`` class rather than a ``float`` as an independent variable of propagation, reference time for an observation, etc. However, this requires a recompilation of Tudat, and the present conda packages are not compiled with this option on (to enable this functionality in your own build, modify the definition of the ``TIME_TYPE`` macro in tudatpy).
+In addition to the :class:`~tudatpy.astro.time_conversion.DateTime` class described above, Tudat has a ``Time`` class that allows time representation to be provided to about femtoseconds (``long double`` resolution for seconds in the current hour; which for most C++ compilers translates into a resolution of :math:`10^{-19}/3600`) resolution. Unlike the :class:`~tudatpy.astro.time_conversion.DateTime` class, the ``Time`` class supports arithmetic operations, so that it can be used to represent an epoch (with the 0 value defined as J2000) or a time interval. Tudat can be compiled such that it uses this ``Time`` class rather than a ``float`` as an independent variable of propagation, reference time for an observation, etc. However, this requires a recompilation of Tudat, and the present conda packages are not compiled with this option on (to enable this functionality in your own build, modify the definition of the ``TIME_TYPE`` macro in tudatpy).
 
 
 

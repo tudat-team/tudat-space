@@ -134,6 +134,7 @@ The instructions in the following are based on the `official Anaconda documentat
        conda --version
 
    This should return the installed Conda version.
+
 From there on, you can follow the instructions in the :ref:`Conda primer <getting_started_with_conda>` to set up your Conda environment and :ref:`install Tudat(Py) <getting_started_installation>`.
 
 .. dropdown:: Quick TudatPy installation

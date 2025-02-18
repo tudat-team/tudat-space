@@ -24,8 +24,7 @@ The above differential equations are solved:
 
 * Using the specific :ref:`choice of integrator <integrator_setup>`
 * Are terminated by user-specified :ref:`termination settings <termination_settings>`.
-* The output of
-the propagation consists of the state that is propagated, as well as any number of :ref:`output (dependent) variables <printing_processing_results>`.
+* The output of the propagation consists of the state that is propagated, as well as any number of :ref:`output (dependent) variables <printing_processing_results>`.
 
 Simulations in which only the system state is propagated are handled by simulator objects derived from the ``Simulator`` base class. 
 The creation of this object is done using the :func:`~tudatpy.numerical_simulation.create_dynamics_simulator` function :

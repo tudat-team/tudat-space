@@ -20,7 +20,7 @@ initial_state = [5.89960424e+06, 2.30545977e+06, 1.74910449e+06, -1.53482795e+03
 
 # Define numerical integrator (RK4; step size 2 seconds)
 integrator_settings = propagation_setup.integrator.runge_kutta_fixed_step(
-    2.0, integrator.rk_4 )
+    2.0, integrator.CoefficientSets.rk_4 )
 
 # Start of simulation
 simulation_start_epoch = 9120.0 * constants.JULIAN_DAY

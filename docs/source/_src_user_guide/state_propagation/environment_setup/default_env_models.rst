@@ -93,7 +93,7 @@ Atmosphere
 
 Radiation source
 ----------------
-- Sun: Isotropic point source with a luminosity of 3.828 × 10\ :sup:`26` W, using the :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.constant_luminosity` function, with tudatpy.numerical_simulation.environment_setup.radiation_pressure.predefined_knocke_type_surface_property_distribution
+- Sun: Isotropic point source with a luminosity of 3.828 × 10\ :sup:`26` W, using the :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.constant_luminosity` function, with :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.predefined_knocke_type_surface_property_distribution`
 - All other bodies: none (see :ref:`radiation_pressure_acceleration` for details on specifying models).
 
 
