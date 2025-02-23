@@ -110,6 +110,10 @@ The instructions in the following are based on the `official Anaconda documentat
 
        bash Miniconda3-latest-Linux-x86_64.sh
 
+   .. warning::
+
+        Do **not** run the installer with ``sudo``! This will install it in your root directory and will cause issues with access permissions.
+
 3. Read through the Terms of Service and accept them.
 
 4. In the next step, it is recommended to install Miniconda in the default location.
