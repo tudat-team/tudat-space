@@ -93,13 +93,13 @@ using the pre-defined Knocke-style surface distribution of both. Three rings are
 .. code-block:: python
 
     earth_surface_radiosity_models = [
-        radiation_pressure.albedo_variable_surface_radiosity(
-            albedo_distribution_model = radiation_pressure.predefined_knocke_type_surface_property_distribution( radiation_pressure.albedo_knocke ),
+        environment_setup.radiation_pressure.variable_albedo_surface_radiosity(
+            albedo_distribution_settings = environment_setup.radiation_pressure.predefined_knocke_type_surface_property_distribution( environment_setup.radiation_pressure.albedo_knocke ),
             original_source_name = "Sun" ),
-        radiation_pressure.thermal_emission_blackbody_variable_emissivity(
-            emissivity_distribution_model = radiation_pressure.predefined_knocke_type_surface_property_distribution( radiation_pressure.emissivity_knocke ),
+        environment_setup.radiation_pressure.thermal_emission_blackbody_variable_emissivity(
+            emissivity_distribution_model = environment_setup.radiation_pressure.predefined_knocke_type_surface_property_distribution(            environment_setup.radiation_pressure.emissivity_knocke ),
             original_source_name = "Sun" ) ]
-    body_settings.get( "Earth" ).radiation_source_settings = radiation_pressure.panelled_extended_radiation_source(
+    body_settings.get( "Earth" ).radiation_source_settings = environment_setup.radiation_pressure.panelled_extended_radiation_source(
         earth_surface_radiosity_models, [ 6, 12, 18 ] )
 
 Albedo and thermal radiosity models often require a so-called original source (typically the Sun), the radiation of which is reflected or re-radiated.
