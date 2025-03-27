@@ -15,7 +15,16 @@ In the following examples, observations are simulated and then used as input for
   ./tudatpy-examples/estimation/covariance_propagation_example.ipynb
   ./tudatpy-examples/estimation/full_estimation_example.ipynb
   ./tudatpy-examples/estimation/estimation_dynamical_models.ipynb
-  
+
+Functionality to support estimation
+***********************************
+
+In the following examples, functionality is showcased that can be used to support (pre- and/or post-processing of observations) estimation
+
+.. nbgallery::
+
+  ./tudatpy-examples/estimation/tudat_azimuth_elevation_example.ipynb
+
 Estimation using pseudo-observations data
 *****************************************
 
