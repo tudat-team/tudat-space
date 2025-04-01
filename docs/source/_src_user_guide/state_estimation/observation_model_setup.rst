@@ -57,15 +57,15 @@ The only limitation is that you may not have duplicate entries of link ends *and
     
     # Create list of observation settings
     observation_settings_list = list()
-    observation_settings_list.append( observation_setup.one_way_range( one_way_nno_mex_link_ends ) )
-    observation_settings_list.append( observation_setup.one_way_open_loop_doppler( one_way_nno_mex_link_ends ) )
+    observation_settings_list.append( estimation_setup.observation.one_way_range( one_way_nno_mex_link_ends ) )
+    observation_settings_list.append( estimation_setup.observation.one_way_open_loop_doppler( one_way_nno_mex_link_ends ) )
                 
                 
 
 When defining observation models, you can for most types of models define settings for:
 
 * **Biases:** A bias in Tudat is applied to the observable after its 'ideal' value computed from the environment is computed. You can find a list of settings for observation biases in our :doc:`API documentation <observation>`.
-* **Light-time corrections:** When using an observable that involves the observation of one point/body in space by another, it is automatically assumed that the signal travels at the speed of light in a straight line in Euclidean (e.g. flat) space. The associated light-time is automatically computed when calculating the observable. For instance, when computing an observable by a ground station at time :math:`t`, the psotion of the observed target (such as a spacecraft) is evaluated at time :math:`t-\Delta t`, with :math:`\Delta t` the light time from spacecraft to ground station. Deviations from the signal's ideal trajectory (straight line at speed of light) due to relativistic, atmospheric, etc. effects may be defined by adding light-time correction settings, as listed in our :doc:`API documentation <observation>`.
+* **Light-time corrections:** When using an observable that involves the observation of one point/body in space by another, it is automatically assumed that the signal travels at the speed of light in a straight line in Euclidean (e.g. flat) space. The associated light-time is automatically computed when calculating the observable. For instance, when computing an observable by a ground station at time :math:`t`, the position of the observed target (such as a spacecraft) is evaluated at time :math:`t-\Delta t`, with :math:`\Delta t` the light time from spacecraft to ground station. Deviations from the signal's ideal trajectory (straight line at speed of light) due to relativistic, atmospheric, etc. effects may be defined by adding light-time correction settings, as listed in our :doc:`API documentation <observation>`.
 * **Light-time convergence settings:** Calculating the light time between two link ends requires the iterative solution of the light-time equation. Default settings for convergence criteria for this solution are implemented, but a user may modify these settings if so desired. The associated settings object can be created using the :func:`~tudatpy.numerical_simulation.estimation_setup.observation.light_time_convergence_settings` function.
 
 Observation biases are used to add any systematic deviations from the 'physical' value of the computed observation
@@ -101,21 +101,21 @@ The above options are added to the calls of the observation model settings facto
     one_way_nno_mex_link_ends = dict( )
     one_way_nno_mex_link_ends[ transmitter ] = estimation_setup.observation.body_reference_point_link_end_id( "Earth", "NNO" )
     one_way_nno_mex_link_ends[ receiver ] = estimation_setup.observation.body_origin_link_end_id( "MeX" )
-    one_way_nno_mex_link_definition = estimation_setup.link_definition( one_way_nno_mex_link_ends )
+    one_way_nno_mex_link_definition = estimation_setup.observation.link_definition( one_way_nno_mex_link_ends )
     
     # Define settings for light-time calculations
-    light_time_correction_settings = [ observation_setup.first_order_relativistic_correction( [ 'Sun' ] )]
+    light_time_correction_settings = [ estimation_setup.observation.first_order_relativistic_correction( [ 'Sun' ] )]
     
     # Define settings for range bias
-    range_bias_settings = observation_setup.absolute_bias( 0.01 )
+    range_bias_settings = estimation_setup.observation.absolute_bias( 0.01 )
     
     # Create list of observation settings
     observation_settings_list = list()
-    observation_settings_list.append( observation_setup.one_way_range( 
+    observation_settings_list.append( estimation_setup.observation.one_way_range( 
         one_way_nno_mex_link_ends,
         light_time_correction_settings = light_time_correction_settings,
         bias_settings = range_bias_settings ) )
-    observation_settings_list.append( observation_setup.one_way_open_loop_doppler( 
+    observation_settings_list.append( estimation_setup.observation.one_way_open_loop_doppler( 
         one_way_nno_mex_link_ends, 
         light_time_correction_settings = light_time_correction_settings ) )
                 

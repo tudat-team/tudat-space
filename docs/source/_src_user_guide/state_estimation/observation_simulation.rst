@@ -33,9 +33,9 @@ In addition to the :ref:`definition of the observation model <observationModelSe
 requires a definition of the time(s) at which the observation is to be simulated, as well as a definition of which observation model
 these are to be simulated from (in addition to optional additional settings, see :ref:`below <additional_observation_settings>`).
 
-Settings for simulating observations are defined by the creation of a ``ObservationSimulationSettings`` class (or derived class).
+Settings for simulating observations are defined by the creation of a :class:`~tudatpy.numerical_simulation.estimation_setup.observation.ObservationSimulationSettings` class (or derived class).
 The basic manner in which to define an observation simulation settings object uses the
-:func:`~tudatpy.numerical_simulation.estimation_setup.observation.tabulated_settings`, specifying the observation times explicitly as follows:
+:func:`~tudatpy.numerical_simulation.estimation_setup.observation.tabulated_simulation_settings`, specifying the observation times explicitly as follows:
 
 .. code-block:: python
                 
@@ -47,7 +47,7 @@ The basic manner in which to define an observation simulation settings object us
     observation_times = list( )
     observation_times = [10.0, 20.0, 30.0]
     
-    observation_simulation_settings = observation_setup.tabulated_settings( 
+    observation_simulation_settings = estimation_setup.observation.tabulated_simulation_settings( 
        one_way_range_type,
        one_way_nno_mex_link_definition,
        observation_times )
@@ -56,27 +56,27 @@ where a list of times (:math:`t=10,20,30` s) is explicitly specified, and an obs
 which specifies that a one-way range observation is to be simulated at these times, with the link ends specified by ``one_way_nno_mex_link_definition``.
 
 By default, the *reference time* for the one-way range observable is the receiver
-(see :attr:`~tudatpy.numerical_simulation.estimation_setup.observation.get_default_reference_link_end`).
+(see :func:`~tudatpy.numerical_simulation.estimation_setup.observation.get_default_reference_link_end`).
 This means that, for the above, these settings will simulate observations which are *received* by MeX at :math:`t=10`, :math:`t=20`, and :math:`t=30`, respectively.
 To override this behaviour, we can specify a reference link end manually, which will yield observations *transmitted* at :math:`t=10`, :math:`t=20`, and :math:`t=30` by NNO.
 
 .. code-block:: python
     
-    observation_simulation_settings = observation_setup.tabulated_settings( 
+    observation_simulation_settings = estimation_setup.observation.tabulated_simulation_settings( 
        one_way_range_type,
        one_way_nno_mex_link_ends,
        observation_times,
-       reference_link_end = observation_setup.transmitter )
+       reference_link_end = estimation_setup.observation.LinkEndType.transmitter )
 
 
 
-As an extension of the above, you can also use :func:`~tudatpy.numerical_simulation.estimation_setup.observation.tabulated_settings_list`.
+As an extension of the above, you can also use :func:`~tudatpy.numerical_simulation.estimation_setup.observation.tabulated_simulation_settings_list`.
 This function contains a list of objects,  for any number of observable types and link ends (stored together in the ``link_definitions_per_observable`` below).
 Thus it uses this list, instead of creating a single object to simulate the observations.
 
 .. code-block:: python
     
-    observation_simulation_settings_list = observation_setup.tabulated_settings_list( 
+    observation_simulation_settings_list = estimation_setup.observation.tabulated_simulation_settings_list( 
        link_definitions_per_observable,
        observation_times )
  
@@ -84,7 +84,7 @@ Thus it uses this list, instead of creating a single object to simulate the obse
 
 .. note::
 
-    The :func:`~tudatpy.numerical_simulation.estimation_setup.observation.tabulated_settings` is the simplest manner in which to define the times (and other settings) at which to simulate observations. By adding observation constraints (see :ref:`below <observation_constraints>`), this list of times may be filtered during the observation simulation process to only retain those times at which specific conditions are met (e.g. target above the horizon). For many practical cases, it is desirable to have continuous tracking passes of a given length that are not interrupted by such constraints. The :func:`~tudatpy.numerical_simulation.estimation_setup.continuous_arc_simulation_settings` can be used to achieve such behaviour.
+    The :func:`~tudatpy.numerical_simulation.estimation_setup.observation.tabulated_simulation_settings` is the simplest manner in which to define the times (and other settings) at which to simulate observations. By adding observation constraints (see :ref:`below <observation_constraints>`), this list of times may be filtered during the observation simulation process to only retain those times at which specific conditions are met (e.g. target above the horizon). For many practical cases, it is desirable to have continuous tracking passes of a given length that are not interrupted by such constraints. The :func:`~tudatpy.numerical_simulation.estimation_setup.observation.continuous_arc_simulation_settings` can be used to achieve such behaviour.
 
 .. _additional_observation_settings:
 
@@ -94,20 +94,20 @@ Defining additional settings
 In addition to defining the observable type, link ends, observation times and (optionally) reference link ends for simulating an observation, you can (or, in some cases, need to) define a number of additional settings to be taken into account:
 
 - **Ancilliary settings**: Some observables may or must get additional quantitative data that influences the ideal value of the observable. Examples are the integration time for averaged Doppler observables, and retransmission times for n-way observables. 
-- **Constraints**: You can define settings such that an observation is only simulated if certain conditions (elevation angle, no occultation, *etc.*) are (not) met
-- **Noise levels**: You can define a functions which adds (random) noise to the simulated observations. This noise is typically, but not necessarily, Gaussian
+- **Constraints**: You can define settings such that an observation is only simulated if certain conditions (elevation angle, no occultation, *etc.*) are (not) met.
+- **Noise levels**: You can define a functions which adds (random) noise to the simulated observations. This noise is typically, but not necessarily, Gaussian.
 - **Additional output**: Similarly to the state propagation framework, you can define a wide range of *dependent variables* to be calculating during the simulation of observations. Note that the *type* of variables you can choose from is distinct from those available during state propagation.
 
 Typically (but not necessarily), these settings are defined and added to the observation simulation settings *after* the nominal settings have been defined
 (in the process outlined above). To efficiently achieve this, there are several functions available in Tudat, which take a list of
-``ObservationSimulationSettings`` objects (such as those returned by the :func:`~tudatpy.tabulated_settings_list` function),
+:class:`~tudatpy.numerical_simulation.estimation_setup.observation.ObservationSimulationSettings` objects (such as those returned by the :func:`~tudatpy.tabulated_settings_list` function),
 and add settings for one of the above options to any number of observation simulation settings.
 For each of the above type of (optional) settings, three separate functions are provided to modify the list of observation simulation settings
 (see :ref:`ancilliary_settings`, :ref:`observation_constraints`, :ref:`noise_levels` and :ref:`observation_dependent_variables` for API links, and examples):
 
-- One function modifying each ``ObservationSimulationSettings`` object in the list (for instance: regardless of the type or link end of the observation, always save the light-time as dependent variable)
-- One function modifying each ``ObservationSimulationSettings`` object in the list which contains settings for a given :func:`~tudatpy.ObservableType` (for instance: regardless of link ends, use 1 mm/s random noise for all two-way Doppler observables)
-- One function modifying each ``ObservationSimulationSettings`` object in the list which contains settings for a given :func:`~tudatpy.ObservableType` and a given set of link ends (for instance: for all one-way range observables between New Norcia ground station and Mars Express, only simulate an observation if Mars Express is at last 15 degrees above the horizon.
+- One function modifying each :class:`~tudatpy.numerical_simulation.estimation_setup.observation.ObservationSimulationSettings` object in the list (for instance: regardless of the type or link end of the observation, always save the light-time as dependent variable)
+- One function modifying each :class:`~tudatpy.numerical_simulation.estimation_setup.observation.ObservationSimulationSettings` object in the list which contains settings for a given :func:`~tudatpy.ObservableType` (for instance: regardless of link ends, use 1 mm/s random noise for all two-way Doppler observables)
+- One function modifying each :class:`~tudatpy.numerical_simulation.estimation_setup.observation.ObservationSimulationSettings` object in the list which contains settings for a given :func:`~tudatpy.ObservableType` and a given set of link ends (for instance: for all one-way range observables between New Norcia ground station and Mars Express, only simulate an observation if Mars Express is at last 15 degrees above the horizon).
 
 .. _ancilliary_settings:
 
@@ -125,12 +125,14 @@ To set a 5 s Doppler integration time for every averaged n-way Doppler observabl
 
 .. code-block:: python
 
+    from tudatpy.numerical_simulation.estimation_setup import observation
+
     integration_time = 5.0
-    doppler_ancilliary_settings = doppler_ancilliary_settings( integration_time )
+    doppler_ancilliary_settings = observation.doppler_ancilliary_settings( integration_time )
     observation.add_ancilliary_settings_to_observable(
         observation_simulation_settings_list,
         doppler_ancilliary_settings,
-        observation.n_way_averaged_doppler_type )
+        observation.ObservableType.n_way_averaged_doppler_type )
 
 .. _observation_constraints:
 
@@ -158,7 +160,7 @@ For example, the ``observation_simulation_settings_list`` list created in the ex
       viability_settings_list )
 
 
-To add viability settings directly to a single ``ObservationSimulationSettings`` object, use the  :func:`~tudatpy.numerical_simulation.estimation_setup.observation.ObservationSimulationSettings.viability_settings_list` attribute.
+To add viability settings directly to a single :class:`~tudatpy.numerical_simulation.estimation_setup.observation.ObservationSimulationSettings` object, use the  :attr:`~tudatpy.numerical_simulation.estimation_setup.observation.ObservationSimulationSettings.viability_settings_list` attribute.
 
 .. _noise_levels:
 
@@ -182,7 +184,7 @@ Adding Gaussian noise to all observations of a given type can be done by:
     observation.add_gaussian_noise_to_observable(
         observation_simulation_settings_list,
         noise_level,
-        observation.one_way_range_type )
+        observation.ObservableType.one_way_range_type )
         
 which will add 10 cm random noise to each one-way range observable in the ``observation_simulation_settings_list`` list.
 In this case (the :func:`~tudatpy.numerical_simulation.estimation_setup.observation.add_gaussian_noise_to_observable` function),
@@ -201,13 +203,13 @@ Similar interfaces exist to add a generic noise function to the observation:
     observation.add_noise_function_to_observable(
         observation_simulation_settings_list,
         custom_noise_function,
-        observation.one_way_range_type )
+        observation.ObservableType.one_way_range_type )
 
 where it is important to realize that the noise function *must* have a single float representing time as input, and returns a vector (of the size of a single observation) as output. For many observables (range, Doppler), this size will be 1. For angular position observables, for instance, the size will be 2. The
 :func:`~tudatpy.numerical_simulation.estimation_setup.observation.add_noise_function_to_all`,
 :func:`~tudatpy.numerical_simulation.estimation_setup.observation.add_noise_function_to_observable` and :func:`~tudatpy.numerical_simulation.estimation_setup.observation.add_noise_function_to_observable_for_link_ends` functions can be used to add a noise function to a subset of all observation simulation settings.
 
-To add a generic noise function directly to a single ``ObservationSimulationSettings`` object, use the  :func:`~tudatpy.numerical_simulation.estimation_setup.observation.ObservationSimulationSettings.noise_function` attribute.
+To add a generic noise function directly to a single :class:`~tudatpy.numerical_simulation.estimation_setup.observation.ObservationSimulationSettings` object, use the  :attr:`~tudatpy.numerical_simulation.estimation_setup.observation.ObservationSimulationSettings.noise_function` attribute.
 
 .. _observation_dependent_variables:
 
@@ -258,7 +260,7 @@ Internally, this observation collection stores the observations (and any associa
 
 Consequently, the vector :math:`\mathbf{h}` provides the observations stored in the manner identified above. Note that the
 nested dictionary of :class:`~tudatpy.numerical_simulation.estimation.SingleObservationSet` objects can be directly
-extracted using the ``sorted_observation_sets`` attribute of the :class:`~tudatpy.numerical_simulation.estimation.ObservationCollection` observation collection.
+extracted using the :attr:`~tudatpy.numerical_simulation.estimation.ObservationCollection.sorted_observation_sets` attribute of the :class:`~tudatpy.numerical_simulation.estimation.ObservationCollection` observation collection.
 
 A vector of observable types,
 link definitions and times (each with length :math:`n_{\text{obs}}`) can be extracted from the
@@ -271,7 +273,7 @@ the associated entries in the vector of times
 position observables, we will have :math:`\mathbf{h}=[\alpha(t_{1}); \delta(t_{1}); \alpha(t_{2}); \delta(t_{2}); \alpha(t_{3}); \delta(t_{3})]`,
 and the associated vector of times will be :math:`\mathbf{t}=[t_{1}; t_{1}; t_{2}; t_{2}; t_{3}; t_{3}]`.
 
-Since the dependent variables that are saved in the ``ObservationCollection`` will typically differ per constituent ``SingleObservationSet``,
+Since the dependent variables that are saved in the :class:`~tudatpy.numerical_simulation.estimation.ObservationCollection` will typically differ per constituent :class:`~tudatpy.numerical_simulation.estimation.SingleObservationSet`,
 it is not possible to extract a single list of these from the full collection. Instead, they can only be extracted from the single observation set.
 
 .. _loading_data:
