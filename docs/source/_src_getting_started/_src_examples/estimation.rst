@@ -25,6 +25,9 @@ In the following examples, functionality is showcased that can be used to suppor
 
   ./tudatpy-examples/estimation/tudat_azimuth_elevation_example.ipynb
 
+
+.. _estimation_using_pseudo_observations:
+
 Estimation using pseudo-observations data
 *****************************************
 
@@ -34,6 +37,9 @@ In the following examples, Cartesian positions of bodies are taken from an exter
 
   ./tudatpy-examples/estimation/galilean_moons_state_estimation.ipynb
   
+
+.. _estimation_using_real_observations:
+
 Estimation using real observations
 **********************************
 

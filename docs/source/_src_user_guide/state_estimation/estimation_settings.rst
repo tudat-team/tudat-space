@@ -61,7 +61,7 @@ Where the *inverse* a priori covariance matrix can be provided as an additional 
 :class:`~tudatpy.numerical_simulation.estimation.CovarianceAnalysisInput` constructor.
 
 The resulting object ``covariance_analysis_settings`` can be used to tune the exact behaviour of the covariance analysis process
-(see the :func:`~tudatpy.numerical_simulation.estimation.CovarianceAnalysisInput.define_covariance_settings` function of this class for details),
+(see the :meth:`~tudatpy.numerical_simulation.estimation.CovarianceAnalysisInput.define_covariance_settings` method of this class for details),
 such as whether to reintegrate the dynamics, or which terminal output to provide.
 
 The weight matrix is typically not provided as a full matrix in a covariance analysis, as the its size of :math:`N_{obs}\times N_{obs}` leads to prohibitive memory usage.
@@ -71,10 +71,10 @@ Several options are provided to set the weights matrix diagonal
 (as :class:`~tudatpy.numerical_simulation.estimation.CovarianceAnalysisInput` member functions):
 
 * Constant weight for all observation, using the :meth:`~tudatpy.numerical_simulation.estimation.CovarianceAnalysisInput.set_constant_weight` function,
-* Constant weight for all observations of a given observation type, using the :meth:`~tudatpy.numerical_simulation.estimation.CovarianceAnalysisInput.set_constant_single_observable_weight` function, or the :func:`~tudatpy.numerical_simulation.estimation.CovarianceAnalysisInput.set_constant_single_observable_vector_weight` function for observables of size :math:`>1`, to for instance set different weights for right ascension and declination of an angular position observable
-* Constant weight for all observations of a given observation type, with a given set of link ends, using the :meth:`~tudatpy.numerical_simulation.estimation.CovarianceAnalysisInput.set_constant_single_observable_and_link_end_weight` function, or the :func:`~tudatpy.numerical_simulation.estimation.CovarianceAnalysisInput.set_constant_single_observable_and_link_end_vector_weight` function for observables of size :math:`>1`
+* Constant weight for all observations of a given observation type, using the :meth:`~tudatpy.numerical_simulation.estimation.CovarianceAnalysisInput.set_constant_single_observable_weight` function, or the :meth:`~tudatpy.numerical_simulation.estimation.CovarianceAnalysisInput.set_constant_single_observable_vector_weight` function for observables of size :math:`>1`, to for instance set different weights for right ascension and declination of an angular position observable
+* Constant weight for all observations of a given observation type, with a given set of link ends, using the :meth:`~tudatpy.numerical_simulation.estimation.CovarianceAnalysisInput.set_constant_single_observable_and_link_end_weight` function, or the :meth:`~tudatpy.numerical_simulation.estimation.CovarianceAnalysisInput.set_constant_single_observable_and_link_end_vector_weight` function for observables of size :math:`>1`
 * Manual definition of full weight vector for all observations of a given observation type with a given set of link ends, using the :meth:`~tudatpy.numerical_simulation.estimation.CovarianceAnalysisInput.set_total_single_observable_and_link_end_vector_weight` function,
-* Manual definition of the full weight vector for all observations using the :meth:`~tudatpy.numerical_simulation.estimation.CovarianceAnalysisInput.weight_matrix_diagonal` attribute,
+* Manual definition of the full weight vector for all observations using the :attr:`~tudatpy.numerical_simulation.estimation.CovarianceAnalysisInput.weight_matrix_diagonal` attribute,
 
 When using consider covariance (e.g. when consider parameters are defined in the :ref:`parameterSettings`), the consider parameter covariance matrix :math:`\mathbf{C}`
 is also provided to the :class:`~tudatpy.numerical_simulation.estimation.CovarianceAnalysisInput` constructor, and the
@@ -134,5 +134,5 @@ however, there are a number of additional options available, such as the definit
 
 The :class:`~tudatpy.numerical_simulation.estimation.EstimationInput` class also has as function to
 tune the exact behaviour of the estimation process (see the
-:func:`~tudatpy.numerical_simulation.estimation.EstimationInput.define_estimation_settings` function of this class for details),
+:meth:`~tudatpy.numerical_simulation.estimation.EstimationInput.define_estimation_settings` function of this class for details),
 such as whether to save all intermediate results for the user.

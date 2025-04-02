@@ -100,14 +100,14 @@ In addition to defining the observable type, link ends, observation times and (o
 
 Typically (but not necessarily), these settings are defined and added to the observation simulation settings *after* the nominal settings have been defined
 (in the process outlined above). To efficiently achieve this, there are several functions available in Tudat, which take a list of
-:class:`~tudatpy.numerical_simulation.estimation_setup.observation.ObservationSimulationSettings` objects (such as those returned by the :func:`~tudatpy.tabulated_settings_list` function),
+:class:`~tudatpy.numerical_simulation.estimation_setup.observation.ObservationSimulationSettings` objects (such as those returned by the :func:`~tudatpy.numerical_simulation.estimation_setup.observation.tabulated_simulation_settings_list` function),
 and add settings for one of the above options to any number of observation simulation settings.
 For each of the above type of (optional) settings, three separate functions are provided to modify the list of observation simulation settings
 (see :ref:`ancilliary_settings`, :ref:`observation_constraints`, :ref:`noise_levels` and :ref:`observation_dependent_variables` for API links, and examples):
 
 - One function modifying each :class:`~tudatpy.numerical_simulation.estimation_setup.observation.ObservationSimulationSettings` object in the list (for instance: regardless of the type or link end of the observation, always save the light-time as dependent variable)
-- One function modifying each :class:`~tudatpy.numerical_simulation.estimation_setup.observation.ObservationSimulationSettings` object in the list which contains settings for a given :func:`~tudatpy.ObservableType` (for instance: regardless of link ends, use 1 mm/s random noise for all two-way Doppler observables)
-- One function modifying each :class:`~tudatpy.numerical_simulation.estimation_setup.observation.ObservationSimulationSettings` object in the list which contains settings for a given :func:`~tudatpy.ObservableType` and a given set of link ends (for instance: for all one-way range observables between New Norcia ground station and Mars Express, only simulate an observation if Mars Express is at last 15 degrees above the horizon).
+- One function modifying each :class:`~tudatpy.numerical_simulation.estimation_setup.observation.ObservationSimulationSettings` object in the list which contains settings for a given :class:`~tudatpy.numerical_simulation.estimation_setup.observation.ObservableType` (for instance: regardless of link ends, use 1 mm/s random noise for all two-way Doppler observables)
+- One function modifying each :class:`~tudatpy.numerical_simulation.estimation_setup.observation.ObservationSimulationSettings` object in the list which contains settings for a given :class:`~tudatpy.numerical_simulation.estimation_setup.observation.ObservableType` and a given set of link ends (for instance: for all one-way range observables between New Norcia ground station and Mars Express, only simulate an observation if Mars Express is at last 15 degrees above the horizon).
 
 .. _ancilliary_settings:
 
