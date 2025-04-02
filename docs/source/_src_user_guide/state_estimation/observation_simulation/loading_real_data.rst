@@ -12,26 +12,25 @@ The `Minor Planet Center <https://www.minorplanetcenter.net/iau/mpc.html>`_ (MPC
 for minor solar system bodies. We have implemented an interface between Tudat and the MPC's observation database, by making use
 of the `astroquery <https://astroquery.readthedocs.io/en/latest/mpc/mpc.html#observations>`_ Python library.
 
-.. note::
-   At the moment, the documentation of the Python-native MPC interface is not rendering correctly on our API documentation
-   page. For now, you can find the in-code comments of our interface on `github <https://github.com/tudat-team/tudatpy/blob/develop/tudatpy/data/mpc.py>`_.
-
-Loading MPC astrometric observations into Tudat starts with creating a ``BatchMPC`` object. Then, data can be loaded into this object by
-calling the ``get_observations`` function, which takes a list of small body identifiers and queries all astrometric data of these bodies from the MPC.
+Loading MPC astrometric observations into Tudat starts with creating a :class:`~tudatpy.data.mpc.BatchMPC` object. Then, data can be loaded into this object by
+calling the :meth:`~tudatpy.data.mpc.BatchMPC.get_observations` method, which takes a list of small body identifiers and queries all astrometric data of these bodies from the MPC.
 Subsequently, the data in the object can be filtered by:
 
 * Keeping *only* data from a given set of observatories
 * Removing data from a given set of observatories
 * Retaining *only* data that falls in a given time span
 
-Then, the ``BatchMPC`` object can be used to create an :class:`~tudatpy.numerical_simulation.estimation.ObservationCollection` that
-contains all remaining data, using the ``to_tudat`` function. Note that, in the conversion to a Tudat-compatible data set,
+Then, the :class:`~tudatpy.data.mpc.BatchMPC` object can be used to create an :class:`~tudatpy.numerical_simulation.estimation.ObservationCollection` that
+contains all remaining data, using the :meth:`~tudatpy.data.mpc.BatchMPC.to_tudat` method. Note that, in the conversion to a Tudat-compatible data set,
 one has the option to filter any and all space observatories (e.g. WISE, Hubble).
 
 For instance, the following example will retrieve all data from asteroids 433 (Eros), 238 (Hypatia) and 329 (Svea), over a period of
 10 years (2010-2020)
 
 .. code-block:: python
+
+  import datetime
+  from tudatpy.data.mpc import BatchMPC
 
   # Create MPC data container
   mpc_container = BatchMPC()
@@ -48,7 +47,7 @@ For instance, the following example will retrieve all data from asteroids 433 (E
 
 
 
-Several examples using MPC data can be found on our page with :ref:`estimation examples <estimation_examples>`
+Several examples using MPC data can be found on our page with :ref:`estimation examples <estimation_using_real_observations>`.
 
 Natural Satellite Data Center Astrometry
 ========================================
@@ -103,7 +102,7 @@ The source of the Cartesian positions is up to the user, but typical sources are
 * TLEs propagated in time using an SGP4 propagator, and rotated to an inertial frame
 * SP3c files containing tabulated state histories, typically for Earth-orbiting spacecraft
 
-The Galilean moon state estimation example on :ref:`this page <estimation_examples>` gives a good examples of the full procedure that can be used
+The Galilean moon state estimation example on :ref:`this page <estimation_using_pseudo_observations>` gives a good examples of the full procedure that can be used
 for this, where the states are (in this case) extracted from SPICE kernels.
 
 In Tudat Cartesian position (pseudo-)observations are processed using the :func:`~tudatpy.numerical_simulation.estimation_setup.observation.relative_cartesian_position`
@@ -114,7 +113,7 @@ manually from external data, we provide a function of convenience to generate su
 * Generate relative position observations (and associated observation model settings) using the :func:`~tudatpy.numerical_simulation.estimation.create_pseudo_observations_and_models`
 
 The latter function provides both the observations (as an :class:`~tudatpy.numerical_simulation.estimation.ObservationCollection`),
-and a list of :class:`~tudatpy.numerical_simulation.estimation_setup.observation.ObservationModelSettings` to be used
+and a list of :class:`~tudatpy.numerical_simulation.estimation_setup.observation.ObservationSettings` to be used
 for simulating the observables. The combination of these two can be used directly for the subsequent steps
 of defining estimation settings and performing the estimation.
 

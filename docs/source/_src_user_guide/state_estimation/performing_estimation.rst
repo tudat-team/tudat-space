@@ -19,14 +19,14 @@ which is created as follows:
         observation_settings_list,
         propagator_settings)
         
-where the propagator settings may be single-, multi- or hybrid arc. Creating an ``Estimator`` object automatically propagates
+where the propagator settings may be single-, multi- or hybrid arc. Creating an :class:`~tudatpy.numerical_simulation.Estimator` object automatically propagates
 the dynamics and variational equations for the specific propagator and parameter settings.
 
 Covariance analysis
 -------------------
 
 The settings for a covariance analysis described :ref:`here <covarianceSettings>` can be used to compute the covariance
-using the :func:`~tudatpy.numerical_simulation.Estimator.compute_covariance` function.
+using the :meth:`~tudatpy.numerical_simulation.Estimator.compute_covariance` method.
 
 .. code-block:: python
 
@@ -49,7 +49,7 @@ be obtained from the :class:`~tudatpy.numerical_simulation.estimation.Covariance
 Normalization
 ^^^^^^^^^^^^^
 
-The partial derivative matrix :math:`\mathbf{H}=\frac{\partial\mathbf{h}}{\partial\mathbf{p}}` is computed automatically for all observations and parameters, from which the inverse covariance :math:`\mathbf{P}^{-1}` is then computed, as described :ref:`here <covarianceSettings>`. However, due to the potentially huge difference in order of magnitude of the estimated parameters (for instance, the Sun's gravitational parameter, at approximately :math:` 1.3267 \cdot 10^{20}` m^3/s^2, and the bias of a VLBI observation, at :math:`10^{-9}` radians), the inversion of the matrix :math:`\mathbf{P}^{-1}` can be extremely ill-posed. We partly correct for this problem by normalizing the parameters.
+The partial derivative matrix :math:`\mathbf{H}=\frac{\partial\mathbf{h}}{\partial\mathbf{p}}` is computed automatically for all observations and parameters, from which the inverse covariance :math:`\mathbf{P}^{-1}` is then computed, as described :ref:`here <covarianceSettings>`. However, due to the potentially huge difference in order of magnitude of the estimated parameters (for instance, the Sun's gravitational parameter, at approximately :math:`1.3267 \cdot 10^{20}` m^3/s^2, and the bias of a VLBI observation, at :math:`10^{-9}` radians), the inversion of the matrix :math:`\mathbf{P}^{-1}` can be extremely ill-posed. We partly correct for this problem by normalizing the parameters.
 
 The normalization is achieved by computing a vector :math:`\mathbf{N}` (of the same size as the parameter vector :math:`\mathbf{p}`, such that for each column of the matrix :math:`\mathbf{H}`, we have:
 
@@ -76,7 +76,7 @@ Full estimation
    :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.tabulated_from_existing` setting (for estimated translational dynamics)
 
 Similarly, the settings for a full estimation described :ref:`here <fullEstimationSettings>` can be used to perform
-the full estimation using the :func:`~tudatpy.numerical_simulation.Estimator.perform_estimation` function.
+the full estimation using the :meth:`~tudatpy.numerical_simulation.Estimator.perform_estimation` method.
 
 .. code-block:: python
 
@@ -90,7 +90,7 @@ where the residual was lowest.
 
 The specific additional information that is retained for the
 :class:`~tudatpy.numerical_simulation.estimation.EstimationOutput` is defined by the
-:func:`~tudatpy.numerical_simulation.estimation.EstimationInput.define_estimation_settings` function of the :class:`~tudatpy.numerical_simulation.estimation.EstimationInput`
+:meth:`~tudatpy.numerical_simulation.estimation.EstimationInput.define_estimation_settings` method of the :class:`~tudatpy.numerical_simulation.estimation.EstimationInput`
 class. We note that saving all information from each iteration may not be recommended for larger applications, as the memory
 consumption that is required may be prohibitive.
 
