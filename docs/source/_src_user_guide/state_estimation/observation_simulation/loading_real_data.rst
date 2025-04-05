@@ -54,9 +54,30 @@ Natural Satellite Data Center Astrometry
 
 The `Natural Satellite Data Center <http://nsdb.imcce.fr/obspos/obsindhe.htm>`_ is the largest database of astrometric observations
 of natural satellites of solar system planets (except Earth's moon). Unlike astrometry from the MPC, there is no
-existing library to extract data from this website, and there is more diversity in the layout of the files in the NSDC.
+existing library to extract data from this website, and there is more diversity in the layout of the files in the NSDC. For this reason,
+some manual steps are required. 
 
-An interface between Tudat and the NSDC astrometry is under construction, and will be detailed here later TODO.
+First, the raw NSDC data should be downloaded or copied into a txt file. At the top of this file, one should place the metadata (TODO: link metadata file).
+One can then call the process_file function, which will convert this raw data into a CSV file with tudat-compatible observations, with standard settings. 
+These standard settings are intended to meet the use cases of the majority of the users. However, it is possible to redefine the output, add intermediate steps,
+or only use a fraction of the process by using the underlying functionality.
+
+The following example shows the simplest form of processing the NSDC observations. A more extensive example, including 
+how to convert these observations into an observation collection, is available in (TO DO: link example).
+
+.. code-block:: python
+
+     # Load necessary spice kernels
+     spice.load_standard_kernels()
+     spice.load_kernel('jup344.bsp')
+
+     # Specify data location and 
+     folder_path = 'Observations\InnerJovianMoons'
+     raw_observation_files = [os.path.join(folder_path, f) for f in os.listdir(folder_path) if f.endswith('.txt')]
+
+     # Process files
+     for raw_file in raw_observation_files:
+        process_file(raw_file,True,'ECLIPJ2000')
 
 
 Deep Space Tracking Radio Data
