@@ -14,10 +14,10 @@ The examples below will help you get started in exploring the diverse capabiliti
    :caption: Tudatpy example categories
    :name: example-categories
 
-   /getting-started/examples/propagation
-   /getting-started/examples/estimation
-   /getting-started/examples/mission-design
-   /getting-started/examples/pygmo
+   /examples/propagation
+   /examples/estimation
+   /examples/mission-design
+   /examples/pygmo
 
 
 .. grid:: 2

@@ -94,7 +94,7 @@ of the :class:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResu
 
 .. seealso::
    For a complete example of a perturbed single-arc propagation, please see the tutorial
-   :ref:`Perturbed satellite orbit </getting-started/examples/tudatpy-examples/propagation/perturbed_satellite_orbit.ipynb>`.
+   :ref:`Perturbed satellite orbit </examples/tudatpy-examples/propagation/perturbed_satellite_orbit.ipynb>`.
 
 .. _multi_hybrid_arc_results:
 

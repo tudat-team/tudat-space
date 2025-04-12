@@ -2,7 +2,7 @@
 GRAIL - Comparing Doppler measurements from ODF files to simulated observables
 =============================================================================================
 
-.. literalinclude:: /getting-started/examples/tudatpy-examples/estimation/grail_residuals.py
+.. literalinclude:: /examples/tudatpy-examples/estimation/grail_residuals.py
     :language: python
 
 ------

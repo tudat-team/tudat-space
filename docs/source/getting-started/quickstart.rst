@@ -51,7 +51,7 @@ Propagating your first orbit
 ****************************
 The core of Tudat is the numerical propagation of orbits. Here, we give a basic introduction to setting up such an orbit simulation by means of an example.
 
-The example is based on the :ref:`Keplerian satellite orbit example </getting-started/examples/tudatpy-examples/propagation/keplerian_satellite_orbit.ipynb>` (available as a Python script in our `examples repo <https://github.com/tudat-team/tudatpy-examples/blob/master/propagation/keplerian_satellite_orbit.py>`_ . The goal is to numerically propagate a (quasi-)massless body (spacecraft) under the attraction of a central point-mass. Under this assumption, only the translational motion of this body is propagated, which follows a Keplerian orbit.
+The example is based on the :ref:`Keplerian satellite orbit example </examples/tudatpy-examples/propagation/keplerian_satellite_orbit.ipynb>` (available as a Python script in our `examples repo <https://github.com/tudat-team/tudatpy-examples/blob/master/propagation/keplerian_satellite_orbit.py>`_ . The goal is to numerically propagate a (quasi-)massless body (spacecraft) under the attraction of a central point-mass. Under this assumption, only the translational motion of this body is propagated, which follows a Keplerian orbit.
 
 
 Setting up the simulation
@@ -459,11 +459,11 @@ You have now successfully propagated a satellite in a Keplerian orbit around the
 
 .. seealso:: 
    For more information on how to set up more complex simulations, have a look at the :ref:`examples <getting_started_examples>`.
-   They include examples on more complex propagations, such as :ref:`including additional perturbation models </getting-started/examples/tudatpy-examples/propagation/perturbed_satellite_orbit.ipynb>` or :ref:`the effect of a thruster </getting-started/examples/tudatpy-examples/propagation/thrust_between_Earth_Moon.ipynb>`.
+   They include examples on more complex propagations, such as :ref:`including additional perturbation models </examples/tudatpy-examples/propagation/perturbed_satellite_orbit.ipynb>` or :ref:`the effect of a thruster </examples/tudatpy-examples/propagation/thrust_between_Earth_Moon.ipynb>`.
 
-   If you are interested in using TudatPy for state estimation, have a look at the example of using TudatPy for :ref:`parameter estimation of Delfi-C3 </getting-started/examples/tudatpy-examples/estimation/full_estimation_example.ipynb>`.
+   If you are interested in using TudatPy for state estimation, have a look at the example of using TudatPy for :ref:`parameter estimation of Delfi-C3 </examples/tudatpy-examples/estimation/full_estimation_example.ipynb>`.
 
-   Last but not least, if you would like to find the optimal Earth-Mars launch window, you might be interested in using TudatPy to :ref:`create Porkchop plots </getting-started/examples/tudatpy-examples/mission_design/earth_mars_transfer_window.ipynb>`.
+   Last but not least, if you would like to find the optimal Earth-Mars launch window, you might be interested in using TudatPy to :ref:`create Porkchop plots </examples/tudatpy-examples/mission_design/earth_mars_transfer_window.ipynb>`.
 
 Navigating the Tudat(Py) ecosystem
 **********************************

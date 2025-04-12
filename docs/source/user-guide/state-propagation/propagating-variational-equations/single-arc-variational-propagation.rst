@@ -28,6 +28,6 @@ The state history, state transition matrices, and sensitivity matrices can then 
         state_transition_matrices = variational_equations_solver.state_transition_matrix_history
         sensitivity_matrices = variational_equations_solver.sensitivity_matrix_history
 
-For a complete example of propagation and usage of the variational equations, please see the tutorial :ref:`Linear sensitivity analysis of perturbed orbit </getting-started/examples/tudatpy-examples/propagation/linear_sensitivity_analysis.ipynb>`.
+For a complete example of propagation and usage of the variational equations, please see the tutorial :ref:`Linear sensitivity analysis of perturbed orbit </examples/tudatpy-examples/propagation/linear_sensitivity_analysis.ipynb>`.
 
 

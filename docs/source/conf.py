@@ -52,11 +52,11 @@ extensions = [
 
 # Specifying thumbnails according to images in _static folder
 nbsphinx_thumbnails = {
-    "getting-started/examples/propagation": "./_static/propagation_example_thumbnail.png",
-    "getting-started/examples/pygmo": "./_static/pygmo_example_thumbnail.png",
-    "getting-started/examples/estimation": "./_static/estimation_example_thumbnail.png",
-    "getting-started/examples/mission_design": "./_static/mission_design_example_thumbnail.png",
-    "getting-started/examples/pygmo/asteroid_orbit_optimization": "./_static/asteroid_example_thumbnail.png",
+    "/examples/propagation": "./_static/propagation_example_thumbnail.png",
+    "/examples/pygmo": "./_static/pygmo_example_thumbnail.png",
+    "/examples/estimation": "./_static/estimation_example_thumbnail.png",
+    "/examples/mission_design": "./_static/mission_design_example_thumbnail.png",
+    "/examples/pygmo/asteroid_orbit_optimization": "./_static/asteroid_example_thumbnail.png",
 }
 
 # Add any paths that contain templates here, relative to this directory.

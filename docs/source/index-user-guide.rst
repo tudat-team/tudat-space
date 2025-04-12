@@ -104,6 +104,6 @@ For more information on how to use TudatPy with other libraries, see the :ref:`o
    :caption: Interface with other libraries
    :hidden:
 
-   /advanced-topics/optimization-pygmo
-   /advanced-topics/parallelization
-   /advanced-topics/post-processing-python
+   /user-guide/advanced-topics/optimization-pygmo
+   /user-guide/advanced-topics/parallelization
+   /user-guide/advanced-topics/post-processing-python

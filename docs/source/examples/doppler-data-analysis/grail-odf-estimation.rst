@@ -2,7 +2,7 @@
 GRAIL - Estimating the spacecraft trajectory from ODF Doppler measurements
 =============================================================================================
 
-.. literalinclude:: /getting-started/examples/tudatpy-examples/estimation/grail_odf_estimation.py
+.. literalinclude:: /examples/tudatpy-examples/estimation/grail_odf_estimation.py
     :language: python
 
 ------
