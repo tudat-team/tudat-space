@@ -1,4 +1,4 @@
 [submodule "docs/source/_src_getting_started/_src_examples/tudatpy-examples"]
-	path = docs/source/_src_getting_started/_src_examples/tudatpy-examples
+	path = docs/source/getting-started/examples/tudatpy-examples
 	url = https://github.com/tudat-team/tudatpy-examples.git
 	branch = master
