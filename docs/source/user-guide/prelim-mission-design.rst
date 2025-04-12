@@ -9,4 +9,4 @@ Different tools are available for preliminary mission design. These are discusse
 .. toctree::
     :maxdepth: 1
 
-    prelim_mission_design/mga_transfer
+    prelim-mission-design/mga-transfer

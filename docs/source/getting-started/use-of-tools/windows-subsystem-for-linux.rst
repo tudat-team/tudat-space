@@ -150,7 +150,7 @@ From there on, you can follow the instructions in the :ref:`Conda primer <gettin
 
     .. code-block:: bash
 
-        wget https://raw.githubusercontent.com/tudat-team/tudat-space/refs/heads/develop/docs/source/_src_getting_started/_static/environment.yaml
+        wget https://raw.githubusercontent.com/tudat-team/tudat-space/refs/heads/develop/docs/source/getting-started/_static/environment.yaml
     
     Create a new Conda environment from the ``environment.yaml`` file:
 
