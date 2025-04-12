@@ -65,13 +65,13 @@ than the input arguments.
             from tudatpy.numerical_simulation import environment_setup, propagation_setup
             from tudatpy.interface import spice
 
-      .. literalinclude:: /_src_snippets/simulation/parallelization/general_bfe_example.py
+      .. literalinclude:: /_snippets/simulation/parallelization/general_bfe_example.py
          :language: python
 
    .. tab-item:: C++
       :sync: cpp
          
-      .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
+      .. literalinclude:: /_snippets/simulation/environment_setup/req_create_bodies.cpp
          :language: cpp
 
 
@@ -128,13 +128,13 @@ the orbit.
             from tudatpy import constants
             from tudatpy.util import result2array
 
-      .. literalinclude:: /_src_snippets/simulation/parallelization/mc_bfe_run.py
+      .. literalinclude:: /_snippets/simulation/parallelization/mc_bfe_run.py
          :language: python
 
    .. tab-item:: C++
       :sync: cpp
          
-      .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
+      .. literalinclude:: /_snippets/simulation/environment_setup/req_create_bodies.cpp
          :language: cpp
 
 The basic BFE structure can be seen above. Below the ``run_dynamics()`` function is shown, which is almost identical to
@@ -170,13 +170,13 @@ manually.
             from tudatpy import constants
             from tudatpy.util import result2array
 
-      .. literalinclude:: /_src_snippets/simulation/parallelization/mc_bfe_dynamics.py
+      .. literalinclude:: /_snippets/simulation/parallelization/mc_bfe_dynamics.py
          :language: python
 
    .. tab-item:: C++
       :sync: cpp
          
-      .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
+      .. literalinclude:: /_snippets/simulation/environment_setup/req_create_bodies.cpp
          :language: cpp
 
 

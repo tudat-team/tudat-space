@@ -243,7 +243,7 @@ swingby nodes equal to the number of GA's, and a capture node.
               from tudatpy.trajectory_design import transfer_trajectory
               import numpy as np
 
-      .. literalinclude:: /_src_snippets/astrodynamics/manual_node_leg_settings.py
+      .. literalinclude:: /_snippets/astrodynamics/manual_node_leg_settings.py
          :language: python
 
 Having created the legs and nodes settings, the same procedure described above for creating the transfer trajectory

@@ -9,17 +9,17 @@ Propagation Setup
    :hidden:
    :maxdepth: 1
 
-   propagation_setup/translational
-   propagation_setup/rotational
-   propagation_setup/mass
-   propagation_setup/multi_type
-   propagation_setup/multi_body
-   propagation_setup/multi_hybrid_arc
-   propagation_setup/processed_propagated_elements
-   propagation_setup/integration_setup
-   propagation_setup/termination_settings
-   propagation_setup/dependent_variables
-   propagation_setup/printing_processing_results
+   propagation-setup/translational
+   propagation-setup/rotational
+   propagation-setup/mass
+   propagation-setup/multi-type
+   propagation-setup/multi-body
+   propagation-setup/multi-hybrid-arc
+   propagation-setup/processed-propagated-elements
+   propagation-setup/integration-setup
+   propagation-setup/termination-settings
+   propagation-setup/dependent-variables
+   propagation-setup/printing-processing-results
    
 
 In this part of the user guide, we will explain the relevant inputs as well as present the different
@@ -43,7 +43,7 @@ Using Tudat, you can propagate different kinds of equations of motion, including
 These equations can be propagated for one or more bodies, and over a single arc or multiple arcs.
 The figure below gives an overview of the inputs that are required to define so-called propagator settings in Tudat
 
-.. figure:: propagation_setup/_static/tudatpy_propagation_settings.png
+.. figure:: propagation-setup/_static/tudatpy_propagation_settings.png
 
 On the left is a list of arguments (some optional) that can be provided
 to the propagator settings, regardless of their type:

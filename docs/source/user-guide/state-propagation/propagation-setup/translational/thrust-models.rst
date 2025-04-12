@@ -124,12 +124,12 @@ A mass rate setting is available in Tudat(Py) to make the loss of mass of the ve
    .. tab-item:: Python
       :sync: python
 
-      .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/thrust_mass_rate.py
+      .. literalinclude:: /_snippets/simulation/propagation_setup/thrust/thrust_mass_rate.py
          :language: python
 
    .. tab-item:: C++
 
-      .. literalinclude:: /_src_snippets/simulation/propagation_setup/thrust/thrust_mass_rate.cpp
+      .. literalinclude:: /_snippets/simulation/propagation_setup/thrust/thrust_mass_rate.cpp
          :language: cpp
 
 More details and options on mass propagation are provided on the :ref:`mass_dynamics` page.

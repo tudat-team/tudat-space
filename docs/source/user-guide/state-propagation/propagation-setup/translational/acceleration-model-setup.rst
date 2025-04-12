@@ -71,7 +71,7 @@ models that compute the accelerations during the propagation.
 
             from tudatpy.numerical_simulation import propagation_setup
 
-      .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/acceleration_example.py
+      .. literalinclude:: /_snippets/simulation/propagation_setup/acceleration_models/acceleration_example.py
           :language: python
 
 When propagating multiple bodies, the same list of settings may be re-used for multiple bodies. Below,
@@ -91,7 +91,7 @@ an example is given for the definition of ``acceleration_settings`` for multiple
 
             from tudatpy.numerical_simulation import propagation_setup
 
-      .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/acceleration_example_multi_vehicle.py
+      .. literalinclude:: /_snippets/simulation/propagation_setup/acceleration_models/acceleration_example_multi_vehicle.py
           :language: python
 
 Alternatively, separate acceleration settings may be defined for separate bodies and then combined into an
@@ -110,7 +110,7 @@ Alternatively, separate acceleration settings may be defined for separate bodies
 
             from tudatpy.numerical_simulation import propagation_setup
 
-      .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/acceleration_example_multi.py
+      .. literalinclude:: /_snippets/simulation/propagation_setup/acceleration_models/acceleration_example_multi.py
           :language: python
 
 

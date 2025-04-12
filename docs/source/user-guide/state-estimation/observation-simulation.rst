@@ -9,7 +9,7 @@ Observation Creation
    :hidden:
    :maxdepth: 1
 
-   observation_simulation/loading_real_data
+   observation-simulation/loading-real-data
 
 Observation Simulation
 ======================

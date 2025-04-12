@@ -93,17 +93,17 @@ For more information on how to use TudatPy with other libraries, see the :ref:`o
    :caption: Tudat(Py) user guide
    :hidden:
 
-   /_src_user_guide/state_propagation
-   /_src_user_guide/state_estimation
-   /_src_user_guide/prelim_mission_design
-   /_src_user_guide/mathematics
+   /user-guide/state-propagation
+   /user-guide/state-estimation
+   /user-guide/prelim-mission-design
+   /user-guide/mathematics
    Mathematical model definition <https://raw.githubusercontent.com/tudat-team/tudat-space/master/Tudat_mathematical_model_definition.pdf>
-   /_src_user_guide/tudatpy_submodules
+   /user-guide/tudatpy-submodules
 
 .. toctree::
    :caption: Interface with other libraries
    :hidden:
 
-   /_src_advanced_topics/optimization_pygmo
-   /_src_advanced_topics/parallelization
-   /_src_advanced_topics/post_processing_python
+   /advanced-topics/optimization-pygmo
+   /advanced-topics/parallelization
+   /advanced-topics/post-processing-python

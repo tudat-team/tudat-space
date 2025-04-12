@@ -9,7 +9,7 @@ Custom models
    :hidden:
    :maxdepth: 1
 
-   custom_models/environment_during_propagation
+   custom-models/environment-during-propagation
 
 When working with a very specific model or application, it often happens that the model you want to use is not implemented in Tudat. Two important examples are:
 
@@ -59,7 +59,7 @@ Here, we show an example of an ephemeris model that will be both faster, and les
    .. tab-item:: Python
       :sync: python
 
-      .. literalinclude:: /_src_snippets/simulation/environment_setup/custom_ephemeris_example.py
+      .. literalinclude:: /_snippets/simulation/environment_setup/custom_ephemeris_example.py
          :language: python
 
  
@@ -78,7 +78,7 @@ Below, a skeleton is given for a custom class for the calculation of the thrust 
    .. tab-item:: Python
       :sync: python
 
-      .. literalinclude:: /_src_snippets/simulation/environment_setup/custom_class_single.py
+      .. literalinclude:: /_snippets/simulation/environment_setup/custom_class_single.py
          :language: python
 
          
@@ -92,7 +92,7 @@ The custom thrust magnitude model can then be used as follows to define the thru
    .. tab-item:: Python
       :sync: python
 
-      .. literalinclude:: /_src_snippets/simulation/environment_setup/custom_thrust_magnitude_example.py
+      .. literalinclude:: /_snippets/simulation/environment_setup/custom_thrust_magnitude_example.py
          :language: python
 
 .. _couple_custom_models:
@@ -108,7 +108,7 @@ Below, a skeleton is given for a custom class for the calculation of both thrust
    .. tab-item:: Python
       :sync: python
 
-      .. literalinclude:: /_src_snippets/simulation/environment_setup/custom_class_multiple.py
+      .. literalinclude:: /_snippets/simulation/environment_setup/custom_class_multiple.py
          :language: python
 
          
@@ -120,7 +120,7 @@ Here, we see a different setup compared to the previous case. There is a single 
    .. tab-item:: Python
       :sync: python
          
-      .. literalinclude:: /_src_snippets/simulation/environment_setup/coupled_thrust_aerodynamics_example.py
+      .. literalinclude:: /_snippets/simulation/environment_setup/coupled_thrust_aerodynamics_example.py
          :language: python
 
 

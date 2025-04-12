@@ -48,5 +48,5 @@ more detailed description of the process that is executed during the propagation
    :titlesonly:
    :maxdepth: 1
 
-   propagating_dynamics/propagation_results
-   propagating_dynamics/propagation_architecture
+   propagating-dynamics/propagation-results
+   propagating-dynamics/propagation-architecture

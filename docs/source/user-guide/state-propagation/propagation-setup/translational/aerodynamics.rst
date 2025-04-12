@@ -95,7 +95,7 @@ A more complicated algorithm to compute the aerodynamic angles may be defined us
    .. tab-item:: Python
     :sync: python
 
-    .. literalinclude:: /_src_snippets/simulation/environment_setup/custom_class_simple_aero_angles.py
+    .. literalinclude:: /_snippets/simulation/environment_setup/custom_class_simple_aero_angles.py
         :language: python
 
 The above example will apply the model :math:`\alpha=\dot{\alpha}(t-t_{0})` (and similar for :math:`\sigma`), so that the angles vary linearly over time.

@@ -24,8 +24,8 @@ There are two distinct input types necessary to create a simulation:
    :hidden:
    :maxdepth: 1
 
-   state_propagation/environment_setup
-   state_propagation/propagation_setup
+   state-propagation/environment-setup
+   state-propagation/propagation-setup
 
 
 Simulation & Output
@@ -43,5 +43,5 @@ about this part, including the interpretation and availability of outputs, are e
    :hidden:
    :maxdepth: 1
 
-   state_propagation/propagating_dynamics
-   state_propagation/propagating_variational_simulation
+   state-propagation/propagating-dynamics
+   state-propagation/propagating-variational-simulation

@@ -9,15 +9,15 @@ Environment Setup
    :hidden:
    :maxdepth: 1
 
-   environment_setup/creation_celestial_body_settings
-   environment_setup/creating_modifying_bodies
-   environment_setup/environment_models
-   environment_setup/default_env_models
-   environment_setup/custom_models
-   environment_setup/frames_in_environment
-   environment_setup/times_and_dates
-   environment_setup/available_state_definitions_conversions
-   environment_setup/environment_architecture
+   environment-setup/creation-celestial-body-settings
+   environment-setup/creating-modifying-bodies
+   environment-setup/environment-models
+   environment-setup/default-env-models
+   environment-setup/custom-models
+   environment-setup/frames-in-environment
+   environment-setup/times-and-dates
+   environment-setup/available-state-definitions-conversions
+   environment-setup/environment-architecture
 
 
 

@@ -28,8 +28,8 @@ A description of how these parameters are to be defined and a comprehensive list
 .. toctree::
     :maxdepth: 3
 
-    propagating_variational_equations/parameter_settings
-    propagating_variational_equations/available_parameters
+    propagating-variational-equations/parameter-settings
+    propagating-variational-equations/available-parameters
 
 
 Performing the Propagation
@@ -41,4 +41,4 @@ For propagation of the system state and variational equations along a single arc
 .. toctree::
   :maxdepth: 1
 
-  propagating_variational_equations/single_arc_variational_propagation
+  propagating-variational-equations/single-arc-variational-propagation

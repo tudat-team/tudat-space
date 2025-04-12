@@ -36,10 +36,10 @@ An example, for the case of a linear interpolator, is shown below:
       .. dropdown:: Required
          :color: muted
 
-         .. literalinclude:: /_src_snippets/math/interpolators/interpolator_import.py
+         .. literalinclude:: /_snippets/math/interpolators/interpolator_import.py
             :language: python
 
-      .. literalinclude:: /_src_snippets/math/interpolators/basic_interpolation.py
+      .. literalinclude:: /_snippets/math/interpolators/basic_interpolation.py
          :language: python
 
 
@@ -87,10 +87,10 @@ the state derivatives :math:`d\mathbf{x}_{i}/dt` at the independent variable val
       .. dropdown:: Required
          :color: muted
 
-         .. literalinclude:: /_src_snippets/math/interpolators/interpolator_import.py
+         .. literalinclude:: /_snippets/math/interpolators/interpolator_import.py
             :language: python
 
-      .. literalinclude:: /_src_snippets/math/interpolators/hermite_interpolation.py
+      .. literalinclude:: /_snippets/math/interpolators/hermite_interpolation.py
          :language: python
 
 Additional settings

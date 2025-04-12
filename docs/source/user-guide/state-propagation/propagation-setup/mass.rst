@@ -53,7 +53,7 @@ required as input, to link the thrust acceleration to the mass rate.
 
             from tudatpy.numerical_simulation import propagation_setup
 
-      .. literalinclude:: /_src_snippets/simulation/propagation_setup/mass_models/from_thrust_mass_rate.py
+      .. literalinclude:: /_snippets/simulation/propagation_setup/mass_models/from_thrust_mass_rate.py
          :language: python
 
 For a full description of available functions, see associated pages of :doc:`mass-rate models <mass_rate>` and :doc:`thrust models <thrust>` in the API documentation. For mass rate models that are not internally associated with thrust (for whatever reason), the user is recommended to use the :func:`~tudatpy.numerical_simulation.propagation_setup.mass_rate.custom_mass_rate` function.
@@ -83,5 +83,5 @@ hours (simulation time).
 
           from tudatpy.numerical_simulation import propagation_setup
 
-    .. literalinclude:: /_src_snippets/simulation/environment_setup/full_mass_setup.py
+    .. literalinclude:: /_snippets/simulation/environment_setup/full_mass_setup.py
         :language: python

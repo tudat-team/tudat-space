@@ -47,10 +47,10 @@ default body settings is given at :ref:`default_env_models`, and can be retrieve
       .. dropdown:: Required
          :color: muted
 
-         .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.py
+         .. literalinclude:: /_snippets/simulation/environment_setup/req_create_bodies.py
             :language: python
 
-      .. literalinclude:: /_src_snippets/simulation/environment_setup/default_bodies.py
+      .. literalinclude:: /_snippets/simulation/environment_setup/default_bodies.py
          :language: python
 
 
@@ -76,10 +76,10 @@ Finally, in case you want to initialize body settings without *any* default sett
       .. dropdown:: Required
          :color: muted
 
-         .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.py
+         .. literalinclude:: /_snippets/simulation/environment_setup/req_create_bodies.py
             :language: python
 
-      .. literalinclude:: /_src_snippets/simulation/environment_setup/body_list_settings_manual.py
+      .. literalinclude:: /_snippets/simulation/environment_setup/body_list_settings_manual.py
          :language: python
 
 where the frame origin and orientation have been defined manually as "Earth" and "J2000", respectively.
@@ -100,12 +100,12 @@ Some bodies do not have any default settings, and in some cases all default sett
       .. dropdown:: Required
          :color: muted
 
-         .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.py
+         .. literalinclude:: /_snippets/simulation/environment_setup/req_create_bodies.py
             :language: python
-         .. literalinclude:: /_src_snippets/simulation/environment_setup/default_bodies.py
+         .. literalinclude:: /_snippets/simulation/environment_setup/default_bodies.py
             :language: python
 
-      .. literalinclude:: /_src_snippets/simulation/environment_setup/add_new_body_settings.py
+      .. literalinclude:: /_snippets/simulation/environment_setup/add_new_body_settings.py
          :language: python
 
 In this example, empty body settings for a body 'Oumuamua' are first added to the ``body_settings`` created previously. When adding such settings, no properties whatsoever are assigned to the body, the body is only given a name. Each environment model setting has to be manually added.
@@ -121,12 +121,12 @@ The above setup is also one that is typically used for artificial bodies, for wh
       .. dropdown:: Required
          :color: muted
 
-         .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.py
+         .. literalinclude:: /_snippets/simulation/environment_setup/req_create_bodies.py
             :language: python
-         .. literalinclude:: /_src_snippets/simulation/environment_setup/default_bodies.py
+         .. literalinclude:: /_snippets/simulation/environment_setup/default_bodies.py
             :language: python
 
-      .. literalinclude:: /_src_snippets/simulation/environment_setup/add_new_vehicle_settings.py
+      .. literalinclude:: /_snippets/simulation/environment_setup/add_new_vehicle_settings.py
          :language: python
 
 In the above code snippet, you may notice that the body mass is set directly as a value (here 500 kg) in the :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings`. This is used as a 'shortcut' for the use of the :func:`~tudatpy.numerical_simulation.environment_setup.rigid_body.constant_rigid_body_properties` and assigning this to the :attr:`~tudatpy.numerical_simulation.environment_setup.BodySettings.rigid_body_settings`.
@@ -165,12 +165,12 @@ Default settings may be overridden as follows:
       .. dropdown:: Required
          :color: muted
 
-         .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.py
+         .. literalinclude:: /_snippets/simulation/environment_setup/req_create_bodies.py
             :language: python
-         .. literalinclude:: /_src_snippets/simulation/environment_setup/default_bodies.py
+         .. literalinclude:: /_snippets/simulation/environment_setup/default_bodies.py
             :language: python
 
-      .. literalinclude:: /_src_snippets/simulation/environment_setup/override_default.py
+      .. literalinclude:: /_snippets/simulation/environment_setup/override_default.py
          :language: python
 
 The above works equally well if the existing environment model settings are empty or the default model is not suitable for the users simulation.
@@ -191,12 +191,12 @@ Parameters of default models may be overridden as follows:
       .. dropdown:: Required
          :color: muted
 
-         .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.py
+         .. literalinclude:: /_snippets/simulation/environment_setup/req_create_bodies.py
             :language: python
-         .. literalinclude:: /_src_snippets/simulation/environment_setup/default_bodies.py
+         .. literalinclude:: /_snippets/simulation/environment_setup/default_bodies.py
             :language: python
 
-      .. literalinclude:: /_src_snippets/simulation/environment_setup/override_default_parameters.py
+      .. literalinclude:: /_snippets/simulation/environment_setup/override_default_parameters.py
          :language: python
 
 Functionally, this example is identical to the previous one, but it permits different kinds of modifications to be made. It allows only a *single* property of the environment model to be modified, while in the previous example, it is required that *all* properties are redefined by the user. The present example therefor allows for more 'fine-grained' control of the settings, but limits the user to a modifying the properties of the settings.
@@ -212,12 +212,12 @@ Below is a slightly more involved example, which does not use a property of the 
       .. dropdown:: Required
          :color: muted
 
-         .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.py
+         .. literalinclude:: /_snippets/simulation/environment_setup/req_create_bodies.py
             :language: python
-         .. literalinclude:: /_src_snippets/simulation/environment_setup/default_bodies.py
+         .. literalinclude:: /_snippets/simulation/environment_setup/default_bodies.py
             :language: python
 
-      .. literalinclude:: /_src_snippets/simulation/environment_setup/override_default_parameters_sh.py
+      .. literalinclude:: /_snippets/simulation/environment_setup/override_default_parameters_sh.py
          :language: python
 
 Here, we extracted, modified, and then reset the :attr:`~tudatpy.numerical_simulation.environment_setup.gravity_field.SphericalHarmonicsGravityFieldSettings.normalized_cosine_coefficients` property of the :class:`~tudatpy.numerical_simulation.environment_setup.gravity_field.SphericalHarmonicsGravityFieldSettings`.
@@ -244,12 +244,12 @@ The example below shows how to create a set of bodies from previously defined bo
       .. dropdown:: Required
          :color: muted
 
-         .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.py
+         .. literalinclude:: /_snippets/simulation/environment_setup/req_create_bodies.py
             :language: python
-         .. literalinclude:: /_src_snippets/simulation/environment_setup/default_bodies.py
+         .. literalinclude:: /_snippets/simulation/environment_setup/default_bodies.py
             :language: python
 
-      .. literalinclude:: /_src_snippets/simulation/environment_setup/create_system_of_bodies.py
+      .. literalinclude:: /_snippets/simulation/environment_setup/create_system_of_bodies.py
          :language: python
 
 

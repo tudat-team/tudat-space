@@ -32,10 +32,10 @@ In addition to the inputs required for state propagation, the following needs to
    :hidden:
    :maxdepth: 1
 
-   state_estimation/link_ends_setup
-   state_estimation/observation_model_setup
-   state_estimation/observation_simulation
-   state_estimation/estimation_settings
+   state-estimation/link-ends-setup
+   state-estimation/observation-model-setup
+   state-estimation/observation-simulation
+   state-estimation/estimation-settings
 
 
 Simulation/Analysis & Output
@@ -48,5 +48,5 @@ Once all the settings are in place, the solution can be generated: the (simulate
    :hidden:
    :maxdepth: 1
 
-   state_estimation/performing_estimation
+   state-estimation/performing-estimation
 

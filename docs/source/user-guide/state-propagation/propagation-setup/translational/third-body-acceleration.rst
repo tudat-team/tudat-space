@@ -68,12 +68,12 @@ acceleration of the Earth:
    .. tab-item:: Python
       :sync: python
 
-      .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/point_mass_gravity.py
+      .. literalinclude:: /_snippets/simulation/propagation_setup/acceleration_models/point_mass_gravity.py
          :language: python
 
    .. tab-item:: C++
 
-      .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/point_mass_gravity.cpp
+      .. literalinclude:: /_snippets/simulation/propagation_setup/acceleration_models/point_mass_gravity.cpp
          :language: cpp
 
 while the following will add the third-body spherical-harmonic acceleration of the Earth (zonal coefficients up to degree 4):
@@ -84,7 +84,7 @@ while the following will add the third-body spherical-harmonic acceleration of t
    .. tab-item:: Python
       :sync: python
 
-      .. literalinclude:: /_src_snippets/simulation/propagation_setup/acceleration_models/spherical_harmonic_gravity_zonal.py
+      .. literalinclude:: /_snippets/simulation/propagation_setup/acceleration_models/spherical_harmonic_gravity_zonal.py
          :language: python
 
 

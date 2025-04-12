@@ -42,14 +42,14 @@ The first step is to add an empty :class:`~tudatpy.numerical_simulation.environm
       .. dropdown:: Required
          :color: muted
 
-         .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.py
+         .. literalinclude:: /_snippets/simulation/environment_setup/req_create_bodies.py
             :language: python
-         .. literalinclude:: /_src_snippets/simulation/environment_setup/default_bodies.py
+         .. literalinclude:: /_snippets/simulation/environment_setup/default_bodies.py
             :language: python
-         .. literalinclude:: /_src_snippets/simulation/environment_setup/create_system_of_bodies.py
+         .. literalinclude:: /_snippets/simulation/environment_setup/create_system_of_bodies.py
             :language: python
 
-      .. literalinclude:: /_src_snippets/simulation/environment_setup/add_body.py
+      .. literalinclude:: /_snippets/simulation/environment_setup/add_body.py
          :language: python
 
 
@@ -79,16 +79,16 @@ Properties can be added to an existing body after the body's creation (with the 
       .. dropdown:: Required
          :color: muted
 
-         .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.py
+         .. literalinclude:: /_snippets/simulation/environment_setup/req_create_bodies.py
             :language: python
-         .. literalinclude:: /_src_snippets/simulation/environment_setup/default_bodies.py
+         .. literalinclude:: /_snippets/simulation/environment_setup/default_bodies.py
             :language: python
-         .. literalinclude:: /_src_snippets/simulation/environment_setup/create_system_of_bodies.py
+         .. literalinclude:: /_snippets/simulation/environment_setup/create_system_of_bodies.py
             :language: python
-         .. literalinclude:: /_src_snippets/simulation/environment_setup/add_body.py
+         .. literalinclude:: /_snippets/simulation/environment_setup/add_body.py
             :language: python
 
-      .. literalinclude:: /_src_snippets/simulation/environment_setup/add_body_properties.py
+      .. literalinclude:: /_snippets/simulation/environment_setup/add_body_properties.py
          :language: python
 
 .. note::

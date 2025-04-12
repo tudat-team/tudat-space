@@ -9,11 +9,11 @@ Translational Dynamics
    :hidden:
    :maxdepth: 1
 
-   translational/acceleration_model_setup
-   translational/available_acceleration_models
-   translational/third_body_acceleration
-   translational/radiation_pressure_acceleration
-   translational/thrust_models
+   translational/acceleration-model-setup
+   translational/available-acceleration-models
+   translational/third-body-acceleration
+   translational/radiation-pressure-acceleration
+   translational/thrust-models
    translational/aerodynamics
 
 Settings to propagate the translational state of a body numerically can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.translational` function. Using these settings to propagate dynamics us described on the page on :ref:`propagating_dynamics`.
@@ -78,6 +78,6 @@ The time and state will be printed on the terminal once every 24 hours.
            from tudatpy.astro import element_conversion
            import numpy as np
 
-     .. literalinclude:: /_src_snippets/simulation/environment_setup/full_translational_setup.py
+     .. literalinclude:: /_snippets/simulation/environment_setup/full_translational_setup.py
         :language: python
 

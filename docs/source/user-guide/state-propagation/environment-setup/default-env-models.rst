@@ -10,7 +10,7 @@ Default environment models
    :hidden:
    :maxdepth: 1
 
-   default_env_models/default_bodies_limited_time_range 
+   default-env-models/default-bodies-limited-time-range 
 
 .. contents:: Content of this page
    :local:

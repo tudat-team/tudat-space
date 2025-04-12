@@ -16,10 +16,10 @@ The regular default body settings use the SPICE toolbox to determine the ephemer
       .. dropdown:: Required
          :color: muted
 
-         .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.py
+         .. literalinclude:: /_snippets/simulation/environment_setup/req_create_bodies.py
             :language: python
 
-      .. literalinclude:: /_src_snippets/simulation/environment_setup/default_bodies_time_interval.py
+      .. literalinclude:: /_snippets/simulation/environment_setup/default_bodies_time_interval.py
          :language: python
 
 The difference w.r.t. the :ref:`regular creation <creation_celestial_body_settings>` of default body settings being the use of the :func:`~tudatpy.numerical_simulation.environment_setup.get_default_body_settings_time_limited` function (instead of :func:`~tudatpy.numerical_simulation.environment_setup.get_default_body_settings`). What is done when using this alternative setup:

@@ -13,17 +13,17 @@ This section contains all the information for new users, including a quickstart 
 .. toctree::
    :hidden:
 
-   /_src_getting_started/quickstart
-   /_src_getting_started/installation
-   /_src_getting_started/faq
-   /_src_getting_started/using_source
+   /getting-started/quickstart
+   /getting-started/installation
+   /getting-started/faq
+   /getting-started/using-source
 
 .. toctree::
    :caption: Primer for coding tools
    :hidden:
 
-   /_src_getting_started/_src_use_of_tools/conda
-   /_src_getting_started/_src_use_of_tools/python
-   /_src_getting_started/_src_use_of_tools/github
-   /_src_getting_started/_src_use_of_tools/setup_dev_environment
-   /_src_getting_started/_src_use_of_tools/windows_subsystem_for_linux
+   /getting-started/use-of-tools/conda
+   /getting-started/use-of-tools/python
+   /getting-started/use-of-tools/github
+   /getting-started/use-of-tools/setup-dev-environment
+   /getting-started/use-of-tools/windows-subsystem-for-linux

@@ -8,7 +8,7 @@ Observation Model Setup
    :hidden:
    :maxdepth: 1
 
-   observation_model_setup/observation_models
+   observation-model-setup/observation-models
 
 Having defined the :ref:`link ends <linkEndSetup>`, you can now define and create the observation models. Below the general workflow for this is discussed. The observation models can play two roles in Tudat:
 

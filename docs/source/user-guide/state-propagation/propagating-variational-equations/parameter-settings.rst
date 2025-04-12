@@ -24,7 +24,7 @@ When only wishing to propagate the state transition matrix :math:`\Phi(t,t_{0})`
    .. tab-item:: Python
       :sync: python
 
-      .. literalinclude:: /_src_snippets/simulation/sensitivity_analysis/state_only_parameters.py
+      .. literalinclude:: /_snippets/simulation/sensitivity_analysis/state_only_parameters.py
          :language: python
 
 which defines the initial state parameters to be fully consistent with the settings in the `propagator_settings`. 
@@ -39,7 +39,7 @@ When wishing to propagate the sensitivity matrix :math:`S(t)` (or depending on y
    .. tab-item:: Python
       :sync: python
 
-      .. literalinclude:: /_src_snippets/simulation/sensitivity_analysis/full_parameter_settings.py
+      .. literalinclude:: /_snippets/simulation/sensitivity_analysis/full_parameter_settings.py
          :language: python
 	
          

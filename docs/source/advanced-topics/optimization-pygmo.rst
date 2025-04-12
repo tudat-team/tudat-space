@@ -334,13 +334,13 @@ processes that can be used.
             from tudatpy import constants
             from tudatpy.numerical_simulation import environment_setup
 
-      .. literalinclude:: /_src_snippets/simulation/parallelization/pygmo_batch_fitness.py
+      .. literalinclude:: /_snippets/simulation/parallelization/pygmo_batch_fitness.py
          :language: python
 
    .. tab-item:: C++
       :sync: cpp
          
-      .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
+      .. literalinclude:: /_snippets/simulation/environment_setup/req_create_bodies.cpp
          :language: cpp
 
 Now that we have the ``batch_fitness()`` method defined, it must be called during the optimisation, which leads us to the
@@ -375,13 +375,13 @@ this is not considered here.
                 from tudatpy import constants
                 from tudatpy.numerical_simulation import environment_setup
 
-      .. literalinclude:: /_src_snippets/simulation/parallelization/pg_bfe_evolve.py
+      .. literalinclude:: /_snippets/simulation/parallelization/pg_bfe_evolve.py
          :language: python
 
    .. tab-item:: C++
       :sync: cpp
          
-      .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
+      .. literalinclude:: /_snippets/simulation/environment_setup/req_create_bodies.cpp
          :language: cpp
 
 
@@ -467,11 +467,11 @@ for any topology to exchange individuals.
             from tudatpy import constants
             from tudatpy.numerical_simulation import environment_setup
 
-      .. literalinclude:: /_src_snippets/simulation/parallelization/pg_archi.py
+      .. literalinclude:: /_snippets/simulation/parallelization/pg_archi.py
          :language: python
 
    .. tab-item:: C++
       :sync: cpp
          
-      .. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.cpp
+      .. literalinclude:: /_snippets/simulation/environment_setup/req_create_bodies.cpp
          :language: cpp

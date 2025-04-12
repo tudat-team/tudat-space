@@ -17,12 +17,12 @@ To define multi-type propagator settings, you must first define the propagator s
       .. dropdown:: Required
          :color: muted
 
-         .. literalinclude:: /_src_snippets/simulation/environment_setup/full_translational_setup.py
-         .. literalinclude:: /_src_snippets/simulation/environment_setup/full_rotational_setup.py
-         .. literalinclude:: /_src_snippets/simulation/environment_setup/full_mass_setup.py
+         .. literalinclude:: /_snippets/simulation/environment_setup/full_translational_setup.py
+         .. literalinclude:: /_snippets/simulation/environment_setup/full_rotational_setup.py
+         .. literalinclude:: /_snippets/simulation/environment_setup/full_mass_setup.py
             :language: python
 
-      .. literalinclude:: /_src_snippets/simulation/environment_setup/full_multitype_setup.py
+      .. literalinclude:: /_snippets/simulation/environment_setup/full_multitype_setup.py
          :language: python
 
 This example (note the collapsed combined code for the translational, rotational, and mass dynamics examples) shows the use of the translational, rotational and mass dynamics of a single body ``Spacecraft``. However, the framework is not limited to propagating the different types of dynamics for only one body. You may for instance propagate the translational state and mass of a spacecraft concurrently with the rotational state of the Earth. Also, you may propagate any number of any type of dynamics of any body, e.g. translational dynamics of 6 bodies, rotational dynamics of 4 bodies and mass of 2 bodies, where these three sets of bodies may but need not fully or partially overlap.

@@ -39,7 +39,7 @@ you are using the bodies in your simulations.**
 .. dropdown:: Required
 	:color: muted
 
-	.. literalinclude:: /_src_snippets/simulation/environment_setup/req_create_bodies.py
+	.. literalinclude:: /_snippets/simulation/environment_setup/req_create_bodies.py
 		:language: python
 
 .. code-block:: python
