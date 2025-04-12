@@ -89,7 +89,7 @@ Batch Fitness Evaluation for Monte-Carlo analysis
 
 In this section, the basic structure is presented that can allow for a simple, parallel Monte-Carlo analysis of any
 problem. An astrodynamics example is used for obvious reasons: the :ref:`Kepler satellite orbit
-</_src_getting_started/_src_examples/tudatpy-examples/propagation/keplerian_satellite_orbit.ipynb>`. Using
+</getting-started/examples/tudatpy-examples/propagation/keplerian_satellite_orbit.ipynb>`. Using
 this, we can change any parameter, let the Monte-Carlo simulations run in parallel, and enjoy the power.
 
 BFE Monte Carlo code structure
@@ -139,7 +139,7 @@ the orbit.
 
 The basic BFE structure can be seen above. Below the ``run_dynamics()`` function is shown, which is almost identical to
 code from the :ref:`Kepler satellite orbit
-</_src_getting_started/_src_examples/tudatpy-examples/propagation/keplerian_satellite_orbit.ipynb>`, with the small
+</getting-started/examples/tudatpy-examples/propagation/keplerian_satellite_orbit.ipynb>`, with the small
 adjustment that the initial state definition is given by the input arguments to the function rather than defined
 manually.
 

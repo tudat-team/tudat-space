@@ -61,8 +61,8 @@ We also have the following examples that showcase the reading of, and estimation
 
 .. toctree::
 
-  doppler-data-analysis/mro_residuals_analysis
-  doppler-data-analysis/grail_odf_estimation
-  doppler-data-analysis/grail_residuals
-  doppler-data-analysis/grail_spice_fit
+  doppler-data-analysis/mro-residuals-analysis
+  doppler-data-analysis/grail-odf-estimation
+  doppler-data-analysis/grail-residuals
+  doppler-data-analysis/grail-spice-fit
  

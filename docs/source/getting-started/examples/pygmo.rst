@@ -16,4 +16,4 @@ Below, a number of examples of Tudat applications used the Pygmo optimization to
 .. nbgallery::
 
   ./tudatpy-examples/pygmo/himmelblau_minimization.ipynb
-  ./pygmo/asteroid_orbit_optimization.rst
+  ./pygmo/asteroid-orbit-optimization.rst

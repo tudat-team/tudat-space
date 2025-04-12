@@ -294,7 +294,7 @@ Multi-threading with Batch Fitness Evaluation
 Multi-threading in PyGMO is used with BFE; simply evaluating some fitness function in a batch, similar to the example
 explained above. For this, PyGMO has classes and methods to help setup a multi-threaded optimization. For this section,
 code snippets are shown below from :ref:`the hodographic shaping MGA trajectory example
-</_src_getting_started/_src_examples/tudatpy-examples/mission_design/hodographic_shaping_mga_optimization.ipynb>` and adapted
+</getting-started/examples/tudatpy-examples/mission_design/hodographic_shaping_mga_optimization.ipynb>` and adapted
 to showcase the parallel capabilities. You can either define your own User-Defined Batch Fitness Evaluator (UDBFE),
 explained on the `pygmo documentation <https://esa.github.io/pygmo2/bfe.html>`_, or use the ``batch_fitness()`` method.
 Here, the latter is explained and used as this follows more naturally from `1. Creation of the UDP class`_ above. A
@@ -434,7 +434,7 @@ archipelago. By default, the topology is the ``pygmo.unconnected`` type, which h
 parallel evolution.
 
 In the code snippet below, inspired by :ref:`the hodographic shaping MGA trajectory example
-</_src_getting_started/_src_examples/tudatpy-examples/mission_design/hodographic_shaping_mga_optimization.ipynb>` but
+</getting-started/examples/tudatpy-examples/mission_design/hodographic_shaping_mga_optimization.ipynb>` but
 parallelized with an archipelago, a group of islands evolve in parallel. Specifically, a ``pygmo.archipelago`` object is
 created that initializes a ``number_of_islands`` number of ``pygmo.island`` objects using the provided ``algo``,
 ``prob``, and ``pop_size`` arguments. ``pygmo.archipelago`` then has an ``evolve()`` method that in turn calls the
