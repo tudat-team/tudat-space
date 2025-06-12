@@ -19,4 +19,5 @@ dependencies:
   - pip
   - pip:
     - astroquery>=0.4.8.dev9306
+    - git+https://github.com/NASA-PDS/PyTrk234.git
 
