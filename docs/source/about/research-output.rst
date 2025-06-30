@@ -8,7 +8,7 @@ Tudat has also been used extensively in research projects. Many of those that re
 
 **Journal publications**
 
-- `Constraining the ephemeris and interior structure of Io using space-based astrometry by JUICE <https://www.sciencedirect.com/science/article/pii/S0032063325000790>` Zenk, K., Dirkx, D., & Fayolle, S. (2025).  Planetary and Space Science, 261, 106112.
+- `Constraining the ephemeris and interior structure of Io using space-based astrometry by JUICE <https://www.sciencedirect.com/science/article/pii/S0032063325000790>`_ Zenk, K., Dirkx, D., & Fayolle, S. (2025).  Planetary and Space Science, 261, 106112.
 - `Neural combinatorial optimization for multi-rendezvous mission design <https://www.sciencedirect.com/science/article/pii/S0273117725002893>`_. Rivera, A. L., & Naeije, M. (2025).  Advances in Space Research (in press).
 - `Dynamical Modelling of NASA's ACS3 Solar Sail Mission <https://www.sciencedirect.com/science/article/pii/S1270963825002172>`_ Minervino Amodio, A., Visser, P., & Heiligers, J. (2025).  Aerospace Science and Technology, 110146.
 - `Simulation of the Tianwen-4 Mission Contribution to Jupiter Gravity Field Improvement <https://iopscience.iop.org/article/10.3847/1538-4357/adb1e8/meta>`_ Afzal, Z., Yan, J., Dirkx, D., Huang, Y., Wang, Z., Haider, Z., & Barriot, J. P. (2025).    The Astrophysical Journal, 981(2), 163.
