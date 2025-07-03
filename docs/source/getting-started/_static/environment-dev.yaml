@@ -1,0 +1,23 @@
+name: tudat-space-dev
+channels:
+  - conda-forge
+  - tudat-team/label/dev
+  - tudat-team
+dependencies:
+  - python=3.11
+  - tudatpy
+  - matplotlib=3.9.2
+  - notebook
+  - scipy
+  - pandas
+  - astropy
+  - tqdm
+  - astropy-healpix
+  - spiceypy # for automatic data downloader and kernel converter
+  - tabulate
+  - colorama
+  - numpy<2.0.0
+  - pip
+  - pip:
+      - astroquery>=0.4.8.dev9306
+      - git+https://github.com/NASA-PDS/PyTrk234.git
