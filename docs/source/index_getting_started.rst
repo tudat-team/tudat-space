@@ -17,6 +17,7 @@ This section contains all the information for new users, including a quickstart 
    /_src_getting_started/installation
    /_src_getting_started/faq
    /_src_getting_started/using_source
+   /_src_getting_started/project_setup
 
 .. toctree::
    :caption: Primer for coding tools

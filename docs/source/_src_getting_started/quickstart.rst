@@ -479,6 +479,7 @@ This website is complemented by the `API documentation <https://py.api.tudat.spa
 As mentioned before, Tudat(Py) is completely open source and welcomes contributions.
 The source code is hosted on `GitHub <https://github.com/tudat-team>`_.
 For more information on how to contribute to Tudat, have a look at the :ref:`contribute_to_tudat` page.
+A more detailed overview of our different repositories, packages and workflows can be found on our page for :ref:`tudat_ecosystem`
 
 Good luck with your Tudat(Py) journey!
 We are excited to hear what you will create using Tudat(Py).

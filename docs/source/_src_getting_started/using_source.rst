@@ -20,6 +20,9 @@ For normal/simple applications, a user will not need to view or interact directl
 
 The Tudat sources code is hosted on Github, in a number of repositories, which can be found here: `https://github.com/tudat-team/ <https://github.com/tudat-team/>`_. To build both tudat and tudatpy, while installing all dependencies for the installation with a single conda environment, we have created the 'tudat-bundle' repository: `https://github.com/tudat-team/tudat-bundle <https://github.com/tudat-team/tudat-bundle>`_.
 
+.. note::
+We will soon merge the tudat, tudatpy and tudat-bundle repositories into a single repository to simply the workflow for both developers and our automated processes.
+
 If you only want to view and navigate through the source code, but not compile it, you only need to go through the README of this repository up to step 4. To also compile Tudat and create your own Tudatpy kernel, go through the entire README. We've created a video (TODO VIDEO) to showcase how to use an IDE (in this case CLion) to navigate through the code, starting from the Python exposure of a Tudatpy function that you would normally use.
 
 The tudat-bundle itself is rarely modified, but instead includes the repositories that hold the actual Tudat code (as submodules). The following two repositories (which are inside tudat-bundle) is where the source code is housed, and can be modified:
