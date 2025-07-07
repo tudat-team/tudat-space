@@ -16,6 +16,7 @@ This section contains all the information for new users, including a quickstart 
    /getting-started/quickstart
    /getting-started/installation
    /getting-started/faq
+   /getting_started/project_setup
    /getting-started/using-source
 
 .. toctree::
