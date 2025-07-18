@@ -87,14 +87,29 @@ The conversion between UTC and UT1 (the latter of which is used directly to comp
 
 Formally, the conversion from TT to TDB (and therefore also UTC to TDB) depends on the geocentric position at which the time in TT/UTC is registered. This effect is very small, with the largest effect a daily periodic variation on the order of several microseconds.
 
+Internal representation of time
+===============================
 
+The :class:`~tudatpy.astro.time_conversion.DateTime` class described above is used for converting between typical representations of time and a single numerical epoch. It is not used as the representation of time in the propagation, simulation of obsevations *etc.* For this, we have a dedicated :class:`~tudatpy.astro.time_conversion.Time` class. This class provides a numerical representation of time (both epochs and intervals) with a better resolution that what is provided by a simple ``float``. Using a ``float``, we can represent time over a period of 100 years with a resolution of a microsecond. For many applications, this is insufficient, since it also means that the representation of time intervals (from the subtraction of two epochs) is limited to the same resolution. The :class:`~tudatpy.astro.time_conversion.Time` class provides a two-component representation of time (integer hours since J2000, and number of seconds into the current hour). This provides sub-picosecond resolution of time over essentially arbitrary time intervals.
 
-High-resolution Time representation
-===================================
+Unlike the :class:`~tudatpy.astro.time_conversion.DateTime` class, the :class:`~tudatpy.astro.time_conversion.Time` class supports arithmetic operations, so that it can be used to represent an epoch (with the 0 value defined as J2000) or a time interval. It can also be down-converted to a ``float`` to be used, and conversely be created from a ``float``. The ``Time`` class is implemented in C++, and using pybind11's functionality, it can be implicitly coverted to/from a ``float``. This means that any function that takes a ``float`` as input can take a ``Time`` as input (and vice versa). For instance, the following code (to create translational state propagator settings)
 
-In addition to the :class:`~tudatpy.astro.time_conversion.DateTime` class described above, Tudat has a ``Time`` class that allows time representation to be provided to about femtoseconds (``long double`` resolution for seconds in the current hour; which for most C++ compilers translates into a resolution of :math:`10^{-19}/3600`) resolution. Unlike the :class:`~tudatpy.astro.time_conversion.DateTime` class, the ``Time`` class supports arithmetic operations, so that it can be used to represent an epoch (with the 0 value defined as J2000) or a time interval. Tudat can be compiled such that it uses this ``Time`` class rather than a ``float`` as an independent variable of propagation, reference time for an observation, etc. However, this requires a recompilation of Tudat, and the present conda packages are not compiled with this option on (to enable this functionality in your own build, modify the definition of the ``TIME_TYPE`` macro in tudatpy).
+.. code-block:: python
 
+    # Define translational propagator settings
+    translational_propagator_settings = propagation_setup.propagator.translational(
+        central_bodies,
+        acceleration_models,
+        bodies_to_propagate,
+        initial_state,
+        simulation_start_epoch,
+        integrator_settings,
+        termination_settings )
+    ]
 
+can be called with ``simulation_start_epoch`` being an object of type ``Time`` (as is technically required by :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.translational`), but also using a ``float`` as input. In the latter case, it will be automatically converted to a ``Time`` object. Although this would provide the initial time a the lower resolution provided by ``float``, it will ensure that all subsequent operations are performed at high numerical resolution. Therefore, by default the time representation there is a ``float``.
+
+Although internal operations in propagation, *etc.* will be done at high resolution time representation, typical post-processing and analysis of results does not require such resolution. Moreover, using a ``float`` as time representation is easier for plotting, interacting with other libraries and data structures, *etc.* Therefore, the default time representation in output data is a ``float``. For instance, the type of the propagation state history in :attr:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults.state_history` is a ``dict[float, np.ndarray]``, where it must be stresses that this is down-converted from the internal representation that uses ``Time`` as independent variable. For users requiring the high-precision time representation as output, the :attr:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults.state_history_time_object` is available. A similar structure (functions seemingly duplicated, with one having the ``_time_object`` suffix) can be found in a number of places, which is provided to allow (i) easy interation with output data in ``float`` representation (ii) full resolution data using ``Time`` when users require it.
 
 
 
