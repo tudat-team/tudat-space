@@ -5,7 +5,7 @@ Acceleration Model Setup
 ========================
 
 Acceleration models can be created through the factory function
-:func:`~tudatpy.numerical_simulation.propagation_setup.create_acceleration_models`.
+:func:`~tudatpy.dynamics.propagation_setup.create_acceleration_models`.
 
 How to select accelerations
 ============================
@@ -24,11 +24,11 @@ These settings are defined via factory functions for each acceleration in the si
 
 For a single body, the user-specified settings are organized in nested dictionaries ``dict[str,dict[str,list[AccelerationSettings]]]``,
 with the first ``str`` denoting the body undergoing acceleration, the second ``str`` denoting the body exerting the acceleration, and the
-list of :class:`~tudatpy.numerical_simulation.propagation_setup.acceleration.AccelerationSettings` objects is created using the functions in the
+list of :class:`~tudatpy.dynamics.propagation_setup.acceleration.AccelerationSettings` objects is created using the functions in the
 :doc:`acceleration` module.
 
 This nested dictionary will be supplied to the
-:func:`~tudatpy.numerical_simulation.propagation_setup.create_acceleration_models` function to create the
+:func:`~tudatpy.dynamics.propagation_setup.create_acceleration_models` function to create the
 acceleration models. This is illustrated in the example below.
 
 Example
@@ -53,7 +53,7 @@ The variable ``accelerations_settings_vehicle`` denotes the list of bodies exert
 accelerations, while the variable ``acceleration_settings`` associates this list with the body undergoing the
 acceleration.
 The
-function :func:`~tudatpy.numerical_simulation.propagation_setup.create_acceleration_models` creates the list of
+function :func:`~tudatpy.dynamics.propagation_setup.create_acceleration_models` creates the list of
 models that compute the accelerations during the propagation.
 
 
@@ -69,7 +69,7 @@ models that compute the accelerations during the propagation.
 
         .. code-block:: python
 
-            from tudatpy.numerical_simulation import propagation_setup
+            from tudatpy.dynamics import propagation_setup
 
       .. literalinclude:: /_snippets/simulation/propagation_setup/acceleration_models/acceleration_example.py
           :language: python
@@ -89,7 +89,7 @@ an example is given for the definition of ``acceleration_settings`` for multiple
 
         .. code-block:: python
 
-            from tudatpy.numerical_simulation import propagation_setup
+            from tudatpy.dynamics import propagation_setup
 
       .. literalinclude:: /_snippets/simulation/propagation_setup/acceleration_models/acceleration_example_multi_vehicle.py
           :language: python
@@ -108,7 +108,7 @@ Alternatively, separate acceleration settings may be defined for separate bodies
 
         .. code-block:: python
 
-            from tudatpy.numerical_simulation import propagation_setup
+            from tudatpy.dynamics import propagation_setup
 
       .. literalinclude:: /_snippets/simulation/propagation_setup/acceleration_models/acceleration_example_multi.py
           :language: python

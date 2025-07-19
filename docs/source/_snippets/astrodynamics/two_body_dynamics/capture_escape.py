@@ -4,7 +4,7 @@ import spiceypy as spice
 import os
 
 # required internal imports
-from tudatpy.kernel import io
+from tudatpy import io
 from tudatpy.astro import two_body_dynamics
 from tudatpy.interface import spice
 

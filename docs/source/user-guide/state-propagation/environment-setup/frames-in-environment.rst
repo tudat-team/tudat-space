@@ -8,7 +8,7 @@ Frames in the Environment
 In any state propagation tool, the careful use of reference frames is essential: small mistakes in definitions and conventions
 are a notorious source of errors in simulations. The environment and state propagation framework in Tudat handles all the
 relevant state translations/rotations/transformations. On this page, we describe various manners in which reference frames
-are used in the environment Tudat, in particular in the :class:`~tudatpy.numerical_simulation.environment.Body` objects (which
+are used in the environment Tudat, in particular in the :class:`~tudatpy.dynamics.environment.Body` objects (which
 constitute the environment). In addition, we highlight what the differences are when extracting a state from different places in Tudat.
 This page is limited mainly in the manner that Tudat *automatically* deals with various different frames. A comprehensive list of
 all available frames that are available to the user can be found :ref:`here <manual_state_definitions>`.
@@ -50,18 +50,18 @@ function :math:`\mathbf{f}(\mathbf{x},t)` (see :ref:`single_propagation_evaluati
 
 ..
   This update
-  step ensures that each Body object (see :class:`~tudatpy.numerical_simulation.environment.Body`) has all time/state
+  step ensures that each Body object (see :class:`~tudatpy.dynamics.environment.Body`) has all time/state
   dependent properties updated before any calculations of the state derivative are performed. Once this update step is
   performed, each body relevant for the simulation will have their current translational state computed and set. 
 
 Even when propagating the dynamics using a non-Cartesian propagator, for instance Keplerian elements,
-(see :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.TranslationalPropagatorType`
+(see :class:`~tudatpy.dynamics.propagation_setup.propagator.TranslationalPropagatorType`
 for full list of options), the translational state of a body is *always* set as its Cartesian state,
 with any relevant element conversions performed automatically. The Cartesian state may extracted from one
 of two places when the body is updated:
 
 *  **State vector**: if the translational state of body :math:`A` is among the states that is numerically propagated, these elements will be extracted from the full state, and any relevant frame and elements conversions performed to define the current state of the body :math:`A`
-*  **Ephemeris of a body**: if the translational state of a body is required for a simulation, and this body is *not* numerically propagated, its state is retrieved from this body's ephemeris (see :class:`~tudatpy.numerical_simulation.environment.Ephemeris`).
+*  **Ephemeris of a body**: if the translational state of a body is required for a simulation, and this body is *not* numerically propagated, its state is retrieved from this body's ephemeris (see :class:`~tudatpy.dynamics.environment.Ephemeris`).
 
 .. _translational_frame_origins:
 
@@ -116,7 +116,7 @@ When :ref:`creating a set of body objects<creation_celestial_body_settings>`, yo
 When a body's state gets updated (see :ref:`propagation architecture page <single_propagator_time_step>`, regardless of whether it is retrieved
 from the propagated state vector, or an ephemeris, it is *always*
 converted to this global frame origin/orientation before being assigned to a body object.
-Consequently, any time that a state is retrieved directly from a body object during the propagation using the :attr:`~tudatpy.numerical_simulation.environment.Body.state`
+Consequently, any time that a state is retrieved directly from a body object during the propagation using the :attr:`~tudatpy.dynamics.environment.Body.state`
 function (as described :ref:`here <translational_state_during_propagation>`), it will *always* be defined in this global frame.
 
 The global frame is the same for each body in a simulation. All used for calculations of the state derivative are in this global frame.

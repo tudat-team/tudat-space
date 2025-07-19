@@ -65,7 +65,7 @@ def run_dynamics(arg_1, arg_2, spice=spice.load_standard_kernels()):
     )
 
     # Create simulation object and propagate the dynamics
-    dynamics_simulator = numerical_simulation.create_dynamics_simulator(
+    dynamics_simulator = dynamics.simulator.create_dynamics_simulator(
         bodies, propagator_settings
     )
 

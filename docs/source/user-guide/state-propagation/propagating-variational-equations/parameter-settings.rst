@@ -45,4 +45,4 @@ When wishing to propagate the sensitivity matrix :math:`S(t)` (or depending on y
          
 In the snippet above, parameters are created to estimate the initial states in the `propagator_settings` (presumably Delfi-C3 initial translational states), the gravitational parameter of the Earth, the constant drag and the radiation pressure coefficient of Delfi-C3.
 
-For the full list of available parameters, see :ref:`parameterSettingCreation`.
+For the full list of available parameters, see the :mod:`parameter_setup` page of the API documentation

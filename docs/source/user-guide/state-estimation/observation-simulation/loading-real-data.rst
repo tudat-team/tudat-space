@@ -20,7 +20,7 @@ Subsequently, the data in the object can be filtered by:
 * Removing data from a given set of observatories
 * Retaining *only* data that falls in a given time span
 
-Then, the :class:`~tudatpy.data.mpc.BatchMPC` object can be used to create an :class:`~tudatpy.numerical_simulation.estimation.ObservationCollection` that
+Then, the :class:`~tudatpy.data.mpc.BatchMPC` object can be used to create an :class:`~tudatpy.estimation.observations.ObservationCollection` that
 contains all remaining data, using the :meth:`~tudatpy.data.mpc.BatchMPC.to_tudat` method. Note that, in the conversion to a Tudat-compatible data set,
 one has the option to filter any and all space observatories (e.g. WISE, Hubble).
 
@@ -83,9 +83,9 @@ steps:
   * All observation times are converted to TDB
 
 * The properties of the ground stations (ramp tables) are taken from the :class:`~data.odf.ProcessedOdfFileContents` object and set in the environment using the :func:`~data.odf.set_odf_information_in_bodies` function
-* Convert the :class:`~data.odf.ProcessedOdfFileContents` to an object of type :class:`~tudatpy.numerical_simulation.estimation.ObservationCollection`, which can be used in the estimation
+* Convert the :class:`~data.odf.ProcessedOdfFileContents` to an object of type :class:`~tudatpy.estimation.observations.ObservationCollection`, which can be used in the estimation
 
-To further use the :class:`~tudatpy.numerical_simulation.estimation.ObservationCollection`
+To further use the :class:`~tudatpy.estimation.observations.ObservationCollection`
 
 Pseudo-observations from External Ephemerides
 =============================================
@@ -105,15 +105,15 @@ The source of the Cartesian positions is up to the user, but typical sources are
 The Galilean moon state estimation example on :ref:`this page <estimation_using_pseudo_observations>` gives a good examples of the full procedure that can be used
 for this, where the states are (in this case) extracted from SPICE kernels.
 
-In Tudat Cartesian position (pseudo-)observations are processed using the :func:`~tudatpy.numerical_simulation.estimation_setup.observation.relative_cartesian_position`
-observation model. In addition to creating the :class:`~tudatpy.numerical_simulation.estimation.ObservationCollection`
+In Tudat Cartesian position (pseudo-)observations are processed using the :func:`~tudatpy.estimation.observable_models_setup.model_settings.relative_cartesian_position`
+observation model. In addition to creating the :class:`~tudatpy.estimation.observations.ObservationCollection`
 manually from external data, we provide a function of convenience to generate such pseudo-observations, using the following procedure:
 
-* Create the body for which the pseudo-observations are to be generated in your environment, using the :doc:`ephemeris` tudatpy module. Note that the :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.tabulated_from_existing` option can be used to turn any ephemeris settings into tabulated ephemeris settings (which is required if using the same bodies in the estimation).
-* Generate relative position observations (and associated observation model settings) using the :func:`~tudatpy.numerical_simulation.estimation.create_pseudo_observations_and_models`
+* Create the body for which the pseudo-observations are to be generated in your environment, using the :doc:`ephemeris` tudatpy module. Note that the :func:`~tudatpy.dynamics.environment_setup.ephemeris.tabulated_from_existing` option can be used to turn any ephemeris settings into tabulated ephemeris settings (which is required if using the same bodies in the estimation).
+* Generate relative position observations (and associated observation model settings) using the :func:`~tudatpy.estimation.observations_setup.observations_wrapper.create_pseudo_observations_and_models`
 
-The latter function provides both the observations (as an :class:`~tudatpy.numerical_simulation.estimation.ObservationCollection`),
-and a list of :class:`~tudatpy.numerical_simulation.estimation_setup.observation.ObservationSettings` to be used
+The latter function provides both the observations (as an :class:`~tudatpy.estimation.observations.ObservationCollection`),
+and a list of :class:`~tudatpy.estimation.observable_models_setup.model_settings.ObservationSettings` to be used
 for simulating the observables. The combination of these two can be used directly for the subsequent steps
 of defining estimation settings and performing the estimation.
 

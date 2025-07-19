@@ -12,7 +12,7 @@ Top-level submodules
 
 The top-level submodules of tudatpy are:
 
-* :doc:`tudatpy.numerical_simulation <numerical_simulation>`: This submodule contains the interfaces for the primary application of Tudatpy: numerical state propagation and estimation. The functionality in this submodule consists of a large number of interconnected elements that work together as a whole. The usability of separate functions/classes in this submodule *outside* of the Tudatpy framework is very limited, and this functionality is typically only used within a Tudatpy numerical simulation. Its further subdivision into submodules is discussed in more detail below.
+* :doc:`tudatpy.dynamics <numerical_simulation>`: This submodule contains the interfaces for the primary application of Tudatpy: numerical state propagation and estimation. The functionality in this submodule consists of a large number of interconnected elements that work together as a whole. The usability of separate functions/classes in this submodule *outside* of the Tudatpy framework is very limited, and this functionality is typically only used within a Tudatpy numerical simulation. Its further subdivision into submodules is discussed in more detail below.
 * :doc:`tudatpy.astro <astro>`: This submodule contains various (semi-)standalone functions for astrodynamics applications, which can be used very well outside of a Tudat application/propagation. Submodules contain lists of frame conversions, element conversion, elementary orbit calculations, *etc.*.
 * :doc:`tudatpy.trajectory_design <trajectory_design>`: This submodule contains functionality for the preliminary design of a full (transfer) orbit, using for instance a Multiple Gravity Assist (MGA) or a low-thrust system. It relies on functionality in the ``astro`` submodule. It is largely independent of the ``numerical_simulation`` submodule, but does contain interface functions to allow the preliminary design to be used as an initial guess for a full numerical propagation.
 * :doc:`tudatpy.math <math>`:  This submodule contains various functions and classes for purely mathematical operations, such as numerical interpolation, *etc.*.
@@ -26,8 +26,8 @@ The numerical_simulation submodules
 
 This submodule contains the bulk of the functionality in Tudat, and is subdivided into six submodules, two for functionality related to the environment, propagation and estimation:
 
-* :doc:`tudatpy.numerical_simulation.environment_setup <environment_setup>`/ :doc:`tudatpy.numerical_simulation.environment <environment>`: Functionality related to the physical environment (properties of natural and celestial bodies)
-* :doc:`tudatpy.numerical_simulation.propagation_setup <propagation_setup>`/ :doc:`tudatpy.numerical_simulation.propagation <propagation>`: Functionality related to numerical propagation of states (state types, acceleration models, output variables, *etc.*)
+* :doc:`tudatpy.dynamics.environment_setup <environment_setup>`/ :doc:`tudatpy.dynamics.environment <environment>`: Functionality related to the physical environment (properties of natural and celestial bodies)
+* :doc:`tudatpy.dynamics.propagation_setup <propagation_setup>`/ :doc:`tudatpy.dynamics.propagation <propagation>`: Functionality related to numerical propagation of states (state types, acceleration models, output variables, *etc.*)
 * :doc:`tudatpy.numerical_simulation.estimation_setup <estimation_setup>`/ :doc:`tudatpy.numerical_simulation.estimation <estimation>`: Functionality related to state estimation (estimated parameters, observation models, *etc.*)
 
 The distinction between the ``foo`` and ``foo_setup`` libraries is the following:

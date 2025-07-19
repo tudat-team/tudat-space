@@ -1,2 +1,2 @@
 # required import statements
-from tudatpy.kernel import environment_setup
+from tudatpy import environment_setup

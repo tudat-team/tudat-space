@@ -5,11 +5,11 @@ Dependent Variables
 
 Dependent variables can be added to the propagation settings by first defining
 a list of desired dependent variables, which is supplied as input argument to the
-:func:`~tudatpy.numerical_simulation.propagation_setup.propagator.translational`,
-:func:`~tudatpy.numerical_simulation.propagation_setup.propagator.rotational`,
-:func:`~tudatpy.numerical_simulation.propagation_setup.propagator.mass`,
-:func:`~tudatpy.numerical_simulation.propagation_setup.propagator.custom_state` or
-:func:`~tudatpy.numerical_simulation.propagation_setup.propagator.multitype`
+:func:`~tudatpy.dynamics.propagation_setup.propagator.translational`,
+:func:`~tudatpy.dynamics.propagation_setup.propagator.rotational`,
+:func:`~tudatpy.dynamics.propagation_setup.propagator.mass`,
+:func:`~tudatpy.dynamics.propagation_setup.propagator.custom_state` or
+:func:`~tudatpy.dynamics.propagation_setup.propagator.multitype`
 propagators.
 
 Each dependent variable is created via a dedicated factory function. See the example below for the definition of four separate dependent variables:

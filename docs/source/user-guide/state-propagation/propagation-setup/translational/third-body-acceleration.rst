@@ -89,6 +89,6 @@ while the following will add the third-body spherical-harmonic acceleration of t
 
 
 Note that above two code blocks are identical to those given as example in the API documentation
-entries of :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.point_mass_gravity` and
-:func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.spherical_harmonic_gravity`. It is through the definition
+entries of :func:`~tudatpy.dynamics.propagation_setup.acceleration.point_mass_gravity` and
+:func:`~tudatpy.dynamics.propagation_setup.acceleration.spherical_harmonic_gravity`. It is through the definition
 *of the central body* that a direct, central or third-body acceleration is created.

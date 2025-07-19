@@ -5,17 +5,17 @@
 Single-arc Variational Equations Propagation
 ============================================
 
-For propagation of the variational equations alongside the system state, a different sort of simulator object - a :class:`~tudatpy.numerical_simulation.VariationalEquationsSolver` - has to be used.
-The :class:`~tudatpy.numerical_simulation.VariationalEquationsSolver` objects contain a :class:`~tudatpy.numerical_simulation.DynamicsSimulator` object, which means that they can do anything that a :class:`~tudatpy.numerical_simulation.DynamicsSimulator` can plus the added functionality of propagating variational equations.
+For propagation of the variational equations alongside the system state, a different sort of simulator object - a :class:`~tudatpy.dynamics.simulator.VariationalSimulator` - has to be used.
+The :class:`~tudatpy.dynamics.simulator.VariationalSimulator` objects contain a :class:`~tudatpy.dynamics.simulator.DynamicsSimulator` object, which means that they can do anything that a :class:`~tudatpy.dynamics.simulator.DynamicsSimulator` can plus the added functionality of propagating variational equations.
 
 
-To propagate the variational equations alongside the single-arc system state, the :func:`~tudatpy.numerical_simulation.create_variational_equations_solver` function should be used, which returns a :class:`~tudatpy.numerical_simulation.SingleArcVariationalSimulator`, derived of the :class:`~tudatpy.numerical_simulation.VariationalEquationsSolver` base class should be used.
+To propagate the variational equations alongside the single-arc system state, the :func:`~tudatpy.dynamics.simulator.create_variational_equations_solver` function should be used, which returns a :class:`~tudatpy.dynamics.simulator.SingleArcVariationalSimulator`, derived of the :class:`~tudatpy.dynamics.simulator.VariationalSimulator` base class should be used.
 With the basic simulation setup (system of bodies, integrator settings, propagator settings) and the parameter settings for the variational equations, a variational equations solver can be set up.
 The setup works similarly to the normal dynamics simulator:
 
 .. code-block:: python
 
-        variational_equations_solver = numerical_simulation.create_variational_equations_solver(
+        variational_equations_solver = dynamics.simulator.create_variational_equations_solver(
                 bodies, propagator_settings,
                 estimation_setup.create_parameters_to_estimate(parameter_settings, bodies)
                 )

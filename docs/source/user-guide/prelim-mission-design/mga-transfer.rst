@@ -237,8 +237,8 @@ swingby nodes equal to the number of GA's, and a capture node.
 
           .. code-block:: python
 
-              from tudatpy.numerical_simulation import propagation_setup
-              from tudatpy.numerical_simulation import environment_setup
+              from tudatpy.dynamics import propagation_setup
+              from tudatpy.dynamics import environment_setup
               from tudatpy.trajectory_design import shape_based_thrust
               from tudatpy.trajectory_design import transfer_trajectory
               import numpy as np

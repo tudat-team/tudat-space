@@ -17,20 +17,20 @@ Below you can find a number of frequently asked questions on the usage and funct
 How do I retrieve the body properties of a Body object?
 =======================================================
 
-If you have created a system of bodies of type :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` stored in a variable ``bodies`` and want to retrieve certain Body properties from the environment, you can retrieve them by calling (for example): 
+If you have created a system of bodies of type :class:`~tudatpy.dynamics.environment.SystemOfBodies` stored in a variable ``bodies`` and want to retrieve certain Body properties from the environment, you can retrieve them by calling (for example):
 
 .. code-block:: python
 
    bodies.get("Earth").gravity_field_model.gravitational_parameter
 
-which would return the gravitational parameter of the Earth as used by tudat. A full list of all Body properties you can retrieve can be accessed from the :class:`~tudatpy.numerical_simulation.environment.Body` class. Note that first the ``gravity_field_model`` environment model is entered before the gravitational parameter is retrieved. A full list of environment models available can be accessed on the :ref:`Environment Models page <environment_model_overview>`.
+which would return the gravitational parameter of the Earth as used by tudat. A full list of all Body properties you can retrieve can be accessed from the :class:`~tudatpy.dynamics.environment.Body` class. Note that first the ``gravity_field_model`` environment model is entered before the gravitational parameter is retrieved. A full list of environment models available can be accessed on the :ref:`Environment Models page <environment_model_overview>`.
 
 How do I retrieve the orbital period of a Body object?
 ======================================================
 
 While it is not possible (right now) to directly retrieve the orbital period of a Body object, it is possible to calculate it. This can be done by storing the Keplerian state of a numerically propagated Body as a :doc:`dependent_variable`, from which the orbital period can directly be calculated.
 
-Alternatively, if the Body is not numerically propagated, or you prefer not to store the Keplerian state as a dependent variable, this can also be done by accessing the :attr:`~tudatpy.numerical_simulation.environment.Body.state` property of a Body, which returns its translational state at the current time step in Cartesian elements w.r.t. the global frame origin, with axes along the global frame orientation. Note that if the Body is numerically propagated, this information is retrieved from the propagated state vector. If it is not numerically propagated, it is retrieved from the body's ephemeris. This state can then be converted to Keplerian elements using the :func:`~tudatpy.astro.element_conversion.cartesian_to_keplerian` function, from which the orbital period can be calculated.
+Alternatively, if the Body is not numerically propagated, or you prefer not to store the Keplerian state as a dependent variable, this can also be done by accessing the :attr:`~tudatpy.dynamics.environment.Body.state` property of a Body, which returns its translational state at the current time step in Cartesian elements w.r.t. the global frame origin, with axes along the global frame orientation. Note that if the Body is numerically propagated, this information is retrieved from the propagated state vector. If it is not numerically propagated, it is retrieved from the body's ephemeris. This state can then be converted to Keplerian elements using the :func:`~tudatpy.astro.element_conversion.cartesian_to_keplerian` function, from which the orbital period can be calculated.
 
 Why are the number of function evaluations the same for fixed-timestep multi-stage integrators?
 ===============================================================================================
@@ -47,7 +47,7 @@ If we were to make use of a *fixed*-timestep RKF7(8)-integrator, *the first step
 How can I create a more detailed gravity field (i.e. higher degree and order spherical harmonic expansion)?
 ===========================================================================================================
 
-If you wish to create a more detailed gravity field of a Body, this is possible using the :func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.from_file_spherical_harmonic` function. As one of the inputs it will take a file path which indicates where the spherical harmonic gravity field file is located. These should be stored in the resources directory. To return the full file path pointing to this gravity file, you can use the :func:`~tudatpy.data.get_gravity_models_path` function. Storing the output from :func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.from_file_spherical_harmonic` under ``file``, you can then update a Body's gravity field settings by overwriting the default gravity field with ``file``. Make sure to do this *before* creating your environment.
+If you wish to create a more detailed gravity field of a Body, this is possible using the :func:`~tudatpy.dynamics.environment_setup.gravity_field.from_file_spherical_harmonic` function. As one of the inputs it will take a file path which indicates where the spherical harmonic gravity field file is located. These should be stored in the resources directory. To return the full file path pointing to this gravity file, you can use the :func:`~tudatpy.data.get_gravity_models_path` function. Storing the output from :func:`~tudatpy.dynamics.environment_setup.gravity_field.from_file_spherical_harmonic` under ``file``, you can then update a Body's gravity field settings by overwriting the default gravity field with ``file``. Make sure to do this *before* creating your environment.
 
 How can I add SPICE kernels myself?
 =================================== 
