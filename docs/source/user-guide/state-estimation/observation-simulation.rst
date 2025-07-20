@@ -235,7 +235,7 @@ Having fully defined the list of observation simulation settings ``observation_s
 
 .. code-block:: python
 
-    simulated_observations = estimation.simulate_observations(
+    simulated_observations = estimation.observations_setup.observations_wrapper.simulate_observations(
         observation_simulation_settings,
         estimator.observation_simulators,
         bodies)

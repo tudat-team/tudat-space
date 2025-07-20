@@ -50,11 +50,11 @@ The basic definition of settings for a covariance analysis only requires the obs
     parameters_to_estimate = dynamics.parameters_setup.create_parameter_set(parameter_settings, bodies)
     ...
     # Simulate observations
-    simulated_observations = estimation.simulate_observations(
+    simulated_observations = estimation.estimation_analysis.simulate_observations(
         observation_simulation_settings,  estimator.observation_simulators, bodies)
     ...
     # Create settings for observation models
-    covariance_analysis_settings = estimation.CovarianceAnalysisInput(
+    covariance_analysis_settings = estimation.estimation_analysis.CovarianceAnalysisInput(
         simulated_observations)
 
 Where the *inverse* a priori covariance matrix can be provided as an additional optional input argument to the
@@ -120,11 +120,11 @@ The settings for the full estimation are created in an essentially identical man
     parameters_to_estimate = dynamics.parameters_setup.create_parameter_set(parameter_settings, bodies)
     ...
     # Simulate observations
-    simulated_observations = estimation.simulate_observations(
+    simulated_observations = estimation.estimation_analysis.simulate_observations(
         observation_simulation_settings,  estimator.observation_simulators, bodies)
     ...
     # Create settings for observation models
-    estimation_settings = estimation.EstimationInput(
+    estimation_settings = estimation.estimation_analysis.EstimationInput(
         simulated_observations)
 
 where, in fact, the :class:`~tudatpy.estimation.estimation_analysis.EstimationInput` is derived from
