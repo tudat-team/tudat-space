@@ -42,12 +42,12 @@ The basic manner in which to define an observation simulation settings object us
     one_way_nno_mex_link_ends = dict( )
     one_way_nno_mex_link_ends[ transmitter ] = estimation.observable_model_setup.links.body_reference_point_link_end_id( "Earth", "NNO" )
     one_way_nno_mex_link_ends[ receiver ] = estimation.observable_model_setup.links.body_origin_link_end_id( "MeX" )
-    one_way_nno_mex_link_definition = estimation_setup.observation.link_definition( one_way_nno_mex_link_ends )
+    one_way_nno_mex_link_definition = estimation.observable_model_setup.links.link_definition( one_way_nno_mex_link_ends )
     
     observation_times = list( )
     observation_times = [10.0, 20.0, 30.0]
     
-    observation_simulation_settings = estimation_setup.observation.tabulated_simulation_settings( 
+    observation_simulation_settings = observations_setup.observations_simulation_settings.tabulated_simulation_settings(
        one_way_range_type,
        one_way_nno_mex_link_definition,
        observation_times )
@@ -62,11 +62,11 @@ To override this behaviour, we can specify a reference link end manually, which 
 
 .. code-block:: python
     
-    observation_simulation_settings = estimation_setup.observation.tabulated_simulation_settings( 
+    observation_simulation_settings = observations_setup.observations_simulation_settings.tabulated_simulation_settings(
        one_way_range_type,
        one_way_nno_mex_link_ends,
        observation_times,
-       reference_link_end = estimation_setup.observation.LinkEndType.transmitter )
+       reference_link_end = estimation.observable_model_setup.links.LinkEndType.transmitter )
 
 
 
@@ -76,7 +76,7 @@ Thus it uses this list, instead of creating a single object to simulate the obse
 
 .. code-block:: python
     
-    observation_simulation_settings_list = estimation_setup.observation.tabulated_simulation_settings_list( 
+    observation_simulation_settings_list = observations_setup.observations_simulation_settings.tabulated_simulation_settings_list(
        link_definitions_per_observable,
        observation_times )
  
@@ -152,7 +152,7 @@ For example, the ``observation_simulation_settings_list`` list created in the ex
     
     station_id = [ "Earth", "NNO" ];  
     viability_settings_list = list()  
-    viability_settings_list.append( estimation_setup.observation.elevation_angle_viability( 
+    viability_settings_list.append( observations_setup.viability.elevation_angle_viability(
        station_id,
        np.deg2rad( 15.0 ) ) )
     observation.add_viability_check_to_all(

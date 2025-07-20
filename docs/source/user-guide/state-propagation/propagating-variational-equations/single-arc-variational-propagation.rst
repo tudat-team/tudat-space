@@ -17,7 +17,7 @@ The setup works similarly to the normal dynamics simulator:
 
         variational_equations_solver = dynamics.simulator.create_variational_equations_solver(
                 bodies, propagator_settings,
-                estimation_setup.create_parameters_to_estimate(parameter_settings, bodies)
+                dynamics.parameters_setup.create_parameter_set(parameter_settings, bodies)
                 )
 
 The state history, state transition matrices, and sensitivity matrices can then be extracted:
