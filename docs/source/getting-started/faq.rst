@@ -80,7 +80,7 @@ or::
    A traceback follows.  The name of the highest level module is first.
    furnsh_c --> FURNSH --> ZZLDKER
    
-is caused by the ``tudat-resources`` conda package (which is a dependency of tudat and tudatpy) not being installed properly, or being outdated. You can manually download the missing data, and place them in the directory specified by the error. In the `tudat-resources releases <https://github.com/tudat-team/tudat-resources/releases>`_, select the latest release and under 'assets' download and unpack the ``resource.tar.gz`` in the specified directory. 
+is caused by the ``tudat-resources`` conda package (which is a dependency of tudatpy) not being installed properly, or being outdated. You can manually download the missing data, and place them in the directory specified by the error. In the `tudat-resources releases <https://github.com/tudat-team/tudat-resources/releases>`_, select the latest release and under 'assets' download and unpack the ``resource.tar.gz`` in the specified directory.
 
 
 Installation
@@ -101,7 +101,7 @@ have been known to be caused by virus scanners being overzealous, and seeing tud
 How can I compile tudat and the tudatpy kernel from source?
 ===========================================================
 
-Our recommended procedure is to use the `tudat-bundle repository <https://github.com/tudat-team/tudat-bundle/>`_. The README of this repository provides instructions on how to build tudat from source. Some more background can be found under :ref:`using_tudat_source`. 
+You can compile our `tudatpy repository <https://github.com/tudat-team/tudatpy/>`_ repository easily using a ``build.py`` file we've provided. The README of this repository provides complete instructions on how to build tudat from source. Some more background can be found under :ref:`using_tudat_source`.
 
 Tudat(Py) is not updating to the latest version in my conda environment, how can I solve this?
 ==============================================================================================
