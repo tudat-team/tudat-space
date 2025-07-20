@@ -198,12 +198,12 @@ Similar interfaces exist to add a generic noise function to the observation:
 .. code-block:: python
     
     def custom_noise_function( current_time ):
-        return np.ndarray([np.random.lognormal(0.0,1.0)])
+        return np.array([np.random.lognormal(0.0, 1.0)])
         
     observation.add_noise_function_to_observable(
         observation_simulation_settings_list,
         custom_noise_function,
-        observable_models_setup.model_settings..one_way_range_type )
+        observable_models_setup.model_settings.one_way_range_type )
 
 where it is important to realize that the noise function *must* have a single float representing time as input, and returns a vector (of the size of a single observation) as output. For many observables (range, Doppler), this size will be 1. For angular position observables, for instance, the size will be 2. The
 :func:`~tudatpy.estimation.observations_setup.random_noise.add_noise_function_to_all`,
