@@ -13,7 +13,7 @@ page. Instead, for each model, a reference to the related API documentation entr
 .. note::
    In Tudat, torque models are defined through factory functions, which define the properties required of
    the torques, but do not perform any calculations themselves. These properties are stored through instances
-   of the :class:`~tudatpy.numerical_simulation.propagation_setup.torque.TorqueSettings` class or of its
+   of the :class:`~tudatpy.dynamics.propagation_setup.torque.TorqueSettings` class or of its
    derived classes.
 
 
@@ -24,14 +24,14 @@ page. Instead, for each model, a reference to the related API documentation entr
 In certain pieces of code, such as when requesting the saving of a single torque (see :ref:`dependent_variables`
 for saving of dependent variables), you will need to supply an identifier for the type of torque you are requesting.
 See the list of supported identifier types in the API documentation:
-:class:`~tudatpy.numerical_simulation.propagation_setup.torque.AvailableTorque`.
+:class:`~tudatpy.dynamics.propagation_setup.torque.AvailableTorque`.
 
 
 Aerodynamic Torque
 ######################
 
 | **Description**
-| The aerodynamic torque model can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.torque.aerodynamic` factory function.
+| The aerodynamic torque model can be created through the :func:`~tudatpy.dynamics.propagation_setup.torque.aerodynamic` factory function.
 
 | **Dependencies**
 | 1. Atmosphere model for body exerting acceleration (see :doc:`Atmosphere models <atmosphere>`).
@@ -46,7 +46,7 @@ Aerodynamic Torque
    The aerodynamic acceleration is calculated in the vehicles body-fixed or aerodynamic frame. Expressing the
    acceleration in an inertial frame (as required by the propagation) requires the vehicle's orientation to be defined.
    For a simple definition, in which the body's angle of attack, sideslip angle, and bank angle are all set to 0, see
-   :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.aerodynamic_angle_based`.
+   :func:`~tudatpy.dynamics.environment_setup.rotation_model.aerodynamic_angle_based`.
 
    More details on aerodynamic guidance can be found on :ref:`this page <aerodynamic_models>`.
 
@@ -54,7 +54,7 @@ Second Degree Gravitational Torque
 ###################################
 
 | **Description**
-| The second degree gravitational torque model can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.torque.second_degree_gravitational` factory function.
+| The second degree gravitational torque model can be created through the :func:`~tudatpy.dynamics.propagation_setup.torque.second_degree_gravitational` factory function.
 
 | **Dependencies**
 | 1. Gravity field model for body exerting acceleration (see :doc:`Atmosphere models <atmosphere>`).
@@ -71,7 +71,7 @@ Spherical Harmonics Gravitational Torque
 ##########################################
 
 | **Description**
-| The second degree gravitational torque model can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.torque.spherical_harmonic_gravitational` factory function.
+| The second degree gravitational torque model can be created through the :func:`~tudatpy.dynamics.propagation_setup.torque.spherical_harmonic_gravitational` factory function.
 
 | **Dependencies**
 | 1. Gravity field model for body exerting acceleration (see :doc:`Atmosphere models <atmosphere>`).
@@ -89,7 +89,7 @@ Custom Torque
 #################
 
 | **Description**
-| The custom torque model can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.torque.custom` factory function.
+| The custom torque model can be created through the :func:`~tudatpy.dynamics.propagation_setup.torque.custom` factory function.
 
 | **Dependencies**
 | None.

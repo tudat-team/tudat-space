@@ -62,7 +62,7 @@ than the input arguments.
             import multiprocessing as mp
             import numpy as np
 
-            from tudatpy.numerical_simulation import environment_setup, propagation_setup
+            from tudatpy.dynamics import environment_setup, propagation_setup
             from tudatpy.interface import spice
 
       .. literalinclude:: /_snippets/simulation/parallelization/general_bfe_example.py
@@ -122,8 +122,8 @@ the orbit.
 
             # Load tudatpy modules
             from tudatpy.interface import spice
-            from tudatpy.kernel import numerical_simulation
-            from tudatpy.numerical_simulation import environment_setup, propagation_setup
+            from tudatpy import dynamics
+            from tudatpy.dynamics import environment_setup, propagation_setup
             from tudatpy.astro import element_conversion
             from tudatpy import constants
             from tudatpy.util import result2array
@@ -164,8 +164,8 @@ manually.
 
             # Load tudatpy modules
             from tudatpy.interface import spice
-            from tudatpy.kernel import numerical_simulation
-            from tudatpy.numerical_simulation import environment_setup, propagation_setup
+            from tudatpy import dynamics
+            from tudatpy.dynamics import environment_setup, propagation_setup
             from tudatpy.astro import element_conversion
             from tudatpy import constants
             from tudatpy.util import result2array

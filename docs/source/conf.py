@@ -221,6 +221,8 @@ intersphinx_disabled_reftypes = []
 # -- Options for sphinx_codeautolink -------------------------------------------
 codeautolink_concat_default = True
 codeautolink_global_preface = """
-from tudatpy import numerical_simulation
-from tudatpy.numerical_simulation import propagation_setup, environment_setup, estimation_setup, propagation, environment, estimation
+from tudatpy import dynamics
+from tudatpy.dynamics import propagation_setup, environment_setup, parameters_setup, propagation, environment, parameters
+from tudatpy import estimation
+from tudatpy.estimation import observations, observable_models, observations_setup, observable_models_setup
 """

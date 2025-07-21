@@ -6,7 +6,7 @@ Multi-type dynamics
 
 Tudat permits the propagation of any combination of types of dynamics, for any number of bodies. One example is the simulation of coupled translational-rotational dynamics of one or more bodies, or the combined translational and mass dynamics of a body (e.g. spacecraft under thrust).
 
-To define multi-type propagator settings, you must first define the propagator settings for each type of dynamics separately, after which you combine these using the :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.multitype` function as follows: 
+To define multi-type propagator settings, you must first define the propagator settings for each type of dynamics separately, after which you combine these using the :func:`~tudatpy.dynamics.propagation_setup.propagator.multitype` function as follows:
 
 .. tab-set::
    :sync-group: coding-language

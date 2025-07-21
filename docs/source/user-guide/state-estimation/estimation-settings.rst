@@ -47,37 +47,37 @@ The basic definition of settings for a covariance analysis only requires the obs
 .. code-block:: python
 
     # Create parameters to estimate
-    parameters_to_estimate = estimation_setup.create_parameter_set(parameter_settings, bodies)
+    parameters_to_estimate = dynamics.parameters_setup.create_parameter_set(parameter_settings, bodies)
     ...
     # Simulate observations
-    simulated_observations = estimation.simulate_observations(
+    simulated_observations = estimation.estimation_analysis.simulate_observations(
         observation_simulation_settings,  estimator.observation_simulators, bodies)
     ...
     # Create settings for observation models
-    covariance_analysis_settings = estimation.CovarianceAnalysisInput(
+    covariance_analysis_settings = estimation.estimation_analysis.CovarianceAnalysisInput(
         simulated_observations)
 
 Where the *inverse* a priori covariance matrix can be provided as an additional optional input argument to the
-:class:`~tudatpy.numerical_simulation.estimation.CovarianceAnalysisInput` constructor.
+:class:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput` constructor.
 
 The resulting object ``covariance_analysis_settings`` can be used to tune the exact behaviour of the covariance analysis process
-(see the :meth:`~tudatpy.numerical_simulation.estimation.CovarianceAnalysisInput.define_covariance_settings` method of this class for details),
+(see the :meth:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput.define_covariance_settings` method of this class for details),
 such as whether to reintegrate the dynamics, or which terminal output to provide.
 
 The weight matrix is typically not provided as a full matrix in a covariance analysis, as the its size of :math:`N_{obs}\times N_{obs}` leads to prohibitive memory usage.
 Presently, we only support the definition of a diagonal weights matrix.
 Note that the weight matrix diagonal entry :math:`W_{i,i}` should ideally be related to the observation's Gaussian noise as :math:`W_{i,i}=1/\sigma_{i}^{2}`.
 Several options are provided to set the weights matrix diagonal
-(as :class:`~tudatpy.numerical_simulation.estimation.CovarianceAnalysisInput` member functions):
+(as :class:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput` member functions):
 
-* Constant weight for all observation, using the :meth:`~tudatpy.numerical_simulation.estimation.CovarianceAnalysisInput.set_constant_weight` function,
-* Constant weight for all observations of a given observation type, using the :meth:`~tudatpy.numerical_simulation.estimation.CovarianceAnalysisInput.set_constant_single_observable_weight` function, or the :meth:`~tudatpy.numerical_simulation.estimation.CovarianceAnalysisInput.set_constant_single_observable_vector_weight` function for observables of size :math:`>1`, to for instance set different weights for right ascension and declination of an angular position observable
-* Constant weight for all observations of a given observation type, with a given set of link ends, using the :meth:`~tudatpy.numerical_simulation.estimation.CovarianceAnalysisInput.set_constant_single_observable_and_link_end_weight` function, or the :meth:`~tudatpy.numerical_simulation.estimation.CovarianceAnalysisInput.set_constant_single_observable_and_link_end_vector_weight` function for observables of size :math:`>1`
-* Manual definition of full weight vector for all observations of a given observation type with a given set of link ends, using the :meth:`~tudatpy.numerical_simulation.estimation.CovarianceAnalysisInput.set_total_single_observable_and_link_end_vector_weight` function,
-* Manual definition of the full weight vector for all observations using the :attr:`~tudatpy.numerical_simulation.estimation.CovarianceAnalysisInput.weight_matrix_diagonal` attribute,
+* Constant weight for all observation, using the :meth:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput.set_constant_weight` function,
+* Constant weight for all observations of a given observation type, using the :meth:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput.set_constant_single_observable_weight` function, or the :meth:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput.set_constant_single_observable_vector_weight` function for observables of size :math:`>1`, to for instance set different weights for right ascension and declination of an angular position observable
+* Constant weight for all observations of a given observation type, with a given set of link ends, using the :meth:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput.set_constant_single_observable_and_link_end_weight` function, or the :meth:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput.set_constant_single_observable_and_link_end_vector_weight` function for observables of size :math:`>1`
+* Manual definition of full weight vector for all observations of a given observation type with a given set of link ends, using the :meth:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput.set_total_single_observable_and_link_end_vector_weight` function,
+* Manual definition of the full weight vector for all observations using the :attr:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput.weight_matrix_diagonal` attribute,
 
 When using consider covariance (e.g. when consider parameters are defined in the :ref:`parameterSettings`), the consider parameter covariance matrix :math:`\mathbf{C}`
-is also provided to the :class:`~tudatpy.numerical_simulation.estimation.CovarianceAnalysisInput` constructor, and the
+is also provided to the :class:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput` constructor, and the
 calculation of the resulting covariance matrix becomes the matrix :math:`\mathbf{P}^{c}`, which is computed from the above as:
 
 .. math::
@@ -117,22 +117,22 @@ The settings for the full estimation are created in an essentially identical man
 .. code-block:: python
 
     # Create parameters to estimate
-    parameters_to_estimate = estimation_setup.create_parameter_set(parameter_settings, bodies)
+    parameters_to_estimate = dynamics.parameters_setup.create_parameter_set(parameter_settings, bodies)
     ...
     # Simulate observations
-    simulated_observations = estimation.simulate_observations(
+    simulated_observations = estimation.estimation_analysis.simulate_observations(
         observation_simulation_settings,  estimator.observation_simulators, bodies)
     ...
     # Create settings for observation models
-    estimation_settings = estimation.EstimationInput(
+    estimation_settings = estimation.estimation_analysis.EstimationInput(
         simulated_observations)
 
-where, in fact, the :class:`~tudatpy.numerical_simulation.estimation.EstimationInput` is derived from
-the :class:`~tudatpy.numerical_simulation.estimation.CovarianceAnalysisInput`. For the estimation settings,
+where, in fact, the :class:`~tudatpy.estimation.estimation_analysis.EstimationInput` is derived from
+the :class:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput`. For the estimation settings,
 however, there are a number of additional options available, such as the definition for 'convergence'
 (default: perform three iterations of the least squares).
 
-The :class:`~tudatpy.numerical_simulation.estimation.EstimationInput` class also has as function to
+The :class:`~tudatpy.estimation.estimation_analysis.EstimationInput` class also has as function to
 tune the exact behaviour of the estimation process (see the
-:meth:`~tudatpy.numerical_simulation.estimation.EstimationInput.define_estimation_settings` function of this class for details),
+:meth:`~tudatpy.estimation.estimation_analysis.EstimationInput.define_estimation_settings` function of this class for details),
 such as whether to save all intermediate results for the user.

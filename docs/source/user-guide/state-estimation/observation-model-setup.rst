@@ -30,7 +30,7 @@ Defining observation settings
 
 Tudat supports a diverse set of observation types.
 The creation of an observation model is done in a similar manner as models used for the numerical propagation:
-an object defining the settings of each observation model is created (of type :class:`~tudatpy.numerical_simulation.estimation_setup.observation.ObservationSettings`),
+an object defining the settings of each observation model is created (of type :class:`~tudatpy.estimation.observable_models_setup.model_settings.ObservationSettings`),
 which is then processed to create the actual observation model. The full list of available observation models
 is discussed :ref:`here <observation_model_overview>`, including links to the API documentation
 
@@ -51,14 +51,14 @@ The only limitation is that you may not have duplicate entries of link ends *and
 
     # Define link ends
     one_way_nno_mex_link_ends = dict( )
-    one_way_nno_mex_link_ends[ transmitter ] = estimation_setup.observation.body_reference_point_link_end_id( "Earth", "NNO" )
-    one_way_nno_mex_link_ends[ receiver ] = estimation_setup.observation.body_origin_link_end_id( "MeX" )
-    one_way_nno_mex_link_definition = estimation_setup.link_definition( one_way_nno_mex_link_ends )
+    one_way_nno_mex_link_ends[ transmitter ] = estimation.observable_model_setup.linksbody_reference_point_link_end_id( "Earth", "NNO" )
+    one_way_nno_mex_link_ends[ receiver ] = estimation.observable_model_setup.linksbody_origin_link_end_id( "MeX" )
+    one_way_nno_mex_link_definition = estimation.observable_model_setup.links.link_definition( one_way_nno_mex_link_ends )
     
     # Create list of observation settings
     observation_settings_list = list()
-    observation_settings_list.append( estimation_setup.observation.one_way_range( one_way_nno_mex_link_ends ) )
-    observation_settings_list.append( estimation_setup.observation.one_way_open_loop_doppler( one_way_nno_mex_link_ends ) )
+    observation_settings_list.append( estimation.observable_model_setup.model_settings.one_way_range( one_way_nno_mex_link_ends ) )
+    observation_settings_list.append( estimation.observable_model_setup.model_settings.one_way_open_loop_doppler( one_way_nno_mex_link_ends ) )
                 
                 
 
@@ -66,7 +66,7 @@ When defining observation models, you can for most types of models define settin
 
 * **Biases:** A bias in Tudat is applied to the observable after its 'ideal' value computed from the environment is computed. You can find a list of settings for observation biases in our :doc:`API documentation <observation>`.
 * **Light-time corrections:** When using an observable that involves the observation of one point/body in space by another, it is automatically assumed that the signal travels at the speed of light in a straight line in Euclidean (e.g. flat) space. The associated light-time is automatically computed when calculating the observable. For instance, when computing an observable by a ground station at time :math:`t`, the position of the observed target (such as a spacecraft) is evaluated at time :math:`t-\Delta t`, with :math:`\Delta t` the light time from spacecraft to ground station. Deviations from the signal's ideal trajectory (straight line at speed of light) due to relativistic, atmospheric, etc. effects may be defined by adding light-time correction settings, as listed in our :doc:`API documentation <observation>`.
-* **Light-time convergence settings:** Calculating the light time between two link ends requires the iterative solution of the light-time equation. Default settings for convergence criteria for this solution are implemented, but a user may modify these settings if so desired. The associated settings object can be created using the :func:`~tudatpy.numerical_simulation.estimation_setup.observation.light_time_convergence_settings` function.
+* **Light-time convergence settings:** Calculating the light time between two link ends requires the iterative solution of the light-time equation. Default settings for convergence criteria for this solution are implemented, but a user may modify these settings if so desired. The associated settings object can be created using the :func:`~tudatpy.estimation.observable_model_setup.light_time_corrections.light_time_convergence_settings` function.
 
 Observation biases are used to add any systematic deviations from the 'physical' value of the computed observation
 (due to unmodelled electronic delays, or unmodelled propagation effects of the electromagnetic signals). From the formulation of a bias :math:`\Delta h` (which may be a function of time, the observable itself, or properties of the environment) and the
@@ -99,27 +99,27 @@ The above options are added to the calls of the observation model settings facto
 
     # Define link ends
     one_way_nno_mex_link_ends = dict( )
-    one_way_nno_mex_link_ends[ transmitter ] = estimation_setup.observation.body_reference_point_link_end_id( "Earth", "NNO" )
-    one_way_nno_mex_link_ends[ receiver ] = estimation_setup.observation.body_origin_link_end_id( "MeX" )
-    one_way_nno_mex_link_definition = estimation_setup.observation.link_definition( one_way_nno_mex_link_ends )
+    one_way_nno_mex_link_ends[ transmitter ] = estimation.observable_model_setup.links.body_reference_point_link_end_id( "Earth", "NNO" )
+    one_way_nno_mex_link_ends[ receiver ] = estimation.observable_model_setup.links.body_origin_link_end_id( "MeX" )
+    one_way_nno_mex_link_definition = estimation.observable_model_setup.links.link_definition( one_way_nno_mex_link_ends )
     
     # Define settings for light-time calculations
-    light_time_correction_settings = [ estimation_setup.observation.first_order_relativistic_correction( [ 'Sun' ] )]
+    light_time_correction_settings = [ estimation.observable_model_setup.light_time_corrections.first_order_relativistic_correction( [ 'Sun' ] )]
     
     # Define settings for range bias
-    range_bias_settings = estimation_setup.observation.absolute_bias( 0.01 )
+    range_bias_settings = estimation.observable_model_setup.biases.absolute_bias( 0.01 )
     
     # Create list of observation settings
     observation_settings_list = list()
-    observation_settings_list.append( estimation_setup.observation.one_way_range( 
+    observation_settings_list.append( estimation.observable_model_setup.model_settings.one_way_range(
         one_way_nno_mex_link_ends,
         light_time_correction_settings = light_time_correction_settings,
         bias_settings = range_bias_settings ) )
-    observation_settings_list.append( estimation_setup.observation.one_way_open_loop_doppler( 
+    observation_settings_list.append( estimation.observable_model_setup.model_settings.one_way_open_loop_doppler(
         one_way_nno_mex_link_ends, 
         light_time_correction_settings = light_time_correction_settings ) )
                 
-where we have defined that, for both observation models for which settings are created, the light-time calculation will take into account the first-order relativistic correction of the Sun, by using the :func:`~tudatpy.numerical_simulation.estimation_setup.observation.first_order_relativistic_light_time_correction` function. For the range observable, we have defined an absolute bias of 1 cm (0.01 m) using the :func:`~tudatpy.numerical_simulation.estimation_setup.observation.absolute_bias`, while leaving the Doppler observable unbiased.
+where we have defined that, for both observation models for which settings are created, the light-time calculation will take into account the first-order relativistic correction of the Sun, by using the :func:`~tudatpy.estimation.observable_model_setup.light_time_corrections..first_order_relativistic_light_time_correction` function. For the range observable, we have defined an absolute bias of 1 cm (0.01 m) using the :func:`~tudatpy.estimation.observable_model_setup.biases.absolute_bias`, while leaving the Doppler observable unbiased.
 
 .. _observationSimulators:
 
@@ -160,7 +160,7 @@ Firstly, when only performing a :ref:`covariance analysis<covarianceSettings>`, 
 its definition altogether (greatly simplifying the setup!) Secondly, doing a :ref:`full estimation<fullEstimationSettings>` with the truth and estimation model equal to one another allows one to study the influence that
 different data types, their noise levels, etc. have on the final estimation, with some more flexibility than what is the case in the covariance analysis (for instance, in a covariance analysis one is limited to Gaussian uncorrelated noise, which in a full estimation you can add any noise you like to the observations).
 
-When taking this approach, one makes use of the fact that observation simulators for the estimation are created anyway when creating an :class:`~tudatpy.numerical_simulation.Estimator` object (discussed further :ref:`here <perform_estimation>`).
+When taking this approach, one makes use of the fact that observation simulators for the estimation are created anyway when creating an :class:`~tudatpy.estimation.estimation_analysis.Estimator` object (discussed further :ref:`here <perform_estimation>`).
 You can extract these ``observation_simulators`` as follows, and use them to :ref:`simulate observations <observationSimulation>` as follows:
 
 .. code-block:: python
@@ -181,7 +181,7 @@ Different truth and estimation model
 
 The second case above, where the truth and estimation model are different from one another, opens up a broad range of options. In principle, any and all settings
 of the bodies, the propagation model, and the observation models can be made different between the two. A challenge is often in choosing the difference that one
-wants to implement to study the case at hand. In this case, the observation simulators are created directly, using the :func:`~tudatpy.numerical_simulation.estimation_setup.create_observation_simulators` function:
+wants to implement to study the case at hand. In this case, the observation simulators are created directly, using the :func:`~tudatpy.estimation.observations_setup.observations_simulation_settings.create_observation_simulators` function:
 
 .. code-block:: python
 
@@ -195,14 +195,14 @@ wants to implement to study the case at hand. In this case, the observation simu
   # Create observation simulators
   observation_simulators = create_observation_simulators( observation_settings_list, bodies )       
 
-When subsequently creating the :class:`~tudatpy.numerical_simulation.Estimator` object (discussed further :ref:`here <perform_estimation>`)
+When subsequently creating the :class:`~tudatpy.estimation.estimation_analysis.Estimator` object (discussed further :ref:`here <perform_estimation>`)
 to perform the estimation, one can then provide a different ``observation_settings_list`` to ensure a difference between the truth
 and estimation models. One can also choose to provide different ``bodies``, so that the physical environment from which
 the observations are simulated, and the one to which they are fit, are different. Finally, even when using the same ``bodies``,
 one can choose a different model for the states of the estimated bodies to ensure a difference in truth and estimation model.
 
 In either case, the ``observation_simulators`` variable is a list of objects derived from
-:class:`~tudatpy.numerical_simulation.estimation.ObservationSimulator`, with a single object responsible for the simulation
+:class:`~tudatpy.estimation.observable_models_observables_simulation.ObservationSimulator`, with a single object responsible for the simulation
 of a single *type* of observable (*e.g.* one-way range, one-way Doppler, *etc.*). The ``observation_simulators``
 is then used for simulating the actual observations to be used in the analysis, as described in :ref:`observationSimulation`.
 
