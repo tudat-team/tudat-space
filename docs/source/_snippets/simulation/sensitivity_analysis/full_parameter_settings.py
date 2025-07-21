@@ -1,5 +1,5 @@
-parameter_settings = estimation_setup.parameter.initial_states( 
+parameter_settings = dynamics.parameters_setup.initial_states(
 	propagator_settings, bodies )
-parameter_settings.append( estimation_setup.parameter.gravitational_parameter("Earth") )
-parameter_settings.append( estimation_setup.parameter.constant_drag_coefficient("Delfi-C3") )
-parameter_settings.append( estimation_setup.parameter.radiation_pressure_coefficient("Delfi-C3") )
+parameter_settings.append( dynamics.parameters_setup.gravitational_parameter("Earth") )
+parameter_settings.append( dynamics.parameters_setup.constant_drag_coefficient("Delfi-C3") )
+parameter_settings.append( dynamics.parameters_setup.radiation_pressure_coefficient("Delfi-C3") )

@@ -74,7 +74,7 @@ For more help on getting started with the command-line interface (CLI), you coul
 
 .. _`tutorial`: https://blog.balthazar-rouberol.com/discovering-the-terminal
 
-Congratulations! You have now installed Tudat and TudatPy and are ready to start running your simulations and analyses! We recommend you get started by having a look at our :ref:`getting_started_examples`.
+Congratulations! You have now installed tudatpy and are ready to start running your simulations and analyses! We recommend you get started by having a look at our :ref:`getting_started_examples`.
 
 If there are any issues with the installation, the examples, or if you have any question or comments on Tudat, please use our `Github discussion forum <https://github.com/orgs/tudat-team/discussions>`_.
 
@@ -100,7 +100,7 @@ If there are any issues with the installation, the examples, or if you have any 
 Building your own TudatPy kernel
 ################################
 
-If you would prefer to not use a conda package, but instead build your own tudatpy kernel from the source code, clone the ``tudat-bundle`` repository from `here <https://github.com/tudat-team/tudat-bundle>`_ and follow the instructions in the README. To build the latest version of the kernel, switch both the tudat and tudatpy repositories to the ``develop`` branch in step 3 of the README.
+If you would prefer to not use a conda package, but instead build your own tudatpy kernel from the source code, clone the ``tudatpy`` repository from `here <https://github.com/tudat-team/tudatpy>`_ and follow the instructions in the README. To build the latest version of the kernel, switch the tudatpy repository to the ``develop`` branch in step 3 of the README.
 
 .. note::
 

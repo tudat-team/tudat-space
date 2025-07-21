@@ -20,23 +20,23 @@ If this is the case, we have the option for users to define 'custom' models for 
 
 Custom environment models:
 
-* Custom aerodynamic coefficients (with supported dependencies from :class:`~tudatpy.numerical_simulation.environment.AerodynamicCoefficientsIndependentVariables`) :func:`~tudatpy.numerical_simulation.environment_setup.aerodynamic_coefficients.custom_aerodynamic_force_coefficients` or :func:`~tudatpy.numerical_simulation.environment_setup.aerodynamic_coefficients.custom_aerodynamic_force_and_moment_coefficients` (only force, and force and moment coefficients, respectively)
-* Custom atmospheric density model (function of time only) :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.custom_constant_temperature`
-* Custom atmospheric density model (function of position and time) :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.custom_four_dimensional_constant_temperature` *Note:* this custom function has current time, altitude, latitude and longitude as input.
-* Custom wind model: :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.custom_wind_model`
-* Custom ephemeris: :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.custom_ephemeris`
-* Custom body orientation :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.custom_rotation_model`
-* Custom inertial direction (typical for basic thrust guidance) :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.custom_inertial_direction_based`
+* Custom aerodynamic coefficients (with supported dependencies from :class:`~tudatpy.dynamics.environment.AerodynamicCoefficientsIndependentVariables`) :func:`~tudatpy.dynamics.environment_setup.aerodynamic_coefficients.custom_aerodynamic_force_coefficients` or :func:`~tudatpy.dynamics.environment_setup.aerodynamic_coefficients.custom_aerodynamic_force_and_moment_coefficients` (only force, and force and moment coefficients, respectively)
+* Custom atmospheric density model (function of time only) :func:`~tudatpy.dynamics.environment_setup.atmosphere.custom_constant_temperature`
+* Custom atmospheric density model (function of position and time) :func:`~tudatpy.dynamics.environment_setup.atmosphere.custom_four_dimensional_constant_temperature` *Note:* this custom function has current time, altitude, latitude and longitude as input.
+* Custom wind model: :func:`~tudatpy.dynamics.environment_setup.atmosphere.custom_wind_model`
+* Custom ephemeris: :func:`~tudatpy.dynamics.environment_setup.ephemeris.custom_ephemeris`
+* Custom body orientation :func:`~tudatpy.dynamics.environment_setup.rotation_model.custom_rotation_model`
+* Custom inertial direction (typical for basic thrust guidance) :func:`~tudatpy.dynamics.environment_setup.rotation_model.custom_inertial_direction_based`
 
 Custom propagation models:
 
-* Custom thrust magnitude :func:`~tudatpy.numerical_simulation.propagation_setup.thrust.custom_thrust_magnitude`
-* Custom torque :func:`~tudatpy.numerical_simulation.propagation_setup.torque.custom_torque`
-* Custom acceleration :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.custom_acceleration`
-* Custom mass rate :func:`~tudatpy.numerical_simulation.propagation_setup.mass_rate.custom_mass_rate`
-* Custom state :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.custom_state` *Note:* this custom function has current time, and the current custom state, as input
-* Custom termination setting :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.custom_termination`  *Note:* this custom function takes no inputs, if the current time is needed, it can be retrieved from the :attr:`~tudatpy.numerical_simulation.environment.SystemOfBodies.current_time` attribute of the :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies`
-* Custom dependent variable :func:`~tudatpy.numerical_simulation.propagation_setup.dependent_variable.custom_dependent_variable` *Note:* this custom function takes no inputs, if the current time is needed, it can be retrieved from the :attr:`~tudatpy.numerical_simulation.environment.SystemOfBodies.current_time` attribute of the :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies`
+* Custom thrust magnitude :func:`~tudatpy.dynamics.propagation_setup.thrust.custom_thrust_magnitude`
+* Custom torque :func:`~tudatpy.dynamics.propagation_setup.torque.custom_torque`
+* Custom acceleration :func:`~tudatpy.dynamics.propagation_setup.acceleration.custom_acceleration`
+* Custom mass rate :func:`~tudatpy.dynamics.propagation_setup.mass_rate.custom_mass_rate`
+* Custom state :func:`~tudatpy.dynamics.propagation_setup.propagator.custom_state` *Note:* this custom function has current time, and the current custom state, as input
+* Custom termination setting :func:`~tudatpy.dynamics.propagation_setup.propagator.custom_termination`  *Note:* this custom function takes no inputs, if the current time is needed, it can be retrieved from the :attr:`~tudatpy.dynamics.environment.SystemOfBodies.current_time` attribute of the :class:`~tudatpy.dynamics.environment.SystemOfBodies`
+* Custom dependent variable :func:`~tudatpy.dynamics.propagation_setup.dependent_variable.custom_dependent_variable` *Note:* this custom function takes no inputs, if the current time is needed, it can be retrieved from the :attr:`~tudatpy.dynamics.environment.SystemOfBodies.current_time` attribute of the :class:`~tudatpy.dynamics.environment.SystemOfBodies`
 
 In each case, the user is required to define their own function, with a predefined set of inputs and outputs, which are different for each specific environment model (see API documentation links above). We can distinguish (roughly) three different ways in which to provide such custom functions to Tudat:
 
@@ -63,7 +63,7 @@ Here, we show an example of an ephemeris model that will be both faster, and les
          :language: python
 
  
-In the above example, the user-defined function ``neptune_state_function`` is provided when creating the custom ephemeris settings. The only requirement on this custom function is that it takes a single float as argument (representing time since J2000), and returns a 6-dimensional vector (representing the Cartesian state in the frame specified), as can be seen in the :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.custom_ephemeris` API entry.
+In the above example, the user-defined function ``neptune_state_function`` is provided when creating the custom ephemeris settings. The only requirement on this custom function is that it takes a single float as argument (representing time since J2000), and returns a 6-dimensional vector (representing the Cartesian state in the frame specified), as can be seen in the :func:`~tudatpy.dynamics.environment_setup.ephemeris.custom_ephemeris` API entry.
 
 .. _single_custom_models:
 

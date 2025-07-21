@@ -5,7 +5,7 @@ Mass Dynamics
 =============
 
 Settings to propagate the mass of a body numerically can be created through the
-:func:`~tudatpy.numerical_simulation.propagation_setup.propagator.mass` factory function, described
+:func:`~tudatpy.dynamics.propagation_setup.propagator.mass` factory function, described
 in detail in the :doc:`API documentation <propagator>`. In the current page, only the
 Tudat-specific aspects of the input will be briefly described.
 
@@ -17,7 +17,7 @@ Inputs
 
 In addition to the general propagation settings described :ref:`here <propagation_inputs>`, the definition of rotational dynamics settings requires:
 
-- A set of mass models (created via the :func:`~tudatpy.numerical_simulation.propagation_setup.create_mass_rate_models` factory function; see below)
+- A set of mass models (created via the :func:`~tudatpy.dynamics.propagation_setup.create_mass_rate_models` factory function; see below)
 - The initial conditions for the propagation (initial mass and time)
 
 The governing equation that is solved numerically for the mass dynamics is a first-order differential equation. It takes the simple form:
@@ -51,12 +51,12 @@ required as input, to link the thrust acceleration to the mass rate.
 
         .. code-block:: python
 
-            from tudatpy.numerical_simulation import propagation_setup
+            from tudatpy.dynamics import propagation_setup
 
       .. literalinclude:: /_snippets/simulation/propagation_setup/mass_models/from_thrust_mass_rate.py
          :language: python
 
-For a full description of available functions, see associated pages of :doc:`mass-rate models <mass_rate>` and :doc:`thrust models <thrust>` in the API documentation. For mass rate models that are not internally associated with thrust (for whatever reason), the user is recommended to use the :func:`~tudatpy.numerical_simulation.propagation_setup.mass_rate.custom_mass_rate` function.
+For a full description of available functions, see associated pages of :doc:`mass-rate models <mass_rate>` and :doc:`thrust models <thrust>` in the API documentation. For mass rate models that are not internally associated with thrust (for whatever reason), the user is recommended to use the :func:`~tudatpy.dynamics.propagation_setup.mass_rate.custom_mass_rate` function.
 
 .. _mass_example:
 
@@ -81,7 +81,7 @@ hours (simulation time).
 
       .. code-block:: python
 
-          from tudatpy.numerical_simulation import propagation_setup
+          from tudatpy.dynamics import propagation_setup
 
     .. literalinclude:: /_snippets/simulation/environment_setup/full_mass_setup.py
         :language: python

@@ -25,16 +25,16 @@ General information
 ========================
 
 In Tudat, the physical environment is defined by a set of bodies, each encapsulated in a
-:class:`~tudatpy.numerical_simulation.environment.Body` object. Each body contains a list of properties
+:class:`~tudatpy.dynamics.environment.Body` object. Each body contains a list of properties
 (gravity field, ephemeris, *etc.*), which may be interdependent.
 
 .. note::
-   The :class:`~tudatpy.numerical_simulation.environment.Body` object may represent a celestial body or an
+   The :class:`~tudatpy.dynamics.environment.Body` object may represent a celestial body or an
    artificial vehicle. Tudat makes *no* a priori distinction between the two: the distinction is made by the user when
    creating the bodies.
 
-The combination of all :class:`~tudatpy.numerical_simulation.environment.Body` objects is stored in a
-:class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` object (typically named
+The combination of all :class:`~tudatpy.dynamics.environment.Body` objects is stored in a
+:class:`~tudatpy.dynamics.environment.SystemOfBodies` object (typically named
 simple ``bodies`` in the code). This object constitutes "the environment" in Tudat.
 During the propagation, all the required properties of bodies are extracted from here and combined
 to evaluate accelerations/torques/guidance/..., and compute the state derivative of the system
@@ -51,23 +51,23 @@ detail on a dedicated page on :ref:`environment_architecture` (for advanced user
 Body Creation - Procedure
 -------------------------
 
-The :class:`~tudatpy.numerical_simulation.environment.Body` objects, and the :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` object
+The :class:`~tudatpy.dynamics.environment.Body` objects, and the :class:`~tudatpy.dynamics.environment.SystemOfBodies` object
 that holds them, are not directly created by the user. Instead, settings for each body
-are created by a user and stored in a :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings` object.
-A set of such objects (one for each body) is in turn stored in a :class:`~tudatpy.numerical_simulation.environment_setup.BodyListSettings` object,
-from which the environment is created using the :func:`~tudatpy.numerical_simulation.environment_setup.create_system_of_bodies` function.
+are created by a user and stored in a :class:`~tudatpy.dynamics.environment_setup.BodySettings` object.
+A set of such objects (one for each body) is in turn stored in a :class:`~tudatpy.dynamics.environment_setup.BodyListSettings` object,
+from which the environment is created using the :func:`~tudatpy.dynamics.environment_setup.create_system_of_bodies` function.
 
 The typical procedure to create the environment is represented in the figure and explained below.
 
 1. **Create body settings**: create settings for bodies which have default settings (see :ref:`default_env_models`),
    customize these settings as desired, and/or manually add settings for bodies without defaults (see :ref:`creation_celestial_body_settings`).
 
-2. **Create system of bodies**: use the settings above to create a set of :class:`~tudatpy.numerical_simulation.environment.Body`
-   objects stored in a  :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` object, automatically resolving any
+2. **Create system of bodies**: use the settings above to create a set of :class:`~tudatpy.dynamics.environment.Body`
+   objects stored in a  :class:`~tudatpy.dynamics.environment.SystemOfBodies` object, automatically resolving any
    interdependencies  (see :ref:`create_bodies_from_settings_first`).
 
 3. **Modify bodies** If desired, additional models and bodies can be added after this
-   :class:`~tudatpy.numerical_simulation.environment.Body`/:class:`~tudatpy.numerical_simulation.environment.SystemOfBodies`
+   :class:`~tudatpy.dynamics.environment.Body`/:class:`~tudatpy.dynamics.environment.SystemOfBodies`
    creation, with limitations on interdependencies with existing bodies (see :ref:`create_empty_body`).
 
 .. figure:: _static/tudatpy_environment.png
@@ -77,7 +77,7 @@ The typical procedure to create the environment is represented in the figure and
 Body Utilization
 ----------------
 
-Although the :class:`~tudatpy.numerical_simulation.environment.Body` objects contain all information on the environment,
+Although the :class:`~tudatpy.dynamics.environment.Body` objects contain all information on the environment,
 the direct interaction with these objects in a simple numerical propagation is very limited. The bodies interact mostly
 with the numerical simulation framework, which uses the information on the environment to set up and solve teh equations of motion.
 
