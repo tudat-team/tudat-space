@@ -4,6 +4,10 @@ build:
   os: "ubuntu-22.04"
   tools:
     python: "mambaforge-22.9"
+  commands:
+    - unset CONDA_ENVS_PATH ; unset CONDA_DEFAULT_ENV ; asdf install python miniforge3-25.1.1-2
+    - asdf global python miniforge3-25.1.1-2
+
   
 conda:
   environment: docs/environment.yaml
