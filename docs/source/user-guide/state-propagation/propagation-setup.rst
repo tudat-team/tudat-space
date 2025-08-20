@@ -71,7 +71,7 @@ There are a number different types of dynamics that Tudat can numerically propag
 - :ref:`translational_dynamics`: the translational state of a body is propagated;
 - :ref:`rotational_dynamics`: the rotational state of a body is propagated;
 - :ref:`mass_dynamics`: the mass of a body is propagated.
-- Custom Dynamics: an arbitrary user-defined state derivative model, see :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.custom_state` (typically in the context of a multi-type propagation).
+- Custom Dynamics: an arbitrary user-defined state derivative model, see :func:`~tudatpy.dynamics.propagation_setup.propagator.custom_state` (typically in the context of a multi-type propagation).
 
 Furthermore, any combination of any number of types of dynamics for any number of bodies can be defined. Therefore,
 in Tudat we also have:

@@ -25,14 +25,14 @@ For the supported dynamics types, the following formulations are defined to be t
 You will find and need to use *processed* coordinates in these scenarios:
 
 - To describe the initial conditions of an object when creating propagator settings (typically using the
-  :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.translational` or
-  :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.rotational` functions)
+  :func:`~tudatpy.dynamics.propagation_setup.propagator.translational` or
+  :func:`~tudatpy.dynamics.propagation_setup.propagator.rotational` functions)
 - As an output from the numerical propagation, extracted from the
-  :attr:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults.state_history` of the
-  :class:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults` (see :ref:`propagation_results`)
+  :attr:`~tudatpy.dynamics.propagation.SingleArcSimulationResults.state_history` of the
+  :class:`~tudatpy.dynamics.propagation.SingleArcSimulationResults` (see :ref:`propagation_results`)
 
 
-- When extracting the current state from a :class:`~tudatpy.numerical_simulation.environment.Body` object during the propagation
+- When extracting the current state from a :class:`~tudatpy.dynamics.environment.Body` object during the propagation
 
 Internally, Tudat uses the *processed* state in the following places:
 
@@ -46,17 +46,17 @@ Propagated Elements
 
 The *propagated* coordinates, on the other hand, are used *only* to describe the state in the actual differential equations
 being used. A list of options for translational and rotational dynamics is given in
-:class:`~tudatpy.numerical_simulation.propagation_setup.propagator.TranslationalPropagatorType` and
-:class:`~tudatpy.numerical_simulation.propagation_setup.propagator.RotationalPropagatorType`, respectively.
+:class:`~tudatpy.dynamics.propagation_setup.propagator.TranslationalPropagatorType` and
+:class:`~tudatpy.dynamics.propagation_setup.propagator.RotationalPropagatorType`, respectively.
 The choice of formulation for translational and
-rotational motion is specified when calling the  :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.translational` and
-:func:`~tudatpy.numerical_simulation.propagation_setup.propagator.rotational` functions, respectively.
+rotational motion is specified when calling the  :func:`~tudatpy.dynamics.propagation_setup.propagator.translational` and
+:func:`~tudatpy.dynamics.propagation_setup.propagator.rotational` functions, respectively.
 
 In Tudat, you will find the propagated elements in the following place:
 
 - As an output from the numerical propagation, extracted from the
-  :attr:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults.unprocessed_state_history` of the
-  :class:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults` (see :ref:`propagation_results`)
+  :attr:`~tudatpy.dynamics.propagation.SingleArcSimulationResults.unprocessed_state_history` of the
+  :class:`~tudatpy.dynamics.propagation.SingleArcSimulationResults` (see :ref:`propagation_results`)
 
 Internally, Tudat uses the *propagated* state in the following place:
 

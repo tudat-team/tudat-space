@@ -332,7 +332,7 @@ processes that can be used.
             import tudatpy
             from tudatpy.util import result2array
             from tudatpy import constants
-            from tudatpy.numerical_simulation import environment_setup
+            from tudatpy.dynamics import environment_setup
 
       .. literalinclude:: /_snippets/simulation/parallelization/pygmo_batch_fitness.py
          :language: python
@@ -373,7 +373,7 @@ this is not considered here.
                 import tudatpy
                 from tudatpy.util import result2array
                 from tudatpy import constants
-                from tudatpy.numerical_simulation import environment_setup
+                from tudatpy.dynamics import environment_setup
 
       .. literalinclude:: /_snippets/simulation/parallelization/pg_bfe_evolve.py
          :language: python
@@ -465,7 +465,7 @@ for any topology to exchange individuals.
             import tudatpy
             from tudatpy.util import result2array
             from tudatpy import constants
-            from tudatpy.numerical_simulation import environment_setup
+            from tudatpy.dynamics import environment_setup
 
       .. literalinclude:: /_snippets/simulation/parallelization/pg_archi.py
          :language: python

@@ -27,11 +27,11 @@ The above differential equations are solved:
 * The output of the propagation consists of the state that is propagated, as well as any number of :ref:`output (dependent) variables <printing_processing_results>`.
 
 Simulations in which only the system state is propagated are handled by simulator objects derived from the ``Simulator`` base class. 
-The creation of this object is done using the :func:`~tudatpy.numerical_simulation.create_dynamics_simulator` function :
+The creation of this object is done using the :func:`~tudatpy.dynamics.simulator.create_dynamics_simulator` function :
 
 .. code-block:: python
 
-    dynamics_simulator = numerical_simulation.create_dynamics_simulator(
+    dynamics_simulator = dynamics.simulator.create_dynamics_simulator(
         body_system, propagator_settings)
     propagation_results = dynamics_simulator.propagation_results
 
@@ -39,8 +39,8 @@ The creation of this object is done using the :func:`~tudatpy.numerical_simulati
 where the two inputs specify (roughly) what the physical environment is (the bodies) and how the simulator is supposed to act on this
 physical environment. By default, creating the dynamics simulator immediately starts the propagation.
 The choice of single-, multi- or hybrid-arc (see :ref:`here <multi_arc_dynamics>`) is defined by the choice of ``propagator_settings``, resulting in the ``dynamics_simulator``
-being of type :class:`~tudatpy.numerical_simulation.SingleArcSimulator`, :class:`~tudatpy.numerical_simulation.MultiArcSimulator` or
-:class:`~tudatpy.numerical_simulation.HybridArcSimulator`, respectively.
+being of type :class:`~tudatpy.dynamics.simulator.SingleArcSimulator`, :class:`~tudatpy.dynamics.simulator.MultiArcSimulator` or
+:class:`~tudatpy.dynamics.simulator.HybridArcSimulator`, respectively.
 The results of the numerical integration are stored in the ``propagation_results``, which is described in more detail below, along with a
 more detailed description of the process that is executed during the propagation:
 
