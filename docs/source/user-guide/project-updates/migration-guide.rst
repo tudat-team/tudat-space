@@ -14,49 +14,63 @@ Have questions or feedback? As always, let us know in our `Github Discussion for
 Installation
 ^^^^^^^^^^^^
 
-How to obtain the new version: ...
+How to obtain the new version: the installation of tudatpy for users has not changed, you can simply use our installation using the conda packages
+as described on our :ref:`installation guide <getting_started_installation>`. The only difference is that installing tudatpy will now no longer result in a separate ``tudat`` and ``tudatpy`` conda packages being installed, since the two have been merged into a single ``tudatpy`` package.
 
 New module structure
 ^^^^^^^^^^^^^^^^^^^^
 
-Explain what was changed ...
+As of v1.0, we have thoroughly re-organized the module structure of tudatpy. We have implemented this such that old import statements will still work (so v1.0 is backwards compatible with code written for older version), but will phase out this support in later versions. A comprehensive overview of the changes to the module structure is given below.
 
 Why was this needed?
 ===================
 
-...
+There are two driving reasons behind our reorganization of the module structure. The primary reason is the poor organization of functionality in the ``numerical_simulation.estimation`` and ``numerical_simulation.estimation_setup`` modules, which led to a large amount of functionality being combined into a small number of modules
+(such as ``numerical_simulation.estimation_setup.observation``), making tudaty functionality poorly findable, and hampering transparent further developments. An additional reason was that the bulk of the functionality was in the ``numerical_simulation`` module. It was decided to split this into two top-level modules ``dynamics`` and ``estimation``, where the former contains functionality for propagation of dynamics, and the latter contains all functionality required for estimation of states and parameters from (tracking) data.
+
+In addition to these two drivers, we also took the oppurtunity to re-organize some other minor aspects of the modules, moving some classes and functions into a more suitable module.
+
 
 How does it effect users?
 =========================
 
-...
+The impact on existing scripts should be none, since all reorganization has been done in backwards compatible manner. If you find any functionality fot which this does not seem to be the case, let us know in our `Github Discussion forum <https://github.com/orgs/tudat-team/discussions?discussions_q=>`_.
+
+Using the pre-v1.0 imports will result in a deprecation warning being printed. We expect to drop support for the older imports after two years, in the course of 2027.
+
+All newly developed functionality will be provided only in the new module structure. In addition, all updates to documentation will only be available in the new module setup, so we recommend all users to update their to the new import statements.
 
 How to migrate?
 ====================
 
-...
+Migrating to the new module setup can be done by modifying top-level import statements of modules, and module specifications in the code when using a specific piece of functionality. Below we provide an overview of all changes that have been made. Implementing these modifications in your code should fully migrate you to v1.0!
+
+TODO: ADD TABLE/LIST HERE
 
 
 New ``Time`` type
 ^^^^^^^^^^^^^^^^^
 
-Explain what was changed ...
+Up until v0.9, tudatpy used ``float`` variables to denote both epochs and durations of time. As of v1.0, we have moved to a new setup where time is represented by a dedicated :class:`~tudatpy.astro.time_conversion.Time` class.
 
 Why was this needed?
 ===================
 
-...
+A ``float`` variable has a numerical resolution of about :math:`2\cdot 10^{-16}`, meaning that a relative change below this level cannot be represented. In Tudat, we use seconds since epoch J2000 as time representation. Using a ``float`` for this means that for epochs durther away from J2000, the resolution to which time can be represented degrades. For either 1950 or 2050 (about :math:`1.6\cdot 10^{9}` seconds from J2000 this imposes a hard limit of 0.35 microseconds in resolution of time.
+
+TODO: ADD MORE DETAILS
 
 How does it affect users?
 =========================
 
-...
+The modifications we have made to change to a different time representation have all been made in a backwards compatible manner. An implicit conversion between ``Time`` and ``float`` has been implemented, so that any function that requires a ``Time`` object as input can also take a ``float`` as input. In doing so, the value is 'upconverted` to the higher resolution representation, allowing all later computations to be done at the high resolution.
+
+Various output structures in tudat are provided as dictionaries with time as the independent variable (key). By default, the output a user extracts, for instance from the :attr:`~tudatpy.dynamics.propagation.SingleArcSimulationResults.state_history` attribute for the state history from a numerical propagation will (as in v0.9 and earlier) provide this state history with ``float`` as independent variable, since for most post-processing purposes this is both sufficient and more convenient. However, we now also provide the option to retrieve the state history with time at the native resolution in which the propagation was performed by using the :attr:`~tudatpy.dynamics.propagation.SingleArcSimulationResults.state_history_time_object` attribute. A similar setup has been introduced in various other tudat output options, facilitating backwards compatibility, permitting use of the more typical ``float`` for post-processing, and providing access to the native resolution when required. Some more information on Tudat time representations can be found on our page for :ref:`internal_time`.
 
 How to migrate?
 ====================
 
-...
-
+No action is required to migrate for this modification. All v0.9 interfaces remain valid and are not deprecated. For various applications, it will not be relevant whether the ``float`` or ``Time`` representation is used internally, and inputs and outputs using ``float`` continue to be valid as they were before. Even for applications where the use of the high-accuracy internal time representation improves numerical results, it will often still be sufficient to provide the input and output at the original ``float`` representation.
 
 Merging of ``tudatpy`` repositories
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -84,7 +98,7 @@ Reduced complexity:
 Developers were expected to build from the tudat-bundle repository, even though the actual source code lived in tudat and tudatpy. This indirection often caused confusion, particularly for new contributors. The merge removes this extra layer.
 
 Consistent configuration:
-Maintaining separate build systems (CMake and conda feedstock) for two repositories sometimes led to inconsistencies or duplication of effort. A unified repo makes it easier to keep things aligned.
+Maintaining separate build systems (CMake and conda feedstock) for two repositories sometimes led to inconsistencies or duplication of effort. A unified repo makes it easier to keep things aligned.BLABLA
 
 Changing usage patterns:
 The repositories were originally split to support C++-only users. However, most users now rely on the Python interface. With the merged setup, C++-only workflows are still fully supported, but there's no longer a strong reason to keep the two codebases apart.
