@@ -51,14 +51,15 @@ TODO: ADD TABLE/LIST HERE
 New ``Time`` type
 ^^^^^^^^^^^^^^^^^
 
-Up until v0.9, tudatpy used ``float`` variables to denote both epochs and durations of time. As of v1.0, we have moved to a new setup where time is represented by a dedicated :class:`~tudatpy.astro.time_conversion.Time` class.
+Up until v0.9, tudatpy used ``float`` variables to denote both epochs and durations of time. As of v1.0, we have moved to a new setup where time is represented by a dedicated :class:`~tudatpy.astro.time_conversion.Time` class. Also in v0.9 and earlier, it was possible to use the ``Time`` type internally, but this required manual recompilation withn specific settings to trigger this behavious. As of v1.0, we have choisen to make this the default behaviour in our packages
+
 
 Why was this needed?
 ===================
 
 A ``float`` variable has a numerical resolution of about :math:`2\cdot 10^{-16}`, meaning that a relative change below this level cannot be represented. In Tudat, we use seconds since epoch J2000 as time representation. Using a ``float`` for this means that for epochs durther away from J2000, the resolution to which time can be represented degrades. For either 1950 or 2050 (about :math:`1.6\cdot 10^{9}` seconds from J2000 this imposes a hard limit of 0.35 microseconds in resolution of time.
 
-TODO: ADD MORE DETAILS
+There are several concrete examples of cases where this poor timing resolution limits the performance of analyses. For numerical integration with small time steps, rounding errors in the representation of time have been known to lead to confusing results in (for instance) benchmarking. As an additional example, in Doppler data analysis of planetary missions, the observable is computed by the difference of two light times. Due to the limited resolution in representing epochs, using ``Time`` is required to get state-of-the-art performance. This required Tudat to be manually compiled to use this functionality. With the data analysis framework of Tudat taking an ever more prominent place, it has become important to provide this functionality in the 'normal' package.
 
 How does it affect users?
 =========================
@@ -72,15 +73,17 @@ How to migrate?
 
 No action is required to migrate for this modification. All v0.9 interfaces remain valid and are not deprecated. For various applications, it will not be relevant whether the ``float`` or ``Time`` representation is used internally, and inputs and outputs using ``float`` continue to be valid as they were before. Even for applications where the use of the high-accuracy internal time representation improves numerical results, it will often still be sufficient to provide the input and output at the original ``float`` representation.
 
-Merging of ``tudatpy`` repositories
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The previous tudat-bundle structure (where tudat, tudatpy, and tudatpy-examples were maintained as separate repositories) has been simplified. The core tudat codebase is now included as a subdirectory within the tudatpy repository, which contains both the C++ source code and the Python bindings. The tudatpy-examples repository still exists, now as a submodule within tudatpy. The tudat-bundle repository has been deprecated and is effectively replaced by tudatpy.
+Merging of ``tudatpy`` repositories and conda packages
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The CMake configuration from tudat has been merged into the main CMakeLists.txt of tudatpy, resulting in a unified build system. The tudatpy repository now follows a mirrored structure: each component has its own tudat (for C++) and tudatpy (for Python) subdirectories. In general, the core logic is located in the tudat folders, while Python bindings and Python-only functionality are placed under the tudatpy folders.
+The previous structure of the project, with separate conda packages and code repostories for tudat (underlying C++ models) and tudatpy (Python exposure), as well as a tudat-bundle repositories for developers to compile both tudat and tudatpy concurrently, has been a source of various complications and inconsistencies. The codebase from the original tudat repository is now included as a subdirectory within the tudatpy repository (with some reorganization), which contains both the C++ source code and the Python bindings. The tudatpy-examples repository still exists, now as a submodule within tudatpy. The tudat-bundle repository has been deprecated, developers now compile the tudatpy repository directly.
 
-Where files were previously duplicated or mirrored between tudat and tudatpy, they have now been consolidated—typically by keeping the version from tudatpy when the content was identical.
+The CMake configuration from tudat has been merged into the main CMakeLists.txt of tudatpy, resulting in a unified build system. The tudatpy repository now follows a mirrored structure: each component has its own tudat (for C++) and tudatpy (for Python) subdirectories. In general, the core logic is located in the tudat folders, while Python bindings and Python-only functionality are placed under the tudatpy folders. The build logic is now largely identical for developing, testing and deploying.
 
-[WHAT ELSE IS WORTH MENTIONING, @ALFONSO? PERHAPS THE AZURE BUILD, and something else...]
+Where some files were previously duplicated or mirrored between tudat and tudatpy, they have now been consolidated—typically by keeping the version from tudatpy when the content was identical.
+
+The tudat conda package and tudat-feedstock repository are now longer used with this change. The tudatpy conda package now contains both the underlying C++ models and the Python exposure.
+
 
 Why was this needed?
 ===================
@@ -98,7 +101,7 @@ Reduced complexity:
 Developers were expected to build from the tudat-bundle repository, even though the actual source code lived in tudat and tudatpy. This indirection often caused confusion, particularly for new contributors. The merge removes this extra layer.
 
 Consistent configuration:
-Maintaining separate build systems (CMake and conda feedstock) for two repositories sometimes led to inconsistencies or duplication of effort. A unified repo makes it easier to keep things aligned.BLABLA
+Maintaining separate build systems (CMake and conda feedstock) for two repositories sometimes led to inconsistencies or duplication of effort. A unified repo makes it easier to keep things aligned.
 
 Changing usage patterns:
 The repositories were originally split to support C++-only users. However, most users now rely on the Python interface. With the merged setup, C++-only workflows are still fully supported, but there's no longer a strong reason to keep the two codebases apart.
@@ -113,9 +116,16 @@ The repository restructuring introduces a cleaner and more unified layout, but a
 
 However, developers who were actively working on branches in the old tudat repository will need to migrate their work to the new combined repository. This typically involves rebasing or transplanting their changes into the appropriate location within the new structure (e.g. moving C++ code to the tudat/ subdirectory within tudatpy).
 
-To preserve commit history and ensure smooth integration, we recommend carefully following the steps outlined in the "How to Migrate?" section below. If you encounter any issues or are unsure how to proceed, feel free to reach out to the core development team at [ADD EMAILS].
+To preserve commit history and ensure smooth integration, we recommend carefully following the steps outlined in the "How to Migrate?" section below. If you encounter any issues or are unsure how to proceed, feel free to reach out to the core development team on our `discussion forum <https://github.com/orgs/tudat-team/discussions/>`_
 
 How to migrate?
 ====================
-...
+
+For users, simply creating a new conda environment for tudatpy (as per out :ref:`getting_started_installation`) will migrate to the new setup, without any changes on the user side.
+
+Developers wihout any active development branches on either tudat or tudatpy (pre-v1.0) should clone the new (v1.0) tudatpy ``develop`` branch, and work with this in the exact same manner as they interacted with the old tudat-bundle repository.
+
+Developers with active development branches on either tudat or tudatpy that have diverged from the ``develop`` branch shoud contact the tudatpy development team. We can assist in migrating your code to the new repository setup.
+
+TODO: write migration guide
 
