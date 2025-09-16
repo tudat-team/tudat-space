@@ -241,8 +241,8 @@ We will use Tudat's own :class:`~tudatpy.astro.time_representation.DateTime` cla
 .. code-block:: python
 
    # Set simulation start and end epochs
-   simulation_start_epoch = DateTime(2020, 1, 1).epoch()
-   simulation_end_epoch   = DateTime(2020, 1, 2).epoch()
+   simulation_start_epoch = DateTime(2020, 1, 1).to_epoch()
+   simulation_end_epoch   = DateTime(2020, 1, 2).to_epoch()
 
 .. seealso:: 
    For conversions from other time scales and formats, see :ref:`times_and_dates`.

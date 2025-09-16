@@ -184,7 +184,7 @@ The :doc:`Rotation models <rotation_model>` module contains functions to create 
   .. code-block:: python
 
       from tudatpy.dynamics import environment_setup
-      from tudatpy.astro import time_conversion
+      from tudatpy.astro import time_representation
 
       # Create body settings
       body_settings =  environment_setup.get_default_body_settings( ... ) # Typical way to instantiate body settings
@@ -194,7 +194,7 @@ The :doc:`Rotation models <rotation_model>` module contains functions to create 
           base_frame = 'J2000',
           target_frame = 'IAU_Earth',
           target_frame_spice = 'IAU_Earth_simplified',
-          initial_time = time_conversion.date_time_from_iso_string( '2020-09-08T14:00:00.0' ).epoch( ) )
+          initial_time = time_representation.DateTime.from_iso_string( '2020-09-08T14:00:00.0' ).to_epoch( ) )
 
       # Create bodies
       bodies = environment_setup.create_system_of_bodies(body_settings)
@@ -216,7 +216,7 @@ The :doc:`Shape models <shape>` module contains functions to create settings obj
   .. code-block:: python
 
       from tudatpy.dynamics import environment_setup
-      from tudatpy.astro import time_conversion
+      from tudatpy.astro import time_representation
 
       # Create body settings
       body_settings =  environment_setup.get_default_body_settings( ... ) # Typical way to instantiate body settings
