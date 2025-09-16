@@ -23,41 +23,65 @@ New module structure
 As of v1.0, we have thoroughly re-organized the module structure of tudatpy. We have implemented this such that old import statements will still work (so v1.0 is backwards compatible with code written for older version), but will phase out this support in later versions. A comprehensive overview of the changes to the module structure is given below.
 
 Why was this needed?
-===================
+====================
 
 There are two driving reasons behind our reorganization of the module structure. The primary reason is the poor organization of functionality in the ``numerical_simulation.estimation`` and ``numerical_simulation.estimation_setup`` modules, which led to a large amount of functionality being combined into a small number of modules
-(such as ``numerical_simulation.estimation_setup.observation``), making tudaty functionality poorly findable, and hampering transparent further developments. An additional reason was that the bulk of the functionality was in the ``numerical_simulation`` module. It was decided to split this into two top-level modules ``dynamics`` and ``estimation``, where the former contains functionality for propagation of dynamics, and the latter contains all functionality required for estimation of states and parameters from (tracking) data.
+(such as ``numerical_simulation.estimation_setup.observation``), making tudatpy functionality poorly findable, and hampering transparent further developments. An additional reason was that the bulk of the functionality was in the ``numerical_simulation`` module. It was decided to split this into two top-level modules ``dynamics`` and ``estimation``, where the former contains functionality for propagation of dynamics, and the latter contains all functionality required for estimation of states and parameters from (tracking) data.
 
-In addition to these two drivers, we also took the oppurtunity to re-organize some other minor aspects of the modules, moving some classes and functions into a more suitable module.
+In addition to these two drivers, we also took the opportunity to re-organize some other minor aspects of the modules, moving some classes and functions into a more suitable module.
 
 
 How does it effect users?
 =========================
 
-The impact on existing scripts should be none, since all reorganization has been done in backwards compatible manner. If you find any functionality fot which this does not seem to be the case, let us know in our `Github Discussion forum <https://github.com/orgs/tudat-team/discussions?discussions_q=>`_.
+The impact on existing scripts should be none, since all reorganization has been done in a backwards compatible manner. If you find any functionality fot which this does not seem to be the case, let us know in our `Github Discussion forum <https://github.com/orgs/tudat-team/discussions?discussions_q=>`_.
 
 Using the pre-v1.0 imports will result in a deprecation warning being printed. We expect to drop support for the older imports after two years, in the course of 2027.
 
-All newly developed functionality will be provided only in the new module structure. In addition, all updates to documentation will only be available in the new module setup, so we recommend all users to update their to the new import statements.
+All newly developed functionality will only be provided in the new module structure. In addition, all updates to documentation will only be available in the new module setup, so we recommend all users to update their code to the new import statements.
 
 How to migrate?
 ====================
 
-Migrating to the new module setup can be done by modifying top-level import statements of modules, and module specifications in the code when using a specific piece of functionality. Below we provide an overview of all changes that have been made. Implementing these modifications in your code should fully migrate you to v1.0!
+Migrating to the new module setup can be done by modifying top-level import statements of modules, and module specifications in the code when using a specific piece of functionality. Most of the propagation-related functionality in the ``environment``, ``environment_setup``, ``propagation`` and ``propagation_setup`` submodules is simply moved from the old ``numerical_simulation`` module to the new ``dynamics`` module. Estimation-related functionality in the ``estimation`` and ``estimation_setup`` submodules has been refactored in multiple submodules, which requires more detailed treatment. Below we provide an overview of all changes that have been made. Implementing these modifications in your code should fully migrate you to v1.0!
 
-TODO: ADD TABLE/LIST HERE
+.. dropdown:: Full list of module changes
+    :color: secondary
 
+    +-------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | Old module                                            | New module                                                                                                                                                                |
+    +=======================================================+===========================================================================================================================================================================+
+    | ``astro.time_conversion``                             | ``astro.time_representation``                                                                                                                                             |
+    +-------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | Top-level ``numerical_simulation``                    | Split in ``dynamics.simulator`` and ``estimation.estimation_analysis``                                                                                                    |
+    +-------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | ``numerical_simulation.environment``                  | ``dynamics.environment``                                                                                                                                                  |
+    +-------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | ``numerical_simulation.environment_setup``            | ``dynamics.environment_setup``                                                                                                                                            |
+    +-------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | ``numerical_simulation.propagation``                  | ``dynamics.propagation``                                                                                                                                                  |
+    +-------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | ``numerical_simulation.propagation_setup``            | ``dynamics.propagation_setup``                                                                                                                                            |
+    +-------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | ``numerical_simulation.estimation``                   | Distributed in ``estimation.estimation_analysis`` and ``estimation.observations.observations.geometry``                                                                   |
+    +-------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | ``numerical_simulation.estimation_setup``             | Distributed in ``dynamics.parameters``, ``dynamics.parameters_setup``, ``estimation.observations_setup.observations_simulation_settings``                                 |
+    +-------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | ``numerical_simulation.estimation_setup.parameter``   | Split in ``dynamics.parameters`` and ``dynamics.parameters_setup``                                                                                                        |
+    +-------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | ``numerical_simulation.estimation_setup.observation`` | Split in ``estimation.observable_models``, ``estimation.observable_models_setup``, ``estimation.observations`` and ``estimation.observations_setup`` and their submodules |
+    +-------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 New ``Time`` type
 ^^^^^^^^^^^^^^^^^
 
-Up until v0.9, tudatpy used ``float`` variables to denote both epochs and durations of time. As of v1.0, we have moved to a new setup where time is represented by a dedicated :class:`~tudatpy.astro.time_conversion.Time` class. Also in v0.9 and earlier, it was possible to use the ``Time`` type internally, but this required manual recompilation withn specific settings to trigger this behavious. As of v1.0, we have choisen to make this the default behaviour in our packages
+Up until v0.9, tudatpy used ``float`` variables to denote both epochs and durations of time. As of v1.0, we have moved to a new setup where time is represented by a dedicated :class:`~tudatpy.astro.time_conversion.Time` class. Also in v0.9 and earlier, it was possible to use the ``Time`` type internally, but this required manual recompilation with specific settings to trigger this behaviour. As of v1.0, we have chosen to make this the default behaviour in our packages.
 
 
 Why was this needed?
-===================
+====================
 
-A ``float`` variable has a numerical resolution of about :math:`2\cdot 10^{-16}`, meaning that a relative change below this level cannot be represented. In Tudat, we use seconds since epoch J2000 as time representation. Using a ``float`` for this means that for epochs durther away from J2000, the resolution to which time can be represented degrades. For either 1950 or 2050 (about :math:`1.6\cdot 10^{9}` seconds from J2000 this imposes a hard limit of 0.35 microseconds in resolution of time.
+A ``float`` variable has a numerical resolution of about :math:`2\cdot 10^{-16}`, meaning that a relative change below this level cannot be represented. In Tudat, we use seconds since epoch J2000 as time representation. Using a ``float`` for this means that for epochs durther away from J2000, the resolution to which time can be represented degrades. For either 1950 or 2050 (about :math:`1.6\cdot 10^{9}` seconds from J2000) this imposes a hard limit of 0.35 microseconds in resolution of time.
 
 There are several concrete examples of cases where this poor timing resolution limits the performance of analyses. For numerical integration with small time steps, rounding errors in the representation of time have been known to lead to confusing results in (for instance) benchmarking. As an additional example, in Doppler data analysis of planetary missions, the observable is computed by the difference of two light times. Due to the limited resolution in representing epochs, using ``Time`` is required to get state-of-the-art performance. This required Tudat to be manually compiled to use this functionality. With the data analysis framework of Tudat taking an ever more prominent place, it has become important to provide this functionality in the 'normal' package.
 
@@ -76,7 +100,7 @@ No action is required to migrate for this modification. All v0.9 interfaces rema
 Merging of ``tudatpy`` repositories and conda packages
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The previous structure of the project, with separate conda packages and code repostories for tudat (underlying C++ models) and tudatpy (Python exposure), as well as a tudat-bundle repositories for developers to compile both tudat and tudatpy concurrently, has been a source of various complications and inconsistencies. The codebase from the original tudat repository is now included as a subdirectory within the tudatpy repository (with some reorganization), which contains both the C++ source code and the Python bindings. The tudatpy-examples repository still exists, now as a submodule within tudatpy. The tudat-bundle repository has been deprecated, developers now compile the tudatpy repository directly.
+The previous structure of the project, with separate conda packages and code repositories for tudat (underlying C++ models) and tudatpy (Python exposure), as well as a tudat-bundle repositories for developers to compile both tudat and tudatpy concurrently, has been a source of various complications and inconsistencies. The codebase from the original tudat repository is now included as a subdirectory within the tudatpy repository (with some reorganization), which contains both the C++ source code and the Python bindings. The tudatpy-examples repository still exists, now as a submodule within tudatpy. The tudat-bundle repository has been deprecated, developers now compile the tudatpy repository directly.
 
 The CMake configuration from tudat has been merged into the main CMakeLists.txt of tudatpy, resulting in a unified build system. The tudatpy repository now follows a mirrored structure: each component has its own tudat (for C++) and tudatpy (for Python) subdirectories. In general, the core logic is located in the tudat folders, while Python bindings and Python-only functionality are placed under the tudatpy folders. The build logic is now largely identical for developing, testing and deploying.
 
@@ -86,7 +110,7 @@ The tudat conda package and tudat-feedstock repository are now longer used with 
 
 
 Why was this needed?
-===================
+====================
 The decision to merge the tudat and tudatpy repositories was driven by the need to simplify development, testing, and packaging workflows. Maintaining them separately had become increasingly cumbersome, and the original motivation for the split no longer reflects how the project is used today.
 
 Here are the main reasons behind the merge:
@@ -123,9 +147,9 @@ How to migrate?
 
 For users, simply creating a new conda environment for tudatpy (as per out :ref:`getting_started_installation`) will migrate to the new setup, without any changes on the user side.
 
-Developers wihout any active development branches on either tudat or tudatpy (pre-v1.0) should clone the new (v1.0) tudatpy ``develop`` branch, and work with this in the exact same manner as they interacted with the old tudat-bundle repository.
+Developers without any active development branches on either tudat or tudatpy (pre-v1.0) should clone the new (v1.0) tudatpy ``develop`` branch, and work with this in the exact same manner as they interacted with the old tudat-bundle repository.
 
-Developers with active development branches on either tudat or tudatpy that have diverged from the ``develop`` branch shoud contact the tudatpy development team. We can assist in migrating your code to the new repository setup.
+Developers with active development branches on either tudat or tudatpy that have diverged from the ``develop`` branch should contact the tudatpy development team. We can assist in migrating your code to the new repository setup.
 
 TODO: write migration guide
 
