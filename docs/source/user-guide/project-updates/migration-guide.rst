@@ -47,7 +47,6 @@ Migrating to the new module setup can be done by modifying top-level import stat
 
 .. dropdown:: Full list of module changes
     :color: secondary
-
     +-------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | Old module                                            | New module                                                                                                                                                                |
     +=======================================================+===========================================================================================================================================================================+
@@ -151,5 +150,4 @@ Developers without any active development branches on either tudat or tudatpy (p
 
 Developers with active development branches on either tudat or tudatpy that have diverged from the ``develop`` branch should contact the tudatpy development team. We can assist in migrating your code to the new repository setup.
 
-TODO: write migration guide
 

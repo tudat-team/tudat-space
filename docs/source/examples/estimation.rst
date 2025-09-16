@@ -24,6 +24,7 @@ In the following examples, functionality is showcased that can be used to suppor
 .. nbgallery::
 
   ./tudatpy-examples/estimation/tudat_azimuth_elevation_example.ipynb
+  ./tudatpy-examples/estimation/mission_data_downloader.ipynb
 
 
 .. _estimation_using_pseudo_observations:
@@ -51,6 +52,7 @@ In the following examples, real observations are used to fit compute residuals a
   ./tudatpy-examples/estimation/estimation_with_mpc.ipynb
   ./tudatpy-examples/estimation/improved_estimation_with_mpc.ipynb
   ./tudatpy-examples/estimation/mro_range_estimation.ipynb
+  ./tudatpy-examples/estimation/kosmos482_reentry.ipynb
 
 Estimation using real observations - Python only
 ************************************************
