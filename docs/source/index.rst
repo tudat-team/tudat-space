@@ -1,3 +1,7 @@
+.. meta::
+    :description lang=en:
+        Learn how to use and install the open-source TU Delft Astrodynamics toolbox (Tudat), a powerful set of libraries that support astrodynamics and space research and education.
+
 ======================================
 Welcome to Tudat Space!
 ======================================
@@ -62,7 +66,7 @@ Tudat and Tudat(Py) are entirely open-source and disseminated using conda packag
 
         +++
 
-        .. button-ref:: index_user_guide
+        .. button-ref:: index-user-guide
             :expand:
             :color: secondary
             :click-parent:
@@ -91,11 +95,11 @@ Tudat and Tudat(Py) are entirely open-source and disseminated using conda packag
 .. toctree::
    :hidden:
 
-   /index_getting_started
-   /index_examples
-   /index_user_guide
+   /index-getting-started
+   /index-examples
+   /index-user-guide
    API Reference <https://py.api.tudat.space/en/latest/>
-   /index_about
+   /index-about
 
 ---------------------
 Want to contribute?
