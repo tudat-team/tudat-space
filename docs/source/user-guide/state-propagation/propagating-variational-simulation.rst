@@ -29,13 +29,12 @@ A description of how these parameters are to be defined and a comprehensive list
     :maxdepth: 3
 
     propagating-variational-equations/parameter-settings
-    propagating-variational-equations/available-parameters
 
 
 Performing the Propagation
 --------------------------
 
-Simulations in which only the system state and variational equations is propagated are handled by simulator objects from the :class:`~tudatpy.numerical_simulation.VariationalEquationsSolver` base class.
+Simulations in which only the system state and variational equations is propagated are handled by simulator objects from the :class:`~tudatpy.dynamics.simulator.VariationalSimulator` base class.
 For propagation of the system state and variational equations along a single arc, see the page below:
 
 .. toctree::

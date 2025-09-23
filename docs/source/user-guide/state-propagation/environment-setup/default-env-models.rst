@@ -30,13 +30,13 @@ with pre-defined ephemerides and rotation models of solar system bodies (see sec
 Default settings
 =================
 
-The default body settings are retrieved when calling the :func:`~tudatpy.numerical_simulation.environment_setup.get_default_body_settings` function in combination with calling :func:`~tudatpy.interface.spice.load_standard_kernels` beforehand.
+The default body settings are retrieved when calling the :func:`~tudatpy.dynamics.environment_setup.get_default_body_settings` function in combination with calling :func:`~tudatpy.interface.spice.load_standard_kernels` beforehand.
 The following settings are then used for the default celestial bodies by Tudat.
 
 Ephemeris
 ---------
 
-Directly from SPICE (see :ref:`spice_in_tudat`) using the :func:`~tudatpy.numerical_simulation.environment_setup.ephemeris.direct_spice` option. For our default settings, this includes all solar system
+Directly from SPICE (see :ref:`spice_in_tudat`) using the :func:`~tudatpy.dynamics.environment_setup.ephemeris.direct_spice` option. For our default settings, this includes all solar system
 planets, the Sun, Earth's moon, the main Martian, Jovian and Saturnian satellites, as well as 300 major solar system asteroids. Users can append this list with additional ephemeris files, for
 instance for small bodies or other satellite systems, through the use of the
 :func:`~tudatpy.interface.spice.load_kernel`.
@@ -48,16 +48,16 @@ Ephemerides from SPICE kernels are only valid for a somewhat limited time interv
 Rotation model
 --------------
 
-Directly from SPICE (see :ref:`spice_in_tudat`) using the :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.spice` option. For body ``Foo``, Tudat uses the frame
+Directly from SPICE (see :ref:`spice_in_tudat`) using the :func:`~tudatpy.dynamics.environment_setup.rotation_model.spice` option. For body ``Foo``, Tudat uses the frame
 ``IAU_Foo`` defined in SPICE as the body-fixed frame. These rotation models are implementations of results published by
 the IAU Working Group on Cartographic Coordinates and Rotational Elements.
 
-For the Earth, a high-accuracy rotation model is available, which is *not* loaded by default, but can be defined using the :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.gcrs_to_itrs` function.
+For the Earth, a high-accuracy rotation model is available, which is *not* loaded by default, but can be defined using the :func:`~tudatpy.dynamics.environment_setup.rotation_model.gcrs_to_itrs` function.
 
 Shape model
 -----------
 
-Directly from SPICE (see :ref:`spice_in_tudat`) using the :func:`~tudatpy.numerical_simulation.environment_setup.shape.spherical_spice` option. Tudat uses the average radius from SPICE to define a
+Directly from SPICE (see :ref:`spice_in_tudat`) using the :func:`~tudatpy.dynamics.environment_setup.shape.spherical_spice` option. Tudat uses the average radius from SPICE to define a
 spherical shape model for all bodies.
 
 .. _default_gravity_fields:
@@ -65,7 +65,7 @@ spherical shape model for all bodies.
 Gravity field
 -------------
 
-* Spherical harmonic gravity field for the following bodies, using the :func:`~tudatpy.numerical_simulation.environment_setup.gravity_field.predefined_spherical_harmonic` option:
+* Spherical harmonic gravity field for the following bodies, using the :func:`~tudatpy.dynamics.environment_setup.gravity_field.predefined_spherical_harmonic` option:
 
   - **Earth**: Full gravity field up to degree and order 200, described `here <https://link.springer.com/article/10.1007/s10712-016-9406-y>`__ (GOCO05c, data obtained from `GFZ <https://dataservices.gfz-potsdam.de/icgem/showshort.php?id=escidoc:1504398>`__; coefficient are available up to degree/order 720, but are not all loaded by default for efficiency purposes)
   - **Moon**: Full gravity field up to degree and order 200, described `here <https://pgda.gsfc.nasa.gov/products/50>`__ (gggrx1200, data obtained from `PDS <https://pds-geosciences.wustl.edu/grail/grail-l-lgrs-5-rdr-v1/grail_1001/shadr/>`__; coefficient are available up to degree/order 1199, but are not all loaded by default for efficiency purposes)
@@ -76,7 +76,7 @@ Gravity field
   - **Galilean Moons**: (Io, Europa, Ganymede, Callisto), :math:`\mu`, :math:`C_{20}` and :math:`C_{22}` from IMCCE ephemerides
 
 * For all the other bodies not mentioned above, point-mass gravity field with gravitational parameter loaded from SPICE are used
-  (see :ref:`spice_in_tudat`) using the :func:`tudatpy.numerical_simulation.environment_setup.gravity_field.central_spice` option.
+  (see :ref:`spice_in_tudat`) using the :func:`tudatpy.dynamics.environment_setup.gravity_field.central_spice` option.
 
 .. warning::
    For the bodies with default spherical harmonic gravity fields, the gravitational parameter is not loaded from SPICE, but is set to the value used in the construction of the gravity field model. This value may be different from the value used in the SPICE kernels, which you can retrieve using the :func:`~tudatpy.interface.spice.get_body_gravitational_parameter` function.
@@ -88,12 +88,12 @@ Gravity field
 Atmosphere
 -----------
 
-- Earth: US76 density model (using interpolation of tabulated data :func:`~tudatpy.numerical_simulation.environment_setup.atmosphere.us76`)
+- Earth: US76 density model (using interpolation of tabulated data :func:`~tudatpy.dynamics.environment_setup.atmosphere.us76`)
 - All other bodies: none
 
 Radiation source
 ----------------
-- Sun: Isotropic point source with a luminosity of 3.828 × 10\ :sup:`26` W, using the :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.constant_luminosity` function, with :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.predefined_knocke_type_surface_property_distribution`
+- Sun: Isotropic point source with a luminosity of 3.828 × 10\ :sup:`26` W, using the :func:`~tudatpy.dynamics.environment_setup.radiation_pressure.constant_luminosity` function, with :func:`~tudatpy.dynamics.environment_setup.radiation_pressure.predefined_knocke_type_surface_property_distribution`
 - All other bodies: none (see :ref:`radiation_pressure_acceleration` for details on specifying models).
 
 

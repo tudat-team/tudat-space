@@ -107,3 +107,9 @@ For more information on how to use TudatPy with other libraries, see the :ref:`o
    /user-guide/advanced-topics/optimization-pygmo
    /user-guide/advanced-topics/parallelization
    /user-guide/advanced-topics/post-processing-python
+
+.. toctree::
+   :caption: TudatPy Project Updates
+   :hidden:
+
+   /user-guide/project-updates/migration-guide

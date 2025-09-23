@@ -16,7 +16,7 @@ Translational Dynamics
    translational/thrust-models
    translational/aerodynamics
 
-Settings to propagate the translational state of a body numerically can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.propagator.translational` function. Using these settings to propagate dynamics us described on the page on :ref:`propagating_dynamics`.
+Settings to propagate the translational state of a body numerically can be created through the :func:`~tudatpy.dynamics.propagation_setup.propagator.translational` function. Using these settings to propagate dynamics us described on the page on :ref:`propagating_dynamics`.
 
 The default (processed) representation for solving the translational equations of motion is by using the Cowell propagator
 (using Cartesian elements as the propagated states), but other formulations can be used (see below and :ref:`processed_propagated_states`).
@@ -29,7 +29,7 @@ In addition to the settings described :ref:`here <propagation_inputs>` for propa
 - A set of acceleration models (see :ref:`acceleration_models_setup`)
 - The central bodies of the propagation
 - A type of propagator, since the translational state can have different representations
-  (listed in :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.TranslationalPropagatorType`; default is Cowell).
+  (listed in :class:`~tudatpy.dynamics.propagation_setup.propagator.TranslationalPropagatorType`; default is Cowell).
 - The initial conditions for the propagation (Cartesian state, and time)
 
 .. warning::
@@ -74,7 +74,7 @@ The time and state will be printed on the terminal once every 24 hours.
 
         .. code-block:: python
 
-           from tudatpy.numerical_simulation import propagation_setup
+           from tudatpy.dynamics import propagation_setup
            from tudatpy.astro import element_conversion
            import numpy as np
 

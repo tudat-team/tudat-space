@@ -12,7 +12,7 @@ This pages aims to get you started with Tudat(Py) and introduce you to some of t
 
 .. tip:: 
    For a comprehensive list of available functions and classes in TudatPy, have a look at the :doc:`index`.
-   This guide links to the API documentation in numerous places, indicated by a white box with black text, like the following: :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies`.
+   This guide links to the API documentation in numerous places, indicated by a white box with black text, like the following: :class:`~tudatpy.dynamics.environment.SystemOfBodies`.
 
 
 .. contents:: Content of this page
@@ -61,7 +61,7 @@ The workflow of a typical propagation in Tudat(Py) is shown in the figure below.
 .. figure:: /user-guide/_static/tudatpy_high_level.png
    :width: 600
 
-There are two inputs necessary to perform a simulation: a :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.PropagatorSettings` instance and a :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` instance.
+There are two inputs necessary to perform a simulation: a :class:`~tudatpy.dynamics.propagation_setup.propagator.PropagatorSettings` instance and a :class:`~tudatpy.dynamics.environment.SystemOfBodies` instance.
 The propagation setup defines the differential equations to be solved and the method to solve them, while the environment setup defines the physical modeling of the environment and system properties, including those of both natural and artificial objects.
 
 .. seealso::
@@ -82,12 +82,12 @@ We will first import all necessary modules, including some standard Python modul
 
    # Load tudatpy modules
    from tudatpy.interface import spice
-   from tudatpy import numerical_simulation
-   from tudatpy.numerical_simulation import environment_setup, propagation_setup
+   from tudatpy import dynamics
+   from tudatpy.dynamics import environment_setup, propagation_setup
    from tudatpy.astro import element_conversion
    from tudatpy import constants
    from tudatpy.util import result2array
-   from tudatpy.astro.time_conversion import DateTime
+   from tudatpy.astro.time_representation import DateTime
 
 .. seealso::
 
@@ -96,7 +96,7 @@ We will first import all necessary modules, including some standard Python modul
 Setting up the environment
 --------------------------
 
-As mentioned before, in Tudat(Py) the physical environment is defined using a :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` object.
+As mentioned before, in Tudat(Py) the physical environment is defined using a :class:`~tudatpy.dynamics.environment.SystemOfBodies` object.
 This object contains all the bodies in the simulation along with their physical properties of these bodies.
 In this case, we will define only a central body (Earth) and a satellite.
 
@@ -115,7 +115,7 @@ Define natural bodies
 ^^^^^^^^^^^^^^^^^^^^^
 
 With the standard kernels loaded, we can define our central body, the Earth.
-In this example, the :func:`~tudatpy.numerical_simulation.environment_setup.get_default_body_settings` function is used to create the Earth using a number of default settings, which are distributed with Tudat(Py).
+In this example, the :func:`~tudatpy.dynamics.environment_setup.get_default_body_settings` function is used to create the Earth using a number of default settings, which are distributed with Tudat(Py).
 
 .. code-block:: python
 
@@ -152,7 +152,7 @@ Instead, we need to create a set of empty body settings for our satellite, using
 Create the system of bodies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-These body settings are then used to create the system of bodies, using the function :func:`~tudatpy.numerical_simulation.environment_setup.create_system_of_bodies`.
+These body settings are then used to create the system of bodies, using the function :func:`~tudatpy.dynamics.environment_setup.create_system_of_bodies`.
 
 .. code-block:: python
 
@@ -160,7 +160,7 @@ These body settings are then used to create the system of bodies, using the func
    bodies = environment_setup.create_system_of_bodies(body_settings)
 
 
-We have now defined our environment in the :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` instance ``bodies`` and are ready to move on to setting up the propagation.
+We have now defined our environment in the :class:`~tudatpy.dynamics.environment.SystemOfBodies` instance ``bodies`` and are ready to move on to setting up the propagation.
 
 Setting up the propagation
 --------------------------
@@ -194,7 +194,7 @@ In this case, we only consider the gravitational point-mass acceleration of the 
 
    acceleration_settings = {"Delfi-C3": acceleration_settings_delfi_c3}
 
-Similar to before, we use the function :func:`~tudatpy.numerical_simulation.propagation_setup.create_acceleration_models` to create the acceleration models from the settings:
+Similar to before, we use the function :func:`~tudatpy.dynamics.propagation_setup.create_acceleration_models` to create the acceleration models from the settings:
 
 .. code-block:: python
 
@@ -236,13 +236,13 @@ In order to convert from Keplerian to Cartesian elements, we also need to know t
    In Tudat(Py), all quantities are defined in SI units, with all angular measures defined in radian. All epochs are defined as seconds since J2000 in the TDB scale.
 
 This only leaves the epoch of the initial state to be defined. 
-We will use Tudat's own :class:`~tudatpy.astro.time_conversion.DateTime` class to define the epoch of the initial state.
+We will use Tudat's own :class:`~tudatpy.astro.time_representation.DateTime` class to define the epoch of the initial state.
 
 .. code-block:: python
 
    # Set simulation start and end epochs
-   simulation_start_epoch = DateTime(2020, 1, 1).epoch()
-   simulation_end_epoch   = DateTime(2020, 1, 2).epoch()
+   simulation_start_epoch = DateTime(2020, 1, 1).to_epoch()
+   simulation_end_epoch   = DateTime(2020, 1, 2).to_epoch()
 
 .. seealso:: 
    For conversions from other time scales and formats, see :ref:`times_and_dates`.
@@ -311,21 +311,21 @@ Putting all together, we can finally create the propagator settings:
 Perform the propagation
 ==========================
 
-Now that we have defined our :class:`~tudatpy.numerical_simulation.propagation_setup.propagator.PropagatorSettings` instance (the ``propagator_settings`` object) and a :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` instance (the ``bodies`` object), we can finally perform the propagation.
-As introduced earlier in `Setting up the simulation`_, the propagation is performed using the :func:`~tudatpy.numerical_simulation.create_dynamics_simulator` function.
+Now that we have defined our :class:`~tudatpy.dynamics.propagation_setup.propagator.PropagatorSettings` instance (the ``propagator_settings`` object) and a :class:`~tudatpy.dynamics.environment.SystemOfBodies` instance (the ``bodies`` object), we can finally perform the propagation.
+As introduced earlier in `Setting up the simulation`_, the propagation is performed using the :func:`~tudatpy.dynamics.simulator.create_dynamics_simulator` function.
 Typically, calling this function performs the propagation (unless the optional input argument ``simulate_dynamics_on_creation`` is set to ``False``)
 
 .. code-block:: python
 
    # Create simulation object and propagate the dynamics
-   dynamics_simulator = numerical_simulation.create_dynamics_simulator(
+   dynamics_simulator = dynamics.simulator.create_dynamics_simulator(
       bodies, propagator_settings
    )
 
 
 Post-processing the results
 ---------------------------
-The :func:`~tudatpy.numerical_simulation.create_dynamics_simulator` function returns an instance of a :class:`~tudatpy.numerical_simulation.SingleArcSimulator`, which has the attribute ``propagation_results`` of type :class:`~tudatpy.numerical_simulation.propagation.SingleArcSimulationResults`.
+The :func:`~tudatpy.dynamics.simulator.create_dynamics_simulator` function returns an instance of a :class:`~tudatpy.dynamics.simulator.SingleArcSimulator`, which has the attribute ``propagation_results`` of type :class:`~tudatpy.dynamics.propagation.SingleArcSimulationResults`.
 The ``propagation_results`` object contains, among other information, the ``state_history`` and ``dependent_variable_history``.
 The former stores the state of the system at each step of the integration, while the latter holds the dependent variables.
 

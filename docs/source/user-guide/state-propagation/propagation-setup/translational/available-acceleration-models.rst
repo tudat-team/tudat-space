@@ -13,7 +13,7 @@ page. Instead, for each model, a reference to the related API documentation entr
 .. note::
    In Tudat, acceleration models are defined through factory functions, which define the properties required of
    the accelerations, but do not perform any calculations themselves. These properties are stored through instances
-   of the :class:`~tudatpy.numerical_simulation.propagation_setup.acceleration.AccelerationSettings` class or of its 
+   of the :class:`~tudatpy.dynamics.propagation_setup.acceleration.AccelerationSettings` class or of its
    derived classes.
 
 
@@ -23,7 +23,7 @@ page. Instead, for each model, a reference to the related API documentation entr
 
 In certain pieces of code, such as when requesting the saving of a single acceleration (see :ref:`dependent_variables`
 for saving of dependent variables), you will need to supply an identifier for the type of acceleration you are requesting.
-See the list of supported identifier types in the API documentation: :class:`~tudatpy.numerical_simulation.propagation_setup.acceleration.AvailableAcceleration`.
+See the list of supported identifier types in the API documentation: :class:`~tudatpy.dynamics.propagation_setup.acceleration.AvailableAcceleration`.
 
 ###########################
 Gravitational
@@ -53,7 +53,7 @@ Point Mass Gravity
 ##################
 
 | **Description**
-| The point-mass gravity acceleration model can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.point_mass_gravity`
+| The point-mass gravity acceleration model can be created through the :func:`~tudatpy.dynamics.propagation_setup.acceleration.point_mass_gravity`
   factory function.
 
 | **Dependencies**
@@ -69,7 +69,7 @@ Spherical Harmonic Gravity
 ##########################
 
 | **Description**
-| The spherical harmonic gravity acceleration model can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.spherical_harmonic_gravity`
+| The spherical harmonic gravity acceleration model can be created through the :func:`~tudatpy.dynamics.propagation_setup.acceleration.spherical_harmonic_gravity`
   factory function.
 
 | **Dependencies**
@@ -93,7 +93,7 @@ Mutual Spherical Harmonic Gravity
 
 
 | **Description**
-| The mutual spherical harmonic gravity acceleration model can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.mutual_spherical_harmonic_gravity`
+| The mutual spherical harmonic gravity acceleration model can be created through the :func:`~tudatpy.dynamics.propagation_setup.acceleration.mutual_spherical_harmonic_gravity`
   factory function. This model is typically only used for detailed propagation of planetary systems. With additional
   parameters, it can
   be used even if the bodies mutually exerting the spherical harmonic gravity acceleration are not the central body.
@@ -134,7 +134,7 @@ Aerodynamic
 ########################
 
 | **Description**
-| The aerodynamic acceleration model can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.aerodynamic`
+| The aerodynamic acceleration model can be created through the :func:`~tudatpy.dynamics.propagation_setup.acceleration.aerodynamic`
   factory function.
 
 | **Dependencies**
@@ -150,7 +150,7 @@ Aerodynamic
    The aerodynamic acceleration is calculated in the vehicles body-fixed or aerodynamic frame. Expressing the
    acceleration in an inertial frame (as required by the propagation) requires the vehicle's orientation to be defined.
    For a simple definition, in which the body’s angle of attack, sideslip angle, and bank angle are all set to 0, see
-   :func:`~tudatpy.numerical_simulation.environment_setup.rotation_model.aerodynamic_angle_based`.
+   :func:`~tudatpy.dynamics.environment_setup.rotation_model.aerodynamic_angle_based`.
 
    More details on aerodynamic guidance can be found on :ref:`this page <aerodynamic_models>`.
 
@@ -162,7 +162,7 @@ The radiation pressure exerted on a body depends on the radiation source model o
 These models are described in detail on the :ref:`radiation pressure acceleration <radiation_pressure_acceleration>` page. 
 
 | **Description**
-| The radiation pressure model can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.radiation_pressure`
+| The radiation pressure model can be created through the :func:`~tudatpy.dynamics.propagation_setup.acceleration.radiation_pressure`
   factory function.
 
 
@@ -177,7 +177,7 @@ Relativistic Correction
 ####################################
 
 | **Description**
-| The relativistic correction acceleration model can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.relativistic_correction`
+| The relativistic correction acceleration model can be created through the :func:`~tudatpy.dynamics.propagation_setup.acceleration.relativistic_correction`
   factory function. This is a first-order (in :math:`1/c^2`) correction to the acceleration due to the influence of relativity
   for a massless body (e.g. spacecraft) orbiting a massive body (e.g. Earth), which in turn orbits a third body (e.g.
   Sun), consisting of three distinct effects: the Schwarzschild, Lense-Thirring and de Sitter accelerations.
@@ -194,7 +194,7 @@ Empirical
 #######################
 
 | **Description**
-| The empirical acceleration model can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.empirical`
+| The empirical acceleration model can be created through the :func:`~tudatpy.dynamics.propagation_setup.acceleration.empirical`
   factory function. This is constant/once-per-orbit acceleration, expressed in the RSW frame (see for instance
   :func:`~tudatpy.astro.frame_conversion.inertial_to_rsw_rotation_matrix`), for which the magnitude is determined
   empirically (typically during an orbit determination process).
@@ -209,9 +209,9 @@ Thrust
 | **Description**
 | The thrust acceleration model can be created through one of the factory functions:
 
-* :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.thrust_from_engine` (use single specific engine)
-* :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.thrust_from_engines` (use multiple specific engines)
-* :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.thrust_from_all_engines` (use all engines)
+* :func:`~tudatpy.dynamics.propagation_setup.acceleration.thrust_from_engine` (use single specific engine)
+* :func:`~tudatpy.dynamics.propagation_setup.acceleration.thrust_from_engines` (use multiple specific engines)
+* :func:`~tudatpy.dynamics.propagation_setup.acceleration.thrust_from_all_engines` (use all engines)
 
 Which differ only in the manner in which the user selects the engine model(s) this is(are) to be used for calculating the thrust.
 The details of the model used for the thrust is given on a :ref:`dedicated page <thrust_acceleration_setup>`
@@ -226,7 +226,7 @@ Tidal effect on natural satellites
 ##################################
 
 | **Description**
-| The acceleration accounting for the tidal effect on natural satellites can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.direct_tidal_dissipation_acceleration`
+| The acceleration accounting for the tidal effect on natural satellites can be created through the :func:`~tudatpy.dynamics.propagation_setup.acceleration.direct_tidal_dissipation_acceleration`
   factory function. It is a rather specialist model, which is only relevant for the dynamics of natural satellites
   themselves. When calculating the dynamics of spacecraft orbiting natural satellites, use gravity field variations
   instead. Two types of accelerations can be computed: acceleration on the satellite due to tide on the planet, or
@@ -243,7 +243,7 @@ Quasi-Impulsive Shot
 #################################
 
 | **Description**
-| The acceleration accounting for the tidal effect on natural satellites can be created through the :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.quasi_impulsive_shots_acceleration`
+| The acceleration accounting for the tidal effect on natural satellites can be created through the :func:`~tudatpy.dynamics.propagation_setup.acceleration.quasi_impulsive_shots_acceleration`
   factory function. This is a manner in which to incorporate short bursts of thrust into a numerical propagation.
   When using this model, ensure that your integration step is sufficiently small to be able to capture the burst of
   thrust.

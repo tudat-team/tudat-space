@@ -1,8 +1,8 @@
 =============================================================================================
-MRO - Comparing Doppler measurements from ODF files to simulated observables
+MRO - Comparing Doppler and range measurements from ODF files to simulated observables
 =============================================================================================
 
-.. literalinclude:: /examples/tudatpy-examples/estimation/mro_residuals_analysis.py
+.. literalinclude:: /examples/tudatpy-examples/estimation/mro_tnf_residuals_analysis.py
     :language: python
 
 ------

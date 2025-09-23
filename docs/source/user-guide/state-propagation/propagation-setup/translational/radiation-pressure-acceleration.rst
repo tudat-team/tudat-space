@@ -9,7 +9,7 @@ In Tudat, radiation pressure accelerations require models for sources (how radia
 (how the spacecraft is accelerated depending on the incident radiation). Here, the 'source' may also be a body
 that reflects light from another body (e.g. albedo). Both sources and targets may be defined in any number of ways.
 Regardless of how the source and target models are defined, creating the acceleration model for them is always done
-in the same manner, using the :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.radiation_pressure`,
+in the same manner, using the :func:`~tudatpy.dynamics.propagation_setup.acceleration.radiation_pressure`,
 which takes the source model of the body exerting the acceleration, and the target model of the body undergoing the
 acceleration, and links these models to set up the specific acceleration model.
 For extensive details on the mathematical
@@ -23,7 +23,7 @@ Radiation source models
 ========================
 In most orbits, there are two sources of radiation: direct solar radiation, and albedo + thermal radiation of the
 central body (particularly in low orbits). Both require different treatment. Therefore, there are two source models in Tudat.
-Settings for a body are defined in the ``radiation_source_settings`` attribute of the :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings` class.
+Settings for a body are defined in the ``radiation_source_settings`` attribute of the :class:`~tudatpy.dynamics.environment_setup.BodySettings` class.
 
 
 Isotropic point source
@@ -31,13 +31,13 @@ Isotropic point source
 The radiation due to an isotropic (point) source depends only on the distance from the source, not on the relative latitude/longitude
 If the source is far away, all rays hitting the target are virtually parallel. This is, for example, the case for solar radiation at 1 AU.
 The default source model for the Sun is such a point source with a luminosity of 3.828 × 10\ :sup:`26` W. Defining settings for an
-isotropic source model is done using the :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.isotropic_radiation_source`
+isotropic source model is done using the :func:`~tudatpy.dynamics.environment_setup.radiation_pressure.isotropic_radiation_source`
 function, which requires a luminosity model. These may be defined by one of the following models:
 
-* User-defined constant luminosity: :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.constant_luminosity`
-* User-defined time-variable luminosity: :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.time_variable_luminosity`
-* User-defined constant irradiance at a reference distance (e.g., as total solar irradiance at 1 AU).: :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.irradiance_based_constant_luminosity`
-* User-defined time-variable irradiance at a reference distance: :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.irradiance_based_time_variable_luminosity`
+* User-defined constant luminosity: :func:`~tudatpy.dynamics.environment_setup.radiation_pressure.constant_luminosity`
+* User-defined time-variable luminosity: :func:`~tudatpy.dynamics.environment_setup.radiation_pressure.time_variable_luminosity`
+* User-defined constant irradiance at a reference distance (e.g., as total solar irradiance at 1 AU).: :func:`~tudatpy.dynamics.environment_setup.radiation_pressure.irradiance_based_constant_luminosity`
+* User-defined time-variable irradiance at a reference distance: :func:`~tudatpy.dynamics.environment_setup.radiation_pressure.irradiance_based_time_variable_luminosity`
 
 Defining the second to last option, for a solar irradiance of 1367 W/m\ :sup:`2` at 1 AU, the settings for the body called 'Sun' would be modified as follows:
 
@@ -53,23 +53,23 @@ Planetary radiation is generally not isotropic and the spacecraft is relatively 
 Therefore, the central body is modeled as an extended source, which is discretized into panels.
 This model was described by [Knocke1988]_. Each panel emits radiation as defined by a radiosity model.
 Typically, these include albedo radiation (reflected solar radiation) and/or thermal radiation (due to surface heating).
-Defining settings for an extended source model is done using the :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.panelled_extended_radiation_source`
+Defining settings for an extended source model is done using the :func:`~tudatpy.dynamics.environment_setup.radiation_pressure.panelled_extended_radiation_source`
 function, which requires surface radiosity models, and settings for the surface discretization.
 
 The following options are supported for defining surface radiosity models:
 
-* Globally constant radiosity: :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.constant_radiosity`
-* Radiosity due to a globally constant albedo: :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.constant_albedo_surface_radiosity`
-* Radiosity due to an albedo that varies over the surface (requires a surface distribution model, see below): :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.variable_albedo_surface_radiosity`
-* Radiosity due to thermal radiation from an isotropically heated source with constant emissivity: :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.thermal_emission_blackbody_constant_emissivity`
-* Radiosity due to thermal radiation from an isotropically heated source with an emissivity that varies over the surface (requires a surface distribution model, see below): :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.thermal_emission_blackbody_constant_emissivity`
-* Radiosity due to thermal radiation from a heated blackbody source with a surface temperature defined from the angle to the sub-solar point (assuming the Sun is the body causing the heating): :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.thermal_emission_angle_based_radiosity`
+* Globally constant radiosity: :func:`~tudatpy.dynamics.environment_setup.radiation_pressure.constant_radiosity`
+* Radiosity due to a globally constant albedo: :func:`~tudatpy.dynamics.environment_setup.radiation_pressure.constant_albedo_surface_radiosity`
+* Radiosity due to an albedo that varies over the surface (requires a surface distribution model, see below): :func:`~tudatpy.dynamics.environment_setup.radiation_pressure.variable_albedo_surface_radiosity`
+* Radiosity due to thermal radiation from an isotropically heated source with constant emissivity: :func:`~tudatpy.dynamics.environment_setup.radiation_pressure.thermal_emission_blackbody_constant_emissivity`
+* Radiosity due to thermal radiation from an isotropically heated source with an emissivity that varies over the surface (requires a surface distribution model, see below): :func:`~tudatpy.dynamics.environment_setup.radiation_pressure.thermal_emission_blackbody_constant_emissivity`
+* Radiosity due to thermal radiation from a heated blackbody source with a surface temperature defined from the angle to the sub-solar point (assuming the Sun is the body causing the heating): :func:`~tudatpy.dynamics.environment_setup.radiation_pressure.thermal_emission_angle_based_radiosity`
 
 For a number of the above models, a surface distribution of a property has to be defined (e.g. albedo, emissivity). A number of options are available for this:
 
-* Globally constant surface distribution: :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.constant_surface_property_distribution`
-* Surface distribution defined by spherical harmonics: :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.spherical_harmonic_surface_property_distribution`, or :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.predefined_spherical_harmonic_surface_property_distribution`
-* Surface distribution as per [Knocke1988]_ (degree-two zonal spherical harmonic definition, with time-variable degree-one coefficient): :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.knocke_type_surface_property_distribution`, or :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.predefined_knocke_type_surface_property_distribution`
+* Globally constant surface distribution: :func:`~tudatpy.dynamics.environment_setup.radiation_pressure.constant_surface_property_distribution`
+* Surface distribution defined by spherical harmonics: :func:`~tudatpy.dynamics.environment_setup.radiation_pressure.spherical_harmonic_surface_property_distribution`, or :func:`~tudatpy.dynamics.environment_setup.radiation_pressure.predefined_spherical_harmonic_surface_property_distribution`
+* Surface distribution as per [Knocke1988]_ (degree-two zonal spherical harmonic definition, with time-variable degree-one coefficient): :func:`~tudatpy.dynamics.environment_setup.radiation_pressure.knocke_type_surface_property_distribution`, or :func:`~tudatpy.dynamics.environment_setup.radiation_pressure.predefined_knocke_type_surface_property_distribution`
 
 When using any of the above models to calculate a radiation pressure acceleration on a target, the extended source is panelled and the per-panel contribution to the
 source's irradiance at the target is computed. This panelling is done dynamically, in the sense that the panel locations
@@ -112,7 +112,7 @@ Radiation pressure target models
 The spacecraft acceleration due to radiation pressure depends on the cross-section area, optical properties, and mass.
 The dependence on the area-to-mass ratio is similar to drag. Optical properties are relevant since reflected radiation
 imparts more momentum than absorbed radiation. There are two target models in Tudat.
-Settings for a body are defined in the ``radiation_pressure_target_settings`` attribute of the :class:`~tudatpy.numerical_simulation.environment_setup.BodySettings` class.
+Settings for a body are defined in the ``radiation_pressure_target_settings`` attribute of the :class:`~tudatpy.dynamics.environment_setup.BodySettings` class.
 
 
 Cannonball target
@@ -120,7 +120,7 @@ Cannonball target
 A cannonball target models the spacecraft as isotropic sphere defined by the cross-section area and a radiation
 pressure coefficient. This model is useful for applications that do not require high-fidelity radiation pressure modelling,
 but cannot capture the finer details of the radiation pressure interaction and may therefore not be suited to high-fidelity analysis.
-Settings for the cannonball model are created using the :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.cannonball_radiation_target` function.
+Settings for the cannonball model are created using the :func:`~tudatpy.dynamics.environment_setup.radiation_pressure.cannonball_radiation_target` function.
 
 
 Paneled target
@@ -134,27 +134,27 @@ Earth-pointing antennas). At the moment, Tudat does not include panel shadowing 
 Details on defining a panelled spacecraft model are defined by :ref:`vehicle_shape_models`. The interaction of each panel is defined by a so-called
 reflection law. At the moment, Tudat implements two panel reflection laws:
 
-* Specular-diffuse reflection: :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.specular_diffuse_body_panel_reflection`
-* Pure Lambertian reflection: :func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.lambertian_body_panel_reflection`
+* Specular-diffuse reflection: :func:`~tudatpy.dynamics.environment_setup.radiation_pressure.specular_diffuse_body_panel_reflection`
+* Pure Lambertian reflection: :func:`~tudatpy.dynamics.environment_setup.radiation_pressure.lambertian_body_panel_reflection`
 
 With the body panels defined, the radiation pressure target model settings are created using the
-:func:`~tudatpy.numerical_simulation.environment_setup.radiation_pressure.panelled_radiation_target` function.
+:func:`~tudatpy.dynamics.environment_setup.radiation_pressure.panelled_radiation_target` function.
 
 Dependent variables
 ===================
 There is a number of dependent variables associated with radiation pressure acceleration:
 
-* Cartesian vector of acceleration, in inertial frame, :func:`~tudatpy.numerical_simulation.propagation_setup.dependent_variable.single_acceleration`, with ``acceleration_type=radiation_pressure``
-* Received irradiance by target due to source (in W/m²), :func:`~tudatpy.numerical_simulation.propagation_setup.dependent_variable.received_irradiance`,
-* Received radiation pressure by target due to source (in N/m²), :func:`~tudatpy.numerical_simulation.propagation_setup.dependent_variable.radiation_pressure`,
+* Cartesian vector of acceleration, in inertial frame, :func:`~tudatpy.dynamics.propagation_setup.dependent_variable.single_acceleration`, with ``acceleration_type=radiation_pressure``
+* Received irradiance by target due to source (in W/m²), :func:`~tudatpy.dynamics.propagation_setup.dependent_variable.received_irradiance`,
+* Received radiation pressure by target due to source (in N/m²), :func:`~tudatpy.dynamics.propagation_setup.dependent_variable.radiation_pressure`,
 
 For point source only:
 
-* Received fraction of 'ideal' irradiance, given by the shadow function (between 0 and 1) as a result of occulting bodies,  :func:`~tudatpy.numerical_simulation.propagation_setup.dependent_variable.received_irradiance_shadow_function`
+* Received fraction of 'ideal' irradiance, given by the shadow function (between 0 and 1) as a result of occulting bodies,  :func:`~tudatpy.dynamics.propagation_setup.dependent_variable.received_irradiance_shadow_function`
 
 For extended source only:
 
-* Total area of source panels contributing to irradiance at target (e.g. area of spherical cap that is panelled for computing the radiation pressure), :func:`~tudatpy.numerical_simulation.propagation_setup.dependent_variable.visible_radiation_source_area`
+* Total area of source panels contributing to irradiance at target (e.g. area of spherical cap that is panelled for computing the radiation pressure), :func:`~tudatpy.dynamics.propagation_setup.dependent_variable.visible_radiation_source_area`
 
 Assumptions
 ===========
@@ -222,5 +222,5 @@ or creating the target settings and adding them to an existing body:
   add_radiation_pressure_target_model( bodies, "Vehicle", vehicle_target_settings )
 
 **Acceleration model** Finally, defining the settings for the acceleration model using the :func:`~propagation_setup.acceleration.cannonball_radiation_pressure`,
-this is now replaced with the :func:`~tudatpy.numerical_simulation.propagation_setup.acceleration.radiation_pressure`, which
+this is now replaced with the :func:`~tudatpy.dynamics.propagation_setup.acceleration.radiation_pressure`, which
 automatically checks the type of the target and source model, and creates the resulting acceleration model accordingly

@@ -6,7 +6,7 @@ Torque Model Setup
 
 
 Torque models can be created through the factory function
-:func:`~tudatpy.numerical_simulation.propagation_setup.create_torque_models`.
+:func:`~tudatpy.dynamics.propagation_setup.create_torque_models`.
 
 How to select torques
 ============================
@@ -25,11 +25,11 @@ These settings are defined via factory functions for each torque in the simulati
 
 For a single body, the user-specified settings are organized in nested dictionaries ``dict[str,dict[str,list[TorqueSettings]]]``,
 with the first ``str`` denoting the body undergoing acceleration, the second ``str`` denoting the body exerting the acceleration, and the
-list of :class:`~tudatpy.numerical_simulation.propagation_setup.torque.TorqueSettings` objects is created using the functions in the
+list of :class:`~tudatpy.dynamics.propagation_setup.torque.TorqueSettings` objects is created using the functions in the
 :doc:`torque` module.
 
 This nested dictionary will be supplied to the
-:func:`~tudatpy.numerical_simulation.propagation_setup.create_torque_models` function to create the
+:func:`~tudatpy.dynamics.propagation_setup.create_torque_models` function to create the
 torque models. This is illustrated in the example below.
 
 Example
@@ -53,7 +53,7 @@ In this example, the following torques are exerted on the vehicle:
 The variable ``torques_settings_vehicle`` denotes the list of bodies exerting torques and the types of
 torques, while the variable ``torque_settings`` associates this list with the body undergoing the
 torque.
-The function :func:`~tudatpy.numerical_simulation.propagation_setup.create_torque_models` creates the list of
+The function :func:`~tudatpy.dynamics.propagation_setup.create_torque_models` creates the list of
 models that compute the torques during the propagation.
 
 .. tab-set::
@@ -67,7 +67,7 @@ models that compute the torques during the propagation.
 
       .. code-block:: python
 
-        from tudatpy.numerical_simulation import propagation_setup
+        from tudatpy.dynamics import propagation_setup
 
     .. literalinclude:: /_snippets/simulation/propagation_setup/torque_models/torque_setup.py
         :language: python
@@ -87,7 +87,7 @@ multiple bodies. Below, an example is given for the definition of ``torque_setti
 
       .. code-block:: python
 
-        from tudatpy.numerical_simulation import propagation_setup
+        from tudatpy.dynamics import propagation_setup
 
     .. literalinclude:: /_snippets/simulation/propagation_setup/torque_models/torque_setup_multi_vehicle.py
         :language: python
@@ -105,7 +105,7 @@ Below, an example for such a case is given when propagating the Earth and Moon:
 
       .. code-block:: python
 
-        from tudatpy.numerical_simulation import propagation_setup
+        from tudatpy.dynamics import propagation_setup
 
     .. literalinclude:: /_snippets/simulation/propagation_setup/torque_models/torque_setup_multi.py
         :language: python

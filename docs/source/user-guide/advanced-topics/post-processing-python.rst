@@ -13,7 +13,7 @@ state and dependent variable histories. In Python, this is returned as a ``dict[
     # ...
 
     # Create simulation object and propagate dynamics.
-    dynamics_simulator = numerical_simulation.create_dynamics_simulator(
+    dynamics_simulator = dynamics.simulator.create_dynamics_simulator(
         bodies,
         propagator_settings )
     state_history = dynamics_simulator.propagation_results.state_history
