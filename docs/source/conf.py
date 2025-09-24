@@ -131,7 +131,7 @@ html_theme_options = {
         "image_light": "_static/cover.png",
         "image_dark": "_static/cover_dark.png",
     },
-    "announcement": "TudatPy version 1.0 has been released 🥳 For more information, see our <a href='https://docs.tudat.space/en/latest/user-guide/project-updates/migration-guide.html'>migration guide</a>!",
+    "announcement": "TudatPy version 1.0 has been released 🥳 For more information, see our <a href='https://docs.tudat.space/en/latest/user-guide/project-updates/migration-guide.html'>migration guide</a>! As always, you can post any questions or feedback in our <a href='https://github.com/orgs/tudat-team/discussions?discussions_q='>Github Discussion forum</a>",
     # "announcement": "Have questions or feedback? Let us know in our <a href='https://github.com/orgs/tudat-team/discussions?discussions_q='>Github Discussion forum</a>!",
 }
 
