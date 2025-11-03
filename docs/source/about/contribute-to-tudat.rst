@@ -51,17 +51,20 @@ Below, there is a list of contributors to Tudat. Mostly, these have been staff a
 **Currently and recently active contributors**
 
 * `Dominic Dirkx <https://www.linkedin.com/in/dominic-dirkx-2806a5b6>`_
-* Marie Fayolle
+* Sam Fayolle
 * `Geoffrey Garrett <https://www.linkedin.com/in/ghgarrett/>`_
 * Riva Alkahal
 * Kevin Cowan
-* Fabien Dahmani
-* Tristan Dijkstra
 * `João Encarnação <https://www.linkedin.com/in/joaoencarnacao/>`_
-* Simon van Hulle
-* Antonio Lopez Rivera
+* Valerio Filice
+* Jonas Hener
+* Lars Hinüber
+* Luigi Gisolfi
+* Nicolò Maistri
+* Andrea Minervino Amodio
 * Michael Plumaris
-* Kai Zenk
+* Markus Reichel
+* Alfonso Sanchez Rodriguez
 
 **Tudat Alumni Hall-of-fame**
 
@@ -75,6 +78,8 @@ Below, there is a list of contributors to Tudat. Mostly, these have been staff a
 * `Giacomo Aciarini <https://www.linkedin.com/in/giacomo-acciarini-470712151/>`_
 * `Evianne Brandon <https://www.linkedin.com/in/eviannebrandon/>`_
 * Sean Cowan
+* Fabien Dahmani
+* Tristan Dijkstra
 * `Frank Engelen <https://www.linkedin.com/in/frankengelen/>`_
 * `Michele Facchinelli <https://www.linkedin.com/in/mfacchinelli/>`_
 * `Iosto Fodde <https://www.linkedin.com/in/iosto-fodde-572b81129/>`_
@@ -90,6 +95,7 @@ Below, there is a list of contributors to Tudat. Mostly, these have been staff a
 * `Elisabetta Iorfida <https://www.linkedin.com/in/elisabettaiorfida>`_
 * `Kartik Kumar <https://www.linkedin.com/in/kumarkartik/>`_
 * `Jonatan Leloux <https://www.linkedin.com/in/jonatanleloux/>`_
+* Antonio Lopez Rivera
 * `Francesco Lupi <https://www.linkedin.com/in/francesco-lupi-b23a658/>`_
 * Gregorio Marchesini
 * Jorge Martinez
@@ -101,6 +107,7 @@ Below, there is a list of contributors to Tudat. Mostly, these have been staff a
 * `Alexander Ronse <https://www.linkedin.com/in/alexander-ronse-1401a5b/>`_
 * `Dominik Stiller <https://www.linkedin.com/in/dominikstiller/>`_
 * `Mattia Topini <https://www.linkedin.com/in/mattia-topini-796448175/>`_
+* Simon Van Hulle
 * Rens van der Zwaard
 
 ..
