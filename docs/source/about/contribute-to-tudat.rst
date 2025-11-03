@@ -50,12 +50,11 @@ Below, there is a list of contributors to Tudat. Mostly, these have been staff a
 
 **Currently and recently active contributors**
 
-* `Dominic Dirkx <https://www.linkedin.com/in/dominic-dirkx-2806a5b6>`_
-* Sam Fayolle
-* `Geoffrey Garrett <https://www.linkedin.com/in/ghgarrett/>`_
 * Riva Alkahal
 * Kevin Cowan
+* `Dominic Dirkx <https://www.linkedin.com/in/dominic-dirkx-2806a5b6>`_
 * `João Encarnação <https://www.linkedin.com/in/joaoencarnacao/>`_
+* Sam Fayolle
 * Valerio Filice
 * Jonas Hener
 * Lars Hinüber
@@ -72,6 +71,7 @@ Below, there is a list of contributors to Tudat. Mostly, these have been staff a
 * `Jacco Geul <https://jacco.geul.net/>`_ - For supporting Tudat for the duration of his Ph.D. project, resolving more bugs and answering more questions than we can count and professionalizing the setup of the project
 * `Jeroen Melman <https://www.linkedin.com/in/jeroen-melman-9533148>`_ - For helping to build up the Tudat project in its very first years with code development and project setup, without which it may never have survived 
 * Miguel Avillez - For developing the current loading and processing functionality allowing Tudat to handle real radio tracking data
+* `Geoffrey Garrett <https://www.linkedin.com/in/ghgarrett/>`_ - For setting up the Python interface of Tudat, the building of the conda packages, and making an important step in professionalizing the project
 
 **Past Contributors**
 
