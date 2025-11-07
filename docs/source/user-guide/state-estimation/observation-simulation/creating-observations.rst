@@ -18,7 +18,7 @@ An :class:`~tudatpy.estimation.observations.ObservationCollection` can be create
 This section covers the different methods for creating observation collections in Tudat(Py):
 
 - :ref:`Simulating observations <simulating_observations>`: Generate synthetic observations using observation models
-- :ref:`Loading real tracking data <loading_real_data>`: Import observations from external data sources (MPC, ODF, IFMS, FDETS)
+- :ref:`Loading real tracking data <loading_real_data>`: Import observations from external data sources (MPC, ODF, TNF, IFMS, FDETS)
 - :ref:`Pseudo-observations <pseudo_observations>`: Create observations from external ephemerides
 
 The following pages provide detailed information on each method.

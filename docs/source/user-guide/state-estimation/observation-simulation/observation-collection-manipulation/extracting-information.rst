@@ -15,10 +15,11 @@ Here is a simple example of how to create and use a parser to retrieve specific 
 
 .. code-block:: python
 
-    from tudatpy.estimation import observations
+    from tudatpy.estimation.observations import observation_parser
+    from tudatpy.estimation.observable_models_setup.model_settings import one_way_range_type
     
     # Create a parser to select only 'one_way_range' observations
-    range_parser = observations.observation_parser(one_way_range)
+    range_parser = observation_parser(one_way_range_type)
     
     # Use the parser to get the concatenated observation times for the selected sets
     range_times = observation_collection.get_concatenated_observation_times(range_parser)
@@ -34,13 +35,15 @@ Only targets single observation sets of the specified observation type:
 
 .. code-block:: python
 
+    from tudatpy.estimation.observations import observation_parser
+    from tudatpy.estimation.observable_models_setup.model_settings import dsn_n_way_averaged_doppler, one_way_range_type
+    
     # Create a parser for a single observable type
-    observable_type = dsn_n_way_averaged_doppler
-    parser = observations.observation_parser(observable_type)
+    parser = observation_parser(dsn_n_way_averaged_doppler)
     
     # Create a parser for a list of observable types (selects sets with EITHER type)
-    obs_type_list = [dsn_n_way_averaged_doppler, one_way_range]
-    parser = observations.observation_parser(obs_type_list)
+    obs_type_list = [dsn_n_way_averaged_doppler, one_way_range_type]
+    parser = observation_parser(obs_type_list)
 
 **Link Ends**
 
@@ -48,11 +51,14 @@ Only targets single observation sets with the specified link ends:
 
 .. code-block:: python
 
+    from tudatpy.estimation.observations import observation_parser
+    from tudatpy.estimation.observable_models_setup import links
+    
     # Create a parser for a specific set of link ends
     link_ends_graz = dict()
-    link_ends_graz[transmitter] = observations.body_reference_point_link_end_id("Earth", "Graz")
-    link_ends_graz[receiver] = observations.body_origin_link_end_id("LRO")
-    parser = observations.observation_parser(link_ends_graz)
+    link_ends_graz[links.transmitter] = links.body_reference_point_link_end_id("Earth", "Graz")
+    link_ends_graz[links.receiver] = links.body_origin_link_end_id("LRO")
+    parser = observation_parser(link_ends_graz)
 
 A few variants of this link ends-based parsing exist, allowing the user to provide only part of the link ends information instead of the full link ends:
 
@@ -60,25 +66,35 @@ A few variants of this link ends-based parsing exist, allowing the user to provi
 
 .. code-block:: python
 
-    parser = observations.observation_parser("Graz", is_reference_point=True)
+    from tudatpy.estimation.observations import observation_parser
+    
+    parser = observation_parser("Graz", is_reference_point=True)
 
 - By the ID of a link end:
 
 .. code-block:: python
 
-    parser = observations.observation_parser(("Earth", "Graz"))
+    from tudatpy.estimation.observations import observation_parser
+    
+    parser = observation_parser(("Earth", "Graz"))
 
 - By the type of a link end:
 
 .. code-block:: python
 
-    parser = observations.observation_parser(observations.receiver)
+    from tudatpy.estimation.observations import observation_parser
+    from tudatpy.estimation.observable_models_setup import links
+    
+    parser = observation_parser(links.receiver)
 
 - By specifying one of the link ends (both link end ID and type):
 
 .. code-block:: python
 
-    parser = observations.observation_parser((observations.receiver, ("Earth", "Graz")))
+    from tudatpy.estimation.observations import observation_parser
+    from tudatpy.estimation.observable_models_setup import links
+    
+    parser = observation_parser((links.receiver, ("Earth", "Graz")))
 
 **Time Bounds**
 
@@ -86,9 +102,11 @@ Selects sets where **all** observation times are within the specified bounds:
 
 .. code-block:: python
 
+    from tudatpy.estimation.observations import observation_parser
+    
     min_time = ...  # Start time in seconds since J2000
     max_time = ...  # End time in seconds since J2000
-    parser = observations.observation_parser((min_time, max_time))
+    parser = observation_parser((min_time, max_time))
 
 **Ancillary Settings**
 
@@ -96,9 +114,12 @@ Only targets single observation sets matching the specified ancillary settings:
 
 .. code-block:: python
 
-    # Example: Create a parser for a specific frequency band
-    ancillary_settings = observations.ancillary_settings(frequency_band='X')
-    parser = observations.observation_parser(ancillary_settings)
+    from tudatpy.estimation.observations import observation_parser
+    from tudatpy.estimation.observations_setup.ancillary_settings import ancillary_settings
+    
+    # Example: Create a parser for observations with specific integration time
+    ancillary_set = ancillary_settings(integration_time=60.0)
+    parser = observation_parser(ancillary_set)
 
 **Multi-Type Parser**
 
@@ -106,15 +127,19 @@ Combine multiple parsers. This allows you to combine any number of the above par
 
 .. code-block:: python
 
+    from tudatpy.estimation.observations import observation_parser
+    from tudatpy.estimation.observable_models_setup.model_settings import one_way_range_type
+    from tudatpy.estimation.observable_models_setup import links
+    
     parser_list = []
-    parser_list.append(observations.observation_parser(one_way_range))
-    parser_list.append(observations.observation_parser((observations.receiver, ("Earth", "Graz"))))
+    parser_list.append(observation_parser(one_way_range_type))
+    parser_list.append(observation_parser((links.receiver, ("Earth", "Graz"))))
     
     # Combine with OR logic (union) - default behavior
-    parser = observations.observation_parser(parser_list, combine_conditions=False)
+    parser = observation_parser(parser_list, combine_conditions=False)
     
     # Combine with AND logic (intersection)
-    parser_and = observations.observation_parser(parser_list, combine_conditions=True)
+    parser_and = observation_parser(parser_list, combine_conditions=True)
 
 Lists of Arguments
 ^^^^^^^^^^^^^^^^^^
@@ -123,8 +148,11 @@ For each of the parser types mentioned above (with the notable exception of the 
 
 .. code-block:: python
 
-    obs_type_list = [dsn_n_way_averaged_doppler, one_way_range]
-    parser = observations.observation_parser(obs_type_list)
+    from tudatpy.estimation.observations import observation_parser
+    from tudatpy.estimation.observable_models_setup.model_settings import dsn_n_way_averaged_doppler, one_way_range_type
+    
+    obs_type_list = [dsn_n_way_averaged_doppler, one_way_range_type]
+    parser = observation_parser(obs_type_list)
 
 In the above code snippet, the parser will target all observation sets containing either ``dsn_n_way_averaged_doppler`` **or** ``one_way_range`` observations.
 
@@ -136,7 +164,10 @@ Inverting Parser Conditions
 
    .. code-block:: python
 
-       parser = observations.observation_parser(observable_type, use_opposite_condition=True)
+       from tudatpy.estimation.observations import observation_parser
+       from tudatpy.estimation.observable_models_setup.model_settings import one_way_range_type
+       
+       parser = observation_parser(one_way_range_type, use_opposite_condition=True)
 
 .. tip::
    Having a clear overview of which observable type, link ends, etc. are present in the observation collection one is working with can be difficult, especially if the collection was created by :ref:`loading real observations <loading_real_data>` from e.g., ODF or IFMS files. This can make the use of a parser more difficult. The :meth:`~tudatpy.estimation.observations.ObservationCollection.print_observation_sets_start_and_size` method can be very useful in that respect, as it prints a summary of all observation sets in the collection (see :ref:`Inspecting Observation Collections <observationSimulation>`).
@@ -150,12 +181,13 @@ Here are some examples:
 
 .. code-block:: python
 
-    from tudatpy.estimation import observations
+    from tudatpy.estimation.observations import observation_parser
+    from tudatpy.estimation.observable_models_setup.model_settings import dsn_n_way_averaged_doppler
     
     # Create a parser for Doppler observations from the 'DSS-14' station
-    doppler_parser = observations.observation_parser([
-        observations.observation_parser(dsn_n_way_averaged_doppler),
-        observations.observation_parser("DSS-14", is_reference_point=True)
+    doppler_parser = observation_parser([
+        observation_parser(dsn_n_way_averaged_doppler),
+        observation_parser("DSS-14", is_reference_point=True)
     ], combine_conditions=True)
     
     # Get the concatenated residuals for this specific subset
@@ -195,3 +227,57 @@ The following methods are commonly used to extract data from an :class:`~tudatpy
 - :meth:`~tudatpy.estimation.observations.ObservationCollection.sorted_observation_sets`: Get the nested dictionary of :class:`~tudatpy.estimation.observations.SingleObservationSet` objects
 
 All of these methods can optionally accept a parser to filter the results to a specific subset of observations.
+
+Example: Complete Workflow
+===========================
+
+Here's a complete example showing how to extract and analyze specific observations:
+
+.. code-block:: python
+
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from tudatpy.estimation.observations import observation_parser
+    from tudatpy.estimation.observable_models_setup.model_settings import dsn_n_way_averaged_doppler
+    from tudatpy.estimation.observable_models_setup import links
+    
+    # Print overview of all observation sets
+    observation_collection.print_observation_sets_start_and_size()
+    
+    # Create parser for specific Doppler observations from a ground station
+    parser_list = [
+        observation_parser(dsn_n_way_averaged_doppler),
+        observation_parser((links.transmitter, ("Earth", "DSS-14")))
+    ]
+    doppler_parser = observation_parser(parser_list, combine_conditions=True)
+    
+    # Extract data
+    times = observation_collection.get_concatenated_observation_times(doppler_parser)
+    observations = observation_collection.get_concatenated_observations(doppler_parser)
+    residuals = observation_collection.get_concatenated_residuals(doppler_parser)
+    weights = observation_collection.get_concatenated_weights(doppler_parser)
+    
+    # Convert times to hours since start
+    times_hours = (np.array(times) - times[0]) / 3600.0
+    
+    # Plot residuals
+    plt.figure(figsize=(12, 6))
+    plt.subplot(2, 1, 1)
+    plt.plot(times_hours, observations, 'b.', markersize=2, label='Observations')
+    plt.ylabel('Doppler [Hz]')
+    plt.legend()
+    plt.grid(True)
+    
+    plt.subplot(2, 1, 2)
+    plt.plot(times_hours, residuals, 'r.', markersize=2, label='Residuals')
+    plt.xlabel('Time since start [hours]')
+    plt.ylabel('Residuals [Hz]')
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
+    
+    # Compute statistics
+    rms_residual = np.sqrt(np.mean(residuals**2))
+    print(f"RMS residual: {rms_residual:.6e} Hz")
+    print(f"Number of observations: {len(observations)}")

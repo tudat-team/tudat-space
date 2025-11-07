@@ -11,15 +11,15 @@ Available Dependent Variables
 
 The settings required for the creation of each observation dependent variable are created by a dedicated factory function. Below is the list of the observation dependent variables currently available:
 
-- The elevation angle using :func:`~tudatpy.estimation.observations_setup.dependent_variable.elevation_angle_dependent_variable`
-- The azimuth angle using :func:`~tudatpy.estimation.observations_setup.dependent_variable.azimuth_angle_dependent_variable`
-- The range distance between two link ends using :func:`~tudatpy.estimation.observations_setup.dependent_variable.target_range_between_link_ends_dependent_variable`
-- The angle between a link end and a given body, as seen from the other end of that link using :func:`~tudatpy.estimation.observations_setup.dependent_variable.avoidance_angle_dependent_variable`
-- The minimum distance between a link and the center of a given body using :func:`~tudatpy.estimation.observations_setup.dependent_variable.body_center_distance_dependent_variable`
-- The minimum distance between a link and the limb of a given body using :func:`~tudatpy.estimation.observations_setup.dependent_variable.body_limb_distance_dependent_variable`
-- The angle between the link direction and the orbital plane using :func:`~tudatpy.estimation.observations_setup.dependent_variable.angle_wrt_orbital_plane_dependent_variable`
-- The integration time of the observation (for integrated observables only) using :func:`~tudatpy.estimation.observations_setup.dependent_variable.integration_time_dependent_variable`
-- The observation retransmission delay(s) using :func:`~tudatpy.estimation.observations_setup.dependent_variable.retransmission_delays_dependent_variable`
+- The elevation angle using :func:`~tudatpy.estimation.observations_setup.observations_dependent_variables.elevation_angle_dependent_variable`
+- The azimuth angle using :func:`~tudatpy.estimation.observations_setup.observations_dependent_variables.azimuth_angle_dependent_variable`
+- The range distance between two link ends using :func:`~tudatpy.estimation.observations_setup.observations_dependent_variables.target_range_between_link_ends_dependent_variable`
+- The angle between a link end and a given body, as seen from the other end of that link using :func:`~tudatpy.estimation.observations_setup.observations_dependent_variables.avoidance_angle_dependent_variable`
+- The minimum distance between a link and the center of a given body using :func:`~tudatpy.estimation.observations_setup.observations_dependent_variables.body_center_distance_dependent_variable`
+- The minimum distance between a link and the limb of a given body using :func:`~tudatpy.estimation.observations_setup.observations_dependent_variables.body_limb_distance_dependent_variable`
+- The angle between the link direction and the orbital plane using :func:`~tudatpy.estimation.observations_setup.observations_dependent_variables.angle_wrt_orbital_plane_dependent_variable`
+- The integration time of the observation (for integrated observables only) using :func:`~tudatpy.estimation.observations_setup.observations_dependent_variables.integration_time_dependent_variable`
+- The observation retransmission delay(s) using :func:`~tudatpy.estimation.observations_setup.observations_dependent_variables.retransmission_delays_dependent_variable`
 
 Adding Dependent Variables
 ===========================
@@ -33,18 +33,20 @@ As an example, let us assume that an observation collection only contains observ
 
 .. code-block:: python
 
-    from tudatpy.estimation import observations_setup
+    from tudatpy.estimation.observable_models_setup import links
     
     link_ends = dict()
-    link_ends[transmitter] = observations_setup.observation.body_reference_point_link_end_id("Earth", "Station1")
-    link_ends[retransmitter] = observations_setup.observation.body_origin_link_end_id("MRO")
-    link_ends[receiver] = observations_setup.observation.body_reference_point_link_end_id("Earth", "Station2")
+    link_ends[links.transmitter] = links.body_reference_point_link_end_id("Earth", "Station1")
+    link_ends[links.retransmitter] = links.body_origin_link_end_id("MRO")
+    link_ends[links.receiver] = links.body_reference_point_link_end_id("Earth", "Station2")
 
 We will now illustrate two different ways to define dependent variable settings, taking the elevation angle as an example. In the first approach, the user does not specify anything about which link end(s) to focus on:
 
 .. code-block:: python
 
-    elevation_angle_settings_1 = observations_setup.dependent_variable.elevation_angle_dependent_variable()
+    from tudatpy.estimation.observations_setup import observations_dependent_variables
+    
+    elevation_angle_settings_1 = observations_dependent_variables.elevation_angle_dependent_variable()
     observation_collection.add_dependent_variable(elevation_angle_settings_1, bodies)
 
 Since no particular link ends information is given, the above lines of code will ultimately lead to the automatic creation of two elevation angle settings:
@@ -59,12 +61,15 @@ Alternatively, the user can explicitly specify for which link end the elevation 
 
 .. code-block:: python
 
-    elevation_angle_settings_2 = observations_setup.dependent_variable.elevation_angle_dependent_variable(
-        link_end_type=transmitter
+    from tudatpy.estimation.observable_models_setup import links
+    from tudatpy.estimation.observations_setup import observations_dependent_variables
+    
+    elevation_angle_settings_2 = observations_dependent_variables.elevation_angle_dependent_variable(
+        link_end_type=links.transmitter
     )
     # or
-    elevation_angle_settings_2 = observations_setup.dependent_variable.elevation_angle_dependent_variable(
-        link_end_id=("Earth", "Station1")
+    elevation_angle_settings_2 = observations_dependent_variables.elevation_angle_dependent_variable(
+        link_end_id=links.body_reference_point_link_end_id("Earth", "Station1")
     )
 
 Both options above lead to the creation of a single elevation dependent variable (elevation of MRO as seen by the transmitting station "Station1").
@@ -89,16 +94,18 @@ The :meth:`~tudatpy.estimation.observations.ObservationCollection.add_dependent_
 
 .. code-block:: python
 
-    from tudatpy.estimation import observations
+    from tudatpy.estimation.observable_models_setup import links, model_settings
+    from tudatpy.estimation.observations_setup import observations_dependent_variables
+    from tudatpy.estimation.observations import observation_parser
     
-    elevation_angle_settings = observations_setup.dependent_variable.elevation_angle_dependent_variable(
-        link_end_type=transmitter,
-        link_end_id=("Earth", "Station1")
+    elevation_angle_settings = observations_dependent_variables.elevation_angle_dependent_variable(
+        link_end_type=links.transmitter,
+        link_end_id=links.body_reference_point_link_end_id("Earth", "Station1")
     )
     elevation_angle_parser = observation_collection.add_dependent_variable(
         elevation_angle_settings,
         bodies,
-        observations.observation_parser(one_way_range)
+        observation_parser(model_settings.one_way_range_type)
     )
 
 In the above lines of code, the elevation angle is only added to observation sets containing ``one_way_range`` data with Station1 as the transmitting station.
@@ -110,9 +117,9 @@ After adding the dependent variable settings to the observation collection, the 
 
 .. code-block:: python
 
-    from tudatpy.estimation import observations_setup
+    from tudatpy.estimation.observations_setup.observations_wrapper import compute_residuals_and_dependent_variables
     
-    observations_setup.observations_wrapper.compute_residuals_and_dependent_variables(
+    compute_residuals_and_dependent_variables(
         observation_collection,
         observation_simulators,
         bodies
@@ -128,18 +135,21 @@ When to Add Dependent Variables
    
    .. code-block:: python
    
+       from tudatpy.estimation.observations_setup import observations_dependent_variables, observations_simulation_settings
+       from tudatpy.estimation.observations_setup.observations_wrapper import simulate_observations
+       
        # Create list of dependent variable settings
        dependent_variables_list = [elevation_angle_settings, ...]
        
        # Add dependent variable settings to observation simulation settings
-       observations_setup.add_dependent_variables_to_all(
+       observations_simulation_settings.add_dependent_variables_to_all(
            simulation_settings,
            dependent_variables_list,
            bodies
        )
        
        # When simulating the observations, the dependent variables are automatically calculated too
-       observation_collection = observations_setup.observations_wrapper.simulate_observations(
+       observation_collection = simulate_observations(
            simulation_settings,
            observation_simulators,
            bodies
@@ -167,7 +177,9 @@ As mentioned above, the following line creates elevation angle settings for all 
 
 .. code-block:: python
 
-    elevation_angle_settings = observations_setup.dependent_variable.elevation_angle_dependent_variable()
+    from tudatpy.estimation.observations_setup import observations_dependent_variables
+    
+    elevation_angle_settings = observations_dependent_variables.elevation_angle_dependent_variable()
 
 Attempting to retrieve the elevation angle values with ``dependent_variable(elevation_angle_settings)`` would then fail: for each observation set, multiple variables could match these settings. There are two options to resolve this:
 
@@ -175,7 +187,7 @@ Attempting to retrieve the elevation angle values with ``dependent_variable(elev
 
 .. code-block:: python
 
-    elevation_angle_settings_1 = observations_setup.dependent_variable.elevation_angle_dependent_variable()
+    elevation_angle_settings_1 = observations_dependent_variables.elevation_angle_dependent_variable()
     elevation_angle_outputs = observation_collection.dependent_variable(
         elevation_angle_settings_1,
         first_compatible_settings=True
@@ -185,8 +197,10 @@ Attempting to retrieve the elevation angle values with ``dependent_variable(elev
 
 .. code-block:: python
 
-    elevation_angle_settings_2 = observations_setup.dependent_variable.elevation_angle_dependent_variable(
-        link_end_type=transmitter
+    from tudatpy.estimation.observable_models_setup import links
+    
+    elevation_angle_settings_2 = observations_dependent_variables.elevation_angle_dependent_variable(
+        link_end_type=links.transmitter
     )
     elevation_angle_outputs = observation_collection.dependent_variable(elevation_angle_settings_2)
 
@@ -235,18 +249,20 @@ Example: Plotting Elevation Angle
 
     import matplotlib.pyplot as plt
     import numpy as np
-    from tudatpy.estimation import observations_setup
+    from tudatpy.estimation.observations_setup import observations_dependent_variables
+    from tudatpy.estimation.observations_setup.observations_wrapper import compute_residuals_and_dependent_variables
+    from tudatpy.estimation.observable_models_setup import links
     
     # Define elevation angle settings
-    elevation_settings = observations_setup.dependent_variable.elevation_angle_dependent_variable(
-        link_end_type=transmitter
+    elevation_settings = observations_dependent_variables.elevation_angle_dependent_variable(
+        link_end_type=links.transmitter
     )
     
     # Add to observation collection
     elevation_parser = observation_collection.add_dependent_variable(elevation_settings, bodies)
     
     # Compute residuals and dependent variables
-    observations_setup.observations_wrapper.compute_residuals_and_dependent_variables(
+    compute_residuals_and_dependent_variables(
         observation_collection,
         observation_simulators,
         bodies
