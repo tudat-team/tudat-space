@@ -24,11 +24,11 @@ The creation of an observation filter object is done by specifying the type of f
 
 .. code-block:: python
 
-    from tudatpy.estimation import observations
+    from tudatpy.estimation.observations import observation_filter, residual_filtering
     
     # Create a filter to remove observations with residuals greater than cutoff_value
-    filter = observations.observation_filter(
-        observations.residual_filtering,
+    filter_obj = observation_filter(
+        residual_filtering,
         cutoff_value,
         use_opposite_condition=False
     )
@@ -38,13 +38,13 @@ The (optional) ``use_opposite_condition`` argument allows the user to revert the
 Available Filter Types
 ----------------------
 
-Tudat supports several types of filters:
+Tudat supports several types of filters, which are accessible as enum values from the :mod:`tudatpy.estimation.observations` module:
 
-- **Residual filtering**: Remove observations with residuals exceeding a threshold
-- **Absolute value filtering**: Remove observations whose absolute value exceeds a threshold
-- **Epochs filtering**: Remove observations at specific time epochs
-- **Time bounds filtering**: Remove observations outside a specified time range
-- **Dependent variable filtering**: Remove observations based on dependent variable values (e.g., elevation angle too low)
+- **residual_filtering**: Remove observations with residuals exceeding a threshold
+- **absolute_value_filtering**: Remove observations whose absolute value exceeds a threshold
+- **epochs_filtering**: Remove observations at specific time epochs
+- **time_bounds_filtering**: Remove observations outside a specified time range
+- **dependent_variable_filtering**: Remove observations based on dependent variable values (e.g., elevation angle too low)
 
 Applying a Filter
 -----------------
@@ -54,18 +54,18 @@ Once the filter object has been defined, one must call the :meth:`~tudatpy.estim
 .. code-block:: python
 
     # Apply the filter in-place (modifies observation_collection directly)
-    observation_collection.filter_observations(filter)
+    observation_collection.filter_observations(filter_obj)
 
 The above directly modifies the content of the ``observation_collection`` object. Alternatively, it is also possible to create a new observation collection that would only contain the post-filtering observations:
 
 .. code-block:: python
 
-    from tudatpy.estimation import observations
+    from tudatpy.estimation.observations import filter_observations
     
     # Create a new filtered collection
-    filtered_observation_collection = observations.filter_observations(
+    filtered_observation_collection = filter_observations(
         observation_collection,
-        filter
+        filter_obj
     )
 
 The :func:`~tudatpy.estimation.observations.filter_observations` function can also take an optional observation parser object as input. In this case, the filter is only applied to the single observation sets meeting the parsing conditions.
@@ -79,11 +79,11 @@ For each single observation set, the filtered observations are stored within a s
 
 .. code-block:: python
 
-    from tudatpy.estimation import observations
+    from tudatpy.estimation.observations import observation_filter, residual_filtering
     
     # Create a filter for all residuals > 0.1
-    residual_filter = observations.observation_filter(
-        observations.residual_filtering,
+    residual_filter = observation_filter(
+        residual_filtering,
         0.1
     )
     
@@ -127,14 +127,14 @@ The splitting is performed as follows:
 
 .. code-block:: python
 
-    from tudatpy.estimation import observations
+    from tudatpy.estimation.observations import observation_set_splitter, time_tags_splitter
     
     # Define splitting epochs
     splitting_epochs = [epoch1, epoch2, epoch3]
     
     # Create a splitter to divide sets at specific times
-    splitter = observations.observation_set_splitter(
-        observations.time_tags_splitter,
+    splitter = observation_set_splitter(
+        time_tags_splitter,
         splitting_epochs
     )
     
@@ -149,10 +149,10 @@ Similarly to the filtering functionality, the splitting can either be applied to
 
 .. code-block:: python
 
-    from tudatpy.estimation import observations
+    from tudatpy.estimation.observations import split_observation_sets
     
     # Create a new post-splitting collection
-    post_split_collection = observations.split_observation_sets(
+    post_split_collection = split_observation_sets(
         observation_collection,
         splitter
     )
@@ -171,10 +171,11 @@ As an example, the following lines of code would remove all ``one_way_range`` da
 
 .. code-block:: python
 
-    from tudatpy.estimation import observations
+    from tudatpy.estimation.observations import observation_parser
+    from tudatpy.estimation.observable_models_setup.model_settings import one_way_range_type
     
     # Remove all one_way_range observations
-    range_parser = observations.observation_parser(one_way_range)
+    range_parser = observation_parser(one_way_range_type)
     observation_collection.remove_single_observation_sets(range_parser)
 
 Removing Empty Sets
@@ -195,10 +196,11 @@ Outlier Removal
 
 .. code-block:: python
 
-    from tudatpy.estimation import observations, observations_setup
+    from tudatpy.estimation.observations import observation_filter, residual_filtering
+    from tudatpy.estimation.observations_setup.observations_wrapper import compute_residuals_and_dependent_variables
     
     # Compute initial residuals
-    observations_setup.observations_wrapper.compute_residuals_and_dependent_variables(
+    compute_residuals_and_dependent_variables(
         observation_collection,
         observation_simulators,
         bodies
@@ -206,34 +208,39 @@ Outlier Removal
     
     # Remove observations with residuals > 3 sigma
     residual_threshold = 3.0 * observation_noise_level
-    residual_filter = observations.observation_filter(
-        observations.residual_filtering,
+    residual_filter_obj = observation_filter(
+        residual_filtering,
         residual_threshold
     )
-    observation_collection.filter_observations(residual_filter)
+    observation_collection.filter_observations(residual_filter_obj)
 
 Data Quality Assessment
 -----------------------
 
 .. code-block:: python
 
-    from tudatpy.estimation import observations, observations_setup
+    from tudatpy.estimation.observations import observation_filter, dependent_variable_filtering
+    from tudatpy.estimation.observations_setup import observations_dependent_variables
+    from tudatpy.estimation.observations_setup.observations_wrapper import compute_residuals_and_dependent_variables
+    from tudatpy.estimation.observable_models_setup import links
     import numpy as np
     
-    # Filter by elevation angle (keep only observations above 10 degrees)
-    elevation_settings = observations_setup.dependent_variable.elevation_angle_dependent_variable(
-        link_end_type=transmitter
+    # Define elevation angle dependent variable
+    elevation_settings = observations_dependent_variables.elevation_angle_dependent_variable(
+        link_end_type=links.transmitter
     )
-    observation_collection.add_dependent_variable_settings(elevation_settings, bodies)
+    observation_collection.add_dependent_variable(elevation_settings, bodies)
     
-    observations_setup.observations_wrapper.compute_residuals_and_dependent_variables(
+    # Compute residuals and dependent variables
+    compute_residuals_and_dependent_variables(
         observation_collection,
         observation_simulators,
         bodies
     )
     
-    elevation_filter = observations.observation_filter(
-        observations.dependent_variable_filtering,
+    # Filter by elevation angle (keep only observations above 10 degrees)
+    elevation_filter = observation_filter(
+        dependent_variable_filtering,
         elevation_settings,
         min_value=np.deg2rad(10.0)
     )
@@ -244,16 +251,15 @@ Time Range Selection
 
 .. code-block:: python
 
-    from tudatpy.estimation import observations
+    from tudatpy.estimation.observations import observation_filter, filter_observations, time_bounds_filtering
     
     # Keep only observations in a specific time window
-    time_filter = observations.observation_filter(
-        observations.time_bounds_filtering,
-        start_time=start_epoch,
-        end_time=end_epoch
+    time_filter = observation_filter(
+        time_bounds_filtering,
+        (start_epoch, end_epoch)
     )
     
-    filtered_collection = observations.filter_observations(
+    filtered_collection = filter_observations(
         observation_collection,
         time_filter
     )
@@ -263,14 +269,106 @@ Splitting Around Events
 
 .. code-block:: python
 
-    from tudatpy.estimation import observations
+    from tudatpy.estimation.observations import observation_set_splitter, time_tags_splitter
     
     # Split observation sets around maneuver epochs
     maneuver_epochs = [maneuver_epoch_1, maneuver_epoch_2, maneuver_epoch_3]
     
-    splitter = observations.observation_set_splitter(
-        observations.time_tags_splitter,
+    splitter = observation_set_splitter(
+        time_tags_splitter,
         maneuver_epochs
     )
     
     observation_collection.split_observation_sets(splitter)
+
+Example: Complete Filtering Workflow
+=====================================
+
+Here's a complete example showing how to filter observations based on multiple criteria:
+
+.. code-block:: python
+
+    import numpy as np
+    from tudatpy.estimation.observations import observation_filter, observation_parser, residual_filtering, dependent_variable_filtering
+    from tudatpy.estimation.observations_setup import observations_dependent_variables
+    from tudatpy.estimation.observations_setup.observations_wrapper import compute_residuals_and_dependent_variables
+    from tudatpy.estimation.observable_models_setup import links
+    from tudatpy.estimation.observable_models_setup.model_settings import dsn_n_way_averaged_doppler
+    
+    # Add elevation angle as dependent variable
+    elevation_settings = observations_dependent_variables.elevation_angle_dependent_variable(
+        link_end_type=links.transmitter
+    )
+    observation_collection.add_dependent_variable(elevation_settings, bodies)
+    
+    # Compute residuals and dependent variables
+    compute_residuals_and_dependent_variables(
+        observation_collection,
+        observation_simulators,
+        bodies
+    )
+    
+    # Filter 1: Remove observations below 15 degrees elevation
+    elevation_filter = observation_filter(
+        dependent_variable_filtering,
+        elevation_settings,
+        min_value=np.deg2rad(15.0)
+    )
+    observation_collection.filter_observations(elevation_filter)
+    
+    # Filter 2: Remove observations with high residuals (only for Doppler)
+    doppler_parser = observation_parser(dsn_n_way_averaged_doppler)
+    residual_filter_obj = observation_filter(
+        residual_filtering,
+        3.0 * doppler_noise_level
+    )
+    observation_collection.filter_observations(residual_filter_obj, parser=doppler_parser)
+    
+    # Remove any empty observation sets
+    observation_collection.remove_empty_observation_sets()
+    
+    # Print filtering results
+    print(f"Number of remaining observation sets: {observation_collection.get_number_of_observation_sets()}")
+    print(f"Total number of observations: {len(observation_collection.get_concatenated_observations())}")
+
+Filtering by Multiple Conditions
+=================================
+
+You can apply multiple filters sequentially to progressively refine your observation data:
+
+.. code-block:: python
+
+    from tudatpy.estimation.observations import observation_filter, time_bounds_filtering, residual_filtering, epochs_filtering
+    from tudatpy.estimation.observations_setup.observations_wrapper import compute_residuals_and_dependent_variables
+    
+    # Step 1: Filter by time range
+    time_filter = observation_filter(
+        time_bounds_filtering,
+        (start_time, end_time)
+    )
+    observation_collection.filter_observations(time_filter)
+    
+    # Step 2: Compute residuals
+    compute_residuals_and_dependent_variables(
+        observation_collection,
+        observation_simulators,
+        bodies
+    )
+    
+    # Step 3: Filter by residual magnitude
+    residual_filter_obj = observation_filter(
+        residual_filtering,
+        max_residual_threshold
+    )
+    observation_collection.filter_observations(residual_filter_obj, save_filtered_observations=True)
+    
+    # Step 4: Remove specific problematic epochs if needed
+    problematic_epochs = [epoch1, epoch2, epoch3]
+    epochs_filter = observation_filter(
+        epochs_filtering,
+        problematic_epochs
+    )
+    observation_collection.filter_observations(epochs_filter)
+    
+    # Clean up
+    observation_collection.remove_empty_observation_sets()

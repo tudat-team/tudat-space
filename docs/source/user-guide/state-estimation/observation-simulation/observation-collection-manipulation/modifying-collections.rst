@@ -30,7 +30,8 @@ The example below shows two equivalent ways of assigning different (constant) we
 
 .. code-block:: python
 
-    from tudatpy.estimation import observations
+    from tudatpy.estimation.observations import observation_parser
+    from tudatpy.estimation.observable_models_setup.model_settings import one_way_range_type, one_way_doppler_type
     
     # Set weights based on observable type
     range_weight = 1.0 / (1.0**2)  # Assuming 1.0m noise
@@ -39,17 +40,17 @@ The example below shows two equivalent ways of assigning different (constant) we
     # Approach 1: Set weights individually
     observation_collection.set_constant_weight(
         range_weight,
-        observations.observation_parser(one_way_range)
+        observation_parser(one_way_range_type)
     )
     observation_collection.set_constant_weight(
         doppler_weight,
-        observations.observation_parser(one_way_doppler)
+        observation_parser(one_way_doppler_type)
     )
     
     # Approach 2: Set weights using a dictionary
     weights_per_type = dict()
-    weights_per_type[observations.observation_parser(one_way_range)] = range_weight
-    weights_per_type[observations.observation_parser(one_way_doppler)] = doppler_weight
+    weights_per_type[observation_parser(one_way_range_type)] = range_weight
+    weights_per_type[observation_parser(one_way_doppler_type)] = doppler_weight
     observation_collection.set_constant_weight(weights_per_type)
 
 Tabulated Weights
@@ -59,6 +60,8 @@ The :meth:`~tudatpy.estimation.observations.ObservationCollection.set_tabulated_
 
 .. code-block:: python
 
+    import numpy as np
+    
     # Set weights for the entire collection
     tabulated_weights = ...  # numpy array with size matching the observation vector
     observation_collection.set_tabulated_weights(tabulated_weights)
@@ -81,7 +84,7 @@ For a **single** reference point whose position is **constant** in the body-fixe
 .. code-block:: python
 
     import numpy as np
-    from tudatpy.estimation import observations
+    from tudatpy.estimation.observable_models_setup import links
     
     # Define the antenna position in the spacecraft-fixed frame
     antenna_position = np.array([1.0, 0.0, 0.0])
@@ -92,7 +95,7 @@ For a **single** reference point whose position is **constant** in the body-fixe
         antenna_position,
         "AntennaName",
         "SpacecraftName",
-        observations.reflector1
+        links.reflector1
     )
 
 Single, Time-Varying Reference Point
@@ -102,8 +105,8 @@ For a **single** reference point whose position **varies** in the body-fixed fra
 
 .. code-block:: python
 
-    from tudatpy.numerical_simulation import environment_setup
-    from tudatpy.estimation import observations
+    from tudatpy.dynamics import environment_setup
+    from tudatpy.estimation.observable_models_setup import links
     
     # Retrieve the MRO antenna (SPICE ID: -74214) ephemeris in the spacecraft-fixed frame
     # (SPICE ID of the frame origin: -74000)
@@ -111,9 +114,9 @@ For a **single** reference point whose position **varies** in the body-fixed fra
         "-74000",
         "MRO_SPACECRAFT"
     )
-    antenna_ephemeris = environment_setup.ephemeris.create_ephemeris(
+    antenna_ephemeris = environment_setup.create_ephemeris(
         antenna_ephemeris_settings,
-        "-76214"
+        "-74214"
     )
     
     # Set the antenna as reference point
@@ -122,7 +125,7 @@ For a **single** reference point whose position **varies** in the body-fixed fra
         antenna_ephemeris,
         "Antenna",
         "MRO",
-        observations.reflector1
+        links.reflector1
     )
 
 Multiple Reference Points with Switching
@@ -133,7 +136,7 @@ For **multiple** reference points whose positions are **constant** in the body-f
 .. code-block:: python
 
     import numpy as np
-    from tudatpy.estimation import observations
+    from tudatpy.estimation.observable_models_setup import links
     
     position_antenna_1 = np.array([1.0, 0.0, 0.0])
     position_antenna_2 = np.array([0.0, 1.0, 0.0])
@@ -149,7 +152,7 @@ For **multiple** reference points whose positions are **constant** in the body-f
         bodies,
         antenna_switch_history,
         "SpacecraftName",
-        observations.reflector1
+        links.reflector1
     )
 
 .. warning::
@@ -168,14 +171,18 @@ Using Parsers with Reference Points
 
    .. code-block:: python
 
+       from tudatpy.estimation.observations import observation_parser
+       from tudatpy.estimation.observable_models_setup.model_settings import one_way_range_type
+       from tudatpy.estimation.observable_models_setup import links
+       
        # Set the reference point position for one_way_range observables only
        observation_collection.set_reference_point(
            bodies,
            antenna_position,
            "AntennaName",
            "SpacecraftName",
-           observations.reflector1,
-           observations.observation_parser(one_way_range)
+           links.reflector1,
+           observation_parser(one_way_range_type)
        )
 
 Computing Residuals
@@ -186,22 +193,23 @@ Residuals are defined as the difference between computed (i.e., simulated) and o
 - For observation collections created from loading **real** data, residuals indicate how much the real observations depart from the values predicted by our observation model(s).
 - For observation collections created from **simulated** data, residuals should theoretically be equal to zero unless artificial measurement (bias and/or noise) or dynamical errors are introduced.
 
-Computing the residuals for a given observation collection can be done using the :func:`~tudatpy.estimation.observations_setup.observations_wrapper.compute_residuals_and_dependent_variables` function. It only requires the observation collection, observation simulators (see :func:`~tudatpy.estimation.observations_setup.create_observation_simulators`), and the usual :class:`~tudatpy.numerical_simulation.environment.SystemOfBodies` as inputs.
+Computing the residuals for a given observation collection can be done using the :func:`~tudatpy.estimation.observations_setup.observations_wrapper.compute_residuals_and_dependent_variables` function. It only requires the observation collection, observation simulators (see :func:`~tudatpy.estimation.observable_models_setup.create_observation_simulators`), and the usual :class:`~tudatpy.dynamics.SystemOfBodies` as inputs.
 
 The :func:`~tudatpy.estimation.observations_setup.observations_wrapper.compute_residuals_and_dependent_variables` function automatically generates the simulation settings to match the observations contained within the observation collection, and uses such settings - combined with the observation simulators - to get the computed observation values:
 
 .. code-block:: python
 
-    from tudatpy.estimation import observations_setup
+    from tudatpy.estimation.observable_models_setup import create_observation_simulators
+    from tudatpy.estimation.observations_setup.observations_wrapper import compute_residuals_and_dependent_variables
     
     # Create observation simulators
-    observation_simulators = observations_setup.create_observation_simulators(
+    observation_simulators = create_observation_simulators(
         observation_model_settings,
         bodies
     )
     
     # Compute residuals and store them in the observation_collection
-    observations_setup.observations_wrapper.compute_residuals_and_dependent_variables(
+    compute_residuals_and_dependent_variables(
         observation_collection,
         observation_simulators,
         bodies
@@ -224,3 +232,57 @@ The residuals can then be used for:
 - Outlier detection
 - Convergence checking during estimation
 - Post-estimation analysis
+
+Example: Complete Residuals Workflow
+=====================================
+
+Here's a complete example showing how to compute and analyze residuals:
+
+.. code-block:: python
+
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from tudatpy.estimation.observable_models_setup import create_observation_simulators
+    from tudatpy.estimation.observations_setup.observations_wrapper import compute_residuals_and_dependent_variables
+    from tudatpy.estimation.observations import observation_parser
+    from tudatpy.estimation.observable_models_setup.model_settings import dsn_n_way_averaged_doppler
+    
+    # Create observation simulators with observation models
+    observation_simulators = create_observation_simulators(
+        observation_model_settings,
+        bodies
+    )
+    
+    # Compute residuals
+    compute_residuals_and_dependent_variables(
+        observation_collection,
+        observation_simulators,
+        bodies
+    )
+    
+    # Extract residuals for Doppler observations
+    doppler_parser = observation_parser(dsn_n_way_averaged_doppler)
+    doppler_residuals = observation_collection.get_concatenated_residuals(doppler_parser)
+    doppler_times = observation_collection.get_concatenated_observation_times(doppler_parser)
+    
+    # Convert times to hours since start
+    times_hours = (np.array(doppler_times) - doppler_times[0]) / 3600.0
+    
+    # Plot residuals
+    plt.figure(figsize=(12, 6))
+    plt.plot(times_hours, doppler_residuals * 1e3, 'b.', markersize=2)
+    plt.xlabel('Time since start [hours]')
+    plt.ylabel('Doppler Residuals [mHz]')
+    plt.title('Doppler Observation Residuals')
+    plt.grid(True)
+    plt.show()
+    
+    # Compute residual statistics
+    rms_residual = np.sqrt(np.mean(doppler_residuals**2))
+    mean_residual = np.mean(doppler_residuals)
+    std_residual = np.std(doppler_residuals)
+    
+    print(f"RMS residual: {rms_residual:.6e} Hz")
+    print(f"Mean residual: {mean_residual:.6e} Hz")
+    print(f"Std deviation: {std_residual:.6e} Hz")
+    print(f"Number of observations: {len(doppler_residuals)}")

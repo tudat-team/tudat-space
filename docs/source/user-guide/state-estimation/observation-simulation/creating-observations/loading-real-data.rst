@@ -34,10 +34,10 @@ For instance, the following example will retrieve all data from asteroids 433 (E
     # Filter data based on time
     start_epoch = datetime.datetime(2010, 1, 1)
     end_epoch = datetime.datetime(2020, 1, 1)
-    mpc_container.filter_by_time(start_epoch, end_epoch)
+    mpc_container.filter(epoch_start=start_epoch, epoch_end=end_epoch)
 
     # Convert data to Tudat-compatible object
-    observation_collection = mpc_container.to_tudat(filter_out_space_observatories=True)
+    observation_collection = mpc_container.to_tudat(bodies=bodies, included_satellites=None)
 
 Several examples using MPC data can be found on our page with :ref:`estimation examples <estimation_using_real_observations>`.
 
@@ -53,15 +53,15 @@ TRK-2-18 Orbit Data File (ODF)
 
 The Orbit Data File format is documented `here <https://pds-geosciences.wustl.edu/radioscience/urn-nasa-pds-radiosci_documentation/odf_071710/odf.pdf>`_. These are binary files that Tudat can 'unpack' and put the contents into Tudat-compatible data structures. Since the contents of the radio science data are significantly more complicated than (for instance) optical astrometric data, the loading of the files is done in several steps:
 
-- Each ODF file is loaded into a single :class:`~tudatpy.data.odf.OdfRawFileContents` object. In this step, the contents of the binary file are loaded and put into basic C++/Python data types.
-- The list of :class:`~tudatpy.data.odf.OdfRawFileContents` objects are processed, the relevant data combined and data structures set up, resulting in a set of :class:`~tudatpy.data.odf.ProcessedOdfFileContents` objects (each holding all data for a given link ends and observable type):
+- Each ODF file is loaded into a single :class:`~tudatpy.io.OdfRawFileContents` object. In this step, the contents of the binary file are loaded and put into basic C++/Python data types.
+- The list of :class:`~tudatpy.io.OdfRawFileContents` objects are processed, the relevant data combined and data structures set up, resulting in a :class:`~tudatpy.estimation.observations_setup.observations_wrapper.ProcessedOdfFileContents` object (holding all data for a given link ends and observable type):
 
   - Ramp tables per ground station are created from the combination of all ODF files
   - All observations of a given observable type and link ends from all ODF files are merged into a single object holding the observables and relevant metadata
   - All observation times are converted to TDB
 
-- The properties of the ground stations (ramp tables) are taken from the :class:`~tudatpy.data.odf.ProcessedOdfFileContents` object and set in the environment using the :func:`~tudatpy.data.odf.set_odf_information_in_bodies` function.
-- Convert the :class:`~tudatpy.data.odf.ProcessedOdfFileContents` to an object of type :class:`~tudatpy.estimation.observations.ObservationCollection`, which can be used in the estimation.
+- The properties of the ground stations (ramp tables) are taken from the :class:`~tudatpy.estimation.observations_setup.observations_wrapper.ProcessedOdfFileContents` object and set in the environment using the :func:`~tudatpy.estimation.observations_setup.observations_wrapper.set_odf_information_in_bodies` function.
+- Convert the :class:`~tudatpy.estimation.observations_setup.observations_wrapper.ProcessedOdfFileContents` to an object of type :class:`~tudatpy.estimation.observations.ObservationCollection`, which can be used in the estimation.
 
 TRK-2-34 Tracking and Navigation File (TNF)
 -------------------------------------------
@@ -145,7 +145,7 @@ For observations from a single ground station:
 
 .. code-block:: python
 
-    from tudatpy.estimation.observations_setup import observations_from_ifms_files
+    from tudatpy.estimation.observations_setup.observations_wrapper import observations_from_ifms_files
     from tudatpy.estimation.observations_setup.ancillary_settings import FrequencyBands
 
     # Load IFMS files for single station
@@ -165,7 +165,8 @@ For observations from multiple ESTRACK ground stations (one file per station):
 
 .. code-block:: python
 
-    from tudatpy.estimation.observations_setup import observations_from_multi_station_ifms_files
+    from tudatpy.estimation.observations_setup.observations_wrapper import observations_from_multi_station_ifms_files
+    from tudatpy.estimation.observations_setup.ancillary_settings import FrequencyBands
 
     # Load IFMS files for multiple stations
     observation_collection = observations_from_multi_station_ifms_files(
@@ -259,9 +260,8 @@ Example: Complete IFMS Processing Workflow
 
 .. code-block:: python
 
-    from tudatpy.kernel import numerical_simulation
-    from tudatpy.kernel.numerical_simulation import environment_setup
-    from tudatpy.estimation.observations_setup import observations_from_multi_station_ifms_files
+    from tudatpy.dynamics import environment_setup
+    from tudatpy.estimation.observations_setup.observations_wrapper import observations_from_multi_station_ifms_files
     from tudatpy.estimation.observations_setup.ancillary_settings import FrequencyBands
 
     # Create system of bodies
@@ -321,7 +321,7 @@ Tudat also supports the loading of Very Long Baseline Interferometry (VLBI) data
 
 .. code-block:: python
 
-    from tudatpy.estimation.observations_setup import observations_from_fdets_files
+    from tudatpy.estimation.observations_setup.observations_wrapper import observations_from_fdets_files
     from tudatpy.estimation.observations_setup.ancillary_settings import FrequencyBands
 
     observation_collection = observations_from_fdets_files(

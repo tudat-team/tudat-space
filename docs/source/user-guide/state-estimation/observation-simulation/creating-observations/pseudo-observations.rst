@@ -24,7 +24,7 @@ Creating Pseudo-observations
 
 In Tudat Cartesian position (pseudo-)observations are processed using the :func:`~tudatpy.estimation.observable_models_setup.model_settings.relative_cartesian_position` observation model. In addition to creating the :class:`~tudatpy.estimation.observations.ObservationCollection` manually from external data, we provide a function of convenience to generate such pseudo-observations, using the following procedure:
 
-1. Create the body for which the pseudo-observations are to be generated in your environment, using the :doc:`ephemeris</user-guide/state-propagation/environment-setup/environment-models/ephemeris>` tudatpy module. Note that the :func:`~tudatpy.dynamics.environment_setup.ephemeris.tabulated_from_existing` option can be used to turn any ephemeris settings into tabulated ephemeris settings (which is required if using the same bodies in the estimation).
+1. Create the body for which the pseudo-observations are to be generated in your environment, using the :doc:`ephemeris</user-guide/state-propagation/environment-setup/environment-models/ephemeris>` module. Note that the :func:`~tudatpy.dynamics.environment_setup.ephemeris.tabulated_from_existing` option can be used to turn any ephemeris settings into tabulated ephemeris settings (which is required if using the same bodies in the estimation).
 
 2. Generate relative position observations (and associated observation model settings) using the :func:`~tudatpy.estimation.observations_setup.observations_wrapper.create_pseudo_observations_and_models` function.
 
@@ -36,27 +36,36 @@ Example
 .. code-block:: python
 
     from tudatpy.dynamics import environment_setup
-    from tudatpy.estimation import observations_setup
+    from tudatpy.estimation.observations_setup.observations_wrapper import create_pseudo_observations_and_models
     import numpy as np
     
     # Create body with ephemeris from SPICE
-    body_settings = environment_setup.get_default_body_settings(...)
+    body_settings = environment_setup.get_default_body_settings(
+        ["Earth", "Moon", "Sun"],
+        "SSB",
+        "J2000"
+    )
+    
     # Convert to tabulated ephemeris for estimation
     body_settings.get("TargetBody").ephemeris_settings = \
-        environment_setup.ephemeris.tabulated_from_existing(...)
+        environment_setup.ephemeris.tabulated_from_existing(
+            body_settings.get("TargetBody").ephemeris_settings,
+            initial_time,
+            final_time,
+            time_step
+        )
     
     bodies = environment_setup.create_system_of_bodies(body_settings)
     
-    # Define observation times
-    observation_times = np.arange(start_epoch, end_epoch, time_step)
-    
     # Create pseudo-observations and observation model settings
-    pseudo_observations, observation_settings = \
-        observations_setup.observations_wrapper.create_pseudo_observations_and_models(
-            bodies=bodies,
-            link_ends=link_definition,
-            observation_times=observation_times,
-            reference_body="Sun"
-        )
+    # This function generates observations from the existing ephemeris in the bodies
+    pseudo_observations, observation_settings = create_pseudo_observations_and_models(
+        bodies=bodies,
+        observed_bodies=["TargetBody"],
+        central_bodies=["Sun"],
+        initial_time=initial_time,
+        final_time=final_time,
+        time_step=time_step
+    )
 
 For a complete example of using pseudo-observations, see the :ref:`Galilean moon state estimation example <estimation_using_pseudo_observations>`.

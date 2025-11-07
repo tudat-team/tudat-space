@@ -19,17 +19,18 @@ The basic manner in which to define an observation simulation settings object us
 
 .. code-block:: python
 
-    from tudatpy.estimation import observations_setup
+    from tudatpy.estimation.observations_setup import observations_simulation_settings
+    from tudatpy.estimation.observable_models_setup import links
     
     one_way_nno_mex_link_ends = dict()
-    one_way_nno_mex_link_ends[transmitter] = observations_setup.links.body_reference_point_link_end_id("Earth", "NNO")
-    one_way_nno_mex_link_ends[receiver] = observations_setup.links.body_origin_link_end_id("MeX")
-    one_way_nno_mex_link_definition = observations_setup.links.link_definition(one_way_nno_mex_link_ends)
+    one_way_nno_mex_link_ends[links.transmitter] = links.body_reference_point_link_end_id("Earth", "NNO")
+    one_way_nno_mex_link_ends[links.receiver] = links.body_origin_link_end_id("MeX")
+    one_way_nno_mex_link_definition = links.link_definition(one_way_nno_mex_link_ends)
     
     observation_times = [10.0, 20.0, 30.0]
     
-    observation_simulation_settings = observations_setup.observations_simulation_settings.tabulated_simulation_settings(
-        one_way_range_type,
+    observation_simulation_settings = observations_simulation_settings.tabulated_simulation_settings(
+        links.one_way_range_type,
         one_way_nno_mex_link_definition,
         observation_times
     )
@@ -43,11 +44,11 @@ To override this behaviour, we can specify a reference link end manually, which 
 
 .. code-block:: python
 
-    observation_simulation_settings = observations_setup.observations_simulation_settings.tabulated_simulation_settings(
-        one_way_range_type,
+    observation_simulation_settings = observations_simulation_settings.tabulated_simulation_settings(
+        links.one_way_range_type,
         one_way_nno_mex_link_definition,
         observation_times,
-        reference_link_end=observations_setup.links.LinkEndType.transmitter
+        reference_link_end=links.transmitter
     )
 
 Multiple Observables
@@ -57,7 +58,7 @@ As an extension of the above, you can also use :func:`~tudatpy.estimation.observ
 
 .. code-block:: python
 
-    observation_simulation_settings_list = observations_setup.observations_simulation_settings.tabulated_simulation_settings_list(
+    observation_simulation_settings_list = observations_simulation_settings.tabulated_simulation_settings_list(
         link_definitions_per_observable,
         observation_times
     )
@@ -99,14 +100,15 @@ For example, to set a 5s Doppler integration time for every averaged n-way Doppl
 
 .. code-block:: python
 
-    from tudatpy.estimation import observations_setup
+    from tudatpy.estimation.observations_setup import observations_simulation_settings, ancillary_settings
+    from tudatpy.estimation.observable_models_setup import model_settings
     
     integration_time = 5.0
-    doppler_ancillary_settings = observations_setup.ancillary_settings(integration_time=integration_time)
-    observations_setup.add_ancillary_settings_to_observable(
+    doppler_ancillary_settings = ancillary_settings.ancillary_settings(integration_time=integration_time)
+    ancillary_settings.add_ancillary_settings_to_observable(
         observation_simulation_settings_list,
         doppler_ancillary_settings,
-        observations_setup.model_settings.dsn_n_way_averaged_doppler
+        model_settings.dsn_n_way_averaged_doppler
     )
 
 Similar interfaces exist to add ancillary settings to all observations (the :func:`~tudatpy.estimation.observations_setup.ancillary_settings.add_ancillary_settings_to_all` function), or to add the settings to observation simulation settings of a given observable **and** a given link definition (the :func:`~tudatpy.estimation.observations_setup.ancillary_settings.add_ancillary_settings_to_observable_for_link_ends` function).
@@ -126,15 +128,19 @@ For example, the ``observation_simulation_settings_list`` list created in the ex
 
 .. code-block:: python
 
-    station_id = ["Earth", "NNO"]
+    from tudatpy.estimation.observations_setup import viability
+    from tudatpy.estimation.observable_models_setup import links
+    import numpy as np
+    
+    station_id = links.body_reference_point_link_end_id("Earth", "NNO")
     viability_settings_list = list()
     viability_settings_list.append(
-        observations_setup.viability.elevation_angle_viability(
+        viability.elevation_angle_viability(
             station_id,
             np.deg2rad(15.0)
         )
     )
-    observations_setup.viability.add_viability_check_to_all(
+    viability.add_viability_check_to_all(
         observation_simulation_settings_list,
         viability_settings_list
     )
@@ -159,11 +165,14 @@ Adding Gaussian noise to all observations of a given type can be done by:
 
 .. code-block:: python
 
+    from tudatpy.estimation.observations_setup import random_noise
+    from tudatpy.estimation.observable_models_setup import model_settings
+    
     noise_level = 0.1
-    observations_setup.random_noise.add_gaussian_noise_to_observable(
+    random_noise.add_gaussian_noise_to_observable(
         observation_simulation_settings_list,
         noise_level,
-        observations_setup.model_settings.one_way_range_type
+        model_settings.one_way_range_type
     )
 
 which will add 10 cm random noise to each one-way range observable in the ``observation_simulation_settings_list`` list. In this case (the :func:`~tudatpy.estimation.observations_setup.random_noise.add_gaussian_noise_to_observable` function), the noise is applied to all observations of a given type. To add the noise to observation simulation settings of all observables, or only to those of a given observable **and** a given link definition, use the :func:`~tudatpy.estimation.observations_setup.random_noise.add_gaussian_noise_to_all` and :func:`~tudatpy.estimation.observations_setup.random_noise.add_gaussian_noise_to_observable_for_link_ends` functions, respectively.
@@ -172,13 +181,17 @@ Similar interfaces exist to add a generic noise function to the observation:
 
 .. code-block:: python
 
+    import numpy as np
+    from tudatpy.estimation.observations_setup import random_noise
+    from tudatpy.estimation.observable_models_setup import model_settings
+    
     def custom_noise_function(current_time):
         return np.array([np.random.lognormal(0.0, 1.0)])
     
-    observations_setup.random_noise.add_noise_function_to_observable(
+    random_noise.add_noise_function_to_observable(
         observation_simulation_settings_list,
         custom_noise_function,
-        observations_setup.model_settings.one_way_range_type
+        model_settings.one_way_range_type
     )
 
 where it is important to realize that the noise function *must* have a single float representing time as input, and returns a vector (of the size of a single observation) as output. For many observables (range, Doppler), this size will be 1. For angular position observables, for instance, the size will be 2. The :func:`~tudatpy.estimation.observations_setup.random_noise.add_noise_function_to_all`, :func:`~tudatpy.estimation.observations_setup.random_noise.add_noise_function_to_observable` and :func:`~tudatpy.estimation.observations_setup.random_noise.add_noise_function_to_observable_for_link_ends` functions can be used to add a noise function to a subset of all observation simulation settings.
@@ -200,16 +213,16 @@ Creating the Observations
 Simulating the Observations
 ----------------------------
 
-Having fully defined the list of observation simulation settings ``observation_simulation_settings``, as well as the ``observation_simulators`` (see :func:`~tudatpy.estimation.observations_setup.observations_simulation_settings.create_observation_simulators`), the actual observations can be simulated as follows:
+Having fully defined the list of observation simulation settings ``observation_simulation_settings``, as well as the ``observation_simulators`` (see :func:`~tudatpy.estimation.observable_models_setup.create_observation_simulators`), the actual observations can be simulated as follows:
 
 .. code-block:: python
 
-    from tudatpy.estimation import observations_setup
+    from tudatpy.estimation.observations_setup.observations_wrapper import simulate_observations
     
-    simulated_observations = observations_setup.observations_wrapper.simulate_observations(
+    simulated_observations = simulate_observations(
         observation_simulation_settings,
-        estimator.observation_simulators,
+        observation_simulators,
         bodies
     )
 
-where ``bodies`` is the usual :class:`~tudatpy.dynamics.environment.SystemOfBodies` object that defines the physical environment (see :ref:`environment_setup` for details on creation and usage). The :func:`~tudatpy.estimation.observations_setup.observations_wrapper.simulate_observations` function returns an object of the :class:`~tudatpy.estimation.observations.ObservationCollection`.
+where ``bodies`` is the usual :class:`~tudatpy.dynamics.SystemOfBodies` object that defines the physical environment (see :ref:`environment_setup` for details on creation and usage). The :func:`~tudatpy.estimation.observations_setup.observations_wrapper.simulate_observations` function returns an object of the :class:`~tudatpy.estimation.observations.ObservationCollection`.
