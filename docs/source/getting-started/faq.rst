@@ -28,7 +28,7 @@ which would return the gravitational parameter of the Earth as used by tudat. A 
 How do I retrieve the orbital period of a Body object?
 ======================================================
 
-While it is not possible (right now) to directly retrieve the orbital period of a Body object, it is possible to calculate it. This can be done by storing the Keplerian state of a numerically propagated Body as a :doc:`dependent_variable`, from which the orbital period can directly be calculated.
+While it is not possible (right now) to directly retrieve the orbital period of a Body object, it is possible to calculate it. This can be done by storing the Keplerian state of a numerically propagated Body as a `dependent variable <https://py.api.tudat.space/en/latest/dynamics/propagation_setup/dependent_variable.html>`_ , from which the orbital period can directly be calculated.
 
 Alternatively, if the Body is not numerically propagated, or you prefer not to store the Keplerian state as a dependent variable, this can also be done by accessing the :attr:`~tudatpy.dynamics.environment.Body.state` property of a Body, which returns its translational state at the current time step in Cartesian elements w.r.t. the global frame origin, with axes along the global frame orientation. Note that if the Body is numerically propagated, this information is retrieved from the propagated state vector. If it is not numerically propagated, it is retrieved from the body's ephemeris. This state can then be converted to Keplerian elements using the :func:`~tudatpy.astro.element_conversion.cartesian_to_keplerian` function, from which the orbital period can be calculated.
 

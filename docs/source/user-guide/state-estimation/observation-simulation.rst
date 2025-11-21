@@ -216,7 +216,7 @@ To add a generic noise function directly to a single :class:`~tudatpy.estimation
 Defining additional output
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-As is the case with the state propagation (see :ref:`here<dependent_variables>`), you can define any number of dependent
+As is the case with the state propagation (see :ref:`here<propagation_setup>`), you can define any number of dependent
 variable to be saved along with the observations. These include distances between link ends, angles between link ends,
 and a variety of other options. Note that this functionality is relatively new, and the list of implemented dependent variables
 is currently limited. A full list of options can be found ... (TODO).
