@@ -23,7 +23,7 @@ If you have created a system of bodies of type :class:`~tudatpy.dynamics.environ
 
    bodies.get("Earth").gravity_field_model.gravitational_parameter
 
-which would return the gravitational parameter of the Earth as used by tudat. A full list of all Body properties you can retrieve can be accessed from the :class:`~tudatpy.dynamics.environment.Body` class. Note that first the ``gravity_field_model`` environment model is entered before the gravitational parameter is retrieved. A full list of environment models available can be accessed on the :ref:`Environment Models page <environment_model_overview>`.
+which would return the gravitational parameter of the Earth as used by tudat. A full list of all Body properties you can retrieve can be accessed from the :class:`~tudatpy.dynamics.environment.Body` class. Note that first the ``gravity_field_model`` environment model is entered before the gravitational parameter is retrieved.
 
 How do I retrieve the orbital period of a Body object?
 ======================================================
