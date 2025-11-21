@@ -17,8 +17,6 @@ Propagation Setup
    propagation-setup/multi-hybrid-arc
    propagation-setup/processed-propagated-elements
    propagation-setup/integration-setup
-   propagation-setup/termination-settings
-   propagation-setup/dependent-variables
    propagation-setup/printing-processing-results
    
 
