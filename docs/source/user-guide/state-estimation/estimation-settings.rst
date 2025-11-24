@@ -23,24 +23,6 @@ We distinguish between two different types of analyses:
 Covariance analysis settings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The covariance analysis solves the following equation:
-
-.. math::
-
-  \mathbf{P}=\left(\mathbf{H}^{T}\cdot \mathbf{W}\cdot \mathbf{H} + \mathbf{P}_{0}^{-1} \right)^{-1}
- 
-The design matrix :math:`\mathbf{H}` is created from the observation model, propagated state and variational equations,
-and is fully defined by the specifics of the observations, dynamical model and observation model.
-The weight matrix :math:`\mathbf{W}` can be specified by the user (see below) and is set to the identity matrix by default.
-The inverse a priori covariance :math:`P_{0}^{-1}` can be specified by the user, and is set to a 0 matrix by default.
-
-The design matrix is defined by:
-
-.. math::
-
-  \mathbf{H}=\frac{\partial\mathbf{h}}{\partial\mathbf{p}}
-
-with :math:`\mathbf{h}` the vector of computed observations, and :math:`\mathbf{p}` the vector of estimated parameters.
 
 The basic definition of settings for a covariance analysis only requires the observations that are simulated, as follows:
 
@@ -64,17 +46,8 @@ The resulting object ``covariance_analysis_settings`` can be used to tune the ex
 (see the :meth:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput.define_covariance_settings` method of this class for details),
 such as whether to reintegrate the dynamics, or which terminal output to provide.
 
-The weight matrix is typically not provided as a full matrix in a covariance analysis, as the its size of :math:`N_{obs}\times N_{obs}` leads to prohibitive memory usage.
-Presently, we only support the definition of a diagonal weights matrix.
-Note that the weight matrix diagonal entry :math:`W_{i,i}` should ideally be related to the observation's Gaussian noise as :math:`W_{i,i}=1/\sigma_{i}^{2}`.
-Several options are provided to set the weights matrix diagonal
-(as :class:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput` member functions):
-
-* Constant weight for all observation, using the :meth:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput.set_constant_weight` function,
-* Constant weight for all observations of a given observation type, using the :meth:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput.set_constant_single_observable_weight` function, or the :meth:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput.set_constant_single_observable_vector_weight` function for observables of size :math:`>1`, to for instance set different weights for right ascension and declination of an angular position observable
-* Constant weight for all observations of a given observation type, with a given set of link ends, using the :meth:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput.set_constant_single_observable_and_link_end_weight` function, or the :meth:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput.set_constant_single_observable_and_link_end_vector_weight` function for observables of size :math:`>1`
-* Manual definition of full weight vector for all observations of a given observation type with a given set of link ends, using the :meth:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput.set_total_single_observable_and_link_end_vector_weight` function,
-* Manual definition of the full weight vector for all observations using the :attr:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput.weight_matrix_diagonal` attribute,
+The weight matrix is typically not provided as a full matrix in a covariance analysis, as the its size of :math:`N_{obs}\times N_{obs}` leads to prohibitive memory usage. Presently, we only support the definition of a diagonal weights matrix. The weights of observations
+ are set in the object containing the observations
 
 When using consider covariance (e.g. when consider parameters are defined in the :ref:`parameterSettings`), the consider parameter covariance matrix :math:`\mathbf{C}`
 is also provided to the :class:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput` constructor, and the
