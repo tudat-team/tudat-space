@@ -48,5 +48,3 @@ Once all the settings are in place, the solution can be generated: the (simulate
    :hidden:
    :maxdepth: 1
 
-   state-estimation/performing-estimation
-

@@ -8,6 +8,8 @@ This page describes how to modify the contents and properties of an :class:`~tud
 
 When creating an observation collection - either from simulated or real data - the residuals and weights are in most cases set to their default values (zero and one, respectively) and no observation dependent variable is created by default. This can be changed *a posteriori*, as discussed below.
 
+.. _setting_weight:
+
 Setting Weights
 ===============
 
