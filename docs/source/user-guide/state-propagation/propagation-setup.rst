@@ -17,8 +17,6 @@ Propagation Setup
    propagation-setup/multi-hybrid-arc
    propagation-setup/processed-propagated-elements
    propagation-setup/integration-setup
-   propagation-setup/termination-settings
-   propagation-setup/dependent-variables
    propagation-setup/printing-processing-results
    
 
@@ -49,10 +47,10 @@ On the left is a list of arguments (some optional) that can be provided
 to the propagator settings, regardless of their type:
 
 - **Initial conditions** The initial time and state for the numerical propagation
-- **Numerical integrator**: the solver used to create an approximate solution, described :ref:`here <integrator_setup>`. This setting is mandatory
+- **Numerical integrator**: the solver used to create an approximate solution. This setting is mandatory
 - **List of propagated bodies**: the names of the bodies for which the dynamics is to be propagated.
-- **Termination conditions**: when to terminate the propagation, described :ref:`here <termination_settings>`. This setting is mandatory
-- **Dependent variables**: which quantities to save as output, in addition to the states, described :ref:`here <dependent_variables>`. These settings are optional (none by default).
+- **Termination conditions**: when to terminate the propagation. This setting is mandatory
+- **Dependent variables**: which quantities to save as output, in addition to the states. These settings are optional (none by default).
 - **Processing/output settings**: what to print to the terminal before, during and after propagation, and what to do with the numerical results after propagation, both described :ref:`here <auto_processing>`. This setting is optional (no terminal output or resetting of environment by default)
 
 .. note::

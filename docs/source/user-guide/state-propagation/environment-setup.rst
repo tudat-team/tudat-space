@@ -11,7 +11,6 @@ Environment Setup
 
    environment-setup/creation-celestial-body-settings
    environment-setup/creating-modifying-bodies
-   environment-setup/environment-models
    environment-setup/default-env-models
    environment-setup/custom-models
    environment-setup/frames-in-environment
@@ -44,8 +43,8 @@ Even though the primary role of the environment is in numerical state propagatio
 it is also used to define properties of celestial bodies in, for instance, (semi-)analytical trajectory design
 (see :ref:`transfer_trajectory`).
 
-There are many different types of environment models in Tudat (e.g. ephemerides, rotation models, atmosphere models, *etc.*). See :ref:`environment_model_overview` for
-a comprehensive list. The overall architecture of the environment in Tudat is described in more
+There are many different types of environment models in Tudat (e.g. ephemerides, rotation models, atmosphere models, *etc.*).
+The full list of options for these can be found in the submodules of the `environment setup <https://py.api.tudat.space/en/latest/dynamics/environment_setup.html>`_ module. The overall architecture of the environment in Tudat is described in more
 detail on a dedicated page on :ref:`environment_architecture` (for advanced users and developers).
 
 Body Creation - Procedure

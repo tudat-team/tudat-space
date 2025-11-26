@@ -25,7 +25,7 @@ The three primary numerical results of the propagation are:
   :attr:`~tudatpy.dynamics.propagation.SingleArcSimulationResults.state_history` attribute
 - The numerical results of the propagation, in the propagated coordinates, stored in the
   :attr:`~tudatpy.dynamics.propagation.SingleArcSimulationResults.unprocessed_state_history` attribute
-- The dependent variables of the propagation (if any, see :ref:`dependent_variables`), stored in the
+- The dependent variables of the propagation (if any, see `dependent variables API documentation <https://py.api.tudat.space/en/latest/dynamics/propagation_setup/dependent_variable.html>`_), stored in the
   :attr:`~tudatpy.dynamics.propagation.SingleArcSimulationResults.dependent_variable_history` attribute
 
 Each of these is returned as a dictionary, with the numerical integration epochs as key, and the current state/dependent variable
@@ -80,7 +80,7 @@ Checking the outcome of the propagation
 
 For various reasons, such as the occurrence of a NaN or Inf value in the state during a propagation,
 segmentation fault in underlying (user-defined) code, *etc.*,
-the propagation may not propagate successfully to the final :ref:`user-specified conditions <termination_settings>`.
+the propagation may not propagate successfully to the final user-specified conditions.
 In the case of any such errors, the propagation results will be saved and are accessible as indicated above
 - up until the time of termination.
 
