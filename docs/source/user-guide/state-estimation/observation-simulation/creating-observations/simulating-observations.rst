@@ -73,137 +73,18 @@ Defining Additional Settings
 
 In addition to defining the observable type, link ends, observation times and (optionally) reference link ends for simulating an observation, you can (or, in some cases, need to) define a number of additional settings to be taken into account:
 
-- **Ancillary settings**: Some observables may or must get additional quantitative data that influences the ideal value of the observable. Examples are the integration time for averaged Doppler observables, and retransmission times for n-way observables.
-- **Constraints**: You can define settings such that an observation is only simulated if certain conditions (elevation angle, no occultation, *etc.*) are (not) met.
-- **Noise levels**: You can define functions which adds (random) noise to the simulated observations. This noise is typically, but not necessarily, Gaussian.
-- **Additional output**: Similarly to the state propagation framework, you can define a wide range of *dependent variables* to be calculating during the simulation of observations. Note that the *type* of variables you can choose from is distinct from those available during state propagation.
+- **Ancillary settings**: Some observables may require additional data that influences the calculation of the observation (integration time, frequency band, transponder delay, etc.). See the :doc:`~tudatpy.estimation.observations_setup.ancillary_settings` module for details and options to create/add ancillary settings.
+- **Constraints**: You can define settings such that an observation is only simulated if certain conditions (elevation angle, no occultation, *etc.*) are (not) met. See the :doc:`~tudatpy.estimation.observations_setup.viability` module for details and options to create/add observation constraints.
+- **Noise levels**: You can define functions which adds (random) noise to the simulated observations. This noise is typically, but not necessarily, Gaussian. See the :doc:`~tudatpy.estimation.observations_setup.random_noise` module for details and options to add noise models to observation simulation settings.
+- **Additional output**: Similarly to the state propagation framework, you can define a wide range of *dependent variables* to be calculating during the simulation of observations. Note that the *type* of variables you can choose from is distinct from those available during state propagation. See the :doc:`~tudatpy.estimation.observations_setup.observations_dependent_variables` module for options to add additional outputs to observation simulation settings. A more detailed description on how to extract the computed dependent variables after observation simulation can be found `here <observation_dependent_variables_usage>`_
 
 Typically (but not necessarily), these settings are defined and added to the observation simulation settings *after* the nominal settings have been defined (in the process outlined above). To efficiently achieve this, there are several functions available in Tudat, which take a list of :class:`~tudatpy.estimation.observations_setup.observations_simulation_settings.ObservationSimulationSettings` objects (such as those returned by the :func:`~tudatpy.estimation.observations_setup.observations_simulation_settings.tabulated_simulation_settings_list` function), and add settings for one of the above options to any number of observation simulation settings.
 
-For each of the above type of (optional) settings, three separate functions are provided to modify the list of observation simulation settings:
+For each of the above type of (optional) settings, three separate functions are provided to modify the list of observation simulation settings (see module-level documentation links above for details):
 
 - One function modifying each :class:`~tudatpy.estimation.observations_setup.observations_simulation_settings.ObservationSimulationSettings` object in the list (for instance: regardless of the type or link end of the observation, always save the light-time as dependent variable)
 - One function modifying each :class:`~tudatpy.estimation.observations_setup.observations_simulation_settings.ObservationSimulationSettings` object in the list which contains settings for a given :class:`~tudatpy.estimation.observable_models_setup.model_settings.ObservableType` (for instance: regardless of link ends, use 1 mm/s random noise for all two-way Doppler observables)
 - One function modifying each :class:`~tudatpy.estimation.observations_setup.observations_simulation_settings.ObservationSimulationSettings` object in the list which contains settings for a given :class:`~tudatpy.estimation.observable_models_setup.model_settings.ObservableType` **and** a given link definition (for instance: for all one-way range observables between New Norcia ground station and Mars Express, only simulate an observation if Mars Express is at least 15 degrees above the horizon).
-
-.. _ancilliary_settings:
-
-Ancillary Settings
-------------------
-
-Some observation models can depend on data in addition to that normally contained in either the observation model of the observation simulation settings to fully determine the value of the observable. In some cases, these data *may* be defined, in other cases they *must* be defined. At present, the following ancillary settings are supported:
-
-- **Integration time**: This is required for each averaged Doppler observable. A value of 60 s is set by default. The integration time defines the time over which the observable is to be averaged.
-- **Retransmission delays**: This is optional for each N-way observable. It is undefined by default. The retransmission delays quantify how much time elapses between the reception and retransmission of a signal at one of the retransmitter link ends.
-
-For example, to set a 5s Doppler integration time for every averaged n-way Doppler observable:
-
-.. code-block:: python
-
-    from tudatpy.estimation.observations_setup import observations_simulation_settings, ancillary_settings
-    from tudatpy.estimation.observable_models_setup import model_settings
-    
-    integration_time = 5.0
-    doppler_ancillary_settings = ancillary_settings.ancillary_settings(integration_time=integration_time)
-    ancillary_settings.add_ancillary_settings_to_observable(
-        observation_simulation_settings_list,
-        doppler_ancillary_settings,
-        model_settings.dsn_n_way_averaged_doppler
-    )
-
-Similar interfaces exist to add ancillary settings to all observations (the :func:`~tudatpy.estimation.observations_setup.ancillary_settings.add_ancillary_settings_to_all` function), or to add the settings to observation simulation settings of a given observable **and** a given link definition (the :func:`~tudatpy.estimation.observations_setup.ancillary_settings.add_ancillary_settings_to_observable_for_link_ends` function).
-
-.. _observation_constraints:
-
-Defining Observation Constraints
----------------------------------
-
-In many cases, whether an observation at a given time should be realized will depend on a number of constraints that must be satisfied. We have termed such constraints 'observation viability settings', and we have currently implemented the following types:
-
-- **Minimum elevation angle**: Minimum elevation angle at a ground station: target must be at least a certain elevation above the horizon (see :func:`~tudatpy.estimation.observations_setup.viability.elevation_angle_viability`).
-- **Body avoidance angle**: The line-of-sight vector from a link end :math:`A` to a given third body must have an angle w.r.t. the line-of-sight between link end :math:`A` and any other link ends that it observed that is sufficiently large. This constraint is typically used to prevent the Sun from being too close to the field-of-view of the telescope(s) (see :func:`~tudatpy.estimation.observations_setup.viability.body_avoidance_viability`).
-- **Body occultation**: The link must not be obscured by a given third body. For instance: the Moon occulting a link between Earth and Mars (see :func:`~tudatpy.estimation.observations_setup.viability.body_occultation_viability`).
-
-For example, the ``observation_simulation_settings_list`` list created in the example above can be modified such that only observations above a 15 degree elevation angle at New Norcia are accepted:
-
-.. code-block:: python
-
-    from tudatpy.estimation.observations_setup import viability
-    from tudatpy.estimation.observable_models_setup import links
-    import numpy as np
-    
-    station_id = links.body_reference_point_link_end_id("Earth", "NNO")
-    viability_settings_list = list()
-    viability_settings_list.append(
-        viability.elevation_angle_viability(
-            station_id,
-            np.deg2rad(15.0)
-        )
-    )
-    viability.add_viability_check_to_all(
-        observation_simulation_settings_list,
-        viability_settings_list
-    )
-
-In this case (the :func:`~tudatpy.estimation.observations_setup.viability.add_viability_check_to_all` function), the list of settings in ``viability_settings_list`` is applied to *all* observation simulation settings in ``observation_simulation_settings_list``. To only add the viability settings to observation simulation settings of a given type of observable, or only to those of a given observable **and** a given link definition, use the :func:`~tudatpy.estimation.observations_setup.viability.add_viability_check_to_observable` and :func:`~tudatpy.estimation.observations_setup.viability.add_viability_check_to_observable_for_link_ends` functions, respectively.
-
-To add viability settings directly to a single :class:`~tudatpy.estimation.observations_setup.observations_simulation_settings.ObservationSimulationSettings` object, use the :attr:`~tudatpy.estimation.observations_setup.observations_simulation_settings.ObservationSimulationSettings.viability_settings_list` attribute.
-
-.. _noise_levels:
-
-Defining Noise Levels
----------------------
-
-If no noise is defined, the observations are simulated according to the deterministic model that has been defined in the :ref:`observationModelSetup`. We stress that this 'noise-free' observation can contain a simulated bias, if such a bias has been included in the observation model settings (see :ref:`observationTypes`).
-
-By adding noise settings, a user can add (typically, but not necessarily) random noise to the simulation of the observations. We currently have two types of interfaces for adding noise to an observation:
-
-- **Gaussian noise**: By specifying the standard deviation, you can add uncorrelated, zero-mean Gaussian noise to the observations
-- **Generic noise**: By specifying an arbitrary function that generates noise (as a function of time), a user can add noise from any type of distribution to the simulated observations
-
-Adding Gaussian noise to all observations of a given type can be done by:
-
-.. code-block:: python
-
-    from tudatpy.estimation.observations_setup import random_noise
-    from tudatpy.estimation.observable_models_setup import model_settings
-    
-    noise_level = 0.1
-    random_noise.add_gaussian_noise_to_observable(
-        observation_simulation_settings_list,
-        noise_level,
-        model_settings.one_way_range_type
-    )
-
-which will add 10 cm random noise to each one-way range observable in the ``observation_simulation_settings_list`` list. In this case (the :func:`~tudatpy.estimation.observations_setup.random_noise.add_gaussian_noise_to_observable` function), the noise is applied to all observations of a given type. To add the noise to observation simulation settings of all observables, or only to those of a given observable **and** a given link definition, use the :func:`~tudatpy.estimation.observations_setup.random_noise.add_gaussian_noise_to_all` and :func:`~tudatpy.estimation.observations_setup.random_noise.add_gaussian_noise_to_observable_for_link_ends` functions, respectively.
-
-Similar interfaces exist to add a generic noise function to the observation:
-
-.. code-block:: python
-
-    import numpy as np
-    from tudatpy.estimation.observations_setup import random_noise
-    from tudatpy.estimation.observable_models_setup import model_settings
-    
-    def custom_noise_function(current_time):
-        return np.array([np.random.lognormal(0.0, 1.0)])
-    
-    random_noise.add_noise_function_to_observable(
-        observation_simulation_settings_list,
-        custom_noise_function,
-        model_settings.one_way_range_type
-    )
-
-where it is important to realize that the noise function *must* have a single float representing time as input, and returns a vector (of the size of a single observation) as output. For many observables (range, Doppler), this size will be 1. For angular position observables, for instance, the size will be 2. The :func:`~tudatpy.estimation.observations_setup.random_noise.add_noise_function_to_all`, :func:`~tudatpy.estimation.observations_setup.random_noise.add_noise_function_to_observable` and :func:`~tudatpy.estimation.observations_setup.random_noise.add_noise_function_to_observable_for_link_ends` functions can be used to add a noise function to a subset of all observation simulation settings.
-
-To add a generic noise function directly to a single :class:`~tudatpy.estimation.observations_setup.observations_simulation_settings.ObservationSimulationSettings` object, use the :attr:`~tudatpy.estimation.observations_setup.observations_simulation_settings.ObservationSimulationSettings.noise_function` attribute.
-
-.. _observation_dependent_variables:
-
-Defining Additional Output
----------------------------
-
-As is the case with the state propagation (see :ref:`here<dependent_variables>`), you can define any number of dependent variable to be saved along with the observations. These include distances between link ends, angles between link ends, and a variety of other options. Note that this functionality is relatively new, and the list of implemented dependent variables is currently limited. A full list of options can be found in the API documentation.
 
 Creating the Observations
 ==========================

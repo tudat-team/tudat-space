@@ -4,22 +4,7 @@
 Using Dependent Variables
 =============================
 
-Observation dependent variables (e.g., elevation angle, range distance) can be calculated and stored alongside observations. Similarly to :ref:`dependent variables defined during propagation <dependent_variables>`, observation dependent variables can be defined at the single observation set level. These dependent variables are calculated when the observations are computed, and are stored alongside the observation values and epochs. They can be especially useful to gain insight into the observation geometry and thus facilitate the residual and estimation analyses.
-
-Available Dependent Variables
-==============================
-
-The settings required for the creation of each observation dependent variable are created by a dedicated factory function. Below is the list of the observation dependent variables currently available:
-
-- The elevation angle using :func:`~tudatpy.estimation.observations_setup.observations_dependent_variables.elevation_angle_dependent_variable`
-- The azimuth angle using :func:`~tudatpy.estimation.observations_setup.observations_dependent_variables.azimuth_angle_dependent_variable`
-- The range distance between two link ends using :func:`~tudatpy.estimation.observations_setup.observations_dependent_variables.target_range_between_link_ends_dependent_variable`
-- The angle between a link end and a given body, as seen from the other end of that link using :func:`~tudatpy.estimation.observations_setup.observations_dependent_variables.avoidance_angle_dependent_variable`
-- The minimum distance between a link and the center of a given body using :func:`~tudatpy.estimation.observations_setup.observations_dependent_variables.body_center_distance_dependent_variable`
-- The minimum distance between a link and the limb of a given body using :func:`~tudatpy.estimation.observations_setup.observations_dependent_variables.body_limb_distance_dependent_variable`
-- The angle between the link direction and the orbital plane using :func:`~tudatpy.estimation.observations_setup.observations_dependent_variables.angle_wrt_orbital_plane_dependent_variable`
-- The integration time of the observation (for integrated observables only) using :func:`~tudatpy.estimation.observations_setup.observations_dependent_variables.integration_time_dependent_variable`
-- The observation retransmission delay(s) using :func:`~tudatpy.estimation.observations_setup.observations_dependent_variables.retransmission_delays_dependent_variable`
+Observation dependent variables (e.g., elevation angle, range distance) can be calculated and stored alongside observations. Similarly to :ref:`dependent variables defined during propagation <dependent_variables>`, observation dependent variables can be defined at the single observation set level. These dependent variables are calculated when the observations are computed, and are stored alongside the observation values and epochs. They can be especially useful to gain insight into the observation geometry and thus facilitate the residual and estimation analyses. A list of available dependent variable types is given on our `API documentation <https://py.api.tudat.space/en/latest/estimation/observations_setup/observations_dependent_variables.html>`_.
 
 Adding Dependent Variables
 ===========================
