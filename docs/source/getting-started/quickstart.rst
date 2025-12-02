@@ -91,7 +91,7 @@ We will first import all necessary modules, including some standard Python modul
 
 .. seealso::
 
-   For more information about the submodules of Tudat(Py), take a look at :ref:`tudatpy_submodules`.
+   For more information about the submodules of Tudat(Py), take a look at the `API documentation <https://py.api.tudat.space/en/latest/>`_.
 
 Setting up the environment
 --------------------------
@@ -472,9 +472,8 @@ The Tudat(Py) ecosystem includes a variety of resources to make the functionalit
 On this website, you can find a comprehensive user guide that explains the core concepts of Tudat(Py).
 The user guide includes sections on :ref:`state propagation <state_propagation>`, :ref:`state estimation <state_estimation>`, :ref:`mathematics <mathematics>`, and :ref:`preliminary mission design <prelim_mission_design>`.
 You can also find a :ref:`list of examples <getting_started_examples>` that demonstrate how to use TudatPy for a variety of tasks.
-For more information on the different submodules of TudatPy, the :ref:`tudatpy_submodules` page provides an overview of the available modules and their functionality.
 
-This website is complemented by the `API documentation <https://py.api.tudat.space/en/latest/>`_, which provides a comprehensive overview of all available functions and classes exposed in TudatPy.
+This website is complemented by the `API documentation <https://py.api.tudat.space/en/latest/>`_, which provides a comprehensive overview of the different submodules, and all available functions and classes exposed in TudatPy.
 
 As mentioned before, Tudat(Py) is completely open source and welcomes contributions.
 The source code is hosted on `GitHub <https://github.com/tudat-team>`_.
