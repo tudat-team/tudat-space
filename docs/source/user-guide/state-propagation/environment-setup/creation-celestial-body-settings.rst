@@ -4,6 +4,13 @@
 Creating the bodies
 ===================
 
+.. toctree::
+   :titlesonly:
+   :hidden:
+   :maxdepth: 1
+
+   creation-celestial-body-settings/spacecraft-macromodels
+
 The usual workflow to create bodies in Tudat (both natural and artificial bodies!) is composed of three subsequent steps, described separately:
 
 1. :ref:`creating_body_settings`
@@ -129,7 +136,9 @@ The above setup is also one that is typically used for artificial bodies, for wh
       .. literalinclude:: /_snippets/simulation/environment_setup/add_new_vehicle_settings.py
          :language: python
 
-In the above code snippet, you may notice that the body mass is set directly as a value (here 500 kg) in the :class:`~tudatpy.dynamics.environment_setup.BodySettings`. This is used as a 'shortcut' for the use of the :func:`~tudatpy.dynamics.environment_setup.rigid_body.constant_rigid_body_properties` and assigning this to the :attr:`~tudatpy.dynamics.environment_setup.BodySettings.rigid_body_settings`.
+In the above code snippet, you may notice that the body mass is set directly as a value (here 500 kg) in the :class:`~tudatpy.dynamics.environment_setup.BodySettings`. This is used as a 'shortcut' for the use of the :func:`~tudatpy.dynamics.environment_setup.rigid_body.constant_rigid_body_properties` and assigning this to the :attr:`~tudatpy.dynamics.environment_setup.BodySettings.rigid_body_settings`. 
+
+The code snippet above showcases the possibility to set specific :attr:`~tudatpy.dynamics.environment_setup.BodySettings.vehicle_shape_settings`, see :ref:`spacecraft_macromodels` to learn more about the available options.
 
 
 .. _custom_body_settings:
