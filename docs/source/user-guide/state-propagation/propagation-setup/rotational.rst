@@ -12,7 +12,7 @@ Rotational Dynamics
    rotational/torque-model-setup
    rotational/available-torque-models
 
-Settings to propagate the rotational state of a body numerically can be created through the :func:`~tudatpy.dynamics.propagation_setup.propagator.rotational` factory function, described in detail in the :doc:`API documentation <propagator>`. In the current page, only the Tudat-specific aspects of the input will be briefly described.
+Settings to propagate the rotational state of a body numerically can be created through the :func:`~tudatpy.dynamics.propagation_setup.propagator.rotational` factory function, described in detail in the :ref:`API documentation <tudatpy:propagator>`. In the current page, only the Tudat-specific aspects of the input will be briefly described.
 The default (processed) representation for solving the rotational equations of motion is by using a vector of 7 elements:
 
 * The quaternion elements (vector :math:`\mathbf{q}` of size 4) of the rotation from body-fixed to inertial frame (see :ref:`quaternion_definition`)
@@ -20,14 +20,14 @@ The default (processed) representation for solving the rotational equations of m
 
 Several other formulations can be used if wanted (see below and :ref:`processed_propagated_states`).
 
-To propagate rotational dynamics, an inertia tensor for the propagated body must be defined. The inertia tensor is handled by the :doc:`Rigid body properties <rigid_body>` in Tudat. Note that, by endowing a body with a gravity field, such properties are automatically created (although in the case of a spherical harmonic gravity field, additional information must be provided, see :doc:`the API documentation <rigid_body>`).
+To propagate rotational dynamics, an inertia tensor for the propagated body must be defined. The inertia tensor is handled by the :ref:`Rigid body properties <tudatpy:rigid_body>` in Tudat. Note that, by endowing a body with a gravity field, such properties are automatically created (although in the case of a spherical harmonic gravity field, additional information must be provided, see :ref:`the API documentation <tudatpy:rigid_body>`).
 
 The governing equation that is solved numerically for the rotational dynamics is a first-order differential equation. For the default propagator using :math:`\mathbf{x}=[\mathbf{q};\boldsymbol{\omega}]`, with quaternion vector :math:`\mathbf{q}` and body-fixed angular velocity vector :math:`\boldsymbol{\omega}`, it takes the form:
 
 .. math::
     \frac{d\mathbf{x}}{dt} = \begin{pmatrix} \mathbf{Q}(\mathbf{q})\boldsymbol{\omega} \\ \mathbf{I}\left(-\dot{\mathbf{I}}+(\mathbf{I}\boldsymbol{\omega})\times\boldsymbol{\omega}+\sum_{i}\mathbf{M}_{i}(\mathbf{r},\mathbf{v},t) \right)  \end{pmatrix}
 
-where the summation runs over all torques :math:`\mathbf{M}` specified by the user, :math:`\mathbf{I}` denotes the body's inertia tensor. The inertia tensor of a body is defined through its :ref:`rigid_body_properties`
+where the summation runs over all torques :math:`\mathbf{M}` specified by the user, :math:`\mathbf{I}` denotes the body's inertia tensor. The inertia tensor of a body is defined through its :ref:`tudatpy:rigid_body`
 
 .. note::
 

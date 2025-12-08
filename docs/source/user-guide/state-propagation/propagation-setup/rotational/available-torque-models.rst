@@ -34,9 +34,9 @@ Aerodynamic Torque
 | The aerodynamic torque model can be created through the :func:`~tudatpy.dynamics.propagation_setup.torque.aerodynamic` factory function.
 
 | **Dependencies**
-| 1. Atmosphere model for body exerting acceleration (see :doc:`Atmosphere models <atmosphere>`).
+| 1. Atmosphere model for body exerting acceleration (see :ref:`Atmosphere models <tudatpy:atmosphere>`).
 | 2. Aerodynamic coefficient interface for body undergoing acceleration (see
-  :doc:`Aerodynamic coefficients <aerodynamic_coefficients>`).
+  :ref:`Aerodynamic coefficients <tudatpy:aerodynamic_coefficients>`).
 | 3. Inertia tensor model for body undergoing acceleration.
 | 4. Current states of body undergoing acceleration and body with atmosphere.
 | 5. Shape model for the body exerting an acceleration (to allow for the calculation of vehicle altitude)
@@ -57,7 +57,7 @@ Second Degree Gravitational Torque
 | The second degree gravitational torque model can be created through the :func:`~tudatpy.dynamics.propagation_setup.torque.second_degree_gravitational` factory function.
 
 | **Dependencies**
-| 1. Gravity field model for body exerting acceleration (see :doc:`Atmosphere models <atmosphere>`).
+| 1. Gravity field model for body exerting acceleration (see :ref:`Atmosphere models <tudatpy:atmosphere>`).
 | 2. Inertia tensor model for body undergoing acceleration.
 | 3. Current states of body undergoing acceleration and body with atmosphere.
 
@@ -74,8 +74,8 @@ Spherical Harmonics Gravitational Torque
 | The second degree gravitational torque model can be created through the :func:`~tudatpy.dynamics.propagation_setup.torque.spherical_harmonic_gravitational` factory function.
 
 | **Dependencies**
-| 1. Gravity field model for body exerting acceleration (see :doc:`Atmosphere models <atmosphere>`).
-| 2. Spherical harmonic gravity field for body undergoing torque (see :doc:`Gravity field models <gravity_field>`).
+| 1. Gravity field model for body exerting acceleration (see :ref:`Atmosphere models <tudatpy:atmosphere>`).
+| 2. Spherical harmonic gravity field for body undergoing torque (see :ref:`Gravity field models <tudatpy:gravity_field>`).
 | 3. Current states of body undergoing acceleration and body with atmosphere.
 
 .. tip::

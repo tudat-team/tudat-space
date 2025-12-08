@@ -14,7 +14,7 @@ To define an observation model, the various bodies, spacecraft, ground stations,
 Ground Station Creation
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Often, you will need to define the positions of ground stations on celestial bodies to/from which observations are made. Note that in Tudat, a planetary lander is treated identically to a terrestrial ground station. The creation of a ground station is done when creating the environment, as one of the properties of a body. See the entry on ground stations in :ref:`ground_station_models`.
+Often, you will need to define the positions of ground stations on celestial bodies to/from which observations are made. Note that in Tudat, a planetary lander is treated identically to a terrestrial ground station. The creation of a ground station is done when creating the environment, as one of the properties of a body. See  :ref:`tudatpy:ground_station` for available ground station settngs.
 
 For reference, we give example code to create settings for a ground station name ``Graz`` to the settings of body ``Earth``:
 
@@ -52,7 +52,7 @@ Creating a Set of Link Ends
 
 The creation of the link definition requires the definition of a set of link ends used for a given observable. These are stored in a dictionary as follows:
 
-- The dictionary key denotes the role in the observation (e.g. receiver, transmitter, *etc.*), given by an entry from the :class:`~tudatpy.estimation.observable_model_setup.links.LinkEndType` enum. For each observation model in the :doc:`API documentation <observation>`, it is specified which link end types are required.
+- The dictionary key denotes the role in the observation (e.g. receiver, transmitter, *etc.*), given by an entry from the :class:`~tudatpy.estimation.observable_model_setup.links.LinkEndType` enum. For each observation model in the :ref:`API documentation <tudatpy:observations>`, it is specified which link end types are required.
 - The dictionary value represents the identifier of the link end (spacecraft, ground station, *etc.*), as a :class:`~tudatpy.estimation.observable_model_setup.links.LinkEndId` object.  To use a reference point on a body (for instance, a ground station on Earth), the :func:`~tudatpy.estimation.observable_model_setup.links.body_reference_point_link_end_id` function can be used to create an object of this type. To use the origin (typically, but not necessarily its center of mass) of a body as link end, use the :func:`~tudatpy.estimation.observable_model_setup.links.body_origin_link_end_id` function.  Although using a center of mass is unrealistic for data analysis, such a setup can often be useful for a simulated analysis. Example of defining link ends are given below.
 
 Each type of observable requires a specific combination of *types* of link ends. Below, a number of examples are given for one-, two- and three-way observables (see :ref:`here <two_three_way_observables>` for the distinction between two- and three-way observables when creating observation models):

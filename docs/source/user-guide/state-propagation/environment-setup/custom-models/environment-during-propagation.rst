@@ -62,7 +62,7 @@ Retrieved directly from a :class:`~tudatpy.dynamics.environment.Body` object wit
 Spherical harmonic gravity field coefficients
 ---------------------------------------------
 
-These coefficients may be time variable (see :doc:`gravity_field_variation`). The current cosine and sine coefficients can be retrieved from a :class:`~tudatpy.dynamics.environment.Body` object through its gravity field. A piece of example code on retrieving these coefficients is given below for the case of Earth:
+These coefficients may be time variable (see :ref:`tudatpy:gravity_field_variation`). The current cosine and sine coefficients can be retrieved from a :class:`~tudatpy.dynamics.environment.Body` object through its gravity field. A piece of example code on retrieving these coefficients is given below for the case of Earth:
 
 .. code-block:: python
 

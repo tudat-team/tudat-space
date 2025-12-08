@@ -80,7 +80,7 @@ using the :meth:`~tudatpy.estimation.estimation_analysis.Estimator.compute_covar
 
 where the ``covariance_analysis_output`` is an object of type :class:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisOutput`
 from which the design matrix, covariance, formal errors, correlations etc. can be retrieved. During the calculation of the covariance, the
-columns of the design matrix :math:`\mathbf{H}` are normalized (see :ref:`below <covariance_normalization>`).
+columns of the design matrix :math:`\mathbf{H}` are normalized (see :class:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisOutput` documentation).
 Both the regular and normalized quantities (design matrix :math:`\mathbf{H}`, covariance :math:`\mathbf{P}`, inverse covariance :math:`\mathbf{P}^{-1}`)
 can be retrieved. For most applications, the regular (unnormalized) quantities are the ones that are of interest.
 Use of the normalized quantities should be limited to those applications where a manual inversion is performed.

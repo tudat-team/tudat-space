@@ -106,6 +106,6 @@ The above approach uses the settings for environment models, just as the :ref:`c
 (which is the preferred and recommended approach in most cases). However, instead of storing these environment settings
 in a larger object defining the settings for the full bodies, and for all bodies together,
 here we use the environment model settings *one at a time*. For each supported environment model, an ``add....``
-function is provided in the :doc:`environment_setup` module.
+function is provided in the :ref:`tudatpy:environment_setup` module.
 
 Note that a similar approach is typically taken to add ground stations to a body (see :ref:`groundStationCreation`)
