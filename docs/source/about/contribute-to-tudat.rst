@@ -13,7 +13,7 @@ Any contribution you have to Tudat is very welcome! This can come in the form of
   * `Tudatpy examples code (Python/Jupyter) <https://github.com/tudat-team/tudatpy-examples>`_ where the :ref:`getting_started_examples` of our project are located
   * `Tudat space (sphinx) <https://github.com/tudat-team/tudat-space>`_ where the markup language that generates this website is located
 
-* Part of our development workflow is documented on our `developer docs <https://tudat-developer.readthedocs.io/en/latest/>`_. This site is still under construction, and any input is more than welcome!
+* Part of our development workflow is documented on our `developer docs <https://github.com/tudat-team/tudatpy/wiki>`_. This site is still under construction, and any input is more than welcome!
 
 Ongoing and planned developments
 ================================
