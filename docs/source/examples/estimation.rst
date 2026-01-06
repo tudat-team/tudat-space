@@ -53,6 +53,8 @@ In the following examples, real observations are used to fit compute residuals a
   ./tudatpy-examples/estimation/improved_estimation_with_mpc.ipynb
   ./tudatpy-examples/estimation/mro_range_estimation.ipynb
   ./tudatpy-examples/estimation/kosmos482_reentry.ipynb
+  ./tudatpy-examples/estimation/atlas3I_estimation_example.ipynb
+
 
 Estimation using real observations - Python only
 ************************************************

@@ -85,8 +85,6 @@ This section provides a detailed guide on how to use the functionalities of Tuda
             To the mathematics section
 
 
-The :ref:`tudatpy_submodules` section provides an overview of all modules available in TudatPy.
-
 For more information on how to use TudatPy with other libraries, see the :ref:`optimization_pygmo` or :ref:`parallelization` sections.
 
 .. toctree::
@@ -98,7 +96,6 @@ For more information on how to use TudatPy with other libraries, see the :ref:`o
    /user-guide/prelim-mission-design
    /user-guide/mathematics
    Mathematical model definition <https://raw.githubusercontent.com/tudat-team/tudat-space/master/Tudat_mathematical_model_definition.pdf>
-   /user-guide/tudatpy-submodules
 
 .. toctree::
    :caption: Interface with other libraries

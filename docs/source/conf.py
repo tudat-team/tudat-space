@@ -57,6 +57,8 @@ nbsphinx_thumbnails = {
     "examples/estimation": "./_static/estimation_example_thumbnail.png",
     "examples/mission-design": "./_static/mission_design_example_thumbnail.png",
     "examples/pygmo/asteroid-orbit-optimization": "./_static/asteroid_example_thumbnail.png",
+    "examples/tudatpy-examples/estimation/mission_data_downloader": "./_static/mission_data_downloader_example_thumbnail.png",
+
 }
 
 # Add any paths that contain templates here, relative to this directory.

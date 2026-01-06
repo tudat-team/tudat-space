@@ -25,7 +25,7 @@ These settings are defined via factory functions for each acceleration in the si
 For a single body, the user-specified settings are organized in nested dictionaries ``dict[str,dict[str,list[AccelerationSettings]]]``,
 with the first ``str`` denoting the body undergoing acceleration, the second ``str`` denoting the body exerting the acceleration, and the
 list of :class:`~tudatpy.dynamics.propagation_setup.acceleration.AccelerationSettings` objects is created using the functions in the
-:doc:`acceleration` module.
+:ref:`tudatpy:acceleration` module.
 
 This nested dictionary will be supplied to the
 :func:`~tudatpy.dynamics.propagation_setup.create_acceleration_models` function to create the

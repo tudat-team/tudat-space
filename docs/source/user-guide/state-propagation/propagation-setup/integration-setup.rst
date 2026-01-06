@@ -11,7 +11,8 @@ In Tudat, we offer three general types of integrators:
 * :ref:`Extrapolation integrators <integrator_bs>` (Bulirsch-Stoer)
 * :ref:`Multistep integrators <integrator_abm>`  (Adams-Bashforth-Moulton)
 
-These integrators are available in fixed- and variable-step varieties, as described in more detail below. The integrators
+These integrators are available in fixed- and variable-step varieties. Settings for these integrators
+are created using the functions listed in the `API documentation <https://py.api.tudat.space/en/latest/dynamics/propagation_setup/integrator.html>`_ . The integrators
 are implemented in Tudat, and do not use an external integrator library. For the background of these methods, we recommend people to refer to
 
 * Satellite Orbits: Models, Methods and Applications, by Montenbruck and Gill

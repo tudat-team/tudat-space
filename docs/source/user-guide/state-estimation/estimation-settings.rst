@@ -1,12 +1,12 @@
 .. _estimationSettings:
 
-Estimation Settings
-====================
+Performing the estimation
+=========================
 
-Having defined the link ends, observation models, and having loaded/simulated all the relevant observations, the settings for the estimation can be created.
-
-The definition of the parameters that are to be fit to the (simulated) data are defined as described in :ref:`parameter_settings`, and the dynamical model
-used to propagate initial states is defined identically as for the :ref:`propagation of dynamics <propagation_setup>`.
+Having created all the relevant settings for the physical environment (see :ref:`environment_setup`)
+dynamical model (see :ref:`propagation_setup`), the parameters that are to be estimated (see :ref:`parameter_settings`),
+the settings for the observation models (see :ref:`observationModelSetup`)
+and the actual observations (simulated or real; see :ref:`observationSimulation`), the estimation can be performed.
 
 The remaining settings for the data analysis relate to how the data is to be used in the further analysis.
 We distinguish between two different types of analyses:
@@ -18,29 +18,25 @@ We distinguish between two different types of analyses:
   * The dynamics model is a perfect representation of reality
 * **Batch least-squares estimation**: an iterative batch-least squares estimation is performed. The full estimation requires all settings that the covariance analysis does. In addition, it requires a specification on when to terminate the iteration process.
 
+Both are performed by using the :class:`~tudatpy.estimation.estimation_analysis.Estimator` object,
+which is created as follows:
+
+.. code-block:: python
+
+    estimator = estimation.estimation_analysis.Estimator(
+        bodies,
+        parameters_to_estimate,
+        observation_settings_list,
+        propagator_settings)
+
+where the propagator settings may be single-, multi- or hybrid arc. Creating an :class:`~tudatpy.estimation.estimation_analysis.Estimator` object as above automatically propagates
+the dynamics and variational equations for the specific propagator and parameter settings.
+
 .. _covarianceSettings:
 
-Covariance analysis settings
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Covariance analysis
+~~~~~~~~~~~~~~~~~~~
 
-The covariance analysis solves the following equation:
-
-.. math::
-
-  \mathbf{P}=\left(\mathbf{H}^{T}\cdot \mathbf{W}\cdot \mathbf{H} + \mathbf{P}_{0}^{-1} \right)^{-1}
- 
-The design matrix :math:`\mathbf{H}` is created from the observation model, propagated state and variational equations,
-and is fully defined by the specifics of the observations, dynamical model and observation model.
-The weight matrix :math:`\mathbf{W}` can be specified by the user (see below) and is set to the identity matrix by default.
-The inverse a priori covariance :math:`P_{0}^{-1}` can be specified by the user, and is set to a 0 matrix by default.
-
-The design matrix is defined by:
-
-.. math::
-
-  \mathbf{H}=\frac{\partial\mathbf{h}}{\partial\mathbf{p}}
-
-with :math:`\mathbf{h}` the vector of computed observations, and :math:`\mathbf{p}` the vector of estimated parameters.
 
 The basic definition of settings for a covariance analysis only requires the observations that are simulated, as follows:
 
@@ -64,55 +60,37 @@ The resulting object ``covariance_analysis_settings`` can be used to tune the ex
 (see the :meth:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput.define_covariance_settings` method of this class for details),
 such as whether to reintegrate the dynamics, or which terminal output to provide.
 
-The weight matrix is typically not provided as a full matrix in a covariance analysis, as the its size of :math:`N_{obs}\times N_{obs}` leads to prohibitive memory usage.
-Presently, we only support the definition of a diagonal weights matrix.
-Note that the weight matrix diagonal entry :math:`W_{i,i}` should ideally be related to the observation's Gaussian noise as :math:`W_{i,i}=1/\sigma_{i}^{2}`.
-Several options are provided to set the weights matrix diagonal
-(as :class:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput` member functions):
-
-* Constant weight for all observation, using the :meth:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput.set_constant_weight` function,
-* Constant weight for all observations of a given observation type, using the :meth:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput.set_constant_single_observable_weight` function, or the :meth:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput.set_constant_single_observable_vector_weight` function for observables of size :math:`>1`, to for instance set different weights for right ascension and declination of an angular position observable
-* Constant weight for all observations of a given observation type, with a given set of link ends, using the :meth:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput.set_constant_single_observable_and_link_end_weight` function, or the :meth:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput.set_constant_single_observable_and_link_end_vector_weight` function for observables of size :math:`>1`
-* Manual definition of full weight vector for all observations of a given observation type with a given set of link ends, using the :meth:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput.set_total_single_observable_and_link_end_vector_weight` function,
-* Manual definition of the full weight vector for all observations using the :attr:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput.weight_matrix_diagonal` attribute,
+The weight matrix is typically not provided as a full matrix in a covariance analysis, as the its size of :math:`N_{obs}\times N_{obs}` leads to prohibitive memory usage. Presently, we only support the definition of a diagonal weights matrix. The weights of observations are set in the object containing the observations themselves (see :ref:`setting_weight`)
 
 When using consider covariance (e.g. when consider parameters are defined in the :ref:`parameterSettings`), the consider parameter covariance matrix :math:`\mathbf{C}`
-is also provided to the :class:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput` constructor, and the
-calculation of the resulting covariance matrix becomes the matrix :math:`\mathbf{P}^{c}`, which is computed from the above as:
+is also provided to the :class:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput` constructor.
 
-.. math::
+These settings are used to compute the covariance
+using the :meth:`~tudatpy.estimation.estimation_analysis.Estimator.compute_covariance` method as follows:
 
-  \mathbf{P}^{c}=\mathbf{P}+\left(\mathbf{P}\mathbf{H}^{T}\mathbf{W}\right)\left(\mathbf{H}_{c}\mathbf{C}\mathbf{H}_{c}^{T}\right)\left(\mathbf{P}\mathbf{H}^{T}\mathbf{W}\right)^{T}
+.. code-block:: python
 
-where :math:`\mathbf{H}_{c}` is the design matrix for the consider parameters.
+    estimator = estimation.estimation_analysis.Estimator(
+        bodies,
+        parameters_to_estimate,
+        observation_settings_list,
+        propagator_settings)
+    covariance_analysis_output = estimator.compute_covariance(
+        covariance_analysis_settings)
+
+where the ``covariance_analysis_output`` is an object of type :class:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisOutput`
+from which the design matrix, covariance, formal errors, correlations etc. can be retrieved. During the calculation of the covariance, the
+columns of the design matrix :math:`\mathbf{H}` are normalized (see :class:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisOutput` documentation).
+Both the regular and normalized quantities (design matrix :math:`\mathbf{H}`, covariance :math:`\mathbf{P}`, inverse covariance :math:`\mathbf{P}^{-1}`)
+can be retrieved. For most applications, the regular (unnormalized) quantities are the ones that are of interest.
+Use of the normalized quantities should be limited to those applications where a manual inversion is performed.
 
 .. _fullEstimationSettings:
 
-Full estimation settings
-~~~~~~~~~~~~~~~~~~~~~~~~
+Full estimation
+~~~~~~~~~~~~~~~
 
-The full estimation performs an iterative differential correction of the estimated parameters, where for iteration :math:`i` a correction
-to the parameter vector :math:`\mathbf{p}` is computed according to:
-
-.. math::
-
-  \Delta\mathbf{p}_{i}&=\mathbf{P}_{i}\left(\mathbf{H}_{i}\mathbf{W}\Delta\mathbf{z}_{i}\right)\\
-  \mathbf{p}_{i+1}&=\mathbf{p}_{i}+\Delta\mathbf{p}_{i}
-
-where :math:`\mathbf{P}` is the covariance (see previous section; where using consider parameters, we have :math:`\mathbf{P}\rightarrow\mathbf{P}^{c}` in the above), and :math:`\Delta\mathbf{z}_{i}` is the observation residual at
-iteration :math:`i`, computed from:
-
-.. math::
-
-  \Delta\mathbf{z}_{i} = \mathbf{z} - \mathbf{h}(\mathbf{p}_{i})
-
-with :math:`\mathbf{z}` the vector of all observations provided as input to the data (observed data) and
-:math:`\mathbf{h}(\mathbf{p}_{i})` the vector of all observations, as computed from the current
-estimate of the parameters (computed data).
-
-The above procedure is performed iteratively, until convergence has been reached.
-
-The settings for the full estimation are created in an essentially identical manner as those for a covariance analysis:
+The full estimation performs an iterative differential correction of the estimated parameters. The settings for a full estimation are created in an essentially identical manner as those for a covariance analysis:
 
 .. code-block:: python
 
@@ -136,3 +114,35 @@ The :class:`~tudatpy.estimation.estimation_analysis.EstimationInput` class also 
 tune the exact behaviour of the estimation process (see the
 :meth:`~tudatpy.estimation.estimation_analysis.EstimationInput.define_estimation_settings` function of this class for details),
 such as whether to save all intermediate results for the user.
+
+.. note::
+   To estimate the initial state of a body, its associated ephemeris must be tabulated. When specifying an ephemeris for
+   any of the estimated bodies, convert its type to tabulated using the
+   :func:`~tudatpy.dynamics.environment_setup.ephemeris.tabulated_from_existing` setting (for estimated translational dynamics)
+
+These settings can then be used to perform
+the full estimation using the :meth:`~tudatpy.estimation.estimation_analysis.Estimator.perform_estimation` method.
+
+.. code-block:: python
+
+    estimator = estimation.estimation_analysis.Estimator(
+        bodies,
+        parameters_to_estimate,
+        observation_settings_list,
+        propagator_settings)
+    estimation_output = estimator.perform_estimation(
+        estimation_settings)
+
+where the ``estimation_output`` is an object of type :class:`~tudatpy.estimation.estimation_analysis.EstimationOutput`,
+which (in addition to all information in :class:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisOutput`, which this class derives from)
+contains information on the estimation process. Note that the covariances *etc.* that are always saved are those from the iteration
+where the residual was lowest.
+
+The specific additional information that is retained for the
+:class:`~tudatpy.estimation.estimation_analysis.EstimationOutput` is defined by the
+:meth:`~tudatpy.estimation.estimation_analysis.EstimationInput.define_estimation_settings` method of the :class:`~tudatpy.estimation.estimation_analysis.EstimationInput`
+class. We note that saving all information from each iteration may not be recommended for larger applications, as the memory
+consumption that is required may be prohibitive.
+
+
+

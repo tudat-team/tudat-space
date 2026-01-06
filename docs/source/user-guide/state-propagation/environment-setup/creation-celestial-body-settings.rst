@@ -155,8 +155,8 @@ Although the default body settings are often very useful, there are various case
 Below we show each manner to modify the settings with a representative example. 
 
 .. seealso::
-   A comprehensive list of *all* environment models, and how their settings can be defined and overridden as above, is
-   given in the page about :ref:`environment_model_overview`.
+   A comprehensive list of *all* environment models, and how their settings can be defined and overridden as above,
+   can be found in the submodules of the `environment setup <https://py.api.tudat.space/en/latest/dynamics/environment_setup.html>`_ module.
 
 .. _override_body_settings:
 
@@ -232,7 +232,8 @@ Below is a slightly more involved example, which does not use a property of the 
 Here, we extracted, modified, and then reset the :attr:`~tudatpy.dynamics.environment_setup.gravity_field.SphericalHarmonicsGravityFieldSettings.normalized_cosine_coefficients` property of the :class:`~tudatpy.dynamics.environment_setup.gravity_field.SphericalHarmonicsGravityFieldSettings`.
 
 Provided that the body settings of the Sun and Earth have *any* gravity field settings, the above will work. If it does not, you should first create such settings (see :ref:`override_body_settings`).
-For an overview of the relevant attributes, functions and classes for other environment models, see :ref:`environment_model_overview`.
+For an overview of the relevant attributes, functions and classes for other environment model settings,
+see the submodules of the `environment setup <https://py.api.tudat.space/en/latest/dynamics/environment_setup.html>`_ modules.
 
 .. _create_bodies_from_settings_first:
 

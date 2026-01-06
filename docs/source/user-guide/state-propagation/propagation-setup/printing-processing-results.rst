@@ -181,7 +181,7 @@ A full list of print options is provide in the API documentation. Typical exampl
 
 * The indices in the full dependent variable vector
   (:attr:`~tudatpy.dynamics.propagation_setup.propagator.PropagationPrintSettings.print_dependent_variable_indices`;
-  see :ref:`dependent_variables`) where each separate dependent variable is stored,
+  see `dependent variables API documentation <https://py.api.tudat.space/en/latest/dynamics/propagation_setup/dependent_variable.html>`_) where each separate dependent variable is stored,
   with a brief text description of the associated dependent variable (printed before the propagation starts)
 * The current time and state can be printed *during* the propagation
   (:attr:`~tudatpy.dynamics.propagation_setup.PropagationPrintSettings.state_print_interval`),

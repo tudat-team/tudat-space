@@ -20,8 +20,8 @@ the following pages:
 
 * **Observation Model Settings**, which are presented :ref:`below <observationTypes>` containing settings for the *type* of observations that are to be used (and possible corrections). These objects do not perform any calculation, but define the properties of the observation simulators that are created. 
 * **Observation Simulators**, which are discussed :ref:`below <observationSimulators>`. These objects compute the actual observations from the current properties of the environment. 
-* **Observation Simulation Settings**, which are discussed on the :ref:`following page<observationTypes2>`. These objects define *how to use the observation simulators* by providing the required settings for observation times, etc.
-* **Observation Collection**, which are discussed on the :ref:`following page<accessing_observations>`. These objects store the full set of observations and associated data used in a single estimation/covariance analysis in Tudat
+* **Observation Simulation Settings**, which are discussed on the :ref:`following page<simulating_observations>`. These objects define *how to use the observation simulators* by providing the required settings for observation times, etc.
+* **Observation Collection**, which are discussed on the :ref:`following page<observation_collection_manipulation>`. These objects store the full set of observations and associated data used in a single estimation/covariance analysis in Tudat
 
 .. _observationTypes:
 
@@ -64,8 +64,8 @@ The only limitation is that you may not have duplicate entries of link ends *and
 
 When defining observation models, you can for most types of models define settings for:
 
-* **Biases:** A bias in Tudat is applied to the observable after its 'ideal' value computed from the environment is computed. You can find a list of settings for observation biases in our :doc:`API documentation <observation>`.
-* **Light-time corrections:** When using an observable that involves the observation of one point/body in space by another, it is automatically assumed that the signal travels at the speed of light in a straight line in Euclidean (e.g. flat) space. The associated light-time is automatically computed when calculating the observable. For instance, when computing an observable by a ground station at time :math:`t`, the position of the observed target (such as a spacecraft) is evaluated at time :math:`t-\Delta t`, with :math:`\Delta t` the light time from spacecraft to ground station. Deviations from the signal's ideal trajectory (straight line at speed of light) due to relativistic, atmospheric, etc. effects may be defined by adding light-time correction settings, as listed in our :doc:`API documentation <observation>`.
+* **Biases:** A bias in Tudat is applied to the observable after its 'ideal' value computed from the environment is computed. You can find a list of settings for observation biases in our :ref:`API documentation <tudatpy:observations>`.
+* **Light-time corrections:** When using an observable that involves the observation of one point/body in space by another, it is automatically assumed that the signal travels at the speed of light in a straight line in Euclidean (e.g. flat) space. The associated light-time is automatically computed when calculating the observable. For instance, when computing an observable by a ground station at time :math:`t`, the position of the observed target (such as a spacecraft) is evaluated at time :math:`t-\Delta t`, with :math:`\Delta t` the light time from spacecraft to ground station. Deviations from the signal's ideal trajectory (straight line at speed of light) due to relativistic, atmospheric, etc. effects may be defined by adding light-time correction settings, as listed in our :ref:`API documentation <tudatpy:observations>`.
 * **Light-time convergence settings:** Calculating the light time between two link ends requires the iterative solution of the light-time equation. Default settings for convergence criteria for this solution are implemented, but a user may modify these settings if so desired. The associated settings object can be created using the :func:`~tudatpy.estimation.observable_model_setup.light_time_corrections.light_time_convergence_settings` function.
 
 Observation biases are used to add any systematic deviations from the 'physical' value of the computed observation
@@ -160,7 +160,7 @@ Firstly, when only performing a :ref:`covariance analysis<covarianceSettings>`, 
 its definition altogether (greatly simplifying the setup!) Secondly, doing a :ref:`full estimation<fullEstimationSettings>` with the truth and estimation model equal to one another allows one to study the influence that
 different data types, their noise levels, etc. have on the final estimation, with some more flexibility than what is the case in the covariance analysis (for instance, in a covariance analysis one is limited to Gaussian uncorrelated noise, which in a full estimation you can add any noise you like to the observations).
 
-When taking this approach, one makes use of the fact that observation simulators for the estimation are created anyway when creating an :class:`~tudatpy.estimation.estimation_analysis.Estimator` object (discussed further :ref:`here <perform_estimation>`).
+When taking this approach, one makes use of the fact that observation simulators for the estimation are created anyway when creating an :class:`~tudatpy.estimation.estimation_analysis.Estimator` object (discussed further :ref:`here <estimationSettings>`).
 You can extract these ``observation_simulators`` as follows, and use them to :ref:`simulate observations <observationSimulation>` as follows:
 
 .. code-block:: python
@@ -195,7 +195,7 @@ wants to implement to study the case at hand. In this case, the observation simu
   # Create observation simulators
   observation_simulators = create_observation_simulators( observation_settings_list, bodies )       
 
-When subsequently creating the :class:`~tudatpy.estimation.estimation_analysis.Estimator` object (discussed further :ref:`here <perform_estimation>`)
+When subsequently creating the :class:`~tudatpy.estimation.estimation_analysis.Estimator` object (discussed further :ref:`here <estimationSettings>`)
 to perform the estimation, one can then provide a different ``observation_settings_list`` to ensure a difference between the truth
 and estimation models. One can also choose to provide different ``bodies``, so that the physical environment from which
 the observations are simulated, and the one to which they are fit, are different. Finally, even when using the same ``bodies``,

@@ -41,12 +41,10 @@ In addition to the inputs required for state propagation, the following needs to
 Simulation/Analysis & Output
 ============================
 
-Once all the settings are in place, the solution can be generated: the (simulated) observations can be fit to the dynamical model that has been defined to perform the fitting. Alternatively, the same functionality can be used for a covariance analysis only, in which case no fit is attempted. Details are provided on :ref:`this page <perform_estimation>`
+Once all the settings are in place, the solution can be generated: the (simulated) observations can be fit to the dynamical model that has been defined to perform the fitting. Alternatively, the same functionality can be used for a covariance analysis only, in which case no fit is attempted. Details are provided on :ref:`this page <estimationSettings>`
 
 .. toctree::
    :titlesonly:
    :hidden:
    :maxdepth: 1
-
-   state-estimation/performing-estimation
 

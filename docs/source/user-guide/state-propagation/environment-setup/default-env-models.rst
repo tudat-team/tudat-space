@@ -83,7 +83,7 @@ Gravity field
 
 .. seealso::
    Temporal variations of the gravity field are zero by default, but can be included for high-accuracy
-   applications. See the :doc:`API reference on gravity field variation <gravity_field_variation>`.
+   applications. See the :ref:`API reference on gravity field variation <tudatpy:gravity_field_variation>`.
 
 Atmosphere
 -----------
@@ -107,7 +107,7 @@ SPICE in Tudat
 The ``cspice`` toolkit (version of SPICE written in the C language) is included in the conda environment when installing
 Tudat.
 The SPICE toolkit itself has extensive `lessons <https://naif.jpl.nasa.gov/naif/lessons.html>`_, `tutorials <https://naif.jpl.nasa.gov/naif/tutorials.html>`_ and  `detailed documentation <https://naif.jpl.nasa.gov/naif/documentation.html>`_.
-Tudat contains a number of functions to directly interact with SPICE, listed :doc:`here <spice>`.
+Tudat contains a number of functions to directly interact with SPICE, listed :ref:`here <tudatpy:spice>`.
 
 .. note::
    In some cases, the extraction of the state of bodies from SPICE kernels can be a computational bottleneck. Tudat has an :ref:`alternative set of default options <default_bodies_limited_time_range>`, which make this process significantly faster, at the expense of higher RAM usage, and an environment that is only valid over a very limited time interval.
