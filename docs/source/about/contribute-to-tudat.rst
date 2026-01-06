@@ -53,7 +53,6 @@ Below, there is a list of contributors to Tudat. Mostly, these have been staff a
 * Riva Alkahal
 * Kevin Cowan
 * `Dominic Dirkx <https://www.linkedin.com/in/dominic-dirkx-2806a5b6>`_
-* `João Encarnação <https://www.linkedin.com/in/joaoencarnacao/>`_
 * Sam Fayolle
 * Valerio Filice
 * Jonas Hener
