@@ -8,6 +8,9 @@ Tudat has also been used extensively in research projects. Many of those that re
 
 **Journal publications**
 
+- `Covariance-Based Estimation Performance for In-Flight Calibration of NASA’s ACS3 Solar Sail <https://www.sciencedirect.com/science/article/pii/S0273117725012426>`_ Amodio, A. M., Carzana, L., Dirkx, D., & Heiligers, J. (2025). Advances in Space Research (in press).
+- `Translational–rotational couplings in the dynamics of Phobos <https://www.aanda.org/articles/aa/abs/2025/08/aa50579-24/aa50579-24.html>`_ Martinez, J., Dirkx, D., & Fayolle, S. (2025). Astronomy & Astrophysics, 700, A233.
+- `Prospects of using tidal tomography to constrain Ganymede's interior <https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2025GL114708>`_ Rovira‐Navarro, M., Matsuyama, I., Dirkx, D., Berne, A., Calliess, D., & Fayolle, S. (2025). . Geophysical Research Letters, 52(11), e2025GL114708.
 - `Constraining the ephemeris and interior structure of Io using space-based astrometry by JUICE <https://www.sciencedirect.com/science/article/pii/S0032063325000790>`_ Zenk, K., Dirkx, D., & Fayolle, S. (2025).  Planetary and Space Science, 261, 106112.
 - `Neural combinatorial optimization for multi-rendezvous mission design <https://www.sciencedirect.com/science/article/pii/S0273117725002893>`_. Rivera, A. L., & Naeije, M. (2025).  Advances in Space Research (in press).
 - `Dynamical Modelling of NASA's ACS3 Solar Sail Mission <https://www.sciencedirect.com/science/article/pii/S1270963825002172>`_ Minervino Amodio, A., Visser, P., & Heiligers, J. (2025).  Aerospace Science and Technology, 110146.
@@ -47,6 +50,7 @@ Tudat has also been used extensively in research projects. Many of those that re
 
 **Conference papers**
 
+- `Open-Source High-Fidelity Orbit Estimation for Planetary Science and Space Situational Awareness Using the Tudat Software <https://arxiv.org/abs/2510.23179>`_ Gisolfi, L., Dirkx, D., Fayolle, S., Filice, V., Alkahal, R., Avillez, M., ... & Witte, D. (2025). Proceedings of the 76th International Astronautical Congress (and arxiv 2510.23179)
 - `Preliminary design of a stand-alone Mars CubeSat mission integrating DLR in-house technologies <https://www.spiedigitallibrary.org/conference-proceedings-of-spie/13546/135461Q/Preliminary-design-of-a-stand-alone-Mars-CubeSat-mission-integrating/10.1117/12.3061588.full>`_.  Marí, H. J., Noomen, R., Grundmann, J. T., & Ho, T. M. (2025). In Small Satellites Systems and Services Symposium (4S 2024) (Vol. 13546, pp. 723-737). SPIE.
 - `Design And Optimization Of Multi-rendezvous Manoeuvres Based On Reinforcement Learning And Convex Optimization <https://arxiv.org/abs/2411.11778>`_. Rivera, A. L., Marcovaldi, L., Ramírez, J., Cuenca, A., & Bermejo, D. (2024). Proceedings of the 74th International Astronautical Congress
 - `A Model Framework for High-Accuracy, Short- And Long-Term Orbit Determination and Propagation of Cislunar Space Debris, with Realistically Quantified Uncertainties <https://www.researchgate.net/publication/385740282_A_model_framework_for_high-accuracy_short-_and_long-term_orbit_determination_and_propagation_of_Cislunar_space_debris_with_realistically_quantified_uncertainties>`_ Witte, D., Langbroek, M., Dirkx, D. (2024). Proceedings of the 74th International Astronautical Congress

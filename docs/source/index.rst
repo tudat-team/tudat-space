@@ -11,6 +11,8 @@ Such framework can be used for a wide variety of purposes, ranging from the stud
 missions. The core functionality of Tudat is implemented in C++ and exposed to Python using an interface called Tudat(Py).
 Tudat and Tudat(Py) are entirely open-source and disseminated using conda packages.
 
+Follow us on `LinkedIn <https://www.linkedin.com/company/108004524/>`_ to stay up-to-date with our developments anc achievements!
+
 .. grid:: 1 1 2 2
     :gutter: 2 3 4 4
 

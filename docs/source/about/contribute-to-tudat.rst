@@ -4,16 +4,16 @@
 Contribute to Tudat
 ===================
 
-Any contribution you have to Tudat is very welcome! This can come in the form of code contributions in C++ or Python, additions to our website, extensions to the API documentation, the writing of example applications,  *etc.* Also, any general advice, ideas, comments, feature request are most welcome! You can use any of the following to work on Tudat and/or reach out:
+Any contribution you have to Tudat is very welcome! This can come in the form of code contributions in C++ or Python, additions to our website, extensions to the API documentation, the writing of example applications, *etc.* Also, any general advice, ideas, comments, feature request are most welcome! You can use any of the following to work on Tudat and/or reach out:
 
-* Join our Slack chat! This is where most of our coding discussion takes place. Send an `e-mail <https://www.tudelft.nl/staff/d.dirkx/>`_ to get an invite. 
+* Send an `e-mail <https://www.tudelft.nl/staff/d.dirkx/>`_ to get in touch. We're always open and eager to discuss contributions to and use of Tudat!
 * Post an issue on one of our Github repositories:
   
   * `Tudatpy code (C++ and Python) <https://github.com/tudat-team/tudatpy>`_ where our functionality is implemented, and the C++ functionality is exposed to Python using `pybind11 <https://pybind11.readthedocs.io/en/stable/index.html>`_
   * `Tudatpy examples code (Python/Jupyter) <https://github.com/tudat-team/tudatpy-examples>`_ where the :ref:`getting_started_examples` of our project are located
   * `Tudat space (sphinx) <https://github.com/tudat-team/tudat-space>`_ where the markup language that generates this website is located
 
-* Part of our development workflow is documented on our `developer docs <https://github.com/tudat-team/tudatpy/wiki>`_. This site is still under construction, and any input is more than welcome!
+* Part of our development workflow is documented on our `developer docs <https://github.com/tudat-team/tudatpy/wiki>`_.
 
 Ongoing and planned developments
 ================================
@@ -22,21 +22,17 @@ Below is a (not entirely comprehensive) list of features and functionalities tha
 
 * Extension of Tudat estimation functionality for real tracking data analysis, with a focus on planetary missions
 
-  * Reading additional typical radio tracking data files (TNF, TDF) into Tudat-compatible data structures (in addition to ODF files, which are currently supported)
-  * Adding high-accuracy models for media corrections for radio tracking (troposphere, ionosphere, corona)
-  * Adding more detailed albedo and surface temperature models for radiation pressure modelling
+  * Reading additional typical radio tracking data files (TDF) into Tudat-compatible data structures (in addition to ODF, TNF, IFMS files, which are currently supported)
+  * Adding albedo and surface temperature models for specific solar system bodies
   * Flexible and automated setup for high-fidelity propagation and estimation of planetary spacecraft
-  * Implement sparse matrices for partials matrices
   * ...
 
 * Adding better functionality to automate the plotting of numerical propagation results (**Python**)
-* Linking SGP4 propagator to Tudat (**Python**?)
 * Linking the preliminary mission design module to the numerical propagation, including automated differential corrections
 * Supporting events during the propagation (i.e. modify models when a specific condition is met)
 * Implementing regularized propagators (e.g. Dromo)
 * Extend CR3BP propagation and mission design functionality (including differential correction to account for perturbations)
 * Rigorous relativistic effects for orbit propagation (e.g. acceleration derived from metric tensor)
-* High-accuracy Earth deformation models (ocean tides, etc.)
 * ...
 
 We're also always looking for new example applications, and good ideas for example applications, please feel free to share any ideas and code you may have!
