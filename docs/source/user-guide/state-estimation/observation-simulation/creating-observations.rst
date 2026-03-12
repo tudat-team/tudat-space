@@ -20,5 +20,7 @@ This section covers the different methods for creating observation collections i
 - :ref:`Simulating observations <simulating_observations>`: Generate synthetic observations using observation models
 - :ref:`Loading real tracking data <loading_real_data>`: Import observations from external data sources (MPC, ODF, TNF, IFMS, FDETS)
 - :ref:`Pseudo-observations <pseudo_observations>`: Create observations from external ephemerides
+- :ref:`Manual observations creation <manually_created_observations>`: Create observation collections starting from python objects such as numpy arrays.
+
 
 The following pages provide detailed information on each method.
