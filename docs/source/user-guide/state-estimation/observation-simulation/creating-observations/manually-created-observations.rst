@@ -1,4 +1,4 @@
-.. _manual_observation_collections:
+.. _manually_created_observations:
 
 ==============================
 Manual Observation Collections
