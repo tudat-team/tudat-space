@@ -49,12 +49,12 @@ Radio tracking data from planetary spacecraft (Doppler, range, astrometry) colle
 Tudat supports reading multiple tracking data formats from DSN, ESTRACK and JIVE:
 
 TRK-2-18 Orbit Data File (ODF)
----------------------
+------------------------------
 
-The Orbit Data File format is documented `here <https://pds-geosciences.wustl.edu/radioscience/urn-nasa-pds-radiosci_documentation/odf_071710/odf.pdf>`_. These are binary files that Tudat can 'unpack' and put the contents into Tudat-compatible data structures. Since the contents of the radio science data are significantly more complicated than (for instance) optical astrometric data, the loading of the files is done in several steps:
+The Orbit Data File format is documented `here <https://pds-geosciences.wustl.edu/radiosciencedocs/urn-nasa-pds-radiosci_documentation/dsn_trk-2-18/dsn_trk-2-18.2008-02-29.pdf>`_. These are binary files that Tudat can 'unpack' and put the contents into Tudat-compatible data structures. Since the contents of the radio science data are significantly more complicated than (for instance) optical astrometric data, the loading of the files is done in several steps:
 
-- Each ODF file is loaded into a single :class:`~tudatpy.io.OdfRawFileContents` object. In this step, the contents of the binary file are loaded and put into basic C++/Python data types.
-- The list of :class:`~tudatpy.io.OdfRawFileContents` objects are processed, the relevant data combined and data structures set up, resulting in a :class:`~tudatpy.estimation.observations_setup.observations_wrapper.ProcessedOdfFileContents` object (holding all data for a given link ends and observable type):
+- Each ODF file is loaded into a single :class:`~tudatpy.data.OdfRawFileContents` object. In this step, the contents of the binary file are loaded and put into basic C++/Python data types.
+- The list of :class:`~tudatpy.data.OdfRawFileContents` objects are processed, the relevant data combined and data structures set up, resulting in a :class:`~tudatpy.estimation.observations_setup.observations_wrapper.ProcessedOdfFileContents` object (holding all data for a given link ends and observable type):
 
   - Ramp tables per ground station are created from the combination of all ODF files
   - All observations of a given observable type and link ends from all ODF files are merged into a single object holding the observables and relevant metadata
@@ -66,12 +66,12 @@ The Orbit Data File format is documented `here <https://pds-geosciences.wustl.ed
 TRK-2-34 Tracking and Navigation File (TNF)
 -------------------------------------------
 
-The TRK-2-34 Tracking and Navigation File format is documented `here <https://pds-geosciences.wustl.edu/radiosciencedocs/urn-nasa-pds-radiosci_documentation/dsn_trk-2-34/dsn_trk-2-34.2021-06-03.pdf>`_. This is another format used by the DSN to store tracking data. Like ODF files, TRK-2-34 files are binary files but have a different internal structure. The :mod:`~tudatpy.data.processTrk234` module provides specialized converters to handle the unique structure of these files and extract tracking observables.
+The TRK-2-34 Tracking and Navigation File format is documented `here <https://pds-geosciences.wustl.edu/radiosciencedocs/urn-nasa-pds-radiosci_documentation/dsn_trk-2-34/dsn_trk-2-34.2021-06-03.pdf>`_. This is another format used by the DSN to store tracking data. Like ODF files, TRK-2-34 files are binary files but have a different internal structure. The :doc:`data/processTrk234` module provides specialized converters to handle the unique structure of these files and extract tracking observables.
 
 Processing Architecture
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-The :mod:`~tudatpy.data.processTrk234` module uses a modular converter-based architecture:
+The :doc:`data/processTrk234` module uses a modular converter-based architecture:
 
 1. **Binary File Parsing**: TRK-2-34 files are read and parsed according to their specific binary format structure, extracting raw data records.
 
@@ -89,14 +89,16 @@ Usage Example
 
 .. code-block:: python
 
-    from tudatpy.data.processTrk234 import processor
+    from tudatpy.data.processTrk234 import Trk234Processor
 
     # Process TRK-2-34 files
     tnf_file_paths = ["path/to/file1.tnf", "path/to/file2.tnf"]
-    processed_data = processor.process_trk234_files(
-        tnf_file_paths,
-        spacecraft_name="MarsExpress"
+
+    mex_processor = Trk234Processor(
+        tnf_file_paths, requested_types=["doppler", "range"], spacecraft_name="MarsExpress"
     )
+
+    observations = mex_processor.process()
 
 Intermediate Frequency & Modem System (IFMS) Files
 --------------------------------------------------
