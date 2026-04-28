@@ -67,13 +67,14 @@ TRK-2-34 Tracking and Navigation File (TNF)
 -------------------------------------------
 
 The TRK-2-34 Tracking and Navigation File format is documented `here <https://pds-geosciences.wustl.edu/radiosciencedocs/urn-nasa-pds-radiosci_documentation/dsn_trk-2-34/dsn_trk-2-34.2021-06-03.pdf>`_. This is another format used by the DSN to store tracking data. Like ODF files, TRK-2-34 files are binary files but have a different internal structure. The :doc:`data/processTrk234` module provides specialized converters to handle the unique structure of these files and extract tracking observables.
+It makes heavy use of the `PyTrk234 <https://github.com/NASA-PDS/PyTrk234/>`_ library for parsing of the binary files and extraction of the raw data records.
 
 Processing Architecture
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 The :doc:`data/processTrk234` module uses a modular converter-based architecture:
 
-1. **Binary File Parsing**: TRK-2-34 files are read and parsed according to their specific binary format structure, extracting raw data records.
+1. **Binary File Parsing**: TRK-2-34 files are read and parsed according to their specific binary format structure, extracting raw data records using the `PyTrk234 <https://github.com/NASA-PDS/PyTrk234/>`_ library.
 
 2. **Observable-Specific Converters**:
 
