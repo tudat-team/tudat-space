@@ -53,20 +53,17 @@ In the following examples, real observations are used to fit compute residuals a
   ./tudatpy-examples/estimation/improved_estimation_with_mpc.ipynb
   ./tudatpy-examples/estimation/mro_range_estimation.ipynb
   ./tudatpy-examples/estimation/kosmos482_reentry.ipynb
-  ./tudatpy-examples/estimation/atlas3I_estimation_example.ipynb
 
 
-Estimation using real observations - Python only
-************************************************
+Estimation using real observations from DSN/ESTRACK
+***************************************************
 
-We also have the following examples that showcase the reading of, and estimation from radio tracking data from DSN/ESTRACK. Using these examples requires tudatpy to have been compiled by high-precision time representation (which is not currently available through these conda packages) The examples provide instructions on how to compile your own tudatpy kernel with the required settings.
+We also have the following examples that showcase the reading of, and estimation from radio tracking data from DSN/ESTRACK.
 
-.. workaround until the .py files are available as .ipynb files
+.. nbgallery::
 
-.. toctree::
-
-  doppler-data-analysis/mro-residuals-analysis
-  doppler-data-analysis/grail-odf-estimation
-  doppler-data-analysis/grail-residuals
-  doppler-data-analysis/grail-spice-fit
+  ./tudatpy-examples/estimation/mro_tnf_residuals_analysis.ipynb
+  ./tudatpy-examples/estimation/grail_residuals.ipynb
+  ./tudatpy-examples/estimation/grail_odf_estimation.ipynb
+  ./tudatpy-examples/estimation/grail_spice_fit.ipynb
  
