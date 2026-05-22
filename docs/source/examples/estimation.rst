@@ -66,4 +66,5 @@ We also have the following examples that showcase the reading of, and estimation
   ./tudatpy-examples/estimation/grail_residuals.ipynb
   ./tudatpy-examples/estimation/grail_odf_estimation.ipynb
   ./tudatpy-examples/estimation/grail_spice_fit.ipynb
- 
+  ./tudatpy-examples/estimation/mex_open_loop_residuals.ipynb
+  ./tudatpy-examples/estimation/mro_tnf_estimation.ipynb

@@ -58,6 +58,7 @@ nbsphinx_thumbnails = {
     "examples/mission-design": "./_static/mission_design_example_thumbnail.png",
     "examples/pygmo/asteroid-orbit-optimization": "./_static/asteroid_example_thumbnail.png",
     "examples/tudatpy-examples/estimation/mission_data_downloader": "./_static/mission_data_downloader_example_thumbnail.png",
+    "examples/data_retrieval": "./_static/data_retrieval_example_thumbnail.png"
 
 }
 

@@ -19,6 +19,7 @@ The following examples showcase the basic functionality of the Tudat numerical p
   ./tudatpy-examples/propagation/thrust_between_Earth_Moon.ipynb
   ./tudatpy-examples/propagation/juice_flybys.ipynb
   ./tudatpy-examples/propagation/panelled_radiation_target.ipynb
+  ./tudatpy-examples/propagation/walker_constellation.ipynb
 
 Advanced examples
 *********************

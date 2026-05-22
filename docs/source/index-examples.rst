@@ -18,6 +18,7 @@ The examples below will help you get started in exploring the diverse capabiliti
    /examples/estimation
    /examples/mission-design
    /examples/pygmo
+   /examples/data_retrieval
 
 
 .. grid:: 2

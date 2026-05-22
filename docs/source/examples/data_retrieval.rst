@@ -1,4 +1,4 @@
-.. _data_retrieval_examples:
+.. _data_retrieval:
 
 ====================
 Data Retrieval
@@ -6,4 +6,4 @@ Data Retrieval
 
 .. nbgallery::
 
-  ./tudatpy-examples/_data_retrieval/spacetrack_example.ipynb
+  ./tudatpy-examples/data_retrieval/spacetrack_example.ipynb
