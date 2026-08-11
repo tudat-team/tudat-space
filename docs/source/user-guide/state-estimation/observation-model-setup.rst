@@ -8,9 +8,11 @@ Observation Model Setup
    :hidden:
    :maxdepth: 1
 
+   observation-model-setup/link-ends-setup
    observation-model-setup/observation-models
 
-Having defined the :ref:`link ends <linkEndSetup>`, you can now define and create the observation models. Below the general workflow for this is discussed. The observation models can play two roles in Tudat:
+
+The observation models can play two roles in Tudat:
 
 * To generate simulated data inside Tudat, instead of loading real data.
 * For use in a (least-squares) estimation loop, to create the observation models used to fit input data (real or simulated) to observations provided
@@ -18,7 +20,7 @@ Having defined the :ref:`link ends <linkEndSetup>`, you can now define and creat
 Before providing any specifics, we need to distinguish several different types of settings/models/data structures in Tudat, which will be elaborated upon in
 the following pages:
 
-* **Observation Model Settings**, which are presented :ref:`below <observationTypes>` containing settings for the *type* of observations that are to be used (and possible corrections). These objects do not perform any calculation, but define the properties of the observation simulators that are created. 
+* **Observable Model Settings**, which are presented :ref:`below <observationTypes>`. These contain settings for the *type* of observations that are to be used, information on the observation geometry through the :ref:`linkEndSetup` and possible corrections. These objects do not perform any calculation, but define the properties of the observation simulators that are created. 
 * **Observation Simulators**, which are discussed :ref:`below <observationSimulators>`. These objects compute the actual observations from the current properties of the environment. 
 * **Observation Simulation Settings**, which are discussed on the :ref:`following page<simulating_observations>`. These objects define *how to use the observation simulators* by providing the required settings for observation times, etc.
 * **Observation Collection**, which are discussed on the :ref:`following page<observation_collection_manipulation>`. These objects store the full set of observations and associated data used in a single estimation/covariance analysis in Tudat
@@ -37,12 +39,15 @@ is discussed :ref:`here <observation_model_overview>`, including links to the AP
 A basic observation model is defined by:
 
 * The type of the observation
-* The link ends involved in the observation (e.g. transmitter, receiver)
+* The observation geometry, through the link ends involved in the observation (e.g. transmitter, receiver)
 
-Below is a basic example of creating settings for two observation models. Note that the below code snippet defines a one-way range and one-way open-loop Doppler observable, each with the New Norcia ESTRACK station as transmitter, and Mars Express spacecraft as receiver
-(see :ref:`linkEndSetup`). 
+Below is a basic example of creating settings for two observation models, a one-way range and one-way open-loop Doppler observable, each with the New Norcia ESTRACK station as transmitter, and Mars Express spacecraft as receiver.
 
-Note that this list of observation model settings can be extended with any number of entries, with any number of link ends.
+.. seealso::
+
+  Since the link end setup can become more complex, see the dedicated :ref:`linkEndSetup` page for a discussion on how to define the link ends.
+
+This list of observation model settings can be extended with any number of entries, with any number of link ends.
 The only limitation is that you may not have duplicate entries of link ends *and* observable type
 (as this would essentially define an identical type of observation).
 

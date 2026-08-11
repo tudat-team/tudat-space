@@ -32,7 +32,6 @@ In addition to the inputs required for state propagation, the following needs to
    :hidden:
    :maxdepth: 1
 
-   state-estimation/link-ends-setup
    state-estimation/observation-model-setup
    state-estimation/observation-simulation
    state-estimation/estimation-settings
