@@ -6,7 +6,7 @@ Performing the estimation
 Having created all the relevant settings for the physical environment (see :ref:`environment_setup`)
 dynamical model (see :ref:`propagation_setup`), the parameters that are to be estimated (see :ref:`parameter_settings`),
 the settings for the observation models (see :ref:`observationModelSetup`)
-and the actual observations (simulated or real; see :ref:`observationSimulation`), the estimation can be performed.
+and the actual observations (simulated or real; see :ref:`observation_handling`), the estimation can be performed.
 
 The remaining settings for the data analysis relate to how the data is to be used in the further analysis.
 We distinguish between two different types of analyses:

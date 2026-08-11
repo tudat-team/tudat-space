@@ -1,7 +1,7 @@
 .. _observation_collection_manipulation:
 
 =====================================
-Observation Collection Manipulation
+Observation Collection Interaction
 =====================================
 
 .. toctree::

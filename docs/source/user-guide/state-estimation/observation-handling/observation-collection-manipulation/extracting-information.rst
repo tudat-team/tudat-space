@@ -170,7 +170,7 @@ Inverting Parser Conditions
        parser = observation_parser(one_way_range_type, use_opposite_condition=True)
 
 .. tip::
-   Having a clear overview of which observable type, link ends, etc. are present in the observation collection one is working with can be difficult, especially if the collection was created by :ref:`loading real observations <loading_real_data>` from e.g., ODF or IFMS files. This can make the use of a parser more difficult. The :meth:`~tudatpy.estimation.observations.ObservationCollection.print_observation_sets_start_and_size` method can be very useful in that respect, as it prints a summary of all observation sets in the collection (see :ref:`Inspecting Observation Collections <observationSimulation>`).
+   Having a clear overview of which observable type, link ends, etc. are present in the observation collection one is working with can be difficult, especially if the collection was created by :ref:`loading real observations <loading_real_data>` from e.g., ODF or IFMS files. This can make the use of a parser more difficult. The :meth:`~tudatpy.estimation.observations.ObservationCollection.print_observation_sets_start_and_size` method can be very useful in that respect, as it prints a summary of all observation sets in the collection (see :ref:`Inspecting Observation Collections <observation_handling>`).
 
 Retrieving Observation Data
 ============================

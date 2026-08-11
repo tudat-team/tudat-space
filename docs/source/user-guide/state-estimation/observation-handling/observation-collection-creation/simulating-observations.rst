@@ -1,7 +1,7 @@
 .. _simulating_observations:
 
 =======================
-Simulating Observations
+Simulated Observations
 =======================
 
 To simulate observations, you must first define the "Observation Simulation Settings," which specify *how* and *when* an observation model should be used.
