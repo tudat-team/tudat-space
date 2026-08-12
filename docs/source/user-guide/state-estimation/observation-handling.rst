@@ -22,7 +22,7 @@ A single observation is defined by the following quantities:
 - The **time** of the observation. While original data may be time-tagged in any scale (e.g., UTC), all times are converted to and stored in the Barycentric Dynamical Time (TDB) scale within Tudat.
 - The **weight** assigned to the observation, used during least-squares estimation to account for observation uncertainty (defaults to 1).
 - Any **dependent variables** calculated for the observation.
-- The **observation residual**, computed as the difference between the observed and simulated values. This value is only available after being explicitly computed.
+- The **observation residual**, computed as the difference between the observed and computed values. This value is only available after being explicitly computed.
 - Optional **ancillary settings** required for the simulation of an observation, such as the integration time of a Doppler observation.
 
 Within an :class:`~tudatpy.estimation.observations.ObservationCollection`, observations are not stored individually but are grouped into :class:`~tudatpy.estimation.observations.SingleObservationSet` objects.

@@ -15,7 +15,7 @@ Observation Collection Creation
 
 An :class:`~tudatpy.estimation.observations.ObservationCollection` can be created by simulating observations or by loading them from external files. It's also possible to manually create an :class:`~tudatpy.estimation.observations.ObservationCollection` from a list of :class:`~tudatpy.estimation.observations.SingleObservationSet` objects or to create a new collection after filtering or splitting an existing one.
 
-This section covers the different readily-available methods for creating observation collections in Tudat(Py):
+This section covers the different readily-available methods for creating observation collections in Tudat:
 
 - :ref:`Simulated observations <simulating_observations>`: Generate synthetic observations using observation models
 - :ref:`Loading real tracking data <loading_real_data>`: Import observations from external data sources (MPC, ODF, TNF, IFMS, FDETS, ...)
@@ -27,13 +27,13 @@ The following pages provide detailed information on each method.
 Manual Creation of Observation Collections
 ==========================================
 
-In addition to loading observations from pre-defined file types (such as ODF or IFMS files), or simulating observations within the Tudat environment, users can manually create an :class:`~tudatpy.estimation.observations.ObservationCollection` from external data sources,
+In addition to loading observations from pre-defined file types (such as ODF or IFMS files), or simulating observations within the Tudat environment, users can manually create an :class:`~tudatpy.estimation.observations.ObservationCollection` from arbitrary data sources,
 such as experimental measurements or pre-processed Python arrays. This allows the use of Tudat's estimation and plotting utilities on user-provided datasets.
 
 Defining Single Observation Sets
 --------------------------------
 
-The building block of a manual collection is the :class:`~tudatpy.estimation.observations.SingleObservationSet`. This object encapsulates the data for a specific observable type associated with a specific link definition.
+The building block of an observation collection is the :class:`~tudatpy.estimation.observations.SingleObservationSet`. This object encapsulates the data for a specific observable type associated with a specific link definition.
 
 To create a single observation set, you must define the link ends, provide the observation times and values, and specify the reference link end.
 The observation collection is then created by passing a list of single observation sets to the :class:`~tudatpy.estimation.observations.ObservationCollection` constructor.

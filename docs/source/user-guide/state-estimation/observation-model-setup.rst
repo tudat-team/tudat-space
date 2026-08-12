@@ -15,7 +15,7 @@ Observation Model Setup
 The observation models can play two roles in Tudat:
 
 * To generate simulated data inside Tudat, instead of loading real data.
-* For use inside the estimation loop, to create the observation models used to fit input data (real or simulated) to observations provided
+* For use inside the estimation loop, to create the observation models used to fit input data (real or simulated) to observations provided.
 
 The general workflow to create the observation models is discussed in the following pages.
 Before providing any specifics, we need to distinguish several different types of settings/models/data structures in Tudat:
