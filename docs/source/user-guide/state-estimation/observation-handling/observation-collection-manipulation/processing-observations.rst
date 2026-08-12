@@ -171,7 +171,7 @@ As an example, the following lines of code would remove all ``one_way_range`` da
 
 .. code-block:: python
 
-    from tudatpy.estimation.observations import observation_parser
+    from tudatpy.estimation.observations.observations_processing import observation_parser
     from tudatpy.estimation.observable_models_setup.model_settings import one_way_range_type
     
     # Remove all one_way_range observations
