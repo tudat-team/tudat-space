@@ -26,7 +26,7 @@ which is created as follows:
     estimator = estimation.estimation_analysis.Estimator(
         bodies,
         parameters_to_estimate,
-        observation_settings_list,
+        observation_model_settings,
         propagator_settings)
 
 where the propagator settings may be single-, multi- or hybrid arc. Creating an :class:`~tudatpy.estimation.estimation_analysis.Estimator` object as above automatically propagates
@@ -73,7 +73,7 @@ using the :meth:`~tudatpy.estimation.estimation_analysis.Estimator.compute_covar
     estimator = estimation.estimation_analysis.Estimator(
         bodies,
         parameters_to_estimate,
-        observation_settings_list,
+        observation_model_settings,
         propagator_settings)
     covariance_analysis_output = estimator.compute_covariance(
         covariance_analysis_settings)
@@ -128,7 +128,7 @@ the full estimation using the :meth:`~tudatpy.estimation.estimation_analysis.Est
     estimator = estimation.estimation_analysis.Estimator(
         bodies,
         parameters_to_estimate,
-        observation_settings_list,
+        observation_model_settings,
         propagator_settings)
     estimation_output = estimator.perform_estimation(
         estimation_settings)
