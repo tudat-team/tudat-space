@@ -1,5 +1,5 @@
 
-.. _parameterSettings:
+.. _parameter_settings:
 
 ==================
 Parameter Settings
@@ -18,14 +18,8 @@ In Tudat, these parameters influence the simulation in a variety of manners, and
 
 When only wishing to propagate the state transition matrix :math:`\Phi(t,t_{0})` (or depending on your use case, only estimate initial state parameters), the following line the relevant settings:
 
-.. tab-set::
-   :sync-group: coding-language
-
-   .. tab-item:: Python
-      :sync: python
-
-      .. literalinclude:: /_snippets/simulation/sensitivity_analysis/state_only_parameters.py
-         :language: python
+.. literalinclude:: /_snippets/simulation/sensitivity_analysis/state_only_parameters.py
+   :language: python
 
 which defines the initial state parameters to be fully consistent with the settings in the `propagator_settings`. 
 
@@ -33,16 +27,19 @@ which defines the initial state parameters to be fully consistent with the setti
 
 When wishing to propagate the sensitivity matrix :math:`S(t)` (or depending on your use case, estimate parameters in addition to initial state parameters), the set of parameters can be extended using the following:
 
-.. tab-set::
-   :sync-group: coding-language
-
-   .. tab-item:: Python
-      :sync: python
-
-      .. literalinclude:: /_snippets/simulation/sensitivity_analysis/full_parameter_settings.py
-         :language: python
+.. literalinclude:: /_snippets/simulation/sensitivity_analysis/full_parameter_settings.py
+   :language: python
 	
          
 In the snippet above, parameters are created to estimate the initial states in the `propagator_settings` (presumably Delfi-C3 initial translational states), the gravitational parameter of the Earth, the constant drag and the radiation pressure coefficient of Delfi-C3.
 
-For the full list of available parameters, see the :doc:`dynamics/parameters_setup` page of the API documentation
+For the full list of available parameters, see the :doc:`dynamics/parameters_setup` page of the API documentation.
+
+The actual parameter set can then be created from the settings using the :func:`~tudatpy.dynamics.parameters_setup.create_parameter_set` function:
+
+.. code-block:: python
+
+   from tudatpy.dynamics import parameters_setup
+
+   parameter_set = parameters_setup.create_parameter_set(parameter_settings, bodies)
+  

@@ -1,6 +1,6 @@
 .. _estimationSettings:
 
-Performing the estimation
+Performing the Estimation
 =========================
 
 Having created all the relevant settings for the physical environment (see :ref:`environment_setup`)
@@ -34,7 +34,7 @@ the dynamics and variational equations for the specific propagator and parameter
 
 .. _covarianceSettings:
 
-Covariance analysis
+Covariance Analysis
 ~~~~~~~~~~~~~~~~~~~
 
 
@@ -75,7 +75,7 @@ such as whether to reintegrate the dynamics, or which terminal output to provide
 
 The weight matrix is typically not provided as a full matrix in a covariance analysis, as the its size of :math:`N_{obs}\times N_{obs}` leads to prohibitive memory usage. Presently, we only support the definition of a diagonal weights matrix. The weights of observations are set in the object containing the observations themselves (see :ref:`setting_weight`)
 
-When using consider covariance (e.g. when consider parameters are defined in the :ref:`parameterSettings`), the consider parameter covariance matrix :math:`\mathbf{C}`
+When using consider covariance (e.g. when consider parameters are defined in the :ref:`parameter_settings`), the consider parameter covariance matrix :math:`\mathbf{C}`
 is also provided to the :class:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput` constructor.
 
 These settings are used to compute the covariance
@@ -94,7 +94,7 @@ Use of the normalized quantities should be limited to those applications where a
 
 .. _fullEstimationSettings:
 
-Full estimation
+Full Estimation
 ~~~~~~~~~~~~~~~
 
 The full estimation performs an iterative differential correction of the estimated parameters. The settings for a full estimation are created in an essentially identical manner as those for a covariance analysis:
