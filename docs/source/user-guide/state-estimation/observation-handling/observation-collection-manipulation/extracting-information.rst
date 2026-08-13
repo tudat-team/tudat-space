@@ -6,10 +6,12 @@ Extracting Information
 
 The :class:`~tudatpy.estimation.observations.ObservationCollection` provides numerous methods to retrieve observation data. This page describes how to access the observations and their associated metadata.
 
+.. _observation_collection_parser:
+
 Observation Collection Parser
 ==============================
 
-To access, manipulate, and retrieve specific subsets of an :class:`~tudatpy.estimation.observations.ObservationCollection`, you can use an observation collection parser. A parser is a user-created object that defines criteria for selecting specific :class:`~tudatpy.estimation.observations.SingleObservationSet` objects. The :func:`~tudatpy.estimation.observations.observations_processing.observation_parser` function is overloaded to accept different types of input to create the desired parser.
+To access, manipulate, and retrieve specific subsets of an :class:`~tudatpy.estimation.observations.ObservationCollection`, you can use an observation collection parser. A parser is a user-created object that defines criteria for selecting specific :class:`~tudatpy.estimation.observations.SingleObservationSet` objects based on the metadata of the observation set. The :func:`~tudatpy.estimation.observations.observations_processing.observation_parser` function is overloaded to accept different types of input to create the desired parser.
 
 Here is a simple example of how to create and use a parser to retrieve specific observations:
 
@@ -23,6 +25,11 @@ Here is a simple example of how to create and use a parser to retrieve specific 
     
     # Use the parser to get the concatenated observation times for the selected sets
     range_times = observation_collection.get_concatenated_observation_times(range_parser)
+
+.. hint::
+
+    If you would like to select a subset of the observation collection based on the observation value, its timetag, or residual, see the user guide on :ref:`observation collection filtering <filtering_observations>`.
+
 
 Parser Types
 ------------
