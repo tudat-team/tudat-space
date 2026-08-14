@@ -11,7 +11,9 @@ The :class:`~tudatpy.estimation.observations.ObservationCollection` provides num
 Observation Collection Parser
 ==============================
 
-To access, manipulate, and retrieve specific subsets of an :class:`~tudatpy.estimation.observations.ObservationCollection`, you can use an observation collection parser. A parser is a user-created object that defines criteria for selecting specific :class:`~tudatpy.estimation.observations.SingleObservationSet` objects based on the metadata of the observation set. The :func:`~tudatpy.estimation.observations.observations_processing.observation_parser` function is overloaded to accept different types of input to create the desired parser.
+To access, manipulate, and retrieve specific subsets of an :class:`~tudatpy.estimation.observations.ObservationCollection`, you can use an observation collection parser.
+A parser is a user-created object that defines criteria for selecting specific :class:`~tudatpy.estimation.observations.SingleObservationSet` objects based on the metadata of the observation set.
+The :func:`~tudatpy.estimation.observations.observations_processing.observation_parser` function is overloaded, which means that the function is able to accept different types of input arguments to create the desired parser.
 
 Here is a simple example of how to create and use a parser to retrieve specific observations:
 

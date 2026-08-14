@@ -5,7 +5,8 @@ Simulated Observations
 =======================
 
 To create an observation collection with simulated observations, you need to define the "Observation Model Settings" and the "Observation Simulation Settings".
-In this section we cover the creation of the observation simulation settings (i.e., when and how to simulate observations), while the setup of the observation model is covered in :ref:`observationModelSetup`.
+The former define the type of observable to simulate and the observation geometry; the latter specify when and how to simulate observations.
+In this section we cover the creation of the observation *simulation* settings, while the setup of the observation model is covered in :ref:`observationModelSetup`.
 
 Defining Observation Simulation Settings
 =========================================
