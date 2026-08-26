@@ -118,7 +118,7 @@ The full estimation performs an iterative differential correction of the estimat
     observation_collection = ...
     ...
     # Create settings for observation models
-    covariance_analysis_settings = estimation_analysis.EstimationInput(
+    estimation_settings = estimation_analysis.EstimationInput(
         observation_collection
     )
 
@@ -156,4 +156,3 @@ The specific additional information that is retained for the
 :meth:`~tudatpy.estimation.estimation_analysis.EstimationInput.define_estimation_settings` method of the :class:`~tudatpy.estimation.estimation_analysis.EstimationInput`
 class. We note that saving all information from each iteration may not be recommended for larger applications, as the memory
 consumption that is required may be prohibitive.
-

@@ -34,7 +34,7 @@ We will now illustrate two different ways to define dependent variable settings,
     observation_collection = ...
 
     elevation_angle_settings_1 = observations_dependent_variables.elevation_angle_dependent_variable()
-    observation_collection.add_dependent_variable(elevation_angle_settings_1, bodies)
+    observation_collection.add_dependent_variable(elevation_angle_settings_1)
 
 Since no particular link ends information is given, the above lines of code will ultimately lead to the automatic creation of two elevation angle settings:
 
@@ -70,7 +70,7 @@ Once the observation dependent variable settings are defined, they need to be ad
 
     observation_collection = ...
 
-    elevation_angle_parser = observation_collection.add_dependent_variable(elevation_angle_settings, bodies)
+    elevation_angle_parser = observation_collection.add_dependent_variable(elevation_angle_settings)
 
 Within the observation collection, the :meth:`~tudatpy.estimation.observations.ObservationCollection.add_dependent_variable` method will add the desired dependent variable to all single observation sets for which it can be defined. It must be noted that this method returns an observation parser that defines for which single observation set the specified dependent variable could be created. This can be useful to isolate the observation sets for which elevation angle values will be available:
 
@@ -95,7 +95,6 @@ The :meth:`~tudatpy.estimation.observations.ObservationCollection.add_dependent_
     )
     elevation_angle_parser = observation_collection.add_dependent_variable(
         elevation_angle_settings,
-        bodies,
         observation_parser(model_settings.ObservableType.one_way_range_type)
     )
 
@@ -255,7 +254,7 @@ Example: Plotting Elevation Angle
     )
 
     # Add to observation collection
-    elevation_parser = observation_collection.add_dependent_variable(elevation_settings, bodies)
+    elevation_parser = observation_collection.add_dependent_variable(elevation_settings)
 
     # Compute residuals and dependent variables
     compute_residuals_and_dependent_variables(

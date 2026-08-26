@@ -48,13 +48,13 @@ The example below shows two equivalent ways of assigning different (constant) we
     )
     observation_collection.set_constant_weight(
         doppler_weight,
-        observation_parser(ObservableType.one_way_doppler_type)
+        observation_parser(ObservableType.one_way_instantaneous_doppler_type)
     )
     
     # Approach 2: Set weights using a dictionary
     weights_per_type = dict()
     weights_per_type[observation_parser(ObservableType.one_way_range_type)] = range_weight
-    weights_per_type[observation_parser(ObservableType.one_way_doppler_type)] = doppler_weight
+    weights_per_type[observation_parser(ObservableType.one_way_instantaneous_doppler_type)] = doppler_weight
     observation_collection.set_constant_weight_per_observation_parser(weights_per_type)
 
 Tabulated Weights

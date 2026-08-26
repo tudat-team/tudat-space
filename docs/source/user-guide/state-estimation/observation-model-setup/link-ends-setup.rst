@@ -59,7 +59,7 @@ Below we create settings for all DSN stations:
 
 .. code-block:: python
 
-    body_settings.get("Earth").ground_station_settings = environment_setup.ground_station.dsn_stations
+    body_settings.get("Earth").ground_station_settings = environment_setup.ground_station.dsn_stations()
 
 Creating a Link Definition
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~

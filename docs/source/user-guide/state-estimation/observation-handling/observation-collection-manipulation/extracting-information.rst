@@ -215,7 +215,7 @@ Here are some examples:
     residuals = observation_collection.get_concatenated_residuals(doppler_parser)
 
     # Get the observation times and values for the same subset
-    times, values = observation_collection.get_observations_and_times(doppler_parser)
+    values, times = observation_collection.get_observations_and_times(doppler_parser)
 
 Data is always returned in a fixed, sorted order to ensure deterministic and reproducible results.
 

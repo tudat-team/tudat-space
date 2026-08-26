@@ -51,7 +51,7 @@ To override this behaviour, we can specify a reference link end manually, which 
             model_settings.ObservableType.one_way_range_type,
             one_way_nno_mex_link_definition,
             observation_times,
-            reference_link_end=links.LinkEndType.transmitter
+            reference_link_end_type=links.LinkEndType.transmitter
         )
     )
 
