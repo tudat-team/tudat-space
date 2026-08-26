@@ -1,7 +1,7 @@
 .. _observation_collection_manipulation:
 
 =====================================
-Observation Collection Manipulation
+Observation Collection Interaction
 =====================================
 
 .. toctree::
@@ -22,3 +22,9 @@ Once you have created an :class:`~tudatpy.estimation.observations.ObservationCol
 - :ref:`Processing observations <processing_observations>`: Filter, split, and remove observation sets
 
 These tools allow you to prepare your observation data for estimation, analyze results, and ensure data quality.
+
+.. attention::
+
+   In Tudat, we distinguish between "filtering" and "parsing" the observation collection.
+   "Filtering" selects a subset of the observation collection based on the observation *value*, its timetag and residual, while "parsing" acts on the *metadata* of the observation set (observable type, link ends, ancillary settings).
+   For more information, see the user guide on :ref:`observation collection filtering <filtering_observations>` and :ref:`observation collection parsing <observation_collection_parser>`.  

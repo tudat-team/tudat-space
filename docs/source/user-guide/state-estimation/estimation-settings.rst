@@ -1,12 +1,12 @@
 .. _estimationSettings:
 
-Performing the estimation
+Performing the Estimation
 =========================
 
 Having created all the relevant settings for the physical environment (see :ref:`environment_setup`)
 dynamical model (see :ref:`propagation_setup`), the parameters that are to be estimated (see :ref:`parameter_settings`),
 the settings for the observation models (see :ref:`observationModelSetup`)
-and the actual observations (simulated or real; see :ref:`observationSimulation`), the estimation can be performed.
+and the actual observations (simulated or real; see :ref:`observation_handling`), the estimation can be performed.
 
 The remaining settings for the data analysis relate to how the data is to be used in the further analysis.
 We distinguish between two different types of analyses:
@@ -23,18 +23,18 @@ which is created as follows:
 
 .. code-block:: python
 
-    estimator = estimation.estimation_analysis.Estimator(
-        bodies,
-        parameters_to_estimate,
-        observation_settings_list,
-        propagator_settings)
+    from tudatpy.estimation import estimation_analysis
+
+    estimator = estimation_analysis.Estimator(
+        bodies, parameters_to_estimate, observation_model_settings, propagator_settings
+    )
 
 where the propagator settings may be single-, multi- or hybrid arc. Creating an :class:`~tudatpy.estimation.estimation_analysis.Estimator` object as above automatically propagates
 the dynamics and variational equations for the specific propagator and parameter settings.
 
 .. _covarianceSettings:
 
-Covariance analysis
+Covariance Analysis
 ~~~~~~~~~~~~~~~~~~~
 
 
@@ -42,18 +42,31 @@ The basic definition of settings for a covariance analysis only requires the obs
 
 .. code-block:: python
 
+    from tudatpy.dynamics import parameters_setup
+    from tudatpy.estimation import estimation_analysis
+    from tudatpy.estimation.observations_setup import observations_wrapper
+
     # Create parameters to estimate
-    parameters_to_estimate = dynamics.parameters_setup.create_parameter_set(parameter_settings, bodies)
+    parameters_to_estimate = parameters_setup.create_parameter_set(
+        parameter_settings, bodies
+    )
     ...
+
+    estimator = estimation_analysis.Estimator(
+        bodies, parameters_to_estimate, observation_model_settings, propagator_settings
+    )
+
     # Simulate observations
-    simulated_observations = estimation.estimation_analysis.simulate_observations(
-        observation_simulation_settings,  estimator.observation_simulators, bodies)
+    simulated_observations = observations_wrapper.simulate_observations(
+        observation_simulation_settings, estimator.observation_simulators, bodies
+    )
     ...
     # Create settings for observation models
-    covariance_analysis_settings = estimation.estimation_analysis.CovarianceAnalysisInput(
-        simulated_observations)
+    covariance_analysis_settings = estimation_analysis.CovarianceAnalysisInput(
+        simulated_observations
+    )
 
-Where the *inverse* a priori covariance matrix can be provided as an additional optional input argument to the
+where the *inverse* a priori covariance matrix can be provided as an additional optional input argument to the
 :class:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput` constructor.
 
 The resulting object ``covariance_analysis_settings`` can be used to tune the exact behaviour of the covariance analysis process
@@ -62,7 +75,7 @@ such as whether to reintegrate the dynamics, or which terminal output to provide
 
 The weight matrix is typically not provided as a full matrix in a covariance analysis, as the its size of :math:`N_{obs}\times N_{obs}` leads to prohibitive memory usage. Presently, we only support the definition of a diagonal weights matrix. The weights of observations are set in the object containing the observations themselves (see :ref:`setting_weight`)
 
-When using consider covariance (e.g. when consider parameters are defined in the :ref:`parameterSettings`), the consider parameter covariance matrix :math:`\mathbf{C}`
+When using consider covariance (e.g. when consider parameters are defined in the :ref:`parameter_settings`), the consider parameter covariance matrix :math:`\mathbf{C}`
 is also provided to the :class:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput` constructor.
 
 These settings are used to compute the covariance
@@ -70,13 +83,7 @@ using the :meth:`~tudatpy.estimation.estimation_analysis.Estimator.compute_covar
 
 .. code-block:: python
 
-    estimator = estimation.estimation_analysis.Estimator(
-        bodies,
-        parameters_to_estimate,
-        observation_settings_list,
-        propagator_settings)
-    covariance_analysis_output = estimator.compute_covariance(
-        covariance_analysis_settings)
+    covariance_analysis_output = estimator.compute_covariance(covariance_analysis_settings)
 
 where the ``covariance_analysis_output`` is an object of type :class:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisOutput`
 from which the design matrix, covariance, formal errors, correlations etc. can be retrieved. During the calculation of the covariance, the
@@ -87,27 +94,39 @@ Use of the normalized quantities should be limited to those applications where a
 
 .. _fullEstimationSettings:
 
-Full estimation
+Full Estimation
 ~~~~~~~~~~~~~~~
 
 The full estimation performs an iterative differential correction of the estimated parameters. The settings for a full estimation are created in an essentially identical manner as those for a covariance analysis:
 
 .. code-block:: python
 
+    from tudatpy.dynamics import parameters_setup
+    from tudatpy.estimation import estimation_analysis
+
     # Create parameters to estimate
-    parameters_to_estimate = dynamics.parameters_setup.create_parameter_set(parameter_settings, bodies)
+    parameters_to_estimate = parameters_setup.create_parameter_set(
+        parameter_settings, bodies
+    )
     ...
-    # Simulate observations
-    simulated_observations = estimation.estimation_analysis.simulate_observations(
-        observation_simulation_settings,  estimator.observation_simulators, bodies)
+
+    estimator = estimation_analysis.Estimator(
+        bodies, parameters_to_estimate, observation_model_settings, propagator_settings
+    )
+
+    # Create the observation collection (real or simulated data)
+    observation_collection = ...
     ...
     # Create settings for observation models
-    estimation_settings = estimation.estimation_analysis.EstimationInput(
-        simulated_observations)
+    estimation_settings = estimation_analysis.EstimationInput(
+        observation_collection
+    )
 
 where, in fact, the :class:`~tudatpy.estimation.estimation_analysis.EstimationInput` is derived from
-the :class:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput`. For the estimation settings,
-however, there are a number of additional options available, such as the definition for 'convergence'
+the :class:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisInput`.
+In a full estimation it is more common to use "real" data, hinted by the ``observation_collection`` variable in the example above.
+See the user guide on :ref:`creating_observations` for more information how to create an observation collection.
+For the estimation settings, there are a number of additional options available, such as the definition for 'convergence'
 (default: perform three iterations of the least squares).
 
 The :class:`~tudatpy.estimation.estimation_analysis.EstimationInput` class also has as function to
@@ -125,13 +144,7 @@ the full estimation using the :meth:`~tudatpy.estimation.estimation_analysis.Est
 
 .. code-block:: python
 
-    estimator = estimation.estimation_analysis.Estimator(
-        bodies,
-        parameters_to_estimate,
-        observation_settings_list,
-        propagator_settings)
-    estimation_output = estimator.perform_estimation(
-        estimation_settings)
+    estimation_output = estimator.perform_estimation(estimation_settings)
 
 where the ``estimation_output`` is an object of type :class:`~tudatpy.estimation.estimation_analysis.EstimationOutput`,
 which (in addition to all information in :class:`~tudatpy.estimation.estimation_analysis.CovarianceAnalysisOutput`, which this class derives from)
@@ -143,6 +156,3 @@ The specific additional information that is retained for the
 :meth:`~tudatpy.estimation.estimation_analysis.EstimationInput.define_estimation_settings` method of the :class:`~tudatpy.estimation.estimation_analysis.EstimationInput`
 class. We note that saving all information from each iteration may not be recommended for larger applications, as the memory
 consumption that is required may be prohibitive.
-
-
-
