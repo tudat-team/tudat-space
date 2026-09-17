@@ -4,6 +4,45 @@
 Loading Real Tracking Data
 ==========================
 
+Tudat has interfaces to load real tracking data from a variety of sources, including:
+
+- Minor Planet Center (MPC) astrometry for small solar system bodies
+- NASA Deep Space Network (DSN) closed-loop tracking data from
+
+  - TRK-2-18 Orbit Data Files (ODF)
+  - TRK-2-34 Tracking and Navigation Files (TNF)
+
+- ESA ESTRACK Intermediate Frequency & Modem System (IFMS) files 
+
+For an exhaustive list of supported sources, see the :ref:`tudatpy:tracking_data` module and submodules therein.
+
+The architecture of the Tudat tracking data interface is shown in the figure below.
+
+.. todo::
+
+    Update the figure with the final syntax
+
+.. figure:: _static/tracking_data_interface.png
+
+Each data source has its own submodule within the :ref:`tudatpy:tracking_data` module, which contains the necessary functionality to load and process the data.
+Besides the lower-level functions, that might differ strongly between data sources, each submodule provides a high-level function named ``read_<data_source>_data`` for convenience, that reads/retrieves the data and outputs it in a standardized format.
+
+Regardless of the source, the data is converted into :class:`~tudatpy.data_input.tracking_data.TrackingData` and :class:`~tudatpy.data_input.tracking_data.TrackingSupplementaryData` objects, which are both composed of primitive data types and not yet linked to the Tudat environment.
+:class:`~tudatpy.data_input.tracking_data.TrackingData` objects hold the raw observables, time tags and link-end information, while :class:`~tudatpy.data_input.tracking_data.TrackingSupplementaryData` objects hold supplementary information from the tracking files, that is stored in the Tudat environment, such as ramp tables for closed-loop tracking observables.
+
+These primitive objects can then be converted into an :class:`~tudatpy.estimation.observations.ObservationCollection` using the :func:`~tudatpy.estimation.observations.create_observation_collection_from_tracking_data` function.
+Internally, the function resolves the link-end information to the relevant Tudat environment, and performs the necessary conversions (e.g. time scale conversions to TDB) to create a Tudat-compatible observation collection.
+The supplementary data is stored in the Tudat environment using the :func:`~tudatpy.estimation.observations.set_tracking_supplementary_data_in_bodies` function.
+
+.. todo::
+
+    Move the documentation of the individual data sources to the API documentation of the respective submodules, if relevant
+
+.. todo::
+
+    Add a sample workflow for loading real tracking data
+
+
 Minor Planet Center Astrometry
 ==============================
 
