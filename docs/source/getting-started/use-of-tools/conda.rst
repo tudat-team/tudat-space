@@ -26,11 +26,6 @@ When using the conda package manager, you have two options to choose from:
 .. _Miniconda: https://docs.conda.io/en/latest/miniconda.html
 .. _Anaconda: https://www.anaconda.com/products/individual
 
-.. warning::
-    Python 3.X version of the installer **must** be chosen.
-    Python 2 has reached its End Of Life (EOL) and therefore we do not support
-    it, and do not plan to.
-
 The following table summarises the differences between available installers. We
 recommend you to choose what you feel most comfortable with.
 
@@ -88,11 +83,11 @@ Managing Environments
 Create a new environment
 ------------------------
 
-Generally Python 3.7 is preferred when using the ``tudat-space`` ecosystem.
+You can create a new environment, named `myenv`, with a specific version of Python (here Python 3.13) as follows:
 
 .. code-block::
 
-    conda create --name myenv python=3.7
+    conda create --name myenv python=3.13
 
 Create an environment from an environment.yml file
 __________________________________________________
