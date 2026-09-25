@@ -221,7 +221,7 @@
     </mxGraphModel>
   </diagram>
   <diagram name="Future high level" id="UEuNjZXEpTQ_HXSYcf2w">
-    <mxGraphModel dx="2037" dy="1323" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+    <mxGraphModel dx="712" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="VW7jdbnjOfcRRtuMmZ8E-0" />
         <mxCell id="VW7jdbnjOfcRRtuMmZ8E-1" parent="VW7jdbnjOfcRRtuMmZ8E-0" />
@@ -348,7 +348,7 @@
             <mxPoint x="410" y="550" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="vBG4p2URqbbNyUL7fG3b-20" parent="VW7jdbnjOfcRRtuMmZ8E-1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;verticalAlign=top;" value="create_observation_collection" vertex="1">
+        <mxCell id="vBG4p2URqbbNyUL7fG3b-20" parent="VW7jdbnjOfcRRtuMmZ8E-1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;verticalAlign=top;" value="create_observation_collection_\&lt;br&gt;from_tracking_data" vertex="1">
           <mxGeometry height="40" width="130" x="535" y="580" as="geometry" />
         </mxCell>
         <mxCell id="vBG4p2URqbbNyUL7fG3b-21" edge="1" parent="VW7jdbnjOfcRRtuMmZ8E-1" source="sI3TvdwX54YSsBj-Frvc-0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="vBG4p2URqbbNyUL7fG3b-20">
