@@ -11,7 +11,7 @@ On this page, we provide an overview of the categories of observation models tha
 Model Types
 ===========
 
-Below, a list of different observation models is presented. It is important to realize that Tudat does *not* make an a priori distinction between different manners in which the same observation may be realized. For instance, a VLBI observation of a spacecraft, referenced to the geocenter, and an optical astrometric observation of Io by a spacecraft, are both modelled as an ``angular_position`` observable. The difference between the different realization lies in the different noise levels, link  ends, biases, etc., while using the same observation model.
+Below, a list of different observation models is presented. It is important to realize that Tudat does *not* make an a priori distinction between different manners in which the same observation may be realized. For instance, a VLBI observation of a spacecraft, referenced to the geocenter, and an optical astrometric observation of Io by a spacecraft, are both modelled as an :func:`~tudatpy.estimation.observable_models_setup.model_settings.angular_position` observable. The difference between the different realization lies in the different noise levels, link  ends, biases, etc., while using the same observation model.
 
 * **Range observations:**
 
@@ -30,7 +30,7 @@ Below, a list of different observation models is presented. It is important to r
 * **Instantaneous doppler observables** (see :ref:`doppler_types` for the distinction with averaged Doppler)
 
   * **One-way instantaneous Doppler**, defined using :func:`~tudatpy.estimation.observable_models_setup.model_settings.one_way_doppler_instantaneous`
-  * **Two-way (and three-way) instantaneous Doppler**, defined using :func:`~tudatpy.estimation.observable_models_setup.model_settings.two_doppler_instantaneous`, or  :func:`~tudatpy.estimation.observable_models_setup.model_settings.two_way_doppler_instantaneous_from_one_way_links`. The latter function provided more fine-grained control of the settings for the up- and downlink (e.g. using different light-time corrections for each). See :ref:`two_three_way_observables` for the manner in which Tudat distinguishes between two- and three-way observations.
+  * **Two-way (and three-way) instantaneous Doppler**, defined using :func:`~tudatpy.estimation.observable_models_setup.model_settings.two_way_doppler_instantaneous`, or  :func:`~tudatpy.estimation.observable_models_setup.model_settings.two_way_doppler_instantaneous_from_one_way_links`. The latter function provided more fine-grained control of the settings for the up- and downlink (e.g. using different light-time corrections for each). See :ref:`two_three_way_observables` for the manner in which Tudat distinguishes between two- and three-way observations.
 
 
 * **Angular observables**
