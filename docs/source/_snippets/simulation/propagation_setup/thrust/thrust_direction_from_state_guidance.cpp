@@ -1,2 +1,0 @@
-ThrustDirectionFromStateGuidanceSettings(
-        centralBodyName, isThurstInVelocityDirection, directionIsOppositeToVector );
