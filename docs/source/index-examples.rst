@@ -10,8 +10,12 @@ Examples
 
 The examples below will help you get started in exploring the diverse capabilities of Tudat!
 
+.. hint::
+
+   All examples are also available as Jupyter notebooks and Python scripts in the https://github.com/tudat-team/tudatpy-examples repository.
+
 .. nbgallery::
-   :caption: Tudatpy example categories
+   :caption: Categories
    :name: example-categories
 
    /examples/propagation
@@ -20,24 +24,3 @@ The examples below will help you get started in exploring the diverse capabiliti
    /examples/pygmo
    /examples/data_retrieval
 
-
-.. grid:: 2
-  :gutter: 2
-
-  .. grid-item-card::
-    :text-align: center
-
-    **Github Repository**
-    ^^^
-
-    The same examples shown above available on Github, both as Jupyter notebooks and regular *.py* files, in the ``tudatpy-examples`` repository.
-
-    +++
-
-    .. button-link:: https://github.com/tudat-team/tudatpy-examples
-       :expand:
-       :color: primary
-       :click-parent:
-       :outline:
-
-       Go to the repository
