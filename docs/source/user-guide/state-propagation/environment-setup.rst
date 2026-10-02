@@ -85,6 +85,10 @@ simulation environment *during* the propagation. You can find details on how to 
 from the simulation during the propagation in :ref:`environment_during_propagation`.
 
 Many properties of the environment, either static quantities (*e.g.* gravitational parameter) or time-varying quantities (*e.g.* ephemerides)
-are also useful to extract outside of the scope of a numerical propagation. This is discussed in more detail in TODO :ref:`environment_outside_propagation`.
+are also useful to extract outside of the scope of a numerical propagation.
+
+.. todo::
+   
+   Discuss how to extract information from the simulation environment outside a numerical propagation in more detail.
 
 
