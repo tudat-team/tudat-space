@@ -129,16 +129,21 @@ A panelled radiation pressure target model provides a more realistic representat
 up the spacecraft out of a series of panels, where the interaction of the radiation with each of the panels is computed
 separately. Each panel may have different optical properties, and may be defined as being either fixed to the spacecraft body
 (e.g. bus panels) or may be defined to move w.r.t. the spacecraft body-fixed frame (for instance Sun-pointing solar arrays, or
-Earth-pointing antennas). At the moment, Tudat does not include panel shadowing in the calculations.
+Earth-pointing antennas).
 
-Details on defining a panelled spacecraft model are defined by :ref:`vehicle_shape_models`. The interaction of each panel is defined by a so-called
-reflection law. At the moment, Tudat implements two panel reflection laws:
+The panels of the panelled spacecraft model are defined by the :ref:`spacecraft macro model <spacecraft_macromodels>`.
+The interaction of each panel is defined by a so-called reflection law.
+At the moment, Tudat implements two panel reflection laws:
 
 * Specular-diffuse reflection: :func:`~tudatpy.dynamics.environment_setup.radiation_pressure.specular_diffuse_body_panel_reflection`
 * Pure Lambertian reflection: :func:`~tudatpy.dynamics.environment_setup.radiation_pressure.lambertian_body_panel_reflection`
 
 With the body panels defined, the radiation pressure target model settings are created using the
 :func:`~tudatpy.dynamics.environment_setup.radiation_pressure.panelled_radiation_target` function.
+
+.. hint::
+   
+   For a complete example of how to set up a panelled radiation pressure target model, see the :ref:`panelled radiation pressure example </examples/tudatpy-examples/propagation/panelled_radiation_target.ipynb>`
 
 Dependent variables
 ===================
