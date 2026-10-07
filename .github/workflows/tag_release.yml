@@ -1,0 +1,13 @@
+name: Tag a merged release
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [master, develop]
+
+permissions:
+  contents: write
+
+jobs:
+  tag:
+    uses: tudat-team/tudatpy/.github/workflows/tag_release.yml@develop
