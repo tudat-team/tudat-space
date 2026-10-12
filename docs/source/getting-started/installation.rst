@@ -80,6 +80,28 @@ Alternatively, if you already have a conda environment that you would like to us
 
 Congratulations! You have now installed tudatpy and are ready to start running your simulations and analyses! We recommend you get started by having a look at our :ref:`getting_started_examples`.
 
+Downloading resources
+---------------------
+
+Some simulations use additional resource files (ephemerides, gravity field and atmosphere models, ...) that are not bundled with the package. The ``tudatpy.resource_installer`` module downloads them into ``~/.tudat/resource``. First refresh the resource catalog, then download everything that is still missing:
+
+.. code-block:: bash
+
+    python -m tudatpy.resource_installer --mode manifest
+    python -m tudatpy.resource_installer --mode missing
+
+Download to an alternate location with ``--dest`` (or by setting the ``TUDATPY_RESOURCE_DIR`` environment variable):
+
+.. code-block:: bash
+
+    python -m tudatpy.resource_installer --mode missing --dest /path/to/resources
+
+For the full list of modes and options, see the built-in help:
+
+.. code-block:: bash
+
+    python -m tudatpy.resource_installer --help
+
 If there are any issues with the installation, the examples, or if you have any question or comments on Tudat, please use our `Github discussion forum <https://github.com/orgs/tudat-team/discussions>`_.
 
 Development Version
