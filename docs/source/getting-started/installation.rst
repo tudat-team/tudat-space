@@ -78,19 +78,19 @@ Alternatively, if you already have a conda environment that you would like to us
 
     conda install -c tudat-team -c conda-forge tudatpy
 
-Congratulations! You have now installed tudatpy and are ready to start running your simulations and analyses! We recommend you get started by having a look at our :ref:`getting_started_examples`.
+Congratulations! You have now installed tudatpy. Before starting to run simulations, we recommend to download our default set of resources, which contains select resource files such as ephemerides, gravity fields, etc.  After that, you are ready to start to start trying our :ref:`getting_started_examples`.
 
 Downloading resources
 ---------------------
 
-Some simulations use additional resource files (ephemerides, gravity field and atmosphere models, ...) that are not bundled with the package. The ``tudatpy.resource_installer`` module downloads them into ``~/.tudat/resource``. First refresh the resource catalog, then download everything that is still missing:
+In order to run simulations you typically need additional resource files (ephemerides, gravity field and atmosphere models, ...) that are not bundled with the package. A set of the default resources can be downloaded using the ``tudatpy.resource_installer`` module. By default they are downloaded into ``~/.tudat/resource``. First refresh the resource catalog, then download everything that is missing:
 
 .. code-block:: bash
 
     python -m tudatpy.resource_installer --mode manifest
     python -m tudatpy.resource_installer --mode missing
 
-Download to an alternate location with ``--dest`` (or by setting the ``TUDATPY_RESOURCE_DIR`` environment variable):
+Note that the additional resources takeup about 2 GB of disk space.  So if you want to download them to an alternate location for your convenience, you may do so with ``--dest`` (or by setting the ``TUDATPY_RESOURCE_DIR`` environment variable):
 
 .. code-block:: bash
 
