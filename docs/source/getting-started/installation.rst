@@ -80,6 +80,8 @@ Alternatively, if you already have a conda environment that you would like to us
 
 Congratulations! You have now installed tudatpy. Before starting to run simulations, we recommend to download our default set of resources, which contains select resource files such as ephemerides, gravity fields, etc.  After that, you are ready to start to start trying our :ref:`getting_started_examples`.
 
+.. _downloading-resources:
+
 Downloading resources
 ---------------------
 

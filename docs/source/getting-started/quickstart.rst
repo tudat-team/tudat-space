@@ -47,6 +47,17 @@ With the ``conda`` environment now installed, you can activate it to work in it 
    To develop Tudat(Py), or make use of the latest features not yet in a conda packages, you can compile TudatPy from the C++ source yourself, see the page on :ref:`using the source code <using_tudat_source>` for details.
 
 
+In order to run simulations you typically need additional resource files (ephemerides, gravity field and atmosphere models, ...) that are not bundled with the package. 
+We provide a recommended set of default resources, which you can download after installing TudatPy using the following commands:
+
+.. code-block:: bash
+
+    python -m tudatpy.resource_installer --mode manifest
+    python -m tudatpy.resource_installer --mode missing
+
+Note that the additional resources takeup about 2 GB of disk space. For more information, see the :ref:`downloading-resources` section in the installation guide.
+
+
 Propagating your first orbit
 ****************************
 The core of Tudat is the numerical propagation of orbits. Here, we give a basic introduction to setting up such an orbit simulation by means of an example.
