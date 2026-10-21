@@ -89,7 +89,7 @@ author = "Tudat Team"
 # built documents.
 #
 # The full version, including development tags.
-release = "1.1.0"
+release = "1.1.0.dev0"
 # The short X.Y version.
 version = ".".join(release.split(".")[:2])
 
