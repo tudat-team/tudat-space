@@ -238,8 +238,7 @@ For the mathematical model definition (and graphical representation), we refer t
 The rotation matrix between any two of these frames, as well the angles that define these rotations, can be determined **during the propagation**
 using the :class:`~tudatpy.dynamics.environment.AerodynamicAngleCalculator` class, as described :ref:`here <flight_conditions_during_propagation>`.
 
-To save these rotation matrices **during** the propagation, and then inspect them **after** the propagation, the
-:ref:`dependent variable <dependent_variables>` :func:`~tudatpy.dynamics.propagation_setup.dependent_variable.intermediate_aerodynamic_rotation_matrix_variable`
+To save these rotation matrices **during** the propagation, and then inspect them **after** the propagation, the dependent variable :func:`~tudatpy.dynamics.propagation_setup.dependent_variable.intermediate_aerodynamic_rotation_matrix_variable`
 can be used. The constituent angles that define this rotation can be saved using the :func:`~tudatpy.dynamics.propagation_setup.dependent_variable.latitude`,
 :func:`~tudatpy.dynamics.propagation_setup.dependent_variable.longitude`, :func:`~tudatpy.dynamics.propagation_setup.dependent_variable.heading_angle`,
 :func:`~tudatpy.dynamics.propagation_setup.dependent_variable.flight_path_angle`, :func:`~tudatpy.dynamics.propagation_setup.dependent_variable.angle_of_attack`,
@@ -401,7 +400,7 @@ As a result, the inclination (for example) will be measured w.r.t. the x-y plane
 
 In the definition of the state elements, you will notice that element 5 is the *true* anomaly, not the *eccentric* or
 *mean* anomaly. Tudat also contains functions to convert to these alternative anomalies. The various available functions
-are found in our :doc:`API docs <element_conversion>`.
+are found in our :ref:`API docs <tudatpy:element_conversion>`.
 
 As an example, converting from true to eccentric anomaly is done as follows:
 

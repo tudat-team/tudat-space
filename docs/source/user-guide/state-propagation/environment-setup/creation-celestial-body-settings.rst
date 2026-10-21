@@ -4,6 +4,13 @@
 Creating the bodies
 ===================
 
+.. toctree::
+   :titlesonly:
+   :hidden:
+   :maxdepth: 1
+
+   creation-celestial-body-settings/spacecraft-macromodels
+
 The usual workflow to create bodies in Tudat (both natural and artificial bodies!) is composed of three subsequent steps, described separately:
 
 1. :ref:`creating_body_settings`
@@ -129,7 +136,9 @@ The above setup is also one that is typically used for artificial bodies, for wh
       .. literalinclude:: /_snippets/simulation/environment_setup/add_new_vehicle_settings.py
          :language: python
 
-In the above code snippet, you may notice that the body mass is set directly as a value (here 500 kg) in the :class:`~tudatpy.dynamics.environment_setup.BodySettings`. This is used as a 'shortcut' for the use of the :func:`~tudatpy.dynamics.environment_setup.rigid_body.constant_rigid_body_properties` and assigning this to the :attr:`~tudatpy.dynamics.environment_setup.BodySettings.rigid_body_settings`.
+In the above code snippet, you may notice that the body mass is set directly as a value (here 500 kg) in the :class:`~tudatpy.dynamics.environment_setup.BodySettings`. 
+This is used as a 'shortcut' for the use of the :func:`~tudatpy.dynamics.environment_setup.rigid_body.constant_rigid_body_properties` and assigning this to the :attr:`~tudatpy.dynamics.environment_setup.BodySettings.rigid_body_settings`.  
+It is also possible to set specific :attr:`~tudatpy.dynamics.environment_setup.BodySettings.vehicle_shape_settings`, see :ref:`spacecraft_macromodels` to learn more about the available options.
 
 
 .. _custom_body_settings:
@@ -146,8 +155,8 @@ Although the default body settings are often very useful, there are various case
 Below we show each manner to modify the settings with a representative example. 
 
 .. seealso::
-   A comprehensive list of *all* environment models, and how their settings can be defined and overridden as above, is
-   given in the page about :ref:`environment_model_overview`.
+   A comprehensive list of *all* environment models, and how their settings can be defined and overridden as above,
+   can be found in the submodules of the `environment setup <https://py.api.tudat.space/en/latest/dynamics/environment_setup.html>`_ module.
 
 .. _override_body_settings:
 
@@ -223,7 +232,8 @@ Below is a slightly more involved example, which does not use a property of the 
 Here, we extracted, modified, and then reset the :attr:`~tudatpy.dynamics.environment_setup.gravity_field.SphericalHarmonicsGravityFieldSettings.normalized_cosine_coefficients` property of the :class:`~tudatpy.dynamics.environment_setup.gravity_field.SphericalHarmonicsGravityFieldSettings`.
 
 Provided that the body settings of the Sun and Earth have *any* gravity field settings, the above will work. If it does not, you should first create such settings (see :ref:`override_body_settings`).
-For an overview of the relevant attributes, functions and classes for other environment models, see :ref:`environment_model_overview`.
+For an overview of the relevant attributes, functions and classes for other environment model settings,
+see the submodules of the `environment setup <https://py.api.tudat.space/en/latest/dynamics/environment_setup.html>`_ modules.
 
 .. _create_bodies_from_settings_first:
 

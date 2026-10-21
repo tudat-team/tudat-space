@@ -13,4 +13,4 @@ This section provides information on the history of Tudat(Py), how to contribute
    /about/history
    /about/research-output
    /about/contribute-to-tudat
-   Developer documentation <https://tudat-developer.readthedocs.io/en/latest/>
+   Developer documentation <https://github.com/tudat-team/tudatpy/wiki>

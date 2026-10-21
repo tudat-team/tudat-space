@@ -23,7 +23,7 @@ parameters.
 The above differential equations are solved:
 
 * Using the specific :ref:`choice of integrator <integrator_setup>`
-* Are terminated by user-specified :ref:`termination settings <termination_settings>`.
+* Are terminated by user-specified termination settings, see options in `API documentation <https://py.api.tudat.space/en/latest/dynamics/propagation_setup/propagator.html>`_
 * The output of the propagation consists of the state that is propagated, as well as any number of :ref:`output (dependent) variables <printing_processing_results>`.
 
 Simulations in which only the system state is propagated are handled by simulator objects derived from the ``Simulator`` base class. 

@@ -1,4 +1,4 @@
 [submodule "docs/source/examples/tudatpy-examples"]
 	path = docs/source/examples/tudatpy-examples
 	url = https://github.com/tudat-team/tudatpy-examples.git
-	branch = master
+	branch = develop

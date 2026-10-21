@@ -26,7 +26,7 @@ These settings are defined via factory functions for each torque in the simulati
 For a single body, the user-specified settings are organized in nested dictionaries ``dict[str,dict[str,list[TorqueSettings]]]``,
 with the first ``str`` denoting the body undergoing acceleration, the second ``str`` denoting the body exerting the acceleration, and the
 list of :class:`~tudatpy.dynamics.propagation_setup.torque.TorqueSettings` objects is created using the functions in the
-:doc:`torque` module.
+:ref:`tudatpy:torque` module.
 
 This nested dictionary will be supplied to the
 :func:`~tudatpy.dynamics.propagation_setup.create_torque_models` function to create the
