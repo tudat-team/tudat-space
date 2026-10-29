@@ -24,11 +24,24 @@ Each data source has its own submodule within the :ref:`tudatpy:tracking_data` m
 Besides the lower-level functions, that might differ strongly between data sources, each submodule provides a high-level function named ``read_<data_source>_data`` for convenience, that reads/retrieves the data and outputs it in a standardized format.
 
 Regardless of the source, the data is converted into :class:`~tudatpy.data_input.tracking_data.TrackingData` and :class:`~tudatpy.data_input.tracking_data.TrackingSupplementaryData` objects, which are both composed of primitive data types and not yet linked to the Tudat environment.
-:class:`~tudatpy.data_input.tracking_data.TrackingData` objects hold the raw observables, time tags and link-end information, while :class:`~tudatpy.data_input.tracking_data.TrackingSupplementaryData` objects hold supplementary information from the tracking files, that is stored in the Tudat environment, such as ramp tables for closed-loop tracking observables.
+:class:`~tudatpy.data_input.tracking_data.TrackingData` objects hold the raw observables, time tags and link-end information, while :class:`~tudatpy.data_input.tracking_data.TrackingSupplementaryData` objects hold supplementary information from the tracking files, that is stored in the Tudat environment: these for example include ramp tables for closed-loop radiometric observables, or space-observatories ephemerides for astrometric observations.
 
 These primitive objects can then be converted into an :class:`~tudatpy.estimation.observations.ObservationCollection` using the :func:`~tudatpy.estimation.observations.create_observation_collection_from_tracking_data` function.
-Internally, the function resolves the link-end information to the relevant Tudat environment, and performs the necessary conversions (e.g. time scale conversions to TDB) to create a Tudat-compatible observation collection.
-The supplementary data is stored in the Tudat environment using the :func:`~tudatpy.estimation.observations.set_tracking_supplementary_data_in_bodies` function.
+Internally, the function 
+
+- resolves the raw link-end information stored in the tracking data with the link-ends present in the Tudat environment,
+- creates the link *definitions* based on the link geometry stored in the tracking data,
+- performs necessary conversions (e.g. time scale conversions to TDB),
+- (optionally) applies corrections stored in the tracking data to the raw observables,
+- creates the :class:`~tudatpy.estimation.observations.SingleObservationSet` objects that form the :class:`~tudatpy.estimation.observations.ObservationCollection`.
+
+The supplementary data can be applied to the Tudat environment using the :func:`~tudatpy.estimation.observations.set_tracking_supplementary_data_in_bodies` function.
+
+.. important::
+
+    Before creating an :class:`~tudatpy.estimation.observations.ObservationCollection` from tracking data, the Tudat environment must be set up and contain all relevant link-ends (e.g. ground stations, spacecraft, etc.) for the observations.
+    These should follow the same naming conventions as used in the tracking data.
+    See :ref:`groundStationCreation` for an overview of how to define ground stations settings.
 
 Usage Example
 -------------
